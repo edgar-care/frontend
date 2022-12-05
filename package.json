@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "docker:start": "docker-compose up",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.2",
