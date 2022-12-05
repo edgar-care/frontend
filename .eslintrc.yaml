@@ -1,0 +1,32 @@
+parser: "@typescript-eslint/parser"
+
+parserOptions:
+  ecmaVersion: latest
+  project:
+    - tsconfig.json
+    - cypress/tsconfig.json
+
+env:
+  node: true
+  browser: true
+
+extends:
+  - airbnb-base
+  - airbnb-typescript
+  - airbnb/hooks
+  - plugin:@typescript-eslint/recommended
+  - plugin:@next/next/recommended
+  - prettier
+
+rules:
+  react/react-in-jsx-scope: off
+  react/jsx-filename-extension: off
+
+  react-hooks/exhaustive-deps: off
+
+  no-console: off
+
+  class-methods-use-this: off
+
+  "@typescript-eslint/no-non-null-assertion": off
+  "@typescript-eslint/no-use-before-define": off
