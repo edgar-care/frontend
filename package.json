@@ -12,7 +12,9 @@
     "docker:dev": "docker-compose -f docker-compose.dev.yml up"
   },
   "dependencies": {
+    "@babel/core": "^7.20.5",
     "@chakra-ui/react": "^2.4.2",
+    "@chakra-ui/styled-system": "^2.4.0",
     "@chakra-ui/theme-tools": "^2.0.14",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
