@@ -122,7 +122,7 @@ const Button = {
 				webkitTransition: 'all .6s ease-in-out',
 				transition: 'all .6s ease-in-out',
 			},
-		},
+		}
 	},
 	defaultProps: {
 		size: 'md',
