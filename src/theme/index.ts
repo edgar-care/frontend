@@ -10,7 +10,7 @@ import Button from 'theme/components/button';
 import Link from 'theme/components/link';
 import Text from 'theme/components/text';
 
-const breakpoints = ({
+const breakpoints = {
 	xs: '320px',
 	sm: '576px',
 	md: '768px',
@@ -20,7 +20,7 @@ const breakpoints = ({
 	'3xl': '1600px',
 	'4xl': '1920px',
 	'5xl': '2560px',
-});
+};
 
 const overrides = {
 	shadows,

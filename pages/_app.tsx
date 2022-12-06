@@ -1,4 +1,4 @@
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 
@@ -9,10 +9,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => (
 	<>
 		<Head>
 			<title>edgar.care</title>
-			<meta
-				name="description"
-				content=""
-			/>
+			<meta name="description" content="" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<meta charSet="UTF-8" />
 			<link rel="icon" href="/assets/edgar.care-logo-tabs.svg" />
@@ -21,6 +18,6 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => (
 			<Component {...pageProps} />
 		</ChakraProvider>
 	</>
-)
+);
 
-export default App
+export default App;

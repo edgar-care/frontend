@@ -1,63 +1,61 @@
-import radius from 'theme/foundations/borderRadius';
 import colors from 'theme/foundations/colors';
 
 const Button = {
 	baseStyle: {
-		borderRadius: `${radius.base}`,
-		fontWeight: 500,
+		padding: '6px 16px',
+		height: 'auto',
 		fontSize: '16px',
-		lineHeight: '24px',
+		fontWeight: 600,
+		borderRadius: '12px',
 	},
 	sizes: {
 		sm: {
-			padding: '2px 12px',
+			padding: '6px 12px',
 			height: 'auto',
 			fontSize: '12px',
-			fontWeight: 700,
-			borderRadius: '8px',
+			fontWeight: 600,
+			borderRadius: '12px',
 		},
 		md: {
-			padding: '4px 16px',
-			height: 'auto',
-			fontSize: '16px',
-			fontWeight: 700,
-			borderRadius: '8px',
-		},
-		lg: {
-			padding: '4px 16px',
-			height: 'auto',
-			fontSize: '20px',
-			fontWeight: 700,
-			borderRadius: '8px',
-		},
-		xl: {
 			padding: '6px 16px',
 			height: 'auto',
-			fontSize: '24px',
-			fontWeight: 700,
+			fontSize: '16px',
+			fontWeight: 600,
 			borderRadius: '12px',
+		},
+		lg: {
+			padding: '6px 16px',
+			height: 'auto',
+			fontSize: '20px',
+			fontWeight: 600,
+			borderRadius: '12px',
+		},
+		xl: {
+			padding: '8px 16px',
+			height: 'auto',
+			fontSize: '24px',
+			fontWeight: 600,
+			borderRadius: '14px',
 		},
 		'2xl': {
-			padding: '8px 20px',
+			padding: '12px 20px',
 			height: 'auto',
 			fontSize: '28px',
-			fontWeight: 700,
-			borderRadius: '12px',
+			fontWeight: 600,
+			borderRadius: '16px',
 		},
 		'3xl': {
-			padding: '8px 24px',
+			padding: '12px 24px',
 			height: 'auto',
 			fontSize: '32px',
-			fontWeight: 700,
-			borderRadius: '12px',
+			fontWeight: 600,
+			borderRadius: '16px',
 		},
 	},
 	variants: {
 		primary: {
-			backgroundImage: `linear-gradient(135deg, ${colors.blue[900]} 0%, ${colors.red[900]} 50%, ${colors.blue[900]} 100%)`,
-			color: 'blue.100',
-			bgClip: 'text',
-			backgroundSize: '200% 100%',
+			bg: 'blue.400',
+			color: 'white',
 
 			mozTransition: 'all .6s ease-in-out',
 			oTransition: 'all .6s ease-in-out',
@@ -65,13 +63,11 @@ const Button = {
 			transition: 'all .6s ease-in-out',
 			_hover: {
 				_disabled: {
-					backgroundImage: `linear-gradient(135deg, ${colors.blue[900]} 0%, ${colors.red[900]} 50%, ${colors.blue[900]} 100%)`,
-					backgroundSize: '200% 100%',
-					color: 'blue.100',
-					bgClip: 'text',
+					color: 'white',
+					bg: 'blue.400',
 				},
-				color: 'blue.100',
-				background: 'blue.1100',
+				color: 'white',
+				background: 'blue.700',
 
 				mozTransition: 'all .6s ease-in-out',
 				oTransition: 'all .6s ease-in-out',
@@ -80,23 +76,23 @@ const Button = {
 			},
 		},
 		secondary: {
-			background: 'blue.100',
-			color: 'blue.1100',
+			bg: 'white',
+			color: 'purple.600',
+			border: `2px solid ${colors.blue['200']}`,
 
 			mozTransition: 'all .6s ease-in-out',
 			oTransition: 'all .6s ease-in-out',
 			webkitTransition: 'all .6s ease-in-out',
 			transition: 'all .6s ease-in-out',
-			_disabled: {
-				opacity: 0.5,
-			},
 			_hover: {
 				_disabled: {
-					background: 'blue.100',
-					color: 'blue.1100',
+					color: 'purple.600',
+					bg: 'white',
+					border: `2px solid ${colors.blue['200']}`,
 				},
-				color: 'blue.100',
-				background: 'blue.1100',
+				color: 'purple.800',
+				background: 'grey.200',
+				border: '2px solid transparent',
 
 				mozTransition: 'all .6s ease-in-out',
 				oTransition: 'all .6s ease-in-out',
@@ -104,38 +100,33 @@ const Button = {
 				transition: 'all .6s ease-in-out',
 			},
 		},
-		special: {
-			backgroundImage: `linear-gradient(135deg, ${colors.blue[900]} 0%, ${colors.red[900]} 50%, ${colors.blue[900]} 100%)`,
-			color: 'blue.100',
-			backgroundSize: '200% 100%',
+		tertiary: {
+			bg: 'grey.500',
+			color: 'white',
 
 			mozTransition: 'all .6s ease-in-out',
 			oTransition: 'all .6s ease-in-out',
 			webkitTransition: 'all .6s ease-in-out',
 			transition: 'all .6s ease-in-out',
-
-			_disabled: {
-				opacity: 0.5,
-			},
-
 			_hover: {
 				_disabled: {
-					backgroundImage: `linear-gradient(135deg, ${colors.blue[900]} 0%, ${colors.red[900]} 50%, ${colors.blue[900]} 100%)`,
-					color: 'blue.100',
-					backgroundSize: '200% 100%',
+					color: 'white',
+					bg: 'grey.500',
+					border: `2px solid ${colors.blue['200']}`,
 				},
-				backgroundPosition: '100% 0',
+				color: 'white',
+				background: 'grey.900',
 
 				mozTransition: 'all .6s ease-in-out',
 				oTransition: 'all .6s ease-in-out',
 				webkitTransition: 'all .6s ease-in-out',
 				transition: 'all .6s ease-in-out',
 			},
-		},
+		}
 	},
 	defaultProps: {
-		size: 'oldMd',
-		variant: 'gray',
+		size: 'md',
+		variant: 'primary',
 	},
 };
 
