@@ -1,9 +1,9 @@
-import { HStack, Text, VStack, Button, Image, Box } from '@chakra-ui/react';
+import { HStack, Text, VStack, Button, Image } from '@chakra-ui/react';
 import CheckBox from 'components/CheckBox';
+import ColorText from 'components/ColorText';
 import NumInput from 'components/NumberInput';
 import SlideBar from 'components/SlideBar';
 import { useState } from 'react';
-import colors from 'theme/foundations/colors';
 
 const Infos = (): JSX.Element => {
 	const [ageValue, setAgeValue] = useState(20);
@@ -25,14 +25,7 @@ const Infos = (): JSX.Element => {
 	return (
 		<VStack spacing="96px" paddingTop="150px">
 			<Text size="2xl">
-				Avant de commencer j'ai besoin de{' '}
-				<Box
-					as="span"
-					backgroundImage={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-					bgClip="text"
-				>
-					quelques informations
-				</Box>
+				Avant de commencer j'ai besoin de <ColorText children="quelques informations" />
 			</Text>
 			<HStack spacing="96px">
 				<VStack spacing="20px">
@@ -67,7 +60,6 @@ const Infos = (): JSX.Element => {
 					<NumInput changeValue={(v) => getWeight(v)} children="kg" placeholder="65" />
 				</HStack>
 			</HStack>
-
 			<VStack spacing="96px">
 				<Button variant="primary" size="md">
 					Valider mes informations
