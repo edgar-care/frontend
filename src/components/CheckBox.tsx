@@ -8,7 +8,13 @@ type IsType = {
 };
 
 const CheckBox = ({ image, value, changeSex }: IsType) => (
-	<VStack onClick={() => changeSex()} borderRadius="16px" bg={value ? 'blue.100' : 'blue.200'} p="12px 32px">
+	<VStack
+		onClick={() => changeSex()}
+		borderRadius="16px"
+		bg={value ? 'blue.100' : 'blue.200'}
+		p="12px 32px"
+		cursor="pointer"
+	>
 		<Image src={image} w="16px" h="16px" />
 	</VStack>
 );
