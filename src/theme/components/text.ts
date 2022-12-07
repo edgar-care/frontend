@@ -64,13 +64,10 @@ const Text = {
 		},
 	},
 	variants: {
-		bold: {
-			fontWeight: 700,
-		},
 		gradient: {
 			backgroundImage: `linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`,
 			bgClip: 'text',
-		}
+		},
 	},
 	defaultProps: {
 		size: 'md',
