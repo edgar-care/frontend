@@ -46,18 +46,19 @@ class Auth {
 			// TODO: update this call
 			const auth = await basicFetch('auth/logout', 'GET');
 
-			if (auth.status === 200) return { title: 'Successful logout', status: 'success' };
+			if (auth.status === 200) return { title: 'Déconnexion réussie', status: 'success' };
 
 			const data = await auth.json();
 			return { title: data.message, status: 'error' };
 		} catch (error) {
 			console.error(error);
-			return { title: 'Failed to logout', status: 'error' };
+			return { title: 'Echec de la déconnexion', status: 'error' };
 		}
 	}
 
 	public async checkToken(): Promise<MessageResponse> {
 		try {
+			// TODO: update this call
 			const auth = await basicFetch('auth/check', 'GET');
 
 			if (auth.status === 200) return { title: 'Token is valid', status: 'success' };
@@ -66,7 +67,7 @@ class Auth {
 			return { title: data.message, status: 'error' };
 		} catch (error) {
 			console.error(error);
-			return { title: 'Failed to check token, please retry', status: 'error' };
+			return { title: 'Connexion échouée, veuillez vous reconnecter', status: 'error' };
 		}
 	}
 

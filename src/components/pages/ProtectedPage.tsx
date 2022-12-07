@@ -1,5 +1,5 @@
 import { Center, Img, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { MrMiyagi } from '@uiball/loaders';
 

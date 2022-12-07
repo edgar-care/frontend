@@ -1,5 +1,5 @@
 import { Center, Img, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { MrMiyagi } from '@uiball/loaders';
 
@@ -13,7 +13,7 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 	const auth = useAuthContext();
 	const router = useRouter();
 
-	const { toggle: isAuthenticated, toggleHandler: authenticateHandler } = useToggle();
+	const { toggle: isNotAuthenticated, toggleHandler: authenticateHandler } = useToggle();
 
 	useEffect(() => {
 		auth.checkToken().then((res) => {
@@ -24,7 +24,7 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	return (
 		<>
-			{isAuthenticated ? (
+			{isNotAuthenticated ? (
 				<VStack p="128px">{children}</VStack>
 			) : (
 				<Center h="100vh">
