@@ -25,9 +25,11 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 	return (
 		<>
 			{isNotAuthenticated ? (
-				<VStack p="128px">{children}</VStack>
+				<VStack p="128px" bg="blue.50" minH="100vh">
+					{children}
+				</VStack>
 			) : (
-				<Center h="100vh">
+				<Center h="100vh" bg="blue.50" w="100%">
 					<VStack spacing="128px">
 						<Img src="/assets/edgar.care-logo.svg" w="350px" />
 						<MrMiyagi size={64} color={colors.blue[900]} />
