@@ -2,7 +2,7 @@ import colors from 'theme/foundations/colors';
 
 const Text = {
 	baseStyle: {
-		color: 'black',
+		color: 'blue.900',
 		fontFamily: 'Raleway',
 	},
 	sizes: {
@@ -60,6 +60,10 @@ const Text = {
 		},
 		'7xl': {
 			fontSize: '64px',
+			fontWeight: 700,
+		},
+		'8xl': {
+			fontSize: '72px',
 			fontWeight: 700,
 		},
 	},
