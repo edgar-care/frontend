@@ -1,4 +1,5 @@
 import { VStack, Image, Text, Stack, Button, Box } from '@chakra-ui/react';
+import Link from 'next/link';
 import colors from 'theme/foundations/colors';
 
 const Simulation = (): JSX.Element => (
@@ -38,9 +39,11 @@ const Simulation = (): JSX.Element => (
 						<Text size="boldLg">Une réponse vous sera fournie dans un délai maximum de 48h.</Text>
 					</Stack>
 				</VStack>
-				<Button variant="primary" size="xl">
-					Commencer mon analyse
-				</Button>
+				<Link href="/simulation/infos">
+					<Button variant="primary" size="xl">
+						Commencer mon analyse
+					</Button>
+				</Link>
 			</VStack>
 		</Stack>
 	</VStack>
