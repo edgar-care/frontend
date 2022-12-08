@@ -1,18 +1,17 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
+
 import colors from 'theme/foundations/colors';
 
-type IsType = {
-	children: string;
-};
-
-const ColorText = ({ children }: IsType): JSX.Element => (
+const GradientText = ({ textValue, ...props }: { textValue: string } & BoxProps): JSX.Element => (
 	<Box
 		as="span"
-		backgroundImage={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
+		bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
 		bgClip="text"
+		fontWeight="800"
+		{...props}
 	>
-		{children}
+		{textValue}
 	</Box>
 );
 
-export default ColorText;
+export default GradientText;

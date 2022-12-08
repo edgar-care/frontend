@@ -1,13 +1,14 @@
 import { Slider, SliderMark, SliderTrack, SliderFilledTrack, SliderThumb, Tooltip } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 type IsType = {
 	ageValue: number;
-	setAgeValue: (v: number) => void;
+	setAgeValue: Dispatch<SetStateAction<number>>;
 };
 
 const SlideBar = ({ ageValue, setAgeValue }: IsType) => {
 	const [showTooltip, setShowTooltip] = useState(false);
+
 	return (
 		<Slider
 			id="slider"

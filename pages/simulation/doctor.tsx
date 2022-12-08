@@ -1,23 +1,17 @@
-import { Text, VStack, Image, Stack } from '@chakra-ui/react';
+import { Text, VStack } from '@chakra-ui/react';
+
 import ColorText from 'components/ColorText';
-import { useState } from 'react';
+import SimulationPage from 'components/pages/simulation/SimulationPage';
 
-const Doctor = (): JSX.Element => {
-	const [ageValue, setAgeValue] = useState(20);
-	console.log(ageValue, setAgeValue);
-
-	return (
-		<VStack>
-			<Stack pt="90px" spacing="60px">
-				<Text size="2xl">
-					{' '}
-					Merci pour cet <ColorText children="échange" />
-				</Text>
-				<Text size="2xl">Nous avons besoin d'un medecin pour examiner votre analyse :</Text>
-			</Stack>
-			<Image position="absolute" top="720px" src="/assets/edgar.care-logo.svg" alt="test" w={200} h="auto" />
+const Doctor = (): JSX.Element => (
+	<SimulationPage>
+		<VStack spacing="64px">
+			<Text size="2xl">
+				Merci pour cet <ColorText textValue="échange" />
+			</Text>
+			<Text size="2xl">Nous avons besoin d'un médecin, pour examiner votre analyse :</Text>
 		</VStack>
-	);
-};
+	</SimulationPage>
+);
 
 export default Doctor;
