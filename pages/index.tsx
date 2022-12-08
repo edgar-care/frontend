@@ -9,7 +9,7 @@ const Home = (): JSX.Element => (
 	<BasicPage>
 		<VStack w="100%">
 			<NavBar />
-			<VStack spacing="128px" pt="64px">
+			<VStack spacing="128px" pt="128px">
 				<HeadingSection />
 				<InfosSection />
 				<Link href="/solutions">

@@ -9,10 +9,6 @@ const NavBar = (): JSX.Element => {
 			name: 'Notre solution',
 			path: '/solutions',
 		},
-		{
-			name: 'Notre équipe',
-			path: '/team',
-		},
 	];
 
 	return (
@@ -22,6 +18,8 @@ const NavBar = (): JSX.Element => {
 			justify="space-between"
 			bg="white"
 			borderBottom={`2px solid ${colors.blue[100]}`}
+			position="fixed"
+			zIndex={10}
 		>
 			<Link href="/">
 				<Img src="/assets/edgar.care-logo.svg" w="200px" h="auto" />
@@ -32,7 +30,9 @@ const NavBar = (): JSX.Element => {
 						<TabCard name={tab.name} path={tab.path} key={tab.path} />
 					))}
 				</HStack>
-				<Button size="boldMd">Nous suivre ?</Button>
+				<Link href="https://www.linkedin.com/company/edgar-care/" target="_blank">
+					<Button size="boldMd">Nous suivre ?</Button>
+				</Link>
 			</HStack>
 		</HStack>
 	);
