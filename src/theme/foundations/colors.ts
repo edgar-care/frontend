@@ -4,6 +4,7 @@ const colors = {
 	black: '#000000',
 
 	blue: {
+		50: '#F5F5FF',
 		100: '#DADEF2',
 		200: '#A9B5F2',
 		300: '#798DF2',
@@ -52,6 +53,7 @@ const colors = {
 	},
 
 	grey: {
+		50: '#F2F2F2',
 		100: '#E6E8F2',
 		200: '#B8BED9',
 		300: '#999FBF',

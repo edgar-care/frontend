@@ -2,7 +2,7 @@ import colors from 'theme/foundations/colors';
 
 const Text = {
 	baseStyle: {
-		color: 'black',
+		color: 'blue.900',
 		fontFamily: 'Raleway',
 	},
 	sizes: {
@@ -62,11 +62,12 @@ const Text = {
 			fontSize: '64px',
 			fontWeight: 700,
 		},
-	},
-	variants: {
-		bold: {
+		'8xl': {
+			fontSize: '72px',
 			fontWeight: 700,
 		},
+	},
+	variants: {
 		gradient: {
 			backgroundImage: `linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`,
 			bgClip: 'text',
