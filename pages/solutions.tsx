@@ -8,7 +8,7 @@ const Solutions = (): JSX.Element => (
 	<BasicPage>
 		<VStack w="100%">
 			<NavBar />
-			<VStack pt="64px" pb="256px" w="50%" textAlign="center" spacing="128px">
+			<VStack py="192px" w="50%" textAlign="center" spacing="128px">
 				<VStack>
 					<Text size="3xl">Notre solution:</Text>
 					<Text size="boldXl" w="750px">
