@@ -43,7 +43,7 @@ const Result = (): JSX.Element => {
 						</Text>
 					</Stack>
 
-					<HStack borderRadius="16px" h="350px" backgroundColor="#DADEF2" p="32px" spacing="32px">
+					<HStack borderRadius="16px" h="350px" backgroundColor="blue.100" p="32px" spacing="32px">
 						{appointments.map((appointment) => (
 							<AppointmentCard appointment={appointment} key={appointment.date.toString()} />
 						))}

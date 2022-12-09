@@ -7,7 +7,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }) => (
 		<Text size="boldXl">{appointment.date.toLocaleDateString()}</Text>
 		<VStack spacing="16px" w="100%">
 			{appointment.hours.map((hours) => (
-				<VStack borderRadius="8px" backgroundColor="#E8DAF2" w="100%" key={hours.toString()} cursor="pointer">
+				<VStack borderRadius="8px" backgroundColor="purple.100" w="100%" key={hours.toString()} cursor="pointer">
 					<Text py="4px" size="boldLg">
 						{hours.getHours()}h à {hours.getHours() + 1}h
 					</Text>

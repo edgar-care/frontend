@@ -28,7 +28,7 @@ const Infos = (): JSX.Element => {
 					<VStack spacing="24px">
 						<HStack spacing="48px">
 							<Text size="2xl">Quel est votre age ?</Text>
-							<VStack borderRadius="16px" bg="#DADEF2" p="4px 24px" minW="136px">
+							<VStack borderRadius="16px" bg="blue.100" p="4px 24px" minW="136px">
 								<Text size="2xl">{age} ans</Text>
 							</VStack>
 						</HStack>
