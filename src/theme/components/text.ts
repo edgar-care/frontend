@@ -2,8 +2,8 @@ import colors from 'theme/foundations/colors';
 
 const Text = {
 	baseStyle: {
-		color: 'blue.1100',
-		fontFamily: 'Poppins',
+		color: 'blue.900',
+		fontFamily: 'Raleway',
 	},
 	sizes: {
 		sm: {
@@ -62,17 +62,14 @@ const Text = {
 			fontSize: '64px',
 			fontWeight: 700,
 		},
-	},
-	variants: {
-		bold: {
+		'8xl': {
+			fontSize: '72px',
 			fontWeight: 700,
 		},
+	},
+	variants: {
 		gradient: {
-			backgroundImage: `linear-gradient(135deg, ${colors.blue[900]} 0%, ${colors.red[900]} 100%)`,
-			bgClip: 'text',
-		},
-		reverseGradient: {
-			backgroundImage: `linear-gradient(135deg, ${colors.red[900]} 0%, ${colors.blue[900]} 100%)`,
+			backgroundImage: `linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`,
 			bgClip: 'text',
 		},
 	},

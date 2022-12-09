@@ -12,9 +12,7 @@ RUN yarn --frozen-lockfile
 # Copy source (see .dockerignore)
 COPY . .
 
-RUN yarn dev
-
-ENV PORT 8080
+ENV PORT 3000
 
 CMD ["yarn", "dev"]
 
@@ -35,6 +33,6 @@ COPY . .
 # Build the app
 RUN yarn build
 
-ENV PORT 8080
+ENV PORT 3000
 
 CMD ["yarn", "start"]
