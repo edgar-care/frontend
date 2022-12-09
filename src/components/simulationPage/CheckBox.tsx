@@ -1,17 +1,17 @@
 import { VStack, Image } from '@chakra-ui/react';
 import React from 'react';
 
-type IsType = {
+type CheckBoxType = {
 	image: string;
 	value: boolean;
-	changeSex: () => void;
+	valueHandler: () => void;
 };
 
-const CheckBox = ({ image, value, changeSex }: IsType) => (
+const CheckBox = ({ image, value, valueHandler }: CheckBoxType) => (
 	<VStack
-		onClick={() => changeSex()}
+		onClick={valueHandler}
 		borderRadius="16px"
-		bg={value ? 'blue.100' : 'blue.200'}
+		bg={value ? 'blue.200' : 'blue.100'}
 		p="12px 32px"
 		cursor="pointer"
 	>
