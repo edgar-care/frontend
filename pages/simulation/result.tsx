@@ -29,17 +29,9 @@ const Result = (): JSX.Element => {
 		setAppointments(appointmentList);
 	}, []);
 
-	// appointments.map((appointment) => {
-	// 	// Return le component de la journée
-	// 	// Passer en params appointment
-	// 	// Dans le component, map sur appointment.hours
-	// });
-
-	console.log(appointments);
-
 	return (
 		<SimulationPage>
-			<VStack maxW="715px">
+			<VStack maxW="750px">
 				<Stack spacing="64px">
 					<Stack spacing="32px">
 						<Text size="2xl">
@@ -52,10 +44,9 @@ const Result = (): JSX.Element => {
 					</Stack>
 
 					<HStack borderRadius="16px" h="350px" backgroundColor="#DADEF2" p="32px" spacing="32px">
-						{appointments.map((appointment) => {
-							console.log('test');
-							return <AppointmentCard appointment={appointment} key={appointment.date.toString()} />;
-						})}
+						{appointments.map((appointment) => (
+							<AppointmentCard appointment={appointment} key={appointment.date.toString()} />
+						))}
 					</HStack>
 				</Stack>
 			</VStack>

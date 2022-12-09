@@ -11,7 +11,7 @@ const Simulation = (): JSX.Element => (
 				<Text size="3xl">
 					Bienvenue sur <ColorText textValue="edgar.care" />
 				</Text>
-				<Text size="boldXl">Votre assistant medical</Text>
+				<Text size="boldXl">Votre assistant medical numérique</Text>
 			</Stack>
 			<VStack spacing="64px" width="100%">
 				<VStack spacing="32px" width="100%">

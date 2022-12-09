@@ -31,7 +31,29 @@ const Doctor = (): JSX.Element => {
 						</Text>
 						<Text size="2xl">Nous avons besoin d'un médecin, pour examiner votre analyse :</Text>
 					</Stack>
-					<VStack overflowY="scroll" w="750px" h="400px">
+					<VStack
+						overflowY="auto"
+						w="100%"
+						h="400px"
+						spacing="16px"
+						px="16px"
+						sx={{
+							'::-webkit-scrollbar': {
+								width: '4px',
+							},
+							'::-webkit-scrollbar-track': {
+								background: '#F1F1F1',
+							},
+							'::-webkit-scrollbar-thumb': {
+								background: '#CCC',
+							},
+							'::-webkit-scrollbar-thumb:hover': {
+								background: '#888',
+							},
+							scrollbarWidth: 'thin',
+							scrollbarColor: '#CCC #F1F1F1',
+						}}
+					>
 						{doctorList.map((doctor) => (
 							<DoctorCard doc={doctor.name} pos={doctor.position} />
 						))}
