@@ -1,80 +1,82 @@
-import { HStack, Text, VStack, Button, Image, Box } from '@chakra-ui/react';
-import CheckBox from 'components/CheckBox';
-import NumInput from 'components/NumberInput';
-import SlideBar from 'components/SlideBar';
 import { useState } from 'react';
-import colors from 'theme/foundations/colors';
+import Link from 'next/link';
+import { Button, HStack, Stack, Text, VStack } from '@chakra-ui/react';
+
+import CheckBox from 'components/simulationPage/CheckBox';
+import ColorText from 'components/GradientText';
+import NumInput from 'components/NumInput';
+import SlideBar from 'components/SlideBar';
+import SimulationPage from 'components/pages/simulation/SimulationPage';
+
+import useToggle from 'hooks/useToggle';
 
 const Infos = (): JSX.Element => {
-	const [ageValue, setAgeValue] = useState(20);
-	const [sexValue, setsexValue] = useState(true);
-	const showSex = () => setsexValue(!sexValue);
+	const [age, setAge] = useState(20);
+	const [height, setHeight] = useState<string>('');
+	const [weight, setWeight] = useState<string>('');
+	const [temperature, setTemperature] = useState<string>('');
+	const { toggle: isMale, toggleHandler: sexValueHandler } = useToggle(true);
 
-	const isMale = !sexValue;
-	const isFeMale = sexValue;
-
-	console.log('isMale', isMale);
-	console.log('isFeMale', isFeMale);
-
-	const [Size, getSize] = useState<string>('');
-	const [Weight, getWeight] = useState<string>('');
-
-	console.log('size', Size);
-	console.log('weight', Weight);
+	console.log(isMale);
 
 	return (
-		<VStack spacing="96px" paddingTop="150px">
-			<Text size="2xl">
-				Avant de commencer j'ai besoin de{' '}
-				<Box
-					as="span"
-					backgroundImage={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-					bgClip="text"
-				>
-					quelques informations
-				</Box>
-			</Text>
-			<HStack spacing="96px">
-				<VStack spacing="20px">
-					<HStack spacing="48px">
-						<Text size="2xl">Quel est votre age ?</Text>
-						<VStack borderRadius="16px" bg="#DADEF2" paddingY="4px" paddingX="24px">
-							<Text size="2xl">{ageValue} ans</Text>
-						</VStack>
-					</HStack>
-					<SlideBar ageValue={ageValue} setAgeValue={setAgeValue} />
-				</VStack>
-				<VStack>
-					<Text size="2xl">Quel est votre sexe ?</Text>
-					<HStack spacing="24px">
-						<CheckBox changeSex={() => showSex()} value={sexValue} image="/assets/icons/male_symbol.svg" />
-						<CheckBox
-							changeSex={() => showSex()}
-							value={!sexValue}
-							image="/assets/icons/female_symbol.svg"
-						/>
-					</HStack>
-				</VStack>
-			</HStack>
-
-			<HStack spacing="128px">
-				<HStack spacing="32px">
-					<Text size="2xl">Quel est votre taille ?</Text>
-					<NumInput changeValue={(v) => getSize(v)} children="cm" placeholder="175" />
+		<SimulationPage>
+			<VStack spacing="64px">
+				<Text size="2xl">
+					Avant de commencer j'ai besoin de <ColorText textValue="quelques informations" />
+				</Text>
+				<HStack spacing="128px">
+					<VStack spacing="24px">
+						<HStack spacing="48px">
+							<Text size="2xl">Quel est votre age ?</Text>
+							<VStack borderRadius="16px" bg="blue.100" p="4px 24px" minW="136px">
+								<Text size="2xl">{age} ans</Text>
+							</VStack>
+						</HStack>
+						<SlideBar ageValue={age} setAgeValue={setAge} />
+					</VStack>
+					<VStack>
+						<Text size="2xl">Quel est votre sexe ?</Text>
+						<HStack spacing="24px">
+							<CheckBox
+								valueHandler={sexValueHandler}
+								value={isMale}
+								image="/assets/icons/male_symbol.svg"
+							/>
+							<CheckBox
+								valueHandler={sexValueHandler}
+								value={!isMale}
+								image="/assets/icons/female_symbol.svg"
+							/>
+						</HStack>
+					</VStack>
 				</HStack>
-				<HStack spacing="32px">
-					<Text size="2xl">Quel est votre poid ?</Text>
-					<NumInput changeValue={(v) => getWeight(v)} children="kg" placeholder="65" />
-				</HStack>
-			</HStack>
 
-			<VStack spacing="96px">
-				<Button variant="primary" size="md">
-					Valider mes informations
-				</Button>
-				<Image src="/assets/edgar.care-logo.svg" alt="test" w={200} h="auto" />
+				<HStack spacing="128px">
+					<HStack spacing="32px">
+						<Text size="2xl">Quelle est votre taille ?</Text>
+						<NumInput value={height} setValue={setHeight} children="cm" placeholder="175" />
+					</HStack>
+					<HStack spacing="32px">
+						<Text size="2xl">Quel est votre poids ?</Text>
+						<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
+					</HStack>
+				</HStack>
+				<Stack spacing="96px">
+					<HStack spacing="32px">
+						<Text size="2xl">Quelle est votre température ?</Text>
+						<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
+					</HStack>
+					<VStack spacing="96px">
+						<Link href="/simulation/chat">
+							<Button variant="primary" size="lg">
+								Valider mes informations
+							</Button>
+						</Link>
+					</VStack>
+				</Stack>
 			</VStack>
-		</VStack>
+		</SimulationPage>
 	);
 };
 

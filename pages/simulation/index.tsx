@@ -1,6 +1,7 @@
-import { VStack, Image, Text, Stack, Button, Box } from '@chakra-ui/react';
+import { VStack, Image, Text, Stack, Button } from '@chakra-ui/react';
 import Link from 'next/link';
-import colors from 'theme/foundations/colors';
+
+import ColorText from 'components/GradientText';
 
 const Simulation = (): JSX.Element => (
 	<VStack spacing="96px" paddingTop="32px">
@@ -8,28 +9,14 @@ const Simulation = (): JSX.Element => (
 		<Stack spacing="96px">
 			<Stack spacing="8px">
 				<Text size="3xl">
-					Bienvenue sur{' '}
-					<Box
-						as="span"
-						backgroundImage={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-						bgClip="text"
-					>
-						edgar.care
-					</Box>
+					Bienvenue sur <ColorText textValue="edgar.care" />
 				</Text>
-				<Text size="boldXl">Votre assistant medical</Text>
+				<Text size="boldXl">Votre assistant medical numérique</Text>
 			</Stack>
 			<VStack spacing="64px" width="100%">
 				<VStack spacing="32px" width="100%">
 					<Text textAlign="left" fontWeight={700} fontSize="28px" width="100%">
-						Vous allez commencer votre{' '}
-						<Box
-							as="span"
-							backgroundImage={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-						>
-							analyse
-						</Box>
+						Vous allez commencer votre <ColorText textValue="analyse" />
 					</Text>
 					<Stack spacing="16px" borderRadius="16px" bg="#E8DAF2" padding="24px">
 						<Text size="boldLg">Cette session, n’a pas pour but de diagnostiquer une maladie.</Text>

@@ -25,7 +25,7 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 	return (
 		<>
 			{isNotAuthenticated ? (
-				<VStack p="128px" minH="100vh">
+				<VStack p="64px" minH="100vh">
 					{children}
 				</VStack>
 			) : (

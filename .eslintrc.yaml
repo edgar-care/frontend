@@ -23,7 +23,7 @@ globals:
   "cy": true
 
 rules:
-  prettier/prettier: warn
+  prettier/prettier: error
 
   react/react-in-jsx-scope: 0
   react/jsx-filename-extension: 0

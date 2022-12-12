@@ -1,21 +1,23 @@
 import { Input, InputGroup, InputRightAddon } from '@chakra-ui/react';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-type IsType = {
+type NumInputType = {
 	placeholder: string;
 	children: string;
-	changeValue: (v: string) => void;
+	value: string;
+	setValue: Dispatch<SetStateAction<string>>;
 };
 
-const NumInput = ({ placeholder, children, changeValue }: IsType) => (
-	<InputGroup textColor="black" variant="filled" w="96px">
+const NumInput = ({ placeholder, children, value, setValue }: NumInputType) => (
+	<InputGroup textColor="black" variant="filled" w="100px">
 		<Input
-			onChange={(v) => changeValue(v.target.value)}
 			borderRadius="14px"
 			type="number"
 			fontWeight={600}
-			placeholder={placeholder}
 			backgroundColor="#DADEF2"
+			placeholder={placeholder}
+			onChange={(v) => setValue(v.target.value)}
+			value={value}
 		/>
 		<InputRightAddon borderRadius="14px" fontSize="12px" children={children} backgroundColor="#DADEF2" p="8px" />
 	</InputGroup>

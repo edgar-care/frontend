@@ -6,7 +6,7 @@ class Auth {
 		try {
 			// TODO: update this call
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('auth/login', 'GET', JSON.stringify({ email, password }));
+			const auth = await basicFetch('simulation/login', 'GET', JSON.stringify({ email, password }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
@@ -25,7 +25,7 @@ class Auth {
 	public async signup(email: string, password: string): Promise<MessageResponse> {
 		try {
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('auth/signup', 'POST', JSON.stringify({ email, password }));
+			const auth = await basicFetch('simulation/signup', 'POST', JSON.stringify({ email, password }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
@@ -44,7 +44,7 @@ class Auth {
 	public async logout(): Promise<MessageResponse> {
 		try {
 			// TODO: update this call
-			const auth = await basicFetch('auth/logout', 'GET');
+			const auth = await basicFetch('simulation/logout', 'GET');
 
 			if (auth.status === 200) return { title: 'Déconnexion réussie', status: 'success' };
 
@@ -59,7 +59,7 @@ class Auth {
 	public async checkToken(): Promise<MessageResponse> {
 		try {
 			// TODO: update this call
-			const auth = await basicFetch('auth/check', 'GET');
+			const auth = await basicFetch('simulation/check', 'GET');
 
 			if (auth.status === 200) return { title: 'Token is valid', status: 'success' };
 

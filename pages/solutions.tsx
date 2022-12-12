@@ -1,102 +1,39 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Text, VStack } from '@chakra-ui/react';
 
 import NavBar from 'components/landingPage/NavBar';
 import BasicPage from 'components/pages/BasicPage';
-import colors from '../src/theme/foundations/colors';
+
+import GradientText from 'components/GradientText';
 
 const Solutions = (): JSX.Element => (
 	<BasicPage>
 		<VStack w="100%">
 			<NavBar />
-			<VStack pt="64px" pb="256px" w="50%" textAlign="center" spacing="128px">
+			<VStack py="192px" w="50%" textAlign="center" spacing="128px">
 				<VStack>
 					<Text size="3xl">Notre solution:</Text>
 					<Text size="boldXl" w="750px">
 						Une plateforme permettant d'échanger avec notre{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							assistant numérique Edgar
-						</Box>{' '}
-						avant votre prise de rendez-vous.
+						<GradientText textValue="assistant numérique Edgar" /> avant votre prise de rendez-vous.
 					</Text>
 				</VStack>
 				<VStack>
 					<Text size="3xl">Dans quel but ?</Text>
 					<Text size="boldXl" w="700px">
-						Afin d'éviter d'aller chez le médecin pour une{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							consultation inutile
-						</Box>
-						, l'assistant fournira à celui-ci un{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							compte-rendu
-						</Box>{' '}
-						de l'échange afin de déterminer si la prise de votre rendez-vous est{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							nécessaire
-						</Box>
-						.
+						Afin d'éviter d'aller chez le médecin pour une <GradientText textValue="consultation inutile" />
+						, l'assistant fournira à celui-ci un <GradientText textValue="compte-rendu" /> de l'échange afin
+						de déterminer si la prise de votre rendez-vous est <GradientText textValue="nécessaire" />.
 					</Text>
 					<Text size="boldXl" fontWeight="900">
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-						>
-							Seul le médecin
-						</Box>{' '}
-						pourra déterminer si la prise de rendez-vous est nécessaire.
+						<GradientText textValue="Seul le médecin" /> pourra déterminer si la prise de rendez-vous est
+						nécessaire.
 					</Text>
 				</VStack>
 				<VStack>
 					<Text size="boldXl" w="750px">
 						En plus de cet échange avec Edgar, vous pourrez retrouver{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							l'entièreté
-						</Box>{' '}
-						de vos informations médicales,{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							facilement
-						</Box>{' '}
-						et au{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							même endroit
-						</Box>
-						.
+						<GradientText textValue="l'entièreté" /> de vos informations médicales,{' '}
+						<GradientText textValue="facilement" /> et au <GradientText textValue="même endroit" />.
 					</Text>
 					<Text size="boldXl" w="750px">
 						Parmi ces informations, vous pourrez retrouver, tous vos rendez-vous passés et futurs, ainsi que
@@ -105,45 +42,12 @@ const Solutions = (): JSX.Element => (
 				</VStack>
 				<VStack>
 					<Text size="2xl" w="750px">
-						Votre médecin vous remerciera d'utiliser{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							edgar.care
-						</Box>
+						Votre médecin vous remerciera d'utiliser <GradientText textValue="edgar.care" />
 					</Text>
 					<Text size="boldXl" w="750px">
 						Avec nous il pourra avoir accès à tous vos documents et vos antécédents médicaux, beaucoup plus{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							facilement
-						</Box>{' '}
-						et pourra ainsi vous suivre plus{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							efficacement
-						</Box>{' '}
-						et plus{' '}
-						<Box
-							as="span"
-							bg={`linear-gradient(90deg, ${colors.blue[500]} 0%, ${colors.pink[500]} 100%)`}
-							bgClip="text"
-							fontWeight="800"
-						>
-							rapidement
-						</Box>
-						.
+						<GradientText textValue="facilement" /> et pourra ainsi vous suivre plus{' '}
+						<GradientText textValue="efficacement" /> et plus <GradientText textValue="rapidement" />.
 					</Text>
 				</VStack>
 			</VStack>
