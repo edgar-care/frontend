@@ -1,6 +1,6 @@
 import { Stack, Text, VStack } from '@chakra-ui/react';
 
-import ColorText from 'components/ColorText';
+import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import DoctorCard from 'components/simulationPage/DoctorCard';
 import { useEffect, useState } from 'react';

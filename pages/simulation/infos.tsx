@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button, HStack, Text, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';
-import ColorText from 'components/ColorText';
+import ColorText from 'components/GradientText';
 import NumInput from 'components/NumInput';
 import SlideBar from 'components/SlideBar';
 import SimulationPage from 'components/pages/simulation/SimulationPage';

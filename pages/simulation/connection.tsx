@@ -1,6 +1,6 @@
 import { Text, VStack, Stack, HStack, Button } from '@chakra-ui/react';
 
-import ColorText from 'components/ColorText';
+import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 
 const Doctor = (): JSX.Element => (

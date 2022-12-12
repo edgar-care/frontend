@@ -1,7 +1,7 @@
 import { Text, VStack, Image, HStack } from '@chakra-ui/react';
 
 import ChatBox from 'components/simulationPage/ChatBox';
-import ColorText from 'components/ColorText';
+import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 
 const Chat = (): JSX.Element => (
