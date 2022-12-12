@@ -1,7 +1,8 @@
-import { Text, VStack } from '@chakra-ui/react';
+import { Button, Text, VStack } from '@chakra-ui/react';
 
 import NavBar from 'components/landingPage/NavBar';
 import BasicPage from 'components/pages/BasicPage';
+import Link from 'next/link';
 
 import GradientText from 'components/GradientText';
 
@@ -50,6 +51,9 @@ const Solutions = (): JSX.Element => (
 						<GradientText textValue="efficacement" /> et plus <GradientText textValue="rapidement" />.
 					</Text>
 				</VStack>
+				<Link href="https://www.linkedin.com/company/edgar-care/" target="_blank">
+					<Button size="lg">Nous suivre ?</Button>
+				</Link>
 			</VStack>
 		</VStack>
 	</BasicPage>

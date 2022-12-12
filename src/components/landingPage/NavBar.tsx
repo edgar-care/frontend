@@ -30,8 +30,13 @@ const NavBar = (): JSX.Element => {
 						<TabCard name={tab.name} path={tab.path} key={tab.path} />
 					))}
 				</HStack>
-				<Link href="https://www.linkedin.com/company/edgar-care/" target="_blank">
-					<Button size="boldMd">Nous suivre ?</Button>
+				<Link href="/simulation">
+					<Button variant="secondary" size="boldMd">
+						Simulation
+					</Button>
+				</Link>
+				<Link href="/connection/login">
+					<Button size="boldMd">Espace client</Button>
 				</Link>
 			</HStack>
 		</HStack>
