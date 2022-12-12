@@ -1,7 +1,7 @@
 import { VStack, Image, Text, Stack, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import ColorText from 'components/ColorText';
+import ColorText from 'components/GradientText';
 
 const Simulation = (): JSX.Element => (
 	<VStack spacing="96px" paddingTop="32px">
