@@ -1,4 +1,4 @@
-import { Text, VStack, Stack, HStack, Button } from '@chakra-ui/react';
+import { Text, VStack, Stack, HStack, Button, Link } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
@@ -17,12 +17,16 @@ const Doctor = (): JSX.Element => (
 				<Text size="2xl">Pour que je puisse revenir vers vous, il me faudrait un moyen de communication</Text>
 			</Stack>
 			<HStack spacing="64px">
-				<Button variant="primary" size="lg">
-					Créer un compte
-				</Button>
-				<Button variant="secondary" size="lg">
-					Se connecter
-				</Button>
+				<Link href="/connection/signup">
+					<Button variant="primary" size="lg">
+						Créer un compte
+					</Button>
+				</Link>
+				<Link href="/connection/login">
+					<Button variant="secondary" size="lg">
+						Se connecter
+					</Button>
+				</Link>
 			</HStack>
 		</VStack>
 	</SimulationPage>
