@@ -1,4 +1,4 @@
-import { Button, VStack } from '@chakra-ui/react';
+import { Button, HStack, VStack } from '@chakra-ui/react';
 import HeadingSection from 'components/landingPage/HeadingSection';
 import InfosSection from 'components/landingPage/InfosSection';
 import Link from 'next/link';
@@ -12,9 +12,16 @@ const Home = (): JSX.Element => (
 			<VStack spacing="128px" pt="128px">
 				<HeadingSection />
 				<InfosSection />
-				<Link href="/solutions">
-					<Button size="lg">Vous voulez en apprendre plus ?</Button>
-				</Link>
+				<HStack spacing="32px">
+					<Link href="/simulation">
+						<Button size="lg">Lancer une simulation</Button>
+					</Link>
+					<Link href="/solutions">
+						<Button variant="secondary" size="lg">
+							Vous voulez en apprendre plus ?
+						</Button>
+					</Link>
+				</HStack>
 			</VStack>
 		</VStack>
 	</BasicPage>
