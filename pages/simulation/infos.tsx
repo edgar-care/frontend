@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { Button, HStack, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Stack, Text, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';
 import ColorText from 'components/GradientText';
@@ -14,13 +14,14 @@ const Infos = (): JSX.Element => {
 	const [age, setAge] = useState(20);
 	const [height, setHeight] = useState<string>('');
 	const [weight, setWeight] = useState<string>('');
+	const [temperature, setTemperature] = useState<string>('');
 	const { toggle: isMale, toggleHandler: sexValueHandler } = useToggle(true);
 
 	console.log(isMale);
 
 	return (
 		<SimulationPage>
-			<VStack spacing="96px">
+			<VStack spacing="64px">
 				<Text size="2xl">
 					Avant de commencer j'ai besoin de <ColorText textValue="quelques informations" />
 				</Text>
@@ -61,13 +62,19 @@ const Infos = (): JSX.Element => {
 						<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
 					</HStack>
 				</HStack>
-				<VStack spacing="96px">
-					<Link href="/simulation/chat">
-						<Button variant="primary" size="lg">
-							Valider mes informations
-						</Button>
-					</Link>
-				</VStack>
+				<Stack spacing="96px">
+					<HStack spacing="32px">
+						<Text size="2xl">Quelle est votre température ?</Text>
+						<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
+					</HStack>
+					<VStack spacing="96px">
+						<Link href="/simulation/chat">
+							<Button variant="primary" size="lg">
+								Valider mes informations
+							</Button>
+						</Link>
+					</VStack>
+				</Stack>
 			</VStack>
 		</SimulationPage>
 	);

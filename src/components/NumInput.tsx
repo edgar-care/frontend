@@ -9,7 +9,7 @@ type NumInputType = {
 };
 
 const NumInput = ({ placeholder, children, value, setValue }: NumInputType) => (
-	<InputGroup textColor="black" variant="filled" w="96px">
+	<InputGroup textColor="black" variant="filled" w="100px">
 		<Input
 			borderRadius="14px"
 			type="number"
