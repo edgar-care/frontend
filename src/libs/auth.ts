@@ -1,12 +1,12 @@
 import { MessageResponse } from '../types/MessageResponse';
 import basicFetch from '../utils/basicFetch';
+import { PatientInfos } from '../types/PatientInfos';
 
 class Auth {
 	public async login(email: string, password: string): Promise<MessageResponse> {
 		try {
-			// TODO: update this call
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('simulation/login', 'GET', JSON.stringify({ email, password }));
+			const auth = await basicFetch('auth/p/login', 'POST', JSON.stringify({ email, password }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
@@ -22,14 +22,15 @@ class Auth {
 		}
 	}
 
-	public async signup(email: string, password: string): Promise<MessageResponse> {
+	public async signup(email: string, password: string, infos: PatientInfos): Promise<MessageResponse> {
 		try {
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('simulation/signup', 'POST', JSON.stringify({ email, password }));
+			const auth = await basicFetch('auth/p/register', 'POST', JSON.stringify({ email, password, ...infos }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
 
+			console.log('data', data);
 			if (data.token) {
 				localStorage.setItem('token', data.token);
 				return { title: 'Inscription réussie', status: 'success' };

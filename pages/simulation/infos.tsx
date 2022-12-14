@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Link from 'next/link';
-import { Button, HStack, Stack, Text, VStack } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { Button, HStack, Stack, Text, useToast, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';
 import ColorText from 'components/GradientText';
@@ -10,14 +10,40 @@ import SimulationPage from 'components/pages/simulation/SimulationPage';
 
 import useToggle from 'hooks/useToggle';
 
+import { usePatientContext } from 'contexts/user';
+
+import { MessageResponse } from 'types/MessageResponse';
+
 const Infos = (): JSX.Element => {
+	const { infos, setInfos } = usePatientContext();
+	const router = useRouter();
+	const toast = useToast({ duration: 2000, isClosable: true });
+
 	const [age, setAge] = useState(20);
-	const [height, setHeight] = useState<string>('');
-	const [weight, setWeight] = useState<string>('');
-	const [temperature, setTemperature] = useState<string>('');
+	const [height, setHeight] = useState(0);
+	const [weight, setWeight] = useState(0);
+	const [temperature, setTemperature] = useState(0);
 	const { toggle: isMale, toggleHandler: sexValueHandler } = useToggle(true);
 
-	console.log(isMale);
+	const saveInfos = async (): Promise<MessageResponse> => {
+		try {
+			setInfos({
+				age,
+				height,
+				weight,
+				name: infos ? infos.name : '',
+				last_name: infos ? infos.last_name : '',
+				sex: isMale ? 'M' : 'F',
+			});
+
+			return { title: 'Informations sauvegardées', status: 'success' };
+		} catch {
+			return {
+				title: 'Une erreur est survenue',
+				status: 'error',
+			};
+		}
+	};
 
 	return (
 		<SimulationPage>
@@ -68,11 +94,21 @@ const Infos = (): JSX.Element => {
 						<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
 					</HStack>
 					<VStack spacing="96px">
-						<Link href="/simulation/chat">
-							<Button variant="primary" size="lg">
-								Valider mes informations
-							</Button>
-						</Link>
+						<Button
+							variant="primary"
+							size="lg"
+							onClick={() => {
+								saveInfos().then((res) => {
+									toast({
+										title: res.title,
+										status: res.status,
+									});
+									if (res.status === 'success') void router.push('/simulation/chat');
+								});
+							}}
+						>
+							Valider mes informations
+						</Button>
 					</VStack>
 				</Stack>
 			</VStack>

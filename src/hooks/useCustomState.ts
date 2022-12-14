@@ -1,17 +1,17 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
-const useStringState = (
-	defaultValue?: string,
+const useCustomState = <Type = undefined>(
+	defaultValue: Type,
 ): {
-	value: string;
-	setValue: Dispatch<SetStateAction<string>>;
+	value: Type;
+	setValue: Dispatch<SetStateAction<Type>>;
 	error: boolean;
 	setError: Dispatch<SetStateAction<boolean>>;
 } => {
-	const [value, setValue] = useState<string>(defaultValue || '');
+	const [value, setValue] = useState<Type>(defaultValue);
 	const [error, setError] = useState(false);
 
 	return { value, setValue, error, setError };
 };
 
-export default useStringState;
+export default useCustomState;
