@@ -60,12 +60,14 @@ class Auth {
 	public async checkToken(): Promise<MessageResponse> {
 		try {
 			// TODO: update this call
-			const auth = await basicFetch('simulation/check', 'GET');
-
-			if (auth.status === 200) return { title: 'Token is valid', status: 'success' };
-
-			const data = await auth.json();
-			return { title: data.message, status: 'error' };
+			// const auth = await basicFetch('simulation/check', 'GET');
+			//
+			// if (auth.status === 200) return { title: 'Token is valid', status: 'success' };
+			//
+			// const data = await auth.json();
+			// return { title: data.message, status: 'error' };
+			if (this.getToken()) return { title: 'Token is valid', status: 'success' };
+			return { title: 'Token is invalid', status: 'error' };
 		} catch (error) {
 			console.error(error);
 			return { title: 'Connexion échouée, veuillez vous reconnecter', status: 'error' };
