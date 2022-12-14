@@ -5,29 +5,38 @@ import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VSta
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
-import useStringState from 'hooks/useStringState';
-
 import { useAuthContext } from 'contexts/auth';
+import { useEffect } from 'react';
+import useCustomState from 'hooks/useCustomState';
+import { usePatientContext } from '../../src/contexts/user';
 
 const Signup = (): JSX.Element => {
-	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useStringState();
+	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
 	const {
 		value: password,
 		setValue: setPassword,
 		error: passwordError,
 		setError: setPasswordError,
-	} = useStringState();
+	} = useCustomState('');
 	const {
 		value: passwordConfirmation,
 		setValue: setPasswordConfirmation,
 		error: passwordConfirmationError,
 		setError: setPasswordConfirmationError,
-	} = useStringState();
+	} = useCustomState('');
 
 	const params = useSearchParams();
 	const router = useRouter();
 	const auth = useAuthContext();
+	const { infos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
+
+	useEffect(() => {
+		if (!infos)
+			void router.push(
+				params.get('redirect') ? `/connection/infos?redirect=${params.get('redirect')}` : '/connection/infos',
+			);
+	}, [infos]);
 
 	const signup = () => {
 		if (!email) setEmailError(true);
@@ -35,12 +44,12 @@ const Signup = (): JSX.Element => {
 		if (!passwordConfirmation) setPasswordConfirmationError(true);
 		if (password !== passwordConfirmation) setPasswordConfirmationError(true);
 
-		if (email && password && password === passwordConfirmation) {
-			auth.signup(email, password).then((response) => {
+		if (email && password && password === passwordConfirmation && infos) {
+			auth.signup(email, password, infos).then((response) => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
-					if (params.get('redirect')) void router.push(`/infos?redirect=${params.get('redirect')}`);
-					else void router.push('/infos');
+					if (params.get('redirect')) void router.push(params.get('redirect')!);
+					else void router.push('/app/patient');
 				}
 			});
 		} else toast({ title: 'Identifiants incorrects', status: 'error' });
@@ -96,7 +105,13 @@ const Signup = (): JSX.Element => {
 						<Button variant="primary" size="lg" onClick={signup}>
 							M'inscrire avec ces informations
 						</Button>
-						<Link href={`/connection/login?redirect=${params.get('redirect')}`}>
+						<Link
+							href={
+								params.get('redirect')
+									? `/connection/login?redirect=${params.get('redirect')}`
+									: '/connection/login'
+							}
+						>
 							<Button variant="secondary">J'ai déjà un compte</Button>
 						</Link>
 					</VStack>

@@ -5,18 +5,18 @@ import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VSta
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
-import useStringState from 'hooks/useStringState';
-
 import { useAuthContext } from 'contexts/auth';
 
+import useCustomState from 'hooks/useCustomState';
+
 const Login = (): JSX.Element => {
-	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useStringState();
+	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
 	const {
 		value: password,
 		setValue: setPassword,
 		error: passwordError,
 		setError: setPasswordError,
-	} = useStringState();
+	} = useCustomState('');
 
 	const params = useSearchParams();
 	const router = useRouter();
@@ -32,7 +32,7 @@ const Login = (): JSX.Element => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
 					if (params.get('redirect')) void router.push(params.get('redirect')!);
-					else void router.push('/dashboard');
+					else void router.push('/app/patient');
 				}
 			});
 		} else toast({ title: 'Identifiants incorrects', status: 'error' });
@@ -75,7 +75,13 @@ const Login = (): JSX.Element => {
 						<Button variant="primary" size="lg" onClick={login}>
 							Me connecter avec ces informations
 						</Button>
-						<Link href={`/connection/signup?redirect=${params.get('redirect')}`}>
+						<Link
+							href={
+								params.get('redirect')
+									? `/connection/infos?redirect=${params.get('redirect')}`
+									: '/connection/infos'
+							}
+						>
 							<Button variant="secondary">Je n'ai pas de compte</Button>
 						</Link>
 					</VStack>
