@@ -3,7 +3,7 @@ import { Text, VStack, Stack, HStack, Button, Link } from '@chakra-ui/react';
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 
-const Doctor = (): JSX.Element => (
+const Connection = (): JSX.Element => (
 	<SimulationPage>
 		<VStack spacing="128px">
 			<Stack spacing="64px" maxW="670px">
@@ -28,4 +28,4 @@ const Doctor = (): JSX.Element => (
 	</SimulationPage>
 );
 
-export default Doctor;
+export default Connection;
