@@ -39,8 +39,8 @@ const Documents = (): JSX.Element => {
 				buttonRedirect={() => {}}
 			/>
 			<VStack w="100%" spacing="16px">
-				{appointmentList.map((appointment) => (
-					<DocumentCard docuName={appointment.docuName} name={appointment.name} />
+				{appointmentList.map((appointment, index) => (
+					<DocumentCard docuName={appointment.docuName} name={appointment.name} key={index} />
 				))}
 			</VStack>
 		</VStack>

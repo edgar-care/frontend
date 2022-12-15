@@ -47,6 +47,7 @@ const Appointments = (): JSX.Element => {
 						name={appointment.name}
 						date={appointment.hours.toLocaleDateString()}
 						hours={appointment.hours.toLocaleTimeString()}
+						key={appointment.hours.toString()}
 					/>
 				))}
 			</VStack>

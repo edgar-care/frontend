@@ -45,7 +45,7 @@ const Home = (): JSX.Element => {
 			</Link>
 			<Grid templateColumns="repeat(2, 1fr)" gap="48px">
 				{cards.map((card) => (
-					<GridItem>
+					<GridItem key={card.title}>
 						<DashboardCard
 							title={card.title}
 							para={card.para}
