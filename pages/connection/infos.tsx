@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 import {
 	Button,
 	FormControl,
@@ -17,14 +16,15 @@ import {
 } from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
+import NumInput from 'components/NumInput';
 
 import useCustomState from 'hooks/useCustomState';
 
 import { usePatientContext } from 'contexts/user';
 
 import { PatientSex } from 'types/PatientInfos';
-import NumInput from '../../src/components/NumInput';
-import colors from '../../src/theme/foundations/colors';
+
+import colors from 'theme/foundations/colors';
 
 const Infos = (): JSX.Element => {
 	const { value: name, setValue: setName, error: nameError, setError: setNameError } = useCustomState('');
@@ -40,16 +40,16 @@ const Infos = (): JSX.Element => {
 	const { value: sex, setValue: setSex, error: sexError } = useCustomState('M');
 
 	const router = useRouter();
-	const params = useSearchParams();
 	const { infos, setInfos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
 
 	useEffect(() => {
+		if (!router.isReady) return;
 		if (infos)
 			void router.push(
-				params.get('redirect') ? `/connection/signup?redirect=${params.get('redirect')}` : '/connection/signup',
+				router.query.redirect ? `/connection/signup?redirect=${router.query.redirect}` : '/connection/signup',
 			);
-	}, [infos]);
+	}, [infos, router.isReady]);
 
 	const validate = () => {
 		if (!name) setNameError(true);
@@ -61,7 +61,7 @@ const Infos = (): JSX.Element => {
 		if (name && firstname && age !== 0 && weight !== 0 && height !== 0) {
 			setInfos({ name: firstname, last_name: name, age, weight, height, sex: sex as PatientSex });
 			void router.push(
-				params.get('redirect') ? `/connection/signup?redirect=${params.get('redirect')}` : '/connection/signup',
+				router.query.redirect ? `/connection/signup?redirect=${router.query.redirect}` : '/connection/signup',
 			);
 		} else toast({ title: 'Informations incorrectes', status: 'error' });
 	};

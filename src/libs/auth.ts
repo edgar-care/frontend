@@ -1,6 +1,7 @@
-import { MessageResponse } from '../types/MessageResponse';
-import basicFetch from '../utils/basicFetch';
-import { PatientInfos } from '../types/PatientInfos';
+import basicFetch from 'utils/basicFetch';
+
+import { MessageResponse } from 'types/MessageResponse';
+import { PatientInfos } from 'types/PatientInfos';
 
 class Auth {
 	public async login(email: string, password: string): Promise<MessageResponse> {
@@ -30,7 +31,6 @@ class Auth {
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
 
-			console.log('data', data);
 			if (data.token) {
 				localStorage.setItem('token', data.token);
 				return { title: 'Inscription réussie', status: 'success' };

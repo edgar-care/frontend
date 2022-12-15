@@ -1,14 +1,14 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VStack } from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
 import { useAuthContext } from 'contexts/auth';
-import { useEffect } from 'react';
+import { usePatientContext } from 'contexts/user';
+
 import useCustomState from 'hooks/useCustomState';
-import { usePatientContext } from '../../src/contexts/user';
 
 const Signup = (): JSX.Element => {
 	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
@@ -25,18 +25,18 @@ const Signup = (): JSX.Element => {
 		setError: setPasswordConfirmationError,
 	} = useCustomState('');
 
-	const params = useSearchParams();
 	const router = useRouter();
 	const auth = useAuthContext();
 	const { infos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
 
 	useEffect(() => {
+		if (!router.isReady) return;
 		if (!infos)
 			void router.push(
-				params.get('redirect') ? `/connection/infos?redirect=${params.get('redirect')}` : '/connection/infos',
+				router.query.redirect ? `/connection/infos?redirect=${router.query.redirect}` : '/connection/infos',
 			);
-	}, [infos]);
+	}, [infos, router.isReady]);
 
 	const signup = () => {
 		if (!email) setEmailError(true);
@@ -48,7 +48,7 @@ const Signup = (): JSX.Element => {
 			auth.signup(email, password, infos).then((response) => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
-					if (params.get('redirect')) void router.push(params.get('redirect')!);
+					if (router.query.redirect) void router.push(router.query.redirect as string);
 					else void router.push('/app/patient');
 				}
 			});
@@ -107,8 +107,8 @@ const Signup = (): JSX.Element => {
 						</Button>
 						<Link
 							href={
-								params.get('redirect')
-									? `/connection/login?redirect=${params.get('redirect')}`
+								router.query.redirect
+									? `/connection/login?redirect=${router.query.redirect}`
 									: '/connection/login'
 							}
 						>

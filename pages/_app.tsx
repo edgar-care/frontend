@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { Center, ChakraProvider, Img, useToast, VStack } from '@chakra-ui/react';
 import Head from 'next/head';
+import jwtDecode from 'jwt-decode';
 
 import { MrMiyagi } from '@uiball/loaders';
 
 import PatientContext from 'contexts/user';
 import AuthContext from 'contexts/auth';
+import ChatContext from 'contexts/chat';
 
 import Auth from 'libs/auth';
+import Chat from 'libs/chat';
 
 import { PatientInfos } from 'types/PatientInfos';
 
@@ -16,10 +19,9 @@ import theme from 'theme';
 import 'theme/index.css';
 import colors from 'theme/foundations/colors';
 
-import jwtDecode from 'jwt-decode';
-
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 	const [auth, setAuth] = useState<Auth | undefined>(undefined);
+	const [chat, setChat] = useState<Chat | undefined>(undefined);
 	const [patientInfos, setPatientInfos] = useState<PatientInfos | undefined>(undefined);
 	const [patientLoading, setPatientLoading] = useState(true);
 
@@ -29,6 +31,16 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 		if (!auth) {
 			try {
 				setAuth(new Auth());
+			} catch (e) {
+				toast({
+					title: 'Erreur interne au serveur',
+					status: 'error',
+				});
+			}
+		}
+		if (!chat) {
+			try {
+				setChat(new Chat());
 			} catch (e) {
 				toast({
 					title: 'Erreur interne au serveur',
@@ -56,7 +68,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 		}
 	}, []);
 
-	if (!auth && patientLoading) {
+	if (!auth && !chat && patientLoading) {
 		return (
 			<Center h="100vh" w="100%">
 				<VStack spacing="128px">
@@ -78,9 +90,11 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 			</Head>
 			<ChakraProvider theme={theme} resetCSS>
 				<AuthContext.Provider value={auth}>
-					<PatientContext.Provider value={{ infos: patientInfos, setInfos: setPatientInfos }}>
-						<Component {...pageProps} />
-					</PatientContext.Provider>
+					<ChatContext.Provider value={chat}>
+						<PatientContext.Provider value={{ infos: patientInfos, setInfos: setPatientInfos }}>
+							<Component {...pageProps} />
+						</PatientContext.Provider>
+					</ChatContext.Provider>
 				</AuthContext.Provider>
 			</ChakraProvider>
 		</>
