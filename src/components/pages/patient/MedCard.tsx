@@ -1,5 +1,6 @@
-import { HStack, Icon, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { BsCalendarPlus } from 'react-icons/bs';
+import ButtonIcon from './ButtonIcon';
 import ModalChangeInfos from './ModalChangeInfos';
 
 const MedCard = ({ name, date, hours }: { name: string; date: string; hours: string }): JSX.Element => {
@@ -26,29 +27,7 @@ const MedCard = ({ name, date, hours }: { name: string; date: string; hours: str
 						{date} à {hours}
 					</Text>
 				</VStack>
-				<VStack
-					borderRadius="8px"
-					role="group"
-					border="2px"
-					borderColor="grey.200"
-					bg="grey.100"
-					p="8px"
-					cursor="pointer"
-					onClick={() => onOpen()}
-					_hover={{
-						bg: 'grey.500',
-						borderColor: 'grey.600',
-					}}
-				>
-					<Icon
-						as={BsCalendarPlus}
-						color="black"
-						_groupHover={{
-							color: 'white',
-						}}
-						w="16px"
-					/>
-				</VStack>
+				<ButtonIcon icon={BsCalendarPlus} action={() => onOpen()} />
 			</HStack>
 		</HStack>
 	);

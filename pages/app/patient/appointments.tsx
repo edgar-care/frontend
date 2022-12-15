@@ -26,7 +26,7 @@ const Appointments = (): JSX.Element => {
 				<Text size="3xl">Mes rendez-vous</Text>
 				<Box
 					w="375px"
-					h="2px"
+					h="3px"
 					bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
 				/>
 			</VStack>
