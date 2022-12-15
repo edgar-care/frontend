@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Stack, Text, VStack } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import DoctorCard from 'components/simulationPage/DoctorCard';
-import { useEffect, useState } from 'react';
+
 import { DoctorType } from 'types/simulationPage/DoctorType';
 
 const Doctor = (): JSX.Element => {
@@ -53,7 +54,7 @@ const Doctor = (): JSX.Element => {
 						}}
 					>
 						{doctorList.map((doctor) => (
-							<DoctorCard doc={doctor} setSelectedDoctor={setSelectedDoctor} />
+							<DoctorCard doc={doctor} setSelectedDoctor={setSelectedDoctor} key={doctor.id} />
 						))}
 					</VStack>
 				</Stack>

@@ -17,11 +17,14 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	useEffect(() => {
 		// TODO: add checker
+		if (!router.isReady) return;
 		auth.checkToken().then((res) => {
-			if (res.status === 'success') void router.push('/app/patient');
-			else authenticateHandler();
+			if (res.status === 'success') {
+				if (router.query.redirect) void router.push(router.query.redirect as string);
+				else void router.push('/app/patient');
+			} else authenticateHandler();
 		});
-	}, []);
+	}, [router.isReady]);
 
 	return (
 		<>
