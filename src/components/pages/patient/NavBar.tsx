@@ -72,7 +72,7 @@ const NavBar = (): JSX.Element => {
 					))}
 				</VStack>
 				<VStack spacing="16px">
-					<TabCard name={message.name} path={message.path} key={message.path} icon={message.icon} />
+					<HelpCenter name={message.name} path={message.path} icon={message.icon} />
 					<Button size="md">Prendre un rendez-vous</Button>
 				</VStack>
 				<VStack w="100%" spacing="16px">

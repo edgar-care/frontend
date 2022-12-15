@@ -27,6 +27,7 @@ const Home = (): JSX.Element => {
 			para: 'Vous avez une question, un problème ? Entrez directement en contact avec votre médecin traitant ou avec un autre médecin.',
 			button: 'Echanger avec un médecin',
 			path: '/app/patient/chat',
+			isDisabled: true,
 		},
 	];
 
@@ -41,7 +42,13 @@ const Home = (): JSX.Element => {
 			<Grid templateColumns="repeat(2, 1fr)" gap="48px">
 				{cards.map((card) => (
 					<GridItem>
-						<DashboardCard title={card.title} para={card.para} button={card.button} path={card.path} />
+						<DashboardCard
+							title={card.title}
+							para={card.para}
+							button={card.button}
+							path={card.path}
+							isDisabled={card.isDisabled}
+						/>
 					</GridItem>
 				))}
 			</Grid>

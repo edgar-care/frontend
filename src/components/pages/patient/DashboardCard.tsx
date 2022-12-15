@@ -5,11 +5,13 @@ const DashboardCard = ({
 	para,
 	button,
 	path,
+	isDisabled,
 }: {
 	title: string;
 	para: string;
 	button: string;
 	path: string;
+	isDisabled?: boolean;
 }): JSX.Element => (
 	<VStack
 		justify="space-between"
@@ -27,7 +29,7 @@ const DashboardCard = ({
 			<Text size="lg">{para}</Text>
 		</Stack>
 		<Link href={path}>
-			<Button w="100%" variant="primary" size="lg">
+			<Button isDisabled={!!isDisabled} w="100%" variant="primary" size="lg">
 				{button}
 			</Button>
 		</Link>
