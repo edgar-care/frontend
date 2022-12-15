@@ -21,39 +21,38 @@ const Medical = (): JSX.Element => {
 
 	// TODO: update display content with real data
 	return (
-		<VStack ml="275px" p="64px 384px">
+		<VStack ml="250px" spacing="64px" px="288px">
 			<NavBar />
-			<VStack spacing="64px" w="100%">
-				<VStack spacing="16px">
-					<Text size="3xl">Mon dossier médical</Text>
-					<Box
-						w="425px"
-						h="3px"
-						bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
-					/>
-				</VStack>
-				<BannerCard
-					text="Votre dossier médical n'est pas complet ?"
-					buttonText="Modifier mon dossier"
-					buttonRedirect={onOpen}
+			<VStack>
+				<Text size="3xl">Mon dossier médical</Text>
+				<Box
+					w="425px"
+					h="3px"
+					bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
 				/>
-				<Stack
-					bg="blue.100"
-					border={`2px solid ${colors.blue[300]}`}
-					p="48px"
-					borderRadius="16px"
-					w="100%"
-					spacing="16px"
-				>
-					<NamesCard infos={infos} />
-					<DatesCard infos={infos} />
-					<BodyCard infos={infos} />
-					<DoctorCard infos={infos} />
-					<AllergiesCard infos={infos} />
-					<DiseasesCard infos={infos} />
-					<TreatmentCard infos={infos} />
-				</Stack>
 			</VStack>
+			<BannerCard
+				text="Votre dossier médical n'est pas complet ?"
+				buttonText="Modifier mon dossier"
+				buttonRedirect={onOpen}
+			/>
+			<Stack
+				bg="blue.100"
+				border={`2px solid ${colors.blue[300]}`}
+				p="48px"
+				borderRadius="16px"
+				w="100%"
+				spacing="16px"
+			>
+				<NamesCard infos={infos} />
+				<DatesCard infos={infos} />
+				<BodyCard infos={infos} />
+				<DoctorCard infos={infos} />
+				<AllergiesCard infos={infos} />
+				<DiseasesCard infos={infos} />
+				<TreatmentCard infos={infos} />
+			</Stack>
+
 			<UpdateMedicalModal isOpen={isOpen} onClose={onClose} />
 		</VStack>
 	);

@@ -1,4 +1,6 @@
 import { VStack, Text, Button, Grid, GridItem } from '@chakra-ui/react';
+import Link from 'next/link';
+
 import ColorText from 'components/GradientText';
 import DashboardCard from 'components/pages/patient/DashboardCard';
 
@@ -36,9 +38,11 @@ const Home = (): JSX.Element => {
 			<Text size="3xl">
 				Bienvenue sur votre <ColorText textValue="espace patient" />
 			</Text>
-			<Button variant="primary" size="lg">
-				Besoin d'un nouveau rendez-vous ?
-			</Button>
+			<Link href="/simulation">
+				<Button variant="primary" size="lg">
+					Besoin d'un nouveau rendez-vous ?
+				</Button>
+			</Link>
 			<Grid templateColumns="repeat(2, 1fr)" gap="48px">
 				{cards.map((card) => (
 					<GridItem>

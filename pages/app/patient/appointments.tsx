@@ -1,9 +1,15 @@
-import { VStack, Text, Box, HStack, Button } from '@chakra-ui/react';
+import { VStack, Text, Box } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+
 import MedCard from 'components/pages/patient/MedCard';
 import NavBar from 'components/pages/patient/NavBar';
+import BannerCard from 'components/pages/patient/BannerCard';
+
 import colors from 'theme/foundations/colors';
 
 const Appointments = (): JSX.Element => {
+	const router = useRouter();
+
 	const appointmentList = [
 		{
 			name: 'Roger Palot',
@@ -30,18 +36,11 @@ const Appointments = (): JSX.Element => {
 					bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
 				/>
 			</VStack>
-			<HStack
-				border="2px solid"
-				borderColor="purple.200"
-				justify="space-between"
-				w="100%"
-				borderRadius="16px"
-				p="12px 24px"
-				bg="purple.100"
-			>
-				<Text size="boldLg">Vous avez besoin d'un rendez-vous ?</Text>
-				<Button size="sm">Commencer votre pré-diagnostique</Button>
-			</HStack>
+			<BannerCard
+				text="Vous avez besoin d'un rendez-vous ?"
+				buttonText="Commencer votre pré-diagnostique"
+				buttonRedirect={() => router.push('/simulation')}
+			/>
 			<VStack w="100%" spacing="16px">
 				{appointmentList.map((appointment) => (
 					<MedCard
