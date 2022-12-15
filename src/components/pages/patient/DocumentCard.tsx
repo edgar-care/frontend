@@ -1,4 +1,4 @@
-import { HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { HStack, Text } from '@chakra-ui/react';
 import { BsFileEarmarkArrowDown, BsThreeDotsVertical } from 'react-icons/bs';
 import ButtonIcon from './ButtonIcon';
 

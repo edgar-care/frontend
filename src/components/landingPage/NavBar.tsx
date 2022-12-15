@@ -6,6 +6,10 @@ import TabCard from './TabCard';
 const NavBar = (): JSX.Element => {
 	const tabs = [
 		{
+			name: 'Notre application',
+			path: '/apk',
+		},
+		{
 			name: 'Notre solution',
 			path: '/solutions',
 		},
