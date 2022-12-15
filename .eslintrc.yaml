@@ -43,6 +43,6 @@ rules:
   import/prefer-default-export: 0
 
   "@typescript-eslint/no-non-null-assertion": off
-  "@typescript-eslint/no-unused-vars": ["warn", { ignoreRestSiblings: true }]
+  "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }]
   "@typescript-eslint/no-use-before-define": 0
   "@typescript-eslint/ban-ts-comment": off
