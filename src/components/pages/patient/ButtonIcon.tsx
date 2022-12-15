@@ -1,4 +1,4 @@
-import { Button, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react';
+import { Icon, VStack } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 const DashboardCard = ({ icon, action }: { icon: IconType; action: () => void }): JSX.Element => (
