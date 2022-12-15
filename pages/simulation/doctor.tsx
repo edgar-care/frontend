@@ -1,23 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Stack, Text, VStack } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import DoctorCard from 'components/simulationPage/DoctorCard';
-import { useEffect, useState } from 'react';
 
-type DoctorListType = {
-	name: string;
-	position: string;
-};
+import { DoctorType } from 'types/simulationPage/DoctorType';
 
 const Doctor = (): JSX.Element => {
-	const [doctorList, setDoctorList] = useState<DoctorListType[]>([]);
+	const [doctorList, setDoctorList] = useState<DoctorType[]>([]);
+	const [selectedDoctor, setSelectedDoctor] = useState<string>('');
+	console.log(selectedDoctor);
 
 	useEffect(() => {
 		setDoctorList([
-			{ name: 'Doctor A.', position: 'A 2km de chez vous' },
-			{ name: 'Doctor B.', position: 'A 2km de chez vous' },
-			{ name: 'Doctor C.', position: 'A 2km de chez vous' },
+			{ id: '1', name: 'Doctor A.', position: 'A 2km de chez vous' },
+			{ id: '2', name: 'Doctor B.', position: 'A 2km de chez vous' },
+			{ id: '3', name: 'Doctor C.', position: 'A 2km de chez vous' },
 		]);
 	}, []);
 
@@ -55,7 +54,7 @@ const Doctor = (): JSX.Element => {
 						}}
 					>
 						{doctorList.map((doctor) => (
-							<DoctorCard doc={doctor.name} pos={doctor.position} />
+							<DoctorCard doc={doctor} setSelectedDoctor={setSelectedDoctor} key={doctor.id} />
 						))}
 					</VStack>
 				</Stack>

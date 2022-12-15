@@ -1,33 +1,42 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VStack } from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
-import useStringState from 'hooks/useStringState';
-
 import { useAuthContext } from 'contexts/auth';
+import { usePatientContext } from 'contexts/user';
+
+import useCustomState from 'hooks/useCustomState';
 
 const Signup = (): JSX.Element => {
-	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useStringState();
+	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
 	const {
 		value: password,
 		setValue: setPassword,
 		error: passwordError,
 		setError: setPasswordError,
-	} = useStringState();
+	} = useCustomState('');
 	const {
 		value: passwordConfirmation,
 		setValue: setPasswordConfirmation,
 		error: passwordConfirmationError,
 		setError: setPasswordConfirmationError,
-	} = useStringState();
+	} = useCustomState('');
 
-	const params = useSearchParams();
 	const router = useRouter();
 	const auth = useAuthContext();
+	const { infos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
+
+	useEffect(() => {
+		if (!router.isReady) return;
+		if (!infos)
+			void router.push(
+				router.query.redirect ? `/connection/infos?redirect=${router.query.redirect}` : '/connection/infos',
+			);
+	}, [infos, router.isReady]);
 
 	const signup = () => {
 		if (!email) setEmailError(true);
@@ -35,12 +44,12 @@ const Signup = (): JSX.Element => {
 		if (!passwordConfirmation) setPasswordConfirmationError(true);
 		if (password !== passwordConfirmation) setPasswordConfirmationError(true);
 
-		if (email && password && password === passwordConfirmation) {
-			auth.signup(email, password).then((response) => {
+		if (email && password && password === passwordConfirmation && infos) {
+			auth.signup(email, password, infos).then((response) => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
-					if (params.get('redirect')) void router.push(`/infos?redirect=${params.get('redirect')}`);
-					else void router.push('/infos');
+					if (router.query.redirect) void router.push(router.query.redirect as string);
+					else void router.push('/app/patient');
 				}
 			});
 		} else toast({ title: 'Identifiants incorrects', status: 'error' });
@@ -96,7 +105,13 @@ const Signup = (): JSX.Element => {
 						<Button variant="primary" size="lg" onClick={signup}>
 							M'inscrire avec ces informations
 						</Button>
-						<Link href={`/connection/login?redirect=${params.get('redirect')}`}>
+						<Link
+							href={
+								router.query.redirect
+									? `/connection/login?redirect=${router.query.redirect}`
+									: '/connection/login'
+							}
+						>
 							<Button variant="secondary">J'ai déjà un compte</Button>
 						</Link>
 					</VStack>

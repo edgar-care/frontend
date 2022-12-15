@@ -1,13 +1,15 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import colors from 'theme/foundations/colors';
 import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction } from 'react';
+import { DoctorType } from 'types/simulationPage/DoctorType';
 
 type DoctorCardProps = {
-	doc: string;
-	pos: string;
+	doc: DoctorType;
+	setSelectedDoctor: Dispatch<SetStateAction<string>>;
 };
 
-const DoctorCard = ({ doc, pos }: DoctorCardProps) => {
+const DoctorCard = ({ doc, setSelectedDoctor }: DoctorCardProps) => {
 	const router = useRouter();
 
 	return (
@@ -22,11 +24,14 @@ const DoctorCard = ({ doc, pos }: DoctorCardProps) => {
 				background: `${colors.blue[100]}`,
 			}}
 			cursor="pointer"
-			onClick={() => router.push('/simulation/connection')}
+			onClick={() => {
+				setSelectedDoctor(doc.id);
+				router.push('/simulation/connection');
+			}}
 		>
 			<HStack justify="space-between" w="100%">
-				<Text size="xl">{doc}</Text>
-				<Text size="xl">{pos}</Text>
+				<Text size="xl">{doc.name}</Text>
+				<Text size="xl">{doc.position}</Text>
 			</HStack>
 		</VStack>
 	);

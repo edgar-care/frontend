@@ -16,11 +16,15 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 	const { toggle: isNotAuthenticated, toggleHandler: authenticateHandler } = useToggle();
 
 	useEffect(() => {
+		// TODO: add checker
+		if (!router.isReady) return;
 		auth.checkToken().then((res) => {
-			if (res.status === 'success') void router.push('/dashboard');
-			else authenticateHandler();
+			if (res.status === 'success') {
+				if (router.query.redirect) void router.push(router.query.redirect as string);
+				else void router.push('/app/patient');
+			} else authenticateHandler();
 		});
-	}, []);
+	}, [router.isReady]);
 
 	return (
 		<>

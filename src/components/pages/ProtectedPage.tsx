@@ -16,11 +16,14 @@ const ProtectedPage = ({ children }: { children: JSX.Element }): JSX.Element => 
 	const { toggle: isAuthenticated, toggleHandler: authenticateHandler } = useToggle();
 
 	useEffect(() => {
+		if (!router.isReady) return;
 		auth.checkToken().then((res) => {
-			if (res.status !== 'success') void router.push('/login');
-			else authenticateHandler();
+			if (res.status !== 'success') {
+				if (router.query.redirect) void router.push(router.query.redirect as string);
+				else void router.push('/login');
+			} else authenticateHandler();
 		});
-	}, []);
+	}, [router.isReady]);
 
 	return (
 		<>
