@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button, HStack, Stack, Text, useToast, VStack } from '@chakra-ui/react';
+import { Button, HStack, Stack, Text, useBreakpointValue, useToast, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';
 import ColorText from 'components/GradientText';
@@ -25,6 +25,8 @@ const Infos = (): JSX.Element => {
 	const [temperature, setTemperature] = useState(0);
 	const { toggle: isMale, toggleHandler: sexValueHandler } = useToggle(true);
 
+	const isMobile = useBreakpointValue({ base: true, lg: false });
+
 	const saveInfos = async (): Promise<MessageResponse> => {
 		try {
 			setInfos({
@@ -47,70 +49,87 @@ const Infos = (): JSX.Element => {
 
 	return (
 		<SimulationPage>
-			<VStack spacing="64px">
-				<Text size="2xl">
+			<VStack spacing="64px" pb={{ base: '64px', md: '0px' }}>
+				<Text size={{ base: 'boldXl', sm: '2xl' }} textAlign={{ base: 'center', lg: 'left' }}>
 					Avant de commencer, j'ai besoin de <ColorText textValue="quelques informations" />
 				</Text>
-				<HStack spacing="128px">
-					<VStack spacing="24px">
-						<HStack spacing="48px">
-							<Text size="2xl">Quel est votre age ?</Text>
-							<VStack borderRadius="16px" bg="blue.100" p="4px 24px" minW="136px">
-								<Text size="2xl">{age} ans</Text>
-							</VStack>
-						</HStack>
-						<SlideBar ageValue={age} setAgeValue={setAge} />
-					</VStack>
-					<VStack>
-						<Text size="2xl">Quel est votre sexe ?</Text>
-						<HStack spacing="24px">
-							<CheckBox
-								valueHandler={sexValueHandler}
-								value={isMale}
-								image="/assets/icons/male_symbol.svg"
-							/>
-							<CheckBox
-								valueHandler={sexValueHandler}
-								value={!isMale}
-								image="/assets/icons/female_symbol.svg"
-							/>
-						</HStack>
-					</VStack>
-				</HStack>
+				<VStack spacing={{ base: '32px', sm: '64px' }}>
+					<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '64px', lg: '112px' }}>
+						<VStack spacing="24px">
+							<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '16px', lg: '48px' }}>
+								<Text size={{ base: 'boldXl', sm: '2xl' }}>Quel est votre age ?</Text>
+								<VStack borderRadius="16px" bg="blue.100" p="4px 24px" minW="136px">
+									<Text size={{ base: 'boldLg', sm: '2xl' }}>{age} ans</Text>
+								</VStack>
+							</Stack>
+							<SlideBar ageValue={age} setAgeValue={setAge} />
+						</VStack>
+						<VStack>
+							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quel est votre sexe ?</Text>
+							<HStack spacing="24px">
+								<CheckBox
+									valueHandler={sexValueHandler}
+									value={isMale}
+									image="/assets/icons/male_symbol.svg"
+								/>
+								<CheckBox
+									valueHandler={sexValueHandler}
+									value={!isMale}
+									image="/assets/icons/female_symbol.svg"
+								/>
+							</HStack>
+						</VStack>
+					</Stack>
 
-				<HStack spacing="128px">
-					<HStack spacing="32px">
-						<Text size="2xl">Quelle est votre taille ?</Text>
-						<NumInput value={height} setValue={setHeight} children="cm" placeholder="175" />
-					</HStack>
-					<HStack spacing="32px">
-						<Text size="2xl">Quel est votre poids ?</Text>
-						<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
-					</HStack>
-				</HStack>
-				<Stack spacing="96px">
-					<HStack spacing="32px">
-						<Text size="2xl">Quelle est votre température ?</Text>
-						<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
-					</HStack>
-					<VStack spacing="96px">
-						<Button
-							variant="primary"
-							size="lg"
-							onClick={() => {
-								saveInfos().then((res) => {
-									toast({
-										title: res.title,
-										status: res.status,
-									});
-									if (res.status === 'success') void router.push('/simulation/chat');
-								});
-							}}
+					<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '32px', lg: '112px' }}>
+						<Stack
+							direction={{ base: 'column', lg: 'row' }}
+							textAlign={{ base: 'center', lg: 'left' }}
+							align={{ base: 'center', lg: 'left' }}
+							spacing={{ base: '16px', lg: '32px' }}
 						>
-							Valider mes informations
-						</Button>
-					</VStack>
-				</Stack>
+							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quelle est votre taille ?</Text>
+							<NumInput value={height} setValue={setHeight} children="cm" placeholder="175" />
+						</Stack>
+						<Stack
+							direction={{ base: 'column', lg: 'row' }}
+							textAlign={{ base: 'center', lg: 'left' }}
+							align={{ base: 'center', lg: 'left' }}
+							spacing={{ base: '16px', lg: '32px' }}
+						>
+							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quel est votre poids ?</Text>
+							<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
+						</Stack>
+					</Stack>
+					<Stack spacing="96px">
+						<Stack
+							direction={{ base: 'column', lg: 'row' }}
+							textAlign={{ base: 'center', lg: 'left' }}
+							align={{ base: 'center', lg: 'left' }}
+							spacing={{ base: '16px', lg: '32px' }}
+						>
+							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quelle est votre température ?</Text>
+							<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
+						</Stack>
+						<VStack spacing="96px">
+							<Button
+								variant="primary"
+								size={isMobile ? 'md' : 'lg'}
+								onClick={() => {
+									saveInfos().then((res) => {
+										toast({
+											title: res.title,
+											status: res.status,
+										});
+										if (res.status === 'success') void router.push('/simulation/chat');
+									});
+								}}
+							>
+								Valider mes informations
+							</Button>
+						</VStack>
+					</Stack>
+				</VStack>
 			</VStack>
 		</SimulationPage>
 	);

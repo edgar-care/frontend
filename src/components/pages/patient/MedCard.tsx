@@ -1,4 +1,4 @@
-import { HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { HStack, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { BsCalendarPlus } from 'react-icons/bs';
 import ButtonIcon from './ButtonIcon';
 import ModalChangeInfos from './ModalChangeInfos';
@@ -7,7 +7,8 @@ const MedCard = ({ name, date, hours }: { name: string; date: string; hours: str
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<HStack
+		<Stack
+			direction={{ base: 'column', sm: 'row' }}
 			border="2px solid"
 			borderColor="blue.200"
 			justify="space-between"
@@ -23,13 +24,13 @@ const MedCard = ({ name, date, hours }: { name: string; date: string; hours: str
 			</HStack>
 			<HStack spacing="16px">
 				<VStack borderRadius="8px" p="8px 16px" backgroundColor="purple.100">
-					<Text size="boldLg">
+					<Text size={{ base: 'boldSm', md: 'boldLg' }}>
 						{date} à {hours}
 					</Text>
 				</VStack>
 				<ButtonIcon icon={BsCalendarPlus} action={() => onOpen()} />
 			</HStack>
-		</HStack>
+		</Stack>
 	);
 };
 
