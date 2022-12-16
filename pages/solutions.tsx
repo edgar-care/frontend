@@ -46,7 +46,7 @@ const Solutions = (): JSX.Element => (
 						Votre médecin vous remerciera d'utiliser <GradientText textValue="edgar.care" />
 					</Text>
 					<Text size="boldXl" w="750px">
-						Avec nous il pourra avoir accès à tous vos documents et vos antécédents médicaux, beaucoup plus{' '}
+						Avec nous, il pourra avoir accès à tous vos documents et vos antécédents médicaux, beaucoup plus{' '}
 						<GradientText textValue="facilement" /> et pourra ainsi vous suivre plus{' '}
 						<GradientText textValue="efficacement" /> et plus <GradientText textValue="rapidement" />.
 					</Text>

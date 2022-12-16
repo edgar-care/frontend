@@ -49,7 +49,7 @@ const Infos = (): JSX.Element => {
 		<SimulationPage>
 			<VStack spacing="64px">
 				<Text size="2xl">
-					Avant de commencer j'ai besoin de <ColorText textValue="quelques informations" />
+					Avant de commencer, j'ai besoin de <ColorText textValue="quelques informations" />
 				</Text>
 				<HStack spacing="128px">
 					<VStack spacing="24px">

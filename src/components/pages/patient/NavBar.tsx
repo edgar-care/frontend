@@ -74,7 +74,9 @@ const NavBar = (): JSX.Element => {
 				</VStack>
 				<VStack spacing="16px">
 					<HelpCenter name={message.name} path={message.path} icon={message.icon} />
-					<Button size="md">Prendre un rendez-vous</Button>
+					<Link href="/simulation">
+						<Button size="md">Prendre un rendez-vous</Button>
+					</Link>
 				</VStack>
 				<VStack w="100%" spacing="16px">
 					<HelpCenter name={help.name} path={help.path} icon={help.icon} />

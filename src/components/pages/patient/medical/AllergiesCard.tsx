@@ -10,7 +10,7 @@ const AllergiesCard = ({ infos }: { infos: PatientInfos | undefined }): JSX.Elem
 	<HStack border={`2px solid ${colors.blue[200]}`} p="8px 16px" spacing="32px" borderRadius="8px" bg="white">
 		<HStack>
 			<Text size="boldLg">Allergies:</Text>
-			<Text size="lg">Aucunes allergies renseignées</Text>
+			<Text size="lg">aucune allergie renseignée</Text>
 		</HStack>
 	</HStack>
 );

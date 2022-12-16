@@ -8,7 +8,7 @@ const Advise = (): JSX.Element => (
 		<VStack spacing="128px">
 			<Stack spacing="64px" maxW="650px">
 				<Text size="2xl">
-					Vous receverez une <GradientText textValue="notification" /> lorsque le médecin aura répondu
+					Vous recevrez une <GradientText textValue="notification" /> lorsque le médecin aura répondu
 				</Text>
 				<Text size="2xl">
 					En attendant sa réponse, je vous conseille de faire une sieste dans un endroit{' '}

@@ -10,7 +10,7 @@ const DiseasesCard = ({ infos }: { infos: PatientInfos | undefined }): JSX.Eleme
 	<HStack border={`2px solid ${colors.blue[200]}`} p="8px 16px" spacing="32px" borderRadius="8px" bg="white">
 		<HStack>
 			<Text size="boldLg">Maladies:</Text>
-			<Text size="lg">Aucunes maladies renseignées</Text>
+			<Text size="lg">Aucune maladie renseignée</Text>
 		</HStack>
 	</HStack>
 );

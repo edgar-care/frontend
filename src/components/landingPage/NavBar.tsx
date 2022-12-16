@@ -3,7 +3,7 @@ import Link from 'next/link';
 import colors from 'theme/foundations/colors';
 import TabCard from './TabCard';
 
-const NavBar = (): JSX.Element => {
+const  NavBar = (): JSX.Element => {
 	const tabs = [
 		{
 			name: 'Notre solution',
