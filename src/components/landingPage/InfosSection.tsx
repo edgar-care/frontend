@@ -12,7 +12,7 @@ const InfosSection = (): JSX.Element => (
 		</VStack>
 		<Text size={{ base: 'lg', md: 'xl' }}>
 			En France, <GradientText textValue="28% des consultations" /> sont jugées inutiles par les médecins
-			eux-même.
+			eux-mêmes.
 		</Text>
 	</VStack>
 );

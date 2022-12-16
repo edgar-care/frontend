@@ -41,7 +41,7 @@ const Documents = (): JSX.Element => {
 				/>
 			</VStack>
 			<BannerCard
-				text="Vous ne trouvez pas un documents ?"
+				text="Vous ne trouvez pas un document ?"
 				buttonText="Contacter votre médecin"
 				buttonRedirect={() => {}}
 			/>

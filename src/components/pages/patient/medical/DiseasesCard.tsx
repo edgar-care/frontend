@@ -17,7 +17,7 @@ const DiseasesCard = ({ infos }: { infos: PatientInfos | undefined }): JSX.Eleme
 	>
 		<Stack direction={{ base: 'column', md: 'row' }}>
 			<Text size="boldLg">Maladies:</Text>
-			<Text size="lg">Aucunes maladies renseignées</Text>
+			<Text size="lg">Aucune maladie renseignée</Text>
 		</Stack>
 	</Stack>
 );

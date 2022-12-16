@@ -11,7 +11,7 @@ const Simulation = (): JSX.Element => (
 				<Text size={{ base: '2xl', sm: '3xl' }}>
 					Bienvenue sur <ColorText textValue="edgar.care" />
 				</Text>
-				<Text size="boldXl">Votre assistant medical numérique</Text>
+				<Text size="boldXl">Votre assistant médical numérique</Text>
 			</Stack>
 			<VStack spacing="64px" width="100%">
 				<VStack spacing="32px" width="100%">

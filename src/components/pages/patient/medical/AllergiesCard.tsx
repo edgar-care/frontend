@@ -17,7 +17,7 @@ const AllergiesCard = ({ infos }: { infos: PatientInfos | undefined }): JSX.Elem
 	>
 		<Stack direction={{ base: 'column', md: 'row' }}>
 			<Text size="boldLg">Allergies:</Text>
-			<Text size="lg">Aucunes allergies renseignées</Text>
+			<Text size="lg">Aucune allergie renseignée</Text>
 		</Stack>
 	</Stack>
 );

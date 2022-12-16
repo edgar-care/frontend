@@ -51,7 +51,7 @@ const Infos = (): JSX.Element => {
 		<SimulationPage>
 			<VStack spacing="64px" pb={{ base: '64px', md: '0px' }}>
 				<Text size={{ base: 'boldXl', sm: '2xl' }} textAlign={{ base: 'center', lg: 'left' }}>
-					Avant de commencer j'ai besoin de <ColorText textValue="quelques informations" />
+					Avant de commencer, j'ai besoin de <ColorText textValue="quelques informations" />
 				</Text>
 				<VStack spacing={{ base: '32px', sm: '64px' }}>
 					<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '64px', lg: '112px' }}>
