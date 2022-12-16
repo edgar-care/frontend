@@ -21,17 +21,17 @@ import TabCard from './TabCard';
 const NavBar = (): JSX.Element => {
 	const router = useRouter();
 
-	const isDrawer = useBreakpointValue({ base: true, md: false }) || false;
+	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const tabs = [
 		{
-			name: 'Notre application',
-			path: '/apk',
-		},
-		{
 			name: 'Notre solution',
 			path: '/solutions',
+		},
+		{
+			name: 'Notre application',
+			path: '/apk',
 		},
 	];
 
@@ -59,7 +59,7 @@ const NavBar = (): JSX.Element => {
 							</VStack>
 							<VStack spacing="16px" w="100%">
 								<Button w="100%" onClick={() => router.push('/connection/login')}>
-									Espace client
+									Espace patient
 								</Button>
 								<Button variant="secondary" w="100%" onClick={() => router.push('/simulation')}>
 									Simulation
@@ -87,7 +87,7 @@ const NavBar = (): JSX.Element => {
 	return (
 		<HStack
 			w="100%"
-			p={{ base: '16px 48px', lg: '16px 128px', '2xl': '16px 256px' }}
+			p={{ base: '16px 48px', lg: '16px 64px', '2xl': '16px 256px' }}
 			justify="space-between"
 			bg="white"
 			borderBottom={`2px solid ${colors.blue[100]}`}
@@ -109,7 +109,7 @@ const NavBar = (): JSX.Element => {
 					</Button>
 				</Link>
 				<Link href="/connection/login">
-					<Button size="boldMd">Espace client</Button>
+					<Button size="boldMd">Espace patient</Button>
 				</Link>
 			</HStack>
 		</HStack>
