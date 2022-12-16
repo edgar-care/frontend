@@ -7,6 +7,7 @@ const Button = {
 		fontSize: '16px',
 		fontWeight: 600,
 		borderRadius: '12px',
+		whiteSpace: 'normal',
 	},
 	sizes: {
 		sm: {

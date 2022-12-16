@@ -1,4 +1,4 @@
-import { Text, VStack, Stack, HStack } from '@chakra-ui/react';
+import { Text, VStack, Stack } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
@@ -31,23 +31,30 @@ const Result = (): JSX.Element => {
 
 	return (
 		<SimulationPage>
-			<VStack maxW="750px">
+			<VStack maxW="750px" mb={{ base: '64px', md: '0px' }}>
 				<Stack spacing="64px">
 					<Stack spacing="32px">
-						<Text size="2xl">
+						<Text size={{ base: 'boldXl', md: '2xl' }}>
 							Le médecin que vous avez sélectionné a examiné votre <ColorText textValue="analyse" />
 						</Text>
-						<Text size="2xl">
+						<Text size={{ base: 'boldXl', md: '2xl' }}>
 							Un rendez-vous est <ColorText textValue="nécessaire" /> pour déterminer de manière plus
 							précise les causes de vos symptômes
 						</Text>
 					</Stack>
 
-					<HStack borderRadius="16px" h="350px" backgroundColor="blue.100" p="32px" spacing="32px">
+					<Stack
+						direction={{ base: 'column', md: 'row' }}
+						borderRadius="16px"
+						h={{ base: '100%', md: '350px' }}
+						backgroundColor="blue.100"
+						p="32px"
+						spacing="32px"
+					>
 						{appointments.map((appointment) => (
 							<AppointmentCard appointment={appointment} key={appointment.date.toString()} />
 						))}
-					</HStack>
+					</Stack>
 				</Stack>
 			</VStack>
 		</SimulationPage>

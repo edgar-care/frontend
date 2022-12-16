@@ -12,7 +12,7 @@ import Text from 'theme/components/text';
 
 const breakpoints = {
 	xs: '320px',
-	sm: '576px',
+	sm: '480px',
 	md: '768px',
 	lg: '1024px',
 	xl: '1280px',
