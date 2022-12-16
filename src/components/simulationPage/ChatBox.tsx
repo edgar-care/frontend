@@ -1,5 +1,14 @@
 import { useState } from 'react';
-import { Button, Icon, Input, InputGroup, InputLeftElement, InputRightElement, VStack } from '@chakra-ui/react';
+import {
+	Button,
+	Icon,
+	Input,
+	InputGroup,
+	InputLeftElement,
+	InputRightElement,
+	useBreakpointValue,
+	VStack,
+} from '@chakra-ui/react';
 import { IoSendSharp } from 'react-icons/io5';
 import { BsFillMicFill } from 'react-icons/bs';
 import Link from 'next/link';
@@ -29,6 +38,8 @@ const ChatBox = () => {
 	const [context, setContext] = useState<SymptomsContextType[]>([]);
 	const [isDone, setIsDone] = useState(false);
 
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+
 	const sendMessage = async (): Promise<void> => {
 		if (pendingMessage) {
 			const message = await chat.sendMessage(pendingMessage, symptoms, context);
@@ -55,12 +66,12 @@ const ChatBox = () => {
 	return (
 		<VStack
 			borderRadius="16px"
-			w="500px"
+			maxW="500px"
 			h="600px"
 			bg="blue.100"
 			border={`1px solid ${colors.blue[200]}`}
-			p="32px"
-			pb="16px"
+			p={{ base: '8px', sm: '32px' }}
+			pt={{ base: '16px', sm: '32px' }}
 		>
 			<VStack
 				h="100%"
@@ -91,7 +102,7 @@ const ChatBox = () => {
 				))}
 				{isDone && (
 					<Link href="/simulation/doctor">
-						<Button size="lg">Continuer ma simulation</Button>
+						<Button size={{ base: 'md', sm: 'lg' }}>Continuer ma simulation</Button>
 					</Link>
 				)}
 			</VStack>
@@ -105,7 +116,7 @@ const ChatBox = () => {
 				/>
 				<Input
 					borderRadius="16px"
-					placeholder="Écrivez votre message ici"
+					placeholder={isMobile ? 'Écrivez...' : 'Écrivez votre message ici'}
 					focusBorderColor="white"
 					bg="white"
 					borderColor="white"

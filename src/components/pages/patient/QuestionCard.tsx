@@ -1,7 +1,8 @@
-import { Button, HStack, Text } from '@chakra-ui/react';
+import { Button, Stack, Text } from '@chakra-ui/react';
 
 const QuestionCard = ({ para, button }: { para: string; button: string }): JSX.Element => (
-	<HStack
+	<Stack
+		direction={{ base: 'column', md: 'row' }}
 		justify="space-between"
 		border="2px"
 		borderRadius="8px"
@@ -14,7 +15,7 @@ const QuestionCard = ({ para, button }: { para: string; button: string }): JSX.E
 		<Button variant="primary" size="sm">
 			{button}
 		</Button>
-	</HStack>
+	</Stack>
 );
 
 export default QuestionCard;

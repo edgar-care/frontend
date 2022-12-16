@@ -1,4 +1,4 @@
-import { HStack, Text, VStack } from '@chakra-ui/react';
+import { Stack, Text, VStack } from '@chakra-ui/react';
 import colors from 'theme/foundations/colors';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
@@ -29,10 +29,10 @@ const DoctorCard = ({ doc, setSelectedDoctor }: DoctorCardProps) => {
 				router.push('/simulation/connection');
 			}}
 		>
-			<HStack justify="space-between" w="100%">
-				<Text size="xl">{doc.name}</Text>
-				<Text size="xl">{doc.position}</Text>
-			</HStack>
+			<Stack direction={{ base: 'column', md: 'row' }} justify="space-between" w="100%">
+				<Text size={{ base: 'boldLg', sm: 'xl' }}>{doc.name}</Text>
+				<Text size={{ base: 'boldLg', sm: 'xl' }}>{doc.position}</Text>
+			</Stack>
 		</VStack>
 	);
 };

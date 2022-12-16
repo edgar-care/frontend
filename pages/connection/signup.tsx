@@ -1,7 +1,17 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VStack } from '@chakra-ui/react';
+import {
+	Button,
+	FormControl,
+	FormErrorMessage,
+	Img,
+	Input,
+	Text,
+	useBreakpointValue,
+	useToast,
+	VStack,
+} from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
@@ -30,6 +40,8 @@ const Signup = (): JSX.Element => {
 	const { infos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
 
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+
 	useEffect(() => {
 		if (!router.isReady) return;
 		if (!infos)
@@ -57,10 +69,15 @@ const Signup = (): JSX.Element => {
 
 	return (
 		<UnprotectedPage>
-			<VStack spacing="128px">
-				<Img src="/assets/edgar.care-logo.svg" alt="edgar.care-logo" w="300px" h="auto" />
-				<VStack spacing="64px">
-					<VStack spacing="32px" w="400px">
+			<VStack spacing="128px" w="100%">
+				<Img
+					src="/assets/edgar.care-logo.svg"
+					alt="edgar.care-logo"
+					w={{ base: '200px', md: '300px' }}
+					h="auto"
+				/>
+				<VStack spacing="64px" maxW="400px">
+					<VStack spacing="32px" w="100%">
 						<FormControl isRequired isInvalid={emailError}>
 							<Text size="boldMd">Adresse mail</Text>
 							<Input
@@ -101,8 +118,8 @@ const Signup = (): JSX.Element => {
 							{passwordConfirmationError && <FormErrorMessage>Mot de passe invalide</FormErrorMessage>}
 						</FormControl>
 					</VStack>
-					<VStack spacing="32px">
-						<Button variant="primary" size="lg" onClick={signup}>
+					<VStack spacing="32px" w="100%">
+						<Button variant="primary" size={isMobile ? 'md' : 'lg'} onClick={signup} w="100%">
 							M'inscrire avec ces informations
 						</Button>
 						<Link
@@ -112,7 +129,9 @@ const Signup = (): JSX.Element => {
 									: '/connection/login'
 							}
 						>
-							<Button variant="secondary">J'ai déjà un compte</Button>
+							<Button variant="secondary" size={isMobile ? 'md' : 'lg'} w="100%">
+								J'ai déjà un compte
+							</Button>
 						</Link>
 					</VStack>
 				</VStack>
