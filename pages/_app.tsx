@@ -56,7 +56,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 				// });
 				const token = localStorage.getItem('token');
 
-				if (token) setPatientInfos((jwtDecode(token) as { user: PatientInfos }).user);
+				if (token) setPatientInfos((jwtDecode(token) as { patient: PatientInfos }).patient);
 				setPatientLoading(false);
 			} catch (e) {
 				setPatientLoading(false);

@@ -22,7 +22,7 @@ const Infos = (): JSX.Element => {
 	const [age, setAge] = useState(20);
 	const [height, setHeight] = useState(0);
 	const [weight, setWeight] = useState(0);
-	const [temperature, setTemperature] = useState(0);
+	const [, setTemperature] = useState(0);
 	const { toggle: isMale, toggleHandler: sexValueHandler } = useToggle(true);
 
 	const isMobile = useBreakpointValue({ base: true, lg: false });
@@ -89,7 +89,7 @@ const Infos = (): JSX.Element => {
 							spacing={{ base: '16px', lg: '32px' }}
 						>
 							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quelle est votre taille ?</Text>
-							<NumInput value={height} setValue={setHeight} children="cm" placeholder="175" />
+							<NumInput setValue={setHeight} children="cm" placeholder="175" />
 						</Stack>
 						<Stack
 							direction={{ base: 'column', lg: 'row' }}
@@ -98,7 +98,7 @@ const Infos = (): JSX.Element => {
 							spacing={{ base: '16px', lg: '32px' }}
 						>
 							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quel est votre poids ?</Text>
-							<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
+							<NumInput setValue={setWeight} children="kg" placeholder="65" />
 						</Stack>
 					</Stack>
 					<Stack spacing="96px">
@@ -109,7 +109,7 @@ const Infos = (): JSX.Element => {
 							spacing={{ base: '16px', lg: '32px' }}
 						>
 							<Text size={{ base: 'boldXl', sm: '2xl' }}>Quelle est votre température ?</Text>
-							<NumInput value={temperature} setValue={setTemperature} children="deg" placeholder="28" />
+							<NumInput setValue={setTemperature} children="deg" placeholder="28" />
 						</Stack>
 						<VStack spacing="96px">
 							<Button
