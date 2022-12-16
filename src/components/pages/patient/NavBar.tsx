@@ -59,13 +59,19 @@ const NavBar = (): JSX.Element => {
 		<VStack
 			spacing="100px"
 			w={isDrawer ? '100%' : '275px'}
-			h="100vh"
+			h="100%"
 			p="32px 36px"
 			bg="blue.100"
 			position="fixed"
 			left={0}
 			top={0}
 			zIndex={10}
+			overflowY="scroll"
+			sx={{
+				'::-webkit-scrollbar': {
+					width: '0px',
+				},
+			}}
 		>
 			<Link href="/">
 				<Img src="/assets/edgar.care-logo.svg" w="200px" h="auto" />
