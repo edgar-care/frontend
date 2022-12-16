@@ -17,7 +17,7 @@ const TreatmentCard = ({ infos }: { infos: PatientInfos | undefined }): JSX.Elem
 	>
 		<Stack direction={{ base: 'column', md: 'row' }}>
 			<Text size="boldLg">Traitements en cours:</Text>
-			<Text size="lg">Aucuns traitements en cours</Text>
+			<Text size="lg">Aucun traitement en cours</Text>
 		</Stack>
 	</Stack>
 );
