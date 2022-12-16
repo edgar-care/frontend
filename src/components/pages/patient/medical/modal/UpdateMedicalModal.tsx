@@ -114,7 +114,6 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 								<UpdateModalNumberForm
 									label="Poids"
 									placeholder="Votre poids"
-									value={weightValue}
 									setValue={setWeightValue}
 									error={weightError}
 									setError={setWeightError}
@@ -123,7 +122,6 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 								<UpdateModalNumberForm
 									label="Taille"
 									placeholder="Votre taille"
-									value={heightValue}
 									setValue={setHeightValue}
 									error={heightError}
 									setError={setHeightError}

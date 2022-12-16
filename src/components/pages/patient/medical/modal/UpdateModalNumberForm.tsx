@@ -4,7 +4,6 @@ import { FormControl, FormErrorMessage, Input, Stack, Text } from '@chakra-ui/re
 const UpdateModalNumberForm = ({
 	label,
 	placeholder,
-	value,
 	setValue,
 	error,
 	setError,
@@ -12,7 +11,6 @@ const UpdateModalNumberForm = ({
 }: {
 	label: string;
 	placeholder: string;
-	value: number;
 	setValue: Dispatch<SetStateAction<number>>;
 	error: boolean;
 	setError: Dispatch<SetStateAction<boolean>>;
@@ -26,7 +24,6 @@ const UpdateModalNumberForm = ({
 				type="number"
 				w="100%"
 				h="32px"
-				value={value}
 				onChange={(e) => {
 					setValue(Number(e.target.value));
 					setError(false);

@@ -9,15 +9,15 @@ import colors from 'theme/foundations/colors';
 const Documents = (): JSX.Element => {
 	const appointmentList = [
 		{
-			docuName: 'BahAlors.docx',
+			docuName: 'Document 1.docx',
 			name: 'Roger Palot',
 		},
 		{
-			docuName: 'OnSaitPas.docx',
-			name: 'benoit Baillard',
+			docuName: 'Document 2.docx',
+			name: 'Benoit Baillard',
 		},
 		{
-			docuName: 'CestPasVrai.docx',
+			docuName: 'Document 3.docx',
 			name: 'Amoz Pay',
 		},
 	];
