@@ -8,6 +8,7 @@ import {
 	ModalFooter,
 	ModalHeader,
 	ModalOverlay,
+	Stack,
 	Text,
 	useToast,
 	VStack,
@@ -87,11 +88,18 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} size="2xl">
 			<ModalOverlay />
-			<ModalContent bg="blue.100" borderRadius="16px" p="32px">
-				<VStack bg="white" borderRadius="8px" border={`2px solid ${colors.blue[200]}`} p="16px">
+			<ModalContent bg="blue.100" borderRadius="16px" p={{ base: '16px', md: '32px' }}>
+				<VStack
+					bg="white"
+					borderRadius="8px"
+					border={`2px solid ${colors.blue[200]}`}
+					p={{ base: '8px', md: '16px' }}
+				>
 					<ModalHeader>
 						<VStack>
-							<Text size="boldXl">Modification de votre profil</Text>
+							<Text size="boldXl" textAlign="center">
+								Modification de votre profil
+							</Text>
 							<Box
 								w="200px"
 								h="3px"
@@ -161,7 +169,7 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 						</VStack>
 					</ModalBody>
 					<ModalFooter>
-						<HStack spacing="32px">
+						<Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: '16px', md: '32px' }}>
 							<Button variant="secondary" onClick={onClose}>
 								Annuler mes changements
 							</Button>
@@ -179,7 +187,7 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 							>
 								Valider mes changements
 							</Button>
-						</HStack>
+						</Stack>
 					</ModalFooter>
 				</VStack>
 			</ModalContent>
