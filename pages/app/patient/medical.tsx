@@ -24,7 +24,7 @@ const Medical = (): JSX.Element => {
 		<VStack
 			ml={{ base: '0px', lg: '250px' }}
 			my={{ base: '128px', lg: '0px' }}
-			mb={{ base: '0px', lg: '64px' }}
+			mb={{ base: '128px', lg: '64px' }}
 			spacing="64px"
 			px={{ base: '32px', md: '64px', lg: '96px', xl: '128px', '2xl': '288px' }}
 		>

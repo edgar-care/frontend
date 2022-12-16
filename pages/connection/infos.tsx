@@ -109,17 +109,17 @@ const Infos = (): JSX.Element => {
 						>
 							<FormControl isRequired isInvalid={ageError}>
 								<Text size="boldMd">Votre age</Text>
-								<NumInput value={age} setValue={setAge} children="age" placeholder="20" />
+								<NumInput setValue={setAge} children="age" placeholder="20" />
 								{ageError && <FormErrorMessage>Age invalide</FormErrorMessage>}
 							</FormControl>
 							<FormControl isRequired isInvalid={heightError}>
 								<Text size="boldMd">Votre taille</Text>
-								<NumInput value={height} setValue={setHeight} children="cm" placeholder="170" />
+								<NumInput setValue={setHeight} children="cm" placeholder="170" />
 								{heightError && <FormErrorMessage>Taille invalide</FormErrorMessage>}
 							</FormControl>
 							<FormControl isRequired isInvalid={weightError}>
 								<Text size="boldMd">Votre poids</Text>
-								<NumInput value={weight} setValue={setWeight} children="kg" placeholder="65" />
+								<NumInput setValue={setWeight} children="kg" placeholder="65" />
 								{weightError && <FormErrorMessage>Poids invalide</FormErrorMessage>}
 							</FormControl>
 						</Stack>

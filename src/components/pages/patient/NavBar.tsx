@@ -9,6 +9,7 @@ import {
 	BsHouseDoor,
 } from 'react-icons/bs';
 
+import { useRouter } from 'next/router';
 import HelpCenter from './helpCenter';
 import TabCard from './TabCard';
 
@@ -52,6 +53,7 @@ const NavBar = (): JSX.Element => {
 	const name = 'Care';
 
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
+	const router = useRouter();
 
 	return (
 		<VStack
@@ -82,7 +84,18 @@ const NavBar = (): JSX.Element => {
 				</VStack>
 				<VStack w="100%" spacing="16px">
 					<HelpCenter name={help.name} path={help.path} icon={help.icon} />
-					<HStack p="8px 16px" w="100%" bg="blue.900" borderRadius="16px" spacing="16px">
+					<HStack
+						p="8px 16px"
+						w="100%"
+						bg="blue.900"
+						borderRadius="16px"
+						spacing="16px"
+						onClick={() => {
+							localStorage.removeItem('token');
+							router.push('/');
+						}}
+						cursor="pointer"
+					>
 						<Img
 							src={`https://source.boringavatars.com/marble/32/${surname}%20${name}?colors=A9B5F2,6811A6,1636D9,BF13A4`}
 						/>
