@@ -1,7 +1,16 @@
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VStack } from '@chakra-ui/react';
+import {
+	Button,
+	FormControl,
+	FormErrorMessage,
+	Img,
+	Input,
+	Text,
+	useBreakpointValue,
+	useToast,
+	VStack,
+} from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
@@ -18,10 +27,11 @@ const Login = (): JSX.Element => {
 		setError: setPasswordError,
 	} = useCustomState('');
 
-	const params = useSearchParams();
 	const router = useRouter();
 	const auth = useAuthContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
+
+	const isMobile = useBreakpointValue({ base: true, sm: false });
 
 	const login = () => {
 		if (!email) setEmailError(true);
@@ -31,7 +41,7 @@ const Login = (): JSX.Element => {
 			auth.login(email, password).then((response) => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
-					if (params.get('redirect')) void router.push(params.get('redirect')!);
+					if (router.query.redirect) void router.push(router.query.redirect as string);
 					else void router.push('/app/patient');
 				}
 			});
@@ -40,10 +50,15 @@ const Login = (): JSX.Element => {
 
 	return (
 		<UnprotectedPage>
-			<VStack spacing="128px">
-				<Img src="/assets/edgar.care-logo.svg" alt="edgar.care-logo" w="300px" h="auto" />
-				<VStack spacing="64px">
-					<VStack spacing="32px" w="400px">
+			<VStack spacing="128px" w="100%">
+				<Img
+					src="/assets/edgar.care-logo.svg"
+					alt="edgar.care-logo"
+					w={{ base: '200px', md: '300px' }}
+					h="auto"
+				/>
+				<VStack spacing="64px" maxW="400px">
+					<VStack spacing="32px" w="100%">
 						<FormControl isRequired isInvalid={emailError}>
 							<Text size="boldMd">Adresse mail</Text>
 							<Input
@@ -71,18 +86,20 @@ const Login = (): JSX.Element => {
 							{passwordError && <FormErrorMessage>Mot de passe invalide</FormErrorMessage>}
 						</FormControl>
 					</VStack>
-					<VStack spacing="32px">
-						<Button variant="primary" size="lg" onClick={login}>
+					<VStack spacing="32px" w="100%">
+						<Button variant="primary" size={isMobile ? 'md' : 'lg'} w="100%" onClick={login}>
 							Me connecter avec ces informations
 						</Button>
 						<Link
 							href={
-								params.get('redirect')
-									? `/connection/infos?redirect=${params.get('redirect')}`
+								router.query.redirect
+									? `/connection/infos?redirect=${router.query.redirect}`
 									: '/connection/infos'
 							}
 						>
-							<Button variant="secondary">Je n'ai pas de compte</Button>
+							<Button variant="secondary" size={isMobile ? 'md' : 'lg'} w="100%">
+								Je n'ai pas de compte
+							</Button>
 						</Link>
 					</VStack>
 				</VStack>

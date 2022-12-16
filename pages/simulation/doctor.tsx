@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Stack, Text, VStack } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import DoctorCard from 'components/simulationPage/DoctorCard';
-import { useEffect, useState } from 'react';
+
 import { DoctorType } from 'types/simulationPage/DoctorType';
 
 const Doctor = (): JSX.Element => {
@@ -24,17 +25,19 @@ const Doctor = (): JSX.Element => {
 			<VStack>
 				<Stack spacing="64px">
 					<Stack spacing="32px">
-						<Text size="2xl">
+						<Text size={{ base: 'boldXl', sm: '2xl' }}>
 							Merci pour cet <ColorText textValue="échange" />
 						</Text>
-						<Text size="2xl">Nous avons besoin d'un médecin, pour examiner votre analyse :</Text>
+						<Text size={{ base: 'boldXl', sm: '2xl' }}>
+							Nous avons besoin d'un médecin, pour examiner votre analyse :
+						</Text>
 					</Stack>
 					<VStack
 						overflowY="auto"
 						w="100%"
 						h="400px"
 						spacing="16px"
-						px="16px"
+						px={{ base: '0px', sm: '16px' }}
 						sx={{
 							'::-webkit-scrollbar': {
 								width: '4px',
@@ -53,7 +56,7 @@ const Doctor = (): JSX.Element => {
 						}}
 					>
 						{doctorList.map((doctor) => (
-							<DoctorCard doc={doctor} setSelectedDoctor={setSelectedDoctor} />
+							<DoctorCard doc={doctor} setSelectedDoctor={setSelectedDoctor} key={doctor.id} />
 						))}
 					</VStack>
 				</Stack>

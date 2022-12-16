@@ -1,4 +1,6 @@
-import { VStack, Text, Button, Grid, GridItem } from '@chakra-ui/react';
+import { VStack, Text, Button, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
+import Link from 'next/link';
+
 import ColorText from 'components/GradientText';
 import DashboardCard from 'components/pages/patient/DashboardCard';
 
@@ -31,17 +33,21 @@ const Home = (): JSX.Element => {
 		},
 	];
 
+	const isMobile = useBreakpointValue({ base: true, md: false });
+
 	return (
-		<VStack pt="64px" spacing="48px">
-			<Text size="3xl">
+		<VStack py="64px" px="32px" spacing="48px">
+			<Text size={{ base: '2xl', md: '3xl' }} textAlign="center">
 				Bienvenue sur votre <ColorText textValue="espace patient" />
 			</Text>
-			<Button variant="primary" size="lg">
-				Besoin d'un nouveau rendez-vous ?
-			</Button>
-			<Grid templateColumns="repeat(2, 1fr)" gap="48px">
+			<Link href="/simulation">
+				<Button variant="primary" size={isMobile ? 'md' : 'lg'}>
+					Besoin d'un nouveau rendez-vous ?
+				</Button>
+			</Link>
+			<Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="48px">
 				{cards.map((card) => (
-					<GridItem>
+					<GridItem key={card.title}>
 						<DashboardCard
 							title={card.title}
 							para={card.para}

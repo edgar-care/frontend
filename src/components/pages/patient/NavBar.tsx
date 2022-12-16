@@ -1,4 +1,4 @@
-import { Button, Img, VStack, Text, HStack } from '@chakra-ui/react';
+import { Button, Img, VStack, Text, HStack, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import {
 	BsQuestionCircle,
@@ -51,10 +51,12 @@ const NavBar = (): JSX.Element => {
 	const surname = 'Edgar';
 	const name = 'Care';
 
+	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
+
 	return (
 		<VStack
 			spacing="100px"
-			w="275px"
+			w={isDrawer ? '100%' : '275px'}
 			h="100vh"
 			p="32px 36px"
 			bg="blue.100"
@@ -74,7 +76,9 @@ const NavBar = (): JSX.Element => {
 				</VStack>
 				<VStack spacing="16px">
 					<HelpCenter name={message.name} path={message.path} icon={message.icon} />
-					<Button size="md">Prendre un rendez-vous</Button>
+					<Link href="/simulation">
+						<Button size="md">Prendre un rendez-vous</Button>
+					</Link>
 				</VStack>
 				<VStack w="100%" spacing="16px">
 					<HelpCenter name={help.name} path={help.path} icon={help.icon} />

@@ -1,14 +1,24 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { Button, FormControl, FormErrorMessage, Img, Input, Text, useToast, VStack } from '@chakra-ui/react';
+import {
+	Button,
+	FormControl,
+	FormErrorMessage,
+	Img,
+	Input,
+	Text,
+	useBreakpointValue,
+	useToast,
+	VStack,
+} from '@chakra-ui/react';
 
 import UnprotectedPage from 'components/pages/UnprotectedPage';
 
 import { useAuthContext } from 'contexts/auth';
-import { useEffect } from 'react';
+import { usePatientContext } from 'contexts/user';
+
 import useCustomState from 'hooks/useCustomState';
-import { usePatientContext } from '../../src/contexts/user';
 
 const Signup = (): JSX.Element => {
 	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
@@ -25,18 +35,20 @@ const Signup = (): JSX.Element => {
 		setError: setPasswordConfirmationError,
 	} = useCustomState('');
 
-	const params = useSearchParams();
 	const router = useRouter();
 	const auth = useAuthContext();
 	const { infos } = usePatientContext();
 	const toast = useToast({ duration: 2000, isClosable: true });
 
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+
 	useEffect(() => {
+		if (!router.isReady) return;
 		if (!infos)
 			void router.push(
-				params.get('redirect') ? `/connection/infos?redirect=${params.get('redirect')}` : '/connection/infos',
+				router.query.redirect ? `/connection/infos?redirect=${router.query.redirect}` : '/connection/infos',
 			);
-	}, [infos]);
+	}, [infos, router.isReady]);
 
 	const signup = () => {
 		if (!email) setEmailError(true);
@@ -48,7 +60,7 @@ const Signup = (): JSX.Element => {
 			auth.signup(email, password, infos).then((response) => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
-					if (params.get('redirect')) void router.push(params.get('redirect')!);
+					if (router.query.redirect) void router.push(router.query.redirect as string);
 					else void router.push('/app/patient');
 				}
 			});
@@ -57,10 +69,15 @@ const Signup = (): JSX.Element => {
 
 	return (
 		<UnprotectedPage>
-			<VStack spacing="128px">
-				<Img src="/assets/edgar.care-logo.svg" alt="edgar.care-logo" w="300px" h="auto" />
-				<VStack spacing="64px">
-					<VStack spacing="32px" w="400px">
+			<VStack spacing="128px" w="100%">
+				<Img
+					src="/assets/edgar.care-logo.svg"
+					alt="edgar.care-logo"
+					w={{ base: '200px', md: '300px' }}
+					h="auto"
+				/>
+				<VStack spacing="64px" maxW="400px">
+					<VStack spacing="32px" w="100%">
 						<FormControl isRequired isInvalid={emailError}>
 							<Text size="boldMd">Adresse mail</Text>
 							<Input
@@ -101,18 +118,20 @@ const Signup = (): JSX.Element => {
 							{passwordConfirmationError && <FormErrorMessage>Mot de passe invalide</FormErrorMessage>}
 						</FormControl>
 					</VStack>
-					<VStack spacing="32px">
-						<Button variant="primary" size="lg" onClick={signup}>
+					<VStack spacing="32px" w="100%">
+						<Button variant="primary" size={isMobile ? 'md' : 'lg'} onClick={signup} w="100%">
 							M'inscrire avec ces informations
 						</Button>
 						<Link
 							href={
-								params.get('redirect')
-									? `/connection/login?redirect=${params.get('redirect')}`
+								router.query.redirect
+									? `/connection/login?redirect=${router.query.redirect}`
 									: '/connection/login'
 							}
 						>
-							<Button variant="secondary">J'ai déjà un compte</Button>
+							<Button variant="secondary" size={isMobile ? 'md' : 'lg'} w="100%">
+								J'ai déjà un compte
+							</Button>
 						</Link>
 					</VStack>
 				</VStack>
