@@ -3,6 +3,10 @@
 Please provide a detailed description of what was done in this PR.
 Precise the issue that you are resolving.
 
+### Click Up reference
+
+[CU-XXXX](https://app.clickup.com/t/XXXX)
+
 # Changes include
 
 - [ ] Bugfix (non-breaking change that solves an issue)
@@ -18,9 +22,7 @@ Please complete this section if any breaking changes have been made, otherwise d
 - [ ] I have assigned this PR to myself
 - [ ] I have added at least 1 reviewer
 - [ ] I have added the needed labels
-- [ ] I have linked this PR to an issue
-- [ ] I have linked this PR to a milestone
-- [ ] I have linked this PR to a project
+- [ ] I have linked this PR to a clickup task
 - [ ] I have tested this code
 - [ ] I have added / updated tests (unit / functionals / end-to-end / ...)
 - [ ] I have updated the README and other relevant documents (guides...)
