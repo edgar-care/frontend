@@ -26,7 +26,7 @@ class Auth {
 	public async signup(email: string, password: string, infos: PatientInfos): Promise<MessageResponse> {
 		try {
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('auth/p/register', 'POST', JSON.stringify({ email, password, ...infos }));
+			const auth = await basicFetch('auth/p/register', 'POST', JSON.stringify({ ...infos, email, password }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
