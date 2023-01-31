@@ -1,0 +1,74 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: action/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Load cache
+        uses: action/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build Next
+        run: yarn build
+
+  Lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: action/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Load cache
+        uses: action/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run eslint
+        run: yarn lint > eslint-results
+
+      - name: Get eslint results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: eslint-results
+          path: eslint-results
