@@ -16,11 +16,11 @@ const MedCard = ({ docuName, name }: { docuName: string; name: string }): JSX.El
 		<HStack>
 			<Text size="boldLg">{docuName}</Text>
 		</HStack>
-		<Stack direction={{ base: 'row', sm: 'row' }} spacing={{ base: '8px', sm: '16px' }}>
+		<HStack spacing={{ base: '8px', sm: '16px' }}>
 			<Text size="lg">Dr.{name}</Text>
 			<ButtonIcon icon={BsFileEarmarkArrowDown} action={() => console.log('click')} />
 			<ButtonIcon icon={BsThreeDotsVertical} action={() => console.log('click')} />
-		</Stack>
+		</HStack>
 	</Stack>
 );
 
