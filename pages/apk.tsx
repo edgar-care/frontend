@@ -13,7 +13,7 @@ const Apk = (): JSX.Element => (
 			<VStack py="192px" textAlign="center" spacing="64px">
 				<VStack>
 					<Text size="3xl">
-						<GradientText textValue="edgar.care" /> sur Android et iOS
+						<GradientText textValue="edgar" /> sur Android et iOS
 					</Text>
 					<Text size="boldXl" maxW="500px">
 						La plateforme s'occupant de <GradientText textValue="votre santé" /> et de celle de{' '}

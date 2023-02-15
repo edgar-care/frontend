@@ -9,7 +9,7 @@ const Simulation = (): JSX.Element => (
 		<Stack spacing="96px">
 			<Stack spacing="8px">
 				<Text size={{ base: '2xl', sm: '3xl' }}>
-					Bienvenue sur <ColorText textValue="edgar.care" />
+					Bienvenue sur <ColorText textValue="edgar" />
 				</Text>
 				<Text size="boldXl">Votre assistant médical numérique</Text>
 			</Stack>
