@@ -78,7 +78,7 @@ const Button = {
 		},
 		secondary: {
 			bg: 'white',
-			color: 'purple.600',
+			color: 'green.500',
 			border: `2px solid ${colors.blue['200']}`,
 
 			mozTransition: 'all .6s ease-in-out',
@@ -87,11 +87,11 @@ const Button = {
 			transition: 'all .6s ease-in-out',
 			_hover: {
 				_disabled: {
-					color: 'purple.600',
+					color: 'green.500',
 					bg: 'white',
 					border: `2px solid ${colors.blue['200']}`,
 				},
-				color: 'purple.800',
+				color: 'green.500',
 				background: 'grey.200',
 				border: '2px solid transparent',
 

@@ -40,7 +40,7 @@ const NavBar = (): JSX.Element => {
 			<Box>
 				<Drawer isOpen={isOpen} placement="left" onClose={onClose}>
 					<DrawerOverlay />
-					<DrawerContent w="75%" p="64px 64px">
+					<DrawerContent w="75%" p="32px 64px">
 						<VStack spacing="64px" w="100%">
 							<VStack spacing="16px" w="100%">
 								<Link href="/">
@@ -69,7 +69,7 @@ const NavBar = (): JSX.Element => {
 					</DrawerContent>
 				</Drawer>
 				<Box as="nav" w="100vw" position="fixed" left="0" top="0" zIndex={100} bg="white">
-					<HStack w="100%" h="100%" px="24px" py="24px">
+					<HStack w="100%" h="100%" px="24px">
 						<Button onClick={onOpen} _focus={{}} p="16px" bg="transparent" color="black">
 							<Icon fontSize="24px" as={HamburgerIcon} />
 						</Button>
@@ -87,7 +87,7 @@ const NavBar = (): JSX.Element => {
 	return (
 		<HStack
 			w="100%"
-			p={{ base: '16px 48px', lg: '16px 64px', '2xl': '16px 256px' }}
+			p={{ base: '0px 48px', lg: '0px 64px', '2xl': '0px 256px' }}
 			justify="space-between"
 			bg="white"
 			borderBottom={`2px solid ${colors.blue[100]}`}

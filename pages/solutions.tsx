@@ -53,7 +53,7 @@ const Solutions = (): JSX.Element => {
 					</VStack>
 					<VStack>
 						<Text size={{ base: '2xl', sm: '3xl' }}>
-							Votre médecin vous remerciera d'utiliser <GradientText textValue="edgar.care" />
+							Votre médecin vous remerciera d'utiliser <GradientText textValue="edgar" />
 						</Text>
 						<Text size={{ base: 'boldLg', sm: 'boldXl' }}>
 							Avec nous, il pourra avoir accès à tous vos documents et vos antécédents médicaux, beaucoup
