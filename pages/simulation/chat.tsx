@@ -15,7 +15,7 @@ const Chat = (): JSX.Element => {
 					{!isMobile && (
 						<VStack spacing="48px">
 							<Text size="2xl">
-								Sélectionnez la zone de votre <ColorText textValue="maux" />
+								Sélectionnez la zone de votre <ColorText textValue="mal" />
 							</Text>
 							<Image src="/assets/manequin-3d1.svg" alt="test" w={393} h="auto" />
 						</VStack>
