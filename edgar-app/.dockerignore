@@ -1,6 +1,6 @@
 # Github
 .git/
-.github/
+../.github/
 .gitignore
 LICENSE
 README.md
