@@ -1,4 +1,5 @@
 const url = 'http://localhost:3000';
+const appUrl = 'http://localhost:3001';
 
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
@@ -77,26 +78,16 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.visit(`${url}`);
 	});
 
-	// it('Good redirection on buttons', () => {
-	// 	cy.get('#edgar-homePage-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
-	// });
-	//
-	// it('Good redirection on texts', () => {
-	// 	cy.get('#edgar-homePage-tab-product-text').click().url().should('eq', `${url}/product`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-homePage-tab-application-text').click().url().should('eq', `${url}/application`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-homePage-tab-contact-text').click().url().should('eq', `${url}/contact`);
-	// });
-	//
-	// it('Good redirection on images', () => {
-	// 	cy.get('#edgar-homePage-edgarLogo-img').click().url().should('eq', `${url}/`);
-	// });
+	it('Good redirection on buttons', () => {
+		cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
+	});
 });
 
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.visit(`${url}`);
 	});
 
@@ -113,7 +104,7 @@ describe('Good number of elements - Mobile', () => {
 
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.visit(`${url}`);
 	});
 
@@ -146,7 +137,7 @@ describe('Good content on elements - Mobile', () => {
 
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.visit(`${url}`);
 	});
 
@@ -167,23 +158,13 @@ describe('Visible elements - Mobile', () => {
 
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.visit(`${url}`);
 	});
 
-	// it('Good redirection on buttons', () => {
-	// 	cy.get('#edgar-homePage-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
-	// });
-	//
-	// it('Good redirection on texts', () => {
-	// 	cy.get('#edgar-homePage-tab-product-text').click().url().should('eq', `${url}/product`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-homePage-tab-application-text').click().url().should('eq', `${url}/application`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-homePage-tab-contact-text').click().url().should('eq', `${url}/contact`);
-	// });
-	//
-	// it('Good redirection on images', () => {
-	// 	cy.get('#edgar-homePage-edgarLogo-img').click().url().should('eq', `${url}/`);
-	// });
+	it('Good redirection on buttons', () => {
+		cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
+	});
 });

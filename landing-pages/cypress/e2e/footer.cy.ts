@@ -130,21 +130,36 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.visit(`${url}`);
 	});
 
-	// it('Good redirection on buttons', () => {
-	// 	cy.get('#edgar-footer-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
-	// });
-	//
-	// it('Good redirection on texts', () => {
-	// 	cy.get('#edgar-footer-tab-product-text').click().url().should('eq', `${url}/product`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-footer-tab-application-text').click().url().should('eq', `${url}/application`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-footer-tab-contact-text').click().url().should('eq', `${url}/contact`);
-	// });
-	//
-	// it('Good redirection on images', () => {
-	// 	cy.get('#edgar-footer-edgarLogo-img').click().url().should('eq', `${url}/`);
-	// });
+	it('Good redirection on texts (health)', () => {
+		cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
+		cy.visit(`${url}`);
+	});
+
+	it('Good redirection on texts (project)', () => {
+		cy.get('#edgar-footer-projectOffer-text').click().url().should('eq', `${url}/product`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-projectApplication-text').click().url().should('eq', `${url}/application`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-projectJoinUs-text').click().url().should('eq', `${url}/contact`);
+	});
+
+	it('Good redirection on texts (CS)', () => {
+		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact`);
+		cy.visit(`${url}`);
+		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${url}/`);
+	});
+
+	it('Good redirection on icons', () => {
+		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', `${url}`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-instagramIcon-svg').click().url().should('eq', "");
+	});
 });
 
 describe('Good number of elements - Mobile', () => {
@@ -276,19 +291,34 @@ describe('Good redirection on elements - Mobile', () => {
 		cy.visit(`${url}`);
 	});
 
-	// it('Good redirection on buttons', () => {
-	// 	cy.get('#edgar-footer-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
-	// });
-	//
-	// it('Good redirection on texts', () => {
-	// 	cy.get('#edgar-footer-tab-product-text').click().url().should('eq', `${url}/product`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-footer-tab-application-text').click().url().should('eq', `${url}/application`);
-	// 	cy.visit(`${url}`);
-	// 	cy.get('#edgar-footer-tab-contact-text').click().url().should('eq', `${url}/contact`);
-	// });
-	//
-	// it('Good redirection on images', () => {
-	// 	cy.get('#edgar-footer-edgarLogo-img').click().url().should('eq', `${url}/`);
-	// });
+	it('Good redirection on texts (health)', () => {
+		cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
+		cy.visit(`${url}`);
+	});
+
+	it('Good redirection on texts (project)', () => {
+		cy.get('#edgar-footer-projectOffer-text').click().url().should('eq', `${url}/product`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-projectApplication-text').click().url().should('eq', `${url}/application`);
+		cy.visit(`${url}`);
+		cy.get('#edgar-footer-projectJoinUs-text').click().url().should('eq', `${url}/contact`);
+	});
+
+	it('Good redirection on texts (CS)', () => {
+		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact`);
+		cy.visit(`${url}`);
+		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${url}/`);
+	});
+
+	it('Good redirection on icons', () => {
+		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', `${url}`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-instagramIcon-svg').click().url().should('eq', "");
+	});
 });
