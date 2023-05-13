@@ -1,4 +1,4 @@
-import { HStack, Icon, Text, useBreakpointValue, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { HStack, Icon, Text, Tooltip, useBreakpointValue, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { BsEnvelopeAtFill, BsHeartFill, BsInstagram, BsLinkedin } from 'react-icons/bs';
 import { Image, Link } from '@chakra-ui/next-js';
 
@@ -53,7 +53,7 @@ const Footer = (): JSX.Element => {
 					/>
 					<HStack w="100%" spacing="24px" justify="center">
 						{/* TODO: update link */}
-						<Link href="mailto:">
+						<Link href="mailto:edgarcare_2025@labeip.epitech.eu">
 							<Icon
 								as={BsEnvelopeAtFill}
 								w="24px"
@@ -62,10 +62,10 @@ const Footer = (): JSX.Element => {
 								id="edgar-footer-mailIcon-svg"
 							/>
 						</Link>
-						<Link href="">
+						<Link href="https://www.linkedin.com/company/edgar-care/">
 							<Icon as={BsLinkedin} w="24px" h="24px" color="white" id="edgar-footer-linkedInIcon-svg" />
 						</Link>
-						<Link href="">
+						<Tooltip label="Bientôt">
 							<Icon
 								as={BsInstagram}
 								w="24px"
@@ -73,7 +73,7 @@ const Footer = (): JSX.Element => {
 								color="white"
 								id="edgar-footer-instagramIcon-svg"
 							/>
-						</Link>
+						</Tooltip>
 					</HStack>
 					<HStack justify="center" borderTop="1px solid" borderColor="white" p="8px 0px">
 						<Text size="lg" color="white" id="edgar-footer-madeIn-text">
@@ -99,7 +99,7 @@ const Footer = (): JSX.Element => {
 					/>
 					<HStack w="325px" spacing="24px" justify="end">
 						{/* TODO: update link */}
-						<Link href="mailto:">
+						<Link href="mailto:edgarcare_2025@labeip.epitech.eu">
 							<Icon
 								as={BsEnvelopeAtFill}
 								w="32px"
@@ -108,7 +108,7 @@ const Footer = (): JSX.Element => {
 								id="edgar-footer-mailIcon-svg"
 							/>
 						</Link>
-						<Link href="">
+						<Link href="https://www.linkedin.com/company/edgar-care/">
 							<Icon as={BsLinkedin} w="32px" h="32px" color="white" id="edgar-footer-linkedInIcon-svg" />
 						</Link>
 						<Link href="">

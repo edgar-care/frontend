@@ -1,5 +1,7 @@
 import { Box, Button, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/next-js';
+import { Image, Link } from '@chakra-ui/next-js';
+
+import { APP_URL } from 'config/constants';
 
 const CatchPhraseSection = (): JSX.Element => {
 	const imageDisplayed = useBreakpointValue({ base: false, lg: true });
@@ -36,14 +38,16 @@ const CatchPhraseSection = (): JSX.Element => {
 					/>
 				)}
 			</HStack>
-			<Button
-				size={{ base: 'customLg', xl: '2xl' }}
-				variant="primaryBordered"
-				id="edgar-homePage-appointment-button"
-			>
-				Trouvez votre rendez-vous <Box as="br" />
-				dès maintenant
-			</Button>
+			<Link href={`${APP_URL}/simulation`}>
+				<Button
+					size={{ base: 'customLg', xl: '2xl' }}
+					variant="primaryBordered"
+					id="edgar-homePage-appointment-button"
+				>
+					Trouvez votre rendez-vous <Box as="br" />
+					dès maintenant
+				</Button>
+			</Link>
 		</VStack>
 	);
 };

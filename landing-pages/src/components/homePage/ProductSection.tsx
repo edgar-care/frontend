@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/next-js';
+import { Image, Link } from '@chakra-ui/next-js';
 
 const ProductSection = (): JSX.Element => {
 	const imageDisplayed = useBreakpointValue({ base: false, lg: true });
@@ -41,9 +41,15 @@ const ProductSection = (): JSX.Element => {
 					)}
 				</HStack>
 			</VStack>
-			<Button size={{ base: 'customLg', xl: '2xl' }} variant="primaryBordered" id="edgar-homePage-product-button">
-				En apprendre plus sur edgar
-			</Button>
+			<Link href="/product">
+				<Button
+					size={{ base: 'customLg', xl: '2xl' }}
+					variant="primaryBordered"
+					id="edgar-homePage-product-button"
+				>
+					En apprendre plus sur edgar
+				</Button>
+			</Link>
 		</VStack>
 	);
 };

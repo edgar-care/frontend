@@ -7,17 +7,17 @@ const ProjectSection = (): JSX.Element => (
 			LE PROJET
 		</Text>
 		<VStack w="100%" align="start" spacing="12px">
-			<Link href="">
+			<Link href="product">
 				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-projectOffer-text">
 					Ce que nous offrons
 				</Text>
 			</Link>
-			<Link href="">
+			<Link href="application">
 				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-projectApplication-text">
 					Notre application
 				</Text>
 			</Link>
-			<Link href="">
+			<Link href="contact">
 				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-projectJoinUs-text">
 					Nous rejoindre
 				</Text>
