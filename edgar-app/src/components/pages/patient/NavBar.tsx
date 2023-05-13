@@ -12,40 +12,41 @@ import {
 import { useRouter } from 'next/router';
 import HelpCenter from './helpCenter';
 import TabCard from './TabCard';
+import { LANDING_URL } from '../../../config/constants';
 
 const NavBar = (): JSX.Element => {
 	const tabs = [
 		{
 			name: 'Accueil',
-			path: '/app/patient',
+			path: '/',
 			icon: BsHouseDoor,
 		},
 		{
 			name: 'Rendez-vous',
-			path: '/app/patient/appointments',
+			path: '/appointments',
 			icon: BsCalendar3,
 		},
 		{
 			name: 'Documents',
-			path: '/app/patient/documents',
+			path: '/documents',
 			icon: BsFileEarmarkText,
 		},
 		{
 			name: 'Dossier medical',
-			path: '/app/patient/medical',
+			path: '/medical',
 			icon: BsClipboardPlus,
 		},
 	];
 
 	const message = {
 		name: 'Messagerie',
-		path: '/app/patient/chat',
+		path: '/chat',
 		icon: BsChatText,
 	};
 
 	const help = {
 		name: "Besoin d'aide ?",
-		path: '/app/patient/chat',
+		path: '/chat',
 		icon: BsQuestionCircle,
 	};
 
@@ -98,7 +99,7 @@ const NavBar = (): JSX.Element => {
 						spacing="16px"
 						onClick={() => {
 							localStorage.removeItem('token');
-							router.push('/');
+							router.push(`${LANDING_URL}`);
 						}}
 						cursor="pointer"
 					>

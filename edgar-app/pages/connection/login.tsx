@@ -42,7 +42,7 @@ const Login = (): JSX.Element => {
 				toast({ title: response.title, status: response.status });
 				if (response.status === 'success') {
 					if (router.query.redirect) void router.push(router.query.redirect as string);
-					else void router.push('/app/patient');
+					else void router.push('/');
 				}
 			});
 		} else toast({ title: 'Identifiants incorrects', status: 'error' });

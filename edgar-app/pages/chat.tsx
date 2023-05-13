@@ -1,11 +1,14 @@
 import { VStack, Text } from '@chakra-ui/react';
 import NavBar from 'components/pages/patient/NavBar';
+import ProtectedPage from '../src/components/pages/ProtectedPage';
 
 const Chat = (): JSX.Element => (
-	<VStack>
-		<NavBar />
-		<Text>Chat</Text>
-	</VStack>
+	<ProtectedPage>
+		<VStack>
+			<NavBar />
+			<Text>Chat</Text>
+		</VStack>
+	</ProtectedPage>
 );
 
 export default Chat;

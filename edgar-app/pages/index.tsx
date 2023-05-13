@@ -1,35 +1,67 @@
-import { Button, Stack, useBreakpointValue, VStack } from '@chakra-ui/react';
-import HeadingSection from 'components/landingPage/HeadingSection';
-import InfosSection from 'components/landingPage/InfosSection';
+import { VStack, Text, Button, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
-import NavBar from '../src/components/landingPage/NavBar';
-import BasicPage from '../src/components/pages/BasicPage';
+
+import ColorText from 'components/GradientText';
+import DashboardCard from 'components/pages/patient/DashboardCard';
+import ProtectedPage from '../src/components/pages/ProtectedPage';
 
 const Home = (): JSX.Element => {
-	const isMobile = useBreakpointValue({ base: true, sm: false });
+	const cards = [
+		{
+			title: 'Vos rendez-vous',
+			para: 'Besoin de voir, modifiez ou annuler un rendez-vous ?',
+			button: 'Voir mes rendez-vous',
+			path: '/appointments',
+		},
+		{
+			title: 'Mes documents',
+			para: 'Tous les documents, résultats d’analyse, prescription, ordonnances sont présentes à un seul endroit.',
+			button: 'Voir mes documents',
+			path: '/documents',
+		},
+		{
+			title: 'Mon dossier médical',
+			para: 'Toutes vos informations de santé, maladies, allergies, traitement en cours.',
+			button: 'Voir mon dossier médical',
+			path: '/medical',
+		},
+		{
+			title: 'Besoin de réponse',
+			para: 'Vous avez une question, un problème ? Entrez directement en contact avec votre médecin traitant ou avec un autre médecin.',
+			button: 'Echanger avec un médecin',
+			path: '/chat',
+			isDisabled: true,
+		},
+	];
+
+	const isMobile = useBreakpointValue({ base: true, md: false });
 
 	return (
-		<BasicPage>
-			<VStack w="100%">
-				<NavBar />
-				<VStack spacing="128px" py="128px">
-					<HeadingSection />
-					<InfosSection />
-					<Stack direction={{ base: 'column', md: 'row' }} spacing="32px">
-						<Link href="/simulation">
-							<Button size={isMobile ? 'md' : 'lg'} w="100%">
-								Lancer une simulation
-							</Button>
-						</Link>
-						<Link href="/solutions">
-							<Button variant="secondary" size={isMobile ? 'md' : 'lg'} w="100%">
-								Vous voulez en apprendre plus ?
-							</Button>
-						</Link>
-					</Stack>
-				</VStack>
+		<ProtectedPage>
+			<VStack py="64px" px="32px" spacing="48px">
+				<Text size={{ base: '2xl', md: '3xl' }} textAlign="center">
+					Bienvenue sur votre <ColorText textValue="espace patient" />
+				</Text>
+				<Link href="/simulation">
+					<Button variant="primary" size={isMobile ? 'md' : 'lg'}>
+						Besoin d'un nouveau rendez-vous ?
+					</Button>
+				</Link>
+				<Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap="48px">
+					{cards.map((card) => (
+						<GridItem key={card.title}>
+							<DashboardCard
+								title={card.title}
+								para={card.para}
+								button={card.button}
+								path={card.path}
+								isDisabled={card.isDisabled}
+							/>
+						</GridItem>
+					))}
+				</Grid>
 			</VStack>
-		</BasicPage>
+		</ProtectedPage>
 	);
 };
 

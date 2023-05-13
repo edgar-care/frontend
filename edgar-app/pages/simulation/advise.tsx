@@ -19,7 +19,7 @@ const Advise = (): JSX.Element => {
 					</Text>
 				</Stack>
 				<HStack spacing="64px">
-					<Link href="/app/patient">
+					<Link href="/">
 						<Button variant="primary" size={isMobile ? 'md' : 'lg'}>
 							Accéder à mon compte
 						</Button>

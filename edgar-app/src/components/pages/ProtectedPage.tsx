@@ -20,7 +20,7 @@ const ProtectedPage = ({ children }: { children: JSX.Element }): JSX.Element => 
 		auth.checkToken().then((res) => {
 			if (res.status !== 'success') {
 				if (router.query.redirect) void router.push(router.query.redirect as string);
-				else void router.push('/login');
+				else void router.push('/connection/login');
 			} else authenticateHandler();
 		});
 	}, [router.isReady]);
