@@ -44,45 +44,81 @@ const Footer = (): JSX.Element => {
 			)}
 			{mobileFooter ? (
 				<VStack w="100%" justify="space-between" py="16px" spacing="24px">
-					<Image src="/assets/logo/white-edgar-logo.svg" alt="edgar-logo" height={75} width={150} />
+					<Image
+						src="/assets/logo/white-edgar-logo.svg"
+						alt="edgar-logo"
+						height={75}
+						width={150}
+						id="edgar-footer-edgarLogo-img"
+					/>
 					<HStack w="100%" spacing="24px" justify="center">
 						{/* TODO: update link */}
 						<Link href="mailto:">
-							<Icon as={BsEnvelopeAtFill} w="24px" h="auto" color="white" />
+							<Icon
+								as={BsEnvelopeAtFill}
+								w="24px"
+								h="auto"
+								color="white"
+								id="edgar-footer-mailIcon-svg"
+							/>
 						</Link>
 						<Link href="">
-							<Icon as={BsLinkedin} w="24px" h="24px" color="white" />
+							<Icon as={BsLinkedin} w="24px" h="24px" color="white" id="edgar-footer-linkedInIcon-svg" />
 						</Link>
 						<Link href="">
-							<Icon as={BsInstagram} w="24px" h="24px" color="white" />
+							<Icon
+								as={BsInstagram}
+								w="24px"
+								h="24px"
+								color="white"
+								id="edgar-footer-instagramIcon-svg"
+							/>
 						</Link>
 					</HStack>
 					<HStack justify="center" borderTop="1px solid" borderColor="white" p="8px 0px">
-						<Text size="lg" color="white">
+						<Text size="lg" color="white" id="edgar-footer-madeIn-text">
 							Fait à Lyon & Mulhouse avec
 						</Text>
-						<Icon as={BsHeartFill} color="white" h="20px" w="auto" />
+						<Icon as={BsHeartFill} color="white" h="20px" w="auto" id="edgar-footer-heartIcon-svg" />
 					</HStack>
 				</VStack>
 			) : (
 				<HStack w="100%" justify="space-between" py="16px">
 					<HStack w="325px">
-						<Text size="xl" color="white">
+						<Text size="xl" color="white" id="edgar-footer-madeIn-text">
 							Fait à Lyon & Mulhouse avec
 						</Text>
-						<Icon as={BsHeartFill} color="white" h="20px" w="auto" />
+						<Icon as={BsHeartFill} color="white" h="20px" w="auto" id="edgar-footer-heartIcon-svg" />
 					</HStack>
-					<Image src="/assets/logo/white-edgar-logo.svg" alt="edgar-logo" height={75} width={150} />
+					<Image
+						src="/assets/logo/white-edgar-logo.svg"
+						alt="edgar-logo"
+						height={75}
+						width={150}
+						id="edgar-footer-edgarLogo-img"
+					/>
 					<HStack w="325px" spacing="24px" justify="end">
 						{/* TODO: update link */}
 						<Link href="mailto:">
-							<Icon as={BsEnvelopeAtFill} w="32px" h="auto" color="white" />
+							<Icon
+								as={BsEnvelopeAtFill}
+								w="32px"
+								h="auto"
+								color="white"
+								id="edgar-footer-mailIcon-svg"
+							/>
 						</Link>
 						<Link href="">
-							<Icon as={BsLinkedin} w="32px" h="32px" color="white" />
+							<Icon as={BsLinkedin} w="32px" h="32px" color="white" id="edgar-footer-linkedInIcon-svg" />
 						</Link>
 						<Link href="">
-							<Icon as={BsInstagram} w="32px" h="32px" color="white" />
+							<Icon
+								as={BsInstagram}
+								w="32px"
+								h="32px"
+								color="white"
+								id="edgar-footer-instagramIcon-svg"
+							/>
 						</Link>
 					</HStack>
 				</HStack>

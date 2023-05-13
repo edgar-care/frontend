@@ -1,5 +1,3 @@
-'use client';
-
 import {
 	Button,
 	Drawer,
@@ -29,14 +27,17 @@ const NavBar = (): JSX.Element => {
 		{
 			name: 'Ce que nous offrons',
 			path: '/product',
+			id: 'product',
 		},
 		{
 			name: 'Notre application',
 			path: '/application',
+			id: 'application',
 		},
 		{
 			name: 'Nous rejoindre',
 			path: '/contact',
+			id: 'contact',
 		},
 	];
 
@@ -51,22 +52,28 @@ const NavBar = (): JSX.Element => {
 							h={{ base: '40px', md: '48px' }}
 							onClick={onOpen}
 							color="white"
+							id="edgar-navbar-drawer-button"
 						/>
 					</VStack>
 				)}
 				<Link href="/" w={{ base: 'auto', xl: '200px' }}>
-					<Img src="/assets/logo/white-edgar-logo.svg" w={{ base: '100px', md: '150px' }} h="auto" />
+					<Img
+						src="/assets/logo/white-edgar-logo.svg"
+						w={{ base: '100px', md: '150px' }}
+						h="auto"
+						id="edgar-navbar-edgarLogo-img"
+					/>
 				</Link>
 				{!isDrawer && (
 					<>
 						<HStack spacing="64px">
 							{tabs.map((tab) => (
-								<TabCard name={tab.name} path={tab.path} key={tab.path} />
+								<TabCard name={tab.name} path={tab.path} id={tab.id} key={tab.path} />
 							))}
 						</HStack>
 						<VStack align="end" w={{ base: '175px', xl: '200px' }}>
-							<Link href={`${APP_URL}/connection/login`}>
-								<Button size="md" variant="primaryBordered">
+							<Link href={`${APP_URL}`}>
+								<Button size="md" variant="primaryBordered" id="edgar-navbar-patientArea-button">
 									Espace patient
 								</Button>
 							</Link>
@@ -74,14 +81,14 @@ const NavBar = (): JSX.Element => {
 					</>
 				)}
 			</HStack>
-			<Drawer isOpen={isOpen} onClose={onClose} placement="left" initialFocusRef={undefined}>
+			<Drawer isOpen={isOpen} onClose={onClose} placement="left">
 				<DrawerOverlay />
 				<DrawerContent>
-					<DrawerCloseButton color="white" />
+					<DrawerCloseButton color="white" id="edgar-navbar-drawerClose-button" />
 					<DrawerBody bg="blue.700">
 						<VStack spacing="0px" p="64px 8px" align="start">
-							{[...tabs, { name: 'Espace patient', path: `${APP_URL}/connection/login` }].map((tab) => (
-								<DrawerTabCard name={tab.name} path={tab.path} key={tab.path} />
+							{[...tabs, { name: 'Espace patient', path: `${APP_URL}`, id: 'patient' }].map((tab) => (
+								<DrawerTabCard name={tab.name} path={tab.path} id={tab.id} key={tab.path} />
 							))}
 						</VStack>
 					</DrawerBody>

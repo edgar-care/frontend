@@ -12,11 +12,11 @@ const NewsletterSection = (): JSX.Element => {
 	return (
 		<VStack align="start" maxW="400px" spacing="16px">
 			<VStack w="100%" align="start" spacing="0px">
-				<Text size={{ base: 'xl', xl: '2xl' }} color="white">
+				<Text size={{ base: 'xl', xl: '2xl' }} color="white" id="edgar-footer-newsletterTitle-text">
 					SUIVEZ NOS ACTUALITÉS !!
 				</Text>
-				<Text color="white">
-					Inscrivez-vous et profitez d’un accès en exclusivité lors de l’ouverture de notre beta
+				<Text color="white" id="edgar-footer-newsletterSubtitle-text">
+					Inscrivez-vous et profitez d'un accès en exclusivité lors de l'ouverture de notre beta
 				</Text>
 			</VStack>
 			<VStack w="100%" align="start" spacing="16px">
@@ -35,9 +35,10 @@ const NewsletterSection = (): JSX.Element => {
 						borderColor: 'green.500',
 					}}
 					onChange={(e) => setNewsletterEmail(e.target.value)}
+					id="edgar-footer-newsletterEmail-input"
 				/>
 				<Stack direction={{ base: 'column', xl: 'row' }} justify="space-between" w="100%">
-					<Text color="white" maxW="240px">
+					<Text color="white" maxW="240px" id="edgar-footer-newsletterPolicies-text">
 						En vous abonnant, vous acceptez notre{' '}
 						<Link href="">
 							<Box as="u">politique de confidentialité</Box>
@@ -51,6 +52,7 @@ const NewsletterSection = (): JSX.Element => {
 								if (res.status !== 'error') setNewsletterEmail('');
 							});
 						}}
+						id="edgar-footer-newsletterSubscription-button"
 					>
 						M'abonner
 					</Button>

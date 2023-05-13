@@ -3,17 +3,17 @@ import { Link } from '@chakra-ui/next-js';
 
 const CustomerServiceSection = (): JSX.Element => (
 	<VStack align="start" spacing="16px">
-		<Text size={{ base: 'boldLg', xl: 'boldXl' }} color="white">
+		<Text size={{ base: 'boldLg', xl: 'boldXl' }} color="white" id="edgar-footer-CSTitle-text">
 			SERVICE CLIENT
 		</Text>
 		<VStack w="100%" align="start" spacing="12px">
 			<Link href="">
-				<Text size={{ base: 'md', xl: 'lg' }} color="white">
+				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-CSContactUs-text">
 					Contactez-nous
 				</Text>
 			</Link>
 			<Link href="">
-				<Text size={{ base: 'md', xl: 'lg' }} color="white">
+				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-CSPolicies-text">
 					Politique de confidentialité -{' '}
 					<Box as="i" fontSize="14px" fontWeight="400">
 						bientôt
@@ -21,16 +21,11 @@ const CustomerServiceSection = (): JSX.Element => (
 				</Text>
 			</Link>
 			<Link href="">
-				<Text size={{ base: 'md', xl: 'lg' }} color="white">
-					Politique de confidentialité -{' '}
+				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-CSLegals-text">
+					Mentions légales -{' '}
 					<Box as="i" fontSize="14px" fontWeight="400">
 						bientôt
 					</Box>
-				</Text>
-			</Link>
-			<Link href="">
-				<Text size={{ base: 'md', xl: 'lg' }} color="white">
-					Ordre National des Médecins
 				</Text>
 			</Link>
 		</VStack>
