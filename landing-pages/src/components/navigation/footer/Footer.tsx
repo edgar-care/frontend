@@ -60,10 +60,18 @@ const Footer = (): JSX.Element => {
 								h="auto"
 								color="white"
 								id="edgar-footer-mailIcon-svg"
+								aria-label="open-mail-to-send-to-edgar-team"
 							/>
 						</Link>
 						<Link href="https://www.linkedin.com/company/edgar-care/">
-							<Icon as={BsLinkedin} w="24px" h="24px" color="white" id="edgar-footer-linkedInIcon-svg" />
+							<Icon
+								as={BsLinkedin}
+								w="24px"
+								h="24px"
+								color="white"
+								id="edgar-footer-linkedInIcon-svg"
+								aria-label="redirection-to-linkedIn-edgar-account"
+							/>
 						</Link>
 						<Tooltip label="Bientôt">
 							<Icon
@@ -72,6 +80,7 @@ const Footer = (): JSX.Element => {
 								h="24px"
 								color="white"
 								id="edgar-footer-instagramIcon-svg"
+								aria-label="redirection-to-instragam-edgar-account"
 							/>
 						</Tooltip>
 					</HStack>
@@ -106,10 +115,18 @@ const Footer = (): JSX.Element => {
 								h="auto"
 								color="white"
 								id="edgar-footer-mailIcon-svg"
+								aria-label="open-mail-to-send-to-edgar-team"
 							/>
 						</Link>
 						<Link href="https://www.linkedin.com/company/edgar-care/">
-							<Icon as={BsLinkedin} w="32px" h="32px" color="white" id="edgar-footer-linkedInIcon-svg" />
+							<Icon
+								as={BsLinkedin}
+								w="32px"
+								h="32px"
+								color="white"
+								id="edgar-footer-linkedInIcon-svg"
+								aria-label="redirection-to-linkedIn-edgar-account"
+							/>
 						</Link>
 						<Link href="">
 							<Icon
@@ -118,6 +135,7 @@ const Footer = (): JSX.Element => {
 								h="32px"
 								color="white"
 								id="edgar-footer-instagramIcon-svg"
+								aria-label="redirection-to-instragam-edgar-account"
 							/>
 						</Link>
 					</HStack>

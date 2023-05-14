@@ -2,6 +2,7 @@
 
 import { ChakraProvider, VStack } from '@chakra-ui/react';
 import { CacheProvider } from '@chakra-ui/next-js';
+import '@fontsource/poppins';
 
 import theme from 'theme';
 

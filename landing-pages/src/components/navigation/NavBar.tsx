@@ -66,6 +66,8 @@ const NavBar = ({ variant }: { variant: 'blue' | 'white' }): JSX.Element => {
 						w={{ base: '100px', md: '150px' }}
 						h="auto"
 						id="edgar-navbar-edgarLogo-img"
+						alt="edgar-logo"
+						aria-label="redirection-to-home-page"
 					/>
 				</Link>
 				{!isDrawer && (

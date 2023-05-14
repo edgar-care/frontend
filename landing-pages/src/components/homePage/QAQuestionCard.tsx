@@ -16,7 +16,7 @@ const QAQuestionCard = ({ question }: { question: FAQQuestionType }): JSX.Elemen
 		>
 			<HStack w="100%" justify="space-between">
 				<Text
-					size="xl"
+					size="boldXl"
 					cursor="pointer"
 					onClick={() => onToggle()}
 					id={`edgar-homePage-QATitle-${question.id}-text`}

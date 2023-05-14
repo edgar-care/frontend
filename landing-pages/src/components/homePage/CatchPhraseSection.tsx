@@ -1,6 +1,8 @@
 import { Box, Button, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { Image, Link } from '@chakra-ui/next-js';
 
+import HighlightText from 'components/HighlightText';
+
 import { APP_URL } from 'config/constants';
 
 const CatchPhraseSection = (): JSX.Element => {
@@ -11,18 +13,22 @@ const CatchPhraseSection = (): JSX.Element => {
 			<HStack w="100%" spacing="64px">
 				<VStack align="start" w="100%" spacing="32px">
 					<Text
-						size={{ base: '5xl', lg: '6xl', '2xl': '7xl' }}
+						size={{ base: '3xl', lg: '6xl', '2xl': '7xl' }}
 						color="white"
 						id="edgar-homePage-catchPhrase-text"
 					>
 						Gagne du temps avec
-						<Box as="br" /> l'assistant virtuel du pré-diagnostic.
+						<Box as="br" /> l'assistant virtuel du <HighlightText>pré-diagnostic.</HighlightText>
 					</Text>
-					<VStack align="start" maxW="900px" spacing="0px">
-						<Text size={{ base: 'xl', lg: '2xl' }} color="white" id="edgar-homePage-subTitle1-text">
-							Marre d'attendre pour avoir un rendez-vous chez le médecin généraliste ?
+					<VStack align="start" maxW="905px" spacing="0px">
+						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-homePage-subTitle1-text">
+							Marre d'attendre pour{' '}
+							<Box as="span" fontWeight="600" color="green.400">
+								avoir un rendez-vous
+							</Box>{' '}
+							chez le médecin généraliste ?
 						</Text>
-						<Text size={{ base: 'xl', lg: '2xl' }} color="white" id="edgar-homePage-subTitle2-text">
+						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-homePage-subTitle2-text">
 							Un Français attend en moyenne 6 jours avant d'avoir un rendez-vous chez un médecin
 							généraliste.
 						</Text>
