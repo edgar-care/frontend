@@ -1,10 +1,11 @@
 'use client';
 
 import { Box, Button, Img, Stack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 
 import Footer from 'components/navigation/footer/Footer';
 import NavBar from 'components/navigation/NavBar';
-import { Link } from '@chakra-ui/next-js';
+import HighlightText from 'components/HighlightText';
 
 const ApplicationPage = (): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, md: false });
@@ -28,11 +29,18 @@ const ApplicationPage = (): JSX.Element => {
 			>
 				<VStack spacing="32px" w="100%" align="start">
 					<Text size={{ base: '5xl', lg: '6xl', '2xl': '7xl' }} id="edgar-applicationPage-title-text">
-						edgar sur mobile
+						edgar sur <HighlightText>mobile</HighlightText>
 					</Text>
 					<Text size={{ base: 'xl', lg: '2xl' }} maxW="900px" id="edgar-applicationPage-subtitle-text">
-						La plateforme s’occupant de votre santé et celle de vos proches désormais disponible sur Android
-						et bientôt sur iOS
+						La plateforme s’occupant de{' '}
+						<Box as="span" fontWeight="600" color="green.600">
+							votre santé
+						</Box>{' '}
+						et celle de{' '}
+						<Box as="span" fontWeight="600" color="green.600">
+							vos proches
+						</Box>{' '}
+						désormais disponible sur Android et bientôt sur iOS
 					</Text>
 				</VStack>
 				<Stack
