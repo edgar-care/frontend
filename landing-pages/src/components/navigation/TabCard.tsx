@@ -3,9 +3,19 @@
 import { Link } from '@chakra-ui/next-js';
 import { Text, VStack } from '@chakra-ui/react';
 
-const TabCard = ({ name, path, id }: { name: string; path: string; id: string }): JSX.Element => (
+const TabCard = ({
+	navbarVariant,
+	name,
+	path,
+	id,
+}: {
+	navbarVariant: 'blue' | 'white';
+	name: string;
+	path: string;
+	id: string;
+}): JSX.Element => (
 	<Link href={path}>
-		<Text size="lg" color="white" id={`edgar-navbar-tab-${id}-text`}>
+		<Text size="lg" color={navbarVariant === 'blue' ? 'white' : 'black'} id={`edgar-navbar-tab-${id}-text`}>
 			{name}
 		</Text>
 	</Link>

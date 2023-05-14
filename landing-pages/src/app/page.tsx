@@ -19,12 +19,12 @@ const HomePage = (): JSX.Element => (
 	>
 		<VStack
 			py="32px"
-			spacing="64px"
+			spacing="32px"
 			bg="blue.700"
 			borderRadius={{ base: '0px 0px 32px 32px', xl: '0px 0px 48px 48px' }}
 			w="100%"
 		>
-			<NavBar />
+			<NavBar variant="blue" />
 			<ContentSections />
 		</VStack>
 		<QASection />

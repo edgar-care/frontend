@@ -19,7 +19,7 @@ import { APP_URL } from 'config/constants';
 
 import TabCard, { DrawerTabCard } from './TabCard';
 
-const NavBar = (): JSX.Element => {
+const NavBar = ({ variant }: { variant: 'blue' | 'white' }): JSX.Element => {
 	const isDrawer = useBreakpointValue({ base: true, xl: false });
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -51,14 +51,18 @@ const NavBar = (): JSX.Element => {
 							w={{ base: '40px', md: '48px' }}
 							h={{ base: '40px', md: '48px' }}
 							onClick={onOpen}
-							color="white"
+							color={variant === 'blue' ? 'white' : 'black'}
 							id="edgar-navbar-drawer-button"
 						/>
 					</VStack>
 				)}
 				<Link href="/" w={{ base: 'auto', xl: '200px' }}>
 					<Img
-						src="/assets/logo/white-edgar-logo.svg"
+						src={
+							variant === 'blue'
+								? '/assets/logo/white-edgar-logo.svg'
+								: '/assets/logo/colored-edgar-logo.svg'
+						}
 						w={{ base: '100px', md: '150px' }}
 						h="auto"
 						id="edgar-navbar-edgarLogo-img"
@@ -70,12 +74,22 @@ const NavBar = (): JSX.Element => {
 					<>
 						<HStack spacing="64px">
 							{tabs.map((tab) => (
-								<TabCard name={tab.name} path={tab.path} id={tab.id} key={tab.path} />
+								<TabCard
+									name={tab.name}
+									path={tab.path}
+									id={tab.id}
+									key={tab.path}
+									navbarVariant={variant}
+								/>
 							))}
 						</HStack>
 						<VStack align="end" w={{ base: '175px', xl: '200px' }}>
 							<Link href={`${APP_URL}`}>
-								<Button size="md" variant="primaryBordered" id="edgar-navbar-patientArea-button">
+								<Button
+									size="md"
+									variant={variant === 'blue' ? 'primaryBordered' : 'primary'}
+									id="edgar-navbar-patientArea-button"
+								>
 									Espace patient
 								</Button>
 							</Link>
