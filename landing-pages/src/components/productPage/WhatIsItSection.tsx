@@ -19,7 +19,7 @@ const WhatIsItSection = (): JSX.Element => {
 					</Text>
 					<VStack align="start" maxW="1200px" spacing="24px">
 						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-productPage-subTitle1-text">
-							edgar c'est la plateforme qui s'occupe de
+							edgar c'est la plateforme qui s'occupe de{' '}
 							<Box as="span" fontWeight="600" color="green.400">
 								votre santé
 							</Box>{' '}
