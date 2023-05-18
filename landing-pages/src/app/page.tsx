@@ -16,6 +16,7 @@ const HomePage = (): JSX.Element => (
 		spacing="96px"
 		justify="space-between"
 		w="100%"
+		minH="100vh"
 	>
 		<VStack
 			py="32px"
