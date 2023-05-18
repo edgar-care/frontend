@@ -3,7 +3,7 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 
 import type MilestoneDetailsCardType from 'types/productPage/MilestoneDetailsCardType';
 
-const MilestoneDetailsCard = ({ title, elements, type }: MilestoneDetailsCardType): JSX.Element => (
+const MilestoneDetailsCard = ({ title, elements, type, id }: MilestoneDetailsCardType): JSX.Element => (
 	<VStack
 		bg={type === 'previous' ? 'green.600' : 'blue.700'}
 		spacing="32px"
@@ -13,11 +13,17 @@ const MilestoneDetailsCard = ({ title, elements, type }: MilestoneDetailsCardTyp
 		h={{ base: '100%', smd: '490px' }}
 	>
 		<VStack spacing="0px" h="60px">
-			<Text size={{ base: 'boldXl', lg: 'bold2xl' }} color="white" fontWeight="600" textAlign="center">
+			<Text
+				size={{ base: 'boldXl', lg: 'bold2xl' }}
+				color="white"
+				fontWeight="600"
+				textAlign="center"
+				id={`edgar-productPage-milestoneDetails-${id}-title-text`}
+			>
 				{title}
 			</Text>
 			{type === 'current' && (
-				<Text size="boldLg" color="white">
+				<Text size="boldLg" color="white" id={`edgar-productPage-milestoneDetails-${id}-subTitle-text`}>
 					En cours
 				</Text>
 			)}
@@ -28,7 +34,13 @@ const MilestoneDetailsCard = ({ title, elements, type }: MilestoneDetailsCardTyp
 					<Text size={{ base: 'lg', lg: 'xl' }} color="white" maxW="250px">
 						{element}
 					</Text>
-					<Icon as={BsCheckCircleFill} w="24px" h="24px" color={type === 'previous' ? 'white' : 'grey.300'} />
+					<Icon
+						as={BsCheckCircleFill}
+						w="24px"
+						h="24px"
+						color={type === 'previous' ? 'white' : 'grey.300'}
+						id={`edgar-productPage-milestoneDetails-${id}-check-icon`}
+					/>
 				</HStack>
 			))}
 		</VStack>

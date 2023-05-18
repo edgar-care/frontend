@@ -106,7 +106,7 @@ const HowItWorks = (): JSX.Element => {
 				<Button
 					size={{ base: 'customLg', xl: '2xl' }}
 					variant="primaryBordered"
-					id="edgar-productPage-product-button"
+					id="edgar-productPage-milestone-button"
 				>
 					Voir nos milestones
 				</Button>

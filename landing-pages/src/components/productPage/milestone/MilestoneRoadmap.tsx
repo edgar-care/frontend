@@ -7,7 +7,7 @@ const MilestoneRoadmap = (): JSX.Element => {
 
 	return (
 		<VStack w="100%" spacing={{ base: '32px', '2xl': '96px' }} align="start" id="milestones">
-			<Text size={{ base: '3xl', xl: '6xl' }} id="edgar-homePage-QATitle-text">
+			<Text size={{ base: '3xl', xl: '6xl' }} id="edgar-productPage-milestonesTitle-text">
 				LES MILESTONES D'EDGAR
 			</Text>
 			{isMobile ? (

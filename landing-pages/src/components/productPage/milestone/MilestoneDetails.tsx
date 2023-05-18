@@ -10,6 +10,7 @@ const MilestoneDetails = (): JSX.Element => {
 			title: 'Prototypage/ Idéation',
 			elements: ['Brainstorming', 'Maquettage', 'Image de marque', 'Assistant numérique: Edgar'],
 			type: 'previous',
+			id: 'prototypage',
 		},
 		{
 			title: 'POC (Proof Of Concept)',
@@ -20,6 +21,7 @@ const MilestoneDetails = (): JSX.Element => {
 				'Edgar plus performant',
 			],
 			type: 'current',
+			id: 'poc',
 		},
 		{
 			title: 'Beta #1',
@@ -31,6 +33,7 @@ const MilestoneDetails = (): JSX.Element => {
 				'Suivi des rendez-vous',
 			],
 			type: 'futur',
+			id: 'beta1',
 		},
 		{
 			title: 'Beta #2',
@@ -42,6 +45,7 @@ const MilestoneDetails = (): JSX.Element => {
 				'Suivi de sa santé',
 			],
 			type: 'futur',
+			id: 'beta2',
 		},
 	];
 
@@ -53,6 +57,7 @@ const MilestoneDetails = (): JSX.Element => {
 						title={milestoneDetail.title}
 						elements={milestoneDetail.elements}
 						type={milestoneDetail.type}
+						id={milestoneDetail.id}
 					/>
 				</WrapItem>
 			))}

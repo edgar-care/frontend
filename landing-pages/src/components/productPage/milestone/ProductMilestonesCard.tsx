@@ -29,7 +29,7 @@ const ProductMilestonesCard = ({
 				borderRadius="16px"
 			>
 				<Text
-					id={`edgar-productMilestones-${id}-text`}
+					id={`edgar-productPage-productMilestones-${id}-text`}
 					color="white"
 					size={{ base: 'boldLg', lg: 'boldXl' }}
 					textAlign="center"

@@ -17,11 +17,14 @@ const ProductNewsletter = (): JSX.Element => {
 		<VStack w="100%" spacing="0px" align="start">
 			<HStack w="100%" spacing="64px">
 				<VStack align="start" w="100%" spacing="32px">
-					<Text size={{ base: '3xl', lg: '6xl', '2xl': '7xl' }} id="edgar-productPage-catchPhrase-text">
+					<Text
+						size={{ base: '3xl', lg: '6xl', '2xl': '7xl' }}
+						id="edgar-productPage-newsletterCatchPhrase-text"
+					>
 						Envie <HighlightText>d'essayer ?</HighlightText>
 					</Text>
 					<VStack align="start" maxW="1200px" spacing="24px">
-						<Text size={{ base: 'lg', lg: '2xl' }} id="edgar-productPage-subTitle1-text">
+						<Text size={{ base: 'lg', lg: '2xl' }} id="edgar-productPage-newsletterSubTitle1-text">
 							Abonnez-vous à notre newsletter et obtenez un{' '}
 							<Box as="span" fontWeight="600" color="green.600">
 								accès anticipé
@@ -55,10 +58,10 @@ const ProductNewsletter = (): JSX.Element => {
 						borderColor: 'green.500',
 					}}
 					onChange={(e) => setNewsletterEmail(e.target.value)}
-					id="edgar-footer-newsletterEmail-input"
+					id="edgar-productPage-newsletterEmail-input"
 				/>
 				<Stack direction={{ base: 'column', xl: 'row' }} justify="space-between" w="100%">
-					<Text maxW="240px" id="edgar-footer-newsletterPolicies-text">
+					<Text maxW="240px" id="edgar-productPage-newsletterPolicies-text">
 						En vous abonnant, vous acceptez notre{' '}
 						<Link href="">
 							<Box as="u">politique de confidentialité</Box>
@@ -72,7 +75,7 @@ const ProductNewsletter = (): JSX.Element => {
 								if (res.status !== 'error') setNewsletterEmail('');
 							});
 						}}
-						id="edgar-footer-newsletterSubscription-button"
+						id="edgar-productPage-newsletterSubscription-button"
 					>
 						M'abonner
 					</Button>
