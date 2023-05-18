@@ -2,12 +2,13 @@
 
 import { VStack } from '@chakra-ui/react';
 
-import ContentSections from 'components/homePage/ContentSections';
 import Footer from 'components/navigation/footer/Footer';
 import NavBar from 'components/navigation/NavBar';
-import QASection from 'components/homePage/QASection';
 
-const HomePage = (): JSX.Element => (
+import ProductContentSection from 'components/productPage/ProductContentSection';
+import ProductMilestones from 'components/productPage/milestone/ProductMilestones';
+
+const ProductPage = (): JSX.Element => (
 	<VStack
 		bg="white"
 		borderStyle="solid"
@@ -26,11 +27,11 @@ const HomePage = (): JSX.Element => (
 			w="100%"
 		>
 			<NavBar variant="blue" />
-			<ContentSections />
+			<ProductContentSection />
 		</VStack>
-		<QASection />
+		<ProductMilestones />
 		<Footer />
 	</VStack>
 );
 
-export default HomePage;
+export default ProductPage;
