@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Text, VStack } from '@chakra-ui/react';
+import { Link, Text, VStack } from '@chakra-ui/react';
 
 const TabCard = ({
 	navbarVariant,

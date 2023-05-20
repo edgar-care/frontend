@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Input, Stack, Text, useToast, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Box, Button, Input, Link, Stack, Text, useToast, VStack } from '@chakra-ui/react';
 
 import subscribeToNewsletter from 'utils/subscribeToNewsletter';
 

@@ -1,5 +1,4 @@
-import { Button, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Button, Link, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 
 import HighlightText from '../HighlightText';
 

@@ -1,5 +1,5 @@
-import { Box, Button, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { Image, Link } from '@chakra-ui/next-js';
+import { Box, Button, HStack, Link, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/next-js';
 
 import HighlightText from 'components/HighlightText';
 

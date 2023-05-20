@@ -1,5 +1,4 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Box, Link, Text, VStack } from '@chakra-ui/react';
 
 const CustomerServiceSection = (): JSX.Element => (
 	<VStack align="start" spacing="16px">

@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Button, Img, Stack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Box, Button, Img, Link, Stack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 
 import Footer from 'components/navigation/footer/Footer';
 import NavBar from 'components/navigation/NavBar';
