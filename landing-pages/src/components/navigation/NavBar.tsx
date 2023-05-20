@@ -8,11 +8,11 @@ import {
 	HStack,
 	Icon,
 	Img,
+	Link,
 	useBreakpointValue,
 	useDisclosure,
 	VStack,
 } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
 import { BsList } from 'react-icons/bs';
 
 import { APP_URL } from 'config/constants';

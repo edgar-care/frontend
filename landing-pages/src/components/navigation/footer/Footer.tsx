@@ -1,6 +1,6 @@
-import { HStack, Icon, Text, Tooltip, useBreakpointValue, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { HStack, Icon, Link, Text, Tooltip, useBreakpointValue, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { BsEnvelopeAtFill, BsHeartFill, BsInstagram, BsLinkedin } from 'react-icons/bs';
-import { Image, Link } from '@chakra-ui/next-js';
+import { Image } from '@chakra-ui/next-js';
 
 import NewsletterSection from './NewsletterSection';
 import HealthSection from './HealthSection';

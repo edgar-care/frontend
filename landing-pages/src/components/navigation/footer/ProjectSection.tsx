@@ -1,5 +1,4 @@
-import { Text, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
+import { Link, Text, VStack } from '@chakra-ui/react';
 
 const ProjectSection = (): JSX.Element => (
 	<VStack align="start" spacing="16px">

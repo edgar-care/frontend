@@ -1,20 +1,14 @@
-import { useState } from 'react';
-import { Box, Button, HStack, Input, Stack, Text, useBreakpointValue, useToast, VStack } from '@chakra-ui/react';
-import { Image, Link } from '@chakra-ui/next-js';
-
-import subscribeToNewsletter from 'utils/subscribeToNewsletter';
+import { Box, HStack, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/next-js';
 
 import HighlightText from '../HighlightText';
+import NewsletterForm from '../NewsletterForm';
 
 const ProductNewsletter = (): JSX.Element => {
-	const [newsletterEmail, setNewsletterEmail] = useState('');
-
-	const toast = useToast({ duration: 3000, isClosable: true });
-
 	const imageDisplayed = useBreakpointValue({ base: false, lg: true });
 
 	return (
-		<VStack w="100%" spacing="0px" align="start">
+		<VStack w="100%" spacing={imageDisplayed ? '0px' : '16px'} align="start">
 			<HStack w="100%" spacing="64px">
 				<VStack align="start" w="100%" spacing="32px">
 					<Text
@@ -43,44 +37,7 @@ const ProductNewsletter = (): JSX.Element => {
 					/>
 				)}
 			</HStack>
-			<VStack maxW="400px" align="start" spacing="16px">
-				<Input
-					type="email"
-					w="100%"
-					value={newsletterEmail}
-					placeholder="prenom.nom@gmail.com"
-					border="2px solid"
-					borderColor="green.500"
-					_placeholder={{
-						color: 'gray.400',
-					}}
-					_hover={{
-						borderColor: 'green.500',
-					}}
-					onChange={(e) => setNewsletterEmail(e.target.value)}
-					id="edgar-productPage-newsletterEmail-input"
-				/>
-				<Stack direction={{ base: 'column', xl: 'row' }} justify="space-between" w="100%">
-					<Text maxW="240px" id="edgar-productPage-newsletterPolicies-text">
-						En vous abonnant, vous acceptez notre{' '}
-						<Link href="">
-							<Box as="u">politique de confidentialité</Box>
-						</Link>
-					</Text>
-					<Button
-						variant="primary"
-						onClick={() => {
-							subscribeToNewsletter(newsletterEmail).then((res) => {
-								toast(res);
-								if (res.status !== 'error') setNewsletterEmail('');
-							});
-						}}
-						id="edgar-productPage-newsletterSubscription-button"
-					>
-						M'abonner
-					</Button>
-				</Stack>
-			</VStack>
+			<NewsletterForm variant="white" id="productPage" />
 		</VStack>
 	);
 };

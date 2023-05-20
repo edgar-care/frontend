@@ -1,6 +1,6 @@
-import { Text, VStack } from '@chakra-ui/react';
-import { Link } from '@chakra-ui/next-js';
-import { APP_URL } from '../../../config/constants';
+import { Link, Text, VStack } from '@chakra-ui/react';
+
+import { APP_URL } from 'config/constants';
 
 const HealthSection = (): JSX.Element => (
 	<VStack align="start" spacing="16px">
