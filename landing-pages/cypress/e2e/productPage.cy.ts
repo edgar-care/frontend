@@ -39,7 +39,7 @@ describe('Good content on elements - Desktop', () => {
 		cy.get('#edgar-productPage-catchPhrase-text').should('contain.text', "edgar c'est quoi ?");
 		cy.get('#edgar-productPage-subTitle1-text').should(
 			'contain.text',
-			"edgar c'est la plateforme qui s'occupe devotre santé et celle de vos proches.",
+			"edgar c'est la plateforme qui s'occupe de votre santé et celle de vos proches.",
 		);
 		cy.get('#edgar-productPage-subTitle2-text').should(
 			'contain.text',
@@ -189,7 +189,7 @@ describe('Good content on elements - Mobile', () => {
 		cy.get('#edgar-productPage-catchPhrase-text').should('contain.text', "edgar c'est quoi ?");
 		cy.get('#edgar-productPage-subTitle1-text').should(
 			'contain.text',
-			"edgar c'est la plateforme qui s'occupe devotre santé et celle de vos proches.",
+			"edgar c'est la plateforme qui s'occupe de votre santé et celle de vos proches.",
 		);
 		cy.get('#edgar-productPage-subTitle2-text').should(
 			'contain.text',
