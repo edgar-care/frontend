@@ -21,7 +21,7 @@ const ContactLinkedInSection = (): JSX.Element => {
 			<Text size={{ base: 'xl', lg: '2xl' }} maxW="650px" id="edgar-contactPage-linkedInSubtitle-text">
 				Suivez nous sur LinkedIn pour être à l'affut des nouveautés de notre assistant numérique
 			</Text>
-			<Link href="https://www.linkedin.com/company/edgar-care/">
+			<Link href="https://www.linkedin.com/company/edgar-care/" target="_blank">
 				<Button size={{ base: 'customLg', xl: 'xl' }} variant="primary" id="edgar-contactPage-linkedIn-button">
 					Direction LinkedIn
 				</Button>
