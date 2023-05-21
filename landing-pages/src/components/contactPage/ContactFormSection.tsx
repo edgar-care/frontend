@@ -11,7 +11,7 @@ const ContactFormSection = (): JSX.Element => {
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	return (
-		<VStack w="100%" spacing="32px" align="start">
+		<VStack w="100%" spacing="32px" align="start" id="form">
 			<VStack spacing="32px" w="100%" align="start">
 				<Text size={{ base: 'bold2xl', lg: '3xl' }} id="edgar-contactPage-formTitle-text">
 					Une question ? Besoin d’aide ?
