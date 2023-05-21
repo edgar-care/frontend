@@ -57,12 +57,12 @@ describe('Visible elements - Desktop', () => {
 		cy.visit(`${url}`);
 	});
 
-	it('Good content for buttons', () => {
+	it('Visible buttons', () => {
 		cy.get('#edgar-homePage-appointment-button').should('be.visible');
 		cy.get('#edgar-homePage-product-button').should('be.visible');
 	});
 
-	it('Good content for texts', () => {
+	it('Visible texts', () => {
 		cy.get('#edgar-homePage-catchPhrase-text').should('be.visible');
 		cy.get('#edgar-homePage-subTitle1-text').should('be.visible');
 		cy.get('#edgar-homePage-subTitle2-text').should('be.visible');
@@ -141,12 +141,12 @@ describe('Visible elements - Mobile', () => {
 		cy.visit(`${url}`);
 	});
 
-	it('Good content for buttons', () => {
+	it('Visible buttons', () => {
 		cy.get('#edgar-homePage-appointment-button').should('be.visible');
 		cy.get('#edgar-homePage-product-button').should('be.visible');
 	});
 
-	it('Good content for texts', () => {
+	it('Visible texts', () => {
 		cy.get('#edgar-homePage-catchPhrase-text').should('be.visible');
 		cy.get('#edgar-homePage-subTitle1-text').should('be.visible');
 		cy.get('#edgar-homePage-subTitle2-text').should('be.visible');
