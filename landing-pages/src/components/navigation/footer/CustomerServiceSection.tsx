@@ -6,7 +6,7 @@ const CustomerServiceSection = (): JSX.Element => (
 			SERVICE CLIENT
 		</Text>
 		<VStack w="100%" align="start" spacing="12px">
-			<Link href="/contact">
+			<Link href="/contact#form">
 				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-CSContactUs-text">
 					Contactez-nous
 				</Text>

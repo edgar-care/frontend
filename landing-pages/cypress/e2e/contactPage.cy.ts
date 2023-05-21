@@ -65,13 +65,13 @@ describe('Visible elements - Desktop', () => {
 		cy.visit(`${url}/contact`);
 	});
 
-	it('Good content for buttons', () => {
+	it('Visible buttons', () => {
 		cy.get('#edgar-contactPage-linkedIn-button').should('be.visible');
 		cy.get('#edgar-contactPage-newsletterSubscription-button').should('be.visible');
 		cy.get('#edgar-contactPage-formSubmit-button').should('be.visible');
 	});
 
-	it('Good content for texts', () => {
+	it('Visible texts', () => {
 		cy.get('#edgar-contactPage-linkedInTitle-text').should('be.visible');
 		cy.get('#edgar-contactPage-linkedInSubtitle-text').should('be.visible');
 		cy.get('#edgar-contactPage-newsletterTitle-text').should('be.visible');
@@ -105,13 +105,13 @@ describe('Good content on elements - Mobile', () => {
 		cy.visit(`${url}/contact`);
 	});
 
-	it('Good content for buttons', () => {
+	it('Visible buttons', () => {
 		cy.get('#edgar-contactPage-linkedIn-button').should('contain.text', 'Direction LinkedIn');
 		cy.get('#edgar-contactPage-newsletterSubscription-button').should('contain.text', "M'abonner");
 		cy.get('#edgar-contactPage-formSubmit-button').should('contain.text', 'Envoyer mon message');
 	});
 
-	it('Good content for texts', () => {
+	it('Visible texts', () => {
 		cy.get('#edgar-contactPage-linkedInTitle-text').should('contain.text', 'edgar sur les réseaux sociaux');
 		cy.get('#edgar-contactPage-linkedInSubtitle-text').should(
 			'contain.text',
