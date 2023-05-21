@@ -148,7 +148,7 @@ describe('Good redirection on elements - Desktop', () => {
 	});
 
 	it('Good redirection on texts (CS)', () => {
-		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact#form`);
 		cy.visit(`${url}`);
 		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
 		// cy.visit(`${url}`);
@@ -309,7 +309,7 @@ describe('Good redirection on elements - Mobile', () => {
 	});
 
 	it('Good redirection on texts (CS)', () => {
-		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact#form`);
 		cy.visit(`${url}`);
 		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
 		// cy.visit(`${url}`);
