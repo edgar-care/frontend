@@ -38,7 +38,7 @@ const MilestoneRoadmap = (): JSX.Element => {
 					</WrapItem>
 				</Wrap>
 			) : (
-				<HStack spacing={{ base: '16px', '4xl': '32px' }} justify="space-between" align="start">
+				<HStack spacing={{ base: '16px', '4xl': '24px' }} justify="space-between" align="start" w="100%">
 					<VStack spacing="32px">
 						<ProductMilestonesCard variant="blue" label="2022 - Décembre" id="2022-title" />
 						<ProductMilestonesCard variant="green" label="Prototypage/ Idéation" id="2022-goal" />
