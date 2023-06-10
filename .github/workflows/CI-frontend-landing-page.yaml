@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Frontend CI LANDING PAGE
 
 on:
   pull_request:

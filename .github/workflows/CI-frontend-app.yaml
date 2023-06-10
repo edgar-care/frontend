@@ -1,4 +1,4 @@
-name: Frontend CI
+name: Frontend CI APP EDGAR
 
 on:
   pull_request:
