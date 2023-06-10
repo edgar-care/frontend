@@ -10,8 +10,13 @@ describe('Good number of elements - Desktop', () => {
 	it('Good number of buttons', () => {
 		cy.get('button[id^=edgar-contactPage]').should('have.length', 3);
 	});
+
 	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-contactPage]').should('have.length', 10);
+		cy.get('p[id^=edgar-contactPage]').should('have.length', 8);
+	});
+
+	it('Good number of labels', () => {
+		cy.get('label[id^=edgar-contactPage]').should('have.length', 2);
 	});
 });
 
@@ -94,8 +99,13 @@ describe('Good number of elements - Mobile', () => {
 	it('Good number of buttons', () => {
 		cy.get('button[id^=edgar-contactPage]').should('have.length', 3);
 	});
+
 	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-contactPage]').should('have.length', 10);
+		cy.get('p[id^=edgar-contactPage]').should('have.length', 8);
+	});
+
+	it('Good number of labels', () => {
+		cy.get('label[id^=edgar-contactPage]').should('have.length', 2);
 	});
 });
 

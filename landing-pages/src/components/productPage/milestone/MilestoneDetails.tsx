@@ -50,7 +50,7 @@ const MilestoneDetails = (): JSX.Element => {
 	];
 
 	return (
-		<Wrap spacing={{ base: '48px', smd: '32px' }} justify={{ base: 'center', md: 'start' }} w="100%">
+		<Wrap spacing={{ base: '48px', smd: '24px' }} justify={{ base: 'center', md: 'start' }} w="100%">
 			{milestoneDetails.map((milestoneDetail) => (
 				<WrapItem w={{ base: '100%', smd: 'auto' }}>
 					<MilestoneDetailsCard

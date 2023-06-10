@@ -47,6 +47,7 @@ const DoctorSearchBox = ({
 							<Input
 								type="text"
 								w="100%"
+								maxLength={50}
 								value={doctorName}
 								placeholder="Renseignez le nom du médecin recherché "
 								border="2px solid"
@@ -72,6 +73,7 @@ const DoctorSearchBox = ({
 								type="text"
 								w="100%"
 								value={localisation}
+								maxLength={50}
 								placeholder="Où ?"
 								border="2px solid"
 								borderColor="blue.500"
