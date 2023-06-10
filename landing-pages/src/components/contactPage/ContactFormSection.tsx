@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Input, Stack, Text, Textarea, useToast, VStack } from '@chakra-ui/react';
+import { Button, FormControl, FormLabel, Input, Stack, Text, Textarea, useToast, VStack } from '@chakra-ui/react';
 
 import sendContactForm from 'utils/sendContactForm';
 
@@ -23,54 +23,61 @@ const ContactFormSection = (): JSX.Element => {
 			<VStack spacing="16px" align="start" w={{ base: '100%', lg: '900px' }}>
 				<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '16px', lg: '64px' }} w="100%">
 					<VStack w="100%" align="start">
-						<Text size="boldLg" id="edgar-contactPage-formName-text">
-							Votre prénom & nom
-						</Text>
-						<Input
-							type="text"
-							w="100%"
-							value={contactName}
-							placeholder="Edgar L’assistant-numérique"
-							border="2px solid"
-							borderColor="blue.500"
-							borderRadius="12px"
-							_placeholder={{
-								color: 'gray.400',
-							}}
-							_hover={{
-								borderColor: 'blue.500',
-							}}
-							onChange={(e) => setContactName(e.target.value)}
-							id="edgar-contactPage-formName-input"
-						/>
+						<FormControl isRequired>
+							<FormLabel size="boldLg" id="edgar-contactPage-formName-text">
+								Votre prénom & nom
+							</FormLabel>
+							<Input
+								type="text"
+								w="100%"
+								maxLength={50}
+								value={contactName}
+								placeholder="Edgar L’assistant-numérique"
+								border="2px solid"
+								borderColor="blue.500"
+								borderRadius="12px"
+								_placeholder={{
+									color: 'gray.400',
+								}}
+								_hover={{
+									borderColor: 'blue.500',
+								}}
+								onChange={(e) => setContactName(e.target.value)}
+								id="edgar-contactPage-formName-input"
+							/>
+						</FormControl>
 					</VStack>
 					<VStack w="100%" align="start">
-						<Text size="boldLg" id="edgar-contactPage-formEmail-text">
-							Votre adresse mail
-						</Text>
-						<Input
-							type="text"
-							w="100%"
-							value={contactEmail}
-							placeholder="prenom.nom@gmail.com"
-							border="2px solid"
-							borderColor="blue.500"
-							borderRadius="12px"
-							_placeholder={{
-								color: 'gray.400',
-							}}
-							_hover={{
-								borderColor: 'blue.500',
-							}}
-							onChange={(e) => setContactEmail(e.target.value)}
-							id="edgar-contactPage-formEmail-input"
-						/>
+						<FormControl isRequired>
+							<FormLabel id="edgar-contactPage-formEmail-text" size="boldLg">
+								Votre adresse mail
+							</FormLabel>
+							<Input
+								type="text"
+								w="100%"
+								maxLength={50}
+								value={contactEmail}
+								placeholder="prenom.nom@gmail.com"
+								border="2px solid"
+								borderColor="blue.500"
+								borderRadius="12px"
+								_placeholder={{
+									color: 'gray.400',
+								}}
+								_hover={{
+									borderColor: 'blue.500',
+								}}
+								onChange={(e) => setContactEmail(e.target.value)}
+								id="edgar-contactPage-formEmail-input"
+							/>
+						</FormControl>
 					</VStack>
 				</Stack>
 				<Textarea
 					maxW="100%"
 					h="150px"
 					value={contactMessage}
+					maxLength={1000}
 					placeholder="Votre message"
 					border="2px solid"
 					borderColor="blue.500"

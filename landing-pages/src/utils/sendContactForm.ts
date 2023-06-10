@@ -2,10 +2,11 @@ import { AIRTABLE_KEY } from 'config/constants';
 
 import type { MessageResponse } from 'types/MessageResponse';
 
+import emailValidityChecker from './emailValidityChecker';
+
 const sendContactForm = async (email: string, name: string, message: string): Promise<MessageResponse> => {
 	try {
-		if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email))
-			return { title: 'Adresse mail invalide', status: 'error' };
+		if (!emailValidityChecker(email)) return { title: 'Adresse mail invalide', status: 'error' };
 		if (!name) return { title: 'Merci de renseigner votre nom', status: 'error' };
 		if (!message) return { title: 'Merci de renseigner votre message', status: 'error' };
 

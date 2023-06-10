@@ -13,6 +13,7 @@ const NewsletterForm = ({ variant, id }: { variant: 'blue' | 'white'; id: string
 			<Input
 				type="email"
 				w="100%"
+				maxLength={50}
 				value={newsletterEmail}
 				placeholder="prenom.nom@gmail.com"
 				textColor={variant === 'blue' ? 'white' : 'black'}
