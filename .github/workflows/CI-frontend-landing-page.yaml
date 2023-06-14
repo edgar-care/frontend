@@ -109,6 +109,12 @@ jobs:
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
           NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
 
+      - name: Create Cypress env file
+        run: |
+          touch cypress.env.json
+          echo "{\n\t\"url\": \"${{ secrets.NEXT_PUBLIC_LANDING_URL }}\",\n\t\"appUrl\": \"${{ secrets.NEXT_PUBLIC_APP_URL }}\",\n}" >> cypress.env.json
+          cat cypress.env.json
+
       - name: Run cypress
         uses: cypress-io/github-action@v4
         with:
