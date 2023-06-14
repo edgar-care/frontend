@@ -1,5 +1,5 @@
-const url = 'http://localhost:3000';
-const appUrl = 'http://localhost:3001';
+const url = Cypress.env('url');
+const appUrl = Cypress.env('appUrl');
 
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
