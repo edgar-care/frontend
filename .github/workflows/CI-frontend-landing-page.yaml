@@ -4,8 +4,8 @@ on:
   pull_request:
     # Only following types are handled by the action, but one can default to all as well
     types: [opened, reopened, synchronize]
-    paths:
-      - "landing-pages/**"
+#     paths:
+#       - "landing-pages/**"
 defaults:
   run:
     working-directory: landing-pages
@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'yarn'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -41,7 +40,8 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
 
   Lint:
     runs-on: ubuntu-latest
@@ -54,7 +54,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: 'yarn'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -82,20 +81,36 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+        
+      - name: Build Next
+        run: yarn build
+        env:
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
+
       - name: Run cypress
         uses: cypress-io/github-action@v4
-        with:
-          build: yarn build
-          start: yarn start
-          wait-on: ${{ secrets.APP_URL }}
-          wait-on-timeout: 300
-        env:
-          NEXT_PUBLIC_ALEPH_CHANNEL: ${{ secrets.NEXT_PUBLIC_ALEPH_CHANNEL }}
-          NEXT_PUBLIC_GITCLONE_DIR: ${{ secrets.NEXT_PUBLIC_GITCLONE_DIR }}
-          NEXT_PUBLIC_GITHUB_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_ID }}
-          NEXT_PUBLIC_GITHUB_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_GITHUB_CLIENT_SECRET }}
-          NEXTAUTH_URL: ${{ secrets.APP_URL }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
   
   Artifact:
     runs-on: ubuntu-latest
