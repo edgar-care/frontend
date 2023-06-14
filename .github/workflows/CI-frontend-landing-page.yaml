@@ -100,6 +100,13 @@ jobs:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
 
+      - name: Load next cache
+        uses: actions/cache@v3
+        id: nextjs-cache
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/.next/cache') }}
+
       - name: Install dependencies
         run: yarn
         
@@ -112,7 +119,7 @@ jobs:
       - name: Create Cypress env file
         run: |
           touch cypress.env.json
-          echo "{\n\t\"url\": \"${{ secrets.NEXT_PUBLIC_LANDING_URL }}\",\n\t\"appUrl\": \"${{ secrets.NEXT_PUBLIC_APP_URL }}\",\n}" >> cypress.env.json
+          echo "{\n\t\"url\": \"http://localhost:3000\",\n\t\"appUrl\": \"${{ secrets.NEXT_PUBLIC_APP_URL }}\"\n}" >> cypress.env.json
           cat cypress.env.json
 
       - name: Run cypress
