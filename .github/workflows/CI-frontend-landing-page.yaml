@@ -113,7 +113,7 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_APP_URL: http://localhost:3001
           NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
 
       - name: Install dependencies (edgar-app)
@@ -125,7 +125,7 @@ jobs:
         run: yarn build
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
+          NEXT_PUBLIC_LANDING_URL: http://localhost:3000
 
       - name: Run cypress
         uses: cypress-io/github-action@v4
