@@ -116,12 +116,6 @@ jobs:
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
           NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
 
-      - name: Create Cypress env file
-        run: |
-          touch cypress.env.json
-          echo "{\n\t\"url\": \"http://localhost:3000\",\n\t\"appUrl\": \"${{ secrets.NEXT_PUBLIC_APP_URL }}\"\n}" >> cypress.env.json
-          cat cypress.env.json
-
       - name: Run cypress
         uses: cypress-io/github-action@v4
         with:
@@ -129,6 +123,7 @@ jobs:
           working-directory: ./landing-pages
           wait-on: "http://localhost:3000"
           wait-on-timeout: 300
+          env: url=http://localhost:3000,appUrl=${{ secrets.NEXT_PUBLIC_APP_URL }}
         
       - name: Get screenshots
         uses: actions/upload-artifact@v1
