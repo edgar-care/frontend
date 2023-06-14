@@ -6,6 +6,9 @@ on:
     types: [opened, reopened, synchronize]
 #     paths:
 #       - "edgar-app/**"
+defaults:
+  run:
+    working-directory: ./edgar-app
 
 jobs:
   Build:
@@ -19,7 +22,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-#           cache: 'yarn'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -33,11 +35,9 @@ jobs:
           key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
 
       - name: Install dependencies
-        working-directory: ./edgar-app
         run: yarn
 
       - name: Build Next
-        working-directory: ./edgar-app
         run: yarn build
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -67,11 +67,9 @@ jobs:
           key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
 
       - name: Install dependencies
-        working-directory: ./edgar-app
         run: yarn
 
       - name: Run eslint
-        working-directory: ./edgar-app
         run: yarn lint > eslint-results
 
       - name: Get eslint results
