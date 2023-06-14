@@ -112,7 +112,10 @@ jobs:
       - name: Run cypress
         uses: cypress-io/github-action@v4
         with:
+          start: yarn start
           working-directory: ./landing-pages
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 300
         
       - name: Get screenshots
         uses: actions/upload-artifact@v1
