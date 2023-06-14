@@ -130,7 +130,7 @@ jobs:
       - name: Run cypress
         uses: cypress-io/github-action@v4
         with:
-          start: yarn start, yarn --cwd ../edgar-app start
+          start: yarn start, yarn --cwd ../edgar-app start -p 3001
           working-directory: ./landing-pages
           wait-on: "http://localhost:3000, http://localhost:3001"
           wait-on-timeout: 300
