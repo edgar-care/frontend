@@ -32,7 +32,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
 
       - name: Install dependencies
         run: yarn
@@ -64,7 +64,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
 
       - name: Install dependencies
         run: yarn
@@ -98,7 +98,7 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
 
       - name: Install dependencies
         run: yarn
