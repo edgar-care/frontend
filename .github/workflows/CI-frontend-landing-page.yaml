@@ -116,14 +116,25 @@ jobs:
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
           NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
 
+      - name: Install dependencies (edgar-app)
+        working-directory: edgar-app
+        run: yarn
+
+      - name: Build Next (edgar-app)
+        working-directory: edgar-app
+        run: yarn build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
+
       - name: Run cypress
         uses: cypress-io/github-action@v4
         with:
-          start: yarn start
+          start: yarn start, cd ../edgar-app && yarn start
           working-directory: ./landing-pages
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:3000, http://localhost:3001"
           wait-on-timeout: 300
-          env: url=http://localhost:3000,appUrl=https://app-edgar-care.netlify.app
+          env: url=http://localhost:3000,appUrl=http://localhost:3001
         
       - name: Get screenshots
         uses: actions/upload-artifact@v1
