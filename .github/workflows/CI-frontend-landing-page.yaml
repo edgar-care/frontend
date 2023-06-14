@@ -123,7 +123,7 @@ jobs:
           working-directory: ./landing-pages
           wait-on: "http://localhost:3000"
           wait-on-timeout: 300
-          env: url=http://localhost:3000,appUrl=${{ secrets.NEXT_PUBLIC_APP_URL }}
+          env: url=http://localhost:3000,appUrl=https://app-edgar-care.netlify.app
         
       - name: Get screenshots
         uses: actions/upload-artifact@v1
