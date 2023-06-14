@@ -1,0 +1,151 @@
+name: Frontend CI LANDING PAGE
+
+on:
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
+#     paths:
+#       - "landing-pages/**"
+defaults:
+  run:
+    working-directory: landing-pages
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build Next
+        run: yarn build
+        env:
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
+
+  Lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run eslint
+        run: yarn lint > eslint-results
+
+      - name: Get eslint results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: eslint-results
+          path: eslint-results
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/yarn.lock') }}
+
+      - name: Load next cache
+        uses: actions/cache@v3
+        id: nextjs-cache
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./landing-pages/.next/cache') }}
+
+      - name: Install dependencies
+        run: yarn
+        
+      - name: Build Next
+        run: yarn build
+        env:
+          NEXT_PUBLIC_APP_URL: http://localhost:3001
+          NEXT_PUBLIC_AIRTABLE_KEY: ${{ secrets.NEXT_PUBLIC_AIRTABLE_KEY }}
+
+      - name: Install dependencies (edgar-app)
+        working-directory: edgar-app
+        run: yarn
+
+      - name: Build Next (edgar-app)
+        working-directory: edgar-app
+        run: yarn build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_LANDING_URL: http://localhost:3000
+
+      - name: Run cypress
+        uses: cypress-io/github-action@v4
+        with:
+          start: yarn start, yarn --cwd ../edgar-app start -p 3001
+          working-directory: ./landing-pages
+          wait-on: "http://localhost:3000, http://localhost:3001"
+          wait-on-timeout: 300
+          env: url=http://localhost:3000,appUrl=http://localhost:3001
+        
+      - name: Get screenshots
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./landing-pages/cypress/screenshots
+
+      - name: Get videos
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-videos
+          path: ./landing-pages/cypress/videos
