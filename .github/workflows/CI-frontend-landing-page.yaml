@@ -111,17 +111,19 @@ jobs:
 
       - name: Run cypress
         uses: cypress-io/github-action@v4
+        with:
+          working-directory: ./landing-pages
         
       - name: Get screenshots
         uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: ./landing-pagescypress/screenshots
 
       - name: Get videos
         uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: ./landing-pagescypress/videos
