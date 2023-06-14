@@ -41,6 +41,7 @@ jobs:
         run: yarn build
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
 
   Lint:
     runs-on: ubuntu-latest
