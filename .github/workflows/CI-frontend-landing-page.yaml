@@ -111,10 +111,7 @@ jobs:
 
       - name: Run cypress
         uses: cypress-io/github-action@v4
-  
-  Artifact:
-    runs-on: ubuntu-latest
-    steps:
+        
       - name: Get screenshots
         uses: actions/upload-artifact@v1
         if: failure()
