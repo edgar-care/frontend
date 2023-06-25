@@ -72,7 +72,7 @@ const ApplicationPage = (): JSX.Element => {
 							w="auto"
 							id="edgar-applicationPage-edgarAndroid-image"
 						/>
-						<Link href="https://edgar-care-apk.s3.eu-west-3.amazonaws.com/edgar.care.apk">
+						<Link href="https://edgar-care-apk.s3.eu-west-3.amazonaws.com/edgar.apk">
 							<Button
 								variant="primary"
 								size={{ base: 'customLg', xl: 'xl' }}
