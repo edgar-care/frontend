@@ -1,6 +1,6 @@
 import { Center, Img, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MrMiyagi } from '@uiball/loaders';
 
 import useToggle from 'hooks/useToggle';
@@ -12,19 +12,19 @@ import colors from 'theme/foundations/colors';
 const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const auth = useAuthContext();
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const { toggle: isNotAuthenticated, toggleHandler: authenticateHandler } = useToggle();
 
 	useEffect(() => {
-		// TODO: add checker
-		if (!router.isReady) return;
+		const redirect = searchParams.get('redirect');
 		auth.checkToken().then((res) => {
 			if (res.status === 'success') {
-				if (router.query.redirect) void router.push(router.query.redirect as string);
+				if (redirect) void router.push(redirect as string);
 				else void router.push('/');
 			} else authenticateHandler();
 		});
-	}, [router.isReady]);
+	}, []);
 
 	return (
 		<>
