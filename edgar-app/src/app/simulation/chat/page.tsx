@@ -1,3 +1,5 @@
+'use client';
+
 import { Text, VStack, Image, HStack, useBreakpointValue } from '@chakra-ui/react';
 
 import ChatBox from 'components/simulationPage/ChatBox';

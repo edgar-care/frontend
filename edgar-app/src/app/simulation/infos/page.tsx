@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Button, HStack, Stack, Text, useBreakpointValue, useToast, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';

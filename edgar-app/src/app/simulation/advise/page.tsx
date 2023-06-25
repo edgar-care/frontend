@@ -1,3 +1,5 @@
+'use client';
+
 import { Text, VStack, Stack, HStack, Button, Link, useBreakpointValue } from '@chakra-ui/react';
 
 import SimulationPage from 'components/pages/simulation/SimulationPage';

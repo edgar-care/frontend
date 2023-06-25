@@ -1,3 +1,5 @@
+'use client';
+
 import { Text, VStack, Stack, Button, Link } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';

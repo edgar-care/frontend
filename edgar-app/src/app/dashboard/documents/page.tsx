@@ -1,28 +1,27 @@
-import { VStack, Text, Box } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+'use client';
 
-import MedCard from 'components/pages/patient/MedCard';
-import BannerCard from 'components/pages/patient/BannerCard';
+import { VStack, Text, Box } from '@chakra-ui/react';
+
+import DocumentCard from 'components/pages/patient/DocumentCard';
 import ResponsiveNavBar from 'components/pages/patient/medical/ResponsiveNavBar';
+import BannerCard from 'components/pages/patient/BannerCard';
 
 import colors from 'theme/foundations/colors';
-import ProtectedPage from '../src/components/pages/ProtectedPage';
+import ProtectedPage from 'components/pages/ProtectedPage';
 
-const Appointments = (): JSX.Element => {
-	const router = useRouter();
-
+const Documents = (): JSX.Element => {
 	const appointmentList = [
 		{
+			docuName: 'Document 1.docx',
 			name: 'Roger Palot',
-			hours: new Date('2021-05-01 09:00'),
 		},
 		{
-			name: 'benoit Baillard',
-			hours: new Date('2021-04-22 11:00'),
+			docuName: 'Document 2.docx',
+			name: 'Benoit Baillard',
 		},
 		{
+			docuName: 'Document 3.docx',
 			name: 'Amoz Pay',
-			hours: new Date('2021-02-12 15:00'),
 		},
 	];
 
@@ -37,7 +36,7 @@ const Appointments = (): JSX.Element => {
 				<ResponsiveNavBar />
 				<VStack>
 					<Text size={{ base: '2xl', lg: '3xl' }} textAlign="center">
-						Mes rendez-vous
+						Mes documents
 					</Text>
 					<Box
 						w={{ base: '200px', sm: '300px', md: '375px' }}
@@ -46,18 +45,13 @@ const Appointments = (): JSX.Element => {
 					/>
 				</VStack>
 				<BannerCard
-					text="Vous avez besoin d'un rendez-vous ?"
-					buttonText="Commencer votre pré-diagnostique"
-					buttonRedirect={() => router.push('/simulation')}
+					text="Vous ne trouvez pas un document ?"
+					buttonText="Contacter votre médecin"
+					buttonRedirect={() => {}}
 				/>
 				<VStack w="100%" spacing="16px">
-					{appointmentList.map((appointment) => (
-						<MedCard
-							name={appointment.name}
-							date={appointment.hours.toLocaleDateString()}
-							hours={appointment.hours.toLocaleTimeString()}
-							key={appointment.hours.toString()}
-						/>
+					{appointmentList.map((appointment, index) => (
+						<DocumentCard docuName={appointment.docuName} name={appointment.name} key={index} />
 					))}
 				</VStack>
 			</VStack>
@@ -65,4 +59,4 @@ const Appointments = (): JSX.Element => {
 	);
 };
 
-export default Appointments;
+export default Documents;

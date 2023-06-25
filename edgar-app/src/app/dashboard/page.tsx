@@ -1,9 +1,11 @@
+'use client';
+
 import { VStack, Text, Button, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import ColorText from 'components/GradientText';
 import DashboardCard from 'components/pages/patient/DashboardCard';
-import ProtectedPage from '../src/components/pages/ProtectedPage';
+import ProtectedPage from 'components/pages/ProtectedPage';
 
 const Home = (): JSX.Element => {
 	const cards = [
@@ -11,25 +13,25 @@ const Home = (): JSX.Element => {
 			title: 'Vos rendez-vous',
 			para: 'Besoin de voir, modifiez ou annuler un rendez-vous ?',
 			button: 'Voir mes rendez-vous',
-			path: '/appointments',
+			path: '/dashboard/appointments',
 		},
 		{
 			title: 'Mes documents',
 			para: 'Tous les documents, résultats d’analyse, prescription, ordonnances sont présentes à un seul endroit.',
 			button: 'Voir mes documents',
-			path: '/documents',
+			path: '/dashboard/documents',
 		},
 		{
 			title: 'Mon dossier médical',
 			para: 'Toutes vos informations de santé, maladies, allergies, traitement en cours.',
 			button: 'Voir mon dossier médical',
-			path: '/medical',
+			path: '/dashboard/medical',
 		},
 		{
 			title: 'Besoin de réponse',
 			para: 'Vous avez une question, un problème ? Entrez directement en contact avec votre médecin traitant ou avec un autre médecin.',
 			button: 'Echanger avec un médecin',
-			path: '/chat',
+			path: '/dashboard/chat',
 			isDisabled: true,
 		},
 	];
@@ -42,7 +44,7 @@ const Home = (): JSX.Element => {
 				<Text size={{ base: '2xl', md: '3xl' }} textAlign="center">
 					Bienvenue sur votre <ColorText textValue="espace patient" />
 				</Text>
-				<Link href="/simulation">
+				<Link href="/edgar-app/src/app/simulation">
 					<Button variant="primary" size={isMobile ? 'md' : 'lg'}>
 						Besoin d'un nouveau rendez-vous ?
 					</Button>
