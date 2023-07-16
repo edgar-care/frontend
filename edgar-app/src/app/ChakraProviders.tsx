@@ -17,7 +17,7 @@ const ChakraProviders = ({ children }: { children: JSX.Element }): JSX.Element =
 			<AuthProvider>
 				<ChatProvider>
 					<PatientProvider>
-						<VStack px={{ base: '0px', xl: '64px' }} bg="blue.50" minH="100vh">
+						<VStack bg="blue.50" minH="100%" h="100%">
 							{children}
 						</VStack>
 					</PatientProvider>
