@@ -1,3 +1,5 @@
+'use client';
+
 import { VStack, Image, Text, Stack, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 
@@ -18,7 +20,7 @@ const Simulation = (): JSX.Element => (
 					<Text textAlign="left" size="2xl" width="100%">
 						Vous allez commencer votre <ColorText textValue="analyse" />
 					</Text>
-					<Stack spacing="16px" borderRadius="16px" bg="purple.100" padding="24px">
+					<Stack spacing="16px" borderRadius="16px" bg="green.100" padding="24px">
 						<Text size="boldLg">Cette session, n’a pas pour but de diagnostiquer une maladie.</Text>
 						<Text size="boldLg">
 							À l’issue de la session, votre pré-diagnostic sera transmis à un médecin pour être examiné.

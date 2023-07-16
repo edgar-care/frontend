@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 
 import BannerCard from 'components/pages/patient/BannerCard';
@@ -14,7 +16,7 @@ import ResponsiveNavBar from 'components/pages/patient/medical/ResponsiveNavBar'
 import { usePatientContext } from 'contexts/user';
 
 import colors from 'theme/foundations/colors';
-import ProtectedPage from '../src/components/pages/ProtectedPage';
+import ProtectedPage from 'components/pages/ProtectedPage';
 
 const Medical = (): JSX.Element => {
 	const { infos } = usePatientContext();
@@ -38,7 +40,7 @@ const Medical = (): JSX.Element => {
 					<Box
 						w={{ base: '200px', sm: '300px', md: '375px' }}
 						h="3px"
-						bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
+						bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.green[600]} 100%)`}
 					/>
 				</VStack>
 				<BannerCard

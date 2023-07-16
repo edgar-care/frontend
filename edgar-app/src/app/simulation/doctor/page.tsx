@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Stack, Text, VStack } from '@chakra-ui/react';
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { Text, VStack, Stack } from '@chakra-ui/react';
 
 import ColorText from 'components/GradientText';
@@ -6,7 +8,7 @@ import AppointmentCard from 'components/simulationPage/AppointmentCard';
 import { useEffect, useState } from 'react';
 import { AppointmentType } from 'types/simulationPage/AppointmentType';
 
-const Result = (): JSX.Element => {
+const Page = (): JSX.Element => {
 	const [appointments, setAppointments] = useState<AppointmentType[]>([]);
 
 	useEffect(() => {
@@ -61,4 +63,4 @@ const Result = (): JSX.Element => {
 	);
 };
 
-export default Result;
+export default Page;

@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import colors from 'theme/foundations/colors';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import TabCard from './TabCard';
 
 const NavBar = (): JSX.Element => {

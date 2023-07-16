@@ -1,7 +1,6 @@
 import basicFetch from 'utils/basicFetch';
 
 import { MessageResponse } from 'types/MessageResponse';
-import { PatientInfos } from 'types/PatientInfos';
 
 class Auth {
 	public async login(email: string, password: string): Promise<MessageResponse> {
@@ -23,10 +22,10 @@ class Auth {
 		}
 	}
 
-	public async signup(email: string, password: string, infos: PatientInfos): Promise<MessageResponse> {
+	public async signup(email: string, password: string): Promise<MessageResponse> {
 		try {
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
-			const auth = await basicFetch('auth/p/register', 'POST', JSON.stringify({ ...infos, email, password }));
+			const auth = await basicFetch('auth/p/register', 'POST', JSON.stringify({ email, password }));
 
 			const data = await auth.json();
 			if (auth.status !== 200) return { title: data.message, status: 'error' };
@@ -59,13 +58,6 @@ class Auth {
 
 	public async checkToken(): Promise<MessageResponse> {
 		try {
-			// TODO: update this call
-			// const auth = await basicFetch('simulation/check', 'GET');
-			//
-			// if (auth.status === 200) return { title: 'Token is valid', status: 'success' };
-			//
-			// const data = await auth.json();
-			// return { title: data.message, status: 'error' };
 			if (this.getToken()) return { title: 'Token is valid', status: 'success' };
 			return { title: 'Token is invalid', status: 'error' };
 		} catch (error) {

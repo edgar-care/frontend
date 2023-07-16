@@ -1,6 +1,6 @@
 import { Stack, Text, VStack } from '@chakra-ui/react';
 import colors from 'theme/foundations/colors';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 import { DoctorType } from 'types/simulationPage/DoctorType';
 

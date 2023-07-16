@@ -1,27 +1,26 @@
-import { Center, Img, VStack } from '@chakra-ui/react';
+'use client';
+
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Center, Img, useDisclosure, VStack } from '@chakra-ui/react';
 import { MrMiyagi } from '@uiball/loaders';
-
-import useToggle from 'hooks/useToggle';
 
 import { useAuthContext } from 'contexts/auth';
 
 import colors from 'theme/foundations/colors';
 
-const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element => {
+const ConnectionLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const auth = useAuthContext();
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
-	const { toggle: isNotAuthenticated, toggleHandler: authenticateHandler } = useToggle();
+	const { isOpen: isNotAuthenticated, onToggle: authenticateHandler } = useDisclosure();
 
 	useEffect(() => {
-		const redirect = searchParams.get('redirect');
 		auth.checkToken().then((res) => {
 			if (res.status === 'success') {
-				if (redirect) void router.push(redirect as string);
-				else void router.push('/');
+				if (searchParams.get('redirect')) void router.push(searchParams.get('redirect') as string);
+				else void router.push('/dashboard');
 			} else authenticateHandler();
 		});
 	}, []);
@@ -44,4 +43,4 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 	);
 };
 
-export default UnprotectedPage;
+export default ConnectionLayout;
