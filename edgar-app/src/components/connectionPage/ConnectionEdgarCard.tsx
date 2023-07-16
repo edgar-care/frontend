@@ -19,6 +19,7 @@ const ConnectionEdgarCard = (): JSX.Element => {
 				color="white"
 				textAlign={{ base: 'center', lg: 'start' }}
 				mt={{ base: '0px', lg: '32px' }}
+				id="edgar-loginPage-EdgarCard-title-text"
 			>
 				Bienvenue sur la plateforme edgar
 			</Text>

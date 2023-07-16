@@ -41,7 +41,9 @@ const ConnectionLoginInputs = (): JSX.Element => {
 	return (
 		<VStack w="100%" maxW="500px" spacing="32px">
 			<FormControl isRequired isInvalid={emailError}>
-				<FormLabel size="boldLg">Adresse mail</FormLabel>
+				<FormLabel size="boldLg" id="edgar-loginPage-formEmail-text">
+					Adresse mail
+				</FormLabel>
 				<Input
 					type="email"
 					w="100%"
@@ -61,11 +63,16 @@ const ConnectionLoginInputs = (): JSX.Element => {
 						setEmail(e.target.value);
 						setEmailError(false);
 					}}
+					id="edgar-loginPage-formEmail-input"
 				/>
-				{emailError && <FormErrorMessage>Adresse mail invalide</FormErrorMessage>}
+				{emailError && (
+					<FormErrorMessage id="edgar-loginPage-formEmailError-text">Adresse mail invalide</FormErrorMessage>
+				)}
 			</FormControl>
 			<FormControl isRequired isInvalid={passwordError}>
-				<FormLabel size="boldLg">Mot de passe</FormLabel>
+				<FormLabel size="boldLg" id="edgar-loginPage-formPassword-text">
+					Mot de passe
+				</FormLabel>
 				<InputGroup w="100%">
 					<Input
 						type={showPassword ? 'text' : 'password'}
@@ -86,6 +93,7 @@ const ConnectionLoginInputs = (): JSX.Element => {
 							setPassword(e.target.value);
 							setPasswordError(false);
 						}}
+						id="edgar-loginPage-formPassword-input"
 					/>
 					<InputRightElement>
 						{showPassword ? (
@@ -95,7 +103,11 @@ const ConnectionLoginInputs = (): JSX.Element => {
 						)}
 					</InputRightElement>
 				</InputGroup>
-				{passwordError && <FormErrorMessage>Mot de passe invalide</FormErrorMessage>}
+				{passwordError && (
+					<FormErrorMessage id="edgar-loginPage-formPasswordError-text">
+						Mot de passe invalide
+					</FormErrorMessage>
+				)}
 			</FormControl>
 			<Button
 				w="100%"
@@ -108,6 +120,7 @@ const ConnectionLoginInputs = (): JSX.Element => {
 						}
 					})
 				}
+				id="edgar-loginPage-form-button"
 			>
 				Se connecter
 			</Button>
