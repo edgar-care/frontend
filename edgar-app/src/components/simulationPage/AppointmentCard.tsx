@@ -9,7 +9,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }) => (
 			{appointment.hours.map((hours) => (
 				<VStack
 					borderRadius="8px"
-					backgroundColor="purple.100"
+					backgroundColor="green.100"
 					w="100%"
 					key={hours.toString()}
 					cursor="pointer"

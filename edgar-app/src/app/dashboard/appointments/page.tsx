@@ -44,7 +44,7 @@ const Appointments = (): JSX.Element => {
 					<Box
 						w={{ base: '200px', sm: '300px', md: '375px' }}
 						h="3px"
-						bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
+						bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.green[600]} 100%)`}
 					/>
 				</VStack>
 				<BannerCard

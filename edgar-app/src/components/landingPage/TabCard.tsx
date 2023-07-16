@@ -21,7 +21,7 @@ const TabCard = ({ name, path }: { name: string; path: string }): JSX.Element =>
 				</VStack>
 				<Box
 					w="75%"
-					borderBottom={pathname === path ? `2px solid ${colors.purple['500']}` : '2px solid transparent'}
+					borderBottom={pathname === path ? `2px solid ${colors.green['500']}` : '2px solid transparent'}
 				/>
 			</VStack>
 		</Link>
