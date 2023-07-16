@@ -8,7 +8,6 @@ import ConnectionEdgarCard from 'components/connectionPage/ConnectionEdgarCard';
 import ConnectionLoginFields from 'components/connectionPage/login/ConnectionLoginFields';
 
 import { useAuthContext } from 'contexts/auth';
-import ConnectionSignupFields from 'components/connectionPage/signup/ConnectionSignupFields';
 
 const LoginPageContent = (): JSX.Element => {
 	const auth = useAuthContext();
