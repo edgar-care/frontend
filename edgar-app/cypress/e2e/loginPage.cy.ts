@@ -201,11 +201,54 @@ describe('Visible elements - Mobile', () => {
 
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.visit(`${url}/login`);
 	});
 
 	it('Good redirection on buttons', () => {
 		cy.get('#edgar-loginPage-signup-button').click().url().should('eq', `${url}/signup`);
+	});
+});
+
+describe('Working page - Mobile', () => {
+	beforeEach(() => {
+		cy.viewport(390, 844);
+		cy.visit(`${url}/login`);
+		cy.wait(1000);
+	});
+
+	it('No email address', () => {
+		cy.get('#edgar-loginPage-form-button').click();
+		cy.get('#edgar-loginPage-formEmailError-text').should('be.visible');
+		cy.get('#edgar-loginPage-formEmailError-text').should('contain.text', 'Adresse mail invalide');
+	});
+
+	it('No password', () => {
+		cy.get('#edgar-loginPage-formEmail-input').click().type('prenom.nom@test.fr');
+		cy.get('#edgar-loginPage-form-button').click();
+		cy.get('#edgar-loginPage-formPasswordError-text').should('be.visible');
+		cy.get('#edgar-loginPage-formPasswordError-text').should('contain.text', 'Mot de passe invalide');
+	});
+
+	it('Not real email address', () => {
+		cy.get('#edgar-loginPage-formEmail-input').click().type('prenom.nomtest.fr');
+		cy.get('#edgar-loginPage-formEmail-input').click().type('testtest');
+		cy.get('#edgar-loginPage-form-button').click();
+		cy.get('#edgar-loginPage-formEmailError-text').should('be.visible');
+		cy.get('#edgar-loginPage-formEmailError-text').should('contain.text', 'Adresse mail invalide');
+	});
+
+	it('Too short password', () => {
+		cy.get('#edgar-loginPage-formEmail-input').click().type('prenom.nom@test.fr');
+		cy.get('#edgar-loginPage-formPassword-input').click().type('2short');
+		cy.get('#edgar-loginPage-form-button').click();
+		cy.get('#edgar-loginPage-formPasswordError-text').should('be.visible');
+		cy.get('#edgar-loginPage-formPasswordError-text').should('contain.text', 'Mot de passe invalide');
+	});
+
+	it('Good credentials', () => {
+		cy.get('#edgar-loginPage-formEmail-input').click().type(loginEmail);
+		cy.get('#edgar-loginPage-formPassword-input').click().type(loginPassword);
+		cy.get('#edgar-loginPage-form-button').click().wait(1000).url().should('eq', `${url}/dashboard`);
 	});
 });
