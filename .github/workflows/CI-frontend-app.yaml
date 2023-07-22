@@ -35,6 +35,13 @@ jobs:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./edgar-app/yarn.lock') }}
 
+      - name: Load next cache
+        uses: actions/cache@v3
+        id: nextjs-cache
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./edgar-app/.next/cache') }}
+
       - name: Install dependencies
         run: yarn
 
@@ -79,3 +86,67 @@ jobs:
         with:
           name: eslint-results
           path: eslint-results
+
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-frontend-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./edgar-app/yarn.lock') }}
+
+      - name: Load next cache
+        uses: actions/cache@v3
+        id: nextjs-cache
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ secrets.CACHE_VERSION }}-${{ hashFiles('./edgar-app/.next/cache') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build Next
+        run: yarn build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
+
+      - name: Run cypress
+        uses: cypress-io/github-action@v4
+        with:
+          start: yarn start
+          working-directory: ./edgar-app
+          wait-on: "http://localhost:3000/login"
+          wait-on-timeout: 30
+        env:
+          CYPRESS_url: http://localhost:3000
+          CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_LOGIN_TEST_EMAIL }}
+          CYPRESS_loginTestPassword: ${{ secrets.CYPRESS_LOGIN_TEST_PASSWORD }}
+
+      - name: Get screenshots
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./edgar-app/cypress/screenshots
+
+      - name: Get videos
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-videos
+          path: ./edgar-app/cypress/videos
