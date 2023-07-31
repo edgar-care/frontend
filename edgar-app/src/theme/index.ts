@@ -8,6 +8,7 @@ import shadows from 'theme/foundations/shadows';
 
 import Button from 'theme/components/button';
 import FormLabel from 'theme/components/formLabel';
+import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Text from 'theme/components/text';
 
@@ -34,6 +35,7 @@ const overrides = {
 	components: {
 		Button,
 		FormLabel,
+		Input,
 		Link,
 		Text,
 	},

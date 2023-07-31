@@ -2,13 +2,11 @@
 
 body {
   font-family: 'Poppins', serif !important;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 100%;
 }
 
 html {
   scroll-behavior: smooth;
-  min-height: 100vh;
   height: 100%;
 }
 
