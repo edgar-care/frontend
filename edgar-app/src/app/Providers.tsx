@@ -11,13 +11,13 @@ import ChatProvider from './ChatProvider';
 import PatientProvider from './PatientProvider';
 
 // TODO: remove ChatProvider & PatientProvider when the simulation flow is refactored
-const ChakraProviders = ({ children }: { children: JSX.Element }): JSX.Element => (
+const Providers = ({ children }: { children: JSX.Element }): JSX.Element => (
 	<CacheProvider>
 		<ChakraProvider theme={theme} resetCSS>
 			<AuthProvider>
 				<ChatProvider>
 					<PatientProvider>
-						<VStack bg="blue.50" minH="100%" h="100%">
+						<VStack bg="blue.50" height="100%">
 							{children}
 						</VStack>
 					</PatientProvider>
@@ -27,4 +27,4 @@ const ChakraProviders = ({ children }: { children: JSX.Element }): JSX.Element =
 	</CacheProvider>
 );
 
-export default ChakraProviders;
+export default Providers;
