@@ -17,12 +17,10 @@ const ConnectionLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 	const { isOpen: isNotAuthenticated, onToggle: authenticateHandler } = useDisclosure();
 
 	useEffect(() => {
-		auth.checkToken().then((res) => {
-			if (res.status === 'success') {
-				if (searchParams.get('redirect')) void router.push(searchParams.get('redirect') as string);
-				else void router.push('/dashboard');
-			} else authenticateHandler();
-		});
+		if (auth.checkToken().status === 'success') {
+			if (searchParams.get('redirect')) void router.push(searchParams.get('redirect') as string);
+			else void router.push('/dashboard');
+		} else authenticateHandler();
 	}, []);
 
 	return (

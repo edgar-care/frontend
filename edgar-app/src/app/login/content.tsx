@@ -17,14 +17,10 @@ const LoginPageContent = (): JSX.Element => {
 	const isTablet = useBreakpointValue({ base: true, lg: false });
 
 	useEffect(() => {
-		auth.checkToken().then((response) => {
-			if (response.status === 'success')
-				router.push(
-					searchParams.get('redirect')
-						? searchParams.get('redirect')!
-						: `/dashboard?${searchParams.toString()}`,
-				);
-		});
+		if (auth.checkToken().status === 'success')
+			router.push(
+				searchParams.get('redirect') ? searchParams.get('redirect')! : `/dashboard?${searchParams.toString()}`,
+			);
 	}, []);
 
 	return (
@@ -32,6 +28,8 @@ const LoginPageContent = (): JSX.Element => {
 			p={{ base: '0px', sm: '16px', lg: '64px', xl: '128px', '4xl': '128px 256px' }}
 			w="100%"
 			h={{ base: '100%', lg: 'auto' }}
+			justify={{ base: 'start', sm: 'center' }}
+			minH={{ base: 'auto', sm: '100vh' }}
 		>
 			{isTablet ? (
 				<VStack
