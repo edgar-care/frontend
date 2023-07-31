@@ -1,11 +1,19 @@
-import { FetchMethod } from 'types/FetchMethod';
-
 import { API_URL } from 'config/constants';
 
-const basicFetch = async (endpoint: string, method: FetchMethod, body?: BodyInit): Promise<Response> => {
+import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+
+import { FetchMethod } from 'types/FetchMethod';
+
+const basicFetch = async (
+	endpoint: string,
+	method: FetchMethod,
+	body?: BodyInit,
+	router?: AppRouterInstance,
+	authRedirectionUrl = '/dashboard/connection/login',
+): Promise<Response> => {
 	const token = localStorage.getItem('token');
 
-	return fetch(`${API_URL}/${endpoint}`, {
+	const response = await fetch(`${API_URL}/${endpoint}`, {
 		method,
 		headers: {
 			'Content-Type': 'application/json',
@@ -15,6 +23,10 @@ const basicFetch = async (endpoint: string, method: FetchMethod, body?: BodyInit
 		},
 		body,
 	});
+
+	if (router && response.status === 401) router.push(authRedirectionUrl);
+
+	return response;
 };
 
 export default basicFetch;
