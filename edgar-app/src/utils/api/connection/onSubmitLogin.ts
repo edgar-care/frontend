@@ -4,7 +4,7 @@ import { type MessageResponse } from 'types/MessageResponse';
 
 import Auth from 'libs/auth';
 
-import emailValidityChecker from '../emailValidityChecker';
+import emailValidityChecker from 'utils/emailValidityChecker';
 
 const onSubmitLogin = async (
 	email: string,
