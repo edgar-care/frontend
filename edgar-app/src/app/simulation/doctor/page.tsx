@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Stack, Text, VStack } from '@chakra-ui/react';
 
-import ColorText from 'components/GradientText';
+import ColorText from 'components/HighlightText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import DoctorCard from 'components/simulationPage/DoctorCard';
 
@@ -28,7 +28,7 @@ const Doctor = (): JSX.Element => {
 				<Stack spacing="64px">
 					<Stack spacing="32px">
 						<Text size={{ base: 'boldXl', sm: '2xl' }}>
-							Merci pour cet <ColorText textValue="échange" />
+							Merci pour cet <ColorText>échange</ColorText>
 						</Text>
 						<Text size={{ base: 'boldXl', sm: '2xl' }}>
 							Nous avons besoin d'un médecin, pour examiner votre analyse :
