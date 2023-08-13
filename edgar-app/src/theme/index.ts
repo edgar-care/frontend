@@ -11,6 +11,7 @@ import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Text from 'theme/components/text';
+import UnorderedList from 'theme/components/unorderedList';
 
 const breakpoints = {
 	xs: '320px',
@@ -38,6 +39,7 @@ const overrides = {
 		Input,
 		Link,
 		Text,
+		UnorderedList,
 	},
 };
 
