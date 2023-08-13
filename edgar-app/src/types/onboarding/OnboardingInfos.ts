@@ -8,3 +8,10 @@ export type PersonalInfos = {
 	size: number; // in meters
 	weight: number; // in kilograms
 };
+
+export type MedicalInfos = {
+	primaryDoctorName: string;
+	allergies: string[];
+	diseases: string[];
+	treatmentsInProgress: string[];
+};
