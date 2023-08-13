@@ -43,7 +43,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 			<chakra.form onSubmit={onSubmit} w="100%" maxW={{ base: '500px', '4xl': '100%' }}>
 				<VStack w="100%" spacing="64px" h="100%" align={{ base: 'center', lg: 'end' }}>
 					<VStack w="100%" p={{ base: '0px', '4xl': '64px' }} align={{ base: 'center', lg: 'start' }}>
-						<VStack w="100%" spacing="16px" maxW="500px">
+						<VStack w="100%" spacing="32px" maxW="500px">
 							<OnboardingPersonalFirstnameInput register={register} errors={errors} />
 							<OnboardingPersonalNameInput register={register} errors={errors} />
 							<OnboardingPersonalBirthdateInput register={register} errors={errors} />
