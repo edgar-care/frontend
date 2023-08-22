@@ -60,7 +60,7 @@ const OnboardingMedicalAllergiesInput = ({
 							transition="all .3s ease-in-out"
 							id="edgar-onboardingMedicalPage-formAllergies-addButton-icon"
 							onClick={() => {
-								if (!allergieInput && !checkAllergies()) return;
+								if (!allergieInput || !checkAllergies()) return;
 								setValue('allergies', [...allergies, allergieInput]);
 								setAllergieInput('');
 							}}

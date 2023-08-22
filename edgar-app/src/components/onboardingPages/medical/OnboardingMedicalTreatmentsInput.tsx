@@ -60,7 +60,7 @@ const OnboardingMedicalTreatmentsInput = ({
 							transition="all .3s ease-in-out"
 							id="edgar-onboardingMedicalPage-formTreatments-addButton-icon"
 							onClick={() => {
-								if (!treatmentInput && !checkTreatments()) return;
+								if (!treatmentInput || !checkTreatments()) return;
 								setValue('treatmentsInProgress', [...treatments, treatmentInput]);
 								setDiseaseInput('');
 							}}
