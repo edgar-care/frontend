@@ -24,15 +24,24 @@ const OnboardingMedicalModal = ({
 	<Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
 		<ModalOverlay />
 		<ModalContent borderRadius="16px" gap="16px">
-			<ModalHeader>Vous êtes sûr ?</ModalHeader>
-			<ModalCloseButton />
+			<ModalHeader id="edgar-onboardingMedicalPage-confirmationModalTitle-text">Vous êtes sûr ?</ModalHeader>
+			<ModalCloseButton id="edgar-onboardingMedicalPage-confirmationModalClose-button" />
 			<ModalBody>{body}</ModalBody>
 			<ModalFooter>
 				<HStack>
-					<Button variant="secondary" size="sm" onClick={onClose}>
+					<Button
+						variant="secondary"
+						size="sm"
+						onClick={onClose}
+						id="edgar-onboardingMedicalPage-confirmationModalCancel-button"
+					>
 						J'ai oublié des informations
 					</Button>
-					<Button size="sm" onClick={onClick}>
+					<Button
+						size="sm"
+						onClick={onClick}
+						id="edgar-onboardingMedicalPage-confirmationModalValidate-button"
+					>
 						Tout est bon !
 					</Button>
 				</HStack>

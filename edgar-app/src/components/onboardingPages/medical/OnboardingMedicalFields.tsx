@@ -81,10 +81,20 @@ const OnboardingMedicalFields = (): JSX.Element => {
 					<VStack spacing="8px" w="100%" align="start">
 						<Text size="boldLg">Les informations suivantes n'ont pas été remplies :</Text>
 						<UnorderedList>
-							{(!allergies || allergies.length === 0) && <ListItem>Vos allergies</ListItem>}
-							{(!diseases || diseases.length === 0) && <ListItem>Vos maladies</ListItem>}
+							{(!allergies || allergies.length === 0) && (
+								<ListItem id="edgar-onboardingMedicalPage-confirmationModalAllergies-text">
+									Vos allergies
+								</ListItem>
+							)}
+							{(!diseases || diseases.length === 0) && (
+								<ListItem id="edgar-onboardingMedicalPage-confirmationModalDiseases-text">
+									Vos maladies
+								</ListItem>
+							)}
 							{(!treatmentsInProgress || treatmentsInProgress.length === 0) && (
-								<ListItem>Vos traitements en cours</ListItem>
+								<ListItem id="edgar-onboardingMedicalPage-confirmationModalTreatments-text">
+									Vos traitements en cours
+								</ListItem>
 							)}
 						</UnorderedList>
 					</VStack>

@@ -4,8 +4,16 @@ import { HStack, Icon, Text } from '@chakra-ui/react';
 import CrossIcon from 'assets/icons/CrossIcon';
 
 const OnboardingMedicalSmallCard = ({ title, onClick }: { title: string; onClick: () => void }): JSX.Element => (
-	<HStack spacing="12px" p="8px 16px" bg="blue.50" borderRadius="8px" border="1px solid" borderColor="blue.200">
-		<Text textTransform="capitalize" id="edgar-onboardingMedicalPage-smallCard-text">
+	<HStack
+		spacing="12px"
+		p="8px 16px"
+		bg="blue.50"
+		borderRadius="8px"
+		border="1px solid"
+		borderColor="blue.200"
+		id={`edgar-onboardingMedicalPage-smallCard-${title}`}
+	>
+		<Text textTransform="capitalize" id={`edgar-onboardingMedicalPage-smallCard-${title}-text`}>
 			{title}
 		</Text>
 		<Icon
@@ -18,7 +26,7 @@ const OnboardingMedicalSmallCard = ({ title, onClick }: { title: string; onClick
 			_hover={{
 				transform: 'rotate(90deg)',
 			}}
-			id="edgar-onboardingMedicalPage-smallCard-icon"
+			id={`edgar-onboardingMedicalPage-smallCard-${title}-icon`}
 		/>
 	</HStack>
 );
