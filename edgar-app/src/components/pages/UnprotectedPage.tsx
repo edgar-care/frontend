@@ -18,12 +18,10 @@ const UnprotectedPage = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	useEffect(() => {
 		const redirect = searchParams.get('redirect');
-		auth.checkToken().then((res) => {
-			if (res.status === 'success') {
-				if (redirect) void router.push(redirect as string);
-				else void router.push('/');
-			} else authenticateHandler();
-		});
+		if (auth.checkToken().status === 'success') {
+			if (redirect) void router.push(redirect as string);
+			else void router.push('/');
+		} else authenticateHandler();
 	}, []);
 
 	return (

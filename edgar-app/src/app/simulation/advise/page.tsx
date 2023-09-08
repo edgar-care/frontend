@@ -3,7 +3,7 @@
 import { Text, VStack, Stack, HStack, Button, Link, useBreakpointValue } from '@chakra-ui/react';
 
 import SimulationPage from 'components/pages/simulation/SimulationPage';
-import GradientText from 'components/GradientText';
+import HighlightText from 'components/HighlightText';
 
 const Advise = (): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, sm: false });
@@ -13,11 +13,11 @@ const Advise = (): JSX.Element => {
 			<VStack spacing={{ base: '96px', md: '128px' }}>
 				<Stack spacing="64px" maxW="650px">
 					<Text size={{ base: 'boldXl', md: '2xl' }}>
-						Vous recevrez une <GradientText textValue="notification" /> lorsque le médecin aura répondu
+						Vous recevrez une <HighlightText>notification</HighlightText> lorsque le médecin aura répondu
 					</Text>
 					<Text size={{ base: 'boldXl', md: '2xl' }}>
 						En attendant sa réponse, je vous conseille de faire une sieste dans un endroit{' '}
-						<GradientText textValue="calme" /> et <GradientText textValue="peu lumineux" />
+						<HighlightText>calme</HighlightText> et <HighlightText>peu lumineux</HighlightText>
 					</Text>
 				</Stack>
 				<HStack spacing="64px">

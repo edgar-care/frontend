@@ -3,7 +3,7 @@
 import { Text, VStack, Image, HStack, useBreakpointValue } from '@chakra-ui/react';
 
 import ChatBox from 'components/simulationPage/ChatBox';
-import ColorText from 'components/GradientText';
+import ColorText from 'components/HighlightText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 
 const Chat = (): JSX.Element => {
@@ -17,7 +17,7 @@ const Chat = (): JSX.Element => {
 					{!isMobile && (
 						<VStack spacing="48px">
 							<Text size="2xl">
-								Sélectionnez la zone de votre <ColorText textValue="mal" />
+								Sélectionnez la zone de votre <ColorText>mal</ColorText>
 							</Text>
 							<Image src="/assets/manequin-3d1.svg" alt="test" w={393} h="auto" />
 						</VStack>

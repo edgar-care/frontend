@@ -56,7 +56,7 @@ class Auth {
 		}
 	}
 
-	public async checkToken(): Promise<MessageResponse> {
+	public checkToken(): MessageResponse {
 		try {
 			if (this.getToken()) return { title: 'Token is valid', status: 'success' };
 			return { title: 'Token is invalid', status: 'error' };
