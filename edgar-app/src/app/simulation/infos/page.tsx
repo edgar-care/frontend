@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button, HStack, Stack, Text, useBreakpointValue, useToast, VStack } from '@chakra-ui/react';
 
 import CheckBox from 'components/simulationPage/CheckBox';
-import ColorText from 'components/HighlightText';
+import HighlightText from 'components/HighlightText';
 import NumInput from 'components/NumInput';
 import SlideBar from 'components/SlideBar';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
@@ -53,7 +53,7 @@ const Infos = (): JSX.Element => {
 		<SimulationPage>
 			<VStack spacing="64px" pb={{ base: '64px', md: '0px' }}>
 				<Text size={{ base: 'boldXl', sm: '2xl' }} textAlign={{ base: 'center', lg: 'left' }}>
-					Avant de commencer, j'ai besoin de <ColorText>quelques informations</ColorText>
+					Avant de commencer, j'ai besoin de <HighlightText>quelques informations</HighlightText>
 				</Text>
 				<VStack spacing={{ base: '32px', sm: '64px' }}>
 					<Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '64px', lg: '112px' }}>

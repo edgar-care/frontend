@@ -9,7 +9,7 @@ const HeadingSection = (): JSX.Element => (
 		</Text>
 		<Text size={{ base: 'boldXl', md: '2xl' }} w={{ base: '100%', md: '75%' }} textAlign="center">
 			C'est le temps moyen pour obtenir un rendez-vous chez le médecin généraliste{' '}
-			<HighlightText>en France</HighlightText>
+			<HighlightText>en France</HighlightText>.
 		</Text>
 	</VStack>
 );

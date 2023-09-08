@@ -2,7 +2,7 @@
 
 import { Text, VStack, Stack } from '@chakra-ui/react';
 
-import ColorText from 'components/HighlightText';
+import HighlightText from 'components/HighlightText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 import AppointmentCard from 'components/simulationPage/AppointmentCard';
 import { useEffect, useState } from 'react';
@@ -37,11 +37,11 @@ const Page = (): JSX.Element => {
 				<Stack spacing="64px">
 					<Stack spacing="32px">
 						<Text size={{ base: 'boldXl', md: '2xl' }}>
-							Le médecin que vous avez sélectionné a examiné votre <ColorText>analyse</ColorText>
+							Le médecin que vous avez sélectionné a examiné votre <HighlightText>analyse</HighlightText>
 						</Text>
 						<Text size={{ base: 'boldXl', md: '2xl' }}>
-							Un rendez-vous est <ColorText>nécessaire</ColorText> pour déterminer de manière plus précise
-							les causes de vos symptômes
+							Un rendez-vous est <HighlightText>nécessaire</HighlightText> pour déterminer de manière plus
+							précise les causes de vos symptômes
 						</Text>
 					</Stack>
 

@@ -3,7 +3,7 @@
 import { VStack, Text, Button, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import ColorText from 'components/HighlightText';
+import HighlightText from 'components/HighlightText';
 import DashboardCard from 'components/pages/patient/DashboardCard';
 import ProtectedPage from 'components/pages/ProtectedPage';
 
@@ -42,7 +42,7 @@ const Home = (): JSX.Element => {
 		<ProtectedPage>
 			<VStack py="64px" px="32px" spacing="48px">
 				<Text size={{ base: '2xl', md: '3xl' }} textAlign="center">
-					Bienvenue sur votre <ColorText>espace patient</ColorText>
+					Bienvenue sur votre <HighlightText>espace patient</HighlightText>
 				</Text>
 				<Link href="/edgar-app/src/app/simulation">
 					<Button variant="primary" size={isMobile ? 'md' : 'lg'}>

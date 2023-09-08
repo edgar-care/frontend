@@ -2,7 +2,7 @@
 
 import { Text, VStack, Stack, Button, Link } from '@chakra-ui/react';
 
-import ColorText from 'components/HighlightText';
+import HighlightText from 'components/HighlightText';
 import SimulationPage from 'components/pages/simulation/SimulationPage';
 
 const Connection = (): JSX.Element => (
@@ -10,7 +10,7 @@ const Connection = (): JSX.Element => (
 		<VStack spacing={{ base: '96px', md: '128px' }} pb={{ base: '64px', md: '0px' }}>
 			<Stack spacing="64px" maxW="670px">
 				<Text size={{ base: 'boldXl', md: '2xl' }}>
-					Ce médecin va examiner votre analyse sous <ColorText>maximum 48h</ColorText>
+					Ce médecin va examiner votre analyse sous <HighlightText>maximum 48h</HighlightText>
 				</Text>
 				<Text size={{ base: 'boldXl', md: '2xl' }}>
 					Pour que je puisse revenir vers vous, il me faudrait un moyen de communication
