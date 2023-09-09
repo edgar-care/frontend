@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Stack, useBreakpointValue, VStack } from '@chakra-ui/react';
 
-import ResponsiveNavBar from 'components/pages/patient/medical/ResponsiveNavBar';
+import ResponsiveNavBar from 'components/navigation/ResponsiveNavBar';
 
 import { useAuthContext } from 'contexts/auth';
 
