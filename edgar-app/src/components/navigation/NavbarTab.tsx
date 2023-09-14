@@ -19,6 +19,7 @@ const NavbarTabContent = ({ tab }: { tab: NavbarTabType }): JSX.Element => {
 				background: 'blue.700',
 			}}
 			role="group"
+			id={`edgar-dashboardNavbar-navbarTab-${tab.id}`}
 		>
 			<Icon
 				as={tab.icon}
@@ -27,6 +28,7 @@ const NavbarTabContent = ({ tab }: { tab: NavbarTabType }): JSX.Element => {
 				_groupHover={{
 					color: 'white',
 				}}
+				id={`edgar-dashboardNavbar-navbarTab-${tab.id}-icon`}
 			/>
 			<Text
 				color={pathname === tab.path ? 'white' : 'blue.900'}
@@ -34,6 +36,7 @@ const NavbarTabContent = ({ tab }: { tab: NavbarTabType }): JSX.Element => {
 				_groupHover={{
 					color: 'white',
 				}}
+				id={`edgar-dashboardNavbar-navbarTab-${tab.id}-text`}
 			>
 				{tab.name}
 			</Text>

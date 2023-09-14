@@ -35,6 +35,7 @@ const ProfileCard = (): JSX.Element => {
 					borderRadius="16px"
 					cursor="pointer"
 					transition="all .3s ease-out"
+					id="edgar-dashboardNavbar-profileCard"
 				>
 					<VStack w="100%" p="4px" pb="0px">
 						{profileTabs.map((tab) => (
@@ -52,6 +53,7 @@ const ProfileCard = (): JSX.Element => {
 								background: 'blue.100',
 							}}
 							onClick={onToggle}
+							id="edgar-dashboardNavbar-profileCard-userName"
 						>
 							<HStack spacing="16px" w="100%">
 								<Avatar
@@ -60,7 +62,9 @@ const ProfileCard = (): JSX.Element => {
 									variant="beam"
 									colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
 								/>
-								<Text size="boldMd">Nom Prénom</Text>
+								<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
+									Nom Prénom
+								</Text>
 							</HStack>
 							<Icon as={SelectorIcon} w="12px" h="16px" />
 						</HStack>
@@ -79,6 +83,7 @@ const ProfileCard = (): JSX.Element => {
 						background: 'blue.100',
 					}}
 					onClick={onToggle}
+					id="edgar-dashboardNavbar-profileCard"
 				>
 					<HStack justify="space-between" w="100%" p="8px 16px">
 						<HStack spacing="16px" w="100%">
@@ -88,7 +93,9 @@ const ProfileCard = (): JSX.Element => {
 								variant="beam"
 								colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
 							/>
-							<Text size="boldMd">Nom Prénom</Text>
+							<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
+								Nom Prénom
+							</Text>
 						</HStack>
 						<Icon as={SelectorIcon} w="12px" h="16px" />
 					</HStack>

@@ -13,9 +13,10 @@ const ProfileTab = ({ tab }: { tab: ProfileTabType }): JSX.Element => (
 			background: 'blue.100',
 		}}
 		onClick={tab.action}
+		id={`edgar-dashboardNavbar-profileTab-${tab.name}`}
 	>
-		<Icon as={tab.icon} color="blue.900" w="14px" />
-		<Text color="blue.900" size="md">
+		<Icon as={tab.icon} color="blue.900" w="14px" id={`edgar-dashboardNavbar-profileTab-${tab.name}-icon`} />
+		<Text color="blue.900" size="md" id={`edgar-dashboardNavbar-profileTab-${tab.name}-text`}>
 			{tab.name}
 		</Text>
 	</HStack>

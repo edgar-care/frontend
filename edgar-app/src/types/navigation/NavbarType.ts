@@ -7,4 +7,5 @@ export type NavbarTabType = {
 	path: string;
 	icon: ComponentWithAs<'svg', IconProps> | IconType;
 	newPage?: boolean;
+	id?: string;
 };

@@ -22,16 +22,19 @@ const Navbar = (): JSX.Element => {
 			name: 'Accueil',
 			path: '/dashboard',
 			icon: HomeIcon,
+			id: 'home',
 		},
 		{
 			name: 'Rendez-vous',
 			path: '/dashboard/appointments',
 			icon: CalendarIcon,
+			id: 'appointments',
 		},
 		{
 			name: 'Documents',
 			path: '/dashboard/documents',
 			icon: DocumentIcon,
+			id: 'documents',
 		},
 	];
 
@@ -40,6 +43,7 @@ const Navbar = (): JSX.Element => {
 			name: 'Dossier médical',
 			path: '/dashboard/medical',
 			icon: MedicalIcon,
+			id: 'medical',
 		},
 	];
 
@@ -49,6 +53,7 @@ const Navbar = (): JSX.Element => {
 			path: 'https://edgar-sante.fr/contact#form',
 			icon: HelpIcon,
 			newPage: true,
+			id: 'help',
 		},
 	];
 

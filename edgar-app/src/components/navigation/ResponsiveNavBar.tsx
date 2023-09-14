@@ -34,7 +34,14 @@ const ResponsiveNavBar = (): JSX.Element => {
 				<Box as="nav" w="100%" bg="blue.700" borderRadius={{ base: '0px', sm: '32px 32px 0px 0px' }}>
 					<HStack w="100%" h="100%" p="16px" justify="space-between">
 						<HStack spacing="16px" w={{ base: '100%', sm: 'auto' }}>
-							<Button onClick={onOpen} _focus={{}} p="16px" bg="transparent" color="black">
+							<Button
+								onClick={onOpen}
+								_focus={{}}
+								p="16px"
+								bg="transparent"
+								color="black"
+								id="edgar-dashboardNavbar-menu-button"
+							>
 								<Icon fontSize="24px" as={HamburgerIcon} color="white" />
 							</Button>
 							<VStack w="100%" ml={{ base: '-55px', sm: '0px' }}>
