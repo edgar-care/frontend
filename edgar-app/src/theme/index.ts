@@ -7,6 +7,7 @@ import fonts from 'theme/foundations/fonts';
 import shadows from 'theme/foundations/shadows';
 
 import Button from 'theme/components/button';
+import Drawer from 'theme/components/drawer';
 import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
@@ -35,6 +36,7 @@ const overrides = {
 	breakpoints,
 	components: {
 		Button,
+		Drawer,
 		FormLabel,
 		Input,
 		Link,
