@@ -10,11 +10,17 @@ const onSubmitPersonalInfos = async (
 	router: AppRouterInstance,
 ): Promise<MessageResponse> => {
 	try {
-		// TODO: update the URL of the backend
 		const response = await basicFetch(
-			'/???',
+			'onboarding/infos',
 			'POST',
-			JSON.stringify(personalInfos),
+			JSON.stringify({
+				name: personalInfos.name,
+				surname: personalInfos.firstname,
+				birthdate: personalInfos.birthDate.toString(),
+				sex: personalInfos.sex,
+				weight: personalInfos.weight,
+				height: personalInfos.size * 100,
+			}),
 			router,
 			'/dashboard/connection/login?redirect=/onboarding/personal',
 		);

@@ -10,11 +10,15 @@ const onSubmitMedicalInfos = async (
 	router: AppRouterInstance,
 ): Promise<MessageResponse> => {
 	try {
-		// TODO: update the URL of the backend
 		const response = await basicFetch(
-			'/???',
+			'onboarding/health',
 			'POST',
-			JSON.stringify(medicalInfos),
+			JSON.stringify({
+				patients_allergies: medicalInfos.allergies,
+				patients_illness: medicalInfos.diseases,
+				patients_treatments: medicalInfos.treatmentsInProgress,
+				patients_primary_doctor: medicalInfos.primaryDoctorName,
+			}),
 			router,
 			'/dashboard/connection/login?redirect=/onboarding/medical',
 		);

@@ -165,7 +165,7 @@ describe('Working page - Mobile', () => {
 		cy.get('#edgar-onboardingMedicalPage-confirmationModalAllergies-text').should('be.visible');
 		cy.get('#edgar-onboardingMedicalPage-confirmationModalDiseases-text').should('be.visible');
 		cy.get('#edgar-onboardingMedicalPage-confirmationModalTreatments-text').should('be.visible');
-		cy.get('#edgar-onboardingMedicalPage-confirmationModalValidate-button')
+		cy.get('#edgar-onboardingMedicalPage-confirmationDrawerConfirm-button')
 			.click()
 			.url()
 			.should('eq', `${url}/dashboard`);
