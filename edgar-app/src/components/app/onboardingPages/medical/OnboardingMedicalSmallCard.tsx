@@ -1,9 +1,18 @@
 'use client';
 
 import { HStack, Icon, Text } from '@chakra-ui/react';
+
 import CrossIcon from 'assets/icons/CrossIcon';
 
-const OnboardingMedicalSmallCard = ({ title, onClick }: { title: string; onClick: () => void }): JSX.Element => (
+const OnboardingMedicalSmallCard = ({
+	title,
+	onClick,
+	canBeDeleted = true,
+}: {
+	title: string;
+	onClick: () => void;
+	canBeDeleted?: boolean;
+}): JSX.Element => (
 	<HStack
 		spacing="12px"
 		p="8px 16px"
@@ -16,18 +25,20 @@ const OnboardingMedicalSmallCard = ({ title, onClick }: { title: string; onClick
 		<Text textTransform="capitalize" id={`edgar-onboardingMedicalPage-smallCard-${title}-text`}>
 			{title}
 		</Text>
-		<Icon
-			as={CrossIcon}
-			onClick={onClick}
-			w="12px"
-			h="12px"
-			cursor="pointer"
-			transition="all .3s ease-in-out"
-			_hover={{
-				transform: 'rotate(90deg)',
-			}}
-			id={`edgar-onboardingMedicalPage-smallCard-${title}-icon`}
-		/>
+		{canBeDeleted && (
+			<Icon
+				as={CrossIcon}
+				onClick={onClick}
+				w="12px"
+				h="12px"
+				cursor="pointer"
+				transition="all .3s ease-in-out"
+				_hover={{
+					transform: 'rotate(90deg)',
+				}}
+				id={`edgar-onboardingMedicalPage-smallCard-${title}-icon`}
+			/>
+		)}
 	</HStack>
 );
 
