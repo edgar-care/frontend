@@ -9,7 +9,7 @@ import {
 	BsHouseDoor,
 } from 'react-icons/bs';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import HelpCenter from './helpCenter';
 import TabCard from './TabCard';
 import { LANDING_URL } from '../../../config/constants';
@@ -23,30 +23,30 @@ const NavBar = (): JSX.Element => {
 		},
 		{
 			name: 'Rendez-vous',
-			path: '/appointments',
+			path: '/dashboard/appointments',
 			icon: BsCalendar3,
 		},
 		{
 			name: 'Documents',
-			path: '/documents',
+			path: '/dashboard/documents',
 			icon: BsFileEarmarkText,
 		},
 		{
 			name: 'Dossier medical',
-			path: '/medical',
+			path: '/dashboard/medical',
 			icon: BsClipboardPlus,
 		},
 	];
 
 	const message = {
 		name: 'Messagerie',
-		path: '/chat',
+		path: '/dashboard/chat',
 		icon: BsChatText,
 	};
 
 	const help = {
 		name: "Besoin d'aide ?",
-		path: '/chat',
+		path: '/dashboard/chat',
 		icon: BsQuestionCircle,
 	};
 

@@ -103,7 +103,7 @@ const UpdateMedicalModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 							<Box
 								w="200px"
 								h="3px"
-								bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.pink[600]} 100%)`}
+								bg={`linear-gradient(90deg, ${colors.blue[600]} 0%, ${colors.green[600]} 100%)`}
 							/>
 						</VStack>
 					</ModalHeader>

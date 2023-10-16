@@ -23,7 +23,7 @@ const MedCard = ({ name, date, hours }: { name: string; date: string; hours: str
 				<Text size="lg">{name}</Text>
 			</HStack>
 			<HStack spacing="16px">
-				<VStack borderRadius="8px" p="8px 16px" backgroundColor="purple.100">
+				<VStack borderRadius="8px" p="8px 16px" backgroundColor="green.100">
 					<Text size={{ base: 'boldSm', md: 'boldLg' }}>
 						{date} à {hours}
 					</Text>
