@@ -1,6 +1,6 @@
 import { Box, Button, HStack, Icon, Text, VStack } from '@chakra-ui/react';
 
-import { type AppointmentType } from 'types/dashboardPages/appointments/appointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
