@@ -5,7 +5,7 @@ import CancelAppointmentModal from 'components/dashboardPages/appointments/modal
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
-import { type AppointmentType } from 'types/dashboardPages/appointments/appointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 import UpdateAppointmentModal from 'components/dashboardPages/appointments/modals/UpdateAppointmentModal';
 
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
