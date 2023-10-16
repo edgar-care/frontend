@@ -4,7 +4,7 @@ import { Text, VStack } from '@chakra-ui/react';
 
 import AppointmentCard from 'components/dashboardPages/appointments/AppointmentCard';
 
-import { type AppointmentType } from 'types/dashboardPages/appointments/appointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
 const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => (
 	<VStack spacing="32px" w="100%">

@@ -3,7 +3,7 @@ import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { days } from 'utils/app/dashboard/appointments/calendarUtils';
 import getAllDays from 'utils/app/dashboard/appointments/getAllDays';
 
-import { type AppointmentType } from 'types/dashboardPages/appointments/appointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
 const AppointmentCalendar = ({
 	month,
