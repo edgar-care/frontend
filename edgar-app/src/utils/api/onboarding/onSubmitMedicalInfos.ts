@@ -20,7 +20,7 @@ const onSubmitMedicalInfos = async (
 				patients_primary_doctor: medicalInfos.primaryDoctorName,
 			}),
 			router,
-			'/dashboard/connection/login?redirect=/onboarding/medical',
+			'/login?redirect=/onboarding/medical',
 		);
 
 		if (response.status === 201)

@@ -3,7 +3,7 @@ import { InfoIcon } from '@chakra-ui/icons';
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
-import OnboardingPersonalSexInfoHandler from 'components/onboardingPages/personal/sexInfos/OnboardingPersonalSexInfoHandler';
+import OnboardingPersonalSexInfoHandler from 'components/app/onboardingPages/personal/sexInfos/OnboardingPersonalSexInfoHandler';
 
 import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 

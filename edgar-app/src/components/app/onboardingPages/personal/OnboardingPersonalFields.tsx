@@ -8,12 +8,12 @@ import onSubmitPersonalInfos from 'utils/api/onboarding/onSubmitPersonalInfos';
 
 import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
-import OnboardingPersonalFirstnameInput from './OnboardingPersonalFirstnameInput';
-import OnboardingPersonalNameInput from './OnboardingPersonalNameInput';
-import OnboardingPersonalBirthdateInput from './OnboardingPersonalBirthdateInput';
-import OnboardingPersonalSexInput from './OnboardingPersonalSexInput';
-import OnboardingPersonalSizeInput from './OnboardingPersonalSizeInput';
-import OnboardingPersonalWeightInput from './OnboardingPersonalWeightInput';
+import OnboardingPersonalFirstnameInput from 'components/app/onboardingPages/personal/OnboardingPersonalFirstnameInput';
+import OnboardingPersonalNameInput from 'components/app/onboardingPages/personal/OnboardingPersonalNameInput';
+import OnboardingPersonalBirthdateInput from 'components/app/onboardingPages/personal/OnboardingPersonalBirthdateInput';
+import OnboardingPersonalSexInput from 'components/app/onboardingPages/personal/OnboardingPersonalSexInput';
+import OnboardingPersonalSizeInput from 'components/app/onboardingPages/personal/OnboardingPersonalSizeInput';
+import OnboardingPersonalWeightInput from 'components/app/onboardingPages/personal/OnboardingPersonalWeightInput';
 
 const OnboardingPersonalFields = (): JSX.Element => {
 	const {

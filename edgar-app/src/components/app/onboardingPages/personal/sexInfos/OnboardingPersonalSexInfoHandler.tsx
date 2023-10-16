@@ -1,7 +1,7 @@
 import { useBreakpointValue } from '@chakra-ui/react';
 
-import OnboardingPersonalSexDrawer from 'components/onboardingPages/personal/sexInfos/OnboardingPersonalSexDrawer';
-import OnboardingPersonalSexModal from 'components/onboardingPages/personal/sexInfos/OnboardingPersonalSexModal';
+import OnboardingPersonalSexDrawer from 'components/app/onboardingPages/personal/sexInfos/OnboardingPersonalSexDrawer';
+import OnboardingPersonalSexModal from 'components/app/onboardingPages/personal/sexInfos/OnboardingPersonalSexModal';
 
 const OnboardingPersonalSexInfoHandler = ({
 	isOpen,

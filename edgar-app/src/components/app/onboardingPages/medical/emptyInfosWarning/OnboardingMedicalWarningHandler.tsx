@@ -1,7 +1,7 @@
 import { useBreakpointValue } from '@chakra-ui/react';
 
-import OnboardingMedicalModal from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalModal';
-import OnboardingMedicalDrawer from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalDrawer';
+import OnboardingMedicalModal from 'components/app/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalModal';
+import OnboardingMedicalDrawer from 'components/app/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalDrawer';
 
 const OnboardingMedicalWarningHandler = ({
 	body,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormLabel, Input, InputGroup, InputRightElement, useToast, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { type UseFormSetValue, type UseFormWatch } from 'react-hook-form';
 
-import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/OnboardingMedicalSmallCard';
+import OnboardingMedicalSmallCard from 'components/app/onboardingPages/medical/OnboardingMedicalSmallCard';
 
 import PlusIcon from 'assets/icons/PlusIcon';
 

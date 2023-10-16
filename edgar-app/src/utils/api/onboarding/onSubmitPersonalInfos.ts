@@ -22,7 +22,7 @@ const onSubmitPersonalInfos = async (
 				height: personalInfos.size * 100,
 			}),
 			router,
-			'/dashboard/connection/login?redirect=/onboarding/personal',
+			'/login?redirect=/onboarding/personal',
 		);
 
 		if (response.status === 201) return { title: 'Personal infos submitted successfully', status: 'success' };

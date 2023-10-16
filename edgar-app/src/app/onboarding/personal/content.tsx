@@ -2,8 +2,8 @@
 
 import { HStack, VStack, useBreakpointValue } from '@chakra-ui/react';
 
-import OnboardingEdgarCard from 'components/onboardingPages/OnboardingEdgarCard';
-import OnboardingPersonalFields from 'components/onboardingPages/personal/OnboardingPersonalFields';
+import OnboardingEdgarCard from 'components/app/onboardingPages/OnboardingEdgarCard';
+import OnboardingPersonalFields from 'components/app/onboardingPages/personal/OnboardingPersonalFields';
 
 const OnboardingPersonalPageContent = (): JSX.Element => {
 	const isTablet = useBreakpointValue({ base: true, lg: false });

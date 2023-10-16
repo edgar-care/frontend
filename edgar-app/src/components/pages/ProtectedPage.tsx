@@ -20,7 +20,7 @@ const ProtectedPage = ({ children }: { children: JSX.Element }): JSX.Element => 
 		const redirect = searchParams.get('redirect');
 		if (auth.checkToken().status !== 'success') {
 			if (redirect) void router.push(redirect as string);
-			else void router.push('/connection/login');
+			else void router.push('/login');
 		} else authenticateHandler();
 	}, []);
 

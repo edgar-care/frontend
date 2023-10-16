@@ -17,12 +17,12 @@ const Connection = (): JSX.Element => (
 				</Text>
 			</Stack>
 			<Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: '16px', md: '64px' }}>
-				<Link href="/connection/signup?redirect=/simulation/advise">
+				<Link href="/signup?redirect=/simulation/advise">
 					<Button variant="primary" size="lg" w="100%">
 						Créer un compte
 					</Button>
 				</Link>
-				<Link href="/connection/login?redirect=/simulation/advise">
+				<Link href="/login?redirect=/simulation/advise">
 					<Button variant="secondary" size="lg" w="100%">
 						Se connecter
 					</Button>

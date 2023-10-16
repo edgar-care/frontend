@@ -2,15 +2,15 @@ import { chakra, Button, ListItem, Text, UnorderedList, VStack, useDisclosure, u
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
-import OnboardingMedicalPrimaryDoctorInput from 'components/onboardingPages/medical/OnboardingMedicalPrimaryDoctorInput';
-import OnboardingMedicalAllergiesInput from 'components/onboardingPages/medical/OnboardingMedicalAllergiesInput';
-import OnboardingMedicalDiseasesInput from 'components/onboardingPages/medical/OnboardingMedicalDiseasesInput';
-import OnboardingMedicalTreatmentsInput from 'components/onboardingPages/medical/OnboardingMedicalTreatmentsInput';
+import OnboardingMedicalPrimaryDoctorInput from 'components/app/onboardingPages/medical/OnboardingMedicalPrimaryDoctorInput';
+import OnboardingMedicalAllergiesInput from 'components/app/onboardingPages/medical/OnboardingMedicalAllergiesInput';
+import OnboardingMedicalDiseasesInput from 'components/app/onboardingPages/medical/OnboardingMedicalDiseasesInput';
+import OnboardingMedicalTreatmentsInput from 'components/app/onboardingPages/medical/OnboardingMedicalTreatmentsInput';
 
 import onSubmitMedicalInfos from 'utils/api/onboarding/onSubmitMedicalInfos';
 
 import { type MedicalInfos } from 'types/onboarding/OnboardingInfos';
-import OnboardingMedicalWarningHandler from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalWarningHandler';
+import OnboardingMedicalWarningHandler from 'components/app/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalWarningHandler';
 
 const OnboardingMedicalFields = (): JSX.Element => {
 	const {

@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { HStack, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import ConnectionEdgarCard from 'components/connectionPage/ConnectionEdgarCard';
-import ConnectionLoginFields from 'components/connectionPage/login/ConnectionLoginFields';
+import ConnectionEdgarCard from 'components/app/connectionPages/ConnectionEdgarCard';
+import ConnectionLoginFields from 'components/app/connectionPages/login/ConnectionLoginFields';
 
 import { useAuthContext } from 'contexts/auth';
 

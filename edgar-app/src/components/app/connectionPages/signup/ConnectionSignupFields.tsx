@@ -4,7 +4,7 @@ import { Box, Button, Stack, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-import ConnectionSignupInputs from './ConnectionSignupInputs';
+import ConnectionSignupInputs from 'components/app/connectionPages/signup/ConnectionSignupInputs';
 
 const ConnectionSignupFields = (): JSX.Element => {
 	const searchParams = useSearchParams();

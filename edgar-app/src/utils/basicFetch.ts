@@ -9,7 +9,7 @@ const basicFetch = async (
 	method: FetchMethod,
 	body?: BodyInit,
 	router?: AppRouterInstance,
-	authRedirectionUrl = '/dashboard/connection/login',
+	authRedirectionUrl = '/login',
 ): Promise<Response> => {
 	const token = localStorage.getItem('token');
 
