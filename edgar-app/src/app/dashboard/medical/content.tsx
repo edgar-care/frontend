@@ -1,6 +1,6 @@
 'use client';
 
-import { HStack, VStack } from '@chakra-ui/react';
+import { Stack, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import MedicalUpdateCard from 'components/dashboardPages/medical/MedicalUpdateCard';
@@ -31,11 +31,18 @@ const MedicalPageContent = (): JSX.Element => {
 				title="Mon dossier médical"
 				subTitle="Retrouvez toutes vos informations personnelles et médicales."
 			/>
-			<HStack w="100%" align="start" spacing="32px">
+			<Stack direction={{ base: 'column', xl: 'row' }} w="100%" align="start" spacing="32px">
 				<MedicalUpdateCard personalInfos={personalInfos} medicalInfos={medicalInfos} />
-				<MedicalPersonalInfoCard personalInfos={personalInfos} />
-				<MedicalMedicalInfoCard medicalInfos={medicalInfos} />
-			</HStack>
+				<Stack
+					direction={{ base: 'column', '2xl': 'row' }}
+					w="100%"
+					align="start"
+					spacing={{ base: '16px', '2xl': '32px' }}
+				>
+					<MedicalPersonalInfoCard personalInfos={personalInfos} />
+					<MedicalMedicalInfoCard medicalInfos={medicalInfos} />
+				</Stack>
+			</Stack>
 		</VStack>
 	);
 };

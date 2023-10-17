@@ -13,21 +13,31 @@ const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: MedicalInfos }
 	};
 
 	return (
-		<HStack p="16px" w="100%" bg="white" border="2px solid" borderColor="blue.200" spacing="4px" borderRadius="8px">
+		<HStack
+			p="16px"
+			w="100%"
+			bg="white"
+			border="2px solid"
+			borderColor="blue.200"
+			spacing="4px"
+			borderRadius="8px"
+			maxW={{ base: '100%', '2xl': '500px' }}
+			minW={{ base: '100%', sm: '300px' }}
+		>
 			<Box as="span" w="4px" alignSelf="stretch" bg="green.500" borderRadius="4px" />
-			<VStack pl="8px" w="100%" align="start" spacing="12px">
+			<VStack pl="8px" w="100%" align="start" spacing={{ base: '8px', lg: '12px' }}>
 				{Object.keys(medicalInfos).map((key, index) => {
 					const info = medicalInfos[key as keyof MedicalInfos];
 
 					return (
 						<>
 							{(key as keyof MedicalInfos) === 'primaryDoctorName' ? (
-								<Text key={index} size="lg">
+								<Text key={index} size={{ base: 'md', lg: 'lg' }}>
 									{medicalInfosLabels[key as keyof MedicalInfos]}: {info}
 								</Text>
 							) : (
 								<VStack w="100%" align="start">
-									<Text key={index} size="lg">
+									<Text key={index} size={{ base: 'md', lg: 'lg' }}>
 										{medicalInfosLabels[key as keyof MedicalInfos]}:
 									</Text>
 									<Wrap w="100%" gap="8px">
