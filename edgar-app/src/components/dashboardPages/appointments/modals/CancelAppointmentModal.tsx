@@ -53,7 +53,7 @@ const CancelAppointmentModal = ({
 						</Button>
 						<Button
 							size="customSm"
-							variant="validate"
+							variant="delete"
 							w="100%"
 							onClick={() =>
 								cancelAppointment(appointmentId, router).then((res) => {
