@@ -4,7 +4,6 @@ import {
 	Icon,
 	Modal,
 	ModalBody,
-	ModalCloseButton,
 	ModalContent,
 	ModalFooter,
 	ModalOverlay,
@@ -12,9 +11,11 @@ import {
 	useToast,
 	VStack,
 } from '@chakra-ui/react';
-import DeleteCrossIllustration from 'assets/illustrations/DeleteCrossIllustration';
-import cancelAppointment from 'utils/api/dashboard/appointments/cancelAppointment';
 import { useRouter } from 'next/navigation';
+
+import cancelAppointment from 'utils/api/dashboard/appointments/cancelAppointment';
+
+import DeleteCrossIllustration from 'assets/illustrations/DeleteCrossIllustration';
 
 const CancelAppointmentModal = ({
 	isOpen,
@@ -47,11 +48,11 @@ const CancelAppointmentModal = ({
 				</ModalBody>
 				<ModalFooter p="24px 32px 32px 32px">
 					<HStack w="100%">
-						<Button size="sm" variant="secondary" w="100%" onClick={onClose}>
+						<Button size="customSm" variant="secondary" w="100%" onClick={onClose}>
 							Non, je veux revenir en arrière
 						</Button>
 						<Button
-							size="sm"
+							size="customSm"
 							variant="validate"
 							w="100%"
 							onClick={() =>
