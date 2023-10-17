@@ -31,14 +31,14 @@ const OnboardingMedicalModal = ({
 				<HStack>
 					<Button
 						variant="secondary"
-						size="sm"
+						size="customSm"
 						onClick={onClose}
 						id="edgar-onboardingMedicalPage-confirmationModalCancel-button"
 					>
 						J'ai oublié des informations
 					</Button>
 					<Button
-						size="sm"
+						size="customSm"
 						onClick={onClick}
 						id="edgar-onboardingMedicalPage-confirmationModalValidate-button"
 					>

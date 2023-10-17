@@ -1,10 +1,10 @@
 import { Box, Button, HStack, Icon, Text, VStack } from '@chakra-ui/react';
 
-import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
-
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
-const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => (
+import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+
+const CalendarAppointmentCard = ({ appointment }: { appointment: PatientAppointmentType }): JSX.Element => (
 	<HStack spacing="4px" w="100%" p="12px" borderRadius="8px" border="2px solid" borderColor="blue.200" bg="white">
 		<Box
 			as="span"
@@ -27,10 +27,10 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 			</VStack>
 			{appointment.status !== 'DONE' && (
 				<HStack justify="end" w="100%">
-					<Button size="sm" variant="delete" onClick={() => {}}>
+					<Button size="customSm" variant="delete" onClick={() => {}}>
 						Annuler
 					</Button>
-					<Button size="sm" variant="secondary" onClick={() => {}}>
+					<Button size="customSm" variant="secondary" onClick={() => {}}>
 						Modifier
 					</Button>
 				</HStack>

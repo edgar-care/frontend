@@ -1,4 +1,4 @@
-import { type AppointmentDaysType } from 'types/dashboardPages/appointments/appointmentDaysType';
+import { type AppointmentDaysType } from 'types/dashboard/appointments/appointmentDaysType';
 
 const getAllDays = (month: number, year: number): AppointmentDaysType[] => {
 	const days: AppointmentDaysType[] = [];

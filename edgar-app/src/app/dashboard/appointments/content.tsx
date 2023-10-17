@@ -7,10 +7,10 @@ import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import AppointmentsCalendarCard from 'components/dashboardPages/appointments/AppointmentsCalendarCard';
 import AppointmentsCards from 'components/dashboardPages/appointments/AppointmentsCards';
 
-import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
+import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
 
 const AppointmentsPageContent = (): JSX.Element => {
-	const appointments: AppointmentType[] = [
+	const appointments: PatientAppointmentType[] = [
 		{
 			id: '1',
 			status: 'NOT_STARTED',
