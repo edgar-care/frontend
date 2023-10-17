@@ -17,7 +17,9 @@ import UnorderedList from 'theme/components/unorderedList';
 const breakpoints = {
 	xs: '320px',
 	ssm: '350px',
+	ssm2: '415px',
 	sm: '480px',
+	sm2: '600px',
 	smd: '700px',
 	md: '768px',
 	lg: '1024px',
