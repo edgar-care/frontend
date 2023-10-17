@@ -188,7 +188,7 @@ const Button = {
 		},
 	},
 	defaultProps: {
-		size: 'md',
+		size: 'customMd',
 		variant: 'primary',
 	},
 };
