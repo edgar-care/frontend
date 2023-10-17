@@ -3,7 +3,7 @@ import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { days } from 'utils/app/dashboard/appointments/calendarUtils';
 import getAllDays from 'utils/app/dashboard/appointments/getAllDays';
 
-import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
+import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
 
 const AppointmentCalendar = ({
 	month,
@@ -12,7 +12,7 @@ const AppointmentCalendar = ({
 }: {
 	month: number;
 	year: number;
-	appointments: AppointmentType[];
+	appointments: PatientAppointmentType[];
 }): JSX.Element => (
 	<Grid templateColumns="repeat(7, 1fr)" gap={{ base: '6px', ssm: '12px' }}>
 		{days.map((day) => (

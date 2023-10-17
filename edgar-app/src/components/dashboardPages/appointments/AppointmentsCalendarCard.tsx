@@ -6,6 +6,8 @@ import AppointmentCalendar from 'components/dashboardPages/appointments/Appointm
 
 import { months } from 'utils/app/dashboard/appointments/calendarUtils';
 
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
+
 import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
