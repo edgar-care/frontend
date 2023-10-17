@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Box, Button, HStack, Icon, Text, useDisclosure, VStack } from '@chakra-ui/react';
 
 import CancelAppointmentModal from 'components/dashboardPages/appointments/modals/CancelAppointmentModal';
+import UpdateAppointmentModal from 'components/dashboardPages/appointments/modals/UpdateAppointmentModal';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
-import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
-import UpdateAppointmentModal from 'components/dashboardPages/appointments/modals/UpdateAppointmentModal';
+import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
 
-const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
+const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType }): JSX.Element => {
 	const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
 	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
 
@@ -38,7 +38,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 				{appointment.status !== 'DONE' && (
 					<HStack>
 						<Button
-							size="sm"
+							size="customSm"
 							variant="delete"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
@@ -48,7 +48,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							Annuler
 						</Button>
 						<Button
-							size="sm"
+							size="customSm"
 							variant="secondary"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);

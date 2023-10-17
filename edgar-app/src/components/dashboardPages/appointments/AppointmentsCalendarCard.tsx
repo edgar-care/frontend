@@ -6,12 +6,12 @@ import AppointmentCalendar from 'components/dashboardPages/appointments/Appointm
 
 import { months } from 'utils/app/dashboard/appointments/calendarUtils';
 
-import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
-
 import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
-const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => {
+import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+
+const AppointmentsCalendarCard = ({ appointments }: { appointments: PatientAppointmentType[] }): JSX.Element => {
 	const [month, setMonth] = useState<number>(new Date().getMonth());
 	const [year, setYear] = useState<number>(new Date().getFullYear());
 
