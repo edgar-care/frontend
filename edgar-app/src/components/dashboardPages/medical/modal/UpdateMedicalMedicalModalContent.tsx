@@ -22,10 +22,10 @@ const UpdateMedicalMedicalModalContent = ({
 	<VStack
 		w="100%"
 		spacing="24px"
-		px="32px"
+		px={{ base: '0px', smd: '32px' }}
 		align="start"
-		maxH="calc(100vh - 400px)"
-		overflowY="scroll"
+		maxH={{ base: 'auto', smd: 'calc(100vh - 400px)' }}
+		overflowY={{ base: 'hidden', smd: 'scroll' }}
 		sx={{
 			'::-webkit-scrollbar': {
 				width: '6px',

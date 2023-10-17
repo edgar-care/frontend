@@ -29,7 +29,7 @@ const UpdateMedicalPersonalModal = ({
 	watch: UseFormWatch<MedicalProfileType>;
 	setValue: UseFormSetValue<MedicalProfileType>;
 }): JSX.Element => (
-	<VStack w="100%" spacing="24px" px="32px" align="start">
+	<VStack w="100%" spacing="24px" px={{ base: '0px', smd: '32px' }} align="start">
 		<HStack w="100%" spacing="32px">
 			<UpdateMedicalPersonalModalFirstnameInput register={register} errors={errors} />
 			<UpdateMedicalPersonalModalNameInput register={register} errors={errors} />

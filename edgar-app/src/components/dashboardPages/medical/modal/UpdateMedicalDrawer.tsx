@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import {
 	Box,
 	Button,
+	Drawer,
+	DrawerBody,
+	DrawerContent,
+	DrawerFooter,
+	DrawerOverlay,
 	HStack,
 	Icon,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalFooter,
-	ModalOverlay,
 	Text,
 	VStack,
 } from '@chakra-ui/react';
@@ -23,7 +23,7 @@ import MedicalIllustration from 'assets/illustrations/MedicalIllustration';
 import { type MedicalInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
 
-const UpdateMedicalModal = ({
+const UpdateMedicalDrawer = ({
 	isOpen,
 	onClose,
 	personalInfos,
@@ -66,27 +66,28 @@ const UpdateMedicalModal = ({
 	}, []);
 
 	return (
-		<Modal
+		<Drawer
 			isOpen={isOpen}
 			onClose={() => {
 				setStep(0);
 				onClose();
 			}}
-			size="2xl"
+			size="sm"
+			placement="bottom"
 		>
-			<ModalOverlay />
-			<ModalContent>
-				<ModalBody p="24px 24px 16px 24px">
+			<DrawerOverlay />
+			<DrawerContent borderRadius="16px 16px 0px 0px" maxH="700px">
+				<DrawerBody p="24px 24px 16px 24px">
 					<VStack spacing="32px" w="100%">
 						<VStack w="100%">
 							<Icon as={MedicalIllustration} w="48px" h="48px" />
 							<VStack spacing="16px" w="100%">
-								<Text size="xl">
+								<Text size="xl" textAlign="center">
 									{step === 0
 										? 'Mettez à jour vos informations personnelles'
 										: 'Mettez à jour vos informations médicales'}
 								</Text>
-								<Box as="span" w="300px">
+								<Box as="span" w="200px">
 									<Stepper nbrSteps={2} activeStep={step} />
 								</Box>
 							</VStack>
@@ -108,8 +109,8 @@ const UpdateMedicalModal = ({
 							/>
 						)}
 					</VStack>
-				</ModalBody>
-				<ModalFooter p="16px 24px 24px 24px">
+				</DrawerBody>
+				<DrawerFooter p="16px 24px 24px 24px">
 					<HStack w="100%">
 						<Button
 							variant="secondary"
@@ -119,7 +120,7 @@ const UpdateMedicalModal = ({
 								else setStep(0);
 							}}
 						>
-							{step === 0 ? 'Annuler' : 'Revenir en arrière'}
+							{step === 0 ? 'Annuler' : 'Précedent'}
 						</Button>
 						<Button
 							w="100%"
@@ -133,10 +134,10 @@ const UpdateMedicalModal = ({
 							{step === 0 ? 'Continuer' : 'Confirmer'}
 						</Button>
 					</HStack>
-				</ModalFooter>
-			</ModalContent>
-		</Modal>
+				</DrawerFooter>
+			</DrawerContent>
+		</Drawer>
 	);
 };
 
-export default UpdateMedicalModal;
+export default UpdateMedicalDrawer;
