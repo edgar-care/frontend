@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useState } from 'react';
-import { HStack, Icon, Text, useBreakpointValue, useDisclosure, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, useBreakpointValue, useDisclosure, VStack } from '@chakra-ui/react';
 
 import AppointmentSlot from 'components/dashboardPages/appointments/AppointmentSlot';
 
@@ -22,7 +22,9 @@ const AppointmentDoctorCard = ({
 	const [firstAppointmentIndex, setFirstAppointmentIndex] = useState(0);
 	const { isOpen: isDetailsOpen, onToggle: onToggleDetails } = useDisclosure();
 
-	const nbrDisplayedAppointments = useBreakpointValue({ base: 1, md: 2, lg: 5 }) || 1;
+	const nbrDisplayedAppointments = useBreakpointValue({ base: 1, ssm2: 2, sm2: 3, lg: 5 }) || 1;
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+	const isDrawer = useBreakpointValue({ base: true, smd: false });
 
 	const groupAppointmentsOnSameDay = (appointments: AppointmentType[]): AppointmentType[][] => {
 		const groupedAppointments: AppointmentType[][] = [];
@@ -69,16 +71,17 @@ const AppointmentDoctorCard = ({
 						<Text>{doctorInfos.address}</Text>
 					</VStack>
 					{!isDetailsOpen && (
-						<HStack w="100%" spacing="4px">
-							<Text>Prochain créneau disponible le</Text>
-							<Text color="blue.700" textTransform="capitalize">
+						<Text maxW={{ base: '250px', sm: '350px', smd: '100%' }}>
+							Prochain créneau disponible{isDrawer ? ':' : ' le '}
+							<Box as="span" color="blue.700" textTransform="capitalize" display="inline-block">
 								{doctorInfos.appointments[0].startDate.toLocaleDateString('fr-FR', {
-									weekday: 'long',
+									weekday: isMobile ? 'short' : 'long',
 									day: 'numeric',
-									month: 'long',
+									month: isMobile ? 'short' : 'long',
 								})}
-							</Text>
-							<Text color="blue.700">
+							</Box>
+							<Box as="span" color="blue.700">
+								{' '}
 								de{' '}
 								{doctorInfos.appointments[0].startDate.toLocaleTimeString('fr-FR', {
 									hour: '2-digit',
@@ -89,8 +92,8 @@ const AppointmentDoctorCard = ({
 									hour: '2-digit',
 									minute: '2-digit',
 								})}
-							</Text>
-						</HStack>
+							</Box>
+						</Text>
 					)}
 				</VStack>
 				<Icon as={isDetailsOpen ? UpChevronIcon : DownChevronIcon} w="16px" color="black" />

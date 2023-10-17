@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Box, Button, HStack, Icon, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 
-import CancelAppointmentModal from 'components/dashboardPages/appointments/modals/CancelAppointmentModal';
-import UpdateAppointmentModal from 'components/dashboardPages/appointments/modals/UpdateAppointmentModal';
+import UpdateAppointmentHandler from 'components/dashboardPages/appointments/modals/UpdateAppointmentHandler';
+import CancelAppointmentHandler from 'components/dashboardPages/appointments/modals/CancelAppointmentHandler';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
@@ -15,15 +15,23 @@ const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType 
 	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
 
 	return (
-		<HStack spacing="4px" w="100%" p="12px" borderRadius="8px" border="2px solid" borderColor="blue.200" bg="white">
+		<HStack
+			spacing="4px"
+			w="100%"
+			p="12px"
+			borderRadius="8px"
+			border="2px solid"
+			borderColor="blue.200"
+			bg="white"
+			align="stretch"
+		>
 			<Box
 				as="span"
 				w="4px"
-				h="45px"
 				bg={appointment.status === 'NOT_STARTED' ? 'green.500' : 'blue.200'}
 				borderRadius="4px"
 			/>
-			<HStack justify="space-between" w="100%">
+			<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
 					<Text size="boldLg">{appointment.doctorName}</Text>
 					<HStack>
@@ -36,10 +44,11 @@ const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType 
 					</HStack>
 				</VStack>
 				{appointment.status !== 'DONE' && (
-					<HStack>
+					<HStack px={{ base: '8px', xl: '0px' }} justify="end">
 						<Button
 							size="customSm"
 							variant="delete"
+							w="auto"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenCancelModal();
@@ -50,6 +59,7 @@ const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType 
 						<Button
 							size="customSm"
 							variant="secondary"
+							w="auto"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenUpdateModal();
@@ -59,13 +69,13 @@ const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType 
 						</Button>
 					</HStack>
 				)}
-			</HStack>
-			<CancelAppointmentModal
+			</Stack>
+			<CancelAppointmentHandler
 				isOpen={isOpenCancelModal}
 				onClose={onCloseCancelModal}
 				appointmentId={selectedAppointmentId}
 			/>
-			<UpdateAppointmentModal
+			<UpdateAppointmentHandler
 				isOpen={isOpenUpdateModal}
 				onClose={onCloseUpdateModal}
 				appointmentId={selectedAppointmentId}

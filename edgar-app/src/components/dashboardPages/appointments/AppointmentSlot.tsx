@@ -30,6 +30,7 @@ const AppointmentSlot = ({
 					endDate={appointment.endDate}
 					selected={selectedAppointment === appointment.id}
 					onClick={() => setSelectedAppointment(appointment.id)}
+					key={appointment.id}
 				/>
 			))}
 		</VStack>

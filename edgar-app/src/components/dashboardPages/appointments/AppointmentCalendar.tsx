@@ -14,7 +14,7 @@ const AppointmentCalendar = ({
 	year: number;
 	appointments: PatientAppointmentType[];
 }): JSX.Element => (
-	<Grid templateColumns="repeat(7, 1fr)" gap="12px">
+	<Grid templateColumns="repeat(7, 1fr)" gap={{ base: '6px', ssm: '12px' }}>
 		{days.map((day) => (
 			<GridItem key={day}>
 				<Text size="boldMd" textAlign="center">

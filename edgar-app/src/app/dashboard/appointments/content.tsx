@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, HStack, VStack } from '@chakra-ui/react';
+import { Box, Button, Stack, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
@@ -47,8 +47,13 @@ const AppointmentsPageContent = (): JSX.Element => {
 				title="Mes rendez-vous"
 				subTitle="Retrouvez toutes les informations liées à vos rendez-vous."
 			/>
-			<HStack w="100%" align="start" spacing="64px">
-				<VStack spacing="16px">
+			<Stack
+				direction={{ base: 'column', lg: 'row' }}
+				w="100%"
+				align="start"
+				spacing={{ base: '32px', xl: '64px' }}
+			>
+				<VStack spacing="16px" w={{ base: '100%', md: 'auto' }}>
 					<Box w="100%">
 						<Link href="/simulation">
 							<Button w="100%" size="customLg">
@@ -63,7 +68,7 @@ const AppointmentsPageContent = (): JSX.Element => {
 				<AppointmentsCards
 					appointments={appointments.sort((a, b) => a.startDate.getTime() - b.startDate.getTime())}
 				/>
-			</HStack>
+			</Stack>
 		</VStack>
 	);
 };
