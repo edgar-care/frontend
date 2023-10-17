@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import {
 	Button,
+	Drawer,
+	DrawerBody,
+	DrawerContent,
+	DrawerFooter,
+	DrawerOverlay,
 	HStack,
 	Icon,
 	Input,
 	InputGroup,
 	InputRightElement,
-	Modal,
-	ModalBody,
-	ModalContent,
-	ModalFooter,
-	ModalOverlay,
 	Text,
 	useToast,
 	VStack,
@@ -23,7 +23,7 @@ import CalendarIllustration from 'assets/illustrations/Calendarllustration';
 
 import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
 
-const UpdateAppointmentModal = ({
+const UpdateAppointmentDrawer = ({
 	isOpen,
 	onClose,
 	appointmentId,
@@ -136,10 +136,11 @@ const UpdateAppointmentModal = ({
 	];
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size={{ base: '2xl', lg: '4xl' }}>
-			<ModalOverlay />
-			<ModalContent
-				maxH={{ base: 'auto', smd: 'calc(100vh - 128px)' }}
+		<Drawer isOpen={isOpen} onClose={onClose} size="sm" placement="bottom">
+			<DrawerOverlay />
+			<DrawerContent
+				borderRadius="16px 16px 0px 0px"
+				maxH="700px"
 				overflowY={{ base: 'hidden', smd: 'scroll' }}
 				sx={{
 					'::-webkit-scrollbar': {
@@ -162,7 +163,7 @@ const UpdateAppointmentModal = ({
 					scrollbarColor: '#CCC #F1F1F1',
 				}}
 			>
-				<ModalBody p="32px 32px 24px 32px">
+				<DrawerBody p="16px">
 					<VStack spacing="32px" w="100%">
 						<VStack w="100%">
 							<Icon as={CalendarIllustration} w="48px" h="48px" />
@@ -192,8 +193,8 @@ const UpdateAppointmentModal = ({
 							))}
 						</VStack>
 					</VStack>
-				</ModalBody>
-				<ModalFooter p="24px 32px 32px 32px">
+				</DrawerBody>
+				<DrawerFooter p="16px">
 					<HStack w="100%">
 						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
 							Annuler
@@ -215,10 +216,10 @@ const UpdateAppointmentModal = ({
 							Confirmer
 						</Button>
 					</HStack>
-				</ModalFooter>
-			</ModalContent>
-		</Modal>
+				</DrawerFooter>
+			</DrawerContent>
+		</Drawer>
 	);
 };
 
-export default UpdateAppointmentModal;
+export default UpdateAppointmentDrawer;
