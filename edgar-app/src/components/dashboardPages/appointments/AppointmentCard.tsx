@@ -31,9 +31,11 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 			<Box as="span" w="4px" bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'} borderRadius="4px" />
 			<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
-					<Text size="boldLg">Docteur XX</Text>
+					<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
+						Docteur XX
+					</Text>
 					<HStack>
-						<Text textAlign="center">
+						<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCardHour-text">
 							{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
 							{appointmentStartDate.getMinutes().toString().padStart(2, '0')}{' '}
 							<Icon as={RightArrowIcon} w="14px" /> {appointmentEndDate.getHours()}h
@@ -47,6 +49,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							size="customSm"
 							variant="delete"
 							w="auto"
+							id="edgar-dashboardAppointmentsPage-appointmentCardCancel-button"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenCancelModal();
@@ -58,6 +61,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							size="customSm"
 							variant="secondary"
 							w="auto"
+							id="edgar-dashboardAppointmentsPage-appointmentCardUpdate-button"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenUpdateModal();
