@@ -30,19 +30,19 @@ const MedicalMedicalInfoCard = ({ healthInfos }: { healthInfos: HealthInfos }): 
 					const info = healthInfos[key as keyof HealthInfos];
 
 					return (
-						<>
+						<Box as="div" key={index}>
 							{(key as keyof HealthInfos) === 'primaryDoctorName' ? (
-								<Text key={index} size={{ base: 'md', lg: 'lg' }}>
+								<Text size={{ base: 'md', lg: 'lg' }}>
 									{medicalInfosLabels[key as keyof HealthInfos]}: {info}
 								</Text>
 							) : (
 								<VStack w="100%" align="start">
-									<Text key={index} size={{ base: 'md', lg: 'lg' }}>
+									<Text size={{ base: 'md', lg: 'lg' }}>
 										{medicalInfosLabels[key as keyof HealthInfos]}:
 									</Text>
 									<Wrap w="100%" gap="8px">
 										{(info as string[]).map((value) => (
-											<WrapItem>
+											<WrapItem key={value}>
 												<OnboardingMedicalSmallCard
 													title={value}
 													onClick={() => {}}
@@ -53,7 +53,7 @@ const MedicalMedicalInfoCard = ({ healthInfos }: { healthInfos: HealthInfos }): 
 									</Wrap>
 								</VStack>
 							)}
-						</>
+						</Box>
 					);
 				})}
 			</VStack>
