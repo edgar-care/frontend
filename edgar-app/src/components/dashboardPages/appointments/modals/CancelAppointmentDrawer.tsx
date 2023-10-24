@@ -12,11 +12,10 @@ import {
 	useToast,
 	VStack,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
-
-import cancelAppointment from 'utils/api/dashboard/appointments/cancelAppointment';
 
 import DeleteCrossIllustration from 'assets/illustrations/DeleteCrossIllustration';
+
+import { useDeletePatientAppointmentMutation } from 'services/request/appointments';
 
 const CancelAppointmentDrawer = ({
 	isOpen,
@@ -27,7 +26,7 @@ const CancelAppointmentDrawer = ({
 	onClose: () => void;
 	appointmentId: string;
 }): JSX.Element => {
-	const router = useRouter();
+	const [triggerDeletePatientAppointment] = useDeletePatientAppointmentMutation();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
@@ -57,9 +56,18 @@ const CancelAppointmentDrawer = ({
 								variant="delete"
 								w="100%"
 								onClick={() =>
-									cancelAppointment(appointmentId, router).then((res) => {
-										toast({ title: res.title, status: res.status });
-									})
+									triggerDeletePatientAppointment(appointmentId)
+										.unwrap()
+										.then(() => {
+											toast({
+												title: 'Votre rendez-vous a bien été supprimé',
+												status: 'success',
+											});
+											onClose();
+										})
+										.catch(() => {
+											toast({ title: 'Une erreur est survenue', status: 'error' });
+										})
 								}
 							>
 								Oui, je suis sûr
@@ -78,9 +86,18 @@ const CancelAppointmentDrawer = ({
 								variant="delete"
 								w="100%"
 								onClick={() =>
-									cancelAppointment(appointmentId, router).then((res) => {
-										toast({ title: res.title, status: res.status });
-									})
+									triggerDeletePatientAppointment(appointmentId)
+										.unwrap()
+										.then(() => {
+											toast({
+												title: 'Votre rendez-vous a bien été supprimé',
+												status: 'success',
+											});
+											onClose();
+										})
+										.catch(() => {
+											toast({ title: 'Une erreur est survenue', status: 'error' });
+										})
 								}
 							>
 								Oui, je suis sûr

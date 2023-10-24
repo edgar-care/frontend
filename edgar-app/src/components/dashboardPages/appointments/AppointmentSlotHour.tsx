@@ -6,8 +6,8 @@ const AppointmentSlotHour = ({
 	selected,
 	onClick,
 }: {
-	startDate: Date;
-	endDate: Date;
+	startDate: number;
+	endDate: number;
 	selected: boolean;
 	onClick: () => void;
 }): JSX.Element => (
@@ -23,8 +23,8 @@ const AppointmentSlotHour = ({
 		}}
 	>
 		<Text size="md" color="white">
-			{startDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} -{' '}
-			{endDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+			{new Date(startDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })} -{' '}
+			{new Date(endDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
 		</Text>
 	</VStack>
 );

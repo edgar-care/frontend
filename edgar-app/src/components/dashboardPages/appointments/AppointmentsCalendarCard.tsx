@@ -9,9 +9,9 @@ import { months } from 'utils/app/dashboard/appointments/calendarUtils';
 import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
-import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
-const AppointmentsCalendarCard = ({ appointments }: { appointments: PatientAppointmentType[] }): JSX.Element => {
+const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => {
 	const [month, setMonth] = useState<number>(new Date().getMonth());
 	const [year, setYear] = useState<number>(new Date().getFullYear());
 
@@ -61,12 +61,16 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments: PatientAppoi
 				<AppointmentCalendar month={month} year={year} appointments={appointments} />
 				<Box as="span" w="100%" h="2px" bg="blue.700" />
 			</VStack>
-			<VStack w="100%" align="start">
-				<Text size="boldMd">Prochain rendez-vous</Text>
-				<CalendarAppointmentCard
-					appointment={appointments.filter((appointment) => appointment.status !== 'DONE')[0]}
-				/>
-			</VStack>
+			{appointments.filter((appointment) => appointment.endDate > new Date().getTime()).length > 0 && (
+				<VStack w="100%" align="start">
+					<Text size="boldMd">Prochain rendez-vous</Text>
+					<CalendarAppointmentCard
+						appointment={
+							appointments.filter((appointment) => appointment.endDate > new Date().getTime())[0]
+						}
+					/>
+				</VStack>
+			)}
 		</Stack>
 	);
 };

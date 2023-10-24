@@ -3,7 +3,7 @@ import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { days } from 'utils/app/dashboard/appointments/calendarUtils';
 import getAllDays from 'utils/app/dashboard/appointments/getAllDays';
 
-import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
 const AppointmentCalendar = ({
 	month,
@@ -12,7 +12,7 @@ const AppointmentCalendar = ({
 }: {
 	month: number;
 	year: number;
-	appointments: PatientAppointmentType[];
+	appointments: AppointmentType[];
 }): JSX.Element => (
 	<Grid templateColumns="repeat(7, 1fr)" gap={{ base: '6px', ssm: '12px' }}>
 		{days.map((day) => (
@@ -26,8 +26,8 @@ const AppointmentCalendar = ({
 			const appointmentsOfTheDay = appointments.filter(
 				(appointment) =>
 					day.currentMonth &&
-					appointment.startDate.getDate() === day.number &&
-					appointment.startDate.getMonth() === month,
+					new Date(appointment.startDate).getDate() === day.number &&
+					new Date(appointment.startDate).getMonth() === month,
 			);
 
 			return (
@@ -41,7 +41,7 @@ const AppointmentCalendar = ({
 					}
 					borderRadius={appointmentsOfTheDay.length > 0 ? '0px' : '8px'}
 					borderBottom={appointmentsOfTheDay.length > 0 ? '2px solid' : ''}
-					borderColor={appointmentsOfTheDay[0]?.status !== 'DONE' ? 'green.500' : 'blue.200'}
+					borderColor={appointmentsOfTheDay[0]?.endDate > new Date().getTime() ? 'green.500' : 'blue.200'}
 					key={`${day.number}/${month}/${year}-${day.currentMonth}`}
 				>
 					<Text

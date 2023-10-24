@@ -6,13 +6,16 @@ import CancelAppointmentHandler from 'components/dashboardPages/appointments/mod
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
-import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
-const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType }): JSX.Element => {
+const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
 	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
 
 	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
+
+	const appointmentStartDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.startDate);
 
 	return (
 		<HStack
@@ -25,25 +28,20 @@ const AppointmentCard = ({ appointment }: { appointment: PatientAppointmentType 
 			bg="white"
 			align="stretch"
 		>
-			<Box
-				as="span"
-				w="4px"
-				bg={appointment.status === 'NOT_STARTED' ? 'green.500' : 'blue.200'}
-				borderRadius="4px"
-			/>
+			<Box as="span" w="4px" bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'} borderRadius="4px" />
 			<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
-					<Text size="boldLg">{appointment.doctorName}</Text>
+					<Text size="boldLg">Docteur XX</Text>
 					<HStack>
 						<Text textAlign="center">
-							{appointment.startDate.toLocaleDateString('fr')} - {appointment.startDate.getHours()}h
-							{appointment.startDate.getMinutes().toString().padStart(2, '0')}{' '}
-							<Icon as={RightArrowIcon} w="14px" /> {appointment.endDate.getHours()}h
-							{appointment.endDate.getMinutes().toString().padStart(2, '0')}
+							{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
+							{appointmentStartDate.getMinutes().toString().padStart(2, '0')}{' '}
+							<Icon as={RightArrowIcon} w="14px" /> {appointmentEndDate.getHours()}h
+							{appointmentEndDate.getMinutes().toString().padStart(2, '0')}
 						</Text>
 					</HStack>
 				</VStack>
-				{appointment.status !== 'DONE' && (
+				{appointmentEndDate > new Date() && (
 					<HStack px={{ base: '8px', xl: '0px' }} justify="end">
 						<Button
 							size="customSm"

@@ -7,39 +7,10 @@ import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import AppointmentsCalendarCard from 'components/dashboardPages/appointments/AppointmentsCalendarCard';
 import AppointmentsCards from 'components/dashboardPages/appointments/AppointmentsCards';
 
-import { type PatientAppointmentType } from 'types/dashboard/appointments/patientAppointmentType';
+import { useGetPatientAppointmentsQuery } from 'services/request/appointments';
 
 const AppointmentsPageContent = (): JSX.Element => {
-	const appointments: PatientAppointmentType[] = [
-		{
-			id: '1',
-			status: 'NOT_STARTED',
-			doctorName: 'Doctor XX',
-			startDate: new Date('2023-09-30 13:00'),
-			endDate: new Date('2023-09-30 14:00'),
-		},
-		{
-			id: '2',
-			status: 'NOT_STARTED',
-			doctorName: 'Doctor XX',
-			startDate: new Date('2023-11-12 13:00'),
-			endDate: new Date('2023-11-12 14:00'),
-		},
-		{
-			id: '3',
-			status: 'NOT_STARTED',
-			doctorName: 'Doctor XX',
-			startDate: new Date('2023-10-27 13:00'),
-			endDate: new Date('2023-10-27 14:00'),
-		},
-		{
-			id: '4',
-			status: 'DONE',
-			doctorName: 'Doctor YY',
-			startDate: new Date('2023-09-10 13:00'),
-			endDate: new Date('2023-09-10 14:00'),
-		},
-	];
+	const { data: appointments } = useGetPatientAppointmentsQuery();
 
 	return (
 		<VStack w="100%" spacing="32px">
@@ -61,13 +32,21 @@ const AppointmentsPageContent = (): JSX.Element => {
 							</Button>
 						</Link>
 					</Box>
-					<AppointmentsCalendarCard
-						appointments={appointments.sort((a, b) => a.startDate.getTime() - b.startDate.getTime())}
-					/>
+					{appointments && (
+						<AppointmentsCalendarCard
+							appointments={[...appointments].sort(
+								(a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+							)}
+						/>
+					)}
 				</VStack>
-				<AppointmentsCards
-					appointments={appointments.sort((a, b) => a.startDate.getTime() - b.startDate.getTime())}
-				/>
+				{appointments && (
+					<AppointmentsCards
+						appointments={[...appointments].sort(
+							(a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+						)}
+					/>
+				)}
 			</Stack>
 		</VStack>
 	);
