@@ -8,7 +8,10 @@ import UpChevronIcon from 'assets/icons/Chevron/UpChevronIcon';
 import CalendarPreviousIllustration from 'assets/illustrations/CalendarPreviousllustration';
 import CalendarNextIllustration from 'assets/illustrations/CalendarNextIllustration';
 
-import { type AppointmentType, DoctorType } from 'types/dashboard/appointments/doctorTypes';
+import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
+
+import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
+import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
 const AppointmentDoctorCard = ({
 	doctorInfos,
@@ -19,6 +22,8 @@ const AppointmentDoctorCard = ({
 	selectedAppointment: string;
 	setSelectedAppointment: Dispatch<SetStateAction<string>>;
 }): JSX.Element => {
+	const { data: doctorAppointments } = useGetDoctorAppointmentsQuery(doctorInfos.id);
+
 	const [firstAppointmentIndex, setFirstAppointmentIndex] = useState(0);
 	const { isOpen: isDetailsOpen, onToggle: onToggleDetails } = useDisclosure();
 
@@ -30,10 +35,10 @@ const AppointmentDoctorCard = ({
 		const groupedAppointments: AppointmentType[][] = [];
 
 		appointments.forEach((appointment) => {
-			const appointmentDay = appointment.startDate.toLocaleDateString('fr-FR');
+			const appointmentDay = new Date(appointment.startDate).toLocaleDateString('fr-FR');
 
 			const appointmentIndex = groupedAppointments.findIndex((groupedAppointment) => {
-				const groupedAppointmentDay = groupedAppointment[0].startDate.toLocaleDateString('fr-FR');
+				const groupedAppointmentDay = new Date(groupedAppointment[0].startDate).toLocaleDateString('fr-FR');
 				return groupedAppointmentDay === appointmentDay;
 			});
 
@@ -56,49 +61,68 @@ const AppointmentDoctorCard = ({
 			borderColor="blue.200"
 			borderRadius="8px"
 			spacing="16px"
-			cursor="pointer"
+			cursor={doctorAppointments && doctorAppointments.length > 0 ? 'pointer' : ''}
 			transition="all .3s ease-in-out"
 			_hover={{
 				borderColor: 'blue.400',
 				transition: 'all .3s ease-in-out',
 			}}
-			onClick={() => (!isDetailsOpen ? onToggleDetails() : {})}
+			onClick={() =>
+				!isDetailsOpen && doctorAppointments && doctorAppointments.length > 0 ? onToggleDetails() : {}
+			}
 		>
-			<HStack w="100%" justify="space-between" px="4px" onClick={() => (isDetailsOpen ? onToggleDetails() : {})}>
+			<HStack
+				w="100%"
+				justify="space-between"
+				px="4px"
+				onClick={() =>
+					isDetailsOpen && doctorAppointments && doctorAppointments.length > 0 ? onToggleDetails() : {}
+				}
+			>
 				<VStack align="starts">
 					<VStack align="start" spacing="0px">
 						<Text size="boldLg">{doctorInfos.name}</Text>
 						<Text>{doctorInfos.address}</Text>
 					</VStack>
-					{!isDetailsOpen && (
-						<Text maxW={{ base: '250px', sm: '350px', smd: '100%' }}>
-							Prochain créneau disponible{isDrawer ? ':' : ' le '}
-							<Box as="span" color="blue.700" textTransform="capitalize" display="inline-block">
-								{doctorInfos.appointments[0].startDate.toLocaleDateString('fr-FR', {
-									weekday: isMobile ? 'short' : 'long',
-									day: 'numeric',
-									month: isMobile ? 'short' : 'long',
-								})}
-							</Box>
-							<Box as="span" color="blue.700">
-								{' '}
-								de{' '}
-								{doctorInfos.appointments[0].startDate.toLocaleTimeString('fr-FR', {
-									hour: '2-digit',
-									minute: '2-digit',
-								})}{' '}
-								à{' '}
-								{doctorInfos.appointments[0].endDate.toLocaleTimeString('fr-FR', {
-									hour: '2-digit',
-									minute: '2-digit',
-								})}
-							</Box>
-						</Text>
+					{!isDetailsOpen && doctorAppointments && (
+						<>
+							{doctorAppointments.length > 0 ? (
+								<Text maxW={{ base: '250px', sm: '350px', smd: '100%' }}>
+									Prochain créneau disponible{isDrawer ? ':' : ' le '}
+									<Box as="span" color="blue.700" textTransform="capitalize" display="inline-block">
+										{new Date(doctorAppointments[0].startDate).toLocaleDateString('fr-FR', {
+											weekday: isMobile ? 'short' : 'long',
+											day: 'numeric',
+											month: isMobile ? 'short' : 'long',
+										})}
+									</Box>
+									<Box as="span" color="blue.700">
+										{' '}
+										de{' '}
+										{new Date(doctorAppointments[0].startDate).toLocaleTimeString('fr-FR', {
+											hour: '2-digit',
+											minute: '2-digit',
+										})}{' '}
+										à{' '}
+										{new Date(doctorAppointments[0].startDate).toLocaleTimeString('fr-FR', {
+											hour: '2-digit',
+											minute: '2-digit',
+										})}
+									</Box>
+								</Text>
+							) : (
+								<Text maxW={{ base: '250px', sm: '350px', smd: '100%' }} color="red.700">
+									Pas de créneaux disponible pour le moment
+								</Text>
+							)}
+						</>
 					)}
 				</VStack>
-				<Icon as={isDetailsOpen ? UpChevronIcon : DownChevronIcon} w="16px" color="black" />
+				{doctorAppointments && doctorAppointments.length > 0 && (
+					<Icon as={isDetailsOpen ? UpChevronIcon : DownChevronIcon} w="16px" color="black" />
+				)}
 			</HStack>
-			{isDetailsOpen && (
+			{isDetailsOpen && doctorAppointments && (
 				<HStack>
 					<Icon
 						as={CalendarPreviousIllustration}
@@ -109,7 +133,7 @@ const AppointmentDoctorCard = ({
 						}}
 					/>
 					<HStack align="strech">
-						{groupAppointmentsOnSameDay(doctorInfos.appointments)
+						{groupAppointmentsOnSameDay(doctorAppointments)
 							.filter(
 								(_, index) =>
 									index >= firstAppointmentIndex &&
@@ -131,7 +155,7 @@ const AppointmentDoctorCard = ({
 						onClick={() => {
 							if (
 								firstAppointmentIndex + nbrDisplayedAppointments <
-								groupAppointmentsOnSameDay(doctorInfos.appointments).length
+								groupAppointmentsOnSameDay(doctorAppointments).length
 							)
 								setFirstAppointmentIndex(firstAppointmentIndex + 1);
 						}}
