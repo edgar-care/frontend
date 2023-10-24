@@ -29,10 +29,18 @@ const MedicalUpdateCard = ({
 				<Box as="span" w="4px" alignSelf="stretch" bg="green.500" borderRadius="4px" />
 				<VStack pl="8px" w="100%" align="start">
 					<VStack w="100%" spacing="0px" align="start">
-						<Text size={{ base: 'md', lg: 'lg' }}>Des informations manquantes ?</Text>
-						<Text size={{ base: 'md', lg: 'lg' }}>Des changements médicaux ?</Text>
+						<Text size={{ base: 'md', lg: 'lg' }} id="edgar-dashboardMedicalPage-updateInformations1-text">
+							Des informations manquantes ?
+						</Text>
+						<Text size={{ base: 'md', lg: 'lg' }} id="edgar-dashboardMedicalPage-updateInformations2-text">
+							Des changements médicaux ?
+						</Text>
 					</VStack>
-					<Button w="100%" onClick={onOpenUpdateModal}>
+					<Button
+						w="100%"
+						onClick={onOpenUpdateModal}
+						id="edgar-dashboardMedicalPage-updateInformations-button"
+					>
 						Mettre à jour mes informations
 					</Button>
 				</VStack>
