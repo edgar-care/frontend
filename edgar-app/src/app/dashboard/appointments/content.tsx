@@ -27,7 +27,7 @@ const AppointmentsPageContent = (): JSX.Element => {
 				<VStack spacing="16px" w={{ base: '100%', md: 'auto' }}>
 					<Box w="100%">
 						<Link href="/simulation">
-							<Button w="100%" size="customLg">
+							<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
 								Prendre un rendez-vous
 							</Button>
 						</Link>
