@@ -3,13 +3,12 @@ import { SerializedError } from '@reduxjs/toolkit';
 
 import { API_URL } from 'config/constants';
 
-import { RootState } from 'store/store';
-
 const apiBase = fetchBaseQuery({
 	baseUrl: API_URL,
-	prepareHeaders: (headers, { getState }) => {
+	prepareHeaders: (headers) => {
 		// @ts-ignore
-		const { token } = (getState() as RootState).auth;
+		// const { token } = (getState() as RootState).auth;
+		const token = localStorage.getItem('token');
 		if (token) {
 			headers.set('Authorization', `Bearer ${token}`);
 		}
@@ -22,7 +21,7 @@ export const isFetchBaseQueryErrorType = (err: FetchBaseQueryError | SerializedE
 	'status' in err;
 
 export const backendApi = createApi({
-	tagTypes: ['Example'],
+	tagTypes: ['Example', 'patientAppointments', 'doctorAppointments'],
 	reducerPath: 'backendApi',
 	baseQuery: apiBase,
 	endpoints: () => ({}),
