@@ -10,6 +10,7 @@ import {
 	ModalFooter,
 	ModalOverlay,
 	Text,
+	useToast,
 	VStack,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -20,8 +21,10 @@ import Stepper from 'components/stepper/Stepper';
 
 import MedicalIllustration from 'assets/illustrations/MedicalIllustration';
 
-import { type MedicalInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+
+import { useUpdatePatientMedicalFolderMutation } from 'services/request/medical';
 
 const UpdateMedicalModal = ({
 	isOpen,
@@ -32,8 +35,10 @@ const UpdateMedicalModal = ({
 	isOpen: boolean;
 	onClose: () => void;
 	personalInfos: PersonalInfos;
-	medicalInfos: MedicalInfos;
+	medicalInfos: HealthInfos;
 }): JSX.Element => {
+	const [triggerUpdatePatientMedicalFolder] = useUpdatePatientMedicalFolderMutation();
+
 	const [step, setStep] = useState(0);
 	const {
 		handleSubmit,
@@ -47,18 +52,19 @@ const UpdateMedicalModal = ({
 		mode: 'onChange',
 	});
 
+	const toast = useToast({ duration: 3000, isClosable: true });
+
 	const onSubmit = handleSubmit((data) => {
-		// onSubmitPersonalInfos(data, router).then((res) => {
-		// 	toast({
-		// 		title: res.title,
-		// 		status: res.status,
-		// 	});
-		//
-		// 	if (res.status === 'success') router.push('/onboarding/medical');
-		// });
-		void data;
-		setStep(0);
-		onClose();
+		triggerUpdatePatientMedicalFolder(data)
+			.unwrap()
+			.then(() => {
+				toast({ title: 'Votre dossier médical a bien été modifié', status: 'success' });
+				setStep(0);
+				onClose();
+			})
+			.catch(() => {
+				toast({ title: 'Une erreur est survenue', status: 'error' });
+			});
 	});
 
 	useEffect(() => {
@@ -92,13 +98,7 @@ const UpdateMedicalModal = ({
 							</VStack>
 						</VStack>
 						{step === 0 ? (
-							<UpdateMedicalPersonalModalContent
-								register={register}
-								control={control}
-								errors={errors}
-								watch={watch}
-								setValue={setValue}
-							/>
+							<UpdateMedicalPersonalModalContent register={register} control={control} errors={errors} />
 						) : (
 							<UpdateMedicalMedicalModalContent
 								register={register}

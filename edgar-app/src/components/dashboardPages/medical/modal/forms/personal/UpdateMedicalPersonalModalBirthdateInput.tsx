@@ -1,5 +1,5 @@
 import { FormLabel, Input, VStack } from '@chakra-ui/react';
-import { type FieldErrors, type UseFormSetValue, type UseFormWatch } from 'react-hook-form';
+import { type FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -7,22 +7,19 @@ import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileT
 
 const UpdateMedicalPersonalModalBirthdateInput = ({
 	errors,
-	watch,
-	setValue,
+	register,
 }: {
 	errors: FieldErrors<MedicalProfileType>;
-	watch: UseFormWatch<MedicalProfileType>;
-	setValue: UseFormSetValue<MedicalProfileType>;
+	register: UseFormRegister<MedicalProfileType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%" maxW="264px">
 		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formBirthdate-text">
 			Votre date de naissance
 		</FormLabel>
 		<Input
+			{...register('birthDate', { required: true, valueAsDate: false })}
 			placeholder="Sélectionner votre date de naissance"
 			w="100%"
-			value={watch('birthDate').toLocaleDateString('fr-FR').replaceAll('/', '-').split('-').reverse().join('-')}
-			onChange={(e) => setValue('birthDate', new Date(e.target.value))}
 			type="date"
 			id="edgar-updateMedicalPersonalModal-formBirthdate-input"
 		/>
