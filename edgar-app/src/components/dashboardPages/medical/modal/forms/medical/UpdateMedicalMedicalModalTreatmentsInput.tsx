@@ -6,24 +6,24 @@ import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/Onboa
 
 import PlusIcon from 'assets/icons/PlusIcon';
 
-import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
+import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
 
-const OnboardingMedicalDiseasesInput = ({
-	setValue,
+const UpdateMedicalMedicalModalTreatmentsInput = ({
 	watch,
+	setValue,
 }: {
-	setValue: UseFormSetValue<HealthInfos>;
-	watch: UseFormWatch<HealthInfos>;
+	watch: UseFormWatch<MedicalProfileType>;
+	setValue: UseFormSetValue<MedicalProfileType>;
 }): JSX.Element => {
-	const diseases = watch('diseases') || [];
-	const [diseaseInput, setDiseaseInput] = useState('');
+	const treatments = watch('treatmentsInProgress') || [];
+	const [treatmentInput, setDiseaseInput] = useState('');
 
 	const toast = useToast({ duration: 2000, isClosable: true });
 
-	const checkDiseases = () => {
-		if (diseases.includes(diseaseInput)) {
+	const checkTreatments = () => {
+		if (treatments.includes(treatmentInput)) {
 			toast({
-				title: 'Maladie déjà renseignée',
+				title: 'Traitement déjà renseignée',
 				status: 'error',
 			});
 			return false;
@@ -34,20 +34,20 @@ const OnboardingMedicalDiseasesInput = ({
 	return (
 		<VStack spacing="16px" align="start" w="100%">
 			<VStack spacing="8px" align="start" w="100%">
-				<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-formDiseases-text">
-					Vos maladies
+				<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formTreatments-text">
+					Vos traitements
 				</FormLabel>
 				<InputGroup>
 					<Input
-						placeholder="Renseignez vos maladies ici"
+						placeholder="Renseignez vos traitements ici"
 						w="100%"
 						maxLength={40}
-						value={diseaseInput}
-						id="edgar-onboardingMedicalPage-formDiseases-input"
+						value={treatmentInput}
+						id="edgar-updateMedicalPersonalModal-formTreatments-input"
 						onChange={(e) => setDiseaseInput(e.target.value.toLowerCase())}
 						onKeyDown={(e) => {
-							if (e.key !== 'Enter' || !diseaseInput || !checkDiseases()) return;
-							setValue('diseases', [...diseases, diseaseInput]);
+							if (e.key !== 'Enter' || !treatmentInput || !checkTreatments()) return;
+							setValue('treatmentsInProgress', [...treatments, treatmentInput]);
 							setDiseaseInput('');
 						}}
 					/>
@@ -58,10 +58,10 @@ const OnboardingMedicalDiseasesInput = ({
 							h="16px"
 							cursor="pointer"
 							transition="all .3s ease-in-out"
-							id="edgar-onboardingMedicalPage-formDiseases-addButton-icon"
+							id="edgar-updateMedicalPersonalModal-formTreatments-addButton-icon"
 							onClick={() => {
-								if (!diseaseInput || !checkDiseases()) return;
-								setValue('diseases', [...diseases, diseaseInput]);
+								if (!treatmentInput || !checkTreatments()) return;
+								setValue('treatmentsInProgress', [...treatments, treatmentInput]);
 								setDiseaseInput('');
 							}}
 							_hover={{
@@ -71,20 +71,20 @@ const OnboardingMedicalDiseasesInput = ({
 					</InputRightElement>
 				</InputGroup>
 			</VStack>
-			{diseases.length !== 0 && (
+			{treatments.length !== 0 && (
 				<VStack spacing="8px" align="start" w="100%">
-					<FormLabel size="boldMd" id="edgar-onboardingMedicalPage-formDiseases-filled-text">
-						Vos maladies renseignées :{' '}
+					<FormLabel size="boldMd" id="edgar-updateMedicalPersonalModal-formTreatments-filled-text">
+						Vos traitements renseignés :{' '}
 					</FormLabel>
 					<Wrap>
-						{diseases.map((disease) => (
-							<WrapItem key={disease}>
+						{treatments.map((treatment) => (
+							<WrapItem key={treatment}>
 								<OnboardingMedicalSmallCard
-									title={disease}
+									title={treatment}
 									onClick={() =>
 										setValue(
-											'diseases',
-											diseases.filter((d) => d !== disease),
+											'treatmentsInProgress',
+											treatments.filter((d) => d !== treatment),
 										)
 									}
 								/>
@@ -97,4 +97,4 @@ const OnboardingMedicalDiseasesInput = ({
 	);
 };
 
-export default OnboardingMedicalDiseasesInput;
+export default UpdateMedicalMedicalModalTreatmentsInput;

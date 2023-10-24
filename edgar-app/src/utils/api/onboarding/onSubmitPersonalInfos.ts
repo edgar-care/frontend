@@ -14,8 +14,8 @@ const onSubmitPersonalInfos = async (
 			'onboarding/infos',
 			'POST',
 			JSON.stringify({
-				name: personalInfos.name,
-				surname: personalInfos.firstname,
+				name: personalInfos.firstname,
+				surname: personalInfos.name,
 				birthdate: personalInfos.birthDate.toString(),
 				sex: personalInfos.sex,
 				weight: personalInfos.weight,

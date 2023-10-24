@@ -6,11 +6,11 @@ import OnboardingMedicalPrimaryDoctorInput from 'components/onboardingPages/medi
 import OnboardingMedicalAllergiesInput from 'components/onboardingPages/medical/OnboardingMedicalAllergiesInput';
 import OnboardingMedicalDiseasesInput from 'components/onboardingPages/medical/OnboardingMedicalDiseasesInput';
 import OnboardingMedicalTreatmentsInput from 'components/onboardingPages/medical/OnboardingMedicalTreatmentsInput';
+import OnboardingMedicalWarningHandler from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalWarningHandler';
 
 import onSubmitMedicalInfos from 'utils/api/onboarding/onSubmitMedicalInfos';
 
-import { type MedicalInfos } from 'types/onboarding/OnboardingInfos';
-import OnboardingMedicalWarningHandler from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalWarningHandler';
+import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
 const OnboardingMedicalFields = (): JSX.Element => {
 	const {
@@ -19,7 +19,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 		register,
 		setValue,
 		watch,
-	} = useForm<MedicalInfos>({ mode: 'onChange' });
+	} = useForm<HealthInfos>({ mode: 'onChange' });
 	const { allergies, diseases, treatmentsInProgress } = watch();
 
 	const { isOpen, onOpen, onClose } = useDisclosure();

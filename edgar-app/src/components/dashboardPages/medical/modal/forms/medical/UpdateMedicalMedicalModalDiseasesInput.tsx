@@ -6,14 +6,14 @@ import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/Onboa
 
 import PlusIcon from 'assets/icons/PlusIcon';
 
-import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
+import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
 
-const OnboardingMedicalDiseasesInput = ({
-	setValue,
+const UpdateMedicalMedicalModalDiseasesInput = ({
 	watch,
+	setValue,
 }: {
-	setValue: UseFormSetValue<HealthInfos>;
-	watch: UseFormWatch<HealthInfos>;
+	watch: UseFormWatch<MedicalProfileType>;
+	setValue: UseFormSetValue<MedicalProfileType>;
 }): JSX.Element => {
 	const diseases = watch('diseases') || [];
 	const [diseaseInput, setDiseaseInput] = useState('');
@@ -34,7 +34,7 @@ const OnboardingMedicalDiseasesInput = ({
 	return (
 		<VStack spacing="16px" align="start" w="100%">
 			<VStack spacing="8px" align="start" w="100%">
-				<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-formDiseases-text">
+				<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formDiseases-text">
 					Vos maladies
 				</FormLabel>
 				<InputGroup>
@@ -43,7 +43,7 @@ const OnboardingMedicalDiseasesInput = ({
 						w="100%"
 						maxLength={40}
 						value={diseaseInput}
-						id="edgar-onboardingMedicalPage-formDiseases-input"
+						id="edgar-updateMedicalPersonalModal-formDiseases-input"
 						onChange={(e) => setDiseaseInput(e.target.value.toLowerCase())}
 						onKeyDown={(e) => {
 							if (e.key !== 'Enter' || !diseaseInput || !checkDiseases()) return;
@@ -58,7 +58,7 @@ const OnboardingMedicalDiseasesInput = ({
 							h="16px"
 							cursor="pointer"
 							transition="all .3s ease-in-out"
-							id="edgar-onboardingMedicalPage-formDiseases-addButton-icon"
+							id="edgar-updateMedicalPersonalModal-formDiseases-addButton-icon"
 							onClick={() => {
 								if (!diseaseInput || !checkDiseases()) return;
 								setValue('diseases', [...diseases, diseaseInput]);
@@ -73,7 +73,7 @@ const OnboardingMedicalDiseasesInput = ({
 			</VStack>
 			{diseases.length !== 0 && (
 				<VStack spacing="8px" align="start" w="100%">
-					<FormLabel size="boldMd" id="edgar-onboardingMedicalPage-formDiseases-filled-text">
+					<FormLabel size="boldMd" id="edgar-updateMedicalPersonalModal-formDiseases-filled-text">
 						Vos maladies renseignées :{' '}
 					</FormLabel>
 					<Wrap>
@@ -97,4 +97,4 @@ const OnboardingMedicalDiseasesInput = ({
 	);
 };
 
-export default OnboardingMedicalDiseasesInput;
+export default UpdateMedicalMedicalModalDiseasesInput;

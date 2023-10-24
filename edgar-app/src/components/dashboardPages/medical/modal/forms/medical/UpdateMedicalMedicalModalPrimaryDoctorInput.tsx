@@ -3,17 +3,17 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
+import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
 
-const OnboardingMedicalPrimaryDoctorInput = ({
-	register,
+const UpdateMedicalMedicalModalPrimaryDoctorInput = ({
 	errors,
+	register,
 }: {
-	register: UseFormRegister<HealthInfos>;
-	errors: FieldErrors<HealthInfos>;
+	errors: FieldErrors<MedicalProfileType>;
+	register: UseFormRegister<MedicalProfileType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-formPrimaryDoctor-text">
+		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formPrimaryDoctor-text">
 			Le nom de votre médecin traitant
 		</FormLabel>
 		<Input
@@ -21,14 +21,14 @@ const OnboardingMedicalPrimaryDoctorInput = ({
 			placeholder="Docteur Edgar"
 			w="100%"
 			maxLength={100}
-			id="edgar-onboardingMedicalPage-formPrimaryDoctor-input"
+			id="edgar-updateMedicalPersonalModal-formPrimaryDoctor-input"
 		/>
 		{errors.primaryDoctorName?.type === 'required' && (
-			<ErrorMessage id="edgar-onboardingMedicalPage-formPrimaryDoctorError-text">
+			<ErrorMessage id="edgar-updateMedicalPersonalModal-formPrimaryDoctorError-text">
 				Ce champ est nécessaire
 			</ErrorMessage>
 		)}
 	</VStack>
 );
 
-export default OnboardingMedicalPrimaryDoctorInput;
+export default UpdateMedicalMedicalModalPrimaryDoctorInput;

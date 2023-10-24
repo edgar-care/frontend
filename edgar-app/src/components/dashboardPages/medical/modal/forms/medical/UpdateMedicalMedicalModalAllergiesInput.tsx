@@ -6,14 +6,14 @@ import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/Onboa
 
 import PlusIcon from 'assets/icons/PlusIcon';
 
-import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
+import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
 
-const OnboardingMedicalAllergiesInput = ({
-	setValue,
+const UpdateMedicalMedicalModalAllergiesInput = ({
 	watch,
+	setValue,
 }: {
-	setValue: UseFormSetValue<HealthInfos>;
-	watch: UseFormWatch<HealthInfos>;
+	watch: UseFormWatch<MedicalProfileType>;
+	setValue: UseFormSetValue<MedicalProfileType>;
 }): JSX.Element => {
 	const allergies = watch('allergies') || [];
 	const [allergieInput, setAllergieInput] = useState('');
@@ -34,7 +34,7 @@ const OnboardingMedicalAllergiesInput = ({
 	return (
 		<VStack spacing="16px" align="start" w="100%">
 			<VStack spacing="8px" align="start" w="100%">
-				<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-formAllergies-text">
+				<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formAllergies-text">
 					Vos allergies
 				</FormLabel>
 				<InputGroup>
@@ -43,7 +43,7 @@ const OnboardingMedicalAllergiesInput = ({
 						w="100%"
 						maxLength={25}
 						value={allergieInput}
-						id="edgar-onboardingMedicalPage-formAllergies-input"
+						id="edgar-updateMedicalPersonalModal-formAllergies-input"
 						onChange={(e) => setAllergieInput(e.target.value.toLowerCase())}
 						onKeyDown={(e) => {
 							if (e.key !== 'Enter' || !allergieInput || !checkAllergies()) return;
@@ -58,7 +58,7 @@ const OnboardingMedicalAllergiesInput = ({
 							h="16px"
 							cursor="pointer"
 							transition="all .3s ease-in-out"
-							id="edgar-onboardingMedicalPage-formAllergies-addButton-icon"
+							id="edgar-updateMedicalPersonalModal-formAllergies-addButton-icon"
 							onClick={() => {
 								if (!allergieInput || !checkAllergies()) return;
 								setValue('allergies', [...allergies, allergieInput]);
@@ -73,7 +73,7 @@ const OnboardingMedicalAllergiesInput = ({
 			</VStack>
 			{allergies.length !== 0 && (
 				<VStack spacing="8px" align="start" w="100%">
-					<FormLabel size="boldMd" id="edgar-onboardingMedicalPage-formAllergies-filled-text">
+					<FormLabel size="boldMd" id="edgar-updateMedicalPersonalModal-formAllergies-filled-text">
 						Vos allergies renseignées :{' '}
 					</FormLabel>
 					<Wrap>
@@ -97,4 +97,4 @@ const OnboardingMedicalAllergiesInput = ({
 	);
 };
 
-export default OnboardingMedicalAllergiesInput;
+export default UpdateMedicalMedicalModalAllergiesInput;
