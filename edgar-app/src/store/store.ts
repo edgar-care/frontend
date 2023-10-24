@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistStore } from 'redux-persist';
+
 import { backendApi } from 'services/apiService';
 
 const store = configureStore({
@@ -23,5 +24,3 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export { store, persistor };
-
-
