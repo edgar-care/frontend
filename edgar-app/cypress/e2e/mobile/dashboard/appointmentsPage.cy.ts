@@ -22,7 +22,7 @@ describe('Good number of elements - Mobile', () => {
 	});
 
 	it('Good number of images', () => {
-		cy.get('img').should('have.length', 2);
+		cy.get('img').should('have.length', 1);
 	});
 
 	it('Good number of inputs', () => {
