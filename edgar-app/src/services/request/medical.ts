@@ -21,9 +21,9 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 				healthInfos: {
 					primaryDoctorName: response.patient_health.patients_primary_doctor,
-					allergies: response.patient_health.patients_allergies,
-					diseases: response.patient_health.patients_illness,
-					treatmentsInProgress: response.patient_health.patients_treatments,
+					allergies: response.patient_health.patients_allergies || [],
+					diseases: response.patient_health.patients_illness || [],
+					treatmentsInProgress: response.patient_health.patients_treatments || [],
 				},
 			}),
 		}),
