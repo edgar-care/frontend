@@ -3,13 +3,13 @@ export type Sex = 'MALE' | 'FEMALE' | 'OTHER';
 export type PersonalInfos = {
 	name: string;
 	firstname: string;
-	birthDate: Date;
+	birthDate: string;
 	sex: Sex;
 	size: number; // in meters
 	weight: number; // in kilograms
 };
 
-export type MedicalInfos = {
+export type HealthInfos = {
 	primaryDoctorName: string;
 	allergies: string[];
 	diseases: string[];
