@@ -12,7 +12,7 @@ const QuestionCard = ({ para, button }: { para: string; button: string }): JSX.E
 		w="100%"
 	>
 		<Text size="md">{para}</Text>
-		<Button variant="primary" size="sm">
+		<Button variant="primary" size="customSm">
 			{button}
 		</Button>
 	</Stack>
