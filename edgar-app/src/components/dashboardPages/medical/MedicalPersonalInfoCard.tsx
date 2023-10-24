@@ -17,8 +17,8 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 		OTHER: 'Autre',
 	};
 
-	const displayPersonalInfos = (key: string, info: string | number | Date): string => {
-		if (info instanceof Date) return info.toLocaleDateString('fr-FR');
+	const displayPersonalInfos = (key: string, info: string | number): string => {
+		if ((key as keyof PersonalInfos) === 'birthDate') return new Date(info).toLocaleDateString('fr-FR');
 		if ((key as keyof PersonalInfos) === 'sex') return sexLabel[info];
 		if ((key as keyof PersonalInfos) === 'size') return `${((info as number) / 100).toPrecision(3)}m`;
 		if ((key as keyof PersonalInfos) === 'weight') return `${info}kg`;

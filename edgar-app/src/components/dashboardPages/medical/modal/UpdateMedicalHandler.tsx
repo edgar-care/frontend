@@ -3,7 +3,7 @@ import { useBreakpointValue } from '@chakra-ui/react';
 import UpdateMedicalModal from 'components/dashboardPages/medical/modal/UpdateMedicalModal';
 import UpdateMedicalDrawer from 'components/dashboardPages/medical/modal/UpdateMedicalDrawer';
 
-import { type MedicalInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
 const UpdateMedicalHandler = ({
 	isOpen,
@@ -14,7 +14,7 @@ const UpdateMedicalHandler = ({
 	isOpen: boolean;
 	onClose: () => void;
 	personalInfos: PersonalInfos;
-	medicalInfos: MedicalInfos;
+	medicalInfos: HealthInfos;
 }): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, smd: false });
 

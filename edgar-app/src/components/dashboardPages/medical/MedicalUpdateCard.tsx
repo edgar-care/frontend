@@ -2,14 +2,14 @@ import { Box, Button, HStack, Text, useDisclosure, VStack } from '@chakra-ui/rea
 
 import UpdateMedicalHandler from 'components/dashboardPages/medical/modal/UpdateMedicalHandler';
 
-import { type MedicalInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
 const MedicalUpdateCard = ({
 	personalInfos,
-	medicalInfos,
+	healthInfos,
 }: {
 	personalInfos: PersonalInfos;
-	medicalInfos: MedicalInfos;
+	healthInfos: HealthInfos;
 }): JSX.Element => {
 	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
 
@@ -41,7 +41,7 @@ const MedicalUpdateCard = ({
 				isOpen={isOpenUpdateModal}
 				onClose={onCloseUpdateModal}
 				personalInfos={personalInfos}
-				medicalInfos={medicalInfos}
+				medicalInfos={healthInfos}
 			/>
 		</>
 	);
