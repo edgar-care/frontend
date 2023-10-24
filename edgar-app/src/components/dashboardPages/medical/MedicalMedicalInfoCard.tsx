@@ -32,12 +32,20 @@ const MedicalMedicalInfoCard = ({ healthInfos }: { healthInfos: HealthInfos }): 
 					return (
 						<Box as="div" key={index}>
 							{(key as keyof HealthInfos) === 'primaryDoctorName' ? (
-								<Text size={{ base: 'md', lg: 'lg' }}>
+								<Text
+									size={{ base: 'md', lg: 'lg' }}
+									id={`edgar-dashboardMedicalPage-healthInfoCard-${key as keyof HealthInfos}-text`}
+								>
 									{medicalInfosLabels[key as keyof HealthInfos]}: {info}
 								</Text>
 							) : (
 								<VStack w="100%" align="start">
-									<Text size={{ base: 'md', lg: 'lg' }}>
+									<Text
+										size={{ base: 'md', lg: 'lg' }}
+										id={`edgar-dashboardMedicalPage-healthInfoCard-${
+											key as keyof HealthInfos
+										}-text`}
+									>
 										{medicalInfosLabels[key as keyof HealthInfos]}:
 									</Text>
 									<Wrap w="100%" gap="8px">

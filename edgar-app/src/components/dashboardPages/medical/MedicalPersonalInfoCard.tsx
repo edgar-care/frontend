@@ -43,7 +43,11 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 					const info = personalInfos[key as keyof PersonalInfos];
 
 					return (
-						<Text key={index} size={{ base: 'md', lg: 'lg' }}>
+						<Text
+							key={index}
+							size={{ base: 'md', lg: 'lg' }}
+							id={`edgar-dashboardMedicalPage-personalInfoCard-${key as keyof PersonalInfos}-text`}
+						>
 							{personalInfosLabels[key as keyof PersonalInfos]}: {displayPersonalInfos(key, info)}
 						</Text>
 					);
