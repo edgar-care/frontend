@@ -9,7 +9,9 @@ import { type AppointmentType } from 'types/dashboard/appointments/appointmentTy
 const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => (
 	<VStack spacing="32px" w="100%">
 		<VStack w="100%" spacing="16px" align="start">
-			<Text size="boldXl">Mes prochains rendez-vous</Text>
+			<Text size="boldXl" id="edgar-dashboardAppointmentsPage-nextAppointments-text">
+				Mes prochains rendez-vous
+			</Text>
 			<VStack w="100%">
 				{appointments
 					.filter((appointment) => appointment.endDate > new Date().getTime())
@@ -19,7 +21,9 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 			</VStack>
 		</VStack>
 		<VStack w="100%" spacing="16px" align="start">
-			<Text size="boldXl">Mes rendez-vous passés</Text>
+			<Text size="boldXl" id="edgar-dashboardAppointmentsPage-doneAppointments-text">
+				Mes rendez-vous passés
+			</Text>
 			<VStack w="100%">
 				{appointments
 					.filter((appointment) => appointment.endDate <= new Date().getTime())

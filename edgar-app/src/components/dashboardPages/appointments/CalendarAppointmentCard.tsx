@@ -28,9 +28,11 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 			/>
 			<VStack justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
-					<Text size="boldLg">Docteur XX</Text>
+					<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCalendarCardDoctorName-text">
+						Docteur XX
+					</Text>
 					<HStack>
-						<Text textAlign="center">
+						<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCalendarCardHour-text">
 							{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
 							{appointmentStartDate.getMinutes().toString().padStart(2, '0')}{' '}
 							<Icon as={RightArrowIcon} w="14px" /> {appointmentEndDate.getHours()}h
@@ -43,6 +45,7 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 						<Button
 							size="customSm"
 							variant="delete"
+							id="edgar-dashboardAppointmentsPage-appointmentCalendarCardCancel-button"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenCancelModal();
@@ -53,6 +56,7 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 						<Button
 							size="customSm"
 							variant="secondary"
+							id="edgar-dashboardAppointmentsPage-appointmentCalendarCardUpdate-button"
 							onClick={() => {
 								setSelectedAppointmentId(appointment.id);
 								onOpenUpdateModal();
