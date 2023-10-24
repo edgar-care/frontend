@@ -21,7 +21,7 @@ export const isFetchBaseQueryErrorType = (err: FetchBaseQueryError | SerializedE
 	'status' in err;
 
 export const backendApi = createApi({
-	tagTypes: ['Example', 'patientAppointments', 'doctorAppointments'],
+	tagTypes: ['Example', 'patientAppointments', 'doctorAppointments', 'patientMedicalFolder'],
 	reducerPath: 'backendApi',
 	baseQuery: apiBase,
 	endpoints: () => ({}),
