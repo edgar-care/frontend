@@ -6,14 +6,14 @@ import OnboardingMedicalSmallCard from 'components/app/onboardingPages/medical/O
 
 import PlusIcon from 'assets/icons/PlusIcon';
 
-import { type MedicalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
 const OnboardingMedicalDiseasesInput = ({
 	setValue,
 	watch,
 }: {
-	setValue: UseFormSetValue<MedicalInfos>;
-	watch: UseFormWatch<MedicalInfos>;
+	setValue: UseFormSetValue<HealthInfos>;
+	watch: UseFormWatch<HealthInfos>;
 }): JSX.Element => {
 	const diseases = watch('diseases') || [];
 	const [diseaseInput, setDiseaseInput] = useState('');

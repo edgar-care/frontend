@@ -3,12 +3,9 @@ import basicFetch from 'utils/basicFetch';
 import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 
 import { type MessageResponse } from 'types/MessageResponse';
-import { type MedicalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
-const onSubmitMedicalInfos = async (
-	medicalInfos: MedicalInfos,
-	router: AppRouterInstance,
-): Promise<MessageResponse> => {
+const onSubmitMedicalInfos = async (medicalInfos: HealthInfos, router: AppRouterInstance): Promise<MessageResponse> => {
 	try {
 		const response = await basicFetch(
 			'onboarding/health',

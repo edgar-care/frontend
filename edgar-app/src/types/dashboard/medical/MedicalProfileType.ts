@@ -1,3 +1,3 @@
-import { type MedicalInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
-export type MedicalProfileType = PersonalInfos & MedicalInfos;
+export type MedicalProfileType = PersonalInfos & HealthInfos;

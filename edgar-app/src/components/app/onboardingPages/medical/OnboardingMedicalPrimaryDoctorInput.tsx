@@ -3,14 +3,14 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type MedicalInfos } from 'types/onboarding/OnboardingInfos';
+import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
 const OnboardingMedicalPrimaryDoctorInput = ({
 	register,
 	errors,
 }: {
-	register: UseFormRegister<MedicalInfos>;
-	errors: FieldErrors<MedicalInfos>;
+	register: UseFormRegister<HealthInfos>;
+	errors: FieldErrors<HealthInfos>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%">
 		<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-formPrimaryDoctor-text">
