@@ -13,8 +13,8 @@ const BannerCard = ({
 }): JSX.Element => (
 	<Stack
 		direction={{ base: 'column', md: 'row' }}
-		bg="purple.100"
-		border={`2px solid ${colors.purple[200]}`}
+		bg="green.100"
+		border={`2px solid ${colors.green[200]}`}
 		p="12px 24px"
 		borderRadius="16px"
 		w="100%"

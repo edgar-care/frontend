@@ -7,12 +7,20 @@ import fonts from 'theme/foundations/fonts';
 import shadows from 'theme/foundations/shadows';
 
 import Button from 'theme/components/button';
+import Drawer from 'theme/components/drawer';
+import FormLabel from 'theme/components/formLabel';
+import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Text from 'theme/components/text';
+import UnorderedList from 'theme/components/unorderedList';
 
 const breakpoints = {
 	xs: '320px',
+	ssm: '350px',
+	ssm2: '415px',
 	sm: '480px',
+	sm2: '600px',
+	smd: '700px',
 	md: '768px',
 	lg: '1024px',
 	xl: '1280px',
@@ -30,8 +38,12 @@ const overrides = {
 	breakpoints,
 	components: {
 		Button,
+		Drawer,
+		FormLabel,
+		Input,
 		Link,
 		Text,
+		UnorderedList,
 	},
 };
 

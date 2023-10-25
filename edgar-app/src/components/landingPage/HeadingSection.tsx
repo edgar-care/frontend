@@ -1,6 +1,6 @@
 import { Text, VStack } from '@chakra-ui/react';
 
-import GradientText from '../GradientText';
+import HighlightText from 'components/HighlightText';
 
 const HeadingSection = (): JSX.Element => (
 	<VStack>
@@ -9,7 +9,7 @@ const HeadingSection = (): JSX.Element => (
 		</Text>
 		<Text size={{ base: 'boldXl', md: '2xl' }} w={{ base: '100%', md: '75%' }} textAlign="center">
 			C'est le temps moyen pour obtenir un rendez-vous chez le médecin généraliste{' '}
-			<GradientText textValue="en France" />.
+			<HighlightText>en France</HighlightText>.
 		</Text>
 	</VStack>
 );

@@ -1,7 +1,7 @@
 const fonts = {
-	body: 'Raleway, sans-serif',
-	heading: 'Raleway, sans-serif',
-	mono: 'Raleway, sans-serif',
+	body: 'Poppins, sans-serif',
+	heading: 'Poppins, sans-serif',
+	mono: 'Poppins, sans-serif',
 };
 
 export default fonts;

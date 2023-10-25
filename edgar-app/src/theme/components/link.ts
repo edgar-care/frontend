@@ -6,6 +6,9 @@ const Link = {
 		_focusVisible: {
 			outline: 'none',
 		},
+		_hover: {
+			textDecoration: 'none',
+		},
 	},
 	defaultProps: {},
 };
