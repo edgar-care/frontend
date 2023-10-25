@@ -28,7 +28,10 @@ const OnboardingPersonalFields = (): JSX.Element => {
 	const toast = useToast({ duration: 2000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		onSubmitPersonalInfos(data, router).then((res) => {
+		onSubmitPersonalInfos(
+			{ ...data, birthDate: new Date(data.birthDate).toISOString().split('T')[0] },
+			router,
+		).then((res) => {
 			toast({
 				title: res.title,
 				status: res.status,

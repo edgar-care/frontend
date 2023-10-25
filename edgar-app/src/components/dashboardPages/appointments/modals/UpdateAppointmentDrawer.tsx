@@ -31,6 +31,7 @@ const UpdateAppointmentDrawer = ({
 	appointmentId: string;
 }): JSX.Element => {
 	const [selectedAppointment, setSelectedAppointment] = useState('');
+	const [searchValue, setSearchValue] = useState('');
 
 	const doctors: DoctorType[] = [
 		{
@@ -85,7 +86,10 @@ const UpdateAppointmentDrawer = ({
 							<VStack spacing="16px" w="100%">
 								<Text size="xl">Choisissez un rendez-vous</Text>
 								<InputGroup>
-									<Input placeholder="Docteur Edgar" />
+									<Input
+										placeholder="Docteur Edgar"
+										onChange={(e) => setSearchValue(e.target.value)}
+									/>
 									<InputRightElement>
 										<Icon as={SearchIcon} />
 									</InputRightElement>
@@ -93,14 +97,16 @@ const UpdateAppointmentDrawer = ({
 							</VStack>
 						</VStack>
 						<VStack w="100%">
-							{doctors.map((doctor) => (
-								<AppointmentDoctorCard
-									key={doctor.name}
-									doctorInfos={doctor}
-									selectedAppointment={selectedAppointment}
-									setSelectedAppointment={setSelectedAppointment}
-								/>
-							))}
+							{doctors
+								.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
+								.map((doctor) => (
+									<AppointmentDoctorCard
+										key={doctor.name}
+										doctorInfos={doctor}
+										selectedAppointment={selectedAppointment}
+										setSelectedAppointment={setSelectedAppointment}
+									/>
+								))}
 						</VStack>
 					</VStack>
 				</DrawerBody>
