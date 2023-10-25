@@ -1,12 +1,13 @@
 const url = Cypress.env('url');
 const appUrl = Cypress.env('appUrl');
+const authToken = Cypress.env('authToken');
 
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good number of buttons', () => {
@@ -34,8 +35,8 @@ describe('Good content for buttons - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good content for buttons', () => {
@@ -47,8 +48,8 @@ describe('Good content for texts - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good content for Edgar card', () => {
@@ -82,8 +83,8 @@ describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Visible buttons', () => {
@@ -95,8 +96,8 @@ describe('Visible texts - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Visible Edgar card text', () => {
@@ -124,9 +125,9 @@ describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good redirection on buttons', () => {
@@ -145,9 +146,9 @@ describe('Working page - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
 		cy.wait(1000);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('No filled inputs', () => {
