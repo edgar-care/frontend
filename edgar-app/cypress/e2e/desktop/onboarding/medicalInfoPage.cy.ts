@@ -1,11 +1,12 @@
 const url = Cypress.env('url');
 const appUrl = Cypress.env('appUrl');
+const authToken = Cypress.env('authToken');
 
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good number of buttons', () => {
@@ -32,8 +33,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good content for buttons', () => {
@@ -44,8 +45,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Good content for texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good content for Edgar card', () => {
@@ -78,8 +79,8 @@ describe('Good content for texts - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Visible buttons', () => {
@@ -90,8 +91,8 @@ describe('Visible elements - Desktop', () => {
 describe('Visible texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Visible Edgar card text', () => {
@@ -119,8 +120,8 @@ describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
 		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good redirection on buttons', () => {
@@ -138,9 +139,9 @@ describe('Good redirection on elements - Desktop', () => {
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/medical`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('No filled inputs', () => {

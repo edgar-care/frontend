@@ -1,12 +1,13 @@
 const url = Cypress.env('url');
 const appUrl = Cypress.env('appUrl');
+const authToken = Cypress.env('authToken');
 
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/personal`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good number of buttons', () => {
@@ -33,9 +34,9 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/personal`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good content for buttons', () => {
@@ -62,9 +63,9 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/personal`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Visible buttons', () => {
@@ -88,9 +89,9 @@ describe('Visible elements - Mobile', () => {
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/personal`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good redirection on buttons', () => {
@@ -107,9 +108,9 @@ describe('Good redirection on elements - Mobile', () => {
 describe('Working page - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/onboarding/personal`);
 		cy.wait(1000);
-		window.localStorage.setItem('token', 'test');
 	});
 
 	it('No filled inputs', () => {
