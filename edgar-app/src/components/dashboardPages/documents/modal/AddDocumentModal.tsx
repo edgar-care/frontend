@@ -1,149 +1,72 @@
-import React, { useEffect, useRef, useState } from 'react';
 import {
 	Modal,
 	ModalOverlay,
 	ModalContent,
 	ModalBody,
 	ModalFooter,
-	FormLabel,
-	Input,
-	Select,
 	Button,
 	Text,
 	VStack,
 	Icon,
 	HStack,
-	Stack,
+	useToast,
 } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+
+import AddDocumentModalContent from 'components/dashboardPages/documents/modal/AddDocumentModalContent';
+
+import { useAddDocumentMutation } from 'services/request/documents';
+
+import { AddDocumentType } from 'types/dashboard/documents/AddDocumentType';
 
 import AddDocumentIllustration from 'assets/illustrations/AddDocumentIllustration';
 
-interface AddDocumentProps {
-	isOpen: boolean;
-	onClose: () => void;
-	onAddDocument: (type: string, name: string, author: string, medicine: string) => void;
-}
+const AddDocumentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+	const [triggerAddDocument] = useAddDocumentMutation();
+	const {
+		handleSubmit,
+		formState: { errors },
+		register,
+	} = useForm<AddDocumentType>({
+		mode: 'onChange',
+	});
 
-const AddDocumentModal: React.FC<AddDocumentProps> = ({ isOpen, onClose, onAddDocument }) => {
-	const [newDocumentType, setNewDocumentType] = React.useState('');
-	const [newDocumentMedicine, setNewDocumentMedicine] = React.useState('');
-	const documentInputRef = useRef<HTMLInputElement | null>(null);
-	const [error, setError] = useState<string | null>(null);
+	const toast = useToast({ duration: 3000, isClosable: true });
 
-	useEffect(() => {
-		if (isOpen) {
-			setError(null);
-		}
-	}, [isOpen]);
-
-	const handleCancel = () => {
-		onClose();
-		setNewDocumentType('');
-		setNewDocumentMedicine('');
-	}
-
-	const handleAddDocument = () => {
-		if (!newDocumentType || !newDocumentMedicine || !documentInputRef.current?.files?.[0]) {
-			setError("Veuillez remplir tous les champs avant d'ajouter le document.");
-			return;
-		}
-
-		let documentName = '';
-
-		switch (newDocumentType) {
-			case 'PRESCRIPTION':
-				documentName = 'Ordonnance';
-				break;
-			case 'CERTIFICAT':
-				documentName = 'Certificat';
-				break;
-			case 'XRAY':
-				documentName = 'Radio';
-				break;
-			case 'OTHER':
-				documentName = 'Autre';
-				break;
-			default:
-				documentName = '';
-				break;
-		}
-		onAddDocument(newDocumentType, documentName, 'Vous', newDocumentMedicine);
-		onClose();
-		setNewDocumentType('');
-		setNewDocumentMedicine('');
-	};
+	const onSubmit = handleSubmit((data) => {
+		triggerAddDocument(data)
+			.unwrap()
+			.then(() => {
+				toast({ title: 'Votre document a été ajouté', status: 'success' });
+				onClose();
+			})
+			.catch(() => {
+				toast({ title: 'Une erreur est survenue', status: 'error' });
+			});
+	});
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xl', lg: '2xl' }}>
 			<ModalOverlay />
-			<ModalContent>
-				<ModalBody p="24px 24px 0px 24px">
-					<VStack w="100%">
+			<ModalContent borderRadius="12px">
+				<ModalBody p="24px 24px 16px 24px">
+					<VStack w="100%" spacing="32px">
 						<VStack w="100%">
 							<Icon as={AddDocumentIllustration} w="48px" h="48px" />
-							<VStack spacing="16px" w="100%">
-								<Text size="xl">Ajoutez un document à votre espace santé</Text>
-							</VStack>
+							<Text size="xl">Ajoutez un document à votre espace santé</Text>
 						</VStack>
-						<VStack spacing="24px" w="100%" p="24px 32px 0px 32px">
-							<Stack w="100%">
-								<FormLabel htmlFor="documentInput" fontWeight="bold" fontSize="md">
-									Votre document
-								</FormLabel>
-								<Input id="documentInput" type="file" accept=".pdf, .doc, .docx, .png, .jpeg, .jpg, .odt, .odtx" ref={(ref) => (documentInputRef.current = ref)} />
-							</Stack>
-							<Stack w="100%" direction="row" justifyContent="space-between">
-								<Stack w="47%">
-									<FormLabel htmlFor="typeInput" fontWeight="bold" fontSize="md">
-										Le type de votre document
-									</FormLabel>
-									<Select
-										id="typeInput"
-										value={newDocumentType}
-										onChange={(e) => setNewDocumentType(e.target.value)}
-										border="2px"
-										borderColor="blue.500"
-										borderRadius="12"
-									>
-										<option value="" disabled hidden></option>
-										<option value="PRESCRIPTION">Ordonnance</option>
-										<option value="CERTIFICAT">Certificat</option>
-										<option value="XRAY">Radio</option>
-										<option value="OTHER">Autre</option>
-									</Select>
-								</Stack>
-								<Stack w="47%">
-									<FormLabel htmlFor="medicineInput" fontWeight="bold" fontSize="md">
-										Le type de médecine
-									</FormLabel>
-									<Select
-										id="medicineInput"
-										value={newDocumentMedicine}
-										onChange={(e) => setNewDocumentMedicine(e.target.value)}
-										border="2px"
-										borderColor="blue.500"
-										borderRadius="12"
-									>
-										<option value="" disabled hidden></option>
-										<option value="MEDECINE_GENERALE">Générale</option>
-									</Select>
-								</Stack>
-							</Stack>
-						</VStack>
+						<AddDocumentModalContent register={register} errors={errors} />
 					</VStack>
 				</ModalBody>
-				<ModalFooter p="32px 24px 24px 24px">
-					<VStack w="100%">
-						<HStack w="100%">
-							<Button size="customMd" variant="secondary" w="100%" onClick={handleCancel}>
-								Annuler
-							</Button>
-							<Button size="customMd" variant="validate" w="100%" onClick={handleAddDocument}>
-								Ajouter votre document
-							</Button>
-						</HStack>
-						{error && <Text color="red.500">{error}</Text>}
-					</VStack>
+				<ModalFooter p="16px 24px 24px 24px">
+					<HStack w="100%" spacing="12px">
+						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+							Annuler
+						</Button>
+						<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+							Ajouter votre document
+						</Button>
+					</HStack>
 				</ModalFooter>
 			</ModalContent>
 		</Modal>
