@@ -1,98 +1,69 @@
 'use client';
 
-import React, { useState } from 'react';
-import { VStack, Button, HStack, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { useState } from 'react';
+import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure } from '@chakra-ui/react';
+
+import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
+import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
+import AddDocumentModal from 'components/dashboardPages/documents/modal/AddDocumentModal';
+
+// import { useGetDocumentsQuery } from 'services/request/documents';
+
+import { DocumentType } from 'types/dashboard/documents/DocumentType';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 
-import DocumentItem from 'components/dashboardPages/documents/DocumentItem';
 // import DocumentFirstFilter from 'components/dashboardPages/documents/DocumentFirstFilter';
 
-import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
-import AddDocumentModal from 'components/dashboardPages/documents/modal/AddDocumentModal';
-import RemoveDocumentModal from 'components/dashboardPages/documents/modal/RemoveDocumentModal';
-import EditDocumentModal from 'components/dashboardPages/documents/modal/EditDocumentModal';
-
 const DocumentsPageContent = (): JSX.Element => {
-	const [documentsData, setDocumentsData] = useState<
-		Array<{ type: string; name: string; date: string; author: string; medicine: string; isStarred: boolean }>
-	>([]);
-	const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-	const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
-	const [documentIndexToRemove, setDocumentIndexToRemove] = useState(-1);
-	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-	const [documentIndexToEdit, setDocumentIndexToEdit] = useState(-1);
+	// const { data: documentsData } = useGetDocumentsQuery();
+	const [documentsData] = useState<DocumentType[]>([
+		{
+			_id: '1',
+			url: 'https://google.fr',
+			name: 'Document 1',
+			isFavorite: true,
+			_ownerId: 'user1',
+			createdDate: Date.now(),
+			updatedDate: Date.now(),
+			documentType: 'PRESCRIPTION',
+			category: 'GENERAL',
+		},
+		{
+			_id: '2',
+			url: 'https://google.fr',
+			name: 'Document 2',
+			isFavorite: false,
+			_ownerId: 'user1',
+			createdDate: Date.now(),
+			updatedDate: Date.now(),
+			documentType: 'XRAY',
+			category: 'GENERAL',
+		},
+	]);
+	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 	const [searchTerm, setSearchTerm] = useState('');
-	const [sortOrder, setSortOrder] = useState('newest');
+	void searchTerm;
+	// const [sortOrder, setSortOrder] = useState('newest');
 
-	const handleStarClick = (index: number) => {
-		const updatedDocuments = [...documentsData];
-		updatedDocuments[index].isStarred = !updatedDocuments[index].isStarred;
-		setDocumentsData(updatedDocuments);
-	};
-
-	const handleOpenModal = () => {
-		setIsAddModalOpen(true);
-	};
-
-	const handleRemoveDocument = (indexToRemove: number) => {
-		setDocumentIndexToRemove(indexToRemove);
-		setIsRemoveModalOpen(true);
-	};
-
-	const handleConfirmRemove = () => {
-		const updatedDocuments = documentsData.filter((_, index) => index !== documentIndexToRemove);
-		setDocumentsData(updatedDocuments);
-		setIsRemoveModalOpen(false);
-	};
-
-	const handleSaveEdit = (newName: string) => {
-		const updatedDocuments = [...documentsData];
-		updatedDocuments[documentIndexToEdit].name = newName;
-		setDocumentsData(updatedDocuments);
-		setIsEditModalOpen(false);
-	};
-
-	const handleEditDocument = (indexToEdit: number) => {
-		setDocumentIndexToEdit(indexToEdit);
-		setIsEditModalOpen(true);
-	};
-
-	const handleCloseModal = () => {
-		setIsAddModalOpen(false);
-		setIsRemoveModalOpen(false);
-	};
-
-	const handleAddDocument = (type: string, name: string, author: string, medicine: string) => {
-		const newDocument = {
-			type,
-			name,
-			date: new Date().toISOString().split('T')[0],
-			author,
-			medicine,
-			isStarred: false,
-		};
-		setDocumentsData([...documentsData, newDocument]);
-	};
-
-	const handleFilterChange = (value: string) => {
-		setSortOrder(value);
-		const sortedDocuments = [...documentsData].sort((a, b) => {
-		  switch (value) {
-			case 'asc':
-			  return a.name.localeCompare(b.name);
-			case 'desc':
-			  return b.name.localeCompare(a.name);
-			case 'newest':
-			  return new Date(b.date).getTime() - new Date(a.date).getTime();
-			case 'oldest':
-			  return new Date(a.date).getTime() - new Date(b.date).getTime();
-			default:
-			  return 0;
-		  }
-		});
-		setDocumentsData(sortedDocuments);
-	  };
+	// const handleFilterChange = (value: string) => {
+	// 	setSortOrder(value);
+	// 	const sortedDocuments = [...documentsData].sort((a, b) => {
+	// 	  switch (value) {
+	// 		case 'asc':
+	// 		  return a.name.localeCompare(b.name);
+	// 		case 'desc':
+	// 		  return b.name.localeCompare(a.name);
+	// 		case 'newest':
+	// 		  return new Date(b.date).getTime() - new Date(a.date).getTime();
+	// 		case 'oldest':
+	// 		  return new Date(a.date).getTime() - new Date(b.date).getTime();
+	// 		default:
+	// 		  return 0;
+	// 	  }
+	// 	});
+	// 	setDocumentsData(sortedDocuments);
+	//   };
 
 	return (
 		<VStack w="100%" spacing="16px">
@@ -102,7 +73,7 @@ const DocumentsPageContent = (): JSX.Element => {
 			/>
 			<VStack w="100%" spacing="24px">
 				<HStack w="100%" spacing="16px">
-					<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={handleOpenModal}>
+					<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={onOpenAddModal}>
 						Ajouter un document
 					</Button>
 					<InputGroup w="100%">
@@ -112,6 +83,7 @@ const DocumentsPageContent = (): JSX.Element => {
 						/>
 						<InputRightElement>
 							<SearchIcon />
+							{/* Transformer en icon as SearchIcon */}
 						</InputRightElement>
 					</InputGroup>
 				</HStack>
@@ -121,23 +93,16 @@ const DocumentsPageContent = (): JSX.Element => {
 			</VStack>
 			<VStack spacing="8px" w="100%" align="start">
 				{documentsData
-					.filter((document) => 
-						document.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-						document.author.toLowerCase().includes(searchTerm.toLowerCase())
-					)
-					.map((document, index) => (
-					<DocumentItem
-						key={index}
-						document={document}
-						onStarClick={() => handleStarClick(index)}
-						onRemoveClick={() => handleRemoveDocument(index)}
-						onEditClick={() => handleEditDocument(index)}
-					/>
-				))}
+					// .filter(
+					// 	(document) =>
+					// 		document.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+					// 		document.author.toLowerCase().includes(searchTerm.toLowerCase()),
+					// )
+					.map((document) => (
+						<DocumentCard key={document._id} document={document} />
+					))}
 			</VStack>
-			<AddDocumentModal isOpen={isAddModalOpen} onClose={handleCloseModal} onAddDocument={handleAddDocument} />
-			<RemoveDocumentModal isOpen={isRemoveModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmRemove} />
-			<EditDocumentModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onSave={(newName) => handleSaveEdit(newName)} />
+			<AddDocumentModal isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 		</VStack>
 	);
 };
