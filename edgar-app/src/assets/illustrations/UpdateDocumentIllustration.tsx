@@ -1,6 +1,6 @@
 import { createIcon } from '@chakra-ui/react';
 
-const EditDocumentIllustration = createIcon({
+const UpdateDocumentIllustration = createIcon({
 	displayName: 'ModifDocumentIllustration',
 	viewBox: '0 0 48 48',
 	path: (
@@ -14,4 +14,4 @@ const EditDocumentIllustration = createIcon({
 	),
 });
 
-export default EditDocumentIllustration;
+export default UpdateDocumentIllustration;
