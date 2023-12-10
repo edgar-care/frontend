@@ -1,64 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure, Icon } from '@chakra-ui/react';
+import { Button, HStack, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
 
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
-import AddDocumentModal from 'components/dashboardPages/documents/modal/AddDocumentModal';
+import AddDocumentHandler from 'components/dashboardPages/documents/modal/AddDocumentHandler';
+
+import { useGetDocumentsQuery } from 'services/request/documents';
 import DocumentFilter from 'components/dashboardPages/documents/DocumentFilter';
-
-// import { useGetDocumentsQuery } from 'services/request/documents';
-
+import SearchIcon from 'assets/icons/SearchIcon';
+import { useState } from 'react';
 import { DocumentType } from 'types/dashboard/documents/DocumentType';
 
-import SearchIcon from 'assets/icons/SearchIcon';
-
 const DocumentsPageContent = (): JSX.Element => {
-	// const { data: documentsData } = useGetDocumentsQuery();
+	const { data: documents } = useGetDocumentsQuery();
 	const [searchText, setSearchText] = useState<string>('');
-	const specificDate = new Date('November 20, 2023');
-	const [documentsData, setDocumentsData] = useState<DocumentType[]>([
-		{
-			_id: '1',
-			url: 'https://google.fr',
-			name: 'Document 1',
-			isFavorite: true,
-			_ownerId: 'user1',
-			createdDate: Date.now(),
-			updatedDate: Date.now(),
-			documentType: 'PRESCRIPTION',
-			category: 'GENERAL',
-		},
-		{
-			_id: '2',
-			url: 'https://google.fr',
-			name: 'Etest',
-			isFavorite: false,
-			_ownerId: 'user1',
-			createdDate: Date.now(),
-			updatedDate: Date.now(),
-			documentType: 'XRAY',
-			category: 'GENERAL',
-		},
-		{
-			_id: '3',
-			url: 'https://google.fr',
-			name: 'Ordonnance',
-			isFavorite: true,
-			_ownerId: 'toi',
-			createdDate: specificDate.getTime(),
-			updatedDate: Date.now(),
-			documentType: 'PRESCRIPTION',
-			category: 'GENERAL',
-		},
-	]);
+	const [documentsData, setDocumentsData] = useState<DocumentType[]>([]);
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
-	const filteredDocuments = documentsData.filter(
+	const filteredDocuments = documents?.filter(
 		(document) =>
 			document.name.toLowerCase().includes(searchText.toLowerCase()) ||
-			document._ownerId.toLowerCase().includes(searchText.toLowerCase()),
+			document.ownerId.toLowerCase().includes(searchText.toLowerCase()),
 	);
 
 	const handleSort = (option: string) => {
@@ -82,14 +45,21 @@ const DocumentsPageContent = (): JSX.Element => {
 	};
 
 	return (
-		<VStack w="100%" spacing="16px">
+		<VStack w="100%" spacing="32px">
 			<DashboardPageBanner
 				title="Mes documents"
-				subTitle="Retrouvez toutes vos documents personnels et médicaux."
+				subTitle="Retrouvez tous vos documents personnels et médicaux."
 			/>
 			<VStack w="100%" spacing="24px">
 				<HStack w="100%" spacing="16px">
-					<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={onOpenAddModal}>
+					<Button
+						size="customMd"
+						variant="primary"
+						whiteSpace="nowrap"
+						onClick={onOpenAddModal}
+						w={{ base: '100%', smd: 'auto' }}
+						id="edgar-dashboardDocumentsPage-addDocument-button"
+					>
 						Ajouter un document
 					</Button>
 					<InputGroup w="100%">
@@ -104,13 +74,11 @@ const DocumentsPageContent = (): JSX.Element => {
 					</InputGroup>
 				</HStack>
 				<DocumentFilter onSort={handleSort} onFilterChange={handleFilterChange} />
+				<VStack spacing="8px" w="100%" align="start">
+					{filteredDocuments?.map((document) => <DocumentCard key={document.id} document={document} />)}
+				</VStack>
+				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
-			<VStack spacing="8px" w="100%" align="start">
-				{filteredDocuments.map((document) => (
-					<DocumentCard key={document._id} document={document} />
-				))}
-			</VStack>
-			<AddDocumentModal isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 		</VStack>
 	);
 };
