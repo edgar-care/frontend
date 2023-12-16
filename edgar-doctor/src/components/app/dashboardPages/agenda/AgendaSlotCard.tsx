@@ -1,5 +1,6 @@
-import { AgendaSlotStatusType } from 'types/app/dashboard/agenda/AgendaSlotType';
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+
+import { AgendaSlotStatusType } from 'types/app/dashboard/agenda/AgendaSlotType';
 
 const AgendaClosedSlotCard = (): JSX.Element => <Box p="8px" borderRadius="8px" w="100%" bg="grey.100" h="100%" />;
 const AgendaOpenSlotCard = (): JSX.Element => (
