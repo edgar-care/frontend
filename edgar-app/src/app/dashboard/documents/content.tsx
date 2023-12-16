@@ -16,28 +16,28 @@ import SearchIcon from 'assets/icons/SearchIcon';
 const DocumentsPageContent = (): JSX.Element => {
 	// const { data: documentsData } = useGetDocumentsQuery();
 	const [documentsData] = useState<DocumentType[]>([
-		{
-			_id: '1',
-			url: 'https://google.fr',
-			name: 'Document 1',
-			isFavorite: true,
-			_ownerId: 'user1',
-			createdDate: Date.now(),
-			updatedDate: Date.now(),
-			documentType: 'PRESCRIPTION',
-			category: 'GENERAL',
-		},
-		{
-			_id: '2',
-			url: 'https://google.fr',
-			name: 'Document 2',
-			isFavorite: false,
-			_ownerId: 'user1',
-			createdDate: Date.now(),
-			updatedDate: Date.now(),
-			documentType: 'XRAY',
-			category: 'GENERAL',
-		},
+		// {
+		// 	_id: '1',
+		// 	url: 'https://google.fr',
+		// 	name: 'Document 1',
+		// 	isFavorite: true,
+		// 	_ownerId: 'user1',
+		// 	createdDate: Date.now(),
+		// 	updatedDate: Date.now(),
+		// 	documentType: 'PRESCRIPTION',
+		// 	category: 'GENERAL',
+		// },
+		// {
+		// 	_id: '2',
+		// 	url: 'https://google.fr',
+		// 	name: 'Document 2',
+		// 	isFavorite: false,
+		// 	_ownerId: 'user1',
+		// 	createdDate: Date.now(),
+		// 	updatedDate: Date.now(),
+		// 	documentType: 'XRAY',
+		// 	category: 'GENERAL',
+		// },
 	]);
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 	const [searchTerm, setSearchTerm] = useState('');
@@ -52,13 +52,14 @@ const DocumentsPageContent = (): JSX.Element => {
 			<VStack w="100%" spacing="16px">
 				<VStack w="100%" spacing="24px">
 					<HStack w="100%" spacing="16px">
-						<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={onOpenAddModal}>
+						<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={onOpenAddModal} id="edgar-dashboardDocumentsPage-addDocument-button">
 							Ajouter un document
 						</Button>
 						<InputGroup w="100%">
 							<Input
 								placeholder="Rechercher par nom du document ou nom du médecin"
 								onChange={(e) => setSearchTerm(e.target.value)}
+								id="edgar-dashboardDocumentsPage-searchBar-input"
 							/>
 							<InputRightElement>
 								<Icon as={SearchIcon} w="16px" h="16px" />
