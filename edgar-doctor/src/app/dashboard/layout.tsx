@@ -41,7 +41,7 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 							w="100%"
 							h={isDrawer ? '100%' : 'calc(100vh - 36px)'}
 							overflowY="scroll"
-							p="32px"
+							p={{ base: '16px', sm: '32px' }}
 							sx={{
 								'::-webkit-scrollbar': {
 									width: '6px',
