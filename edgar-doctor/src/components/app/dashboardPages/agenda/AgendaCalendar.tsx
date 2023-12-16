@@ -35,7 +35,7 @@ const AgendaCalendar = ({ date, selectedView }: { date: Date; selectedView: Agen
 			status: 'BOOKED',
 		},
 		{
-			id: '1',
+			id: '2',
 			startDate: 10,
 			endDate: 11,
 			patientName: 'Jean',
@@ -45,12 +45,14 @@ const AgendaCalendar = ({ date, selectedView }: { date: Date; selectedView: Agen
 
 	return (
 		<VStack spacing="0px" w="100%" h="100%" overflowY="hidden">
-			<HStack w="100%" spacing="0px" pr="16px">
-				<Box minW="42px" h="100px" />
-				{calendarDates.map((calendarDate, index) => (
-					<AgendaDateCard key={index} date={calendarDate} firstDate={index === 0} />
-				))}
-			</HStack>
+			{selectedView !== 'DAY' && (
+				<HStack w="100%" spacing="0px" pr="16px">
+					<Box minW="42px" h="100px" />
+					{calendarDates.map((calendarDate, index) => (
+						<AgendaDateCard key={index} date={calendarDate} firstDate={index === 0} />
+					))}
+				</HStack>
+			)}
 			<HStack h="100%" overflowY="scroll" w="100%" justify="start" spacing="0px">
 				<VStack spacing="0px" h="100%">
 					{[...Array(24)].map((_, index) => (

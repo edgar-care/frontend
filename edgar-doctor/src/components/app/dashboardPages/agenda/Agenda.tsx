@@ -1,12 +1,20 @@
-import { VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { Center, useBreakpointValue, useTimeout, VStack } from '@chakra-ui/react';
+
 import AgendaNavbar from 'components/app/dashboardPages/agenda/AgendaNavbar';
-import { useState } from 'react';
-import { AgendaViewType } from 'types/app/dashboard/agenda/AgendaViewType';
 import AgendaCalendar from 'components/app/dashboardPages/agenda/AgendaCalendar';
+import GridLoader from 'components/loader/GridLoader';
+
+import colors from 'theme/foundations/colors';
+
+import { AgendaViewType } from 'types/app/dashboard/agenda/AgendaViewType';
 
 const Agenda = (): JSX.Element => {
+	const isWeekAvailable = useBreakpointValue({ base: false, '2xl': true }) || false;
+	const is3DaysAvailable = useBreakpointValue({ base: false, md: true }) || false;
 	const [selectedView, setSelectedView] = useState<AgendaViewType>('WEEK');
 	const [date, setDate] = useState(new Date());
+	const [isLoading, setIsLoading] = useState(true);
 
 	const changeDate = (number: number) => {
 		if (selectedView === 'DAY') setDate(new Date(date.setDate(date.getDate() + number)));
@@ -18,6 +26,17 @@ const Agenda = (): JSX.Element => {
 		}
 	};
 
+	useEffect(() => {
+		if (!isWeekAvailable && selectedView === 'WEEK') setSelectedView('3DAYS');
+		if (!is3DaysAvailable && selectedView !== 'DAY') setSelectedView('DAY');
+	}, [isWeekAvailable, is3DaysAvailable]);
+
+	useTimeout(() => {
+		if (is3DaysAvailable) setSelectedView('3DAYS');
+		if (isWeekAvailable) setSelectedView('WEEK');
+		setIsLoading(false);
+	}, 100);
+
 	return (
 		<VStack
 			w="100%"
@@ -28,14 +47,25 @@ const Agenda = (): JSX.Element => {
 			h="100%"
 			borderRadius="16px"
 			overflowY="hidden"
+			spacing="0px"
 		>
-			<AgendaNavbar
-				date={date}
-				changeDate={changeDate}
-				selectedView={selectedView}
-				setSelectedView={setSelectedView}
-			/>
-			<AgendaCalendar date={date} selectedView={selectedView} />
+			{isLoading ? (
+				<Center w="100%" h="100vh">
+					<GridLoader size="64" speed="1.5" color={colors.blue[900]} />
+				</Center>
+			) : (
+				<>
+					<AgendaNavbar
+						date={date}
+						changeDate={changeDate}
+						selectedView={selectedView}
+						setSelectedView={setSelectedView}
+						is3DaysAvailable={is3DaysAvailable}
+						isWeekAvailable={isWeekAvailable}
+					/>
+					<AgendaCalendar date={date} selectedView={selectedView} />
+				</>
+			)}
 		</VStack>
 	);
 };
