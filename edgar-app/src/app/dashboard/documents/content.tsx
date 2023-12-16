@@ -52,7 +52,13 @@ const DocumentsPageContent = (): JSX.Element => {
 			<VStack w="100%" spacing="16px">
 				<VStack w="100%" spacing="24px">
 					<HStack w="100%" spacing="16px">
-						<Button size="customMd" variant="primary" whiteSpace="nowrap" onClick={onOpenAddModal} id="edgar-dashboardDocumentsPage-addDocument-button">
+						<Button
+							size="customMd"
+							variant="primary"
+							whiteSpace="nowrap"
+							onClick={onOpenAddModal}
+							id="edgar-dashboardDocumentsPage-addDocument-button"
+						>
 							Ajouter un document
 						</Button>
 						<InputGroup w="100%">
