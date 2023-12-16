@@ -32,7 +32,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 			>
 				<HStack w="100%" spacing="8px">
 					{document.isFavorite ? (
-						<Icon as={StarHoverIcon} w="16px" h="16px" onClick={() => {}} />
+						<Icon as={StarHoverIcon} w="16px" h="16px" color="blue.700" onClick={() => {}} />
 					) : (
 						<Icon
 							as={StarOutlineIcon}
