@@ -36,7 +36,9 @@ const AgendaNavbar = ({
 				spacing={{ base: '8px', smd: '24px' }}
 				w={{ base: '100%', smd: 'auto' }}
 			>
-				<Button w={{ base: '100%', smd: 'auto' }}>Ouvrir un créneau</Button>
+				<Button w={{ base: '100%', smd: 'auto' }} id="edgar-dashboardAgendaPage-openSlot-button">
+					Ouvrir un créneau
+				</Button>
 				<HStack spacing="16px">
 					<HStack spacing="16px">
 						<Button variant="fullGhost" onClick={() => changeDate(-1)}>
@@ -46,43 +48,48 @@ const AgendaNavbar = ({
 							<Icon as={RightChevronIcon} h="16px" w="auto" color="black" />
 						</Button>
 					</HStack>
-					<Text size="boldXl" textTransform="capitalize">
+					<Text size="boldXl" textTransform="capitalize" id="edgar-dashboardAgendaPage-dayPeriod-text">
 						{selectedView === 'DAY'
 							? date.toLocaleString('fr-FR', { dateStyle: isMobile ? 'medium' : 'long' })
 							: date.toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}
 					</Text>
 				</HStack>
 			</Stack>
-			<HStack>
-				{is3DaysAvailable && (
-					<>
-						<Button
-							size="customSm"
-							variant={selectedView === 'DAY' ? 'primary' : 'secondary'}
-							onClick={() => setSelectedView('DAY')}
-						>
-							Jour
-						</Button>
+			{!isMobile && (
+				<HStack>
+					{is3DaysAvailable && (
+						<>
+							<Button
+								size="customSm"
+								variant={selectedView === 'DAY' ? 'primary' : 'secondary'}
+								onClick={() => setSelectedView('DAY')}
+								id="edgar-dashboardAgendaPage-dayView-button"
+							>
+								Jour
+							</Button>
 
+							<Button
+								size="customSm"
+								variant={selectedView === '3DAYS' ? 'primary' : 'secondary'}
+								onClick={() => setSelectedView('3DAYS')}
+								id="edgar-dashboardAgendaPage-3daysView-button"
+							>
+								3 Jours
+							</Button>
+						</>
+					)}
+					{isWeekAvailable && (
 						<Button
 							size="customSm"
-							variant={selectedView === '3DAYS' ? 'primary' : 'secondary'}
-							onClick={() => setSelectedView('3DAYS')}
+							variant={selectedView === 'WEEK' ? 'primary' : 'secondary'}
+							onClick={() => setSelectedView('WEEK')}
+							id="edgar-dashboardAgendaPage-weekView-button"
 						>
-							3 Jours
+							Semaine
 						</Button>
-					</>
-				)}
-				{isWeekAvailable && (
-					<Button
-						size="customSm"
-						variant={selectedView === 'WEEK' ? 'primary' : 'secondary'}
-						onClick={() => setSelectedView('WEEK')}
-					>
-						Semaine
-					</Button>
-				)}
-			</HStack>
+					)}
+				</HStack>
+			)}
 		</HStack>
 	);
 };
