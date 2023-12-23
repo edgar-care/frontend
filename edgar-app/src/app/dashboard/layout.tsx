@@ -20,23 +20,28 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 	}, []);
 
 	useEffect(() => {
-		window.Notification.requestPermission().then(async (permission) => {
-			if (permission === 'granted') {
-				const sw = await window.navigator.serviceWorker.register('/push-notifications-sw.js', {
-					scope: '/dashboard',
-				});
-				const subscription = await sw.pushManager.getSubscription().then(async (sub) => {
-					if (sub) return sub;
-					return sw.pushManager.subscribe({
-						userVisibleOnly: true,
-						applicationServerKey: VAPIDPUBLICKEY,
-					});
-				});
+		if (!window.Notification)
+			console.log('Browser does not support notifications. Please use a different browser.');
+		else
+			window.Notification.requestPermission()
+				.then(async (permission) => {
+					if (permission === 'granted') {
+						const sw = await window.navigator.serviceWorker.register('/push-notifications-sw.js', {
+							scope: '/dashboard',
+						});
+						const subscription = await sw.pushManager.getSubscription().then(async (sub) => {
+							if (sub) return sub;
+							return sw.pushManager.subscribe({
+								userVisibleOnly: true,
+								applicationServerKey: VAPIDPUBLICKEY,
+							});
+						});
 
-				// TODO: connect to backend and save subscription
-				console.log(subscription.toJSON());
-			}
-		});
+						// TODO: connect to backend and save subscription
+						console.log(subscription.toJSON());
+					}
+				})
+				.catch((error) => console.error(error));
 	}, []);
 
 	return (
