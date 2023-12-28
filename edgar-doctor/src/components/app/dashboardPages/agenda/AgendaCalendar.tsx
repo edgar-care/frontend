@@ -5,43 +5,19 @@ import AgendaDateCard from 'components/app/dashboardPages/agenda/AgendaDateCard'
 import AgendaHourCard from 'components/app/dashboardPages/agenda/AgendaHourCard';
 import AgendaSlotGroup from 'components/app/dashboardPages/agenda/AgendaSlotGroup';
 
-import { AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
-import { AgendaViewType } from 'types/app/dashboard/agenda/AgendaViewType';
+import { useGetSlotsQuery } from 'services/request/slots';
+
+import { type AgendaViewType } from 'types/app/dashboard/agenda/AgendaViewType';
+
+import getCalendarDates from 'utils/app/dashboard/agenda/getCalendarDates';
 
 const AgendaCalendar = ({ date, selectedView }: { date: Date; selectedView: AgendaViewType }): JSX.Element => {
+	const { data: slots } = useGetSlotsQuery();
 	const [calendarDates, setCalendarDates] = useState<Date[]>([]);
 
 	useEffect(() => {
-		const dates: Date[] = [];
-		if (selectedView === 'DAY') dates.push(date);
-		else if (selectedView === '3DAYS') {
-			const newDate = new Date(date);
-			newDate.setDate(newDate.getDate() - 1);
-			for (let i = 0; i < 3; i += 1) dates.push(new Date(newDate.setDate(newDate.getDate() + 1)));
-		} else {
-			const newDate = new Date(date);
-			newDate.setDate(newDate.getDate() - ((newDate.getDay() + 6) % 7) - 1);
-			for (let i = 0; i < 7; i += 1) dates.push(new Date(newDate.setDate(newDate.getDate() + 1)));
-		}
-		setCalendarDates(dates);
+		setCalendarDates(getCalendarDates(date, selectedView));
 	}, [date, selectedView]);
-
-	const slots: AgendaSlotType[] = [
-		{
-			id: '1',
-			startDate: 1702724400000,
-			endDate: 11,
-			patientName: 'Monsieur Jean',
-			status: 'BOOKED',
-		},
-		{
-			id: '2',
-			startDate: 10,
-			endDate: 11,
-			patientName: 'Jean',
-			status: 'BOOKED',
-		},
-	];
 
 	return (
 		<VStack spacing="0px" w="100%" h="100%" overflowY="hidden">
@@ -63,7 +39,7 @@ const AgendaCalendar = ({ date, selectedView }: { date: Date; selectedView: Agen
 					<VStack spacing="0px" w="100%" h="100%" key={calendarDate.getTime()}>
 						{[...Array(24)].map((_, index) => (
 							<AgendaSlotGroup
-								agendaSlots={slots}
+								agendaSlots={slots || []}
 								hourSlot={index}
 								calendarDate={calendarDate}
 								key={index}
