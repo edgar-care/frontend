@@ -4,6 +4,6 @@ export type AgendaSlotType = {
 	id: string;
 	startDate: number;
 	endDate: number;
-	patientName?: string;
+	patientId: string;
 	status: AgendaSlotStatusType;
 };
