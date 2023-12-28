@@ -1,8 +1,51 @@
-import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 
-import { AgendaSlotStatusType } from 'types/app/dashboard/agenda/AgendaSlotType';
+import { useOpenSlotMutation } from 'services/request/slots';
 
-const AgendaClosedSlotCard = (): JSX.Element => <Box p="8px" borderRadius="8px" w="100%" bg="grey.100" h="100%" />;
+import { type AgendaSlotStatusType } from 'types/app/dashboard/agenda/AgendaSlotType';
+
+import CircleCheckIcon from 'assets/icons/Circle/CircleCheckIcon';
+
+const AgendaClosedSlotCard = ({ startDate, endDate }: { startDate: number; endDate: number }): JSX.Element => {
+	const [triggerOpenSlot] = useOpenSlotMutation();
+
+	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
+
+	const toast = useToast({ duration: 3000, isClosable: true });
+
+	return (
+		<VStack
+			p="8px"
+			borderRadius="8px"
+			w="100%"
+			bg="grey.100"
+			h="100%"
+			onMouseEnter={onHoverOpen}
+			onMouseLeave={onHoverClose}
+			cursor="pointer"
+			onClick={() => {
+				triggerOpenSlot({
+					start_date: startDate,
+					end_date: endDate + 1800000,
+				})
+					.unwrap()
+					.then(() => {
+						toast({ title: 'Le créneaux a bien été ouvert', status: 'success' });
+					})
+					.catch(() => {
+						toast({ title: 'Une erreur est survenue', status: 'error' });
+					});
+			}}
+		>
+			{isHover && (
+				<HStack h="100%">
+					<Text size="sm">Ouvrir le créneau</Text>
+					<Icon as={CircleCheckIcon} w="16px" h="16px" color="grey.700" />
+				</HStack>
+			)}
+		</VStack>
+	);
+};
 const AgendaOpenSlotCard = (): JSX.Element => (
 	<VStack
 		p="8px"
@@ -24,10 +67,20 @@ const AgendaBookedSlotCard = ({ patientName }: { patientName: string }): JSX.Ele
 	</HStack>
 );
 
-const AgendaSlotCard = ({ type, patientName }: { type: AgendaSlotStatusType; patientName?: string }): JSX.Element => {
+const AgendaSlotCard = ({
+	type,
+	patientName,
+	startDate,
+	endDate,
+}: {
+	type: AgendaSlotStatusType;
+	patientName?: string;
+	startDate: number;
+	endDate: number;
+}): JSX.Element => {
 	if (type === 'BOOKED' && patientName) return <AgendaBookedSlotCard patientName={patientName} />;
 	if (type === 'OPEN') return <AgendaOpenSlotCard />;
-	return <AgendaClosedSlotCard />;
+	return <AgendaClosedSlotCard startDate={startDate} endDate={endDate} />;
 };
 
 export default AgendaSlotCard;
