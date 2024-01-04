@@ -97,6 +97,7 @@ const AgendaSlotGroup = ({
 						key={filteredSlot.id}
 						startDate={filteredSlot.startDate}
 						endDate={filteredSlot.endDate}
+						slotId={filteredSlot.id}
 					/>
 				))}
 		</VStack>
