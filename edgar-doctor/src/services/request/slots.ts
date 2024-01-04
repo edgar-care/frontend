@@ -30,7 +30,15 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['doctorSlots'],
 		}),
+
+		closeSlot: builder.mutation<SlotsStoreType, string>({
+			query: (id) => ({
+				url: `/doctor/slot/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['doctorSlots'],
+		}),
 	}),
 });
 
-export const { useGetSlotsQuery, useLazyGetSlotsQuery, useOpenSlotMutation } = extendedApi;
+export const { useGetSlotsQuery, useLazyGetSlotsQuery, useOpenSlotMutation, useCloseSlotMutation } = extendedApi;
