@@ -13,7 +13,7 @@ import {
 	VStack,
 } from '@chakra-ui/react';
 
-import MedicalIllustration from 'assets/illustrations/MedicalIllustration';
+import NotificationsIllustration from 'assets/illustrations/NotificationsIllustration';
 
 import { VAPIDPUBLICKEY } from 'config/constants';
 
@@ -62,7 +62,7 @@ const NotificationsDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 				<DrawerBody p="24px 24px 16px 24px">
 					<VStack spacing="32px" w="100%">
 						<VStack w="100%">
-							<Icon as={MedicalIllustration} w="48px" h="48px" />
+							<Icon as={NotificationsIllustration} w="48px" h="48px" />
 							<VStack spacing="16px" w="100%">
 								<Text size="xl" textAlign="center">
 									Activez les notifications
