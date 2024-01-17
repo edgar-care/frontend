@@ -1,10 +1,16 @@
-import { Button, Grid, GridItem, Text, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { Button, Grid, GridItem, Text, useBreakpointValue, useDisclosure, useTimeout, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import HighlightText from 'components/HighlightText';
 import DashboardCard from 'components/pages/patient/DashboardCard';
+import NotificationsHandler from 'components/dashboardPages/notifications-modal/NotificationsHandler';
 
 const DashboardContent = (): JSX.Element => {
+	const {
+		isOpen: isOpenNotificationsModal,
+		onOpen: onOpenNotificationsModal,
+		onClose: onCloseNotificationsModal,
+	} = useDisclosure();
 	const cards = [
 		{
 			title: 'Vos rendez-vous',
@@ -35,6 +41,10 @@ const DashboardContent = (): JSX.Element => {
 
 	const isMobile = useBreakpointValue({ base: true, md: false });
 
+	useTimeout(() => {
+		onOpenNotificationsModal();
+	}, 5000);
+
 	return (
 		<VStack py="64px" px="32px" spacing="48px">
 			<Text size={{ base: '2xl', md: '3xl' }} textAlign="center">
@@ -58,6 +68,7 @@ const DashboardContent = (): JSX.Element => {
 					</GridItem>
 				))}
 			</Grid>
+			<NotificationsHandler isOpen={isOpenNotificationsModal} onClose={onCloseNotificationsModal} />
 		</VStack>
 	);
 };
