@@ -51,7 +51,7 @@ const DeleteDocumentModal = ({
 							size="customSm"
 							variant="delete"
 							w="100%"
-							onClick={() => triggerDeleteDocument({ _id: documentId })}
+							onClick={() => triggerDeleteDocument({ id: documentId })}
 						>
 							Oui, je suis sûr
 						</Button>

@@ -2,29 +2,22 @@ import { DocumentCategoryType } from 'types/dashboard/documents/DocumentCategory
 import { DocumentTypeType } from 'types/dashboard/documents/DocumentTypeType';
 
 export interface DocumentsStoreType {
-	_id: string;
-	url: string;
+	id: string;
+	owner_id: string;
 	name: string;
-	isFavorite: boolean;
-	_ownerId: string;
 	createdDate: number;
 	updatedDate: number;
-	documentType: DocumentTypeType;
+	document_type: DocumentTypeType;
 	category: DocumentCategoryType;
-}
-
-export interface AddDocumentDTO {
-	isFavorite: boolean;
-	document: ArrayBuffer;
-	documentType: DocumentTypeType;
-	category: DocumentCategoryType;
+	is_favorite: boolean;
+	download_url: string;
 }
 
 export interface UpdateDocumentDTO {
 	documentName: string;
-	_id: string;
+	id: string;
 }
 
 export interface DeleteDocumentDTO {
-	_id: string;
+	id: string;
 }
