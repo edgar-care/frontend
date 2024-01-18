@@ -4,6 +4,6 @@ import { DocumentTypeType } from 'types/dashboard/documents/DocumentTypeType';
 export type AddDocumentType = {
 	documentType: DocumentTypeType;
 	category: DocumentCategoryType;
-	document: ArrayBuffer;
+	document: FileList;
 	isFavorite: boolean;
 };

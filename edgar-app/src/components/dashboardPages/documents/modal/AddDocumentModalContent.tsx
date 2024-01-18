@@ -1,6 +1,8 @@
-import { FormLabel, HStack, Input, Select, VStack } from '@chakra-ui/react';
-import ErrorMessage from 'components/forms/ErrorMessage';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FormLabel, HStack, Input, Select, VStack } from '@chakra-ui/react';
+
+import ErrorMessage from 'components/forms/ErrorMessage';
+
 import { AddDocumentType } from 'types/dashboard/documents/AddDocumentType';
 
 const AddDocumentModalContent = ({
@@ -14,7 +16,7 @@ const AddDocumentModalContent = ({
 		<VStack w="100%" align="start">
 			<FormLabel size="boldLg">Votre document</FormLabel>
 			<Input
-				{...register('document', { minLength: 1, maxLength: 50, required: true })}
+				{...register('document', { required: true })}
 				type="file"
 				accept=".pdf, .doc, .docx, .png, .jpeg, .jpg, .odt, .odtx"
 			/>
@@ -40,7 +42,7 @@ const AddDocumentModalContent = ({
 					<option value="" disabled selected>
 						Générale
 					</option>
-					<option value="MEDECINE_GENERALE">Générale</option>
+					<option value="GENERAL">Générale</option>
 				</Select>
 				{errors.category?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>

@@ -44,7 +44,7 @@ const UpdateDocumentModal = ({
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		triggerUpdateDocument({ _id: documentId, ...data })
+		triggerUpdateDocument({ id: documentId, ...data })
 			.unwrap()
 			.then(() => {
 				toast({ title: 'Votre document a été mis à jour', status: 'success' });
