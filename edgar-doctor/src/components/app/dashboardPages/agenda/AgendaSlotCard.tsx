@@ -1,6 +1,7 @@
 import { Box, HStack, Icon, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 
 import { useCloseSlotMutation, useOpenSlotMutation } from 'services/request/slots';
+import { useGetPatientByIdQuery } from 'services/request/patients';
 
 import { type AgendaSlotStatusType } from 'types/app/dashboard/agenda/AgendaSlotType';
 
@@ -89,27 +90,36 @@ const AgendaOpenSlotCard = ({ slotId }: { slotId: string }): JSX.Element => {
 		</VStack>
 	);
 };
-const AgendaBookedSlotCard = ({ patientName }: { patientName: string }): JSX.Element => (
-	<HStack p="8px" borderRadius="8px" w="100%" h="100%" bg="blue.200">
-		<Box w="3px" h="100%" bg="red.500" borderRadius="8px" />
-		<Text size="boldSm">{patientName}</Text>
-	</HStack>
-);
+const AgendaBookedSlotCard = ({ patientId }: { patientId: string }): JSX.Element => {
+	const { data } = useGetPatientByIdQuery(patientId);
+
+	console.log(patientId);
+	return (
+		<HStack p="8px" borderRadius="8px" w="100%" h="100%" bg="blue.200">
+			<Box w="3px" h="100%" bg="red.500" borderRadius="8px" />
+			{data && (
+				<Text size="boldSm">
+					{data.onboarding_info.name} {data.onboarding_info.surname.toUpperCase()}
+				</Text>
+			)}
+		</HStack>
+	);
+};
 
 const AgendaSlotCard = ({
 	type,
-	patientName,
+	patientId,
 	startDate,
 	endDate,
 	slotId,
 }: {
 	type: AgendaSlotStatusType;
-	patientName?: string;
+	patientId: string;
 	startDate: number;
 	endDate: number;
 	slotId: string;
 }): JSX.Element => {
-	if (type === 'BOOKED' && patientName) return <AgendaBookedSlotCard patientName={patientName} />;
+	if (type === 'BOOKED' && patientId) return <AgendaBookedSlotCard patientId={patientId} />;
 	if (type === 'OPEN') return <AgendaOpenSlotCard slotId={slotId} />;
 	return <AgendaClosedSlotCard startDate={startDate} endDate={endDate} />;
 };
