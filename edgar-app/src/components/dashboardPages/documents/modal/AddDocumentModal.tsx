@@ -18,6 +18,8 @@ import AddDocumentModalContent from 'components/dashboardPages/documents/modal/A
 import { useAddDocumentMutation } from 'services/request/documents';
 
 import { AddDocumentType } from 'types/dashboard/documents/AddDocumentType';
+import { DocumentTypeType } from 'types/dashboard/documents/DocumentTypeType';
+import { DocumentCategoryType } from 'types/dashboard/documents/DocumentCategoryType';
 
 import AddDocumentIllustration from 'assets/illustrations/AddDocumentIllustration';
 
@@ -34,7 +36,13 @@ const AddDocumentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		triggerAddDocument(data)
+		const formData = new FormData();
+		formData.append('document', data.document[0]);
+		formData.append('documentType', data.documentType as DocumentTypeType);
+		formData.append('category', data.category as DocumentCategoryType);
+		formData.append('isFavorite', data.isFavorite ? 'true' : 'false');
+
+		triggerAddDocument(formData)
 			.unwrap()
 			.then(() => {
 				toast({ title: 'Votre document a été ajouté', status: 'success' });
