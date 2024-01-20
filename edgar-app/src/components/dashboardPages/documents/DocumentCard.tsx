@@ -18,7 +18,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 
 	const documentTypes: { [key: string]: string } = {
 		PRESCRIPTION: 'green.500',
-		CERTIFICAT: 'blue.700',
+		CERTIFICATE: 'blue.700',
 		XRAY: 'green.200',
 		OTHER: 'blue.200',
 	};
