@@ -6,9 +6,9 @@ import { DocumentType } from 'types/dashboard/documents/DocumentType';
 
 import StarHoverIcon from 'assets/icons/Stars/StarHoverIcon';
 import StarOutlineIcon from 'assets/icons/Stars/StarOutlineIcon';
+import UpdateDocumentHandler from './modal/UpdateDocumentHandler';
 
 import DeleteDocumentModal from './modal/DeleteDocumentModal';
-import UpdateDocumentModal from './modal/UpdateDocumentModal';
 
 const DocumentCard = ({ document }: { document: DocumentType }) => {
 	const [triggerAddDocumentToFavorite] = useAddDocumentToFavoriteMutation();
@@ -87,7 +87,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 					</Button>
 				</HStack>
 			</HStack>
-			<UpdateDocumentModal isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal} documentId={document.id} />
+			<UpdateDocumentHandler isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal} documentId={document.id} />
 			<DeleteDocumentModal isOpen={isOpenDeleteModal} onClose={onCloseDeleteModal} documentId={document.id} />
 		</>
 	);
