@@ -30,7 +30,7 @@ const AddDocumentModalContent = ({
 						Ordonnance
 					</option>
 					<option value="PRESCRIPTION">Ordonnance</option>
-					<option value="CERTIFICAT">Certificat</option>
+					<option value="CERTIFICATE">Certificat</option>
 					<option value="XRAY">Radio</option>
 					<option value="OTHER">Autre</option>
 				</Select>
