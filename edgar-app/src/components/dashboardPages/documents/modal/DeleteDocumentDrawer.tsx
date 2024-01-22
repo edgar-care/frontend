@@ -1,14 +1,14 @@
-import React from 'react';
 import {
+	Button,
 	Drawer,
 	DrawerOverlay,
 	DrawerContent,
 	DrawerBody,
 	DrawerFooter,
-	Button,
-	Text,
-	Icon,
 	HStack,
+	Icon,
+	Text,
+	useBreakpointValue,
 	VStack,
 } from '@chakra-ui/react';
 
@@ -27,6 +27,8 @@ const DeleteDocumentDrawer = ({
 }) => {
 	const [triggerDeleteDocument] = useDeleteDocumentMutation();
 
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+
 	return (
 		<Drawer isOpen={isOpen} onClose={onClose} size="sm" placement="bottom">
 			<DrawerOverlay />
@@ -43,19 +45,35 @@ const DeleteDocumentDrawer = ({
 					</VStack>
 				</DrawerBody>
 				<DrawerFooter p="16px 24px 24px 24px">
-					<HStack w="100%">
-						<Button size="customSm" variant="secondary" w="100%" onClick={onClose}>
-							Non, je veux revenir en arrière
-						</Button>
-						<Button
-							size="customSm"
-							variant="delete"
-							w="100%"
-							onClick={() => triggerDeleteDocument({ id: documentId })}
-						>
-							Oui, je suis sûr
-						</Button>
-					</HStack>
+					{isMobile ? (
+						<VStack w="100%">
+							<Button
+								size="customSm"
+								variant="delete"
+								w="100%"
+								onClick={() => triggerDeleteDocument({ id: documentId })}
+							>
+								Oui, je suis sûr
+							</Button>
+							<Button size="customSm" variant="secondary" w="100%" onClick={onClose}>
+								Non, je veux revenir en arrière
+							</Button>
+						</VStack>
+					) : (
+						<HStack w="100%">
+							<Button size="customSm" variant="secondary" w="100%" onClick={onClose}>
+								Non, je veux revenir en arrière
+							</Button>
+							<Button
+								size="customSm"
+								variant="delete"
+								w="100%"
+								onClick={() => triggerDeleteDocument({ id: documentId })}
+							>
+								Oui, je suis sûr
+							</Button>
+						</HStack>
+					)}
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>

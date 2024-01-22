@@ -1,15 +1,15 @@
 import {
+	Button,
+	HStack,
+	Icon,
 	Modal,
 	ModalOverlay,
 	ModalContent,
 	ModalBody,
 	ModalFooter,
-	Button,
 	Text,
-	VStack,
-	Icon,
-	HStack,
 	useToast,
+	VStack,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -29,6 +29,7 @@ const AddDocumentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
 		handleSubmit,
 		formState: { errors },
 		register,
+		reset,
 	} = useForm<AddDocumentType>({
 		mode: 'onChange',
 	});
@@ -54,7 +55,14 @@ const AddDocumentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
 	});
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size={{ base: 'xl', lg: '2xl' }}>
+		<Modal
+			isOpen={isOpen}
+			onClose={() => {
+				reset({});
+				onClose();
+			}}
+			size={{ base: 'xl', lg: '2xl' }}
+		>
 			<ModalOverlay />
 			<ModalContent borderRadius="12px">
 				<ModalBody p="24px 24px 16px 24px">
