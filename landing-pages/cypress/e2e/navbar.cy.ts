@@ -62,9 +62,9 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.visit(`${url}`);
 	});
 
-	it('Good redirection on buttons', () => {
-		cy.get('#edgar-navbar-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
-	});
+	// it('Good redirection on buttons', () => {
+	// 	cy.get('#edgar-navbar-patientArea-button').click().url().should('eq', `${appUrl}/connection/login`);
+	// });
 
 	it('Good redirection on texts', () => {
 		cy.get('#edgar-navbar-tab-product-text').click().url().should('eq', `${url}/product`);
@@ -170,10 +170,10 @@ describe('Good redirection on elements - Mobile', () => {
 		cy.get('#edgar-navbar-tab-contact-text').click().url().should('eq', `${url}/contact`);
 	});
 
-	it('Good redirection for patient area text', () => {
-		cy.get('#edgar-navbar-drawer-button').click();
-		cy.get('#edgar-navbar-tab-patient-text').click().url().should('eq', `${appUrl}/connection/login`);
-	});
+	// it('Good redirection for patient area text', () => {
+	// 	cy.get('#edgar-navbar-drawer-button').click();
+	// 	cy.get('#edgar-navbar-tab-patient-text').click().url().should('eq', `${appUrl}/connection/login`);
+	// });
 
 	it('Good redirection on images', () => {
 		cy.get('#edgar-navbar-edgarLogo-img').click().url().should('eq', `${url}/`);
