@@ -50,6 +50,7 @@ jobs:
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
+          NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
   Lint:
     runs-on: ubuntu-latest
@@ -124,6 +125,7 @@ jobs:
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
+          NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
       - name: Run cypress
         uses: cypress-io/github-action@v4

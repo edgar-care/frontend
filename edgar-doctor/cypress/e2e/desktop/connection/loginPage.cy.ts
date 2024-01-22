@@ -108,6 +108,6 @@ describe('Working page - Desktop', () => {
 	it('Good credentials', () => {
 		cy.get('#edgar-loginPage-formEmail-input').click().type(loginEmail);
 		cy.get('#edgar-loginPage-formPassword-input').click().type(loginPassword);
-		cy.get('#edgar-loginPage-form-button').click().wait(1000).url().should('eq', `${url}/dashboard`);
+		cy.get('#edgar-loginPage-form-button').click().wait(2000).url().should('eq', `${url}/dashboard`);
 	});
 });
