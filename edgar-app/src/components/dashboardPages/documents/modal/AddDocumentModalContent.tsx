@@ -1,5 +1,5 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { FormLabel, HStack, Input, Select, VStack } from '@chakra-ui/react';
+import { FormLabel, Input, Select, Stack, VStack } from '@chakra-ui/react';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -12,23 +12,20 @@ const AddDocumentModalContent = ({
 	register: UseFormRegister<AddDocumentType>;
 	errors: FieldErrors<AddDocumentType>;
 }): JSX.Element => (
-	<VStack spacing="24px" w="100%" px="32px">
+	<VStack spacing="24px" w="100%" px={{ base: '0px', smd: '32px' }}>
 		<VStack w="100%" align="start">
 			<FormLabel size="boldLg">Votre document</FormLabel>
 			<Input
 				{...register('document', { required: true })}
 				type="file"
-				accept=".pdf, .doc, .docx, .png, .jpeg, .jpg, .odt, .odtx"
+				accept=".pdf, .doc, .docx, .png, .odt, .odtx"
 			/>
 			{errors.document?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 		</VStack>
-		<HStack w="100%" spacing="32px">
+		<Stack direction={{ base: 'column', smd: 'row' }} w="100%" spacing={{ base: '24px', smd: '32px' }}>
 			<VStack w="100%" align="start">
 				<FormLabel size="boldLg">Le type de votre document</FormLabel>
 				<Select {...register('documentType', { required: true })}>
-					<option value="" disabled selected>
-						Ordonnance
-					</option>
 					<option value="PRESCRIPTION">Ordonnance</option>
 					<option value="CERTIFICATE">Certificat</option>
 					<option value="XRAY">Radio</option>
@@ -39,14 +36,11 @@ const AddDocumentModalContent = ({
 			<VStack w="100%" align="start">
 				<FormLabel size="boldLg">Le type de médecine</FormLabel>
 				<Select {...register('category', { required: true })}>
-					<option value="" disabled selected>
-						Générale
-					</option>
 					<option value="GENERAL">Générale</option>
 				</Select>
 				{errors.category?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>
-		</HStack>
+		</Stack>
 	</VStack>
 );
 

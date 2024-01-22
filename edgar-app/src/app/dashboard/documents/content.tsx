@@ -1,10 +1,10 @@
 'use client';
 
-import { VStack, Button, HStack, useDisclosure } from '@chakra-ui/react';
+import { Button, HStack, useDisclosure, VStack } from '@chakra-ui/react';
 
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
-import AddDocumentModal from 'components/dashboardPages/documents/modal/AddDocumentModal';
+import AddDocumentHandler from 'components/dashboardPages/documents/modal/AddDocumentHandler';
 
 import { useGetDocumentsQuery } from 'services/request/documents';
 
@@ -17,7 +17,7 @@ const DocumentsPageContent = (): JSX.Element => {
 		<VStack w="100%" spacing="32px">
 			<DashboardPageBanner
 				title="Mes documents"
-				subTitle="Retrouvez toutes vos documents personnels et médicaux."
+				subTitle="Retrouvez tous vos documents personnels et médicaux."
 			/>
 			<VStack w="100%" spacing="16px">
 				<VStack w="100%" spacing="24px">
@@ -27,6 +27,7 @@ const DocumentsPageContent = (): JSX.Element => {
 							variant="primary"
 							whiteSpace="nowrap"
 							onClick={onOpenAddModal}
+							w={{ base: '100%', smd: 'auto' }}
 							id="edgar-dashboardDocumentsPage-addDocument-button"
 						>
 							Ajouter un document
@@ -48,7 +49,7 @@ const DocumentsPageContent = (): JSX.Element => {
 						<DocumentCard key={document.id} document={document} />
 					))}
 				</VStack>
-				<AddDocumentModal isOpen={isOpenAddModal} onClose={onCloseAddModal} />
+				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
 		</VStack>
 	);
