@@ -11,6 +11,7 @@ import Drawer from 'theme/components/drawer';
 import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
+import Select from 'theme/components/select';
 import Text from 'theme/components/text';
 import UnorderedList from 'theme/components/unorderedList';
 
@@ -42,6 +43,7 @@ const overrides = {
 		FormLabel,
 		Input,
 		Link,
+		Select,
 		Text,
 		UnorderedList,
 	},
