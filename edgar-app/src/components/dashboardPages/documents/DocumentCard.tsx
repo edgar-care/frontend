@@ -7,7 +7,7 @@ import { useAddDocumentToFavoriteMutation, useRemoveDocumentToFavoriteMutation }
 
 import { DocumentType } from 'types/dashboard/documents/DocumentType';
 
-import StarHoverIcon from 'assets/icons/Stars/StarHoverIcon';
+import StarFillIcon from 'assets/icons/Stars/StarFillIcon';
 import StarOutlineIcon from 'assets/icons/Stars/StarOutlineIcon';
 
 const DocumentCard = ({ document }: { document: DocumentType }) => {
@@ -42,7 +42,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 				<HStack w="100%" spacing="8px">
 					{document.isFavorite ? (
 						<Icon
-							as={StarHoverIcon}
+							as={StarFillIcon}
 							w="16px"
 							h="16px"
 							color="blue.700"
