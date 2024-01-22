@@ -4,7 +4,7 @@ const authToken = Cypress.env('authToken');
 
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/dashboard/documents`);
 	});
@@ -22,13 +22,13 @@ describe('Good number of elements - Desktop', () => {
 	});
 
 	it('Good number of images', () => {
-		cy.get('img').should('have.length', 2);
+		cy.get('img').should('have.length', 1);
 	});
 });
 
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/dashboard/documents`);
 	});
@@ -40,7 +40,7 @@ describe('Good content for buttons - Desktop', () => {
 
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
-		cy.viewport(1920, 1080);
+		cy.viewport(390, 844);
 		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/dashboard/documents`);
 	});
