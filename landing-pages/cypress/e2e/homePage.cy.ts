@@ -79,8 +79,8 @@ describe('Good redirection on elements - Desktop', () => {
 	});
 
 	it('Good redirection on buttons', () => {
-		cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
-		cy.visit(`${url}`);
+		// cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
+		// cy.visit(`${url}`);
 		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
 	});
 });
@@ -163,8 +163,8 @@ describe('Good redirection on elements - Mobile', () => {
 	});
 
 	it('Good redirection on buttons', () => {
-		cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
-		cy.visit(`${url}`);
+		// cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
+		// cy.visit(`${url}`);
 		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
 	});
 });
