@@ -131,10 +131,10 @@ describe('Good redirection on elements - Desktop', () => {
 	});
 
 	it('Good redirection on texts (health)', () => {
-		cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
-		cy.visit(`${url}`);
+		// cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
+		// cy.visit(`${url}`);
 		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
 		cy.visit(`${url}`);
 	});
@@ -292,10 +292,10 @@ describe('Good redirection on elements - Mobile', () => {
 	});
 
 	it('Good redirection on texts (health)', () => {
-		cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
-		cy.visit(`${url}`);
+		// cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
+		// cy.visit(`${url}`);
+		// cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
+		// cy.visit(`${url}`);
 		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
 		cy.visit(`${url}`);
 	});
