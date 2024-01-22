@@ -1,17 +1,18 @@
 import {
-	Drawer,
-	DrawerOverlay,
-	DrawerContent,
-	DrawerBody,
-	DrawerFooter,
-	Input,
 	Button,
-	Text,
+	Drawer,
+	DrawerBody,
+	DrawerContent,
+	DrawerFooter,
+	DrawerOverlay,
 	FormLabel,
-	VStack,
-	Icon,
 	HStack,
+	Icon,
+	Input,
+	Text,
+	useBreakpointValue,
 	useToast,
+	VStack,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -43,6 +44,8 @@ const UpdateDocumentDrawer = ({
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
+	const isMobile = useBreakpointValue({ base: true, sm: false });
+
 	const onSubmit = handleSubmit((data) => {
 		triggerUpdateDocument({ id: documentId, ...data })
 			.unwrap()
@@ -65,7 +68,7 @@ const UpdateDocumentDrawer = ({
 							<Icon as={UpdateDocumentIllustration} w="48px" h="48px" />
 							<Text size="xl">Modifiez votre document</Text>
 						</VStack>
-						<VStack w="100%" px="32px" align="start">
+						<VStack w="100%" px={{ base: '0px', smd: '32px' }} align="start">
 							<FormLabel htmlFor="documentInput" fontWeight="bold" fontSize="md">
 								Le nouveau nom de votre document
 							</FormLabel>
@@ -80,14 +83,25 @@ const UpdateDocumentDrawer = ({
 					</VStack>
 				</DrawerBody>
 				<DrawerFooter p="16px 24px 24px 24px">
-					<HStack w="100%" spacing="12px">
-						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
-							Annuler
-						</Button>
-						<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
-							Valider
-						</Button>
-					</HStack>
+					{isMobile ? (
+						<VStack w="100%" spacing="12px">
+							<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+								Valider
+							</Button>
+							<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+								Annuler
+							</Button>
+						</VStack>
+					) : (
+						<HStack w="100%" spacing="12px">
+							<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+								Annuler
+							</Button>
+							<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+								Valider
+							</Button>
+						</HStack>
+					)}
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>

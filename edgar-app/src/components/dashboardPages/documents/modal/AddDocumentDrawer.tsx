@@ -1,15 +1,16 @@
 import {
-	Drawer,
-	DrawerOverlay,
-	DrawerContent,
-	DrawerBody,
-	DrawerFooter,
 	Button,
-	Text,
-	VStack,
-	Icon,
+	Drawer,
+	DrawerBody,
+	DrawerContent,
+	DrawerFooter,
+	DrawerOverlay,
 	HStack,
+	Icon,
+	Text,
+	useBreakpointValue,
 	useToast,
+	VStack,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -29,11 +30,14 @@ const AddDocumentDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 		handleSubmit,
 		formState: { errors },
 		register,
+		reset,
 	} = useForm<AddDocumentType>({
 		mode: 'onChange',
 	});
 
 	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const isMobile = useBreakpointValue({ base: true, sm: false });
 
 	const onSubmit = handleSubmit((data) => {
 		const formData = new FormData();
@@ -54,27 +58,48 @@ const AddDocumentDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 	});
 
 	return (
-		<Drawer isOpen={isOpen} onClose={onClose} size="sm" placement="bottom">
+		<Drawer
+			isOpen={isOpen}
+			onClose={() => {
+				reset({});
+				onClose();
+			}}
+			size="sm"
+			placement="bottom"
+		>
 			<DrawerOverlay />
 			<DrawerContent borderRadius="12px">
 				<DrawerBody p="24px 24px 16px 24px">
 					<VStack w="100%" spacing="32px">
 						<VStack w="100%">
 							<Icon as={AddDocumentIllustration} w="48px" h="48px" />
-							<Text size="xl">Ajoutez un document à votre espace santé</Text>
+							<Text size="xl" textAlign="center">
+								Ajoutez un document à votre espace santé
+							</Text>
 						</VStack>
 						<AddDocumentModalContent register={register} errors={errors} />
 					</VStack>
 				</DrawerBody>
 				<DrawerFooter p="16px 24px 24px 24px">
-					<HStack w="100%" spacing="12px">
-						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
-							Annuler
-						</Button>
-						<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
-							Ajouter votre document
-						</Button>
-					</HStack>
+					{isMobile ? (
+						<VStack w="100%" spacing="12px">
+							<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+								Ajouter votre document
+							</Button>
+							<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+								Annuler
+							</Button>
+						</VStack>
+					) : (
+						<HStack w="100%" spacing="12px">
+							<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+								Annuler
+							</Button>
+							<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+								Ajouter votre document
+							</Button>
+						</HStack>
+					)}
 				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>
