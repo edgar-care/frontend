@@ -1,7 +1,7 @@
 import { createIcon } from '@chakra-ui/react';
 
-const StarHoverIcon = createIcon({
-	displayName: 'StarHoverIcon',
+const StarFillIcon = createIcon({
+	displayName: 'StarFillIcon',
 	viewBox: '0 0 16 16',
 	path: (
 		<g fill="currentColor">
@@ -13,4 +13,4 @@ const StarHoverIcon = createIcon({
 	),
 });
 
-export default StarHoverIcon;
+export default StarFillIcon;
