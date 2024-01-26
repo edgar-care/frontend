@@ -1,18 +1,26 @@
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 import Providers from 'app/Providers';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
 	title: 'edgar',
 	description: "Gagne du temps avec l'assistant virtuel du pré-diagnostic",
-	viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 	icons: '/assets/edgar-logo-tabs.svg',
+};
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	maximumScale: 1,
 };
 
 const RootLayout = ({ children }: { children: JSX.Element }): JSX.Element => (
 	<html lang="fr">
 		<body>
-			<Providers>{children}</Providers>
+			<Suspense>
+				<Providers>{children}</Providers>
+			</Suspense>
 		</body>
 	</html>
 );
