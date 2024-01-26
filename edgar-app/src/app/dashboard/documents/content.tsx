@@ -45,9 +45,7 @@ const DocumentsPageContent = (): JSX.Element => {
 					</HStack>
 				</VStack>
 				<VStack spacing="8px" w="100%" align="start">
-					{documentsData?.map((document) => (
-						<DocumentCard key={document.id} document={document} />
-					))}
+					{documentsData?.map((document) => <DocumentCard key={document.id} document={document} />)}
 				</VStack>
 				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
