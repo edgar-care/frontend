@@ -1,4 +1,4 @@
-FROM node:16-alpine as development
+FROM node:20-alpine as development
 
 # Set the working directory
 WORKDIR /app
@@ -16,7 +16,7 @@ ENV PORT 3000
 
 CMD ["yarn", "dev"]
 
-FROM node:16-alpine as production
+FROM node:20-alpine as production
 
 # Set the working directory
 WORKDIR /app
