@@ -1,6 +1,6 @@
 import { API_URL } from 'config/constants';
 
-import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 import { FetchMethod } from 'types/FetchMethod';
 

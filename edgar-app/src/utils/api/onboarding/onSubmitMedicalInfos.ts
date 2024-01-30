@@ -1,6 +1,6 @@
 import basicFetch from 'utils/basicFetch';
 
-import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { type AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 import { type MessageResponse } from 'types/MessageResponse';
 import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
