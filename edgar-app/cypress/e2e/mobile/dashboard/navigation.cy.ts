@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.get('#edgar-dashboardNavbar-menu-button').click();
 		window.localStorage.setItem('token', 'test');
 	});
@@ -33,7 +30,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content for texts - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.get('#edgar-dashboardNavbar-menu-button').click();
 		window.localStorage.setItem('token', 'test');
 	});
@@ -66,7 +63,7 @@ describe('Good content for texts - Mobile', () => {
 describe('Visible texts - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.get('#edgar-dashboardNavbar-menu-button').click();
 		window.localStorage.setItem('token', 'test');
 	});
@@ -99,7 +96,7 @@ describe('Visible texts - Mobile', () => {
 describe('Working page - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.get('#edgar-dashboardNavbar-menu-button').click();
 		cy.wait(1000);
 		window.localStorage.setItem('token', 'test');
@@ -108,7 +105,9 @@ describe('Working page - Mobile', () => {
 	it('Logout working', () => {
 		cy.get('#edgar-dashboardNavbar-profileCard').click();
 		cy.get('#edgar-dashboardNavbar-profileTab-Déconnexion-text').click();
-		cy.visit(`${url}/dashboard`).url().should('be.equal', `${url}/login`);
+		cy.visit('/dashboard')
+			.url()
+			.should('be.equal', `${Cypress.env('url')}/login`);
 	});
 
 	it('Opening Profile Card works', () => {
