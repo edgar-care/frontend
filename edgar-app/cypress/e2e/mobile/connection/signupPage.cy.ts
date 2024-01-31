@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good number of buttons', () => {
@@ -31,7 +28,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good content for buttons', () => {
@@ -53,7 +50,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good content for buttons', () => {
@@ -72,7 +69,7 @@ describe('Visible elements - Mobile', () => {
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('No email address', () => {
@@ -108,7 +105,7 @@ describe('Good redirection on elements - Mobile', () => {
 describe('Working page - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 		cy.wait(1000);
 	});
 
