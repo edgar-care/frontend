@@ -1,12 +1,8 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const authToken = Cypress.env('authToken');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 	});
 
 	it('Good number of buttons', () => {
@@ -33,8 +29,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 	});
 
 	it('Good content for buttons', () => {
@@ -45,8 +41,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Good content for texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 	});
 
 	it('Good content for Edgar card', () => {
@@ -79,8 +75,8 @@ describe('Good content for texts - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 	});
 
 	it('Visible buttons', () => {
@@ -91,8 +87,8 @@ describe('Visible elements - Desktop', () => {
 describe('Visible texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 	});
 
 	it('Visible Edgar card text', () => {
@@ -119,8 +115,8 @@ describe('Visible texts - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/onboarding/medical`);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit('/onboarding/medical');
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
 		cy.wait(1000);
 	});
 
@@ -132,15 +128,18 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.get('#edgar-onboardingMedicalPage-formDiseases-addButton-icon').click();
 		cy.get('#edgar-onboardingMedicalPage-formTreatments-input').click().type('Traitement');
 		cy.get('#edgar-onboardingMedicalPage-formTreatments-addButton-icon').click();
-		cy.get('#edgar-onboardingMedicalPage-next-button').click().url().should('eq', `${url}/dashboard`);
+		cy.get('#edgar-onboardingMedicalPage-next-button')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/dashboard`);
 	});
 });
 
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/medical');
 		cy.wait(1000);
 	});
 
@@ -162,7 +161,7 @@ describe('Working page - Desktop', () => {
 		cy.get('#edgar-onboardingMedicalPage-confirmationModalValidate-button')
 			.click()
 			.url()
-			.should('eq', `${url}/dashboard`);
+			.should('eq', `${Cypress.env('url')}/dashboard`);
 	});
 
 	it('Doctor name & Allergies input filled', () => {

@@ -1,12 +1,8 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const authToken = Cypress.env('authToken');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/documents`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/documents');
 	});
 
 	it('Good number of buttons', () => {
@@ -29,8 +25,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/documents`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/documents');
 	});
 
 	it('Good content for buttons', () => {
@@ -41,8 +37,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/documents`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/documents');
 	});
 
 	it('Visible buttons', () => {
