@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Good number of buttons', () => {
@@ -27,7 +24,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Good content for buttons', () => {
@@ -108,7 +105,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Visible buttons', () => {
@@ -154,7 +151,7 @@ describe('Visible elements - Desktop', () => {
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Good number of buttons', () => {
@@ -177,7 +174,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Good content for buttons', () => {
@@ -258,7 +255,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/product`);
+		cy.visit('/product');
 	});
 
 	it('Visible buttons', () => {
@@ -270,7 +267,7 @@ describe('Visible elements - Mobile', () => {
 		cy.get('#edgar-productPage-catchPhrase-text').should('be.visible');
 		cy.get('#edgar-productPage-subTitle1-text').should('be.visible');
 		cy.get('#edgar-productPage-subTitle2-text').should('be.visible');
-		-cy.get('#edgar-productPage-subTitle3-text').should('be.visible');
+		cy.get('#edgar-productPage-subTitle3-text').should('be.visible');
 		cy.get('#edgar-productPage-productTitle-text').should('be.visible');
 		cy.get('#edgar-productPage-productDescription1-text').should('be.visible');
 		cy.get('#edgar-productPage-productDescription2-text').should('be.visible');

@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Good number of buttons', () => {
@@ -23,7 +20,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Good content for buttons', () => {
@@ -67,7 +64,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Visible buttons', () => {
@@ -93,7 +90,7 @@ describe('Visible elements - Desktop', () => {
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Good number of buttons', () => {
@@ -112,7 +109,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Visible buttons', () => {
@@ -156,7 +153,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/contact`);
+		cy.visit('/contact');
 	});
 
 	it('Good content for buttons', () => {
