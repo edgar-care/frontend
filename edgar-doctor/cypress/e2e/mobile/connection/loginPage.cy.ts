@@ -1,12 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const loginEmail = Cypress.env('loginTestEmail');
-const loginPassword = Cypress.env('loginTestPassword');
-
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/login`);
+		cy.visit('/login');
 	});
 
 	it('Good number of buttons', () => {
@@ -33,7 +28,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/login`);
+		cy.visit('/login');
 	});
 
 	it('Good content for buttons', () => {
@@ -54,7 +49,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/login`);
+		cy.visit('/login');
 	});
 
 	it('Good content for buttons', () => {
@@ -72,7 +67,7 @@ describe('Visible elements - Mobile', () => {
 describe('Working page - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}/login`);
+		cy.visit('/login');
 		cy.wait(1000);
 	});
 
@@ -106,8 +101,12 @@ describe('Working page - Mobile', () => {
 	});
 
 	it('Good credentials', () => {
-		cy.get('#edgar-loginPage-formEmail-input').click().type(loginEmail);
-		cy.get('#edgar-loginPage-formPassword-input').click().type(loginPassword);
-		cy.get('#edgar-loginPage-form-button').click().wait(1000).url().should('eq', `${url}/dashboard`);
+		cy.get('#edgar-loginPage-formEmail-input').click().type(Cypress.env('loginTestEmail'));
+		cy.get('#edgar-loginPage-formPassword-input').click().type(Cypress.env('loginTestPassword'));
+		cy.get('#edgar-loginPage-form-button')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/dashboard`);
 	});
 });
