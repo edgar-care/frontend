@@ -1,6 +1,27 @@
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 import { Button, HStack, Icon, Text } from '@chakra-ui/react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
+
+import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
+import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
+
+/**
+ * How to use it
+ *
+ * const PaginationUse = () => {
+ *  const data = []																			// The data you want to paginate
+ * 	const [pageIndex, setPageIndex] = useState(1);											// The page index handler
+ *
+ * 	return (
+ * 	    <>
+ * 	        {paginationHandler(data, pageIndex, 10).map((item, index) => (<>...</>))}		// The line where you want to display your data (using paginationHandler)
+ * 		    <Pagination																		// The pagination component
+ * 		    	pageIndex={pageIndex}
+ * 		    	pageNumbers={countMaxNumberPage(data, 10)}
+ * 		    	setPageIndex={setPageIndex}
+ * 		    />
+ *   	</>
+ * }
+ */
 
 const Pagination = ({
 	pageIndex,
@@ -26,7 +47,7 @@ const Pagination = ({
 		justify="center"
 	>
 		<Button variant="unstyled" onClick={() => setPageIndex((prev) => (prev - 1 < 1 ? 1 : prev - 1))}>
-			<Icon as={ChevronLeftIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
+			<Icon as={LeftChevronIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
 		</Button>
 		<HStack spacing="16px">
 			{Array.from(Array(maxPageNumbers + 1).keys())
@@ -57,28 +78,9 @@ const Pagination = ({
 			variant="unstyled"
 			onClick={() => setPageIndex((prev) => (prev + 1 > maxPageNumbers ? maxPageNumbers : prev + 1))}
 		>
-			<Icon as={ChevronRightIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
+			<Icon as={RightChevronIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
 		</Button>
 	</HStack>
 );
 
 export default Pagination;
-
-/**
- * How to use it
- *
- * const PaginationUse = () => {
- *  const data = []
- * 	const [pageIndex, setPageIndex] = useState(1);
- *
- * 	return (
- * 	    <>
- * 	        {paginationHandler(data, pageIndex, 10).map((item, index) => (<>...</>))}
- * 		    <Pagination
- * 		    	pageIndex={pageIndex}
- * 		    	pageNumbers={countMaxNumberPage(data, 10)}
- * 		    	setPageIndex={setPageIndex}
- * 		    />
- *   	</>
- * }
- */
