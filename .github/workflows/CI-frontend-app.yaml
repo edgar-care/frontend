@@ -134,6 +134,7 @@ jobs:
           working-directory: ./edgar-app
           wait-on: "http://localhost:3000/login"
           wait-on-timeout: 30
+          config: baseUrl=http://localhost:3000
         env:
           CYPRESS_url: http://localhost:3000
           CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_LOGIN_TEST_EMAIL }}
