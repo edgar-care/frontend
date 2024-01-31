@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -24,7 +21,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good content for buttons', () => {
@@ -73,7 +70,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -127,37 +124,57 @@ describe('Visible elements - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on texts (health)', () => {
 		// cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
-		// cy.visit(`${url}`);
+		// cy.visit('/');
 		// cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
-		// cy.visit(`${url}`);
-		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
-		cy.visit(`${url}`);
+		// cy.visit('/');
+		cy.get('#edgar-footer-healthFindDoctor-text')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/doctor`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on texts (project)', () => {
-		cy.get('#edgar-footer-projectOffer-text').click().url().should('eq', `${url}/product`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-projectApplication-text').click().url().should('eq', `${url}/application`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-projectJoinUs-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-footer-projectOffer-text')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/product`);
+		cy.visit('/');
+		cy.get('#edgar-footer-projectApplication-text')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/application`);
+		cy.visit('/');
+		cy.get('#edgar-footer-projectJoinUs-text')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact`);
 	});
 
 	it('Good redirection on texts (CS)', () => {
-		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact#form`);
-		cy.visit(`${url}`);
-		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
-		// cy.visit(`${url}`);
-		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${url}/`);
+		cy.get('#edgar-footer-CSContactUs-text')
+			.click()
+			.wait(1000)
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact#form`);
+		cy.visit('/');
+		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${Cypress.env('url')}/`);
+		// cy.visit('/');
+		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${Cypress.env('url')}/`);
 	});
 
 	it('Good redirection on icons', () => {
-		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', `${url}`);
-		// cy.visit(`${url}`);
+		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', '/');
+		// cy.visit('/');
 		// cy.get('#edgar-footer-instagramIcon-svg').click().url().should('eq', "");
 	});
 });
@@ -165,7 +182,7 @@ describe('Good redirection on elements - Desktop', () => {
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -185,7 +202,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good content for buttons', () => {
@@ -234,7 +251,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -288,37 +305,52 @@ describe('Visible elements - Mobile', () => {
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on texts (health)', () => {
 		// cy.get('#edgar-footer-healthAppointment-text').click().url().should('eq', `${appUrl}/simulation`);
-		// cy.visit(`${url}`);
+		// cy.visit('/');
 		// cy.get('#edgar-footer-healthPatientArea-text').click().url().should('eq', `${appUrl}/connection/login`);
-		// cy.visit(`${url}`);
-		cy.get('#edgar-footer-healthFindDoctor-text').click().url().should('eq', `${url}/doctor`);
-		cy.visit(`${url}`);
+		// cy.visit('/');
+		cy.get('#edgar-footer-healthFindDoctor-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/doctor`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on texts (project)', () => {
-		cy.get('#edgar-footer-projectOffer-text').click().url().should('eq', `${url}/product`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-projectApplication-text').click().url().should('eq', `${url}/application`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-footer-projectJoinUs-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-footer-projectOffer-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/product`);
+		cy.visit('/');
+		cy.get('#edgar-footer-projectApplication-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/application`);
+		cy.visit('/');
+		cy.get('#edgar-footer-projectJoinUs-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact`);
 	});
 
 	it('Good redirection on texts (CS)', () => {
-		cy.get('#edgar-footer-CSContactUs-text').click().url().should('eq', `${url}/contact#form`);
-		cy.visit(`${url}`);
-		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${url}/`);
-		// cy.visit(`${url}`);
-		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${url}/`);
+		cy.get('#edgar-footer-CSContactUs-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact#form`);
+		cy.visit('/');
+		// cy.get('#edgar-footer-CSPolicies-text').click().url().should('eq', `${Cypress.env('url')}/`);
+		// cy.visit('/');
+		// cy.get('#edgar-footer-CSLegals-text').click().url().should('eq', `${Cypress.env('url')}/`);
 	});
 
 	it('Good redirection on icons', () => {
-		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', `${url}`);
-		// cy.visit(`${url}`);
+		cy.get('#edgar-footer-linkedInIcon-svg').click().url().should('not.eq', '/');
+		// cy.visit('/');
 		// cy.get('#edgar-footer-instagramIcon-svg').click().url().should('eq', "");
 	});
 });
