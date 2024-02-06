@@ -63,7 +63,7 @@ const NavBar = ({ variant }: { variant: 'blue' | 'white' }): JSX.Element => {
 								? '/assets/logo/white-edgar-logo.svg'
 								: '/assets/logo/colored-edgar-logo.svg'
 						}
-						w={{ base: '100px', md: '150px' }}
+						w={{ base: '150px', md: '200px' }}
 						h="auto"
 						id="edgar-navbar-edgarLogo-img"
 						alt="edgar-logo"
