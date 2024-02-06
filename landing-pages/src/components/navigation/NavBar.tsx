@@ -26,7 +26,7 @@ const NavBar = ({ variant }: { variant: 'blue' | 'white' }): JSX.Element => {
 	const tabs = [
 		{
 			name: 'Ce que nous offrons',
-			path: '/product',
+			path: '/project',
 			id: 'product',
 		},
 		{
