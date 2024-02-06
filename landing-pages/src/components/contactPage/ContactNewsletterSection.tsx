@@ -25,15 +25,15 @@ const ContactNewsletterSection = (): JSX.Element => {
 						)}
 					</Text>
 					<Text size={{ base: 'xl', lg: '2xl' }} maxW="850px" id="edgar-contactPage-newsletterSubtitle-text">
-						Recevez par email les news d’edgar en{' '}
+						Recevez par email, les news d’edgar en{' '}
 						<Box as="span" fontWeight="600" color="green.600">
 							exclusivité
 						</Box>{' '}
 						et en{' '}
 						<Box as="span" fontWeight="600" color="green.600">
 							BONUS
-						</Box>{' '}
-						profitez des premières places d’accès à{' '}
+						</Box>
+						, profitez des premières places d’accès à{' '}
 						<Box as="span" fontWeight="600" color="green.600">
 							notre beta
 						</Box>{' '}
