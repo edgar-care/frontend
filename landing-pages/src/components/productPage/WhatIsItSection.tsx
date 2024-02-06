@@ -25,32 +25,30 @@ const WhatIsItSection = (): JSX.Element => {
 							</Box>{' '}
 							et celle de{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								vos proches
+								vos proches.
 							</Box>
-							.
 						</Text>
 						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-productPage-subTitle2-text">
 							Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes,
-							en France, ces quelques dernières année, un français attend en{' '}
+							en France, ces quelques dernières années, un Français attend en{' '}
 							<Box as="span" fontWeight="600" color="green.400">
 								moyenne 6 jours
 							</Box>{' '}
-							avant d’aller à son rendez-vous médical.
+							avant d’assister à son rendez-vous médical.
 						</Text>
 						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-productPage-subTitle3-text">
-							Chez edgar, nous voulons{' '}
+							Chez edgar, nous souhaitons{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								réduire cette durée
+								réduire la durée d'attente
 							</Box>{' '}
 							en diminuant le nombre de rendez-vous inutiles. Ces rendez-vous font{' '}
 							<Box as="span" fontWeight="600" color="green.400">
 								perdre du temps
 							</Box>{' '}
-							aux patients, mais aussi aux médecins, qui nous le savons{' '}
+							aux patients, mais aussi aux médecins qui sont{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								sont surchargés
+								surchargés.
 							</Box>
-							.
 						</Text>
 					</VStack>
 				</VStack>
