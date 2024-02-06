@@ -67,7 +67,7 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.get('#edgar-navbar-tab-product-text')
 			.click()
 			.url()
-			.should('eq', `${Cypress.env('url')}/product`);
+			.should('eq', `${Cypress.env('url')}/project`);
 		cy.visit('/');
 		cy.get('#edgar-navbar-tab-application-text')
 			.click()
@@ -169,7 +169,7 @@ describe('Good redirection on elements - Mobile', () => {
 		cy.get('#edgar-navbar-tab-product-text')
 			.click()
 			.url()
-			.should('eq', `${Cypress.env('url')}/product`);
+			.should('eq', `${Cypress.env('url')}/project`);
 	});
 
 	it('Good redirection for application text', () => {

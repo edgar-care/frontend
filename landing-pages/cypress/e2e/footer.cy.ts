@@ -63,7 +63,7 @@ describe('Good content on elements - Desktop', () => {
 	});
 
 	it('Good content for texts', () => {
-		cy.get('#edgar-footer-madeIn-text').should('contain.text', 'Fait à Lyon & Mulhouse avec');
+		cy.get('#edgar-footer-madeIn-text').should('contain.text', 'Fait à Lyon & Nancy avec');
 	});
 });
 
@@ -142,20 +142,20 @@ describe('Good redirection on elements - Desktop', () => {
 
 	it('Good redirection on texts (project)', () => {
 		cy.get('#edgar-footer-projectOffer-text')
-			.click()
 			.wait(1000)
+			.click()
 			.url()
-			.should('eq', `${Cypress.env('url')}/product`);
+			.should('eq', `${Cypress.env('url')}/project`);
 		cy.visit('/');
 		cy.get('#edgar-footer-projectApplication-text')
-			.click()
 			.wait(1000)
+			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/application`);
 		cy.visit('/');
 		cy.get('#edgar-footer-projectJoinUs-text')
-			.click()
 			.wait(1000)
+			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/contact`);
 	});
@@ -244,7 +244,7 @@ describe('Good content on elements - Mobile', () => {
 	});
 
 	it('Good content for texts', () => {
-		cy.get('#edgar-footer-madeIn-text').should('contain.text', 'Fait à Lyon & Mulhouse avec');
+		cy.get('#edgar-footer-madeIn-text').should('contain.text', 'Fait à Lyon & Nancy avec');
 	});
 });
 
@@ -324,7 +324,7 @@ describe('Good redirection on elements - Mobile', () => {
 		cy.get('#edgar-footer-projectOffer-text')
 			.click()
 			.url()
-			.should('eq', `${Cypress.env('url')}/product`);
+			.should('eq', `${Cypress.env('url')}/project`);
 		cy.visit('/');
 		cy.get('#edgar-footer-projectApplication-text')
 			.click()
