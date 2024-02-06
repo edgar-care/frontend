@@ -16,7 +16,7 @@ const MilestoneDetails = (): JSX.Element => {
 			title: 'POC (Proof Of Concept)',
 			elements: [
 				"Amélioration de l'expérience utilisateur",
-				'Première version des interfaces utilisateur',
+				'Première version des interfaces utilisateurs',
 				"Parcours d'onboarding pour le dossier médical",
 				'Edgar plus performant',
 			],
