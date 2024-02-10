@@ -11,6 +11,7 @@ const extendedApi = backendApi.injectEndpoints({
 			providesTags: ['doctorSlots'],
 			transformResponse: (response: PatientsStoreType) => ({
 				id: response.patient.id,
+				email: response.patient.email,
 				onboarding_info: {
 					id: response.onboarding_info.id,
 					name: response.onboarding_info.name,

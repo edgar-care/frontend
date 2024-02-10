@@ -14,7 +14,11 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 	const appointmentStartDate = new Date(appointment.startDate);
 	const appointmentEndDate = new Date(appointment.endDate);
 
-	const { isOpen: isOpenPatientInfosDrawer, onOpen: onOpenPatientInfosDrawer, onClose: onClosePatientInfosDrawer } = useDisclosure();
+	const {
+		isOpen: isOpenPatientInfosDrawer,
+		onOpen: onOpenPatientInfosDrawer,
+		onClose: onClosePatientInfosDrawer,
+	} = useDisclosure();
 
 	return (
 		<HStack
@@ -28,32 +32,50 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 			align="stretch"
 		>
 			<Box as="span" w="4px" bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'} borderRadius="4px" />
-				<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%">
-				<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
-				<VStack w="100%" spacing="0px" px="8px" align="start">
-					<HStack spacing="4px">
-						<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-							{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
-						</Text>
-						<HStack p="4px 6px 4px 6px" spacing="8px" cursor="pointer" rounded="8px" _hover={{backgroundColor: 'blue.200'}} role="group" onClick={onOpenPatientInfosDrawer}>
-							<Icon as={SidebarIcon} color="blue.900" w="16px" h="14px"/>
-							<Text size="boldSm" color="white" _groupHover={{color: 'blue.900'}}>
-								Ouvrir
+			<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%">
+				<Stack
+					direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }}
+					justify="space-between"
+					w="100%"
+				>
+					<VStack w="100%" spacing="0px" px="8px" align="start">
+						<HStack spacing="4px">
+							<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
+								{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
+							</Text>
+							<HStack
+								p="4px 6px 4px 6px"
+								spacing="8px"
+								cursor="pointer"
+								rounded="8px"
+								_hover={{ backgroundColor: 'blue.200' }}
+								role="group"
+								onClick={onOpenPatientInfosDrawer}
+							>
+								<Icon as={SidebarIcon} color="blue.900" w="16px" h="14px" />
+								<Text size="boldSm" color="white" _groupHover={{ color: 'blue.900' }}>
+									Ouvrir
+								</Text>
+							</HStack>
+						</HStack>
+						<HStack>
+							<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCardHour-text">
+								{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
+								{appointmentStartDate.getMinutes().toString().padStart(2, '0')}{' '}
+								<Icon as={RightArrowIcon} w="14px" /> {appointmentEndDate.getHours()}h
+								{appointmentEndDate.getMinutes().toString().padStart(2, '0')}
 							</Text>
 						</HStack>
-					</HStack>
-					<HStack>
-						<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCardHour-text">
-							{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
-							{appointmentStartDate.getMinutes().toString().padStart(2, '0')}{' '}
-							<Icon as={RightArrowIcon} w="14px" /> {appointmentEndDate.getHours()}h
-							{appointmentEndDate.getMinutes().toString().padStart(2, '0')}
-						</Text>
-					</HStack>
-				</VStack>
-				{appointmentEndDate > new Date() && <HStack px={{ base: '8px', xl: '0px' }} justify="end"></HStack>}
-				{patient && (<PatientInfosDrawer isOpen={isOpenPatientInfosDrawer} onClose={onClosePatientInfosDrawer} patientInfos={patient} />)}
-			</Stack>
+					</VStack>
+					{appointmentEndDate > new Date() && <HStack px={{ base: '8px', xl: '0px' }} justify="end"></HStack>}
+					{patient && (
+						<PatientInfosDrawer
+							isOpen={isOpenPatientInfosDrawer}
+							onClose={onClosePatientInfosDrawer}
+							patientInfos={patient}
+						/>
+					)}
+				</Stack>
 			</Skeleton>
 		</HStack>
 	);

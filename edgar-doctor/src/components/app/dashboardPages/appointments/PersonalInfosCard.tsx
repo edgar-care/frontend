@@ -1,12 +1,19 @@
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
 import { PatientsType } from 'types/app/dashboard/patients/PatientsType';
 
-const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientsType}): JSX.Element => {
-	const formatHeight = (height: number): string => {
-		return (height / 100).toLocaleString('en-US', {minimumFractionDigits: 2});
-	}
-    return (
-		<HStack w="100%" p="16px" spacing="4px" borderRadius="8px" border="2px solid" borderColor="blue.200" align="stretch">
+const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientsType }): JSX.Element => {
+	const formatHeight = (height: number): string =>
+		(height / 100).toLocaleString('en-US', { minimumFractionDigits: 2 });
+	return (
+		<HStack
+			w="100%"
+			p="16px"
+			spacing="4px"
+			borderRadius="8px"
+			border="2px solid"
+			borderColor="blue.200"
+			align="stretch"
+		>
 			<Box bg="green.500" w="4px" borderRadius="4px" />
 			<VStack w="100%" spacing="32px" display="flex">
 				<VStack spacing="12px" alignItems="start" w="100%">
