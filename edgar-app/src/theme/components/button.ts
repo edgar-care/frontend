@@ -214,6 +214,12 @@ const Button = {
 				transition: 'all .3s ease-in-out',
 			},
 		},
+		unstyled: {
+			padding: '0px',
+			_hover: {
+				bg: 'transparent',
+			},
+		},
 	},
 	defaultProps: {
 		size: 'customMd',
