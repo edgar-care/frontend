@@ -19,5 +19,6 @@ export interface PatientsStoreType {
 		id: string;
 		onboarding_info_id: string;
 		onboarding_health_id: string;
+		email: string;
 	};
 }

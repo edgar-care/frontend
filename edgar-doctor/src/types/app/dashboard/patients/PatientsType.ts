@@ -1,5 +1,6 @@
 export type PatientsType = {
 	id: string;
+	email: string;
 	onboarding_info: {
 		id: string;
 		name: string;
