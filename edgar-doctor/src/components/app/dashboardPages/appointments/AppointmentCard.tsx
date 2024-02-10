@@ -1,12 +1,20 @@
-import { Box, HStack, Icon, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
 
-import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
+import PatientInfosDrawer from 'components/app/dashboardPages/appointments/modals/PatientInfosDrawer';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 
+import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
+import SidebarIcon from 'assets/icons/SidebarIcon';
+
+import { useGetPatientByIdQuery } from 'services/request/patients';
+
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
+	const { data: patient, isLoading } = useGetPatientByIdQuery(appointment.patientId);
 	const appointmentStartDate = new Date(appointment.startDate);
-	const appointmentEndDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.endDate);
+
+	const { isOpen: isOpenPatientInfosDrawer, onOpen: onOpenPatientInfosDrawer, onClose: onClosePatientInfosDrawer } = useDisclosure();
 
 	return (
 		<HStack
@@ -20,11 +28,20 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 			align="stretch"
 		>
 			<Box as="span" w="4px" bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'} borderRadius="4px" />
-			<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
+				<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%">
+				<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
-					<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-						Patient XX
-					</Text>
+					<HStack spacing="4px">
+						<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
+							{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
+						</Text>
+						<HStack p="4px 6px 4px 6px" spacing="8px" cursor="pointer" rounded="8px" _hover={{backgroundColor: 'blue.200'}} role="group" onClick={onOpenPatientInfosDrawer}>
+							<Icon as={SidebarIcon} color="blue.900" w="16px" h="14px"/>
+							<Text size="boldSm" color="white" _groupHover={{color: 'blue.900'}}>
+								Ouvrir
+							</Text>
+						</HStack>
+					</HStack>
 					<HStack>
 						<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCardHour-text">
 							{appointmentStartDate.toLocaleDateString('fr')} - {appointmentStartDate.getHours()}h
@@ -35,7 +52,9 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 					</HStack>
 				</VStack>
 				{appointmentEndDate > new Date() && <HStack px={{ base: '8px', xl: '0px' }} justify="end"></HStack>}
+				{patient && (<PatientInfosDrawer isOpen={isOpenPatientInfosDrawer} onClose={onClosePatientInfosDrawer} patientInfos={patient} />)}
 			</Stack>
+			</Skeleton>
 		</HStack>
 	);
 };
