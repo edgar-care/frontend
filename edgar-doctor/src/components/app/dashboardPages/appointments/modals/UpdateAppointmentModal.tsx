@@ -31,7 +31,11 @@ const UpdateAppointmentModal = ({
 						<Button variant="secondary" w="100%" onClick={onClose}>
 							Revenir en arrière
 						</Button>
-						<UpdateAppointmentSubmitButton selectedAppointmentId={appointmentId} newAppointmentId={selectedAppointment} onClose={onClose}/>
+						<UpdateAppointmentSubmitButton
+							selectedAppointmentId={appointmentId}
+							newAppointmentId={selectedAppointment}
+							onClose={onClose}
+						/>
 					</HStack>
 				</ModalFooter>
 			</ModalContent>

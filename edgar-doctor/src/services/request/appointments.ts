@@ -31,4 +31,5 @@ const extendedApi = backendApi.injectEndpoints({
 	}),
 });
 
-export const { useGetDoctorAppointmentsQuery, useLazyGetDoctorAppointmentsQuery, useUpdateDoctorAppointmentMutation } = extendedApi;
+export const { useGetDoctorAppointmentsQuery, useLazyGetDoctorAppointmentsQuery, useUpdateDoctorAppointmentMutation } =
+	extendedApi;

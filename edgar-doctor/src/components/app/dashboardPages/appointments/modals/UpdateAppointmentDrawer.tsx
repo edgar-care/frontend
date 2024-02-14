@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerOverlay, VStack } from '@chakra-ui/react';
-import UpdateAppointmentContent from './UpdateAppointmentContent';
-
 import UpdateAppointmentSubmitButton from 'components/app/dashboardPages/appointments/modals/UpdateAppointmentSubmitButton';
+import UpdateAppointmentContent from './UpdateAppointmentContent';
 
 const UpdateAppointmentDrawer = ({
 	isOpen,
@@ -26,14 +25,18 @@ const UpdateAppointmentDrawer = ({
 					/>
 				</DrawerBody>
 				<DrawerFooter p="16px">
-				<VStack w="100%">
-					<UpdateAppointmentSubmitButton selectedAppointmentId={appointmentId} newAppointmentId={selectedAppointment} onClose={onClose}/>
-					<Button variant="secondary" w="100%" onClick={onClose}>
-						Revenir en arrière
-					</Button>
-				</VStack>
-			</DrawerFooter>
-			</DrawerContent>	
+					<VStack w="100%">
+						<UpdateAppointmentSubmitButton
+							selectedAppointmentId={appointmentId}
+							newAppointmentId={selectedAppointment}
+							onClose={onClose}
+						/>
+						<Button variant="secondary" w="100%" onClick={onClose}>
+							Revenir en arrière
+						</Button>
+					</VStack>
+				</DrawerFooter>
+			</DrawerContent>
 		</Drawer>
 	);
 };
