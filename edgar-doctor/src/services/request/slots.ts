@@ -19,6 +19,21 @@ const extendedApi = backendApi.injectEndpoints({
 				})),
 		}),
 
+		getOpenSlots: builder.query<AgendaSlotType[], void>({
+			query: () => '/doctor/slots',
+			providesTags: ['doctorSlots'],
+			transformResponse: (response: { slot: SlotsStoreType[] }) =>
+				response.slot
+					.filter((slot) => !slot.id_patient)
+					.map((slot) => ({
+						id: slot.id,
+						startDate: slot.start_date * 1000,
+						endDate: slot.end_date * 1000,
+						patientId: slot.id_patient,
+						status: 'OPEN',
+					})),
+		}),
+
 		openSlot: builder.mutation<SlotsStoreType, OpenSlotDTO>({
 			query: (params) => ({
 				url: '/doctor/slot',
@@ -41,4 +56,11 @@ const extendedApi = backendApi.injectEndpoints({
 	}),
 });
 
-export const { useGetSlotsQuery, useLazyGetSlotsQuery, useOpenSlotMutation, useCloseSlotMutation } = extendedApi;
+export const {
+	useGetSlotsQuery,
+	useLazyGetSlotsQuery,
+	useGetOpenSlotsQuery,
+	useLazyGetOpenSlotsQuery,
+	useOpenSlotMutation,
+	useCloseSlotMutation,
+} = extendedApi;
