@@ -10,3 +10,8 @@ export interface UpdateAppointmentDTO {
 	selectedAppointmentId: string;
 	newAppointmentId: string;
 }
+
+export interface CancelAppointmentDTO {
+	appointmentId: string;
+	reason: string;
+}

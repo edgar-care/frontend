@@ -2,7 +2,11 @@ import { backendApi } from 'services/apiService';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 
-import { type AppointmentsStoreType, type UpdateAppointmentDTO } from 'store/types/appointments.type';
+import {
+	type AppointmentsStoreType,
+	type UpdateAppointmentDTO,
+	type CancelAppointmentDTO,
+} from 'store/types/appointments.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -28,8 +32,22 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['doctorAppointments', 'doctorSlots'],
 		}),
+		cancelDoctorAppointment: builder.mutation<void, CancelAppointmentDTO>({
+			query: (params) => ({
+				url: `/doctor/appointments/${params.appointmentId}`,
+				method: 'DELETE',
+				body: {
+					reason: params.reason,
+				},
+			}),
+			invalidatesTags: ['doctorAppointments', 'doctorSlots'],
+		}),
 	}),
 });
 
-export const { useGetDoctorAppointmentsQuery, useLazyGetDoctorAppointmentsQuery, useUpdateDoctorAppointmentMutation } =
-	extendedApi;
+export const {
+	useGetDoctorAppointmentsQuery,
+	useLazyGetDoctorAppointmentsQuery,
+	useUpdateDoctorAppointmentMutation,
+	useCancelDoctorAppointmentMutation,
+} = extendedApi;
