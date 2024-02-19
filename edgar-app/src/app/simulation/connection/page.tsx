@@ -1,35 +1,33 @@
 'use client';
 
-import { Text, VStack, Stack, Button, Link } from '@chakra-ui/react';
+import { Text, HStack, Box, Button } from '@chakra-ui/react';
+import Link from 'next/link';
 
-import HighlightText from 'components/HighlightText';
-import SimulationPage from 'components/pages/simulation/SimulationPage';
+import SimulationLayout from 'components/simulationPages/SimulationLayout';
 
 const Connection = (): JSX.Element => (
-	<SimulationPage>
-		<VStack spacing={{ base: '96px', md: '128px' }} pb={{ base: '64px', md: '0px' }}>
-			<Stack spacing="64px" maxW="670px">
-				<Text size={{ base: 'boldXl', md: '2xl' }}>
-					Ce médecin va examiner votre analyse sous <HighlightText>maximum 48h</HighlightText>
-				</Text>
-				<Text size={{ base: 'boldXl', md: '2xl' }}>
-					Pour que je puisse revenir vers vous, il me faudrait un moyen de communication
-				</Text>
-			</Stack>
-			<Stack direction={{ base: 'column', sm: 'row' }} spacing={{ base: '16px', md: '64px' }}>
-				<Link href="/connection/signup?redirect=/simulation/advise">
-					<Button variant="primary" size="lg" w="100%">
-						Créer un compte
-					</Button>
+	<SimulationLayout>
+		<>
+			<Text size="3xl" color="white" maxW="1000px">
+				Afin de vous poser les bonnes questions, j’aurai besoin de connaître vos informations de santé. <br />
+				Pour cela, connectez-vous ou créez un compte.
+			</Text>
+			<Box w="100%">
+				<Link href="/simulation/connection">
+					<HStack w="100%" justify="end" spacing="16px">
+						<Button variant="primaryBordered">
+							<Link href="app.edgar-sante.fr/signup?redirect=/simulation/start">Créer un compte</Link>
+						</Button>
+						<Button variant="secondary">
+							<Link href="app.edgar-sante.fr/login?redirect=/simulation/start">
+								Me connecter à mon compte
+							</Link>
+						</Button>
+					</HStack>
 				</Link>
-				<Link href="/connection/login?redirect=/simulation/advise">
-					<Button variant="secondary" size="lg" w="100%">
-						Se connecter
-					</Button>
-				</Link>
-			</Stack>
-		</VStack>
-	</SimulationPage>
+			</Box>
+		</>
+	</SimulationLayout>
 );
 
 export default Connection;
