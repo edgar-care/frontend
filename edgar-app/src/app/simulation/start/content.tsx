@@ -6,18 +6,17 @@ import Link from 'next/link';
 import SimulationLayout from 'components/simulationPages/SimulationLayout';
 import SimulationButton from 'components/simulationPages/SimulationButton';
 
-const SimulationContent = (): JSX.Element => (
+const SimulationStartContent = (): JSX.Element => (
 	<SimulationLayout>
 		<>
 			<Text size="3xl" color="white" maxW="1000px">
-				Bienvenue dans votre simulation, je m’appelle Edgar et je serai votre assistant tout au long de cette
-				simulation.
+				Voilà, tout est prêt pour moi. Vous pouvez dès maintenant commencer votre simulation.
 			</Text>
-			<Link href="/simulation/conditions">
-				<SimulationButton>Continuer</SimulationButton>
+			<Link href="chat">
+				<SimulationButton>Commencer ma simulation</SimulationButton>
 			</Link>
 		</>
 	</SimulationLayout>
 );
 
-export default SimulationContent;
+export default SimulationStartContent;

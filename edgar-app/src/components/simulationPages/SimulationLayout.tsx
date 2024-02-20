@@ -5,7 +5,9 @@ const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 	<VStack py="32px" px="64px" bgColor="blue.700" w="100%" borderRadius="48px" h="100%" justifyContent="space-between">
 		<VStack w="100%" h="108px"></VStack>
 		<HStack spacing="128px">
-			<VStack spacing="64px">{children}</VStack>
+			<VStack spacing="64px" align="end">
+				{children}
+			</VStack>
 			<Image src="/assets/Edgars/edgar-high-five.svg" alt="Edgar high five" width={326} height={350} />
 		</HStack>
 		<VStack>
