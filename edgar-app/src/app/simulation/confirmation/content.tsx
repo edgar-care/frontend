@@ -45,7 +45,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 						a bien été validé.
 					</Text>
 				)}
-				<Link href="dashboard">
+				<Link href="/dashboard">
 					<SimulationButton>Accéder à mon espace patient</SimulationButton>
 				</Link>
 			</>
