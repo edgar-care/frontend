@@ -1,7 +1,7 @@
 import { createIcon } from '@chakra-ui/react';
 
-const UpChevronIcon = createIcon({
-	displayName: 'UpChevronIcon',
+const UpChevronBoldIcon = createIcon({
+	displayName: 'UpChevronBoldIcon',
 	viewBox: '0 0 16 9',
 	path: (
 		<path
@@ -17,4 +17,4 @@ const UpChevronIcon = createIcon({
 	),
 });
 
-export default UpChevronIcon;
+export default UpChevronBoldIcon;
