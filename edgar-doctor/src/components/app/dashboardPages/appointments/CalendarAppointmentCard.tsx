@@ -1,12 +1,19 @@
-import { Box, HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, VStack, useDisclosure, Button } from '@chakra-ui/react';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
+import { useState } from 'react';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
+import UpdateAppointmentHandler from './modals/UpdateAppointmentHandler';
+import CancelAppointmentHandler from './modals/CancelAppointmentHandler';
 
 const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const appointmentStartDate = new Date(appointment.startDate);
 	const appointmentEndDate = new Date(appointment.startDate);
+	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
+
+	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
+	const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
 
 	return (
 		<HStack spacing="4px" w="100%" p="12px" borderRadius="8px" border="2px solid" borderColor="blue.200" bg="white">
@@ -17,8 +24,8 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 				bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'}
 				borderRadius="4px"
 			/>
-			<VStack justify="space-between" w="100%">
-				<VStack w="100%" spacing="0px" px="8px" align="start">
+			<VStack spacing="16px" w="100%" align="end">
+			<VStack w="100%" spacing="0px" px="8px" align="start">
 					<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCalendarCardDoctorName-text">
 						Docteur XX
 					</Text>
@@ -31,8 +38,44 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 						</Text>
 					</HStack>
 				</VStack>
+				<HStack px={{ base: '8px', xl: '0px' }}>
+					<Button
+						size="customSm"
+						variant="delete"
+						w="auto"
+						id="edgar-dashboardAppointmentsPage-appointmentCardCancel-button"
+						onClick={() => {
+							setSelectedAppointmentId(appointment.id);
+							onOpenCancelModal();
+						}}
+					>
+						Annuler
+					</Button>
+					<Button
+						size="customSm"
+						variant="secondary"
+						w="auto"
+						id="edgar-dashboardAppointmentsPage-appointmentCardUpdate-button"
+						onClick={() => {
+							setSelectedAppointmentId(appointment.id);
+							onOpenUpdateModal();
+						}}
+					>
+						Modifier
+					</Button>
+				</HStack>
 				{appointmentEndDate > new Date() && <HStack justify="end" w="100%"></HStack>}
 			</VStack>
+			<UpdateAppointmentHandler
+				isOpen={isOpenUpdateModal}
+				onClose={onCloseUpdateModal}
+				appointmentId={selectedAppointmentId}
+			/>
+			<CancelAppointmentHandler
+				isOpen={isOpenCancelModal}
+				onClose={onCloseCancelModal}
+				appointmentId={selectedAppointmentId}
+			/>
 		</HStack>
 	);
 };
