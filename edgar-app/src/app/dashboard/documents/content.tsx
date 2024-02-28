@@ -33,7 +33,7 @@ const DocumentsPageContent = (): JSX.Element => {
 		{
 			_id: '2',
 			url: 'https://google.fr',
-			name: 'Document 2',
+			name: 'Etest',
 			isFavorite: false,
 			_ownerId: 'user1',
 			createdDate: Date.now(),

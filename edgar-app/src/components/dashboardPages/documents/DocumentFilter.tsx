@@ -5,6 +5,9 @@ import { HStack, Button, Icon, Menu, MenuButton, MenuList, MenuItem, Text, Box }
 import DownChevronIcon from 'assets/icons/Chevron/DownChevronIcon';
 import DownArrowIcon from 'assets/icons/Arrow/DownArrowIcon';
 import UpArrowIcon from 'assets/icons/Arrow/UpArrowIcon';
+import CalendarIcon from 'assets/icons/CalendarIcon';
+import AlphabeticalIcon from 'assets/icons/AlphabeticalIcon';
+import ReverseAlphabeticalIcon from 'assets/icons/ReverseAlphabeticalIcon';
 
 const DocumentFilter = ({
 	onSort,
@@ -60,11 +63,23 @@ const DocumentFilter = ({
 								{sortType === 'asc' || sortType === 'desc' ? 'Nom' : 'Date'}
 							</Text>
 						</MenuButton>
-						<MenuList>
-							<MenuItem onClick={() => handleSort('newest')}>Plus récents</MenuItem>
-							<MenuItem onClick={() => handleSort('oldest')}>Plus anciens</MenuItem>
-							<MenuItem onClick={() => handleSort('asc')}>Nom : A à Z</MenuItem>
-							<MenuItem onClick={() => handleSort('desc')}>Nom : Z à A</MenuItem>
+						<MenuList border="2px" borderColor="blue.200" borderRadius="12px" px="8px" fontSize="medium">
+							<MenuItem onClick={() => handleSort('newest')}>
+								<Icon as={CalendarIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Plus récents</Text>
+							</MenuItem>
+							<MenuItem onClick={() => handleSort('oldest')}>
+								<Icon as={CalendarIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Plus anciens</Text>
+							</MenuItem>
+							<MenuItem onClick={() => handleSort('asc')}>
+								<Icon as={AlphabeticalIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Nom : A à Z</Text>
+							</MenuItem>
+							<MenuItem onClick={() => handleSort('desc')}>
+								<Icon as={ReverseAlphabeticalIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Nom : Z à A</Text>
+							</MenuItem>
 						</MenuList>
 					</>
 				)}
