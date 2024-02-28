@@ -16,42 +16,54 @@ import { DocumentType } from 'types/dashboard/documents/DocumentType';
 import SearchIcon from 'assets/icons/SearchIcon';
 
 const DocumentsPageContent = (): JSX.Element => {
-	const { data: documents } = useGetDocumentsQuery();
-	const [searchText, setSearchText] = useState<string>('');
+	const { data: fetchedDocuments } = useGetDocumentsQuery();
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
+	const [searchText, setSearchText] = useState<string>('');
 	const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>([]);
+	const [sortOption, setSortOption] = useState<string>('asc');
+	const [filterTypes, setFilterTypes] = useState<string[]>([]);
 
-	useEffect(() => {
-		if (documents) {
-			setFilteredDocuments(documents);
-			handleSort('asc');
-		}
-	}, [documents]);
-
-	const handleSort = (option: string) => {
-		if (documents) {
-			const sortedDocuments = [...documents];
-
-			if (option === 'asc') {
-				sortedDocuments.sort((a, b) => a.name.localeCompare(b.name));
-			} else if (option === 'desc') {
-				sortedDocuments.sort((a, b) => b.name.localeCompare(a.name));
-			}
-
-			setFilteredDocuments(sortedDocuments);
-		}
+	const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchText(e.target.value);
 	};
 
-	const handleFilterChange = (filterTypes: string[]) => {
-		if (documents) {
-			let updatedFilteredDocuments = filterTypes.length
-				? documents.filter((document) => filterTypes.includes(document.documentType))
-				: documents;
-			if (filterTypes.includes('FAVORITE')) {
-				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.isFavorite);
+	useEffect(() => {
+		if (fetchedDocuments) {
+			let updatedFilteredDocuments = [...fetchedDocuments];
+
+			if (filterTypes.length > 0) {
+				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) =>
+					filterTypes.includes(document.documentType),
+				);
 			}
+
+			if (searchText.trim() !== '') {
+				updatedFilteredDocuments = updatedFilteredDocuments.filter(
+					(document) =>
+						document.name.toLowerCase().includes(searchText.toLowerCase()) ||
+						document.ownerId.toLowerCase().includes(searchText.toLowerCase()),
+				);
+			}
+
+			if (updatedFilteredDocuments.length > 0) {
+				updatedFilteredDocuments.sort((a, b) => {
+					if (sortOption === 'desc') {
+						return b.name.localeCompare(a.name);
+					}
+					return a.name.localeCompare(b.name);
+				});
+			}
+
 			setFilteredDocuments(updatedFilteredDocuments);
 		}
+	}, [fetchedDocuments, searchText, sortOption, filterTypes]);
+
+	const handleSort = (option: string) => {
+		setSortOption(option);
+	};
+
+	const handleFilterChange = (selectedFilters: string[]) => {
+		setFilterTypes(selectedFilters);
 	};
 
 	return (
@@ -76,7 +88,7 @@ const DocumentsPageContent = (): JSX.Element => {
 						<Input
 							placeholder="Rechercher par nom du document ou nom du médecin"
 							value={searchText}
-							onChange={(e) => setSearchText(e.target.value)}
+							onChange={handleSearchTextChange}
 						/>
 						<InputRightElement>
 							<Icon as={SearchIcon} w="16px" h="16px" />
