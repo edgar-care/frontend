@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure, Icon } from '@chakra-ui/react';
 
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
@@ -17,33 +18,40 @@ import SearchIcon from 'assets/icons/SearchIcon';
 const DocumentsPageContent = (): JSX.Element => {
 	const { data: documents } = useGetDocumentsQuery();
 	const [searchText, setSearchText] = useState<string>('');
-	const [documentsData, setDocumentsData] = useState<DocumentType[]>([]);
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
+	const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>([]);
 
-	const filteredDocuments = documents?.filter(
-		(document) =>
-			document.name.toLowerCase().includes(searchText.toLowerCase()) ||
-			document.ownerId.toLowerCase().includes(searchText.toLowerCase()),
-	);
+	useEffect(() => {
+		if (documents) {
+			setFilteredDocuments(documents);
+			handleSort('asc');
+		}
+	}, [documents]);
 
 	const handleSort = (option: string) => {
-		const sortedDocuments = [...documentsData];
+		if (documents) {
+			const sortedDocuments = [...documents];
 
-		if (option === 'asc') {
-			sortedDocuments.sort((a, b) => a.name.localeCompare(b.name));
-		} else if (option === 'desc') {
-			sortedDocuments.sort((a, b) => b.name.localeCompare(a.name));
-		} else if (option === 'newest') {
-			sortedDocuments.sort((a, b) => b.createdDate - a.createdDate);
-		} else if (option === 'oldest') {
-			sortedDocuments.sort((a, b) => a.createdDate - b.createdDate);
+			if (option === 'asc') {
+				sortedDocuments.sort((a, b) => a.name.localeCompare(b.name));
+			} else if (option === 'desc') {
+				sortedDocuments.sort((a, b) => b.name.localeCompare(a.name));
+			}
+
+			setFilteredDocuments(sortedDocuments);
 		}
-
-		setDocumentsData(sortedDocuments);
 	};
 
-	const handleFilterChange = (filterType: string) => {
-		console.log(`Filter changed: ${filterType}`);
+	const handleFilterChange = (filterTypes: string[]) => {
+		if (documents) {
+			let updatedFilteredDocuments = filterTypes.length
+				? documents.filter((document) => filterTypes.includes(document.documentType))
+				: documents;
+			if (filterTypes.includes('FAVORITE')) {
+				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.isFavorite);
+			}
+			setFilteredDocuments(updatedFilteredDocuments);
+		}
 	};
 
 	return (
