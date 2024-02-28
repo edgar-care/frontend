@@ -1,16 +1,18 @@
 'use client';
 
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
+import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure, Icon } from '@chakra-ui/react';
 
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
+import DocumentFilter from 'components/dashboardPages/documents/DocumentFilter';
 import AddDocumentHandler from 'components/dashboardPages/documents/modal/AddDocumentHandler';
 
 import { useGetDocumentsQuery } from 'services/request/documents';
-import DocumentFilter from 'components/dashboardPages/documents/DocumentFilter';
-import SearchIcon from 'assets/icons/SearchIcon';
-import { useState } from 'react';
+
 import { DocumentType } from 'types/dashboard/documents/DocumentType';
+
+import SearchIcon from 'assets/icons/SearchIcon';
 
 const DocumentsPageContent = (): JSX.Element => {
 	const { data: documents } = useGetDocumentsQuery();
@@ -75,7 +77,9 @@ const DocumentsPageContent = (): JSX.Element => {
 				</HStack>
 				<DocumentFilter onSort={handleSort} onFilterChange={handleFilterChange} />
 				<VStack spacing="8px" w="100%" align="start">
-					{filteredDocuments?.map((document) => <DocumentCard key={document.id} document={document} />)}
+					{filteredDocuments?.map((document) => (
+						<DocumentCard key={document.id} document={document} />
+					))}
 				</VStack>
 				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
