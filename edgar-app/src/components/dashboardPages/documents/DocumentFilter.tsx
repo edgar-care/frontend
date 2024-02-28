@@ -8,6 +8,8 @@ import UpArrowIcon from 'assets/icons/Arrow/UpArrowIcon';
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import AlphabeticalIcon from 'assets/icons/AlphabeticalIcon';
 import ReverseAlphabeticalIcon from 'assets/icons/ReverseAlphabeticalIcon';
+import PersonFillIcon from 'assets/icons/PersonFillIcon';
+import StarFillIcon from 'assets/icons/Stars/StarFillIcon';
 
 const DocumentFilter = ({
 	onSort,
@@ -63,7 +65,7 @@ const DocumentFilter = ({
 								{sortType === 'asc' || sortType === 'desc' ? 'Nom' : 'Date'}
 							</Text>
 						</MenuButton>
-						<MenuList border="2px" borderColor="blue.200" borderRadius="12px" px="8px" fontSize="medium">
+						<MenuList border="2px" borderColor="blue.200" borderRadius="12px" px="8px">
 							<MenuItem onClick={() => handleSort('newest')}>
 								<Icon as={CalendarIcon} w="16px" h="16px" color="blue.800" mr="8px" />
 								<Text size="md">Plus récents</Text>
@@ -86,8 +88,25 @@ const DocumentFilter = ({
 			</Menu>
 			<Box w="2px" h="29px" bg="blue.300" />
 			{activeFilter.map((filter) => (
-				<Button key={filter} variant="outline" size="sm" onClick={() => handleFilterChange(filter)}>
-					{filter}
+				<Button
+					key={filter}
+					variant="outline"
+					size="sm"
+					onClick={() => handleFilterChange(filter)}
+					bg="white"
+					border="1px"
+					color="blue.700"
+					borderColor="blue.700"
+					borderRadius="32px"
+					iconSpacing="8px"
+					p="4px 12px"
+					_hover={{
+						bg: 'blue.100',
+					}}
+				>
+					<Text size="md" color="blue.700">
+						{filter}
+					</Text>
 				</Button>
 			))}
 			<Menu>
@@ -111,7 +130,35 @@ const DocumentFilter = ({
 								Filtres
 							</Text>
 						</MenuButton>
-						<MenuList>
+						<MenuList border="2px" borderColor="blue.200" borderRadius="12px" px="8px">
+							<MenuItem>
+								<Icon as={PersonFillIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Ajouté par vous</Text>
+							</MenuItem>
+							<MenuItem>
+								<Icon as={PersonFillIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Ajouté par un médecin</Text>
+							</MenuItem>
+							<MenuItem>
+								<Icon as={StarFillIcon} w="16px" h="16px" color="blue.800" mr="8px" />
+								<Text size="md">Favoris</Text>
+							</MenuItem>
+							<MenuItem>
+								<Box w="16px" h="16px" borderRadius="50%" bgColor="green.500" mr="8px" />
+								<Text size="md">Ordonnance</Text>
+							</MenuItem>
+							<MenuItem>
+								<Box w="16px" h="16px" borderRadius="50%" bgColor="blue.700" mr="8px" />
+								<Text size="md">Certificat</Text>
+							</MenuItem>
+							<MenuItem>
+								<Box w="16px" h="16px" borderRadius="50%" bgColor="green.300" mr="8px" />
+								<Text size="md">Radiologie</Text>
+							</MenuItem>
+							<MenuItem>
+								<Box w="16px" h="16px" borderRadius="50%" bgColor="blue.200" mr="8px" />
+								<Text size="md">Autre documents</Text>
+							</MenuItem>
 							{[
 								'addedByYou',
 								'addedByDoc',
@@ -124,7 +171,7 @@ const DocumentFilter = ({
 								(filterType) =>
 									!activeFilter.includes(filterType) && (
 										<MenuItem key={filterType} onClick={() => handleFilterChange(filterType)}>
-											{filterType}
+											<Text size="md">{filterType}</Text>
 										</MenuItem>
 									),
 							)}

@@ -77,9 +77,7 @@ const DocumentsPageContent = (): JSX.Element => {
 				</HStack>
 				<DocumentFilter onSort={handleSort} onFilterChange={handleFilterChange} />
 				<VStack spacing="8px" w="100%" align="start">
-					{filteredDocuments?.map((document) => (
-						<DocumentCard key={document.id} document={document} />
-					))}
+					{filteredDocuments?.map((document) => <DocumentCard key={document.id} document={document} />)}
 				</VStack>
 				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
