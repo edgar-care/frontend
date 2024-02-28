@@ -32,6 +32,8 @@ const DocumentFilter = ({
 			Radiologie: 'XRAY',
 			'Autre documents': 'OTHER',
 			Favoris: 'FAVORITE',
+			'Ajouté par vous': 'OWN',
+			'Ajouté par un médecin': 'DOCTOR',
 		};
 
 		const newActiveFilters = activeFilter.includes(filterType)

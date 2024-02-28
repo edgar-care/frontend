@@ -1,21 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure, Icon } from '@chakra-ui/react';
-
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import DocumentFilter from 'components/dashboardPages/documents/DocumentFilter';
 import AddDocumentHandler from 'components/dashboardPages/documents/modal/AddDocumentHandler';
-
 import { useGetDocumentsQuery } from 'services/request/documents';
-
 import { DocumentType } from 'types/dashboard/documents/DocumentType';
-
+import { useAuthContext } from 'contexts/auth';
 import SearchIcon from 'assets/icons/SearchIcon';
 
 const DocumentsPageContent = (): JSX.Element => {
+	const auth = useAuthContext();
 	const { data: fetchedDocuments } = useGetDocumentsQuery();
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 	const [searchText, setSearchText] = useState<string>('');
@@ -30,10 +27,23 @@ const DocumentsPageContent = (): JSX.Element => {
 	useEffect(() => {
 		if (fetchedDocuments) {
 			let updatedFilteredDocuments = [...fetchedDocuments];
+			const updatedFilterTypes = [...filterTypes];
 
-			if (filterTypes.length > 0) {
+			if (updatedFilterTypes.includes('FAVORITE')) {
+				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.isFavorite);
+				updatedFilterTypes.splice(updatedFilterTypes.indexOf('FAVORITE'), 1);
+			}
+			if (updatedFilterTypes.includes('OWN')) {
+				const id = auth.getId();
+				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.ownerId === id);
+				updatedFilterTypes.splice(updatedFilterTypes.indexOf('OWN'), 1);
+			}
+			if (updatedFilterTypes.includes('DOCTOR')) {
+				updatedFilterTypes.splice(updatedFilterTypes.indexOf('DOCTOR'), 1);
+			}
+			if (updatedFilterTypes.length > 0) {
 				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) =>
-					filterTypes.includes(document.documentType),
+					updatedFilterTypes.includes(document.documentType),
 				);
 			}
 
@@ -56,7 +66,7 @@ const DocumentsPageContent = (): JSX.Element => {
 
 			setFilteredDocuments(updatedFilteredDocuments);
 		}
-	}, [fetchedDocuments, searchText, sortOption, filterTypes]);
+	}, [fetchedDocuments, searchText, sortOption, filterTypes, auth]);
 
 	const handleSort = (option: string) => {
 		setSortOption(option);
