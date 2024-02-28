@@ -1,6 +1,7 @@
 import { Stack, useDisclosure, useTimeout, VStack } from '@chakra-ui/react';
 import NotificationsHandler from 'components/dashboardPages/notifications-modal/NotificationsHandler';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
+import HomeChatCard from 'components/dashboardPages/home/HomeChatCard';
 
 const DashboardContent = (): JSX.Element => {
 	const {
@@ -24,7 +25,9 @@ const DashboardContent = (): JSX.Element => {
 				w="100%"
 				align="start"
 				spacing={{ base: '32px', xl: '64px' }}
-			></Stack>
+			>
+				<HomeChatCard />
+			</Stack>
 			<NotificationsHandler isOpen={isOpenNotificationsModal} onClose={onCloseNotificationsModal} />
 		</VStack>
 	);
