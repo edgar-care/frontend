@@ -2,6 +2,7 @@ import { Stack, useDisclosure, useTimeout, VStack } from '@chakra-ui/react';
 import NotificationsHandler from 'components/dashboardPages/notifications-modal/NotificationsHandler';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import HomeChatCard from 'components/dashboardPages/home/HomeChatCard';
+import HomeTreatmentsCard from 'components/dashboardPages/home/HomeTreatmentsCard';
 
 const DashboardContent = (): JSX.Element => {
 	const {
@@ -20,13 +21,9 @@ const DashboardContent = (): JSX.Element => {
 				title="Bienvenue sur votre espace patient"
 				subTitle="Retrouvez toutes vos informations médicales à un seul endroit."
 			/>
-			<Stack
-				direction={{ base: 'column', lg: 'row' }}
-				w="100%"
-				align="start"
-				spacing={{ base: '32px', xl: '64px' }}
-			>
+			<Stack direction={{ base: 'column', lg: 'row' }} w="100%" align="start" spacing={{ base: '32px' }}>
 				<HomeChatCard />
+				<HomeTreatmentsCard />
 			</Stack>
 			<NotificationsHandler isOpen={isOpenNotificationsModal} onClose={onCloseNotificationsModal} />
 		</VStack>
