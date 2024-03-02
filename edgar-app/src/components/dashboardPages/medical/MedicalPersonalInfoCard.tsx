@@ -10,6 +10,8 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 		sex: 'Sexe',
 		size: 'Taille',
 		weight: 'Poids',
+		primaryDoctorId: 'Médecin traitant',
+		hasMedicalAntecedents: 'Antécédents médicaux',
 	};
 	const sexLabel: { [key: string]: string } = {
 		MALE: 'Masculin',
@@ -17,9 +19,9 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 		OTHER: 'Autre',
 	};
 
-	const displayPersonalInfos = (key: string, info: string | number): string => {
-		if ((key as keyof PersonalInfos) === 'birthDate') return new Date(info).toLocaleDateString('fr-FR');
-		if ((key as keyof PersonalInfos) === 'sex') return sexLabel[info];
+	const displayPersonalInfos = (key: string, info: string | number | boolean): string => {
+		if ((key as keyof PersonalInfos) === 'birthDate') return new Date(info as string).toLocaleDateString('fr-FR');
+		if ((key as keyof PersonalInfos) === 'sex') return sexLabel[info as string];
 		if ((key as keyof PersonalInfos) === 'size') return `${((info as number) / 100).toPrecision(3)}m`;
 		if ((key as keyof PersonalInfos) === 'weight') return `${info}kg`;
 		return info.toString();

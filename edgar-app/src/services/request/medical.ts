@@ -18,6 +18,9 @@ const extendedApi = backendApi.injectEndpoints({
 					sex: response.patient_info.sex,
 					size: response.patient_info.height,
 					weight: response.patient_info.weight,
+					// TODO: update this when the API is updated
+					primaryDoctorId: '',
+					hasMedicalAntecedents: false,
 				},
 				healthInfos: {
 					primaryDoctorName: response.patient_health.patients_primary_doctor,
