@@ -31,9 +31,9 @@ const SelectPrimaryDoctorModal = ({
 		<ModalContent>
 			<ModalBody p="32px 32px 24px 32px">
 				<VStack w="100%" spacing="32px">
-					<VStack>
+					<VStack w="100%">
 						<Icon as={PeopleIllustration} w="48px" h="48px" />
-						<VStack>
+						<VStack w="100%">
 							<Text size="xl">Sélectionnez votre médecin traitant</Text>
 						</VStack>
 					</VStack>

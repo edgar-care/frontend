@@ -31,10 +31,12 @@ const SelectPrimaryDoctorDrawer = ({
 		<DrawerContent borderRadius="16px 16px 0px 0px">
 			<DrawerBody p="16px">
 				<VStack w="100%" spacing="32px">
-					<VStack>
+					<VStack w="100%">
 						<Icon as={PeopleIllustration} w="48px" h="48px" />
-						<VStack>
-							<Text size="xl">Sélectionnez votre médecin traitant</Text>
+						<VStack w="100%">
+							<Text size="xl" textAlign="center">
+								Sélectionnez votre médecin traitant
+							</Text>
 						</VStack>
 					</VStack>
 					<SelectPrimaryDoctorContent
