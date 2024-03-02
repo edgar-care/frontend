@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 
+import OnboardingProvider from 'app/onboarding/OnboardingProvider';
+
 import { useAuthContext } from 'contexts/auth';
 
 const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
@@ -15,15 +17,16 @@ const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 	}, []);
 
 	return (
-		<VStack
-			p={{ base: '0px', sm: '16px', lg: '64px', xl: '64px 128px', '4xl': '128px 256px' }}
-			w="100%"
-			h={{ base: '100%', lg: 'auto' }}
-			justify={{ base: 'start', sm: 'center' }}
-			minH={{ base: 'auto', sm: '100vh' }}
-		>
-			{children}
-		</VStack>
+		<OnboardingProvider>
+			<VStack
+				p={{ base: '0px', sm: '16px', lg: '32px', xl: '32px 64px', '4xl': '64px 128px' }}
+				w="100%"
+				justify={{ base: 'start', sm: 'center' }}
+				h={{ base: 'auto', sm: '100vh' }}
+			>
+				{children}
+			</VStack>
+		</OnboardingProvider>
 	);
 };
 
