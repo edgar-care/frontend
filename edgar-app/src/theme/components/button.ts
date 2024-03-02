@@ -20,6 +20,12 @@ const Button = {
 			fontWeight: 600,
 			borderRadius: '10px',
 		},
+		selectorMd: {
+			padding: '8px 16px',
+			fontSize: '16px',
+			fontWeight: 500,
+			borderRadius: '12px',
+		},
 		customLg: {
 			padding: '6px 16px',
 			fontSize: '20px',
@@ -207,6 +213,34 @@ const Button = {
 				background: 'red.800',
 				border: '2px solid',
 				borderColor: 'red.800',
+
+				mozTransition: 'all .3s ease-in-out',
+				oTransition: 'all .3s ease-in-out',
+				webkitTransition: 'all .3s ease-in-out',
+				transition: 'all .3s ease-in-out',
+			},
+		},
+		selector: {
+			bg: 'white',
+			color: 'gray.400',
+			border: '2px solid',
+			borderColor: 'blue.500',
+
+			mozTransition: 'all .3s ease-in-out',
+			oTransition: 'all .3s ease-in-out',
+			webkitTransition: 'all .3s ease-in-out',
+			transition: 'all .3s ease-in-out',
+			_hover: {
+				_disabled: {
+					bg: 'white',
+					color: 'gray.400',
+					border: '2px solid',
+					borderColor: 'blue.500',
+				},
+				color: 'white',
+				background: 'blue.900',
+				border: '2px solid',
+				borderColor: 'blue.900',
 
 				mozTransition: 'all .3s ease-in-out',
 				oTransition: 'all .3s ease-in-out',
