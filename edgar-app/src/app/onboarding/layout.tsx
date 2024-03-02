@@ -21,8 +21,8 @@ const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 			<VStack
 				p={{ base: '0px', sm: '16px', lg: '32px', xl: '32px 64px', '4xl': '64px 128px' }}
 				w="100%"
-				justify={{ base: 'start', sm: 'center' }}
-				h={{ base: 'auto', sm: '100vh' }}
+				justify={{ base: 'start', lg: 'center' }}
+				h="100%"
 			>
 				{children}
 			</VStack>
