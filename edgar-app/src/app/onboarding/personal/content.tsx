@@ -33,6 +33,7 @@ const OnboardingPersonalPageContent = (): JSX.Element => {
 					borderColor="blue.200"
 					align="stretch"
 					spacing="0px"
+					h="100%"
 					maxW="1750px"
 				>
 					<OnboardingEdgarCard title="J’ai besoin de vos informations personnelles afin de remplir votre espace patient" />
