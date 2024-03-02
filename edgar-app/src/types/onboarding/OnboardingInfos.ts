@@ -7,11 +7,15 @@ export type PersonalInfos = {
 	sex: Sex;
 	size: number; // in meters
 	weight: number; // in kilograms
+	primaryDoctorId: string;
+	hasMedicalAntecedents: boolean;
 };
 
 export type HealthInfos = {
 	primaryDoctorName: string;
 	allergies: string[];
 	diseases: string[];
-	treatmentsInProgress: string[];
+	treatmentsInProgress?: string[];
 };
+
+export type OnboardingInfos = PersonalInfos & HealthInfos;
