@@ -12,7 +12,7 @@ const OnboardingPersonalBirthdateInput = ({
 	register: UseFormRegister<PersonalInfos>;
 	errors: FieldErrors<PersonalInfos>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
+	<VStack spacing="8px" align="start" w="100%" pb={errors.birthDate ? '0px' : '16px'}>
 		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formBirthdate-text">
 			Votre date de naissance
 		</FormLabel>

@@ -12,7 +12,7 @@ const OnboardingPersonalFirstnameInput = ({
 	register: UseFormRegister<PersonalInfos>;
 	errors: FieldErrors<PersonalInfos>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
+	<VStack spacing="8px" align="start" w="100%" pb={errors.firstname ? '0px' : '16px'}>
 		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formFirstname-text">
 			Votre prénom
 		</FormLabel>
