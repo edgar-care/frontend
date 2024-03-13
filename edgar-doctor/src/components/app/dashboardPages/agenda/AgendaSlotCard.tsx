@@ -93,13 +93,12 @@ const AgendaOpenSlotCard = ({ slotId }: { slotId: string }): JSX.Element => {
 const AgendaBookedSlotCard = ({ patientId }: { patientId: string }): JSX.Element => {
 	const { data } = useGetPatientByIdQuery(patientId);
 
-	console.log(patientId);
 	return (
 		<HStack p="8px" borderRadius="8px" w="100%" h="100%" bg="blue.200">
 			<Box w="3px" h="100%" bg="red.500" borderRadius="8px" />
 			{data && (
 				<Text size="boldSm">
-					{data.onboarding_info.name} {data.onboarding_info.surname.toUpperCase()}
+					{data.medicalInfos.firstname} {data.medicalInfos.name.toUpperCase()}
 				</Text>
 			)}
 		</HStack>
