@@ -1,19 +1,20 @@
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNavigationTab from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationTab';
 
 import { type PatientsSubViewNavigationTabType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationTabType';
+import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 
 import colors from 'theme/foundations/colors';
 
 const PatientsSubViewNavigation = ({
-	patientId,
+	patient,
 	navigationPath,
 	setNavigationPath,
 	tabs,
 }: {
-	patientId: string;
+	patient: PatientType;
 	navigationPath: string;
 	setNavigationPath: Dispatch<SetStateAction<string>>;
 	tabs: { [key: string]: PatientsSubViewNavigationTabType };
@@ -28,7 +29,9 @@ const PatientsSubViewNavigation = ({
 		p="16px"
 		boxShadow={`0px 0px 0px 2px ${colors.blue[200]}`}
 	>
-		<Text size="lg">{patientId}</Text>
+		<Text size="lg" w="100%" textAlign="center" textOverflow="ellipsis">
+			{patient.medicalInfos.firstname[0]}. {patient.medicalInfos.name}
+		</Text>
 		<VStack w="100%" spacing="16px">
 			<VStack w="100%" spacing="8px">
 				{Object.entries(tabs).map(([key, tab]) => (
