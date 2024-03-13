@@ -13,7 +13,7 @@ const PatientsSubViewNoPatient = (): JSX.Element => (
 		borderColor="blue.200"
 		justify="center"
 	>
-		<Text size="boldLg" color="blue.950">
+		<Text size="boldLg" color="blue.950" textAlign="center">
 			Sélectionner un patient pour accéder à ses informations
 		</Text>
 		<Image src="/assets/Edgars/edgar-confused.svg" alt="edgar-confused" width={200} height={226} />

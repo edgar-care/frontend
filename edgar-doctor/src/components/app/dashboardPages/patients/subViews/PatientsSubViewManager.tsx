@@ -1,21 +1,28 @@
-import { useState } from 'react';
-import { HStack, VStack } from '@chakra-ui/react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
+import { Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
-import PatientsSubViewNavigation from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigation';
+import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
 
-import { type PatientsSubViewNavigationTabType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationTabType';
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
+import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
 
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
+
 import MedicalIcon from 'assets/icons/MedicalIcon';
 
-const PatientsSubViewManager = ({ selectedPatient }: { selectedPatient: PatientType | undefined }): JSX.Element => {
+const PatientsSubViewManager = ({
+	selectedPatient,
+	setSelectedPatientId,
+}: {
+	selectedPatient: PatientType | undefined;
+	setSelectedPatientId: Dispatch<SetStateAction<string>>;
+}): JSX.Element => {
 	const [navigationPath, setNavigationPath] = useState('/medical');
 
-	const navigationHandler: { [key: string]: PatientsSubViewNavigationTabType & { content: JSX.Element } } = {
+	const navigationHandler: PatientsSubViewNavigationHandlerType = {
 		'/medical': {
 			name: 'Dossier médical',
 			content: <>Dossier médical</>,
@@ -45,25 +52,29 @@ const PatientsSubViewManager = ({ selectedPatient }: { selectedPatient: PatientT
 	if (!selectedPatient) return <PatientsSubViewNoPatient />;
 
 	return (
-		<HStack
+		<Stack
+			direction={{ base: 'column', xl: 'row' }}
+			p={{ base: '8px', xl: '0px' }}
 			w="100%"
 			h="100%"
-			spacing="0px"
+			spacing={{ base: '8px', xl: '0px' }}
 			bg="blue.100"
 			border="2px solid"
 			borderColor="blue.200"
 			borderRadius="16px"
+			align="start"
 		>
-			<PatientsSubViewNavigation
-				tabs={navigationHandler}
-				patient={selectedPatient}
+			<PatientsSubViewNavigationHandler
+				navigationHandler={navigationHandler}
+				selectedPatient={selectedPatient}
 				navigationPath={navigationPath}
 				setNavigationPath={setNavigationPath}
+				setSelectedPatientId={setSelectedPatientId}
 			/>
-			<VStack w="100%" h="100%" spacing="16px" p="16px">
+			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }}>
 				{navigationHandler[navigationPath].content}
 			</VStack>
-		</HStack>
+		</Stack>
 	);
 };
 

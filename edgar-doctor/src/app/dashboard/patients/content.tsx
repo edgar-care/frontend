@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { VStack, HStack, Button, InputGroup, Input, Icon, InputRightElement } from '@chakra-ui/react';
+import { Button, InputGroup, Input, Icon, InputRightElement, Stack, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/app/dashboardPages/DashboardPageBanner';
 import Patients from 'components/app/dashboardPages/patients/Patients';
@@ -15,13 +15,13 @@ const PatientsPageContent = (): JSX.Element => {
 		<VStack w="100%" spacing="32px" h="100%">
 			<DashboardPageBanner title="Mes patients" subTitle="Retrouvez toutes les informations de vos patients." />
 			<VStack w="100%" spacing="16px" h="100%">
-				<HStack w="100%" spacing="16px">
+				<Stack direction={{ base: 'column', sm2: 'row' }} w="100%" spacing="16px">
 					<Button id="edgar-dashboardPatientsPage-addPatient-button" whiteSpace="nowrap">
 						Ajouter un patient
 					</Button>
 					<InputGroup>
 						<Input
-							placeholder="Rechercher par nom ou prénom du patient"
+							placeholder="Rechercher par nom du patient"
 							onChange={(e) => setPatientSearch(e.target.value)}
 							id="edgar-dashboardPatientsPage-searchBar-input"
 						/>
@@ -29,7 +29,7 @@ const PatientsPageContent = (): JSX.Element => {
 							<Icon as={SearchIcon} w="16px" h="16px" />
 						</InputRightElement>
 					</InputGroup>
-				</HStack>
+				</Stack>
 				<Patients patientSearch={patientSearch} />
 			</VStack>
 		</VStack>
