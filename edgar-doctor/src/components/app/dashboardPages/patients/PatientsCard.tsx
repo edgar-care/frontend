@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Box, HStack, VStack, Text, Icon } from '@chakra-ui/react';
+import { Box, HStack, VStack, Text, Icon, useBreakpointValue } from '@chakra-ui/react';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -17,6 +17,8 @@ const PatientsCard = ({
 	setSelectedPatientId: Dispatch<SetStateAction<string>>;
 }) => {
 	const auth = useAuthContext();
+
+	const isMobile = useBreakpointValue({ base: true, xl: false });
 
 	return (
 		<HStack
@@ -44,13 +46,15 @@ const PatientsCard = ({
 						<Text size="boldLg">
 							{patient.medicalInfos.firstname} {patient.medicalInfos.name}
 						</Text>
-						<Text>{new Date(patient.medicalInfos.birthdate).toLocaleDateString('fr-FR')}</Text>
+						{!isMobile && (
+							<Text>{new Date(patient.medicalInfos.birthdate).toLocaleDateString('fr-FR')}</Text>
+						)}
 					</HStack>
 					<Text size="sm">
 						{/* TODO: add name of the doctor when it's not the primary doctor */}
 						{auth.getId() === patient.medicalInfos.primaryDoctorId
 							? 'Vous êtes le médecin traitant'
-							: `Médecin traitant: Docteur XX`}
+							: `${!isMobile ? 'Médecin traitant: ' : ''}Docteur XX`}
 					</Text>
 				</VStack>
 				<Icon as={RightChevronIcon} w="16px" />
