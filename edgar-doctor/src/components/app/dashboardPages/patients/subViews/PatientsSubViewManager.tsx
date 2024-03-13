@@ -5,14 +5,16 @@ import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/sub
 import PatientsSubViewNavigation from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigation';
 
 import { type PatientsSubViewNavigationTabType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationTabType';
+import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 import MedicalIcon from 'assets/icons/MedicalIcon';
 
-const PatientsSubViewManager = ({ selectedPatientId }: { selectedPatientId: string }): JSX.Element => {
+const PatientsSubViewManager = ({ selectedPatient }: { selectedPatient: PatientType | undefined }): JSX.Element => {
 	const [navigationPath, setNavigationPath] = useState('/medical');
+
 	const navigationHandler: { [key: string]: PatientsSubViewNavigationTabType & { content: JSX.Element } } = {
 		'/medical': {
 			name: 'Dossier médical',
@@ -40,7 +42,7 @@ const PatientsSubViewManager = ({ selectedPatientId }: { selectedPatientId: stri
 		},
 	};
 
-	if (!selectedPatientId) return <PatientsSubViewNoPatient />;
+	if (!selectedPatient) return <PatientsSubViewNoPatient />;
 
 	return (
 		<HStack
@@ -54,7 +56,7 @@ const PatientsSubViewManager = ({ selectedPatientId }: { selectedPatientId: stri
 		>
 			<PatientsSubViewNavigation
 				tabs={navigationHandler}
-				patientId={selectedPatientId}
+				patient={selectedPatient}
 				navigationPath={navigationPath}
 				setNavigationPath={setNavigationPath}
 			/>
