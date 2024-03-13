@@ -10,10 +10,12 @@ export type PatientType = {
 		firstname: string;
 		birthdate: number;
 		sex: PatientSexType;
-		weight: number;
 		height: number;
+		weight: number;
 		primaryDoctorId: string;
 		onboardingStatus: PatientOnboardingStatusType;
 		medicalAntecedents: PatientMedicalAntecedentType[];
 	};
+	appointmentIds: string[];
+	documentIds: string[];
 };
