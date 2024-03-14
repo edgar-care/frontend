@@ -1,5 +1,6 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
 
+import ProductTeam from '../ProductTeam';
 import MilestoneDetails from './MilestoneDetails';
 import ProductNewsletter from '../ProductNewsletter';
 
@@ -11,6 +12,8 @@ const ProductMilestones = (): JSX.Element => (
 			</Text>
 			<MilestoneDetails />
 		</VStack>
+		<Box w="100%" h="1px" bg="blue.400" />
+		<ProductTeam />
 		<Box w="100%" h="1px" bg="blue.400" />
 		<ProductNewsletter />
 	</VStack>
