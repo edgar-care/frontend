@@ -1,46 +1,60 @@
 import { HStack, Icon, Text, VStack } from '@chakra-ui/react';
 import { BsCheckCircleFill } from 'react-icons/bs';
 
-import type MilestoneDetailsCardType from 'types/productPage/MilestoneDetailsCardType';
+import MilestoneDetailsCardType from 'types/productPage/MilestoneDetailsCardType';
 
-const MilestoneDetailsCard = ({ title, elements, type, id }: MilestoneDetailsCardType): JSX.Element => (
+const MilestoneDetailsCard = ({ milestone }: { milestone: MilestoneDetailsCardType }): JSX.Element => (
 	<VStack
-		bg={type === 'previous' ? 'green.600' : 'blue.700'}
-		spacing="32px"
+		bg={milestone.type === 'previous' ? 'green.600' : 'blue.700'}
+		spacing={{ base: '16px', lg: '32px' }}
 		p="32px"
 		borderRadius="16px"
-		w={{ base: '100%', smd: '300px', lg: '360px' }}
-		h={{ base: '100%', smd: '490px' }}
+		w="100%"
+		minW={{ base: '100%', smd: '300px', '2xl': '500px', '4xl': 'auto' }}
 	>
-		<VStack spacing="0px" h="60px">
+		<VStack spacing="4px" w="100%">
 			<Text
-				size={{ base: 'boldXl', lg: 'bold2xl' }}
+				id={`edgar-productPage-productMilestones-${milestone.id}-text`}
 				color="white"
-				fontWeight="600"
+				size={{ base: 'boldXl', lg: 'bold2xl' }}
 				textAlign="center"
-				id={`edgar-productPage-milestoneDetails-${id}-title-text`}
 			>
-				{title}
+				{milestone.date}
 			</Text>
-			{type === 'current' && (
-				<Text size="boldLg" color="white" id={`edgar-productPage-milestoneDetails-${id}-subTitle-text`}>
-					En cours
+			<VStack spacing="0px" h={{ base: 'auto', smd: '60px' }}>
+				<Text
+					size={{ base: 'boldXl', lg: 'bold2xl' }}
+					color="white"
+					fontWeight="600"
+					textAlign="center"
+					id={`edgar-productPage-milestoneDetails-${milestone.id}-title-text`}
+				>
+					{milestone.title}
 				</Text>
-			)}
+				{milestone.type === 'current' && (
+					<Text
+						size="boldLg"
+						color="white"
+						id={`edgar-productPage-milestoneDetails-${milestone.id}-subTitle-text`}
+					>
+						En cours
+					</Text>
+				)}
+			</VStack>
 		</VStack>
 		<VStack w="100%" spacing="16px">
-			{elements.map((element) => (
-				<HStack justify="space-between" w="100%">
-					<Text size={{ base: 'lg', lg: 'xl' }} color="white" maxW="250px">
-						{element}
-					</Text>
+			{milestone.elements.map((element) => (
+				<HStack w="100%" spacing={{ base: '16px', lg: '32px' }} key={element}>
 					<Icon
 						as={BsCheckCircleFill}
 						w="24px"
 						h="24px"
-						color={type === 'previous' ? 'white' : 'grey.300'}
-						id={`edgar-productPage-milestoneDetails-${id}-check-icon`}
+						color={milestone.type === 'previous' ? 'white' : 'grey.300'}
+						id={`edgar-productPage-milestoneDetails-${milestone.id}-check-icon`}
 					/>
+					<Text size={{ base: 'lg', lg: 'xl' }} color="white">
+						{element}
+					</Text>
 				</HStack>
 			))}
 		</VStack>

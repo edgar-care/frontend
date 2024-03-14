@@ -1,4 +1,4 @@
-import { Wrap, WrapItem } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 
 import type MilestoneDetailsCardType from 'types/productPage/MilestoneDetailsCardType';
 
@@ -10,58 +10,60 @@ const MilestoneDetails = (): JSX.Element => {
 			title: 'Prototypage/ Idéation',
 			elements: ['Brainstorming', 'Maquettage', 'Image de marque', 'Assistant numérique: Edgar'],
 			type: 'previous',
+			date: '2022 - Décembre',
 			id: 'prototypage',
 		},
 		{
 			title: 'POC (Proof Of Concept)',
 			elements: [
 				"Amélioration de l'expérience utilisateur",
-				'Première version des interfaces utilisateur',
+				'Première version des interfaces utilisateurs',
 				"Parcours d'onboarding pour le dossier médical",
 				'Edgar plus performant',
 			],
-			type: 'current',
+			type: 'previous',
+			date: '2023 - Novembre',
 			id: 'poc',
 		},
 		{
-			title: 'Beta #1',
-			elements: [
-				'Beta réservée aux médecins',
-				'Application dédiée aux médecins',
-				'Edgar est compatible avec 25 maladies',
-				'Suivi des patients',
-				'Suivi des rendez-vous',
-			],
-			type: 'futur',
-			id: 'beta1',
-		},
-		{
-			title: 'Beta #2',
+			title: 'Beta - Patient',
 			elements: [
 				'Beta ouverte aux patients',
-				'Application mobile pour les patients et les médecins',
-				'Edgar est compatible avec 50 maladies',
-				'Prise de rendez-vous',
+				'Application mobile et site internet',
+				'Prise de rendez-vous via simulation',
 				'Suivi de sa santé',
+				'Suivi de ses traitements',
+				'Gestion de ses documents',
+				'Messagerie avec les médecins',
 			],
-			type: 'futur',
-			id: 'beta2',
+			type: 'current',
+			date: '2024 - Mai',
+			id: 'beta-patient',
+		},
+		{
+			title: 'Beta - Médecin',
+			elements: [
+				'Beta ouverte aux médecins',
+				'Application mobile et site internet',
+				'Edgar compatible avec 25 maladies',
+				'Gestion de ses rendez-vous',
+				'Gestion de son agenda',
+				'Gestion de ses patients',
+				'Validation des pré-diagnostic',
+				'Messagerie avec les patients',
+			],
+			type: 'current',
+			date: '2024 - Mai',
+			id: 'beta-doctor',
 		},
 	];
 
 	return (
-		<Wrap spacing={{ base: '48px', smd: '24px' }} justify={{ base: 'center', md: 'start' }} w="100%">
+		<SimpleGrid w={{ base: '100%', '4xl': '100%' }} columns={{ base: 1, smd: 2, '4xl': 4 }} spacing="16px">
 			{milestoneDetails.map((milestoneDetail) => (
-				<WrapItem w={{ base: '100%', smd: 'auto' }}>
-					<MilestoneDetailsCard
-						title={milestoneDetail.title}
-						elements={milestoneDetail.elements}
-						type={milestoneDetail.type}
-						id={milestoneDetail.id}
-					/>
-				</WrapItem>
+				<MilestoneDetailsCard milestone={milestoneDetail} key={milestoneDetail.id} />
 			))}
-		</Wrap>
+		</SimpleGrid>
 	);
 };
 
