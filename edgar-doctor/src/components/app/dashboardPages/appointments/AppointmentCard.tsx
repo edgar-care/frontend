@@ -46,7 +46,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 					<VStack w="100%" spacing="0px" px="8px" align="start">
 						<HStack spacing="4px">
 							<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-								{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
+								{patient?.medicalInfos.firstname} {patient?.medicalInfos.name.toUpperCase()}
 							</Text>
 							<HStack
 								p="4px 6px 4px 6px"
