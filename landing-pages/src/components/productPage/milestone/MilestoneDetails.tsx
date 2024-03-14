@@ -61,7 +61,7 @@ const MilestoneDetails = (): JSX.Element => {
 	return (
 		<SimpleGrid w={{ base: '100%', '4xl': '100%' }} columns={{ base: 1, smd: 2, '4xl': 4 }} spacing="16px">
 			{milestoneDetails.map((milestoneDetail) => (
-				<MilestoneDetailsCard milestone={milestoneDetail} />
+				<MilestoneDetailsCard milestone={milestoneDetail} key={milestoneDetail.id} />
 			))}
 		</SimpleGrid>
 	);

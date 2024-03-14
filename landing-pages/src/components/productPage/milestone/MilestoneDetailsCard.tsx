@@ -44,7 +44,7 @@ const MilestoneDetailsCard = ({ milestone }: { milestone: MilestoneDetailsCardTy
 		</VStack>
 		<VStack w="100%" spacing="16px">
 			{milestone.elements.map((element) => (
-				<HStack w="100%" spacing={{ base: '16px', lg: '32px' }}>
+				<HStack w="100%" spacing={{ base: '16px', lg: '32px' }} key={element}>
 					<Icon
 						as={BsCheckCircleFill}
 						w="24px"
