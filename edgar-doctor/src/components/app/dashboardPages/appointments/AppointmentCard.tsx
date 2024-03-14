@@ -1,15 +1,14 @@
+import { useState } from 'react';
 import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure, Button } from '@chakra-ui/react';
 
 import PatientInfosDrawer from 'components/app/dashboardPages/appointments/modals/PatientInfosDrawer';
 import UpdateAppointmentHandler from 'components/app/dashboardPages/appointments/modals/UpdateAppointmentHandler';
 
-import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
-
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 import SidebarIcon from 'assets/icons/SidebarIcon';
 
+import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 import { useGetPatientByIdQuery } from 'services/request/patients';
-import { useState } from 'react';
 
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const { data: patient, isLoading } = useGetPatientByIdQuery(appointment.patientId);

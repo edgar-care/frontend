@@ -16,7 +16,7 @@ const UpdateAppointmentSubmitButton = ({
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const submit = () => {
-		if (!selectedAppointmentId) toast({ title: 'Veuillez sélectionner un rendez-vous', status: 'error' });
+		if (!newAppointmentId) toast({ title: 'Veuillez sélectionner un rendez-vous', status: 'error' });
 		else {
 			triggerUpdateDoctorAppointment({
 				selectedAppointmentId,
