@@ -125,6 +125,7 @@ describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
 		cy.visit('/');
+		cy.wait(1000);
 	});
 
 	it('Good redirection on texts (health)', () => {
@@ -134,7 +135,6 @@ describe('Good redirection on elements - Desktop', () => {
 		// cy.visit('/');
 		cy.get('#edgar-footer-healthFindDoctor-text')
 			.click()
-			.wait(1000)
 			.url()
 			.should('eq', `${Cypress.env('url')}/doctor`);
 		cy.visit('/');
@@ -147,12 +147,14 @@ describe('Good redirection on elements - Desktop', () => {
 			.url()
 			.should('eq', `${Cypress.env('url')}/project`);
 		cy.visit('/');
+		cy.wait(1000);
 		cy.get('#edgar-footer-projectApplication-text')
 			.wait(1000)
 			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/application`);
 		cy.visit('/');
+		cy.wait(1000);
 		cy.get('#edgar-footer-projectJoinUs-text')
 			.wait(1000)
 			.click()
@@ -186,6 +188,7 @@ describe('Good number of elements - Mobile', () => {
 	});
 
 	it('Good number of buttons', () => {
+		cy.visit('/');
 		cy.get('button[id^=edgar-footer]').should('have.length', 1);
 	});
 	it('Good number of inputs', () => {
