@@ -48,7 +48,7 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
@@ -123,7 +123,7 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
