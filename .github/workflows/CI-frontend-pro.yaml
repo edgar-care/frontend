@@ -134,9 +134,9 @@ jobs:
           wait-on-timeout: 30
         env:
           CYPRESS_url: http://localhost:3000
-          CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_LOGIN_TEST_EMAIL }}
-          CYPRESS_loginTestPassword: ${{ secrets.CYPRESS_LOGIN_TEST_PASSWORD }}
-          CYPRESS_authToken: ${{ secrets.CYPRESS_AUTH_TOKEN }}
+          CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_PRO_LOGIN_TEST_EMAIL }}
+          CYPRESS_loginTestPassword: ${{ secrets.CYPRESS_PRO_LOGIN_TEST_PASSWORD }}
+          CYPRESS_authToken: ${{ secrets.CYPRESS_PRO_AUTH_TOKEN }}
 
       - name: Get screenshots
         uses: actions/upload-artifact@v4
