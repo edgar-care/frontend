@@ -45,7 +45,7 @@ const MilestoneDetails = (): JSX.Element => {
 			elements: [
 				'Beta ouverte aux médecins',
 				'Application mobile et site internet',
-				'Edgar compatible avec 25 maladies',
+				'Edgar compatible avec 15 maladies',
 				'Gestion de ses rendez-vous',
 				'Gestion de son agenda',
 				'Gestion de ses patients',
