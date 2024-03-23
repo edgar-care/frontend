@@ -1,24 +1,33 @@
+import type { PatientSexType } from 'types/app/dashboard/patients/PatientSexType';
+import type { PatientOnboardingStatusType } from 'types/app/dashboard/patients/PatientOnboardingStatusType';
+import type { TreatmentPeriodType } from 'types/app/dashboard/patients/medicalInfos/TreatmentPeriodType';
+import type { TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
+
 export interface PatientsStoreType {
-	onboarding_health: {
-		id: string;
-		patients_allergies: string[];
-		patients_illness: string[];
-		patients_treatments: string[];
-		patients_primary_doctor: string;
-	};
-	onboarding_info: {
-		id: string;
+	id: string;
+	email: string;
+	medical_info: {
 		name: string;
-		surname: string;
-		birthdate: string;
-		sex: string;
-		weight: number;
+		firstname: string;
+		birthdate: number;
+		sex: PatientSexType;
 		height: number;
+		weight: number;
+		primary_doctor_id: string;
+		onboarding_status: PatientOnboardingStatusType;
+		medical_antecedents: {
+			id: string;
+			name: string;
+			medicines: {
+				id: string;
+				medicine_id: string;
+				period: TreatmentPeriodType[];
+				day: TreatmentDayType[];
+				quantity: number;
+			}[];
+			stillRelevant: boolean;
+		}[];
 	};
-	patient: {
-		id: string;
-		onboarding_info_id: string;
-		onboarding_health_id: string;
-		email: string;
-	};
+	rendez_vous_ids: string[];
+	documents_ids: string[];
 }

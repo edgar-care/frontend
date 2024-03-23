@@ -33,13 +33,7 @@ const AppointmentsPageContent = (): JSX.Element => {
 							</Button>
 						</Link>
 					</Box>
-					{appointments && (
-						<AppointmentsCalendarCard
-							appointments={[...appointments].sort(
-								(a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
-							)}
-						/>
-					)}
+					<AppointmentsCalendarCard appointments={appointments} />
 				</VStack>
 				{appointments && (
 					<AppointmentsCards

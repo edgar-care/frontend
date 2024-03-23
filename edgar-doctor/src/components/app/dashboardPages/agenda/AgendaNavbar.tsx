@@ -3,8 +3,8 @@ import { Button, HStack, Icon, Stack, Text, useBreakpointValue, useDisclosure } 
 
 import OpenSlotHandler from 'components/app/dashboardPages/agenda/modals/OpenSlotHandler';
 
-import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
-import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
+import LeftChevronBoldIcon from 'assets/icons/Chevron/bold/LeftChevronBoldIcon';
+import RightChevronBoldIcon from 'assets/icons/Chevron/bold/RightChevronBoldIcon';
 
 import { type AgendaViewType } from 'types/app/dashboard/agenda/AgendaViewType';
 
@@ -51,10 +51,10 @@ const AgendaNavbar = ({
 					<HStack spacing="16px">
 						<HStack spacing="16px">
 							<Button variant="fullGhost" onClick={() => changeDate(-1)}>
-								<Icon as={LeftChevronIcon} h="16px" w="auto" color="black" />
+								<Icon as={LeftChevronBoldIcon} h="16px" w="auto" color="black" />
 							</Button>
 							<Button variant="fullGhost" onClick={() => changeDate(1)}>
-								<Icon as={RightChevronIcon} h="16px" w="auto" color="black" />
+								<Icon as={RightChevronBoldIcon} h="16px" w="auto" color="black" />
 							</Button>
 						</HStack>
 						<Text size="boldXl" textTransform="capitalize" id="edgar-dashboardAgendaPage-dayPeriod-text">
