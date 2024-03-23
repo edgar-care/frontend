@@ -20,7 +20,9 @@ const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientType }): JSX
 					<Text size="lg">Adresse mail: {patientInfos.email}</Text>
 					<Text size="lg">Prénom: {patientInfos.medicalInfos.firstname}</Text>
 					<Text size="lg">Nom: {patientInfos.medicalInfos.name}</Text>
-					<Text size="lg">Date de naissance: {patientInfos.medicalInfos.birthdate}</Text>
+					<Text size="lg">
+						Date de naissance: {new Date(patientInfos.medicalInfos.birthdate).toLocaleDateString('fr')}
+					</Text>
 					<Text size="lg">Sexe: {patientInfos.medicalInfos.sex}</Text>
 					<Text size="lg">Taille: {formatHeight(patientInfos.medicalInfos.height)}m</Text>
 					<Text size="lg">Poids: {patientInfos.medicalInfos.weight}kg</Text>
