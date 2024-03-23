@@ -6,7 +6,7 @@ import { type AppointmentType } from 'types/app/dashboard/appointments/appointme
 
 const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const appointmentStartDate = new Date(appointment.startDate);
-	const appointmentEndDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.endDate);
 
 	return (
 		<HStack spacing="4px" w="100%" p="12px" borderRadius="8px" border="2px solid" borderColor="blue.200" bg="white">
@@ -31,7 +31,6 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 						</Text>
 					</HStack>
 				</VStack>
-				{appointmentEndDate > new Date() && <HStack justify="end" w="100%"></HStack>}
 			</VStack>
 		</HStack>
 	);
