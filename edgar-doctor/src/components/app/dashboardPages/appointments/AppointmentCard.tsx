@@ -71,7 +71,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							</Text>
 						</HStack>
 					</VStack>
-					{appointmentEndDate > new Date() && (
+					{appointmentStartDate > new Date() && (
 						<HStack px={{ base: '8px', xl: '0px' }} justify="end">
 							<Button
 								size="customSm"
