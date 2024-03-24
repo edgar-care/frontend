@@ -142,21 +142,18 @@ describe('Good redirection on elements - Desktop', () => {
 
 	it('Good redirection on texts (project)', () => {
 		cy.get('#edgar-footer-projectOffer-text')
-			.wait(1000)
 			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/project`);
 		cy.visit('/');
 		cy.wait(1000);
 		cy.get('#edgar-footer-projectApplication-text')
-			.wait(1000)
 			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/application`);
 		cy.visit('/');
 		cy.wait(1000);
 		cy.get('#edgar-footer-projectJoinUs-text')
-			.wait(1000)
 			.click()
 			.url()
 			.should('eq', `${Cypress.env('url')}/contact`);
