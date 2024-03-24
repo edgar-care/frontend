@@ -25,7 +25,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 		<SimulationLayout>
 			<>
 				{result.data && (
-					<Text size="3xl" color="white" maxW="1000px">
+					<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
 						Merci pour cet échange, votre rendez-vous chez le Dr {result.data?.doctorId} le{' '}
 						<Box as="span" color="green.400">
 							{new Date(result.data.startDate).toLocaleDateString('fr-FR')}
