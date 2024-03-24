@@ -28,7 +28,7 @@ const AgendaClosedSlotCard = ({ startDate, endDate }: { startDate: number; endDa
 			onClick={() => {
 				triggerOpenSlot({
 					start_date: startDate,
-					end_date: endDate + 1800000,
+					end_date: endDate,
 				})
 					.unwrap()
 					.then(() => {
