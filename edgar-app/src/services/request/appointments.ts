@@ -22,12 +22,15 @@ const extendedApi = backendApi.injectEndpoints({
 		getPatientAppointmentById: builder.query<AppointmentType, string>({
 			query: (id) => `/patient/appointments/${id}`,
 			providesTags: ['patientAppointments'],
-			transformResponse: (response: { rdv: AppointmentsStoreType }) => ({
-				id: response.rdv.id,
-				doctorId: response.rdv.doctor_id,
-				patientId: response.rdv.id_patient,
-				startDate: response.rdv.start_date * 1000,
-				endDate: response.rdv.end_date * 1000,
+			transformResponse: (response: { rdv: { Rdv: AppointmentsStoreType } }) => ({
+				id: response.rdv.Rdv.id,
+				doctorId: response.rdv.Rdv.doctor_id,
+				patientId: response.rdv.Rdv.id_patient,
+				startDate: response.rdv.Rdv.start_date * 1000,
+				endDate: response.rdv.Rdv.end_date * 1000,
+				cancelation_reason: response.rdv.Rdv.cancelation_resaon,
+				appointment_status: response.rdv.Rdv.appointment_status,
+				session_id: response.rdv.Rdv.session_id,
 			}),
 		}),
 
