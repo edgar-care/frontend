@@ -1,12 +1,12 @@
 'use client';
 
 import { Text } from '@chakra-ui/react';
+import Link from 'next/link';
 
 import SimulationLayout from 'components/simulationPages/SimulationLayout';
 import SimulationButton from 'components/simulationPages/SimulationButton';
 
 import { useAuthContext } from 'contexts/auth';
-import Link from 'next/link';
 
 const SimulationConditionsContent = (): JSX.Element => {
 	const auth = useAuthContext();
