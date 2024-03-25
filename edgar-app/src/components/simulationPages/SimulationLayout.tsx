@@ -3,9 +3,10 @@ import { Image } from '@chakra-ui/next-js';
 
 const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, md: false });
+
 	return (
 		<VStack py="32px" px="64px" bg="blue.700" w="100%" borderRadius="48px" h="100%" justify="space-between">
-			<VStack w="100%" h="108px"></VStack>
+			<VStack w="100%" h="108px" />
 			<HStack spacing="128px">
 				<VStack spacing="64px">{children}</VStack>
 				{!isMobile && (
