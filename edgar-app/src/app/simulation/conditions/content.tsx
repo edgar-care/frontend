@@ -14,8 +14,7 @@ const SimulationConditionsPageContent = (): JSX.Element => {
 
 	const handleClick = () => {
 		const token = auth.getToken();
-		const redirection = token ? 'start' : 'connection';
-		router.push(redirection);
+		router.push(token ? 'start' : 'connection');
 	};
 
 	return (
