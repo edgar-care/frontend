@@ -14,16 +14,18 @@ const SimulationButton = ({ text }: { text: string }): JSX.Element => {
 			_hover={{ bg: 'white' }}
 			onMouseEnter={onHoverOpen}
 			onMouseLeave={onHoverClose}
+			role="group"
 		>
 			<HStack w="100%" spacing="16px">
-				<Text size="boldXl" color={isHover ? 'blue.700' : 'white'}>
+				<Text size="boldXl" color="white" _groupHover={{ color: 'blue.700' }}>
 					{text}
 				</Text>
 				<Icon
 					as={isHover ? RightCircleArrowFillIcon : RightCircleArrowIcon}
 					w="24px"
 					h="24px"
-					color={isHover ? 'blue.700' : 'white'}
+					color="white"
+					_groupHover={{ color: 'blue.700' }}
 				/>
 			</HStack>
 		</Button>
