@@ -7,11 +7,13 @@ import ChatCard from 'components/dashboardPages/home/ChatCard';
 
 import ChatIcon from 'assets/icons/ChatIcon';
 
+import { MessageType } from 'types/dashboard/home/MessageType';
+
 const HomeChatCard = (): JSX.Element => {
-	const [messages, setMessages] = useState([
-		{ id: 1, sender: 'John', notifications: 12, date: new Date(), lastMessage: 'Salut, ça va ?' },
-		{ id: 2, sender: 'Alice', notifications: 5, date: new Date(), lastMessage: 'Coucou !' },
-		{ id: 3, sender: 'Bob', notifications: 0, date: new Date(), lastMessage: 'Demain à quelle heure ?' },
+	const [messages, setMessages] = useState<MessageType[]>([
+		{ id: 1, sender: 'John', notifications: 12, date: new Date().getTime(), lastMessage: 'Salut, ça va ?' },
+		{ id: 2, sender: 'Alice', notifications: 5, date: new Date().getTime(), lastMessage: 'Coucou !' },
+		{ id: 3, sender: 'Bob', notifications: 0, date: new Date().getTime(), lastMessage: 'Demain à quelle heure ?' },
 	]);
 
 	useEffect(() => {
@@ -19,7 +21,7 @@ const HomeChatCard = (): JSX.Element => {
 			id: messages.length + 1,
 			sender: 'New Sender',
 			notifications: 0,
-			date: new Date(),
+			date: new Date().getTime(),
 			lastMessage: 'New Message',
 		};
 		setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -52,12 +54,14 @@ const HomeChatCard = (): JSX.Element => {
 						borderColor="green.400"
 						bg="green.200"
 						p="16px"
-						spacing="10px"
+						spacing="8px"
 						justify="center"
 					>
 						<Icon as={ChatIcon} w="20px" h="19px" color="green.700" />
 						<Text size="boldMd" color="green.700">
-							Vous avez {messages.length} messages non lus
+							{messages.length === 1
+								? 'Vous avec 1 message non lu'
+								: `Vous avez ${messages.length} messages non lus`}
 						</Text>
 					</HStack>
 					<VStack w="100%" spacing="8px">
@@ -72,7 +76,7 @@ const HomeChatCard = (): JSX.Element => {
 					borderColor="blue.300"
 					bg="blue.200"
 					p="16px"
-					spacing="10px"
+					spacing="8px"
 					justify="center"
 				>
 					<Icon as={ChatIcon} w="20px" h="19px" color="blue.700" />
