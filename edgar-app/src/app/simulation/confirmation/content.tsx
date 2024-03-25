@@ -1,6 +1,6 @@
 'use client';
 
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, useToast } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -12,14 +12,17 @@ import { useEffect } from 'react';
 
 const SimulationConfirmationContent = (): JSX.Element => {
 	const searchParams = useSearchParams();
-	const search = searchParams.get('appointmentId');
+	const appointmentId = searchParams.get('appointmentId');
 	const [trigger, result] = useLazyGetPatientAppointmentByIdQuery();
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	useEffect(() => {
-		if (search) {
-			trigger(search);
-		}
-	}, [search]);
+		if (appointmentId) trigger(appointmentId);
+	}, [appointmentId]);
+
+	useEffect(() => {
+        if (result.error) toast({ title: 'Une erreur est survenue', status: 'error' });
+    }, [result.error]);
 
 	return (
 		<SimulationLayout>
