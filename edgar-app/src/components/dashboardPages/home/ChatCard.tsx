@@ -46,19 +46,19 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 				<HStack spacing="8px">
 					<Box borderRadius="50%" bg="green.300" w="28px" h="28px" />
 					<VStack align="start" spacing="0px">
-						<HStack>
+						<HStack spacing="4px">
 							<Text size="boldMd">{message.sender}</Text>
-							<Text fontStyle="italic" fontSize="12" color="grey.500">
+							<Text fontStyle="italic" fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
 								{/* Insérer - Médecin généraliste */}
 							</Text>
 						</HStack>
-						<Text fontStyle="italic" fontSize="12" color="grey.500">
+						<Text fontStyle="italic" fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
 							{message.lastMessage}
 						</Text>
 					</VStack>
 				</HStack>
 				<VStack spacing="4px" align="end">
-					<Text fontStyle="italic" fontSize="12" color="grey.500">
+					<Text fontStyle="italic" fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
 						{new Date(message.date).toLocaleDateString('fr-FR', {
 							month: 'short',
 							day: 'numeric',
