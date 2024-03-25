@@ -21,8 +21,8 @@ const SimulationConfirmationContent = (): JSX.Element => {
 	}, [appointmentId]);
 
 	useEffect(() => {
-        if (result.error) toast({ title: 'Une erreur est survenue', status: 'error' });
-    }, [result.error]);
+		if (result.error) toast({ title: 'Une erreur est survenue', status: 'error' });
+	}, [result.error]);
 
 	return (
 		<SimulationLayout>
