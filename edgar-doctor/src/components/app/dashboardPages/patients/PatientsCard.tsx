@@ -7,6 +7,8 @@ import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
+
 const PatientsCard = ({
 	patient,
 	selectedPatientId,
@@ -16,6 +18,7 @@ const PatientsCard = ({
 	selectedPatientId: string;
 	setSelectedPatientId: Dispatch<SetStateAction<string>>;
 }) => {
+	const { data: doctorInfo } = useGetDoctorByIdQuery(patient.medicalInfos.primaryDoctorId);
 	const auth = useAuthContext();
 
 	const isMobile = useBreakpointValue({ base: true, xl: false });
@@ -51,10 +54,9 @@ const PatientsCard = ({
 						)}
 					</HStack>
 					<Text size="sm">
-						{/* TODO: add name of the doctor when it's not the primary doctor */}
 						{auth.getId() === patient.medicalInfos.primaryDoctorId
 							? 'Vous êtes le médecin traitant'
-							: `${!isMobile ? 'Médecin traitant: ' : ''}Docteur XX`}
+							: `${!isMobile && 'Médecin traitant: '}Dr. ${doctorInfo?.name.toUpperCase()} ${doctorInfo?.firstname}`}
 					</Text>
 				</VStack>
 				<Icon as={RightChevronIcon} w="16px" />
