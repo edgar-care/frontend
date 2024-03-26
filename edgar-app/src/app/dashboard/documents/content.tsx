@@ -1,80 +1,30 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { VStack, Button, HStack, Input, InputGroup, InputRightElement, useDisclosure, Icon } from '@chakra-ui/react';
+
 import DocumentCard from 'components/dashboardPages/documents/DocumentCard';
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import DocumentFilter from 'components/dashboardPages/documents/DocumentFilter';
 import AddDocumentHandler from 'components/dashboardPages/documents/modal/AddDocumentHandler';
+
 import { useGetDocumentsQuery } from 'services/request/documents';
-import { DocumentType } from 'types/dashboard/documents/DocumentType';
+
 import { useAuthContext } from 'contexts/auth';
+
+import filterDocuments from 'utils/app/dashboard/documents/filterDocuments';
+import sortDocuments from 'utils/app/dashboard/documents/sortDocuments';
+
 import SearchIcon from 'assets/icons/SearchIcon';
 
 const DocumentsPageContent = (): JSX.Element => {
-	const auth = useAuthContext();
 	const { data: fetchedDocuments } = useGetDocumentsQuery();
-	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 	const [searchText, setSearchText] = useState<string>('');
-	const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>([]);
 	const [sortOption, setSortOption] = useState<string>('asc');
-	const [filterTypes, setFilterTypes] = useState<string[]>([]);
+	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-	const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchText(e.target.value);
-	};
-
-	useEffect(() => {
-		if (fetchedDocuments) {
-			let updatedFilteredDocuments = [...fetchedDocuments];
-			const updatedFilterTypes = [...filterTypes];
-
-			if (updatedFilterTypes.includes('FAVORITE')) {
-				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.isFavorite);
-				updatedFilterTypes.splice(updatedFilterTypes.indexOf('FAVORITE'), 1);
-			}
-			if (updatedFilterTypes.includes('OWN')) {
-				const id = auth.getToken();
-				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) => document.ownerId === id);
-				updatedFilterTypes.splice(updatedFilterTypes.indexOf('OWN'), 1);
-			}
-			if (updatedFilterTypes.includes('DOCTOR')) {
-				updatedFilterTypes.splice(updatedFilterTypes.indexOf('DOCTOR'), 1);
-			}
-			if (updatedFilterTypes.length > 0) {
-				updatedFilteredDocuments = updatedFilteredDocuments.filter((document) =>
-					updatedFilterTypes.includes(document.documentType),
-				);
-			}
-
-			if (searchText.trim() !== '') {
-				updatedFilteredDocuments = updatedFilteredDocuments.filter(
-					(document) =>
-						document.name.toLowerCase().includes(searchText.toLowerCase()) ||
-						document.ownerId.toLowerCase().includes(searchText.toLowerCase()),
-				);
-			}
-
-			if (updatedFilteredDocuments.length > 0) {
-				updatedFilteredDocuments.sort((a, b) => {
-					if (sortOption === 'desc') {
-						return b.name.localeCompare(a.name);
-					}
-					return a.name.localeCompare(b.name);
-				});
-			}
-
-			setFilteredDocuments(updatedFilteredDocuments);
-		}
-	}, [fetchedDocuments, searchText, sortOption, filterTypes, auth]);
-
-	const handleSort = (option: string) => {
-		setSortOption(option);
-	};
-
-	const handleFilterChange = (selectedFilters: string[]) => {
-		setFilterTypes(selectedFilters);
-	};
+	const auth = useAuthContext();
+	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (
 		<VStack w="100%" spacing="32px">
@@ -98,16 +48,20 @@ const DocumentsPageContent = (): JSX.Element => {
 						<Input
 							placeholder="Rechercher par nom du document ou nom du médecin"
 							value={searchText}
-							onChange={handleSearchTextChange}
+							onChange={(e) => setSearchText(e.target.value)}
 						/>
 						<InputRightElement>
 							<Icon as={SearchIcon} w="16px" h="16px" />
 						</InputRightElement>
 					</InputGroup>
 				</HStack>
-				<DocumentFilter onSort={handleSort} onFilterChange={handleFilterChange} />
+				<DocumentFilter onSort={setSortOption} onFilterChange={setSelectedFilters} />
 				<VStack spacing="8px" w="100%" align="start">
-					{filteredDocuments?.map((document) => <DocumentCard key={document.id} document={document} />)}
+					{fetchedDocuments &&
+						sortDocuments(
+							filterDocuments(fetchedDocuments, selectedFilters, auth.getId(), searchText),
+							sortOption,
+						).map((document) => <DocumentCard key={document.id} document={document} />)}
 				</VStack>
 				<AddDocumentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 			</VStack>
