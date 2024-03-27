@@ -1,12 +1,8 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const authToken = Cypress.env('authToken');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/personal`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/personal');
 	});
 
 	it('Good number of buttons', () => {
@@ -33,8 +29,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/personal`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/personal');
 	});
 
 	it('Good content for buttons', () => {
@@ -61,8 +57,8 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/personal`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/personal');
 	});
 
 	it('Visible buttons', () => {
@@ -86,8 +82,8 @@ describe('Visible elements - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/onboarding/personal`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/onboarding/personal');
 		cy.wait(1000);
 	});
 
@@ -98,15 +94,18 @@ describe('Good redirection on elements - Desktop', () => {
 		cy.get('#edgar-onboardingPersonalPage-sexMale-button').click();
 		cy.get('#edgar-onboardingPersonalPage-formSize-input').click().type('1.6');
 		cy.get('#edgar-onboardingPersonalPage-formWeight-input').click().type('50');
-		cy.get('#edgar-onboardingPersonalPage-next-button').click().url().should('eq', `${url}/onboarding/medical`);
+		cy.get('#edgar-onboardingPersonalPage-next-button')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/onboarding/medical`);
 	});
 });
 
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/onboarding/personal`);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit('/onboarding/personal');
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
 		cy.wait(1000);
 	});
 

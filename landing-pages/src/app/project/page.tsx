@@ -14,7 +14,7 @@ const ProductPage = (): JSX.Element => (
 		borderStyle="solid"
 		borderWidth={{ base: '0px', xl: '0px 1px' }}
 		borderColor="blue.200"
-		spacing="96px"
+		spacing="32px"
 		justify="space-between"
 		w="100%"
 		minH="100vh"

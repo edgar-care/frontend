@@ -145,6 +145,7 @@ jobs:
           working-directory: ./landing-pages
           wait-on: "http://localhost:3000"
           wait-on-timeout: 30
+          config: baseUrl=http://localhost:3000
         env:
           CYPRESS_url: http://localhost:3000
         

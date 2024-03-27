@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -21,7 +18,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good content for buttons', () => {
@@ -29,24 +26,39 @@ describe('Good content on elements - Desktop', () => {
 		cy.get('#edgar-homePage-product-button').should('contain.text', 'En apprendre plus sur edgar');
 	});
 
-	it('Good content for texts', () => {
+	it('Good content for catch phrase', () => {
 		cy.get('#edgar-homePage-catchPhrase-text').should(
 			'contain.text',
 			"Gagne du temps avec l'assistant virtuel du pré-diagnostic.",
 		);
+	});
+
+	it('Good content for subtitle', () => {
 		cy.get('#edgar-homePage-subTitle1-text').should(
 			'contain.text',
 			"Marre d'attendre pour avoir un rendez-vous chez le médecin généraliste ?",
 		);
+	});
+
+	it('Good content for subtitle 2', () => {
 		cy.get('#edgar-homePage-subTitle2-text').should(
 			'contain.text',
-			"Un Français attend en moyenne 6 jours avant d'avoir un rendez-vous chez un médecin généraliste.",
+			"Un Français attend en moyenne 6 jours avant d'assister à son rendez-vous chez un médecin généraliste.",
 		);
+	});
+
+	it('Good content for product title', () => {
 		cy.get('#edgar-homePage-productTitle-text').should('contain.text', 'Pourquoi edgar ?');
+	});
+
+	it('Good content for product description', () => {
 		cy.get('#edgar-homePage-productDescription-text').should(
 			'contain.text',
-			'Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes, en France, ces quelques dernières année, un français attend en moyenne 6 jours avant d’aller à son rendez-vous médical.Chez edgar, nous voulons réduire cette durée en diminuant le nombre de rendez-vous inutiles. Ces rendez-vous font perdre du temps aux patients, mais aussi aux médecins, qui nous le savons sont surchargés.',
+			'Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes, en France, ces quelques dernières années, un Français attend en moyenne 6 jours avant d’aller à son rendez-vous médical.',
 		);
+	});
+
+	it('Good content for QA title', () => {
 		cy.get('#edgar-homePage-QATitle-text').should('contain.text', 'QUESTIONS FRÉQUEMMENT POSÉES');
 	});
 });
@@ -54,7 +66,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -75,20 +87,23 @@ describe('Visible elements - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on buttons', () => {
 		// cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
-		// cy.visit(`${url}`);
-		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
+		// cy.visit('/');
+		cy.get('#edgar-homePage-product-button')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/project`);
 	});
 });
 
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -105,7 +120,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good content for buttons', () => {
@@ -113,24 +128,39 @@ describe('Good content on elements - Mobile', () => {
 		cy.get('#edgar-homePage-product-button').should('contain.text', 'En apprendre plus sur edgar');
 	});
 
-	it('Good content for texts', () => {
+	it('Good content for catch phrase', () => {
 		cy.get('#edgar-homePage-catchPhrase-text').should(
 			'contain.text',
 			"Gagne du temps avec l'assistant virtuel du pré-diagnostic.",
 		);
+	});
+
+	it('Good content for subtitle', () => {
 		cy.get('#edgar-homePage-subTitle1-text').should(
 			'contain.text',
 			"Marre d'attendre pour avoir un rendez-vous chez le médecin généraliste ?",
 		);
+	});
+
+	it('Good content for subtitle 2', () => {
 		cy.get('#edgar-homePage-subTitle2-text').should(
 			'contain.text',
-			"Un Français attend en moyenne 6 jours avant d'avoir un rendez-vous chez un médecin généraliste.",
+			"Un Français attend en moyenne 6 jours avant d'assister à son rendez-vous chez un médecin généraliste.",
 		);
+	});
+
+	it('Good content for product title', () => {
 		cy.get('#edgar-homePage-productTitle-text').should('contain.text', 'Pourquoi edgar ?');
+	});
+
+	it('Good content for product description', () => {
 		cy.get('#edgar-homePage-productDescription-text').should(
 			'contain.text',
-			'Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes, en France, ces quelques dernières année, un français attend en moyenne 6 jours avant d’aller à son rendez-vous médical.Chez edgar, nous voulons réduire cette durée en diminuant le nombre de rendez-vous inutiles. Ces rendez-vous font perdre du temps aux patients, mais aussi aux médecins, qui nous le savons sont surchargés.',
+			'Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes, en France, ces quelques dernières années, un Français attend en moyenne 6 jours avant d’aller à son rendez-vous médical.',
 		);
+	});
+
+	it('Good content for QA title', () => {
 		cy.get('#edgar-homePage-QATitle-text').should('contain.text', 'QUESTIONS FRÉQUEMMENT POSÉES');
 	});
 });
@@ -138,7 +168,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -159,12 +189,15 @@ describe('Visible elements - Mobile', () => {
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good redirection on buttons', () => {
 		// cy.get('#edgar-homePage-appointment-button').click().url().should('eq', `${appUrl}/simulation`);
-		// cy.visit(`${url}`);
-		cy.get('#edgar-homePage-product-button').click().url().should('eq', `${url}/product`);
+		// cy.visit('/');
+		cy.get('#edgar-homePage-product-button')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/project`);
 	});
 });

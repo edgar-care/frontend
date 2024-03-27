@@ -8,16 +8,16 @@ import UpdateMedicalPersonalModalSexInput from 'components/dashboardPages/medica
 import UpdateMedicalPersonalModalSizeInput from 'components/dashboardPages/medical/modal/forms/personal/UpdateMedicalPersonalModalSizeInput';
 import UpdateMedicalPersonalModalWeightInput from 'components/dashboardPages/medical/modal/forms/personal/UpdateMedicalPersonalModalWeightInput';
 
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 const UpdateMedicalPersonalModal = ({
 	register,
 	control,
 	errors,
 }: {
-	register: UseFormRegister<MedicalProfileType>;
-	control: Control<MedicalProfileType>;
-	errors: FieldErrors<MedicalProfileType>;
+	register: UseFormRegister<PatientMedicalType>;
+	control: Control<PatientMedicalType>;
+	errors: FieldErrors<PatientMedicalType>;
 }): JSX.Element => (
 	<VStack w="100%" spacing="24px" px={{ base: '0px', smd: '32px' }} align="start">
 		<HStack w="100%" spacing="32px">

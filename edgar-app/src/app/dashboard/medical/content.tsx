@@ -20,18 +20,15 @@ const MedicalPageContent = (): JSX.Element => {
 			/>
 			{medicalInfos && (
 				<Stack direction={{ base: 'column', xl: 'row' }} w="100%" align="start" spacing="32px">
-					<MedicalUpdateCard
-						personalInfos={medicalInfos.personalInfos}
-						healthInfos={medicalInfos.healthInfos}
-					/>
+					<MedicalUpdateCard medicalInfos={medicalInfos} />
 					<Stack
 						direction={{ base: 'column', '2xl': 'row' }}
 						w="100%"
 						align="start"
 						spacing={{ base: '16px', '2xl': '32px' }}
 					>
-						<MedicalPersonalInfoCard personalInfos={medicalInfos.personalInfos} />
-						<MedicalMedicalInfoCard healthInfos={medicalInfos.healthInfos} />
+						<MedicalPersonalInfoCard medicalInfos={medicalInfos} />
+						<MedicalMedicalInfoCard medicalInfos={medicalInfos} />
 					</Stack>
 				</Stack>
 			)}

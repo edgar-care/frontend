@@ -22,24 +22,24 @@ const ProductSection = (): JSX.Element => {
 						id="edgar-homePage-productDescription-text"
 					>
 						Malgré les améliorations en termes de prise de rendez-vous chez les médecins généralistes, en
-						France, ces quelques dernières année, un français attend en{' '}
+						France, ces quelques dernières années, un Français attend en{' '}
 						<Box as="span" fontWeight="600" color="green.400">
 							moyenne 6 jours
 						</Box>{' '}
 						avant d’aller à son rendez-vous médical.
 						<Box as="br" />
 						<Box as="br" />
-						Chez edgar, nous voulons{' '}
+						Chez edgar, nous souhaitons{' '}
 						<Box as="span" fontWeight="600" color="green.400">
-							réduire cette durée
+							réduire la durée d'attente
 						</Box>{' '}
 						en diminuant le nombre de rendez-vous inutiles. Ces rendez-vous font{' '}
 						<Box as="span" fontWeight="600" color="green.400">
 							perdre du temps
 						</Box>{' '}
-						aux patients, mais aussi aux médecins, qui nous le savons{' '}
+						aux patients, mais aussi aux médecins qui sont{' '}
 						<Box as="span" fontWeight="600" color="green.400">
-							sont surchargés.
+							surchargés.
 						</Box>
 					</Text>
 					{imageDisplayed && (
@@ -53,7 +53,7 @@ const ProductSection = (): JSX.Element => {
 					)}
 				</HStack>
 			</VStack>
-			<Link href="/product">
+			<Link href="/project">
 				<Button
 					size={{ base: 'customLg', xl: '2xl' }}
 					variant="primaryBordered"

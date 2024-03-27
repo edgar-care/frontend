@@ -21,21 +21,18 @@ import Stepper from 'components/stepper/Stepper';
 
 import MedicalIllustration from 'assets/illustrations/MedicalIllustration';
 
-import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 import { useUpdatePatientMedicalFolderMutation } from 'services/request/medical';
 
 const UpdateMedicalDrawer = ({
 	isOpen,
 	onClose,
-	personalInfos,
 	medicalInfos,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	personalInfos: PersonalInfos;
-	medicalInfos: HealthInfos;
+	medicalInfos: PatientMedicalType;
 }): JSX.Element => {
 	const [triggerUpdatePatientMedicalFolder] = useUpdatePatientMedicalFolderMutation();
 
@@ -46,9 +43,7 @@ const UpdateMedicalDrawer = ({
 		register,
 		control,
 		reset,
-		setValue,
-		watch,
-	} = useForm<MedicalProfileType>({
+	} = useForm<PatientMedicalType>({
 		mode: 'onChange',
 	});
 
@@ -68,7 +63,7 @@ const UpdateMedicalDrawer = ({
 	});
 
 	useEffect(() => {
-		reset({ ...personalInfos, ...medicalInfos });
+		reset(medicalInfos);
 	}, []);
 
 	return (
@@ -101,12 +96,7 @@ const UpdateMedicalDrawer = ({
 						{step === 0 ? (
 							<UpdateMedicalPersonalModalContent register={register} control={control} errors={errors} />
 						) : (
-							<UpdateMedicalMedicalModalContent
-								register={register}
-								errors={errors}
-								watch={watch}
-								setValue={setValue}
-							/>
+							<UpdateMedicalMedicalModalContent register={register} errors={errors} />
 						)}
 					</VStack>
 				</DrawerBody>

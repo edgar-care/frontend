@@ -6,7 +6,7 @@ const ProjectSection = (): JSX.Element => (
 			LE PROJET
 		</Text>
 		<VStack w="100%" align="start" spacing="12px">
-			<Link href="product">
+			<Link href="/project">
 				<Text size={{ base: 'md', xl: 'lg' }} color="white" id="edgar-footer-projectOffer-text">
 					Ce que nous offrons
 				</Text>

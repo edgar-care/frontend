@@ -52,8 +52,7 @@ const Footer = (): JSX.Element => {
 						id="edgar-footer-edgarLogo-img"
 					/>
 					<HStack w="100%" spacing="24px" justify="center">
-						{/* TODO: update link */}
-						<Link href="mailto:edgarcare_2025@labeip.epitech.eu">
+						<Link href="mailto:contact@edgar-sante.fr">
 							<Icon
 								as={BsEnvelopeAtFill}
 								w="24px"
@@ -63,7 +62,7 @@ const Footer = (): JSX.Element => {
 								aria-label="open-mail-to-send-to-edgar-team"
 							/>
 						</Link>
-						<Link href="https://www.linkedin.com/company/edgar-care/">
+						<Link target="_blank" href="https://www.linkedin.com/company/edgar-sante/">
 							<Icon
 								as={BsLinkedin}
 								w="24px"
@@ -86,7 +85,7 @@ const Footer = (): JSX.Element => {
 					</HStack>
 					<HStack justify="center" borderTop="1px solid" borderColor="white" p="8px 0px">
 						<Text size="lg" color="white" id="edgar-footer-madeIn-text">
-							Fait à Lyon & Mulhouse avec
+							Fait à Lyon & Nancy avec
 						</Text>
 						<Icon as={BsHeartFill} color="white" h="20px" w="auto" id="edgar-footer-heartIcon-svg" />
 					</HStack>
@@ -95,7 +94,7 @@ const Footer = (): JSX.Element => {
 				<HStack w="100%" justify="space-between" py="16px">
 					<HStack w="325px">
 						<Text size="xl" color="white" id="edgar-footer-madeIn-text">
-							Fait à Lyon & Mulhouse avec
+							Fait à Lyon & Nancy avec
 						</Text>
 						<Icon as={BsHeartFill} color="white" h="20px" w="auto" id="edgar-footer-heartIcon-svg" />
 					</HStack>
@@ -107,8 +106,7 @@ const Footer = (): JSX.Element => {
 						id="edgar-footer-edgarLogo-img"
 					/>
 					<HStack w="325px" spacing="24px" justify="end">
-						{/* TODO: update link */}
-						<Link href="mailto:edgarcare_2025@labeip.epitech.eu">
+						<Link href="mailto:contact@edgar-sante.fr">
 							<Icon
 								as={BsEnvelopeAtFill}
 								w="32px"
@@ -118,7 +116,7 @@ const Footer = (): JSX.Element => {
 								aria-label="open-mail-to-send-to-edgar-team"
 							/>
 						</Link>
-						<Link href="https://www.linkedin.com/company/edgar-care/">
+						<Link target="_blank" href="https://www.linkedin.com/company/edgar-sante/">
 							<Icon
 								as={BsLinkedin}
 								w="32px"
@@ -128,16 +126,18 @@ const Footer = (): JSX.Element => {
 								aria-label="redirection-to-linkedIn-edgar-account"
 							/>
 						</Link>
-						<Link href="">
-							<Icon
-								as={BsInstagram}
-								w="32px"
-								h="32px"
-								color="white"
-								id="edgar-footer-instagramIcon-svg"
-								aria-label="redirection-to-instragam-edgar-account"
-							/>
-						</Link>
+						<Tooltip label="Bientôt">
+							<Link target="_blank">
+								<Icon
+									as={BsInstagram}
+									w="32px"
+									h="32px"
+									color="white"
+									id="edgar-footer-instagramIcon-svg"
+									aria-label="redirection-to-instragam-edgar-account"
+								/>
+							</Link>
+						</Tooltip>
 					</HStack>
 				</HStack>
 			)}

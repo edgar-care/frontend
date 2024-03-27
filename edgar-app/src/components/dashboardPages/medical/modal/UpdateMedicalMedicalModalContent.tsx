@@ -1,23 +1,16 @@
 import { VStack } from '@chakra-ui/react';
-import { type FieldErrors, type UseFormRegister, type UseFormSetValue, type UseFormWatch } from 'react-hook-form';
+import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import UpdateMedicalMedicalModalPrimaryDoctorInput from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalMedicalModalPrimaryDoctorInput';
-import UpdateMedicalMedicalModalAllergiesInput from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalMedicalModalAllergiesInput';
-import UpdateMedicalMedicalModalDiseasesInput from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalMedicalModalDiseasesInput';
-import UpdateMedicalMedicalModalTreatmentsInput from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalMedicalModalTreatmentsInput';
 
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 const UpdateMedicalMedicalModalContent = ({
 	register,
 	errors,
-	watch,
-	setValue,
 }: {
-	register: UseFormRegister<MedicalProfileType>;
-	errors: FieldErrors<MedicalProfileType>;
-	watch: UseFormWatch<MedicalProfileType>;
-	setValue: UseFormSetValue<MedicalProfileType>;
+	register: UseFormRegister<PatientMedicalType>;
+	errors: FieldErrors<PatientMedicalType>;
 }): JSX.Element => (
 	<VStack
 		w="100%"
@@ -46,9 +39,6 @@ const UpdateMedicalMedicalModalContent = ({
 		}}
 	>
 		<UpdateMedicalMedicalModalPrimaryDoctorInput errors={errors} register={register} />
-		<UpdateMedicalMedicalModalAllergiesInput watch={watch} setValue={setValue} />
-		<UpdateMedicalMedicalModalDiseasesInput watch={watch} setValue={setValue} />
-		<UpdateMedicalMedicalModalTreatmentsInput watch={watch} setValue={setValue} />
 	</VStack>
 );
 

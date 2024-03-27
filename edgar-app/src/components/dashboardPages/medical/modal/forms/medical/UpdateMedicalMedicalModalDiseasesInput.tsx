@@ -1,3 +1,4 @@
+/*
 import { useState } from 'react';
 import { FormLabel, Input, InputGroup, InputRightElement, useToast, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { type UseFormSetValue, type UseFormWatch } from 'react-hook-form';
@@ -6,14 +7,14 @@ import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/Onboa
 
 import PlusIcon from 'assets/icons/PlusIcon';
 
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 const UpdateMedicalMedicalModalDiseasesInput = ({
 	watch,
 	setValue,
 }: {
-	watch: UseFormWatch<MedicalProfileType>;
-	setValue: UseFormSetValue<MedicalProfileType>;
+	watch: UseFormWatch<PatientMedicalType>;
+	setValue: UseFormSetValue<PatientMedicalType>;
 }): JSX.Element => {
 	const diseases = watch('diseases') || [];
 	const [diseaseInput, setDiseaseInput] = useState('');
@@ -98,3 +99,4 @@ const UpdateMedicalMedicalModalDiseasesInput = ({
 };
 
 export default UpdateMedicalMedicalModalDiseasesInput;
+*/

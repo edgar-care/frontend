@@ -3,14 +3,14 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 const UpdateMedicalPersonalModalWeightInput = ({
 	register,
 	errors,
 }: {
-	register: UseFormRegister<MedicalProfileType>;
-	errors: FieldErrors<MedicalProfileType>;
+	register: UseFormRegister<PatientMedicalType>;
+	errors: FieldErrors<PatientMedicalType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%">
 		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formWeight-text">

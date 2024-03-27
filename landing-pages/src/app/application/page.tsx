@@ -39,7 +39,7 @@ const ApplicationPage = (): JSX.Element => {
 						<Box as="span" fontWeight="600" color="green.600">
 							vos proches
 						</Box>{' '}
-						désormais disponible sur Android et bientôt sur iOS
+						désormais disponible sur Android et bientôt sur iOS.
 					</Text>
 				</VStack>
 				<Stack

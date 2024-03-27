@@ -2,14 +2,16 @@ import { Box, HStack, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 
 import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/OnboardingMedicalSmallCard';
 
-import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
+import type { PatientHealthType, PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
+import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
-const MedicalMedicalInfoCard = ({ healthInfos }: { healthInfos: HealthInfos }): JSX.Element => {
+const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
+	const { data: doctorInfo } = useGetDoctorByIdQuery(medicalInfos.primaryDoctorId);
+
 	const medicalInfosLabels = {
-		primaryDoctorName: 'Médecin traitant',
-		allergies: 'Allergies',
-		diseases: 'Maladies',
-		treatmentsInProgress: 'Traitements en cours',
+		primaryDoctorId: 'Médecin traitant',
+		medicalAntecedents: 'Antécédents médicaux',
 	};
 
 	return (
@@ -26,33 +28,37 @@ const MedicalMedicalInfoCard = ({ healthInfos }: { healthInfos: HealthInfos }): 
 		>
 			<Box as="span" w="4px" alignSelf="stretch" bg="green.500" borderRadius="4px" />
 			<VStack pl="8px" w="100%" align="start" spacing={{ base: '8px', lg: '12px' }}>
-				{Object.keys(healthInfos).map((key, index) => {
-					const info = healthInfos[key as keyof HealthInfos];
-
+				{Object.keys({
+					primaryDoctorId: medicalInfos.primaryDoctorId,
+					medicalAntecedents: medicalInfos.medicalAntecedents,
+				}).map((key, index) => {
+					const info = medicalInfos[key as keyof PatientHealthType];
 					return (
 						<Box as="div" key={index}>
-							{(key as keyof HealthInfos) === 'primaryDoctorName' ? (
+							{(key as keyof PatientHealthType) === 'primaryDoctorId' && doctorInfo && (
 								<Text
 									size={{ base: 'md', lg: 'lg' }}
-									id={`edgar-dashboardMedicalPage-healthInfoCard-${key as keyof HealthInfos}-text`}
+									id={`edgar-dashboardMedicalPage-healthInfoCard-${key as keyof PatientHealthType}-text`}
 								>
-									{medicalInfosLabels[key as keyof HealthInfos]}: {info}
+									{medicalInfosLabels[key as keyof PatientHealthType]}: Dr.{' '}
+									{doctorInfo.name.toUpperCase()} {doctorInfo.firstname}
 								</Text>
-							) : (
+							)}
+							{(key as keyof PatientHealthType) === 'medicalAntecedents' && (
 								<VStack w="100%" align="start">
 									<Text
 										size={{ base: 'md', lg: 'lg' }}
 										id={`edgar-dashboardMedicalPage-healthInfoCard-${
-											key as keyof HealthInfos
+											key as keyof PatientHealthType
 										}-text`}
 									>
-										{medicalInfosLabels[key as keyof HealthInfos]}:
+										{medicalInfosLabels[key as keyof PatientHealthType]}:
 									</Text>
 									<Wrap w="100%" gap="8px">
-										{(info as string[]).map((value) => (
-											<WrapItem key={value}>
+										{(info as PatientMedicalAntecedentType[]).map((value) => (
+											<WrapItem key={value.id}>
 												<OnboardingMedicalSmallCard
-													title={value}
+													title={value.name}
 													onClick={() => {}}
 													canBeDeleted={false}
 												/>

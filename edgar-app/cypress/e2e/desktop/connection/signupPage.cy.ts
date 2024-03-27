@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good number of buttons', () => {
@@ -31,7 +28,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good content for buttons', () => {
@@ -53,7 +50,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good content for buttons', () => {
@@ -72,18 +69,21 @@ describe('Visible elements - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 	});
 
 	it('Good redirection on buttons', () => {
-		cy.get('#edgar-signupPage-login-button').click().url().should('eq', `${url}/login`);
+		cy.get('#edgar-signupPage-login-button')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/login`);
 	});
 });
 
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/signup`);
+		cy.visit('/signup');
 		cy.wait(1000);
 	});
 
