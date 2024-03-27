@@ -11,15 +11,37 @@ import { MessageType } from 'types/dashboard/home/MessageType';
 
 const HomeChatCard = (): JSX.Element => {
 	const [messages, setMessages] = useState<MessageType[]>([
-		{ id: 1, sender: 'John', notifications: 12, date: new Date().getTime(), lastMessage: 'Salut, ça va ?' },
-		{ id: 2, sender: 'Alice', notifications: 5, date: new Date().getTime(), lastMessage: 'Coucou !' },
-		{ id: 3, sender: 'Bob', notifications: 0, date: new Date().getTime(), lastMessage: 'Demain à quelle heure ?' },
+		{
+			id: 1,
+			sender: 'John',
+			doctorId: '65feebafd238ecea17cc0f4b',
+			notifications: 12,
+			date: new Date().getTime(),
+			lastMessage: 'Salut, ça va ?',
+		},
+		{
+			id: 2,
+			sender: 'Alice',
+			doctorId: 'test',
+			notifications: 5,
+			date: new Date().getTime(),
+			lastMessage: 'Coucou !',
+		},
+		{
+			id: 3,
+			sender: 'Bob',
+			doctorId: 'test',
+			notifications: 0,
+			date: new Date().getTime(),
+			lastMessage: 'Demain à quelle heure ?',
+		},
 	]);
 
 	useEffect(() => {
 		const newMessage = {
 			id: messages.length + 1,
 			sender: 'New Sender',
+			doctorId: 'test',
 			notifications: 0,
 			date: new Date().getTime(),
 			lastMessage: 'New Message',

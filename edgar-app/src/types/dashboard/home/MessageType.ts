@@ -4,4 +4,5 @@ export type MessageType = {
 	notifications: number;
 	date: number;
 	lastMessage: string;
+	doctorId: string;
 };
