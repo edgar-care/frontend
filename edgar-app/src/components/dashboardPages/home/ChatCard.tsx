@@ -33,7 +33,7 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 		CircleEightIcon,
 		CircleNineIcon,
 	];
-
+	console.log(medicalFolder?.primaryDoctorId);
 	return (
 		<HStack
 			bg="blue.100"
@@ -51,7 +51,7 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 					<VStack align="start" spacing="0px">
 						<HStack spacing="4px">
 							<Text size="boldMd">{message.sender}</Text>
-							{message.sender === medicalFolder?.primaryDoctorId && (
+							{message.doctorId === medicalFolder?.primaryDoctorId && (
 								<Text
 									fontStyle="italic"
 									fontSize="12"
