@@ -14,21 +14,24 @@ import CircleEightIcon from 'assets/icons/CircleNumber/CircleEightIcon';
 import CircleNineIcon from 'assets/icons/CircleNumber/CircleNineIcon';
 import CirclePlusIcon from 'assets/icons/CircleNumber/CirclePlusIcon';
 
+import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+
 import { MessageType } from 'types/dashboard/home/MessageType';
 
 const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
+	const { data: medicalFolder } = useGetPatientMedicalFolderQuery();
 	const icons = [
-		{ icon: CircleZeroIcon },
-		{ icon: CircleOneIcon },
-		{ icon: CircleTwoIcon },
-		{ icon: CircleThreeIcon },
-		{ icon: CircleFourIcon },
-		{ icon: CircleFiveIcon },
-		{ icon: CircleSixIcon },
-		{ icon: CircleSevenIcon },
-		{ icon: CircleEightIcon },
-		{ icon: CircleNineIcon },
+		CircleZeroIcon,
+		CircleOneIcon,
+		CircleTwoIcon,
+		CircleThreeIcon,
+		CircleFourIcon,
+		CircleFiveIcon,
+		CircleSixIcon,
+		CircleSevenIcon,
+		CircleEightIcon,
+		CircleNineIcon,
 	];
 
 	return (
@@ -48,9 +51,17 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 					<VStack align="start" spacing="0px">
 						<HStack spacing="4px">
 							<Text size="boldMd">{message.sender}</Text>
-							<Text fontStyle="italic" fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
-								{/* Insérer - Médecin généraliste */}
-							</Text>
+							{message.sender === medicalFolder?.primaryDoctorId && (
+								<Text
+									fontStyle="italic"
+									fontSize="12"
+									color="grey.500"
+									fontWeight="500"
+									lineHeight="18px"
+								>
+									- Médecin généraliste
+								</Text>
+							)}
 						</HStack>
 						<Text fontStyle="italic" fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
 							{message.lastMessage}
@@ -76,13 +87,13 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 						{message.notifications > 9 ? (
 							<Icon as={CirclePlusIcon} w="16px" h="16px" color="blue.700" />
 						) : (
-							<Icon as={icons[message.notifications].icon} w="16px" h="16px" color="blue.700" />
+							<Icon as={icons[message.notifications]} w="16px" h="16px" color="blue.700" />
 						)}
 					</Box>
 				</VStack>
 			</HStack>
 			{isHover && (
-				<HStack justifyContent="flex-start">
+				<HStack justify="start">
 					<Icon as={CircleRightArrowIcon} w="20px" h="20px" color="blue.700" m="0px 10px 0px 0px" />
 				</HStack>
 			)}
