@@ -1,11 +1,11 @@
 export type HealthIssuesType = {
 	name: string;
 	medicines: HealthIssuesMedicinesType[];
-	stillRelevant: boolean | undefined;
+	stillRelevant: boolean;
 };
 
 export type HealthIssuesMedicinesType = {
-	id: string;
+	medicineId: string;
 	period: HealthIssuesMedicinesPeriodType[];
 	day: HealthIssuesMedicinesDayType[];
 	quantity: string;

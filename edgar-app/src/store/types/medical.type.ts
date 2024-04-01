@@ -28,3 +28,44 @@ export interface MedicalFolderStoreType {
 		}[];
 	};
 }
+
+export interface AddPatientMedicalFolderDTO {
+	name: string;
+	firstname: string;
+	birthdate: number;
+	sex: PatientSexType;
+	height: number;
+	weight: number;
+	primaryDoctorId: string;
+	medicalAntecedents: {
+		name: string;
+		medicines: {
+			medicineId: string;
+			period: TreatmentPeriodType[];
+			day: TreatmentDayType[];
+			quantity: string;
+		}[];
+		stillRelevant: boolean;
+	}[];
+}
+
+export interface UpdatePatientMedicalFolderDTO {
+	name: string;
+	firstname: string;
+	birthdate: number;
+	sex: PatientSexType;
+	height: number;
+	weight: number;
+	primaryDoctorId: string;
+	onboardingStatus: PatientOnboardingStatusType;
+	medicalAntecedents: {
+		name: string;
+		medicines: {
+			medicineId: string;
+			period: TreatmentPeriodType[];
+			day: TreatmentDayType[];
+			quantity: string;
+		}[];
+		stillRelevant: boolean;
+	}[];
+}
