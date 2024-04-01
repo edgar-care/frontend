@@ -24,17 +24,17 @@ const OnboardingPersonalSizeInput = ({
 			step="0.01"
 			id="edgar-onboardingPersonalPage-formSize-input"
 		/>
-		{errors.size?.type === 'required' && (
+		{errors.height?.type === 'required' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formSizeErrorRequired-text">
 				Ce champ est nécessaire
 			</ErrorMessage>
 		)}
-		{errors.size?.type === 'min' && (
+		{errors.height?.type === 'min' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formSizeErrorMin-text">
 				Renseigner une taille supérieure à 0.5 mètres
 			</ErrorMessage>
 		)}
-		{errors.size?.type === 'max' && (
+		{errors.height?.type === 'max' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formSizeErrorMax-text">
 				Renseigner une taille inférieure à 3 mètres
 			</ErrorMessage>
