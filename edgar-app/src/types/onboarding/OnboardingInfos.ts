@@ -1,3 +1,5 @@
+import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+
 export type Sex = 'MALE' | 'FEMALE' | 'OTHER';
 
 export type PersonalInfos = {
@@ -12,10 +14,7 @@ export type PersonalInfos = {
 };
 
 export type HealthInfos = {
-	primaryDoctorName: string;
-	allergies: string[];
-	diseases: string[];
-	treatmentsInProgress?: string[];
+	healthIssues: HealthIssuesType[];
 };
 
 export type OnboardingInfos = PersonalInfos & HealthInfos;
