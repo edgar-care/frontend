@@ -12,12 +12,12 @@ const OnboardingPersonalBirthdateInput = ({
 	register: UseFormRegister<PersonalInfos>;
 	errors: FieldErrors<PersonalInfos>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.birthDate ? '0px' : '16px'}>
+	<VStack spacing="8px" align="start" w="100%" pb={errors.birthdate ? '0px' : '16px'}>
 		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formBirthdate-text">
 			Votre date de naissance
 		</FormLabel>
 		<Input
-			{...register('birthDate', {
+			{...register('birthdate', {
 				valueAsDate: true,
 				min: Date.UTC(0, 0),
 				max: Date.now(),
@@ -28,17 +28,17 @@ const OnboardingPersonalBirthdateInput = ({
 			type="date"
 			id="edgar-onboardingPersonalPage-formBirthdate-input"
 		/>
-		{errors.birthDate?.type === 'required' && (
+		{errors.birthdate?.type === 'required' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorRequired-text">
 				Ce champ est nécessaire
 			</ErrorMessage>
 		)}
-		{errors.birthDate?.type === 'min' && (
+		{errors.birthdate?.type === 'min' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMin-text">
 				Renseigner une date de naissance après le 1 janvier 1900
 			</ErrorMessage>
 		)}
-		{errors.birthDate?.type === 'max' && (
+		{errors.birthdate?.type === 'max' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMax-text">
 				Renseigner une date de naissance avant celle d'aujourd'hui
 			</ErrorMessage>

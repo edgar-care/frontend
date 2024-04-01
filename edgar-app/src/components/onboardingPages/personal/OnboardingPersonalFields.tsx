@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, VStack, chakra, Stack } from '@chakra-ui/react';
+import { Button, VStack, chakra, Stack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
@@ -8,16 +8,20 @@ import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
 import { useOnboardingContext } from 'contexts/onboarding';
 
+import { useAddPatientMedicalFolderMutation } from 'services/request/medical';
+
 import OnboardingPersonalHasAntecedentsInput from './OnboardingPersonalHasAntecedentsInput';
 import OnboardingPersonalPrimaryDoctorInput from './OnboardingPersonalPrimaryDoctorInput';
 import OnboardingPersonalFirstnameInput from './OnboardingPersonalFirstnameInput';
 import OnboardingPersonalNameInput from './OnboardingPersonalNameInput';
 import OnboardingPersonalBirthdateInput from './OnboardingPersonalBirthdateInput';
 import OnboardingPersonalSexInput from './OnboardingPersonalSexInput';
-import OnboardingPersonalSizeInput from './OnboardingPersonalSizeInput';
 import OnboardingPersonalWeightInput from './OnboardingPersonalWeightInput';
+import OnboardingPersonalHeightInput from './OnboardingPersonalHeightInput';
 
 const OnboardingPersonalFields = (): JSX.Element => {
+	const [triggerAddPatientMedicalFolderMutation] = useAddPatientMedicalFolderMutation();
+
 	const { infos: onboardingInfos, setInfos: setOnboardingInfos } = useOnboardingContext();
 	const {
 		handleSubmit,
@@ -32,12 +36,31 @@ const OnboardingPersonalFields = (): JSX.Element => {
 
 	const router = useRouter();
 
+	const toast = useToast({ duration: 3000, isClosable: true });
+
 	const onSubmit = handleSubmit((data) => {
 		if (data.hasMedicalAntecedents) {
 			setOnboardingInfos(data);
 			router.push('/onboarding/medical');
-		}
-		// TODO: call backend to push data
+		} else
+			triggerAddPatientMedicalFolderMutation({
+				name: data.name,
+				firstname: data.firstname,
+				birthdate: new Date(data.birthdate).getTime(),
+				sex: data.sex,
+				height: data.height,
+				weight: data.weight,
+				primaryDoctorId: data.primaryDoctorId,
+				medicalAntecedents: [],
+			})
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
+					router.push('/dashboard');
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
 	});
 
 	return (
@@ -79,10 +102,10 @@ const OnboardingPersonalFields = (): JSX.Element => {
 								direction={{ base: 'column', smd: 'row', lg: 'column', '3xl': 'row' }}
 								w="100%"
 								spacing="32px"
-								pb={errors.size || errors.weight ? '0px' : '16px'}
+								pb={errors.height || errors.weight ? '0px' : '16px'}
 								align="start"
 							>
-								<OnboardingPersonalSizeInput register={register} errors={errors} />
+								<OnboardingPersonalHeightInput register={register} errors={errors} />
 								<OnboardingPersonalWeightInput register={register} errors={errors} />
 							</Stack>
 							<OnboardingPersonalPrimaryDoctorInput control={control} errors={errors} />

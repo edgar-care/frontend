@@ -5,7 +5,7 @@ import ErrorMessage from 'components/forms/ErrorMessage';
 
 import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
-const OnboardingPersonalSizeInput = ({
+const OnboardingPersonalHeightInput = ({
 	register,
 	errors,
 }: {
@@ -17,7 +17,7 @@ const OnboardingPersonalSizeInput = ({
 			Votre taille (en mètres)
 		</FormLabel>
 		<Input
-			{...register('size', { valueAsNumber: true, min: 0.5, max: 3, required: true })}
+			{...register('height', { valueAsNumber: true, min: 0.5, max: 3, required: true })}
 			placeholder="1.52"
 			type="number"
 			w="100%"
@@ -42,4 +42,4 @@ const OnboardingPersonalSizeInput = ({
 	</VStack>
 );
 
-export default OnboardingPersonalSizeInput;
+export default OnboardingPersonalHeightInput;
