@@ -1,4 +1,6 @@
-import { chakra, Button, VStack } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { chakra, Button, VStack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import OnboardingMedicalHealthIssues from 'components/onboardingPages/medical/OnboardingMedicalHealthIssues';
@@ -7,7 +9,10 @@ import { useOnboardingContext } from 'contexts/onboarding';
 
 import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
+import { useAddPatientMedicalFolderMutation } from 'services/request/medical';
+
 const OnboardingMedicalFields = (): JSX.Element => {
+	const [triggerAddPatientMedicalFolderMutation] = useAddPatientMedicalFolderMutation();
 	const { infos: onboardingInfos } = useOnboardingContext();
 	const {
 		handleSubmit,
@@ -16,9 +21,35 @@ const OnboardingMedicalFields = (): JSX.Element => {
 		watch,
 	} = useForm<HealthInfos>({ mode: 'onChange', defaultValues: { healthIssues: [] } });
 
+	const router = useRouter();
+
+	const toast = useToast({ duration: 3000, isClosable: true });
+
 	const onSubmit = handleSubmit((data) => {
-		console.log(onboardingInfos, data);
+		if (onboardingInfos)
+			triggerAddPatientMedicalFolderMutation({
+				name: onboardingInfos.name,
+				firstname: onboardingInfos.firstname,
+				birthdate: new Date(onboardingInfos.birthdate).getTime(),
+				sex: onboardingInfos.sex,
+				height: onboardingInfos.height,
+				weight: onboardingInfos.weight,
+				primaryDoctorId: onboardingInfos.primaryDoctorId,
+				medicalAntecedents: data.healthIssues,
+			})
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
+					router.push('/dashboard');
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
 	});
+
+	useEffect(() => {
+		if (!onboardingInfos) router.push('/onboarding/personal');
+	}, []);
 
 	return (
 		<VStack w="100%" h="100%">

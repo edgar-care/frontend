@@ -31,14 +31,16 @@ const MedicineCardPeriods = ({
 								content={period}
 								variant={
 									value
-										.find((item) => item.id === medicine.id)
+										.find((item) => item.medicineId === medicine.medicineId)
 										?.period.includes(availablePeriods[index])
 										? 'SELECTED'
 										: 'DEFAULT'
 								}
 								key={index}
 								onClick={() => {
-									const medicineIndex = value.findIndex((item) => item.id === medicine.id);
+									const medicineIndex = value.findIndex(
+										(item) => item.medicineId === medicine.medicineId,
+									);
 									const medicineArray = [...value];
 									const medicinePeriods = medicineArray[medicineIndex].period;
 

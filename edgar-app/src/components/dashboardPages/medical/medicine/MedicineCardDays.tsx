@@ -38,13 +38,17 @@ const MedicineCardDays = ({
 							<MedicineSmallCard
 								content={day}
 								variant={
-									value.find((item) => item.id === medicine.id)?.day.includes(availableDays[index])
+									value
+										.find((item) => item.medicineId === medicine.medicineId)
+										?.day.includes(availableDays[index])
 										? 'SELECTED'
 										: 'DEFAULT'
 								}
 								key={index}
 								onClick={() => {
-									const medicineIndex = value.findIndex((item) => item.id === medicine.id);
+									const medicineIndex = value.findIndex(
+										(item) => item.medicineId === medicine.medicineId,
+									);
 									const medicineArray = [...value];
 									const medicineDays = medicineArray[medicineIndex].day;
 

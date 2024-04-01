@@ -19,7 +19,7 @@ const MedicineCard = ({
 	control: Control<HealthIssuesType>;
 }): JSX.Element => {
 	const medicineInfo: MedicineType = {
-		id: medicine.id,
+		id: medicine.medicineId,
 		name: 'Medicament',
 		unit: 'TABLET',
 	};
@@ -42,7 +42,7 @@ const MedicineCard = ({
 									const medicineArray = [...value];
 
 									medicineArray.splice(
-										value.findIndex((item) => item.id === medicine.id),
+										value.findIndex((item) => item.medicineId === medicine.medicineId),
 										1,
 									);
 									onChange(medicineArray);
@@ -70,7 +70,7 @@ const MedicineCard = ({
 									const medicineArray = [...value];
 
 									medicineArray.splice(
-										value.findIndex((item) => item.id === medicine.id),
+										value.findIndex((item) => item.medicineId === medicine.medicineId),
 										1,
 										{
 											...medicine,

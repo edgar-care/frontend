@@ -105,7 +105,7 @@ const MedicineStillRelevantInput = ({
 			</VStack>
 			<Wrap w="100%">
 				{addedMedicines.map((medicine) => (
-					<WrapItem key={medicine.id}>
+					<WrapItem key={medicine.medicineId}>
 						<MedicineCard medicine={medicine} control={control} />
 					</WrapItem>
 				))}

@@ -25,7 +25,7 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 	const displayAvailablePeriods = ['Matin', 'Midi', 'Soir', 'Nuit'];
 	const availablePeriods: HealthIssuesMedicinesPeriodType[] = ['MORNING', 'NOON', 'EVENING', 'NIGHT'];
 	const medicineInfo: MedicineType = {
-		id: medicine.id,
+		id: medicine.medicineId,
 		name: 'Medicament',
 		unit: 'TABLET',
 	};
