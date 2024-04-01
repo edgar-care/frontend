@@ -90,7 +90,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 						</VStack>
 					</VStack>
 					<Button
-						type={watch('hasMedicalAntecedents') ? 'button' : 'submit'}
+						type="submit"
 						variant={watch('hasMedicalAntecedents') ? 'primary' : 'validate'}
 						w={{ base: '100%', xl: 'auto' }}
 						id="edgar-onboardingPersonalPage-next-button"

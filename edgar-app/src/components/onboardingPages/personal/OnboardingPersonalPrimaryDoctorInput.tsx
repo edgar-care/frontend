@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormLabel, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
+import { FormLabel, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
@@ -52,7 +52,7 @@ const OnboardingPersonalPrimaryDoctorInput = ({
 					)}
 				/>
 				<InputRightElement>
-					<AddIcon color="blue.700" />
+					<Icon as={AddIcon} color="blue.700" />
 				</InputRightElement>
 			</InputGroup>
 			{errors.primaryDoctorId?.type === 'required' && (
