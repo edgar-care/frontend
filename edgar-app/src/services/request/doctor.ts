@@ -22,7 +22,26 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 			}),
 		}),
+
+		getDoctors: builder.query<DoctorType[], void>({
+			query: () => `/doctors`,
+			providesTags: ['doctor'],
+			transformResponse: (response: { Doctors: DoctorStoreType[] }) =>
+				response.Doctors.map((doctor) => ({
+					id: doctor.id,
+					email: doctor.email,
+					name: doctor.name,
+					firstname: doctor.firstname,
+					address: {
+						street: doctor.address.street,
+						city: doctor.address.city,
+						zipCode: doctor.address.zip_code,
+						country: doctor.address.country,
+					},
+				})),
+		}),
 	}),
 });
 
-export const { useGetDoctorByIdQuery, useLazyGetDoctorByIdQuery } = extendedApi;
+export const { useGetDoctorByIdQuery, useLazyGetDoctorByIdQuery, useGetDoctorsQuery, useLazyGetDoctorsQuery } =
+	extendedApi;
