@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import CalendarAppointmentCard from 'components/app/dashboardPages/appointments/CalendarAppointmentCard';
@@ -26,6 +26,13 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments?: Appointment
 			align={{ base: 'center', sm: 'start' }}
 		>
 			<VStack spacing="16px">
+			<Box w="100%">
+						<Link href="/simulation">
+							<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
+								Consulter mon agenda
+							</Button>
+						</Link>
+					</Box>
 				<HStack w="100%" px="8px" justify="space-between">
 					<Text size="boldLg">
 						{months[month]} {year}

@@ -26,13 +26,6 @@ const AppointmentsPageContent = (): JSX.Element => {
 				spacing={{ base: '32px', xl: '64px' }}
 			>
 				<VStack spacing="16px" w={{ base: '100%', md: 'auto' }}>
-					<Box w="100%">
-						<Link href="/simulation">
-							<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
-								Consulter mon agenda
-							</Button>
-						</Link>
-					</Box>
 					<AppointmentsCalendarCard appointments={appointments} />
 				</VStack>
 				{appointments && (
