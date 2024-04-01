@@ -87,11 +87,11 @@ const DocumentFilter = ({
 							</Text>
 						</MenuButton>
 						<MenuList border="2px" borderColor="blue.200" borderRadius="12px" px="8px">
-							<MenuItem onClick={() => handleSort('asc')}>
+							<MenuItem onClick={() => handleSort('asc')} borderRadius="12px">
 								<Icon as={AlphabeticalIcon} w="16px" h="16px" color="blue.800" mr="8px" />
 								<Text size="md">Nom : A à Z</Text>
 							</MenuItem>
-							<MenuItem onClick={() => handleSort('desc')}>
+							<MenuItem onClick={() => handleSort('desc')} borderRadius="12px">
 								<Icon as={ReverseAlphabeticalIcon} w="16px" h="16px" color="blue.800" mr="8px" />
 								<Text size="md">Nom : Z à A</Text>
 							</MenuItem>
@@ -171,7 +171,11 @@ const DocumentFilter = ({
 							].map(
 								(filterType) =>
 									!activeFilter.includes(filterType) && (
-										<MenuItem key={filterType} onClick={() => handleFilterChange(filterType)}>
+										<MenuItem
+											key={filterType}
+											onClick={() => handleFilterChange(filterType)}
+											borderRadius="12px"
+										>
 											{filterType === 'Ordonnance' ||
 											filterType === 'Certificat' ||
 											filterType === 'Radiologie' ||
