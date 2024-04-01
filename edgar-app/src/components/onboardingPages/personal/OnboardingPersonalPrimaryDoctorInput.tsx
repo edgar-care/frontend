@@ -16,7 +16,6 @@ const OnboardingPersonalPrimaryDoctorInput = ({
 	control: Control<PersonalInfos>;
 	errors: FieldErrors<PersonalInfos>;
 }): JSX.Element => {
-	// TODO: call the info of the doctor instead of storing it in a use state
 	const [primaryDoctorName, setPrimaryDoctorName] = useState('');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
