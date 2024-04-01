@@ -32,30 +32,32 @@ const DocumentsPageContent = (): JSX.Element => {
 				title="Mes documents"
 				subTitle="Retrouvez tous vos documents personnels et médicaux."
 			/>
-			<VStack w="100%" spacing="24px">
-				<HStack w="100%" spacing="16px">
-					<Button
-						size="customMd"
-						variant="primary"
-						whiteSpace="nowrap"
-						onClick={onOpenAddModal}
-						w={{ base: '100%', smd: 'auto' }}
-						id="edgar-dashboardDocumentsPage-addDocument-button"
-					>
-						Ajouter un document
-					</Button>
-					<InputGroup w="100%">
-						<Input
-							placeholder="Rechercher par nom du document ou nom du médecin"
-							value={searchText}
-							onChange={(e) => setSearchText(e.target.value)}
-						/>
-						<InputRightElement>
-							<Icon as={SearchIcon} w="16px" h="16px" />
-						</InputRightElement>
-					</InputGroup>
-				</HStack>
-				<DocumentFilter onSort={setSortOption} onFilterChange={setSelectedFilters} />
+			<VStack w="100%" spacing="16px">
+				<VStack w="100%" spacing="24px">
+					<HStack w="100%" spacing="16px">
+						<Button
+							size="customMd"
+							variant="primary"
+							whiteSpace="nowrap"
+							onClick={onOpenAddModal}
+							w={{ base: '100%', smd: 'auto' }}
+							id="edgar-dashboardDocumentsPage-addDocument-button"
+						>
+							Ajouter un document
+						</Button>
+						<InputGroup w="100%">
+							<Input
+								placeholder="Rechercher par nom du document ou nom du médecin"
+								value={searchText}
+								onChange={(e) => setSearchText(e.target.value)}
+							/>
+							<InputRightElement>
+								<Icon as={SearchIcon} w="16px" h="16px" />
+							</InputRightElement>
+						</InputGroup>
+					</HStack>
+					<DocumentFilter onSort={setSortOption} onFilterChange={setSelectedFilters} />
+				</VStack>
 				<VStack spacing="8px" w="100%" align="start">
 					{fetchedDocuments &&
 						sortDocuments(
