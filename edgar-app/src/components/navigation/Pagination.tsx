@@ -16,7 +16,7 @@ import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
  * 	        {paginationHandler(data, pageIndex, 10).map((item, index) => (<>...</>))}		// The line where you want to display your data (using paginationHandler)
  * 		    <Pagination																		// The pagination component
  * 		    	pageIndex={pageIndex}
- * 		    	pageNumbers={countMaxNumberPage(data, 10)}
+ * 		    	maxPageNumbers={countMaxNumberPage(data, 10)}
  * 		    	setPageIndex={setPageIndex}
  * 		    />
  *   	</>
