@@ -52,7 +52,7 @@ const Pagination = ({
 		<HStack spacing="16px">
 			{Array.from(Array(maxPageNumbers + 1).keys())
 				.slice(
-					pageIndex === 1 ? 1 : pageIndex === maxPageNumbers ? pageIndex - 2 : pageIndex - 1,
+					pageIndex <= 2 ? 1 : pageIndex === maxPageNumbers ? pageIndex - 2 : pageIndex - 1,
 					(pageIndex < 2 ? 1 : pageIndex - 1) + 3,
 				)
 				.map((value) => (

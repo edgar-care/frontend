@@ -1,7 +1,6 @@
 'use client';
 
-import { VStack, Stack, Box, Button } from '@chakra-ui/react';
-import Link from 'next/link';
+import { VStack, Stack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/app/dashboardPages/DashboardPageBanner';
 import AppointmentsCalendarCard from 'components/app/dashboardPages/appointments/AppointmentsCalendarCard';
@@ -11,7 +10,6 @@ import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
 
 const AppointmentsPageContent = (): JSX.Element => {
 	const { data: appointments } = useGetDoctorAppointmentsQuery();
-	console.log(appointments);
 
 	return (
 		<VStack w="100%" spacing="32px" h="100%">
