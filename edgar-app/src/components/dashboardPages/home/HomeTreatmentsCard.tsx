@@ -40,7 +40,7 @@ const HomeTreatmentsCard = (): JSX.Element => {
 			borderColor="blue.200"
 		>
 			<Box w="100%">
-				<Link href="/dashboard/chat">
+				<Link href="/dashboard/treatments">
 					<Button w="100%" size="customLg" id="edgar-dashboardHomePage-chat-button">
 						Consulter mes traitements
 					</Button>
@@ -150,9 +150,7 @@ const HomeTreatmentsCard = (): JSX.Element => {
 					<HStack spacing="16px" w="100%">
 						<Icon as={WarningIcon} w="32px" h="32px" color="orange.600" />
 						<Text color="orange.600" size="boldMd">
-							Vous n’avez pas encore <br />
-							enregistré de suivi sur vos <br />
-							traitements
+							Vous n’avez pas encore enregistré de suivi sur vos traitements
 						</Text>
 					</HStack>
 					<Button size="sm" variant="secondary" w="100%">
