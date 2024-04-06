@@ -13,7 +13,7 @@ const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 	const router = useRouter();
 
 	useEffect(() => {
-		if (auth.checkToken().status === 'error') router.push('/login');
+		if (auth.checkToken().status === 'error') router.push('/login?redirect=/onboarding/personal');
 	}, []);
 
 	return (
