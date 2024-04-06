@@ -5,11 +5,12 @@ import MedicineCardDays from 'components/dashboardPages/medical/medicine/Medicin
 import MedicineCardPeriods from 'components/dashboardPages/medical/medicine/MedicineCardPeriods';
 
 import { type HealthIssuesMedicinesType, type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
-import { type MedicineType } from 'types/dashboard/medical/MedicineType';
 
 import CrossIcon from 'assets/icons/CrossIcon';
 
 import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+
+import { useGetMedicinesQuery } from 'services/request/medicines';
 
 const MedicineCard = ({
 	medicine,
@@ -18,11 +19,11 @@ const MedicineCard = ({
 	medicine: HealthIssuesMedicinesType;
 	control: Control<HealthIssuesType>;
 }): JSX.Element => {
-	const medicineInfo: MedicineType = {
-		id: medicine.medicineId,
-		name: 'Medicament',
-		unit: 'TABLET',
-	};
+	const { data: medicines } = useGetMedicinesQuery();
+
+	const medicineInfo = medicines?.find((item) => item.id === medicine.medicineId);
+
+	if (!medicineInfo) return <></>;
 
 	return (
 		<VStack align="start" p="8px 16px" borderRadius="8px" bg="blue.50" border="2px solid" borderColor="blue.200">
@@ -85,7 +86,7 @@ const MedicineCard = ({
 					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
 				</HStack>
 			</VStack>
-			<VStack spacing="4px" w="100%">
+			<VStack spacing="4px" w="100%" maxW="200px" align="start">
 				<MedicineCardDays medicine={medicine} control={control} />
 				<MedicineCardPeriods medicine={medicine} control={control} />
 			</VStack>

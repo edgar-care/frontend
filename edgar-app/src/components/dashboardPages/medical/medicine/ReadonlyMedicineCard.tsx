@@ -7,11 +7,14 @@ import {
 	type HealthIssuesMedicinesPeriodType,
 	type HealthIssuesMedicinesType,
 } from 'types/dashboard/medical/HealthIssueType';
-import { type MedicineType } from 'types/dashboard/medical/MedicineType';
+
+import { useGetMedicinesQuery } from 'services/request/medicines';
 
 import MedicineSmallCard from './MedicineSmallCard';
 
 const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesType }): JSX.Element => {
+	const { data: medicines } = useGetMedicinesQuery();
+
 	const displayAvailableDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 	const availableDays: HealthIssuesMedicinesDayType[] = [
 		'MONDAY',
@@ -24,11 +27,10 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 	];
 	const displayAvailablePeriods = ['Matin', 'Midi', 'Soir', 'Nuit'];
 	const availablePeriods: HealthIssuesMedicinesPeriodType[] = ['MORNING', 'NOON', 'EVENING', 'NIGHT'];
-	const medicineInfo: MedicineType = {
-		id: medicine.medicineId,
-		name: 'Medicament',
-		unit: 'TABLET',
-	};
+
+	const medicineInfo = medicines?.find((item) => item.id === medicine.medicineId);
+
+	if (!medicineInfo) return <></>;
 
 	return (
 		<VStack
