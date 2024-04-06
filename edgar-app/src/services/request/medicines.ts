@@ -16,7 +16,18 @@ const extendedApi = backendApi.injectEndpoints({
 					unit: medicament.unit,
 				})),
 		}),
+
+		getMedicineById: builder.query<MedicineType, string>({
+			query: (id) => `/medicament/${id}`,
+			providesTags: [],
+			transformResponse: (response: { medicament: MedicinesStoreType }) => ({
+				id: response.medicament.id,
+				name: response.medicament.name,
+				unit: response.medicament.unit,
+			}),
+		}),
 	}),
 });
 
-export const { useGetMedicinesQuery, useLazyGetMedicinesQuery } = extendedApi;
+export const { useGetMedicinesQuery, useLazyGetMedicinesQuery, useGetMedicineByIdQuery, useLazyGetMedicineByIdQuery } =
+	extendedApi;
