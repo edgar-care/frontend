@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, Icon, Input, InputGroup, InputRightElement, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { type ComponentWithAs } from '@chakra-ui/system';
 import { type IconProps } from '@chakra-ui/icons';
@@ -19,8 +19,9 @@ const AdvancedSelector = ({
 	maxH?: string;
 }): JSX.Element => {
 	const { isOpen: isInputFocused, onOpen: toggleInputFocus, onClose: toggleInputBlur } = useDisclosure();
-	const { isOpen: isOptionFocused, onOpen: toggleOptionFocus, onClose: toggleOptionBlur } = useDisclosure();
 	const [selectSearch, setSelectSearch] = useState('');
+
+	const blurTimeout = useRef(null);
 
 	const options = data
 		.filter((option) => option.name.toLowerCase().includes(selectSearch.toLowerCase()))
@@ -29,7 +30,7 @@ const AdvancedSelector = ({
 				as="span"
 				onClick={() => {
 					toggleInputBlur();
-					toggleOptionBlur();
+					setSelectSearch('');
 				}}
 				w="100%"
 				key={option.id}
@@ -47,7 +48,10 @@ const AdvancedSelector = ({
 					value={selectSearch}
 					onChange={(e) => setSelectSearch(e.target.value)}
 					onClick={toggleInputFocus}
-					onBlur={isOptionFocused ? undefined : toggleInputBlur}
+					onBlur={() => {
+						// @ts-ignore
+						blurTimeout.current = setTimeout(toggleInputBlur, 100);
+					}}
 					w="100%"
 					borderRadius={isInputFocused ? '12px 12px 0px 0px' : '12px'}
 					borderBottom={isInputFocused ? 'none' : '2px solid'}
@@ -70,8 +74,6 @@ const AdvancedSelector = ({
 						borderRadius="0px 0px 12px 12px"
 						p="8px"
 						pt="0px"
-						onMouseEnter={toggleOptionFocus}
-						onMouseLeave={toggleOptionBlur}
 					>
 						<Box as="span" w="100%" h="2px" bg="blue.200" />
 						<VStack
