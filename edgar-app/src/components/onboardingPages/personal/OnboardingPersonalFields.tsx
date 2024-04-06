@@ -46,7 +46,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 			triggerAddPatientMedicalFolderMutation({
 				name: data.name,
 				firstname: data.firstname,
-				birthdate: new Date(data.birthdate).getTime(),
+				birthdate: data.birthdate,
 				sex: data.sex,
 				height: data.height,
 				weight: data.weight,
@@ -96,7 +96,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 						<VStack w="100%" spacing="16px">
 							<OnboardingPersonalFirstnameInput register={register} errors={errors} />
 							<OnboardingPersonalNameInput register={register} errors={errors} />
-							<OnboardingPersonalBirthdateInput register={register} errors={errors} />
+							<OnboardingPersonalBirthdateInput control={control} errors={errors} />
 							<OnboardingPersonalSexInput control={control} errors={errors} />
 							<Stack
 								direction={{ base: 'column', smd: 'row', lg: 'column', '3xl': 'row' }}

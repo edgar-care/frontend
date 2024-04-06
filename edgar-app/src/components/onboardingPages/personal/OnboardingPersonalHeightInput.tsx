@@ -22,6 +22,7 @@ const OnboardingPersonalHeightInput = ({
 			type="number"
 			w="100%"
 			step="0.01"
+			min={0}
 			id="edgar-onboardingPersonalPage-formSize-input"
 		/>
 		{errors.height?.type === 'required' && (
