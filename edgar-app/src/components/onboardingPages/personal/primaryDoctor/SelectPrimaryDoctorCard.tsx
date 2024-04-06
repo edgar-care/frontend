@@ -35,6 +35,7 @@ const SelectPrimaryDoctorCard = ({
 		_hover={{
 			p: '8px 16px',
 		}}
+		id={`edgar-onboardingPersonalPage-formPrimaryDoctor-element-${doctorInfos.id}`}
 	>
 		<VStack w="100%" align="start" spacing="0px">
 			<Text size="boldLg">

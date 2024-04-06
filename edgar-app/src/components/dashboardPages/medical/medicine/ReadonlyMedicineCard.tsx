@@ -8,12 +8,12 @@ import {
 	type HealthIssuesMedicinesType,
 } from 'types/dashboard/medical/HealthIssueType';
 
-import { useGetMedicinesQuery } from 'services/request/medicines';
+import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
 import MedicineSmallCard from './MedicineSmallCard';
 
 const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesType }): JSX.Element => {
-	const { data: medicines } = useGetMedicinesQuery();
+	const { data: medicineInfo } = useGetMedicineByIdQuery(medicine.medicineId);
 
 	const displayAvailableDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 	const availableDays: HealthIssuesMedicinesDayType[] = [
@@ -27,8 +27,6 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 	];
 	const displayAvailablePeriods = ['Matin', 'Midi', 'Soir', 'Nuit'];
 	const availablePeriods: HealthIssuesMedicinesPeriodType[] = ['MORNING', 'NOON', 'EVENING', 'NIGHT'];
-
-	const medicineInfo = medicines?.find((item) => item.id === medicine.medicineId);
 
 	if (!medicineInfo) return <></>;
 
@@ -57,7 +55,7 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 							content={day}
 							variant={medicine.day.includes(availableDays[index]) ? 'SELECTED' : 'DEFAULT'}
 							key={availableDays[index]}
-							onClick={() => {}}
+							id={`edgar-onboardingMedicalPage-medicineCardDay-${day}-${medicine.medicineId}-card`}
 						/>
 					))}
 				</HStack>
@@ -67,7 +65,7 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 							content={period}
 							variant={medicine.period.includes(availablePeriods[index]) ? 'SELECTED' : 'DEFAULT'}
 							key={availablePeriods[index]}
-							onClick={() => {}}
+							id={`edgar-onboardingMedicalPage-medicineCardPeriod-${period}-${medicine.medicineId}-card`}
 						/>
 					))}
 				</HStack>

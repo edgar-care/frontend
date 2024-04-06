@@ -10,7 +10,7 @@ import CrossIcon from 'assets/icons/CrossIcon';
 
 import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
 
-import { useGetMedicinesQuery } from 'services/request/medicines';
+import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
 const MedicineCard = ({
 	medicine,
@@ -19,14 +19,20 @@ const MedicineCard = ({
 	medicine: HealthIssuesMedicinesType;
 	control: Control<HealthIssuesType>;
 }): JSX.Element => {
-	const { data: medicines } = useGetMedicinesQuery();
-
-	const medicineInfo = medicines?.find((item) => item.id === medicine.medicineId);
+	const { data: medicineInfo } = useGetMedicineByIdQuery(medicine.medicineId);
 
 	if (!medicineInfo) return <></>;
 
 	return (
-		<VStack align="start" p="8px 16px" borderRadius="8px" bg="blue.50" border="2px solid" borderColor="blue.200">
+		<VStack
+			align="start"
+			p="8px 16px"
+			borderRadius="8px"
+			bg="blue.50"
+			border="2px solid"
+			borderColor="blue.200"
+			id={`edgar-onboardingMedicalPage-medicineCard-${medicine.medicineId}-card`}
+		>
 			<VStack w="100%" align="start" spacing="0px">
 				<HStack w="100%" justify="space-between">
 					<Text size="boldLg">{medicineInfo.name}</Text>

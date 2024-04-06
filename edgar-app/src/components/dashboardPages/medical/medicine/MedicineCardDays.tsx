@@ -45,6 +45,7 @@ const MedicineCardDays = ({
 										: 'DEFAULT'
 								}
 								key={index}
+								id={`edgar-onboardingMedicalPage-medicineCardDay-${day}-${medicine.medicineId}-card`}
 								onClick={() => {
 									const medicineIndex = value.findIndex(
 										(item) => item.medicineId === medicine.medicineId,

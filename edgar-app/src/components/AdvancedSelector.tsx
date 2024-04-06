@@ -12,11 +12,13 @@ const AdvancedSelector = ({
 	placeholder,
 	rightIcon = DownChevronIcon,
 	maxH = '200px',
+	id,
 }: {
 	data: AdvancedSelectorOptionType[];
 	placeholder: string;
 	rightIcon?: ComponentWithAs<'svg', IconProps>;
 	maxH?: string;
+	id?: string;
 }): JSX.Element => {
 	const { isOpen: isInputFocused, onOpen: toggleInputFocus, onClose: toggleInputBlur } = useDisclosure();
 	const [selectSearch, setSelectSearch] = useState('');
@@ -56,6 +58,7 @@ const AdvancedSelector = ({
 					borderRadius={isInputFocused ? '12px 12px 0px 0px' : '12px'}
 					borderBottom={isInputFocused ? 'none' : '2px solid'}
 					borderColor="blue.500"
+					id={id}
 				/>
 				<InputRightElement>
 					<Icon as={rightIcon} color="blue.700" />

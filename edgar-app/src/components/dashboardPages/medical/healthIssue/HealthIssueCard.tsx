@@ -25,6 +25,7 @@ const HealthIssueCard = ({
 				border="2px solid"
 				borderColor="blue.200"
 				borderRadius="8px"
+				id={`edgar-onboardingMedicalPage-healthIssueCard-${healthIssue.name}-container`}
 			>
 				<HStack>
 					<Icon
@@ -34,10 +35,18 @@ const HealthIssueCard = ({
 						color={healthIssue.medicines.length > 0 ? 'blue.700' : 'grey.300'}
 						cursor={healthIssue.medicines.length > 0 ? 'pointer' : 'default'}
 						onClick={healthIssue.medicines.length > 0 ? onOpen : undefined}
+						id={`edgar-onboardingMedicalPage-healthIssueCard-moreInfo-${healthIssue.name}-icon`}
 					/>
 					<Text size="boldLg">{healthIssue.name}</Text>
 				</HStack>
-				<Icon as={CrossIcon} w="12spx" h="12px" cursor="pointer" onClick={onClick} />
+				<Icon
+					as={CrossIcon}
+					w="12spx"
+					h="12px"
+					cursor="pointer"
+					onClick={onClick}
+					id={`edgar-onboardingMedicalPage-healthIssueCard-close-${healthIssue.name}-icon`}
+				/>
 			</HStack>
 			<HealthIssueInfoDrawer isOpen={isOpen} onClose={onClose} healthIssue={healthIssue} />
 		</>

@@ -49,14 +49,34 @@ const HealthIssueInfoDrawer = ({
 						</VStack>
 						<VStack w="100%" align="start" spacing="24px">
 							<VStack w="100%" align="start">
-								<Text size="boldLg">Votre sujet de santé est-il toujours en cours ?</Text>
+								<Text
+									size="boldLg"
+									id="edgar-onboardingMedicalPage-healthIssueDrawer-stillRelevant-label"
+								>
+									Votre sujet de santé est-il toujours en cours ?
+								</Text>
 								<HStack spacing="16px">
-									<Button variant={healthIssue.stillRelevant ? 'primary' : 'secondary'}>Oui</Button>{' '}
-									<Button variant={healthIssue.stillRelevant ? 'secondary' : 'primary'}>Non</Button>
+									<Button
+										variant={healthIssue.stillRelevant ? 'primary' : 'secondary'}
+										id="edgar-onboardingMedicalPage-healthIssueDrawer-stillRelevantYes-button"
+									>
+										Oui
+									</Button>{' '}
+									<Button
+										variant={healthIssue.stillRelevant ? 'secondary' : 'primary'}
+										id="edgar-onboardingMedicalPage-healthIssueDrawer-stillRelevantNo-button"
+									>
+										Non
+									</Button>
 								</HStack>
 							</VStack>
 							<VStack w="100%" align="start">
-								<Text size="boldLg">Le nom de vos médicaments</Text>
+								<Text
+									size="boldLg"
+									id="edgar-onboardingMedicalPage-healthIssueDrawer-medicinesName-label"
+								>
+									Le nom de vos médicaments
+								</Text>
 								<VStack w="100%" align="start">
 									{healthIssue.medicines.map((medicine) => (
 										<ReadonlyMedicineCard medicine={medicine} key={medicine.medicineId} />

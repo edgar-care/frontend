@@ -74,7 +74,9 @@ const OnboardingMedicalHealthIssues = ({
 				)}
 			</VStack>
 			<VStack w="100%" align="start">
-				<Text>Vos antécédénts médicaux et sujets de santé renseignés</Text>
+				<Text id="edgar-onboardingMedicalPage-formHealthIssuesAdded-text">
+					Vos antécédénts médicaux et sujets de santé renseignés
+				</Text>
 				<Wrap w="100%">
 					{healthIssues.map((healthIssue) => (
 						<WrapItem key={healthIssue.name}>

@@ -2,9 +2,11 @@ import { Text } from '@chakra-ui/react';
 
 const SelectHealthIssueMedicineInputCard = ({
 	children,
+	id,
 	onClick,
 }: {
 	children: JSX.Element;
+	id?: string;
 	onClick: () => void;
 }): JSX.Element => (
 	<Text
@@ -15,6 +17,7 @@ const SelectHealthIssueMedicineInputCard = ({
 		p="4px 8px"
 		borderRadius="8px"
 		userSelect="none"
+		id={id}
 	>
 		{children}
 	</Text>

@@ -22,10 +22,18 @@ const SelectHealthIssueStillRelevantInput = ({
 			rules={{ validate: (value) => value !== undefined }}
 			render={({ field: { value, onChange } }) => (
 				<HStack spacing="16px">
-					<Button variant={value === true ? 'primary' : 'secondary'} onClick={() => onChange(true)}>
+					<Button
+						variant={value === true ? 'primary' : 'secondary'}
+						id="edgar-onboardingMedicalPage-medicineStillRelevantYes-button"
+						onClick={() => onChange(true)}
+					>
 						Oui
 					</Button>
-					<Button variant={value === false ? 'primary' : 'secondary'} onClick={() => onChange(false)}>
+					<Button
+						variant={value === false ? 'primary' : 'secondary'}
+						id="edgar-onboardingMedicalPage-medicineStillRelevantNo-button"
+						onClick={() => onChange(false)}
+					>
 						Non
 					</Button>
 				</HStack>

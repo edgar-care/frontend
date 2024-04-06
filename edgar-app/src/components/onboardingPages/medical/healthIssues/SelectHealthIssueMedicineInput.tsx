@@ -48,6 +48,7 @@ const MedicineStillRelevantInput = ({
 														{ medicineId: medicine.id, day: [], period: [], quantity: '1' },
 													]);
 												}}
+												id={`edgar-onboardingMedicalPage-medicine-option-${medicine.id}`}
 											>
 												<>{medicine.name}</>
 											</SelectHealthIssueMedicineInputCard>
@@ -56,10 +57,15 @@ const MedicineStillRelevantInput = ({
 							}
 							placeholder="Nom du médicament"
 							rightIcon={AddIcon}
+							id="edgar-onboardingMedicalPage-medicine-selector"
 						/>
 					)}
 				/>
-				{errors.medicines?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+				{errors.medicines?.type === 'validate' && (
+					<ErrorMessage id="edgar-onboardingMedicalPage-medicineError-text">
+						Ce champ est nécessaire
+					</ErrorMessage>
+				)}
 			</VStack>
 			<Wrap w="100%">
 				{addedMedicines.map((medicine) => (

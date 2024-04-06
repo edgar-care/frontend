@@ -57,10 +57,22 @@ const SelectHealthIssueModal = ({
 			</ModalBody>
 			<ModalFooter p="24px 32px 32px 32px">
 				<HStack w="100%">
-					<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
+					<Button
+						size="customMd"
+						variant="secondary"
+						w="100%"
+						onClick={onClose}
+						id="edgar-onboardingMedicalPage-addHealthIssue-cancel-button"
+					>
 						Annuler
 					</Button>
-					<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+					<Button
+						size="customMd"
+						variant="validate"
+						w="100%"
+						onClick={onSubmit}
+						id="edgar-onboardingMedicalPage-addHealthIssue-validate-button"
+					>
 						Ajouter
 					</Button>
 				</HStack>
