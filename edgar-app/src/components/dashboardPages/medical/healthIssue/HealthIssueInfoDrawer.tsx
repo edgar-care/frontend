@@ -59,7 +59,7 @@ const HealthIssueInfoDrawer = ({
 								<Text size="boldLg">Le nom de vos médicaments</Text>
 								<VStack w="100%" align="start">
 									{healthIssue.medicines.map((medicine) => (
-										<ReadonlyMedicineCard medicine={medicine} />
+										<ReadonlyMedicineCard medicine={medicine} key={medicine.medicineId} />
 									))}
 								</VStack>
 							</VStack>

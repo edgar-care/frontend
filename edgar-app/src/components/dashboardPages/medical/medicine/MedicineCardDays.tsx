@@ -28,7 +28,7 @@ const MedicineCardDays = ({
 	];
 
 	return (
-		<HStack>
+		<HStack w="100%" justify="space-between">
 			<Controller
 				control={control}
 				name="medicines"

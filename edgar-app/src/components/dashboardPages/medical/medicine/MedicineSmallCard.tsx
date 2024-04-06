@@ -17,7 +17,9 @@ const MedicineSmallCard = ({
 		_hover={{ bg: 'blue.300' }}
 		onClick={onClick}
 	>
-		<Text color="white">{content}</Text>
+		<Text color="white" userSelect="none">
+			{content}
+		</Text>
 	</VStack>
 );
 

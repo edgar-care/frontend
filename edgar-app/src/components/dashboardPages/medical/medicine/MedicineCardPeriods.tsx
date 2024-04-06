@@ -20,7 +20,7 @@ const MedicineCardPeriods = ({
 	const availablePeriods: HealthIssuesMedicinesPeriodType[] = ['MORNING', 'NOON', 'EVENING', 'NIGHT'];
 
 	return (
-		<HStack>
+		<HStack w="100%" justify="space-between">
 			<Controller
 				control={control}
 				name="medicines"

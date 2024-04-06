@@ -35,7 +35,7 @@ const SelectHealthIssueModal = ({
 	errors: FieldErrors<HealthIssuesType>;
 	watch: UseFormWatch<HealthIssuesType>;
 }): JSX.Element => (
-	<Modal isOpen={isOpen} onClose={onClose} size="4xl">
+	<Modal isOpen={isOpen} onClose={onClose} size={{ base: '3xl', lg: '4xl' }}>
 		<ModalOverlay />
 		<ModalContent>
 			<ModalBody p="32px 32px 24px 32px">

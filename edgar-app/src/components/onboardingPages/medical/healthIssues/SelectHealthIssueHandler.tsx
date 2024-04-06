@@ -25,7 +25,7 @@ const SelectHealthIssueHandler = ({
 		watch,
 		reset,
 	} = useForm<HealthIssuesType>({ mode: 'onChange', defaultValues: { medicines: [] } });
-	const isMobile = useBreakpointValue({ base: true, smd: false });
+	const isMobile = useBreakpointValue({ base: true, md: false });
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
@@ -55,7 +55,10 @@ const SelectHealthIssueHandler = ({
 			{isMobile ? (
 				<SelectHealthIssueDrawer
 					isOpen={isOpen}
-					onClose={onClose}
+					onClose={() => {
+						onClose();
+						reset();
+					}}
 					onSubmit={onSubmit}
 					register={register}
 					control={control}
@@ -65,7 +68,10 @@ const SelectHealthIssueHandler = ({
 			) : (
 				<SelectHealthIssueModal
 					isOpen={isOpen}
-					onClose={onClose}
+					onClose={() => {
+						onClose();
+						reset();
+					}}
 					onSubmit={onSubmit}
 					register={register}
 					control={control}
