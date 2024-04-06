@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { chakra, Button, VStack, useToast } from '@chakra-ui/react';
+import { chakra, Button, VStack, useToast, useTimeout } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import OnboardingMedicalHealthIssues from 'components/onboardingPages/medical/OnboardingMedicalHealthIssues';
@@ -40,6 +39,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 				.unwrap()
 				.then(() => {
 					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
+					window.localStorage.removeItem('onboardingInfos');
 					router.push('/dashboard');
 				})
 				.catch(() => {
@@ -48,9 +48,9 @@ const OnboardingMedicalFields = (): JSX.Element => {
 		else toast({ title: 'Une erreur est survenue', status: 'error' });
 	});
 
-	useEffect(() => {
+	useTimeout(() => {
 		if (!onboardingInfos) router.push('/onboarding/personal');
-	}, []);
+	}, 1000);
 
 	return (
 		<VStack w="100%" h="100%">
