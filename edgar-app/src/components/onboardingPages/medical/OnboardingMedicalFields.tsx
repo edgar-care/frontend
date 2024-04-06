@@ -45,6 +45,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 				.catch(() => {
 					toast({ title: 'Une erreur est survenue', status: 'error' });
 				});
+		else toast({ title: 'Une erreur est survenue', status: 'error' });
 	});
 
 	useEffect(() => {
