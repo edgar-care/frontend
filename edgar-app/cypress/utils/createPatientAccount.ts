@@ -1,6 +1,7 @@
-export const createAccount = async (): Promise<string> => {
-	const random = Math.random().toString(36).substring(7);
-	const generatedEmail = `${random}@test.edgar-sante.fr`;
+import generateRandomEmail from 'utils/generateRandomEmail';
+
+const createPatientAccount = async (): Promise<{ email: string; authToken: string }> => {
+	const generatedEmail = generateRandomEmail();
 
 	const response = await fetch(`${Cypress.env('apiUrl')}/auth/p/register`, {
 		method: 'POST',
@@ -19,5 +20,7 @@ export const createAccount = async (): Promise<string> => {
 
 	const content: { token: string } = await response.json();
 
-	return content.token;
+	return { email: generatedEmail, authToken: content.token };
 };
+
+export default createPatientAccount;
