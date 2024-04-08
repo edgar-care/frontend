@@ -1,218 +1,193 @@
-import { createAccount } from 'utils/createAccount';
+import createPatientAccount from 'utils/createPatientAccount';
 
-describe('Medical Info Page tests', () => {
+describe('Medical Info Page tests - Mobile', () => {
 	let authToken: string;
 
-	describe('Init test - Desktop', async () => {
+	describe('Init test', async () => {
 		it('Create an account', () => {
-			createAccount().then((response) => {
-				authToken = response;
+			createPatientAccount().then((response) => {
+				authToken = response.authToken;
 			});
 		});
 	});
 
-	describe('Good number of elements - Desktop', { testIsolation: false }, () => {
+	describe('Good UI', { testIsolation: false }, () => {
 		before(() => {
+			cy.clearAllLocalStorage();
+			cy.clearAllCookies();
+			cy.clearAllSessionStorage();
 			cy.window().then((win) => {
+				win.localStorage.setItem('token', authToken);
 				win.localStorage.setItem(
 					'onboardingInfos',
 					'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
 				);
-				win.localStorage.setItem('token', authToken);
 			});
-			cy.visit('/onboarding/medical');
+			cy.visit('/onboarding/medical').wait(1000);
 		});
 
-		beforeEach(() => {
-			cy.viewport(390, 844);
-		});
-
-		it('Good number of buttons', () => {
-			cy.get('button[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
-		});
-
-		it('Good number of texts', () => {
-			cy.get('p[id^=edgar-onboardingPage]').should('have.length', 1);
-			cy.get('p[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
-		});
-
-		it('Good number of labels', () => {
-			cy.get('label[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
-		});
-
-		it('Good number of images', () => {
-			cy.get('img').should('have.length', 0);
-		});
-
-		it('Good number of inputs', () => {
-			cy.get('input[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
-		});
-	});
-
-	describe('Good content for buttons - Desktop', () => {
-		beforeEach(() => {
-			cy.viewport(390, 844);
-			cy.window().then((win) => {
-				win.localStorage.setItem(
-					'onboardingInfos',
-					'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
-				);
-				win.localStorage.setItem('token', authToken);
+		describe('Good number of elements', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
 			});
-			cy.visit('/onboarding/medical');
-		});
 
-		it('Good content for buttons', () => {
-			cy.get('#edgar-onboardingMedicalPage-next-button').should('contain.text', 'Valider');
-		});
-	});
-
-	describe('Good content for texts - Desktop', { testIsolation: false }, () => {
-		before(() => {
-			cy.window().then((win) => {
-				win.localStorage.setItem(
-					'onboardingInfos',
-					'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
-				);
-				win.localStorage.setItem('token', authToken);
+			it('Good number of buttons', () => {
+				cy.get('button[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
 			});
-			cy.visit('/onboarding/medical');
-		});
 
-		beforeEach(() => {
-			cy.viewport(390, 844);
-		});
-
-		it('Good content for Edgar card', () => {
-			cy.get('#edgar-onboardingPage-EdgarCard-title-text').should(
-				'contain.text',
-				'J’ai besoin de vos informations médicales afin de compléter votre espace patient',
-			);
-		});
-
-		it('Good content for Health issues label', () => {
-			cy.get('#edgar-onboardingMedicalPage-formHealthIssues-text').should(
-				'contain.text',
-				'Vos antécédents médicaux et sujets de santé',
-			);
-		});
-
-		it('Good content for Added Health issues label', () => {
-			cy.get('#edgar-onboardingMedicalPage-formHealthIssuesAdded-text').should(
-				'contain.text',
-				'Vos antécédénts médicaux et sujets de santé renseignés',
-			);
-		});
-	});
-
-	describe('Visible elements - Desktop', () => {
-		beforeEach(() => {
-			cy.viewport(390, 844);
-			cy.window().then((win) => win.localStorage.setItem('token', authToken));
-			cy.visit('/onboarding/medical');
-		});
-
-		it('Visible buttons', () => {
-			cy.get('#edgar-onboardingMedicalPage-next-button').should('be.visible');
-		});
-	});
-
-	describe('Visible texts - Desktop', { testIsolation: false }, () => {
-		before(() => {
-			cy.window().then((win) => {
-				win.localStorage.setItem(
-					'onboardingInfos',
-					'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
-				);
-				win.localStorage.setItem('token', authToken);
+			it('Good number of texts', () => {
+				cy.get('p[id^=edgar-onboardingPage]').should('have.length', 1);
+				cy.get('p[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
 			});
-			cy.visit('/onboarding/medical');
-		});
 
-		beforeEach(() => {
-			cy.viewport(390, 844);
-		});
-
-		it('Visible Edgar card text', () => {
-			cy.get('#edgar-onboardingPage-EdgarCard-title-text').should('be.visible');
-		});
-
-		it('Visible Health issues label', () => {
-			cy.get('#edgar-onboardingMedicalPage-formHealthIssues-text').should('be.visible');
-		});
-
-		it('Visible Added Health issues label', () => {
-			cy.get('#edgar-onboardingMedicalPage-formHealthIssuesAdded-text').should('be.visible');
-		});
-	});
-
-	describe('Good content when adding Health Issue', { testIsolation: false }, () => {
-		beforeEach(() => {
-			cy.window().then((win) => {
-				win.localStorage.setItem(
-					'onboardingInfos',
-					'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
-				);
-				win.localStorage.setItem('token', authToken);
+			it('Good number of labels', () => {
+				cy.get('label[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
 			});
-			cy.visit('/onboarding/medical');
-			cy.viewport(390, 844).wait(1000);
-			cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
+
+			it('Good number of images', () => {
+				cy.get('img').should('have.length', 0);
+			});
+
+			it('Good number of inputs', () => {
+				cy.get('input[id^=edgar-onboardingMedicalPage]').should('have.length', 1);
+			});
 		});
 
-		describe('Good contents', () => {
-			it('Good health issue name label', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineName-text').should(
+		describe('Good content for buttons', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
+			});
+
+			it('Good content for buttons', () => {
+				cy.get('#edgar-onboardingMedicalPage-next-button').should('contain.text', 'Valider');
+			});
+		});
+
+		describe('Good content for texts', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
+			});
+
+			it('Good content for Edgar card', () => {
+				cy.get('#edgar-onboardingPage-EdgarCard-title-text').should(
 					'contain.text',
-					'Nom de votre sujet de santé',
+					'J’ai besoin de vos informations médicales afin de compléter votre espace patient',
 				);
 			});
 
-			it('Good health issue still relevant option label', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevant-text').should(
+			it('Good content for Health issues label', () => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-text').should(
 					'contain.text',
-					'Votre sujet de santé est-il toujours en cours ?',
+					'Vos antécédents médicaux et sujets de santé',
 				);
 			});
 
-			it('Good health issue still relevant Yes option button', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantYes-button').should('contain.text', 'Oui');
-			});
-
-			it('Good health issue still relevant No option button', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantNo-button').should('contain.text', 'No');
+			it('Good content for Added Health issues label', () => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssuesAdded-text').should(
+					'contain.text',
+					'Vos antécédénts médicaux et sujets de santé renseignés',
+				);
 			});
 		});
 
-		describe('Visible contents', () => {
-			it('Visible health issue name label', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineName-text').should('be.visible');
+		describe('Visible elements', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
 			});
 
-			it('Visible health issue name input', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineName-input').should('be.visible');
+			it('Visible buttons', () => {
+				cy.get('#edgar-onboardingMedicalPage-next-button').should('be.visible');
+			});
+		});
+
+		describe('Visible texts', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
 			});
 
-			it('Visible health issue still relevant option label', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevant-text').should('be.visible');
+			it('Visible Edgar card text', () => {
+				cy.get('#edgar-onboardingPage-EdgarCard-title-text').should('be.visible');
 			});
 
-			it('Visible health issue still relevant Yes option button', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantYes-button').should('be.visible');
+			it('Visible Health issues label', () => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-text').should('be.visible');
 			});
 
-			it('Visible health issue still relevant No option button', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantNo-button').should('be.visible');
+			it('Visible Added Health issues label', () => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssuesAdded-text').should('be.visible');
+			});
+		});
+
+		describe('Good UI when adding Health Issue', { testIsolation: false }, () => {
+			before(() => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
 			});
 
-			it('Visible medicine selector', () => {
-				cy.get('#edgar-onboardingMedicalPage-medicine-selector').should('be.visible');
+			describe('Good contents', () => {
+				beforeEach(() => {
+					cy.viewport(390, 844);
+				});
+
+				it('Good health issue name label', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineName-text').should(
+						'contain.text',
+						'Nom de votre sujet de santé',
+					);
+				});
+
+				it('Good health issue still relevant option label', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevant-text').should(
+						'contain.text',
+						'Votre sujet de santé est-il toujours en cours ?',
+					);
+				});
+
+				it('Good health issue still relevant Yes option button', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantYes-button').should(
+						'contain.text',
+						'Oui',
+					);
+				});
+
+				it('Good health issue still relevant No option button', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantNo-button').should('contain.text', 'No');
+				});
+			});
+
+			describe('Visible contents', () => {
+				beforeEach(() => {
+					cy.viewport(390, 844);
+				});
+
+				it('Visible health issue name label', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineName-text').should('be.visible');
+				});
+
+				it('Visible health issue name input', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineName-input').should('be.visible');
+				});
+
+				it('Visible health issue still relevant option label', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevant-text').should('be.visible');
+				});
+
+				it('Visible health issue still relevant Yes option button', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantYes-button').should('be.visible');
+				});
+
+				it('Visible health issue still relevant No option button', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantNo-button').should('be.visible');
+				});
+
+				it('Visible medicine selector', () => {
+					cy.get('#edgar-onboardingMedicalPage-medicine-selector').should('be.visible');
+				});
 			});
 		});
 	});
 
-	describe('Working page - Desktop', () => {
-		describe('Main page', () => {
+	describe('Working page', () => {
+		describe('Error states', () => {
 			beforeEach(() => {
 				cy.window().then((win) => {
 					win.localStorage.setItem(
@@ -221,8 +196,8 @@ describe('Medical Info Page tests', () => {
 					);
 					win.localStorage.setItem('token', authToken);
 				});
-				cy.visit('/onboarding/medical');
-				cy.viewport(390, 844).wait(1000);
+				cy.visit('/onboarding/medical').wait(1000);
+				cy.viewport(390, 844);
 			});
 
 			it('No filled inputs', () => {
@@ -233,23 +208,9 @@ describe('Medical Info Page tests', () => {
 					'Ce champ est nécessaire',
 				);
 			});
-		});
-
-		describe('Add Health Issue Modal', () => {
-			beforeEach(() => {
-				cy.window().then((win) => {
-					win.localStorage.setItem(
-						'onboardingInfos',
-						'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
-					);
-					win.localStorage.setItem('token', authToken);
-				});
-				cy.visit('/onboarding/medical');
-				cy.viewport(390, 844).wait(1000);
-				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
-			});
 
 			it('No filled inputs when adding health issue', () => {
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
 				cy.get('#edgar-onboardingMedicalPage-addHealthIssue-validate-button').click();
 				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantError-text').should('be.visible');
 				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantError-text').should(
@@ -261,6 +222,21 @@ describe('Medical Info Page tests', () => {
 					'contain.text',
 					'Ce champ est nécessaire',
 				);
+			});
+		});
+
+		describe('Working states', () => {
+			beforeEach(() => {
+				cy.window().then((win) => {
+					win.localStorage.setItem(
+						'onboardingInfos',
+						'{"firstname":"test","name":"test","birthdate":1712016000000,"sex":"MALE","height":1.5,"weight":4,"primaryDoctorId":"1","hasMedicalAntecedents":true}',
+					);
+					win.localStorage.setItem('token', authToken);
+				});
+				cy.visit('/onboarding/medical').wait(1000);
+				cy.viewport(390, 844);
+				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
 			});
 
 			it('Add a health issue without treatment', () => {
@@ -335,13 +311,14 @@ describe('Medical Info Page tests', () => {
 				cy.get('#edgar-onboardingMedicalPage-addHealthIssue-validate-button').click();
 				cy.get('#edgar-onboardingMedicalPage-next-button')
 					.click()
+					.wait(1000)
 					.url()
 					.should('eq', `${Cypress.env('url')}/dashboard`);
 			});
 		});
 	});
 
-	describe('Clean up - Desktop', () => {
+	describe('Clean up', () => {
 		// TODO: add backend call to destroy user
 		beforeEach(() => {});
 	});
