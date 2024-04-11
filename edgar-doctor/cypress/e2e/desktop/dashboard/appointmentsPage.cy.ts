@@ -14,7 +14,7 @@ describe('Good number of elements - Desktop', () => {
 	});
 
 	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-dashboardAppointmentsPage]').should('have.length', 2);
+		cy.get('p[id^=edgar-dashboardAppointmentsPage]').should('have.length', 20);
 	});
 
 	it('Good number of labels', () => {
@@ -38,7 +38,7 @@ describe('Good content for buttons - Desktop', () => {
 	});
 
 	it('Good content for buttons', () => {
-		cy.get('#edgar-dashboardAppointmentsPage-appointments-button').should('contain.text', 'Prendre un rendez-vous');
+		cy.get('#edgar-dashboardAppointmentsPage-appointments-button').should('contain.text', 'Consulter mon agenda');
 	});
 });
 

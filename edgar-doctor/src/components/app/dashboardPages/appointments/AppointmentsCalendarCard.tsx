@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Stack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import CalendarAppointmentCard from 'components/app/dashboardPages/appointments/CalendarAppointmentCard';
@@ -11,7 +11,7 @@ import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 
-const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => {
+const AppointmentsCalendarCard = ({ appointments }: { appointments?: AppointmentType[] }): JSX.Element => {
 	const [month, setMonth] = useState<number>(new Date().getMonth());
 	const [year, setYear] = useState<number>(new Date().getFullYear());
 
@@ -26,6 +26,13 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentT
 			align={{ base: 'center', sm: 'start' }}
 		>
 			<VStack spacing="16px">
+				<Box w="100%">
+					<Link href="/simulation">
+						<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
+							Consulter mon agenda
+						</Button>
+					</Link>
+				</Box>
 				<HStack w="100%" px="8px" justify="space-between">
 					<Text size="boldLg">
 						{months[month]} {year}
@@ -58,19 +65,23 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentT
 					</HStack>
 				</HStack>
 				<Box as="span" w="100%" h="2px" bg="blue.700" />
-				<AppointmentCalendar month={month} year={year} appointments={appointments} />
+				<AppointmentCalendar month={month} year={year} />
 				<Box as="span" w="100%" h="2px" bg="blue.700" />
 			</VStack>
-			{appointments.filter((appointment) => appointment.endDate > new Date().getTime()).length > 0 && (
-				<VStack w="100%" align="start">
-					<Text size="boldMd">Prochain rendez-vous</Text>
-					<CalendarAppointmentCard
-						appointment={
-							appointments.filter((appointment) => appointment.endDate > new Date().getTime())[0]
-						}
-					/>
-				</VStack>
-			)}
+			{appointments &&
+				appointments.filter((appointment) => appointment.endDate > new Date().getTime()).length > 0 && (
+					<VStack w="100%" align="start">
+						<Text size="boldMd">Prochain rendez-vous</Text>
+						<CalendarAppointmentCard
+							appointment={
+								appointments
+									.slice()
+									.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+									.filter((appointment) => appointment.endDate > new Date().getTime())[0]
+							}
+						/>
+					</VStack>
+				)}
 		</Stack>
 	);
 };

@@ -31,7 +31,6 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 						</Text>
 					</HStack>
 				</VStack>
-				{appointmentEndDate > new Date() && <HStack justify="end" w="100%"></HStack>}
 			</VStack>
 		</HStack>
 	);

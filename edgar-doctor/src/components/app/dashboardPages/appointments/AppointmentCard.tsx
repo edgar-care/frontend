@@ -1,12 +1,13 @@
-import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure, Button } from '@chakra-ui/react';
 
 import PatientInfosDrawer from 'components/app/dashboardPages/appointments/modals/PatientInfosDrawer';
-
-import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
+import UpdateAppointmentHandler from 'components/app/dashboardPages/appointments/modals/UpdateAppointmentHandler';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 import SidebarIcon from 'assets/icons/SidebarIcon';
 
+import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 import { useGetPatientByIdQuery } from 'services/request/patients';
 
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
@@ -14,11 +15,14 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 	const appointmentStartDate = new Date(appointment.startDate);
 	const appointmentEndDate = new Date(appointment.endDate);
 
+	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
+
 	const {
 		isOpen: isOpenPatientInfosDrawer,
 		onOpen: onOpenPatientInfosDrawer,
 		onClose: onClosePatientInfosDrawer,
 	} = useDisclosure();
+	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
 
 	return (
 		<HStack
@@ -41,7 +45,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 					<VStack w="100%" spacing="0px" px="8px" align="start">
 						<HStack spacing="4px">
 							<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-								{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
+								{patient?.medicalInfos.firstname} {patient?.medicalInfos.name.toUpperCase()}
 							</Text>
 							<HStack
 								p="4px 6px 4px 6px"
@@ -67,7 +71,22 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							</Text>
 						</HStack>
 					</VStack>
-					{appointmentEndDate > new Date() && <HStack px={{ base: '8px', xl: '0px' }} justify="end"></HStack>}
+					{appointmentStartDate > new Date() && (
+						<HStack px={{ base: '8px', xl: '0px' }} justify="end">
+							<Button
+								size="customSm"
+								variant="secondary"
+								w="auto"
+								id="edgar-dashboardAppointmentsPage-appointmentCardUpdate-button"
+								onClick={() => {
+									setSelectedAppointmentId(appointment.id);
+									onOpenUpdateModal();
+								}}
+							>
+								Modifier
+							</Button>
+						</HStack>
+					)}
 					{patient && (
 						<PatientInfosDrawer
 							isOpen={isOpenPatientInfosDrawer}
@@ -76,6 +95,11 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 						/>
 					)}
 				</Stack>
+				<UpdateAppointmentHandler
+					isOpen={isOpenUpdateModal}
+					onClose={onCloseUpdateModal}
+					appointmentId={selectedAppointmentId}
+				/>
 			</Skeleton>
 		</HStack>
 	);

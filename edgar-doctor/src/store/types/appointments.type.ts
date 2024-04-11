@@ -5,3 +5,8 @@ export interface AppointmentsStoreType {
 	start_date: number;
 	end_date: number;
 }
+
+export interface UpdateAppointmentDTO {
+	selectedAppointmentId: string;
+	newAppointmentId: string;
+}

@@ -1,7 +1,7 @@
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
-import { PatientsType } from 'types/app/dashboard/patients/PatientsType';
+import { PatientType } from 'types/app/dashboard/patients/PatientType';
 
-const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientsType }): JSX.Element => {
+const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientType }): JSX.Element => {
 	const formatHeight = (height: number): string =>
 		(height / 100).toLocaleString('en-US', { minimumFractionDigits: 2 });
 	return (
@@ -18,13 +18,15 @@ const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientsType }): JS
 			<VStack w="100%" spacing="32px" display="flex">
 				<VStack spacing="12px" alignItems="start" w="100%">
 					<Text size="lg">Adresse mail: {patientInfos.email}</Text>
-					<Text size="lg">Prénom: {patientInfos.onboarding_info.name}</Text>
-					<Text size="lg">Nom: {patientInfos.onboarding_info.surname.toUpperCase()}</Text>
-					<Text size="lg">Date de naissance: {patientInfos.onboarding_info.birthdate}</Text>
-					<Text size="lg">Sexe: {patientInfos.onboarding_info.sex}</Text>
-					<Text size="lg">Taille: {formatHeight(patientInfos.onboarding_info.height)}m</Text>
-					<Text size="lg">Poids: {patientInfos.onboarding_info.weight}kg</Text>
-					<Text size="lg">Médecin traitant: {patientInfos.onboarding_health.patients_primary_doctor}</Text>
+					<Text size="lg">Prénom: {patientInfos.medicalInfos.firstname}</Text>
+					<Text size="lg">Nom: {patientInfos.medicalInfos.name}</Text>
+					<Text size="lg">
+						Date de naissance: {new Date(patientInfos.medicalInfos.birthdate).toLocaleDateString('fr')}
+					</Text>
+					<Text size="lg">Sexe: {patientInfos.medicalInfos.sex}</Text>
+					<Text size="lg">Taille: {formatHeight(patientInfos.medicalInfos.height)}m</Text>
+					<Text size="lg">Poids: {patientInfos.medicalInfos.weight}kg</Text>
+					<Text size="lg">Médecin traitant: {patientInfos.medicalInfos.primaryDoctorId}</Text>
 				</VStack>
 			</VStack>
 		</HStack>
