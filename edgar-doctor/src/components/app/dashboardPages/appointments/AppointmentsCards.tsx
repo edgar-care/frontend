@@ -32,7 +32,7 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 				{upcomingAppointments.length > 0 && (
 					<Pagination
 						pageIndex={pageIndexNext}
-						maxPageNumbers={countMaxNumberPage(appointments, 3)}
+						maxPageNumbers={countMaxNumberPage(upcomingAppointments, 3)}
 						setPageIndex={setPageIndexNext}
 						variant="secondary"
 					/>
@@ -50,7 +50,7 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 				{pastAppointments.length > 0 && (
 					<Pagination
 						pageIndex={pageIndexOld}
-						maxPageNumbers={countMaxNumberPage(appointments, 3)}
+						maxPageNumbers={countMaxNumberPage(pastAppointments, 3)}
 						setPageIndex={setPageIndexOld}
 						variant="secondary"
 					/>
