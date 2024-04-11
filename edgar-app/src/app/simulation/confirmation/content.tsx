@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Text, Box, useToast } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -8,40 +9,46 @@ import SimulationLayout from 'components/simulationPages/SimulationLayout';
 import SimulationButton from 'components/simulationPages/SimulationButton';
 
 import { useLazyGetPatientAppointmentByIdQuery } from 'services/request/appointments';
-import { useEffect } from 'react';
+import { useLazyGetDoctorByIdQuery } from 'services/request/doctor';
 
 const SimulationConfirmationContent = (): JSX.Element => {
 	const searchParams = useSearchParams();
 	const appointmentId = searchParams.get('appointmentId');
-	const [trigger, result] = useLazyGetPatientAppointmentByIdQuery();
+	const [triggerAppointment, resultAppointment] = useLazyGetPatientAppointmentByIdQuery();
+	const [triggerDoctor, resultDoctor] = useLazyGetDoctorByIdQuery();
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	useEffect(() => {
-		if (appointmentId) trigger(appointmentId);
+		if (appointmentId) triggerAppointment(appointmentId);
 	}, [appointmentId]);
 
 	useEffect(() => {
-		if (result.error) toast({ title: 'Une erreur est survenue', status: 'error' });
-	}, [result.error]);
+		if (resultAppointment.data) triggerDoctor(resultAppointment.data.doctorId);
+	});
+
+	useEffect(() => {
+		if (resultAppointment.error) toast({ title: 'Une erreur est survenue', status: 'error' });
+		if (resultDoctor.error) toast({ title: 'Une erreur est survenue', status: 'error' });
+	}, [resultAppointment.error, resultDoctor.error]);
 
 	return (
 		<SimulationLayout>
 			<>
-				{result.data && (
+				{resultAppointment.data && (
 					<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
-						Merci pour cet échange, votre rendez-vous chez le Dr {result.data?.doctorId} le{' '}
+						Merci pour cet échange, votre rendez-vous chez le Dr {resultDoctor.data?.name} le{' '}
 						<Box as="span" color="green.400">
-							{new Date(result.data.startDate).toLocaleDateString('fr-FR')}
+							{new Date(resultAppointment.data.startDate).toLocaleDateString('fr-FR')}
 						</Box>{' '}
 						de{' '}
 						<Box as="span" color="green.400">
-							{new Date(result.data.startDate)
+							{new Date(resultAppointment.data.startDate)
 								.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 								.replace(':', 'h')}
 						</Box>{' '}
 						à{' '}
 						<Box as="span" color="green.400">
-							{new Date(result.data.endDate)
+							{new Date(resultAppointment.data.endDate)
 								.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 								.replace(':', 'h')}
 						</Box>{' '}
