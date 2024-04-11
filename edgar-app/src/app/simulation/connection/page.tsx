@@ -1,5 +1,5 @@
-import SimulationConnectionContent from './content';
+import SimulationConnectionPageContent from 'app/simulation/connection/content';
 
-const SimulationConnectionPage = (): JSX.Element => <SimulationConnectionContent />;
+const SimulationConnectionPage = (): JSX.Element => <SimulationConnectionPageContent />;
 
 export default SimulationConnectionPage;

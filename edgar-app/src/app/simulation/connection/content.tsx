@@ -1,31 +1,29 @@
 'use client';
 
-import { Text, HStack, Button } from '@chakra-ui/react';
+import { Text, HStack, Box, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import SimulationLayout from 'components/simulationPages/SimulationLayout';
 
-const SimulationConnectionContent = (): JSX.Element => (
+const SimulationConnectionPageContent = (): JSX.Element => (
 	<SimulationLayout>
 		<>
-			<Text size="3xl" color="white" maxW="1000px">
+			<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
 				Afin de vous poser les bonnes questions, j’aurai besoin de connaître vos informations de santé. <br />
 				Pour cela, connectez-vous ou créez un compte.
 			</Text>
-			<HStack spacing="16px">
-				<Link href="/signup?redirect=/simulation/start">
+			<Box w="100%">
+				<HStack justify="end" spacing="16px">
 					<Button variant="primaryBordered" size="customLg">
-						Créer un compte
+						<Link href="/signup?redirect=/simulation/start">Créer un compte</Link>
 					</Button>
-				</Link>
-				<Link href="/login?redirect=/simulation/start">
 					<Button variant="secondary" size="customLg">
-						Me connecter à mon compte
+						<Link href="/login?redirect=/simulation/start">Me connecter à mon compte</Link>
 					</Button>
-				</Link>
-			</HStack>
+				</HStack>
+			</Box>
 		</>
 	</SimulationLayout>
 );
 
-export default SimulationConnectionContent;
+export default SimulationConnectionPageContent;

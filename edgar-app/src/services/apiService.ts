@@ -28,6 +28,7 @@ export const backendApi = createApi({
 		'patientMedicalFolder',
 		'patientDocuments',
 		'patientSimulation',
+		'doctor',
 	],
 	reducerPath: 'backendApi',
 	baseQuery: apiBase,

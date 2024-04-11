@@ -48,7 +48,7 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
@@ -123,7 +123,7 @@ jobs:
       - name: Build Next
         run: yarn build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_LANDING_URL: ${{ secrets.NEXT_PUBLIC_LANDING_URL }}
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
 
@@ -134,6 +134,7 @@ jobs:
           working-directory: ./edgar-app
           wait-on: "http://localhost:3000/login"
           wait-on-timeout: 30
+          config: baseUrl=http://localhost:3000
         env:
           CYPRESS_url: http://localhost:3000
           CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_LOGIN_TEST_EMAIL }}

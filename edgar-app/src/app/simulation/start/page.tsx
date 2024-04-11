@@ -1,5 +1,5 @@
-import SimulationStartContent from './content';
+import SimulationStartPageContent from 'app/simulation/start/content';
 
-const SimulationStartPage = (): JSX.Element => <SimulationStartContent />;
+const SimulationStartPage = (): JSX.Element => <SimulationStartPageContent />;
 
 export default SimulationStartPage;

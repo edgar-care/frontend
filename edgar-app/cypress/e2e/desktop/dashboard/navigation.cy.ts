@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		window.localStorage.setItem('token', 'test');
 	});
 
@@ -32,7 +29,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		window.localStorage.setItem('token', 'test');
 	});
 
@@ -64,7 +61,7 @@ describe('Good content for texts - Desktop', () => {
 describe('Visible texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		window.localStorage.setItem('token', 'test');
 	});
 
@@ -96,38 +93,44 @@ describe('Visible texts - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.wait(1000);
 		window.localStorage.setItem('token', 'test');
 	});
 
 	it('Good redirection for "Accueil" tab', () => {
-		cy.get('#edgar-dashboardNavbar-navbarTab-home').click().url().should('be.equal', `${url}/dashboard`);
+		cy.get('#edgar-dashboardNavbar-navbarTab-home')
+			.click()
+			.url()
+			.should('be.equal', `${Cypress.env('url')}/dashboard`);
 	});
 
 	it('Good redirection for "Rendez-vous" tab', () => {
 		cy.get('#edgar-dashboardNavbar-navbarTab-appointments')
 			.click()
 			.url()
-			.should('be.equal', `${url}/dashboard/appointments`);
+			.should('be.equal', `${Cypress.env('url')}/dashboard/appointments`);
 	});
 
 	it('Good redirection for "Documents" tab', () => {
 		cy.get('#edgar-dashboardNavbar-navbarTab-documents')
 			.click()
 			.url()
-			.should('be.equal', `${url}/dashboard/documents`);
+			.should('be.equal', `${Cypress.env('url')}/dashboard/documents`);
 	});
 
 	it('Good redirection for "Dossier médical" tab', () => {
-		cy.get('#edgar-dashboardNavbar-navbarTab-medical').click().url().should('be.equal', `${url}/dashboard/medical`);
+		cy.get('#edgar-dashboardNavbar-navbarTab-medical')
+			.click()
+			.url()
+			.should('be.equal', `${Cypress.env('url')}/dashboard/medical`);
 	});
 });
 
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}/dashboard`);
+		cy.visit('/dashboard');
 		cy.wait(1000);
 		window.localStorage.setItem('token', 'test');
 	});
@@ -135,7 +138,9 @@ describe('Working page - Desktop', () => {
 	it('Logout working', () => {
 		cy.get('#edgar-dashboardNavbar-profileCard').click();
 		cy.get('#edgar-dashboardNavbar-profileTab-Déconnexion-text').click();
-		cy.visit(`${url}/dashboard`).url().should('be.equal', `${url}/login`);
+		cy.visit('/dashboard')
+			.url()
+			.should('be.equal', `${Cypress.env('url')}/login`);
 	});
 
 	it('Opening Profile Card works', () => {

@@ -1,10 +1,7 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -21,7 +18,7 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good content for buttons', () => {
@@ -38,7 +35,7 @@ describe('Good content on elements - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -59,7 +56,7 @@ describe('Visible elements - Desktop', () => {
 describe('Good redirection on elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	// it('Good redirection on buttons', () => {
@@ -67,22 +64,34 @@ describe('Good redirection on elements - Desktop', () => {
 	// });
 
 	it('Good redirection on texts', () => {
-		cy.get('#edgar-navbar-tab-product-text').click().url().should('eq', `${url}/product`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-navbar-tab-application-text').click().url().should('eq', `${url}/application`);
-		cy.visit(`${url}`);
-		cy.get('#edgar-navbar-tab-contact-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-navbar-tab-product-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/project`);
+		cy.visit('/');
+		cy.get('#edgar-navbar-tab-application-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/application`);
+		cy.visit('/');
+		cy.get('#edgar-navbar-tab-contact-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact`);
 	});
 
 	it('Good redirection on images', () => {
-		cy.get('#edgar-navbar-edgarLogo-img').click().url().should('eq', `${url}/`);
+		cy.get('#edgar-navbar-edgarLogo-img')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/`);
 	});
 });
 
 describe('Good number of elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good number of buttons', () => {
@@ -110,7 +119,7 @@ describe('Good number of elements - Mobile', () => {
 describe('Good content on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 		cy.get('#edgar-navbar-drawer-button').click();
 	});
 
@@ -125,7 +134,7 @@ describe('Good content on elements - Mobile', () => {
 describe('Visible elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Visible buttons', () => {
@@ -152,22 +161,31 @@ describe('Visible elements - Mobile', () => {
 describe('Good redirection on elements - Mobile', () => {
 	beforeEach(() => {
 		cy.viewport(390, 844);
-		cy.visit(`${url}`);
+		cy.visit('/');
 	});
 
 	it('Good redirection for product text', () => {
 		cy.get('#edgar-navbar-drawer-button').click();
-		cy.get('#edgar-navbar-tab-product-text').click().url().should('eq', `${url}/product`);
+		cy.get('#edgar-navbar-tab-product-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/project`);
 	});
 
 	it('Good redirection for application text', () => {
 		cy.get('#edgar-navbar-drawer-button').click();
-		cy.get('#edgar-navbar-tab-application-text').click().url().should('eq', `${url}/application`);
+		cy.get('#edgar-navbar-tab-application-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/application`);
 	});
 
 	it('Good redirection for contact text', () => {
 		cy.get('#edgar-navbar-drawer-button').click();
-		cy.get('#edgar-navbar-tab-contact-text').click().url().should('eq', `${url}/contact`);
+		cy.get('#edgar-navbar-tab-contact-text')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/contact`);
 	});
 
 	// it('Good redirection for patient area text', () => {
@@ -176,6 +194,9 @@ describe('Good redirection on elements - Mobile', () => {
 	// });
 
 	it('Good redirection on images', () => {
-		cy.get('#edgar-navbar-edgarLogo-img').click().url().should('eq', `${url}/`);
+		cy.get('#edgar-navbar-edgarLogo-img')
+			.click()
+			.url()
+			.should('eq', `${Cypress.env('url')}/`);
 	});
 });

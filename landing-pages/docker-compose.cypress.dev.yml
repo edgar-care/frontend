@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    env_file: ./.env
+    restart: always
+    volumes:
+      - ./:/app
+  cypress:
+    image: "cypress/included:latest"
+    depends_on:
+      - frontend
+    environment:
+      - DISPLAY
+      - CYPRESS_baseUrl=http://frontend:3000
+    entrypoint: cypress open --project /e2e --env url=http://frontend:3000
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
+      - /tmp/.X11-unix:/tmp/.X11-unix

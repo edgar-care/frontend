@@ -1,22 +1,37 @@
 'use client';
 
-import { Text } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Text, Box } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import SimulationLayout from 'components/simulationPages/SimulationLayout';
 import SimulationButton from 'components/simulationPages/SimulationButton';
 
-const SimulationStartContent = (): JSX.Element => (
-	<SimulationLayout>
-		<>
-			<Text size="3xl" color="white" maxW="1000px">
-				Voilà, tout est prêt pour moi. Vous pouvez dès maintenant commencer votre simulation.
-			</Text>
-			<Link href="chat">
-				<SimulationButton>Commencer ma simulation</SimulationButton>
-			</Link>
-		</>
-	</SimulationLayout>
-);
+import { useAuthContext } from 'contexts/auth';
 
-export default SimulationStartContent;
+const SimulationStartPageContent = (): JSX.Element => {
+	const auth = useAuthContext();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
+	}, []);
+
+	return (
+		<SimulationLayout>
+			<>
+				<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
+					Voilà, tout est prêt pour moi. Vous pouvez dès maitenant commencer votre simulation.
+				</Text>
+				<Box w="100%" textAlign="end">
+					<Link href="/simulation/chat">
+						<SimulationButton>Commencer ma simulation</SimulationButton>
+					</Link>
+				</Box>
+			</>
+		</SimulationLayout>
+	);
+};
+
+export default SimulationStartPageContent;

@@ -1,12 +1,8 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const authToken = Cypress.env('authToken');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/medical');
 	});
 
 	it('Good number of buttons', () => {
@@ -14,7 +10,7 @@ describe('Good number of elements - Desktop', () => {
 	});
 
 	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-dashboardMedicalPage]').should('have.length', 12);
+		cy.get('p[id^=edgar-dashboardMedicalPage]').should('have.length', 10);
 	});
 
 	it('Good number of labels', () => {
@@ -33,8 +29,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/medical');
 	});
 
 	it('Good content for buttons', () => {
@@ -48,8 +44,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Good content for texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/medical');
 	});
 
 	it('Good content for Update Informations #1', () => {
@@ -74,8 +70,8 @@ describe('Good content for texts - Desktop', () => {
 		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-firstname-text').should('contain.text', 'Prénom:');
 	});
 
-	it('Good content for Birthdate', () => {
-		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-birthDate-text').should(
+	it('Good content for birthdate', () => {
+		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-birthdate-text').should(
 			'contain.text',
 			'Date de naissance:',
 		);
@@ -85,8 +81,8 @@ describe('Good content for texts - Desktop', () => {
 		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-sex-text').should('contain.text', 'Sexe:');
 	});
 
-	it('Good content for Size', () => {
-		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-size-text').should('contain.text', 'Taille:');
+	it('Good content for height', () => {
+		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-height-text').should('contain.text', 'Taille:');
 	});
 
 	it('Good content for Weight', () => {
@@ -94,24 +90,16 @@ describe('Good content for texts - Desktop', () => {
 	});
 
 	it('Good content for Doctor name', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorName-text').should(
+		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorId-text').should(
 			'contain.text',
 			'Médecin traitant:',
 		);
 	});
 
-	it('Good content for Allergies', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-allergies-text').should('contain.text', 'Allergies:');
-	});
-
-	it('Good content for Diseases', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-diseases-text').should('contain.text', 'Maladies:');
-	});
-
-	it('Good content for Treatments', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-treatmentsInProgress-text').should(
+	it('Good content for Medical antecedents', () => {
+		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-medicalAntecedents-text').should(
 			'contain.text',
-			'Traitements en cours:',
+			'Antécédents médicaux:',
 		);
 	});
 });
@@ -119,8 +107,8 @@ describe('Good content for texts - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/medical');
 	});
 
 	it('Visible buttons', () => {
@@ -131,8 +119,8 @@ describe('Visible elements - Desktop', () => {
 describe('Visible texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/medical`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/medical');
 	});
 
 	it('Visible Update Informations #1', () => {
@@ -151,16 +139,16 @@ describe('Visible texts - Desktop', () => {
 		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-firstname-text').should('be.visible');
 	});
 
-	it('Visible Birthdate', () => {
-		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-birthDate-text').should('be.visible');
+	it('Visible birthdate', () => {
+		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-birthdate-text').should('be.visible');
 	});
 
 	it('Visible Sex', () => {
 		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-sex-text').should('be.visible');
 	});
 
-	it('Visible Size', () => {
-		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-size-text').should('be.visible');
+	it('Visible height', () => {
+		cy.get('#edgar-dashboardMedicalPage-personalInfoCard-height-text').should('be.visible');
 	});
 
 	it('Visible Weight', () => {
@@ -168,18 +156,10 @@ describe('Visible texts - Desktop', () => {
 	});
 
 	it('Visible Doctor name', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorName-text').should('be.visible');
+		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorId-text').should('be.visible');
 	});
 
-	it('Visible Allergies', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-allergies-text').should('be.visible');
-	});
-
-	it('Visible Diseases', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-diseases-text').should('be.visible');
-	});
-
-	it('Visible Treatments', () => {
-		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-treatmentsInProgress-text').should('be.visible');
+	it('Visible Medical antecedents', () => {
+		cy.get('#edgar-dashboardMedicalPage-healthInfoCard-medicalAntecedents-text').should('be.visible');
 	});
 });
