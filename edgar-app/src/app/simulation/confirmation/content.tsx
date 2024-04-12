@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Text, Box, useToast } from '@chakra-ui/react';
+import { Text, Box, useToast, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -24,7 +24,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 
 	useEffect(() => {
 		if (resultAppointment.data) triggerDoctor(resultAppointment.data.doctorId);
-	});
+	}, [resultAppointment]);
 
 	useEffect(() => {
 		if (resultAppointment.error) toast({ title: 'Une erreur est survenue', status: 'error' });
@@ -33,7 +33,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 
 	return (
 		<SimulationLayout>
-			<>
+			<VStack w="100%" align="end" spacing="64px">
 				{resultAppointment.data && (
 					<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
 						Merci pour cet échange, votre rendez-vous chez le Dr {resultDoctor.data?.name} le{' '}
@@ -58,7 +58,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 				<Link href="/dashboard">
 					<SimulationButton>Accéder à mon espace patient</SimulationButton>
 				</Link>
-			</>
+			</VStack>
 		</SimulationLayout>
 	);
 };
