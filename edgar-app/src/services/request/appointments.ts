@@ -28,9 +28,6 @@ const extendedApi = backendApi.injectEndpoints({
 				patientId: response.rdv.Rdv.id_patient,
 				startDate: response.rdv.Rdv.start_date * 1000,
 				endDate: response.rdv.Rdv.end_date * 1000,
-				cancelation_reason: response.rdv.Rdv.cancelation_resaon,
-				appointment_status: response.rdv.Rdv.appointment_status,
-				session_id: response.rdv.Rdv.session_id,
 			}),
 		}),
 
