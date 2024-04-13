@@ -26,7 +26,7 @@ const SimulationStartPageContent = (): JSX.Element => {
 				</Text>
 				<Box w="100%" textAlign="end">
 					<Link href="/simulation/chat">
-						<SimulationButton text="Commencer ma simulation" />
+						<SimulationButton>Commencer ma simulation</SimulationButton>
 					</Link>
 				</Box>
 			</>

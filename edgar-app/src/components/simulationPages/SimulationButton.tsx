@@ -1,9 +1,9 @@
 import { Text, HStack, Icon, Button, useDisclosure } from '@chakra-ui/react';
 
-import RightCircleArrowIcon from 'assets/icons/Arrow/RightCircleArrowIcon';
-import RightCircleArrowFillIcon from 'assets/icons/Arrow/RightCircleArrowFillIcon';
+import RightCircleArrowFillIcon from 'assets/icons/Arrow/Circle/RightCircleArrowFillIcon';
+import RightCircleArrowIcon from 'assets/icons/Arrow/Circle/RightCircleArrowIcon';
 
-const SimulationButton = ({ text }: { text: string }): JSX.Element => {
+const SimulationButton = ({ children }: { children: string }): JSX.Element => {
 	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
 
 	return (
@@ -18,7 +18,7 @@ const SimulationButton = ({ text }: { text: string }): JSX.Element => {
 		>
 			<HStack w="100%" spacing="16px">
 				<Text size="boldXl" color="white" _groupHover={{ color: 'blue.700' }}>
-					{text}
+					{children}
 				</Text>
 				<Icon
 					as={isHover ? RightCircleArrowFillIcon : RightCircleArrowIcon}

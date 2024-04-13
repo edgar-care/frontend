@@ -28,7 +28,7 @@ const SimulationConditionsPageContent = (): JSX.Element => {
 					méthodes de soins. <br />
 				</Text>
 				<Box w="100%" textAlign="end" onClick={handleClick}>
-					<SimulationButton text="Continuer" />
+					<SimulationButton>Continuer</SimulationButton>
 				</Box>
 			</>
 		</SimulationLayout>
