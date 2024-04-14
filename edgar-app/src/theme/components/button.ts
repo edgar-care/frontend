@@ -248,6 +248,12 @@ const Button = {
 				transition: 'all .3s ease-in-out',
 			},
 		},
+		fullGhost: {
+			padding: '0px',
+			_hover: {
+				bg: 'transparent',
+			},
+		},
 	},
 	defaultProps: {
 		size: 'customMd',
