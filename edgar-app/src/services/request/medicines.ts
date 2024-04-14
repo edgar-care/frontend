@@ -7,7 +7,7 @@ import { type MedicineType } from 'types/dashboard/medical/MedicineType';
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getMedicines: builder.query<MedicineType[], void>({
-			query: () => '/medicaments',
+			query: () => '/medicine',
 			providesTags: [],
 			transformResponse: (response: { medicament: MedicinesStoreType[] }) =>
 				response.medicament.map((medicament) => ({
@@ -18,7 +18,7 @@ const extendedApi = backendApi.injectEndpoints({
 		}),
 
 		getMedicineById: builder.query<MedicineType, string>({
-			query: (id) => `/medicament/${id}`,
+			query: (id) => `/medicine/${id}`,
 			providesTags: [],
 			transformResponse: (response: { medicament: MedicinesStoreType }) => ({
 				id: response.medicament.id,
