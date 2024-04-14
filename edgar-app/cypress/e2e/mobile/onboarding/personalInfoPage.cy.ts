@@ -235,7 +235,7 @@ describe('Personal Info Page tests - Mobile', () => {
 				cy.get('#edgar-onboardingPersonalPage-formSize-input').click().type('1.6');
 				cy.get('#edgar-onboardingPersonalPage-formWeight-input').click().type('50');
 				cy.get('#edgar-onboardingPersonalPage-formPrimaryDoctor-input').click();
-				cy.get('div[id^=edgar-onboardingPersonalPage-formPrimaryDoctor-element]').click();
+				cy.get('div[id^=edgar-onboardingPersonalPage-formPrimaryDoctor-element]').first().click();
 				cy.get('#edgar-onboardingPersonalPage-hasAntecedentsYes-button').click();
 				cy.get('#edgar-onboardingPersonalPage-next-button')
 					.click()
@@ -252,7 +252,7 @@ describe('Personal Info Page tests - Mobile', () => {
 				cy.get('#edgar-onboardingPersonalPage-formSize-input').click().type('1.6');
 				cy.get('#edgar-onboardingPersonalPage-formWeight-input').click().type('50');
 				cy.get('#edgar-onboardingPersonalPage-formPrimaryDoctor-input').click();
-				cy.get('div[id^=edgar-onboardingPersonalPage-formPrimaryDoctor-element]').click();
+				cy.get('div[id^=edgar-onboardingPersonalPage-formPrimaryDoctor-element]').first().click();
 				cy.get('#edgar-onboardingPersonalPage-hasAntecedentsNo-button').click();
 				cy.get('#edgar-onboardingPersonalPage-next-button')
 					.click()
