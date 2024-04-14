@@ -11,8 +11,8 @@ describe('Login Page tests - Mobile', () => {
 		authToken = response.authToken;
 	});
 
-	it('Create the medical info', () => {
-		setupMedicalInfo(authToken);
+	it('Create the medical info', async () => {
+		await setupMedicalInfo(authToken);
 	});
 
 	describe('Good UI', { testIsolation: false }, () => {

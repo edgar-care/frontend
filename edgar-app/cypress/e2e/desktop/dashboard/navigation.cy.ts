@@ -10,8 +10,8 @@ describe('Navigation tests - Desktop', () => {
 			authToken = response.authToken;
 		});
 
-		it('Create the medical info', () => {
-			setupMedicalInfo(authToken);
+		it('Create the medical info', async () => {
+			await setupMedicalInfo(authToken);
 		});
 	});
 
