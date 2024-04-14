@@ -10,7 +10,7 @@ import { useAuthContext } from 'contexts/auth';
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
+	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 
 	const auth = useAuthContext();
 	const router = useRouter();
@@ -18,8 +18,8 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-		if (!medicalInfo) router.push('/onboarding/personal');
-	}, []);
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+	}, [isLoading]);
 
 	return (
 		<VStack p={{ base: '0px', sm: '16px' }} w="100%" h="100%" bg="blue.100">
