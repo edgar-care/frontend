@@ -18,10 +18,10 @@ const OnboardingMedicalContent = (): JSX.Element => {
 					border={{ base: '0px', sm: '2px solid' }}
 					borderColor={{ sm: 'blue.200' }}
 					align="stretch"
-					spacing="16px"
+					spacing="0px"
 					h="100%"
 				>
-					<OnboardingEdgarCard title="J’ai besoin de vos informations médicales afin de remplir votre espace patient" />
+					<OnboardingEdgarCard title="J’ai besoin de vos informations médicales afin de compléter votre espace patient" />
 					<OnboardingMedicalFields />
 				</VStack>
 			) : (
@@ -33,9 +33,10 @@ const OnboardingMedicalContent = (): JSX.Element => {
 					borderColor="blue.200"
 					align="stretch"
 					spacing="0px"
+					h="100%"
 					maxW="1750px"
 				>
-					<OnboardingEdgarCard title="J’ai besoin de vos informations médicales afin de remplir votre espace patient" />
+					<OnboardingEdgarCard title="J’ai besoin de vos informations médicales afin de compléter votre espace patient" />
 					<OnboardingMedicalFields />
 				</HStack>
 			)}

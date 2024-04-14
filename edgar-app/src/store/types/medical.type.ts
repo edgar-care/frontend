@@ -4,7 +4,7 @@ import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType'
 import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
 
 export interface MedicalFolderStoreType {
-	medical_folder: {
+	'Medical-info': {
 		id: string;
 		name: string;
 		firstname: string;
@@ -14,7 +14,7 @@ export interface MedicalFolderStoreType {
 		weight: number;
 		primary_doctor_id: string;
 		onboarding_status: PatientOnboardingStatusType;
-		medical_antecedents: {
+		antecedent_diseases: {
 			id: string;
 			name: string;
 			medicines: {
@@ -27,4 +27,45 @@ export interface MedicalFolderStoreType {
 			stillRelevant: boolean;
 		}[];
 	};
+}
+
+export interface AddPatientMedicalFolderDTO {
+	name: string;
+	firstname: string;
+	birthdate: number;
+	sex: PatientSexType;
+	height: number;
+	weight: number;
+	primaryDoctorId: string;
+	medicalAntecedents: {
+		name: string;
+		medicines: {
+			medicineId: string;
+			period: TreatmentPeriodType[];
+			day: TreatmentDayType[];
+			quantity: string;
+		}[];
+		stillRelevant: boolean;
+	}[];
+}
+
+export interface UpdatePatientMedicalFolderDTO {
+	name: string;
+	firstname: string;
+	birthdate: number;
+	sex: PatientSexType;
+	height: number;
+	weight: number;
+	primaryDoctorId: string;
+	onboardingStatus: PatientOnboardingStatusType;
+	medicalAntecedents: {
+		name: string;
+		medicines: {
+			medicineId: string;
+			period: TreatmentPeriodType[];
+			day: TreatmentDayType[];
+			quantity: string;
+		}[];
+		stillRelevant: boolean;
+	}[];
 }

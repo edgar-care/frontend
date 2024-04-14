@@ -37,17 +37,35 @@ const UpdateAppointmentModal = ({
 		{
 			id: 'Quentin',
 			name: 'Doctor XX',
-			address: '1 rue de la paix',
+			firstname: 'Quentin',
+			address: {
+				street: '1 rue de la paix',
+				city: 'Paris',
+				zipCode: '75000',
+				country: 'France',
+			},
 		},
 		{
-			id: '1',
-			name: 'Doctor YY',
-			address: '1 rue de la paix',
+			id: 'Quentin',
+			name: 'Doctor XX',
+			firstname: 'Quentin',
+			address: {
+				street: '1 rue de la paix',
+				city: 'Paris',
+				zipCode: '75000',
+				country: 'France',
+			},
 		},
 		{
-			id: '1',
-			name: 'Doctor ZZ',
-			address: '1 rue de la paix',
+			id: 'Quentin',
+			name: 'Doctor XX',
+			firstname: 'Quentin',
+			address: {
+				street: '1 rue de la paix',
+				city: 'Paris',
+				zipCode: '75000',
+				country: 'France',
+			},
 		},
 	];
 

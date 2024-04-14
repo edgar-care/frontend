@@ -21,7 +21,7 @@ const Providers = ({ children }: { children: JSX.Element }): JSX.Element => (
 				<AuthProvider>
 					<ChatProvider>
 						<PatientProvider>
-							<VStack bg="blue.100" height="100%">
+							<VStack id="root" bg="blue.100" minH="100vh" h="auto">
 								{children}
 							</VStack>
 						</PatientProvider>
