@@ -135,6 +135,7 @@ jobs:
           config: baseUrl=http://localhost:3000
         env:
           CYPRESS_url: http://localhost:3000
+          CYPRESS_apiUrl: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           CYPRESS_loginTestEmail: ${{ secrets.CYPRESS_LOGIN_TEST_EMAIL }}
           CYPRESS_loginTestPassword: ${{ secrets.CYPRESS_LOGIN_TEST_PASSWORD }}
           CYPRESS_authToken: ${{ secrets.CYPRESS_AUTH_TOKEN }}

@@ -50,7 +50,17 @@ const UpdateMedicalModal = ({
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		triggerUpdatePatientMedicalFolder(data)
+		triggerUpdatePatientMedicalFolder({
+			name: data.name,
+			firstname: data.firstname,
+			birthdate: data.birthdate,
+			sex: data.sex,
+			height: data.height,
+			weight: data.weight,
+			primaryDoctorId: data.primaryDoctorId,
+			medicalAntecedents: [],
+			onboardingStatus: data.onboardingStatus,
+		})
 			.unwrap()
 			.then(() => {
 				toast({ title: 'Votre dossier médical a bien été modifié', status: 'success' });

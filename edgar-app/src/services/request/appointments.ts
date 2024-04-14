@@ -19,6 +19,18 @@ const extendedApi = backendApi.injectEndpoints({
 				})),
 		}),
 
+		getPatientAppointmentById: builder.query<AppointmentType, string>({
+			query: (id) => `/patient/appointments/${id}`,
+			providesTags: ['patientAppointments'],
+			transformResponse: (response: { rdv: { Rdv: AppointmentsStoreType } }) => ({
+				id: response.rdv.Rdv.id,
+				doctorId: response.rdv.Rdv.doctor_id,
+				patientId: response.rdv.Rdv.id_patient,
+				startDate: response.rdv.Rdv.start_date * 1000,
+				endDate: response.rdv.Rdv.end_date * 1000,
+			}),
+		}),
+
 		getDoctorAppointments: builder.query<AppointmentType[], string>({
 			query: (id) => `/doctor/${id}/appointments`,
 			providesTags: ['doctorAppointments'],
@@ -58,6 +70,8 @@ const extendedApi = backendApi.injectEndpoints({
 export const {
 	useGetPatientAppointmentsQuery,
 	useLazyGetPatientAppointmentsQuery,
+	useGetPatientAppointmentByIdQuery,
+	useLazyGetPatientAppointmentByIdQuery,
 	useGetDoctorAppointmentsQuery,
 	useLazyGetDoctorAppointmentsQuery,
 	useUpdatePatientAppointmentMutation,

@@ -19,8 +19,9 @@ import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 import { MessageType } from 'types/dashboard/home/MessageType';
 
 const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
-	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
 	const { data: medicalFolder } = useGetPatientMedicalFolderQuery();
+	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
+
 	const icons = [
 		CircleZeroIcon,
 		CircleOneIcon,

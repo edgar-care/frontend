@@ -7,15 +7,19 @@ import { Stack, useBreakpointValue, VStack } from '@chakra-ui/react';
 import ResponsiveNavBar from 'components/navigation/ResponsiveNavBar';
 
 import { useAuthContext } from 'contexts/auth';
+import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
+	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
+
 	const auth = useAuthContext();
 	const router = useRouter();
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-	}, []);
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+	}, [isLoading]);
 
 	return (
 		<VStack p={{ base: '0px', sm: '16px' }} w="100%" h="100%" bg="blue.100">

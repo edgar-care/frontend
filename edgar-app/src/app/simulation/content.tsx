@@ -15,7 +15,7 @@ const SimulationContent = (): JSX.Element => (
 			</Text>
 			<Box w="100%" textAlign="end">
 				<Link href="/simulation/conditions">
-					<SimulationButton text="Continuer" />
+					<SimulationButton>Continuer</SimulationButton>
 				</Link>
 			</Box>
 		</>

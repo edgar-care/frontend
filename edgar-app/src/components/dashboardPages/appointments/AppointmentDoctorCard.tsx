@@ -82,7 +82,9 @@ const AppointmentDoctorCard = ({
 				<VStack align="starts">
 					<VStack align="start" spacing="0px">
 						<Text size="boldLg">{doctorInfos.name}</Text>
-						<Text>{doctorInfos.address}</Text>
+						<Text>
+							{doctorInfos.address.street}, {doctorInfos.address.zipCode} - {doctorInfos.address.city}
+						</Text>
 					</VStack>
 					{!isDetailsOpen && doctorAppointments && (
 						<>

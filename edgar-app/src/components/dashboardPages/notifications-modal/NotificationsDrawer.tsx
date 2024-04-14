@@ -78,19 +78,39 @@ const NotificationsDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 				<DrawerFooter p="16px 24px 24px 24px">
 					{isMobile ? (
 						<VStack w="100%">
-							<Button w="100%" variant="validate" onClick={enableNotifications}>
+							<Button
+								w="100%"
+								variant="validate"
+								onClick={enableNotifications}
+								id="edgar-notificationsModal-yes-button"
+							>
 								J’active les notifications
 							</Button>
-							<Button variant="secondary" w="100%" onClick={onClose}>
+							<Button
+								variant="secondary"
+								w="100%"
+								onClick={onClose}
+								id="edgar-notificationsModal-no-button"
+							>
 								Je ne les active pas
 							</Button>
 						</VStack>
 					) : (
 						<HStack w="100%">
-							<Button variant="secondary" w="100%" onClick={onClose}>
+							<Button
+								variant="secondary"
+								w="100%"
+								onClick={onClose}
+								id="edgar-notificationsModal-no-button"
+							>
 								Je ne les active pas
 							</Button>
-							<Button w="100%" variant="validate" onClick={enableNotifications}>
+							<Button
+								w="100%"
+								variant="validate"
+								onClick={enableNotifications}
+								id="edgar-notificationsModal-yes-button"
+							>
 								J’active les notifications
 							</Button>
 						</HStack>
