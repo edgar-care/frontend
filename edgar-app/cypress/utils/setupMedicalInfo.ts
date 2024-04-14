@@ -19,7 +19,7 @@ const setupMedicalInfo = async (accountAuthToken: string): Promise<void> => {
 		}),
 	});
 
-	if (response.status !== 200) throw new Error('Unable to create medical info');
+	if (response.status !== 201) throw new Error('Unable to create medical info');
 };
 
 export default setupMedicalInfo;
