@@ -53,13 +53,13 @@ const SimulationAppointmentsDoctorCard = ({
 				borderColor="blue.200"
 			>
 				<Stack
-					direction={{ base: 'column', sm: 'row', lg: 'column' }}
+					direction={{ base: 'column', sm2: 'row', lg: 'column' }}
 					w="100%"
 					h={{ base: 'auto', lg: '100%' }}
 					spacing={{ base: '8px', sm: '16px' }}
 					justify="space-between"
 					px="8px"
-					align="start"
+					align={{ base: 'start', sm2: 'end', lg: 'start' }}
 					minW={{ base: 'auto', sm: '200px' }}
 					maxW={{ base: '100%', lg: '350px' }}
 				>

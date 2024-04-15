@@ -6,9 +6,11 @@ import RightCircleArrowIcon from 'assets/icons/Arrow/Circle/RightCircleArrowIcon
 const SimulationButton = ({
 	children,
 	variant = 'WHITE',
+	id,
 }: {
 	children: string;
 	variant?: 'BLUE' | 'WHITE';
+	id?: string;
 }): JSX.Element => {
 	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
 
@@ -21,6 +23,7 @@ const SimulationButton = ({
 			onMouseEnter={onHoverOpen}
 			onMouseLeave={onHoverClose}
 			role="group"
+			id={id}
 		>
 			<HStack w="100%" spacing="16px">
 				<Text
