@@ -21,13 +21,18 @@ const SimulationStartPageContent = (): JSX.Element => {
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
-		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal?redirect=simulation/start');
 	}, [isLoading]);
 
 	return (
 		<SimulationLayout>
 			<>
-				<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
+				<Text
+					size={{ base: 'boldXl', md: 'bold2xl', xl: '3xl' }}
+					color="white"
+					maxW="1000px"
+					id="edgar-simulationStartPage-title-text"
+				>
 					Voilà, tout est prêt pour moi. Vous pouvez dès maitenant commencer votre simulation.
 				</Text>
 				<Box w="100%" textAlign="end">
@@ -39,7 +44,9 @@ const SimulationStartPageContent = (): JSX.Element => {
 								.then((response) => router.push(`/simulation/chat?sessionId=${response}`));
 						}}
 					>
-						<SimulationButton>Commencer ma simulation</SimulationButton>
+						<SimulationButton id="edgar-simulationStartPage-startSimulation-button">
+							Commencer ma simulation
+						</SimulationButton>
 					</Box>
 				</Box>
 			</>

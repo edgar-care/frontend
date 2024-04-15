@@ -10,18 +10,22 @@ import SimulationChatEdgarCard from 'components/simulationPages/chat/SimulationC
 import { type SimulationChatEdgarCardType } from 'types/simulation/chat/SimulationChatEdgarCardType';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+import { useAuthContext } from 'contexts/auth';
 
 const SimulationChatContent = (): JSX.Element => {
 	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 	const [edgarState, setEdgarState] = useState<SimulationChatEdgarCardType>('START');
+
+	const auth = useAuthContext();
 
 	const router = useRouter();
 
 	const isTablet = useBreakpointValue({ base: true, lg: false });
 
 	useEffect(() => {
-		if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
-	}, []);
+		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal?redirect=simulation/chat');
+	}, [isLoading]);
 
 	return (
 		<>

@@ -24,7 +24,7 @@ const SimulationAppointmentsPageContent = (): JSX.Element => {
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
-		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal?redirect=simulation/appointments');
 		if (!searchParams.get('sessionId')) toast({ title: 'Une erreur est survenue', status: 'error' });
 	}, []);
 
