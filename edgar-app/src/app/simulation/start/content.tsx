@@ -3,20 +3,26 @@
 import { useEffect } from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 
 import SimulationLayout from 'components/simulationPages/SimulationLayout';
 import SimulationButton from 'components/simulationPages/SimulationButton';
 
 import { useAuthContext } from 'contexts/auth';
 
+import { useInitiateDiagnosticMutation } from 'services/request/simulation';
+import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+
 const SimulationStartPageContent = (): JSX.Element => {
+	const [triggerInitiateDiagnostic] = useInitiateDiagnosticMutation();
+	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
+
 	const auth = useAuthContext();
 	const router = useRouter();
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
-	}, []);
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+	}, [isLoading]);
 
 	return (
 		<SimulationLayout>
@@ -25,9 +31,16 @@ const SimulationStartPageContent = (): JSX.Element => {
 					Voilà, tout est prêt pour moi. Vous pouvez dès maitenant commencer votre simulation.
 				</Text>
 				<Box w="100%" textAlign="end">
-					<Link href="/simulation/chat">
+					<Box
+						as="span"
+						onClick={() => {
+							triggerInitiateDiagnostic()
+								.unwrap()
+								.then((response) => router.push(`/simulation/chat?sessionId=${response}`));
+						}}
+					>
 						<SimulationButton>Commencer ma simulation</SimulationButton>
-					</Link>
+					</Box>
 				</Box>
 			</>
 		</SimulationLayout>
