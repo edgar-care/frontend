@@ -45,7 +45,7 @@ const SimulationAppointments = (): JSX.Element => {
 				overflowY="auto"
 			>
 				<VStack w="100%" spacing="32px" align="start">
-					<Text size={{ base: 'boldXl', lg: 'bold2xl' }}>
+					<Text size={{ base: 'boldXl', lg: 'bold2xl' }} id="edgar-simulationAppointmentsPage-title-text">
 						Vous pouvez maintenant sélectionner un rendez-vous chez un médecin.
 					</Text>
 					<VStack w="100%" spacing="16px">
@@ -101,7 +101,7 @@ const SimulationAppointments = (): JSX.Element => {
 								});
 					}}
 				>
-					<SimulationButton variant="BLUE">Valider le rendez-vous</SimulationButton>
+					<SimulationButton variant="BLUE" id="edgar-simulationAppointmentsPage-validate-button">Valider le rendez-vous</SimulationButton>
 				</Box>
 			</VStack>
 		</VStack>
