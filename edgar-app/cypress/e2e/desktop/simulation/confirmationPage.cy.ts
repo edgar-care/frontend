@@ -91,4 +91,9 @@ describe('Simulation Confirmation Page tests - Desktop', () => {
 			});
 		});
 	});
+
+	describe('Clean up', () => {
+		// TODO: add backend call to destroy user
+		beforeEach(() => {});
+	});
 });

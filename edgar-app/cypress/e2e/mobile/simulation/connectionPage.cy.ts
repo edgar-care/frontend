@@ -112,4 +112,9 @@ describe('Simulation Connection Page tests - Desktop', () => {
 			});
 		});
 	});
+
+	describe('Clean up', () => {
+		// TODO: add backend call to destroy user
+		beforeEach(() => {});
+	});
 });
