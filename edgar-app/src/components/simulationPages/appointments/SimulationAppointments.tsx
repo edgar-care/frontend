@@ -101,7 +101,9 @@ const SimulationAppointments = (): JSX.Element => {
 								});
 					}}
 				>
-					<SimulationButton variant="BLUE" id="edgar-simulationAppointmentsPage-validate-button">Valider le rendez-vous</SimulationButton>
+					<SimulationButton variant="BLUE" id="edgar-simulationAppointmentsPage-validate-button">
+						Valider le rendez-vous
+					</SimulationButton>
 				</Box>
 			</VStack>
 		</VStack>
