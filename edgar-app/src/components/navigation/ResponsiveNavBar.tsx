@@ -46,7 +46,7 @@ const ResponsiveNavBar = (): JSX.Element => {
 							</Button>
 							<VStack w="100%" ml={{ base: '-55px', sm: '0px' }}>
 								<Link href="/dashboard">
-									<Img src="/assets/logo/white-edgar-logo.svg" w="100px" h="auto" />
+									<Img src="/assets/logo/white-edgar-logo.svg" w="150px" h="auto" />
 								</Link>
 							</VStack>
 						</HStack>
