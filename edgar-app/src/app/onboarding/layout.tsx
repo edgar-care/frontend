@@ -1,14 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
-import { VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useTimeout, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 
 import OnboardingProvider from 'app/onboarding/OnboardingProvider';
 
 import { useAuthContext } from 'contexts/auth';
+import LoadingScreen from 'components/loader/LoadingScreen';
 
 const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const auth = useAuthContext();
 	const router = useRouter();
 
@@ -16,16 +19,24 @@ const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 		if (auth.checkToken().status === 'error') router.push('/login?redirect=/onboarding/personal');
 	}, []);
 
+	useTimeout(() => {
+		setIsLoading(false);
+	}, 750);
+
 	return (
 		<OnboardingProvider>
-			<VStack
-				p={{ base: '0px', sm: '16px', lg: '32px', xl: '32px 64px', '4xl': '64px 128px' }}
-				w="100%"
-				justify={{ base: 'start', lg: 'center' }}
-				h="100%"
-			>
-				{children}
-			</VStack>
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<VStack
+					p={{ base: '0px', sm: '16px', lg: '32px', xl: '32px 64px', '4xl': '64px 128px' }}
+					w="100%"
+					justify={{ base: 'start', lg: 'center' }}
+					h="100%"
+				>
+					{children}
+				</VStack>
+			)}
 		</OnboardingProvider>
 	);
 };
