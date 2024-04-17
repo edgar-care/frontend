@@ -38,8 +38,8 @@ const SimulationAppointmentsDoctorCard = ({
 		useBreakpointValue({ base: 3, ssm2: 4, sm2: 5, smd: 6, md: 7, md2: 8, md3: 9, lg: 7 }) || 7;
 
 	const groupedSlotsByDay = groupSlotByDay(slots?.filter((slot) => slot.startDate > new Date().getTime()) || []);
+	const hasNoSlots = !slots || slots.length === 0 || slots.every((slot) => slot.startDate < new Date().getTime());
 
-	console.log(groupedSlotsByDay);
 	return (
 		<Skeleton isLoaded={!isLoading} w="100%" h="100%" borderRadius="8px">
 			<Stack
@@ -72,12 +72,12 @@ const SimulationAppointmentsDoctorCard = ({
 							{doctor.address.zipCode} - {doctor.address.city}
 						</Text>
 					</VStack>
-					<Button w="100%" size="customSm" onClick={onOpen}>
+					<Button w="100%" size="customSm" onClick={onOpen} isDisabled={hasNoSlots}>
 						Voir plus d'horaire
 					</Button>
 				</Stack>
 				<Box as="span" h={{ base: '1px', lg: '100%' }} w={{ base: '100%', lg: '1px' }} bg="blue.700" />
-				{slots?.length === 0 ? (
+				{hasNoSlots ? (
 					<VStack w="100%" h="100%" minH="150px" bg="blue.100" justify="center" borderRadius="8px">
 						<Text size="lg">Aucun créneau disponible</Text>
 					</VStack>
