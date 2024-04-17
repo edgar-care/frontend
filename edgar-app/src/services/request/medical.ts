@@ -80,7 +80,7 @@ const extendedApi = backendApi.injectEndpoints({
 					primary_doctor_id: params.primaryDoctorId,
 					medical_antecedents: params.medicalAntecedents.map((antecedent) => ({
 						name: antecedent.name,
-						medicines: antecedent.medicines.map((medicine) => ({
+						treatments: antecedent.medicines.map((medicine) => ({
 							medicine_id: medicine.medicineId,
 							period: medicine.period,
 							day: medicine.day,
