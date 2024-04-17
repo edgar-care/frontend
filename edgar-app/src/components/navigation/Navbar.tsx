@@ -69,7 +69,7 @@ const Navbar = (): JSX.Element => {
 			h="calc(100vh - 36px)"
 		>
 			<VStack spacing="48px" w="100%">
-				<Image src="/assets/logo/colored-edgar-logo.svg" alt="edgar-logo" width={150} height={75} />
+				<Image src="/assets/logo/colored-edgar-logo.svg" alt="edgar-logo" width={200} height={58} />
 				<VStack w="100%" px="8px" spacing="16px">
 					<VStack w="100%">
 						{primaryTabs
