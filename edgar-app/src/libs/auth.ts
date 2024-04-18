@@ -67,7 +67,20 @@ class Auth {
 	}
 
 	public getToken(): string | null {
-		return localStorage.getItem('token');
+		if (typeof window !== 'undefined') return localStorage.getItem('token');
+		return null;
+	}
+
+	public getId(): string {
+		try {
+			const token = this.getToken();
+			if (!token) return '';
+
+			const payload: { patient: { id: string } } = JSON.parse(atob(token.split('.')[1]));
+			return payload.patient.id;
+		} catch (error) {
+			return '';
+		}
 	}
 }
 

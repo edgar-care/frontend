@@ -3,14 +3,14 @@ import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 const updateMedicalPersonalModalSexInput = ({
 	control,
 	errors,
 }: {
-	control: Control<MedicalProfileType>;
-	errors: FieldErrors<MedicalProfileType>;
+	control: Control<PatientMedicalType>;
+	errors: FieldErrors<PatientMedicalType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%">
 		<HStack>

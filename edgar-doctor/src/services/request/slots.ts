@@ -1,8 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
+import { type OpenSlotDTO, type SlotsStoreType } from 'store/types/slots.type';
 
-import { type OpenSlotDTO, SlotsStoreType } from 'store/types/slots.type';
+import { type AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({

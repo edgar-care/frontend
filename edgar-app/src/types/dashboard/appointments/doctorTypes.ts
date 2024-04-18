@@ -1,5 +1,11 @@
 export type DoctorType = {
 	id: string;
 	name: string;
-	address: string;
+	firstname: string;
+	address: {
+		street: string;
+		city: string;
+		zipCode: string;
+		country: string;
+	};
 };
