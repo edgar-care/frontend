@@ -48,6 +48,7 @@ const AdvancedSelector = ({
 					placeholder={placeholder}
 					type="text"
 					value={selectSearch}
+					maxLength={100}
 					onChange={(e) => setSelectSearch(e.target.value)}
 					onClick={toggleInputFocus}
 					onBlur={() => {

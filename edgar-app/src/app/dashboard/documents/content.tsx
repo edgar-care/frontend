@@ -49,6 +49,7 @@ const DocumentsPageContent = (): JSX.Element => {
 							<Input
 								placeholder="Rechercher par nom du document ou nom du médecin"
 								value={searchText}
+								maxLength={100}
 								onChange={(e) => setSearchText(e.target.value)}
 							/>
 							<InputRightElement>
