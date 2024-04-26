@@ -13,10 +13,7 @@ import 'theme/index.css';
 import { store } from 'store/store';
 
 import AuthProvider from './AuthProvider';
-import ChatProvider from './ChatProvider';
-import PatientProvider from './PatientProvider';
 
-// TODO: remove ChatProvider & PatientProvider when the simulation flow is refactored
 const Providers = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -27,13 +24,9 @@ const Providers = ({ children }: { children: JSX.Element }): JSX.Element => {
 			<ChakraProvider theme={theme} resetCSS>
 				<Provider store={store}>
 					<AuthProvider>
-						<ChatProvider>
-							<PatientProvider>
-								<VStack id="root" bg="blue.100" minH="100vh" h="auto">
-									{isLoading ? <LoadingScreen /> : <>{children}</>}
-								</VStack>
-							</PatientProvider>
-						</ChatProvider>
+						<VStack id="root" bg="blue.100" minH="100vh" h="auto">
+							{isLoading ? <LoadingScreen /> : <>{children}</>}
+						</VStack>
 					</AuthProvider>
 				</Provider>
 			</ChakraProvider>
