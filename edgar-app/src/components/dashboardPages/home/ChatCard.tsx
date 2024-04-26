@@ -34,7 +34,7 @@ const ChatCard = ({ message }: { message: MessageType }): JSX.Element => {
 		CircleEightIcon,
 		CircleNineIcon,
 	];
-	console.log(medicalFolder?.primaryDoctorId);
+
 	return (
 		<HStack
 			bg="blue.100"
