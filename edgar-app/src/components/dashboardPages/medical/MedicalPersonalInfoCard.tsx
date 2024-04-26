@@ -1,7 +1,7 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 
 import type { PatientMedicalType, PatientPersonalType } from 'types/dashboard/medical/PatientMedicalType';
-import type { PatientSex } from 'types/PatientInfos';
+import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
 
 const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
 	const personalInfosLabels = {
@@ -20,7 +20,7 @@ const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedica
 
 	const displayPersonalInfos = (key: string, info: string | number): string => {
 		if ((key as keyof PatientPersonalType) === 'birthdate') return new Date(info).toLocaleDateString('fr-FR');
-		if ((key as keyof PatientPersonalType) === 'sex') return sexLabel[info as PatientSex];
+		if ((key as keyof PatientPersonalType) === 'sex') return sexLabel[info as PatientSexType];
 		if ((key as keyof PatientPersonalType) === 'height') return `${(info as number).toPrecision(3)}m`;
 		if ((key as keyof PatientPersonalType) === 'weight') return `${info}kg`;
 		return info.toString();
