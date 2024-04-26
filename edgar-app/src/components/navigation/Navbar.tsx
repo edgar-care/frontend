@@ -6,6 +6,7 @@ import ProfileCard from 'components/navigation/ProfileCard';
 
 import HomeIcon from 'assets/icons/HomeIcon';
 import CalendarIcon from 'assets/icons/CalendarIcon';
+import MedicineIcon from 'assets/icons/MedicineIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 import MedicalIcon from 'assets/icons/MedicalIcon';
 import HelpIcon from 'assets/icons/HelpIcon';
@@ -29,6 +30,12 @@ const Navbar = (): JSX.Element => {
 			path: '/dashboard/appointments',
 			icon: CalendarIcon,
 			id: 'appointments',
+		},
+		{
+			name: 'Traitements',
+			path: '/dashboard/treatments',
+			icon: MedicineIcon,
+			id: 'treatments',
 		},
 		{
 			name: 'Documents',
