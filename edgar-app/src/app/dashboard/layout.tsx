@@ -7,6 +7,7 @@ import { Stack, useBreakpointValue, VStack } from '@chakra-ui/react';
 import ResponsiveNavBar from 'components/navigation/ResponsiveNavBar';
 
 import { useAuthContext } from 'contexts/auth';
+
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
@@ -36,7 +37,7 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 				<VStack
 					w="100%"
 					h={isDrawer ? '100%' : 'calc(100vh - 36px)'}
-					overflowY="scroll"
+					overflowY="auto"
 					p="32px"
 					sx={{
 						'::-webkit-scrollbar': {
