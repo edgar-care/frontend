@@ -17,7 +17,7 @@ const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 			{isLoading ? (
 				<LoadingScreen />
 			) : (
-				<VStack p={{ base: '0px', sm: '16px', lg: '32px' }} w="100%" h="100vh">
+				<VStack p={{ base: '0px', sm: '16px', lg: '32px' }} w="100%" h="100vh" overflowY="auto">
 					{children}
 				</VStack>
 			)}

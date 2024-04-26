@@ -4,10 +4,9 @@ describe('Medical Info Page tests - Desktop', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {
-		it('Create an account', () => {
-			createPatientAccount().then((response) => {
-				authToken = response.authToken;
-			});
+		it('Create an account', async () => {
+			const response = await createPatientAccount();
+			authToken = response.authToken;
 		});
 	});
 

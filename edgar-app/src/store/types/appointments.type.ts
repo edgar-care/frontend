@@ -13,3 +13,8 @@ export interface UpdatePatientAppointmentsDTO {
 	oldAppointmentId: string;
 	newAppointmentId: string;
 }
+
+export interface AddPatientAppointmentsDTO {
+	appointmentId: string;
+	sessionId: string;
+}

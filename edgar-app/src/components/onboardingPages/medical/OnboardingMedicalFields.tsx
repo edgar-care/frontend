@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { chakra, Button, VStack, useToast, useTimeout } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -21,6 +21,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 	} = useForm<HealthInfos>({ mode: 'onChange', defaultValues: { healthIssues: [] } });
 
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
@@ -40,7 +41,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 				.then(() => {
 					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
 					window.localStorage.removeItem('onboardingInfos');
-					router.push('/dashboard');
+					router.push(searchParams.get('redirect') || '/dashboard');
 				})
 				.catch(() => {
 					toast({ title: 'Une erreur est survenue', status: 'error' });

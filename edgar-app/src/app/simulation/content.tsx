@@ -9,13 +9,18 @@ import SimulationButton from 'components/simulationPages/SimulationButton';
 const SimulationContent = (): JSX.Element => (
 	<SimulationLayout>
 		<>
-			<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
+			<Text
+				size={{ base: 'boldXl', md: 'bold2xl', lg: '3xl' }}
+				color="white"
+				maxW="1000px"
+				id="edgar-simulationPage-title-text"
+			>
 				Bienvenue dans votre simulation, je m’appelle Edgar et je serai votre assistant tout au long de cette
 				simulation.
 			</Text>
 			<Box w="100%" textAlign="end">
 				<Link href="/simulation/conditions">
-					<SimulationButton>Continuer</SimulationButton>
+					<SimulationButton id="edgar-simulationPage-next-button">Continuer</SimulationButton>
 				</Link>
 			</Box>
 		</>

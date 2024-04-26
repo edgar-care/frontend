@@ -2,7 +2,11 @@ import { backendApi } from 'services/apiService';
 
 import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
-import { type AppointmentsStoreType, type UpdatePatientAppointmentsDTO } from 'store/types/appointments.type';
+import {
+	type AddPatientAppointmentsDTO,
+	type AppointmentsStoreType,
+	type UpdatePatientAppointmentsDTO,
+} from 'store/types/appointments.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -46,6 +50,17 @@ const extendedApi = backendApi.injectEndpoints({
 					.sort((a, b) => a.startDate - b.startDate),
 		}),
 
+		addPatientAppointment: builder.mutation<void, AddPatientAppointmentsDTO>({
+			query: (params) => ({
+				url: `/appointments/${params.appointmentId}`,
+				method: 'POST',
+				body: {
+					session_id: params.sessionId,
+				},
+			}),
+			invalidatesTags: ['patientAppointments', 'doctorAppointments'],
+		}),
+
 		updatePatientAppointment: builder.mutation<void, UpdatePatientAppointmentsDTO>({
 			query: (params) => ({
 				url: `/appointments/${params.oldAppointmentId}`,
@@ -74,6 +89,7 @@ export const {
 	useLazyGetPatientAppointmentByIdQuery,
 	useGetDoctorAppointmentsQuery,
 	useLazyGetDoctorAppointmentsQuery,
+	useAddPatientAppointmentMutation,
 	useUpdatePatientAppointmentMutation,
 	useDeletePatientAppointmentMutation,
 } = extendedApi;
