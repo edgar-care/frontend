@@ -20,7 +20,12 @@ const SimulationConditionsPageContent = (): JSX.Element => {
 	return (
 		<SimulationLayout>
 			<>
-				<Text size={{ base: '2xl', md: '3xl' }} color="white" maxW="1000px">
+				<Text
+					size={{ base: 'boldXl', md: 'bold2xl', xl: '3xl' }}
+					color="white"
+					maxW="1000px"
+					id="edgar-simulationConditionsPage-title-text"
+				>
 					Avant de commencer votre simulation, notez que cette simulation n’a pas pour but de diagnostiquer
 					une maladie. <br />
 					A l’issue de la simulation, notre échange sera transmis à un médecin afin d’être examiné. <br />
@@ -28,7 +33,7 @@ const SimulationConditionsPageContent = (): JSX.Element => {
 					méthodes de soins. <br />
 				</Text>
 				<Box w="100%" textAlign="end" onClick={handleClick}>
-					<SimulationButton>Continuer</SimulationButton>
+					<SimulationButton id="edgar-simulationConditionsPage-next-button">Continuer</SimulationButton>
 				</Box>
 			</>
 		</SimulationLayout>

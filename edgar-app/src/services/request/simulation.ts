@@ -1,7 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type DiagnoseDiagnosticDTO, InitiateDiagnosticStoreType } from 'store/types/simulation.type';
-import { type SimulationChatDiagnoseDiagnosticType } from 'types/simulation/SimulationChatDiagnoseDiagnosticType';
+import { type DiagnoseDiagnosticDTO, type InitiateDiagnosticStoreType } from 'store/types/simulation.type';
+
+import { type SimulationChatDiagnoseDiagnosticType } from 'types/simulation/chat/SimulationChatDiagnoseDiagnosticType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({

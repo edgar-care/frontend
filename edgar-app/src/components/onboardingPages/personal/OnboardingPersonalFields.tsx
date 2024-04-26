@@ -2,7 +2,7 @@
 
 import { Button, VStack, chakra, Stack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
@@ -35,13 +35,16 @@ const OnboardingPersonalFields = (): JSX.Element => {
 	});
 
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
+		const redirect = searchParams.get('redirect');
+
 		if (data.hasMedicalAntecedents) {
 			setOnboardingInfos(data);
-			router.push('/onboarding/medical');
+			router.push(`/onboarding/medical${redirect ? `?redirect=${redirect}` : ''}`);
 		} else
 			triggerAddPatientMedicalFolderMutation({
 				name: data.name,
@@ -56,7 +59,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 				.unwrap()
 				.then(() => {
 					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
-					router.push('/dashboard');
+					router.push(redirect || '/dashboard');
 				})
 				.catch(() => {
 					toast({ title: 'Une erreur est survenue', status: 'error' });
