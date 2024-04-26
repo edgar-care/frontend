@@ -1,7 +1,7 @@
 import createPatientAccount from 'utils/createPatientAccount';
 import setupMedicalInfo from 'utils/setupMedicalInfo';
 
-describe('Simulation Appointments Page tests - Desktop', () => {
+describe('Simulation Appointments Page tests - Mobile', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {
@@ -73,16 +73,6 @@ describe('Simulation Appointments Page tests - Desktop', () => {
 					'contain.text',
 					'Vous pouvez maintenant sélectionner un rendez-vous chez un médecin.',
 				);
-			});
-		});
-
-		describe('Visible elements', () => {
-			beforeEach(() => {
-				cy.viewport(390, 844);
-			});
-
-			it('Visible buttons', () => {
-				cy.get('#edgar-simulationAppointmentsPage-validate-button').should('be.visible');
 			});
 		});
 

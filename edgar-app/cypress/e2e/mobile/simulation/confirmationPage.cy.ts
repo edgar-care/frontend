@@ -1,7 +1,7 @@
 import createPatientAccount from 'utils/createPatientAccount';
 import setupMedicalInfo from 'utils/setupMedicalInfo';
 
-describe('Simulation Confirmation Page tests - Desktop', () => {
+describe('Simulation Confirmation Page tests - Mobile', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {

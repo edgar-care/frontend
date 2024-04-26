@@ -1,4 +1,4 @@
-describe('Simulation Page tests - Desktop', () => {
+describe('Simulation Page tests - Mobile', () => {
 	describe('Good UI', { testIsolation: false }, () => {
 		before(() => {
 			cy.clearAllLocalStorage();

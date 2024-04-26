@@ -1,7 +1,7 @@
 import createPatientAccount from 'utils/createPatientAccount';
 import setupMedicalInfo from 'utils/setupMedicalInfo';
 
-describe('Simulation Start Page tests - Desktop', () => {
+describe('Simulation Start Page tests - Mobile', () => {
 	let authToken: string;
 	let noMedicalInfoAuthToken: string;
 
@@ -106,12 +106,12 @@ describe('Simulation Start Page tests - Desktop', () => {
 	describe('Working page', () => {
 		describe('Working states', () => {
 			beforeEach(() => {
-				cy.visit('/simulation/start').wait(1000);
 				cy.viewport(390, 844);
 			});
 
 			it('Click on start simulation button', () => {
 				cy.window().then((win) => win.localStorage.setItem('token', authToken));
+				cy.visit('/simulation/start').wait(1000);
 				cy.get('#edgar-simulationStartPage-startSimulation-button')
 					.click()
 					.wait(1000)
