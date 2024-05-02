@@ -41,7 +41,9 @@ const TreatmentsCalendarDay = ({
 
 	return (
 		<VStack align="start" w="100%">
-			<Text size="boldLg">{displayedDay[availableDays.indexOf(day)]}</Text>
+			<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
+				{displayedDay[availableDays.indexOf(day)]}
+			</Text>
 			{Object.entries(periods).map(([period, treatments]) => {
 				const isToday =
 					(new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase() as TreatmentDayType) ===
@@ -51,7 +53,7 @@ const TreatmentsCalendarDay = ({
 					<VStack key={period} w="100%" bg={isToday ? 'blue.100' : ''} borderRadius="0px 0px 12px 12px">
 						<Box as="span" w="100%" h="2px" bg={isToday ? 'blue.700' : 'blue.100'} />
 						<VStack pb="4px" w="100%" align="start" px={isToday ? '8px' : '0px'}>
-							<Text size="lg">
+							<Text size="lg" id={`edgar-dashboardTreatmentsPage-dayTitle-${period}-text`}>
 								{displayedPeriods[availablePeriods.indexOf(period as HealthIssuesMedicinesPeriodType)]}
 							</Text>
 							<VStack

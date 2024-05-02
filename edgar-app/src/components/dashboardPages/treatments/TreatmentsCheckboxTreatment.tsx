@@ -66,6 +66,7 @@ const TreatmentsCheckboxTreatment = ({
 							});
 				}}
 				borderColor={isToday ? 'blue.300' : 'blue.200'}
+				id="edgar-dashboardTreatmentsPage-checkboxTreatment-input"
 			>
 				<Text key={treatment.id} size="boldSm" textDecoration={isChecked ? 'line-through' : 'none'}>
 					{treatment.quantity} x {medicinesInfo.find((m) => m.id === treatment.medicineId)?.name}
