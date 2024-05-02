@@ -23,7 +23,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 		medicalInfo?.medicalAntecedents
 			.filter((antecedent) => antecedent.stillRelevant)
 			.map((antecedent) => antecedent.medicines)
-			.reduce((acc, medicines) => [...acc, ...medicines]) || [];
+			.flat() || [];
 
 	const subNavigation: { [key: string]: JSX.Element } = {
 		CALENDAR: <TreatmentsCalendar treatments={treatments} />,
@@ -39,7 +39,11 @@ const TreatmentsPageContent = (): JSX.Element => {
 			/>
 			<VStack w="100%" spacing="16px">
 				<HStack w="100%" spacing="16px">
-					<Button whiteSpace="nowrap" w={{ base: '100%', md: 'auto' }}>
+					<Button
+						whiteSpace="nowrap"
+						w={{ base: '100%', md: 'auto' }}
+						id="edgar-dashboardTreatmentsPage-addTreatment-button"
+					>
 						Ajouter un traitement
 					</Button>
 					{subNavigationState !== 'CALENDAR' && (
@@ -60,6 +64,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 						variant={subNavigationState === 'CALENDAR' ? 'primary' : 'secondary'}
 						onClick={() => setSubNavigationState('CALENDAR')}
 						w="100%"
+						id="edgar-dashboardTreatmentsPage-calendarNavigation-button"
 					>
 						Calendrier
 					</Button>
@@ -67,6 +72,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 						variant={subNavigationState === 'CURRENT' ? 'primary' : 'secondary'}
 						onClick={() => setSubNavigationState('CURRENT')}
 						w="100%"
+						id="edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button"
 					>
 						Traitements en cours
 					</Button>
@@ -74,6 +80,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 						variant={subNavigationState === 'PASSED' ? 'primary' : 'secondary'}
 						onClick={() => setSubNavigationState('PASSED')}
 						w="100%"
+						id="edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button"
 					>
 						Traitements finis
 					</Button>
