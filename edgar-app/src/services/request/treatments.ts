@@ -9,12 +9,12 @@ const extendedApi = backendApi.injectEndpoints({
 			query: () => '/dashboard/treatment/follow-up',
 			providesTags: ['patientFollowUpTreatments'],
 			transformResponse: (response: FollowUpTreatmentsStoreType[]) =>
-				response.map((treatment) => ({
+				response?.map((treatment) => ({
 					id: treatment.id,
 					date: treatment.date * 1000,
 					periods: treatment.period,
 					treatmentId: treatment.treatment_id,
-				})),
+				})) || [],
 		}),
 
 		getFollowUpTreatmentById: builder.query<TreatmentFollowUpType, string>({
