@@ -20,6 +20,9 @@ const extendedApi = backendApi.injectEndpoints({
 					patientId: appointment.id_patient,
 					startDate: appointment.start_date * 1000,
 					endDate: appointment.end_date * 1000,
+					cancelationReason: appointment.cancelation_reason,
+					appointmentStatus: appointment.appointment_status,
+					sessionId: appointment.session_id,
 				})),
 		}),
 		updateDoctorAppointment: builder.mutation<void, UpdateAppointmentDTO>({
