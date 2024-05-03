@@ -46,7 +46,7 @@ const Pagination = ({
 		borderColor="blue.200"
 		justify="center"
 	>
-		<Button variant="unstyled" onClick={() => setPageIndex((prev) => (prev - 1 < 1 ? 1 : prev - 1))}>
+		<Button variant="fullGhost" onClick={() => setPageIndex((prev) => (prev - 1 < 1 ? 1 : prev - 1))}>
 			<Icon as={LeftChevronIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
 		</Button>
 		<HStack spacing="16px">
@@ -56,7 +56,7 @@ const Pagination = ({
 					(pageIndex < 2 ? 1 : pageIndex - 1) + 3,
 				)
 				.map((value) => (
-					<Button variant="unstyled" key={value} onClick={() => setPageIndex(value)}>
+					<Button variant="fullGhost" key={value} onClick={() => setPageIndex(value)}>
 						<Text
 							size="lg"
 							color={
@@ -75,7 +75,7 @@ const Pagination = ({
 				))}
 		</HStack>
 		<Button
-			variant="unstyled"
+			variant="fullGhost"
 			onClick={() => setPageIndex((prev) => (prev + 1 > maxPageNumbers ? maxPageNumbers : prev + 1))}
 		>
 			<Icon as={RightChevronIcon} w="16px" h="16px" color={variant === 'primary' ? 'white' : 'black'} />
