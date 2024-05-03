@@ -9,10 +9,10 @@ import LoadingScreen from 'components/loader/LoadingScreen';
 
 import { useAuthContext } from 'contexts/auth';
 
-import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+import { useLazyGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
+	const [triggerGetPatientMedicalFolder, medicalInfo] = useLazyGetPatientMedicalFolderQuery();
 
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
@@ -21,10 +21,14 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 
 	useEffect(() => {
+		triggerGetPatientMedicalFolder();
+	}, []);
+
+	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal');
+		else if (medicalInfo.isError) router.push('/onboarding/personal');
 		else setIsAuthenticated(true);
-	}, [isLoading]);
+	}, [medicalInfo]);
 
 	return (
 		<>
