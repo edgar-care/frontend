@@ -41,7 +41,7 @@ const UpdateAppointmentDrawer = ({
 		triggerCancelDoctorAppointment({ appointmentId, ...data })
 			.unwrap()
 			.then(() => {
-				toast({ title: 'Votre rendez-vous à était annulé', status: 'success' });
+				toast({ title: 'Votre rendez-vous a été annulé', status: 'success' });
 				onClose();
 			})
 			.catch(() => {
