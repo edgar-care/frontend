@@ -1,8 +1,12 @@
+const url = Cypress.env('url');
+const appUrl = Cypress.env('appUrl');
+const authToken = Cypress.env('authToken');
+
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit(`${url}/dashboard/agenda`);
 	});
 
 	it('Good number of buttons', () => {
@@ -29,8 +33,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit(`${url}/dashboard/agenda`);
 	});
 
 	it('Good content for open slot button', () => {
@@ -53,8 +57,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit(`${url}/dashboard/agenda`);
 	});
 
 	it('Visible open slot button', () => {
@@ -77,8 +81,8 @@ describe('Visible elements - Desktop', () => {
 describe('Working page - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
+		cy.window().then((win) => win.localStorage.setItem('token', authToken));
+		cy.visit(`${url}/dashboard/agenda`);
 	});
 
 	it('Changing view to day', () => {
