@@ -1,11 +1,28 @@
 'use client';
 
-import { VStack } from '@chakra-ui/react';
+import { useTimeout, VStack } from '@chakra-ui/react';
+import { useState } from 'react';
 
-const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element => (
-	<VStack p={{ base: '0px', sm: '16px', lg: '32px' }} w="100%" h="100%" overflowY="auto">
-		{children}
-	</VStack>
-);
+import LoadingScreen from 'components/loader/LoadingScreen';
+
+const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	useTimeout(() => {
+		setIsLoading(false);
+	}, 750);
+
+	return (
+		<>
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<VStack p={{ base: '0px', sm: '16px', lg: '32px' }} w="100%" h="100vh" overflowY="auto">
+					{children}
+				</VStack>
+			)}
+		</>
+	);
+};
 
 export default SimulationLayout;

@@ -106,12 +106,12 @@ describe('Simulation Start Page tests - Desktop', () => {
 	describe('Working page', () => {
 		describe('Working states', () => {
 			beforeEach(() => {
-				cy.visit('/simulation/start').wait(1000);
 				cy.viewport(1920, 1080);
 			});
 
 			it('Click on start simulation button', () => {
 				cy.window().then((win) => win.localStorage.setItem('token', authToken));
+				cy.visit('/simulation/start').wait(1000);
 				cy.get('#edgar-simulationStartPage-startSimulation-button')
 					.click()
 					.wait(1000)

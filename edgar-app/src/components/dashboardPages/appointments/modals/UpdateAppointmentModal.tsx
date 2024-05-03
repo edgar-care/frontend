@@ -105,6 +105,7 @@ const UpdateAppointmentModal = ({
 								<InputGroup>
 									<Input
 										placeholder="Docteur Edgar"
+										maxLength={100}
 										onChange={(e) => setSearchValue(e.target.value)}
 									/>
 									<InputRightElement>

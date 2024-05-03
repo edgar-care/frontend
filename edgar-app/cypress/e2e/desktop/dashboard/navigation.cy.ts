@@ -81,7 +81,7 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good content for Username Profile Card', () => {
-				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Nom Prénom');
+				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Edgar Patient');
 			});
 		});
 

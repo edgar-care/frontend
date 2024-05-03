@@ -33,7 +33,7 @@ const SelectPrimaryDoctorContent = ({
 	return (
 		<VStack w="100%" spacing="24px">
 			<InputGroup>
-				<Input placeholder="Nom du médecin" onChange={(e) => setSearchValue(e.target.value)} />
+				<Input placeholder="Nom du médecin" maxLength={100} onChange={(e) => setSearchValue(e.target.value)} />
 				<InputRightElement>
 					<Icon as={SearchIcon} />
 				</InputRightElement>
