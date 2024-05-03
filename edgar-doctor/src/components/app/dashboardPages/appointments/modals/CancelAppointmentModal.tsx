@@ -39,35 +39,23 @@ const UpdateAppointmentModal = ({
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
-	const onSubmit = handleSubmit((data) => {
-		triggerCancelDoctorAppointment({ appointmentId, ...data })
-			.unwrap()
-			.then(() => {
-				toast({ title: 'Votre rendez-vous a été annulé', status: 'success' });
-				onClose();
-			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
-	});
-
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size={{ base: '2xl', lg: '4xl' }}>
+		<Modal isOpen={isOpen} onClose={onClose} size="xl">
 			<ModalOverlay />
-			<ModalContent p="24px" borderRadius="12px">
-				<ModalBody>
+			<ModalContent>
+				<ModalBody p="32px 32px 24px 32px">
 					<VStack spacing="32px" w="100%">
-						<VStack spacing="8px">
+						<VStack>
 							<Icon as={DeleteCrossIllustration} w="48px" h="48px" />
-							<VStack spacing="8px">
+							<VStack>
 								<Text size="xl">Êtes-vous sûr ?</Text>
-								<Text size="md">
+								<Text maxW="350px" align="center" color="grey.500">
 									Si vous annulez ce rendez-vous votre patient ne pourra plus y assister
 								</Text>
 							</VStack>
 						</VStack>
-						<VStack spacing="8px" w="100%">
-							<FormLabel htmlFor="appointmentInput" fontWeight="bold" fontSize="md">
+						<VStack w="100%" align="start" px="32px">
+							<FormLabel htmlFor="appointmentInput" fontWeight="600" fontSize="md">
 								La raison de l'annulation
 							</FormLabel>
 							<Input
@@ -78,12 +66,27 @@ const UpdateAppointmentModal = ({
 						</VStack>
 					</VStack>
 				</ModalBody>
-				<ModalFooter>
+				<ModalFooter p="24px 32px 32px 32px">
 					<HStack w="100%">
-						<Button variant="secondary" w="100%" onClick={onClose}>
+						<Button variant="secondary" w="100%" size="customSm" onClick={onClose}>
 							Non, je veux revenir en arrière
 						</Button>
-						<Button variant="delete" w="100%" onClick={onSubmit}>
+						<Button
+							variant="delete"
+							w="100%"
+							size="customSm"
+							onClick={handleSubmit((data) => {
+								triggerCancelDoctorAppointment({ appointmentId, ...data })
+									.unwrap()
+									.then(() => {
+										toast({ title: 'Votre rendez-vous a été annulé', status: 'success' });
+										onClose();
+									})
+									.catch(() => {
+										toast({ title: 'Une erreur est survenue', status: 'error' });
+									});
+							})}
+						>
 							Oui, je suis sûr
 						</Button>
 					</HStack>
