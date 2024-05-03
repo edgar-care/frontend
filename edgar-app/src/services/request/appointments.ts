@@ -2,7 +2,11 @@ import { backendApi } from 'services/apiService';
 
 import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
-import { type AppointmentsStoreType, type UpdatePatientAppointmentsDTO } from 'store/types/appointments.type';
+import {
+	type AddPatientAppointmentsDTO,
+	type AppointmentsStoreType,
+	type UpdatePatientAppointmentsDTO,
+} from 'store/types/appointments.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -19,6 +23,18 @@ const extendedApi = backendApi.injectEndpoints({
 				})),
 		}),
 
+		getPatientAppointmentById: builder.query<AppointmentType, string>({
+			query: (id) => `/patient/appointments/${id}`,
+			providesTags: ['patientAppointments'],
+			transformResponse: (response: { rdv: { Rdv: AppointmentsStoreType } }) => ({
+				id: response.rdv.Rdv.id,
+				doctorId: response.rdv.Rdv.doctor_id,
+				patientId: response.rdv.Rdv.id_patient,
+				startDate: response.rdv.Rdv.start_date * 1000,
+				endDate: response.rdv.Rdv.end_date * 1000,
+			}),
+		}),
+
 		getDoctorAppointments: builder.query<AppointmentType[], string>({
 			query: (id) => `/doctor/${id}/appointments`,
 			providesTags: ['doctorAppointments'],
@@ -32,6 +48,17 @@ const extendedApi = backendApi.injectEndpoints({
 						endDate: appointment.end_date * 1000,
 					}))
 					.sort((a, b) => a.startDate - b.startDate),
+		}),
+
+		addPatientAppointment: builder.mutation<void, AddPatientAppointmentsDTO>({
+			query: (params) => ({
+				url: `/appointments/${params.appointmentId}`,
+				method: 'POST',
+				body: {
+					session_id: params.sessionId,
+				},
+			}),
+			invalidatesTags: ['patientAppointments', 'doctorAppointments'],
 		}),
 
 		updatePatientAppointment: builder.mutation<void, UpdatePatientAppointmentsDTO>({
@@ -58,8 +85,11 @@ const extendedApi = backendApi.injectEndpoints({
 export const {
 	useGetPatientAppointmentsQuery,
 	useLazyGetPatientAppointmentsQuery,
+	useGetPatientAppointmentByIdQuery,
+	useLazyGetPatientAppointmentByIdQuery,
 	useGetDoctorAppointmentsQuery,
 	useLazyGetDoctorAppointmentsQuery,
+	useAddPatientAppointmentMutation,
 	useUpdatePatientAppointmentMutation,
 	useDeletePatientAppointmentMutation,
 } = extendedApi;

@@ -1,17 +1,19 @@
-export type Sex = 'MALE' | 'FEMALE' | 'OTHER';
+import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
 
 export type PersonalInfos = {
 	name: string;
 	firstname: string;
-	birthDate: string;
-	sex: Sex;
-	size: number; // in meters
+	birthdate: number;
+	sex: PatientSexType;
+	height: number; // in meters
 	weight: number; // in kilograms
+	primaryDoctorId: string;
+	hasMedicalAntecedents: boolean;
 };
 
 export type HealthInfos = {
-	primaryDoctorName: string;
-	allergies: string[];
-	diseases: string[];
-	treatmentsInProgress: string[];
+	healthIssues: HealthIssuesType[];
 };
+
+export type OnboardingInfos = PersonalInfos & HealthInfos;

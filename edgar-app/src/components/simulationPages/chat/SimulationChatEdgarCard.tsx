@@ -3,7 +3,7 @@
 import { Box, VStack } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/next-js';
 
-import { type SimulationChatEdgarCardType } from 'types/simulation/SimulationChatEdgarCardType';
+import { type SimulationChatEdgarCardType } from 'types/simulation/chat/SimulationChatEdgarCardType';
 
 const SimulationChatEdgarCard = ({ type }: { type: SimulationChatEdgarCardType }): JSX.Element => {
 	const edgarImagePaths = {
@@ -18,7 +18,7 @@ const SimulationChatEdgarCard = ({ type }: { type: SimulationChatEdgarCardType }
 			borderRadius="48px"
 			w="100%"
 			h="100%"
-			maxW={{ base: '600px', '4xl': '800px' }}
+			maxW="600px"
 			p={{ base: '32px', sm: '32px 64px', md: '64px', lg: '32px 64px' }}
 			justify="space-between"
 			spacing="64px"

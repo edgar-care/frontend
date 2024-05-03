@@ -2,7 +2,7 @@ import { VStack } from '@chakra-ui/react';
 
 import SimulationChatMessageCard from 'components/simulationPages/chat/SimulationChatMessageCard';
 
-import { type SimulationChatMessageType } from 'types/simulation/SimulationChatMessageType';
+import { type SimulationChatMessageType } from 'types/simulation/chat/SimulationChatMessageType';
 
 const SimulationChatMessageGroup = ({
 	messages,

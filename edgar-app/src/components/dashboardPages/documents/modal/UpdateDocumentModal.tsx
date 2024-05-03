@@ -72,7 +72,7 @@ const UpdateDocumentModal = ({
 							<Input
 								placeholder="Mon document de santé"
 								{...register('documentName', { required: true })}
-								maxLength={10}
+								maxLength={100}
 							/>
 							{errors.documentName?.type === 'required' && (
 								<ErrorMessage>Ce champ est nécessaire</ErrorMessage>

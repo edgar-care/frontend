@@ -23,6 +23,7 @@ const AppointmentCalendar = ({
 			</GridItem>
 		))}
 		{getAllDays(month, year).map((day) => {
+			const isToday = day.currentMonth && month === new Date().getMonth() && day.number === new Date().getDate();
 			const appointmentsOfTheDay = appointments.filter(
 				(appointment) =>
 					day.currentMonth &&
@@ -34,13 +35,9 @@ const AppointmentCalendar = ({
 				<GridItem
 					w="100%"
 					p="2px 6px"
-					bg={
-						day.currentMonth && month === new Date().getMonth() && day.number === new Date().getDate()
-							? 'blue.700'
-							: ''
-					}
-					borderRadius={appointmentsOfTheDay.length > 0 ? '0px' : '8px'}
-					borderBottom={appointmentsOfTheDay.length > 0 ? '2px solid' : ''}
+					bg={isToday ? 'blue.700' : ''}
+					borderRadius={isToday ? '8px' : '0px'}
+					borderBottom={appointmentsOfTheDay.length > 0 && !isToday ? '2px solid' : ''}
 					borderColor={appointmentsOfTheDay[0]?.endDate > new Date().getTime() ? 'green.500' : 'blue.200'}
 					key={`${day.number}/${month}/${year}-${day.currentMonth}`}
 				>

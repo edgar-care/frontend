@@ -12,7 +12,7 @@ const OnboardingPersonalNameInput = ({
 	register: UseFormRegister<PersonalInfos>;
 	errors: FieldErrors<PersonalInfos>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
+	<VStack spacing="8px" align="start" w="100%" pb={errors.name ? '0px' : '16px'}>
 		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formName-text">
 			Votre nom
 		</FormLabel>

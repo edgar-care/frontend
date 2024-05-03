@@ -9,19 +9,19 @@ const extendedApi = backendApi.injectEndpoints({
 		getPatientById: builder.query<PatientType, string>({
 			query: (patientId) => `/doctor/patient/${patientId}`,
 			providesTags: ['patients'],
-			transformResponse: (response: { patient: PatientsStoreType }) => ({
-				id: response.patient.id,
-				email: response.patient.email,
+			transformResponse: (response: PatientsStoreType) => ({
+				id: response.id,
+				email: response.email,
 				medicalInfos: {
-					name: response.patient.medical_info.name,
-					firstname: response.patient.medical_info.firstname,
-					birthdate: response.patient.medical_info.birthdate,
-					sex: response.patient.medical_info.sex,
-					height: response.patient.medical_info.height,
-					weight: response.patient.medical_info.weight,
-					primaryDoctorId: response.patient.medical_info.primary_doctor_id,
-					onboardingStatus: response.patient.medical_info.onboarding_status,
-					medicalAntecedents: response.patient.medical_info.medical_antecedents.map((antecedent) => ({
+					name: response.medical_info.name,
+					firstname: response.medical_info.firstname,
+					birthdate: response.medical_info.birthdate,
+					sex: response.medical_info.sex,
+					height: response.medical_info.height,
+					weight: response.medical_info.weight,
+					primaryDoctorId: response.medical_info.primary_doctor_id,
+					onboardingStatus: response.medical_info.onboarding_status,
+					medicalAntecedents: response.medical_info.medical_antecedents.map((antecedent) => ({
 						id: antecedent.id,
 						name: antecedent.name,
 						medicines: antecedent.medicines.map((medicine) => ({
@@ -34,8 +34,8 @@ const extendedApi = backendApi.injectEndpoints({
 						stillRelevant: antecedent.stillRelevant,
 					})),
 				},
-				appointmentIds: response.patient.rendez_vous_ids,
-				documentIds: response.patient.documents_ids,
+				appointmentIds: response.rendez_vous_ids,
+				documentIds: response.documents_ids,
 			}),
 		}),
 

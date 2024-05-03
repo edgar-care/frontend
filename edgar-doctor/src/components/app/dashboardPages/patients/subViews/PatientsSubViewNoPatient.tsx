@@ -4,7 +4,7 @@ import { Image } from '@chakra-ui/next-js';
 const PatientsSubViewNoPatient = (): JSX.Element => (
 	<VStack
 		w="100%"
-		h="100%"
+		minH="100%"
 		p="16px"
 		spacing="16px"
 		borderRadius="16px"

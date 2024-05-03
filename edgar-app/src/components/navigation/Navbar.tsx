@@ -6,6 +6,7 @@ import ProfileCard from 'components/navigation/ProfileCard';
 
 import HomeIcon from 'assets/icons/HomeIcon';
 import CalendarIcon from 'assets/icons/CalendarIcon';
+import MedicineIcon from 'assets/icons/MedicineIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 import MedicalIcon from 'assets/icons/MedicalIcon';
 import HelpIcon from 'assets/icons/HelpIcon';
@@ -29,6 +30,12 @@ const Navbar = (): JSX.Element => {
 			path: '/dashboard/appointments',
 			icon: CalendarIcon,
 			id: 'appointments',
+		},
+		{
+			name: 'Traitements',
+			path: '/dashboard/treatments',
+			icon: MedicineIcon,
+			id: 'treatments',
 		},
 		{
 			name: 'Documents',
@@ -69,7 +76,7 @@ const Navbar = (): JSX.Element => {
 			h="calc(100vh - 36px)"
 		>
 			<VStack spacing="48px" w="100%">
-				<Image src="/assets/logo/colored-edgar-logo.svg" alt="edgar-logo" width={150} height={75} />
+				<Image src="/assets/logo/colored-edgar-logo.svg" alt="edgar-logo" width={200} height={58} />
 				<VStack w="100%" px="8px" spacing="16px">
 					<VStack w="100%">
 						{primaryTabs
