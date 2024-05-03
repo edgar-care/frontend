@@ -15,7 +15,26 @@ const setupMedicalInfo = async (accountAuthToken: string): Promise<void> => {
 			weight: 6870,
 			height: 150,
 			primary_doctor_id: '65feebafd238ecea17cc0f4b',
-			medical_antecedents: [],
+			medical_antecedents: [
+				{
+					name: 'Allergie',
+					treatments: [
+						{
+							day: ['WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY', 'TUESDAY', 'MONDAY'],
+							medicine_id: '66116e725ee223d8f1b39bfd',
+							period: ['NOON'],
+							quantity: 2,
+						},
+						{
+							day: ['MONDAY', 'FRIDAY'],
+							medicine_id: '66116f1a5ee223d8f1b39c00',
+							period: ['MORNING', 'NOON', 'EVENING', 'NIGHT'],
+							quantity: 1,
+						},
+					],
+					still_relevant: true,
+				},
+			],
 		}),
 	});
 

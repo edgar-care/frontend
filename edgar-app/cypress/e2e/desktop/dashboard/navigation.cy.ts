@@ -35,7 +35,7 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 6);
+				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 7);
 			});
 
 			it('Good number of labels', () => {
@@ -68,6 +68,10 @@ describe('Navigation tests - Desktop', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-documents-text').should('contain.text', 'Documents');
 			});
 
+			it('Good content for "Traitements" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-treatments-text').should('contain.text', 'Traitements');
+			});
+
 			it('Good content for "Dossier médical" tab', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-medical-text').should('contain.text', 'Dossier médical');
 			});
@@ -96,6 +100,10 @@ describe('Navigation tests - Desktop', () => {
 
 			it('"Documents" tab visible', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-documents-text').should('be.visible');
+			});
+
+			it('"Traitements" tab visible', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-treatments-text').should('be.visible');
 			});
 
 			it('"Dossier médical" tab visible', () => {
@@ -135,6 +143,13 @@ describe('Navigation tests - Desktop', () => {
 					.click()
 					.url()
 					.should('be.equal', `${Cypress.env('url')}/dashboard/documents`);
+			});
+
+			it('Good redirection for "Traitements" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-treatments')
+					.click()
+					.url()
+					.should('be.equal', `${Cypress.env('url')}/dashboard/treatments`);
 			});
 
 			it('Good redirection for "Dossier médical" tab', () => {

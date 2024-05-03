@@ -1,3 +1,6 @@
+import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
+import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
+
 export type HealthIssuesType = {
 	name: string;
 	medicines: HealthIssuesMedicinesType[];
@@ -11,13 +14,6 @@ export type HealthIssuesMedicinesType = {
 	quantity: string;
 };
 
-export type HealthIssuesMedicinesPeriodType = 'MORNING' | 'NOON' | 'EVENING' | 'NIGHT';
+export type HealthIssuesMedicinesPeriodType = TreatmentPeriodType;
 
-export type HealthIssuesMedicinesDayType =
-	| 'MONDAY'
-	| 'TUESDAY'
-	| 'WEDNESDAY'
-	| 'THURSDAY'
-	| 'FRIDAY'
-	| 'SATURDAY'
-	| 'SUNDAY';
+export type HealthIssuesMedicinesDayType = TreatmentDayType;
