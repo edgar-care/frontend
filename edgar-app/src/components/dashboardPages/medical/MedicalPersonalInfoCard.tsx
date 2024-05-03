@@ -1,14 +1,15 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 
-import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
+import type { PatientMedicalType, PatientPersonalType } from 'types/dashboard/medical/PatientMedicalType';
+import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
 
-const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInfos }): JSX.Element => {
+const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
 	const personalInfosLabels = {
 		firstname: 'Prénom',
 		name: 'Nom',
-		birthDate: 'Date de naissance',
+		birthdate: 'Date de naissance',
 		sex: 'Sexe',
-		size: 'Taille',
+		height: 'Taille',
 		weight: 'Poids',
 	};
 	const sexLabel: { [key: string]: string } = {
@@ -18,10 +19,10 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 	};
 
 	const displayPersonalInfos = (key: string, info: string | number): string => {
-		if ((key as keyof PersonalInfos) === 'birthDate') return new Date(info).toLocaleDateString('fr-FR');
-		if ((key as keyof PersonalInfos) === 'sex') return sexLabel[info];
-		if ((key as keyof PersonalInfos) === 'size') return `${((info as number) / 100).toPrecision(3)}m`;
-		if ((key as keyof PersonalInfos) === 'weight') return `${info}kg`;
+		if ((key as keyof PatientPersonalType) === 'birthdate') return new Date(info).toLocaleDateString('fr-FR');
+		if ((key as keyof PatientPersonalType) === 'sex') return sexLabel[info as PatientSexType];
+		if ((key as keyof PatientPersonalType) === 'height') return `${(info as number).toPrecision(3)}m`;
+		if ((key as keyof PatientPersonalType) === 'weight') return `${info}kg`;
 		return info.toString();
 	};
 
@@ -39,16 +40,23 @@ const MedicalPersonalInfoCard = ({ personalInfos }: { personalInfos: PersonalInf
 		>
 			<Box as="span" w="4px" alignSelf="stretch" bg="green.500" borderRadius="4px" />
 			<VStack pl="8px" w="100%" align="start" spacing={{ base: '8px', lg: '12px' }}>
-				{Object.keys(personalInfos).map((key, index) => {
-					const info = personalInfos[key as keyof PersonalInfos];
+				{Object.keys({
+					name: medicalInfos.name,
+					firstname: medicalInfos.firstname,
+					birthdate: medicalInfos.birthdate,
+					sex: medicalInfos.sex,
+					height: medicalInfos.height,
+					weight: medicalInfos.weight,
+				}).map((key, index) => {
+					const info = medicalInfos[key as keyof PatientPersonalType];
 
 					return (
 						<Text
 							key={index}
 							size={{ base: 'md', lg: 'lg' }}
-							id={`edgar-dashboardMedicalPage-personalInfoCard-${key as keyof PersonalInfos}-text`}
+							id={`edgar-dashboardMedicalPage-personalInfoCard-${key as keyof PatientPersonalType}-text`}
 						>
-							{personalInfosLabels[key as keyof PersonalInfos]}: {displayPersonalInfos(key, info)}
+							{personalInfosLabels[key as keyof PatientPersonalType]}: {displayPersonalInfos(key, info)}
 						</Text>
 					);
 				})}

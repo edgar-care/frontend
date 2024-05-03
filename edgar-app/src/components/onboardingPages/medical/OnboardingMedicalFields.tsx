@@ -1,74 +1,101 @@
-import { chakra, Button, ListItem, Text, UnorderedList, VStack, useDisclosure, useToast } from '@chakra-ui/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { chakra, Button, VStack, useToast, useTimeout } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import OnboardingMedicalPrimaryDoctorInput from 'components/onboardingPages/medical/OnboardingMedicalPrimaryDoctorInput';
-import OnboardingMedicalAllergiesInput from 'components/onboardingPages/medical/OnboardingMedicalAllergiesInput';
-import OnboardingMedicalDiseasesInput from 'components/onboardingPages/medical/OnboardingMedicalDiseasesInput';
-import OnboardingMedicalTreatmentsInput from 'components/onboardingPages/medical/OnboardingMedicalTreatmentsInput';
-import OnboardingMedicalWarningHandler from 'components/onboardingPages/medical/emptyInfosWarning/OnboardingMedicalWarningHandler';
+import OnboardingMedicalHealthIssues from 'components/onboardingPages/medical/OnboardingMedicalHealthIssues';
 
-import onSubmitMedicalInfos from 'utils/api/onboarding/onSubmitMedicalInfos';
+import { useOnboardingContext } from 'contexts/onboarding';
 
 import { type HealthInfos } from 'types/onboarding/OnboardingInfos';
 
+import { useAddPatientMedicalFolderMutation } from 'services/request/medical';
+
 const OnboardingMedicalFields = (): JSX.Element => {
+	const [triggerAddPatientMedicalFolderMutation] = useAddPatientMedicalFolderMutation();
+	const { infos: onboardingInfos } = useOnboardingContext();
 	const {
 		handleSubmit,
 		formState: { errors },
-		register,
-		setValue,
+		control,
 		watch,
-	} = useForm<HealthInfos>({ mode: 'onChange' });
-	const { allergies, diseases, treatmentsInProgress } = watch();
+	} = useForm<HealthInfos>({ mode: 'onChange', defaultValues: { healthIssues: [] } });
 
-	const { isOpen, onOpen, onClose } = useDisclosure();
 	const router = useRouter();
-	const toast = useToast({ duration: 2000, isClosable: true });
+	const searchParams = useSearchParams();
 
-	let isInfosGood = false;
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		if (
-			(!data.allergies ||
-				data.allergies.length === 0 ||
-				!data.diseases ||
-				data.diseases.length === 0 ||
-				!data.treatmentsInProgress ||
-				data.treatmentsInProgress.length === 0) &&
-			!isInfosGood
-		) {
-			onOpen();
-			return;
-		}
-		onClose();
-		onSubmitMedicalInfos(data, router).then((res) => {
-			toast({
-				title: res.title,
-				status: res.status,
-			});
-
-			if (res.status === 'success') router.push('/dashboard');
-		});
+		if (onboardingInfos)
+			triggerAddPatientMedicalFolderMutation({
+				name: onboardingInfos.name,
+				firstname: onboardingInfos.firstname,
+				birthdate: new Date(onboardingInfos.birthdate).getTime(),
+				sex: onboardingInfos.sex,
+				height: onboardingInfos.height,
+				weight: onboardingInfos.weight,
+				primaryDoctorId: onboardingInfos.primaryDoctorId,
+				medicalAntecedents: data.healthIssues,
+			})
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre dossier médical a bien été ajouté', status: 'success' });
+					window.localStorage.removeItem('onboardingInfos');
+					router.push(searchParams.get('redirect') || '/dashboard');
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		else toast({ title: 'Une erreur est survenue', status: 'error' });
 	});
 
+	useTimeout(() => {
+		if (!onboardingInfos) router.push('/onboarding/personal');
+	}, 1000);
+
 	return (
-		<VStack w="100%" h="100%" p={{ base: '16px', sm: '64px' }}>
+		<VStack w="100%" h="100%">
 			<chakra.form
 				onSubmit={onSubmit}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter') e.preventDefault();
 				}}
 				w="100%"
-				maxW={{ base: '500px', '4xl': '100%' }}
+				h="100%"
 			>
-				<VStack w="100%" spacing="64px" h="100%" align={{ base: 'center', lg: 'end' }}>
-					<VStack w="100%" p={{ base: '0px', '4xl': '64px' }} align={{ base: 'center', lg: 'start' }}>
-						<VStack w="100%" spacing="32px" maxW="500px">
-							<OnboardingMedicalPrimaryDoctorInput register={register} errors={errors} />
-							<OnboardingMedicalAllergiesInput setValue={setValue} watch={watch} />
-							<OnboardingMedicalDiseasesInput setValue={setValue} watch={watch} />
-							<OnboardingMedicalTreatmentsInput setValue={setValue} watch={watch} />
+				<VStack
+					w="100%"
+					spacing="16px"
+					h="100%"
+					align={{ base: 'center', lg: 'end' }}
+					justify="space-between"
+					p={{ base: '16px', ssm: '32px', smd: '32px 64px', lg: '64px' }}
+					sx={{
+						'::-webkit-scrollbar': {
+							width: '6px',
+						},
+						'::-webkit-scrollbar-track': {
+							background: 'grey.100',
+							borderRadius: '8px',
+							marginTop: '64px',
+							marginBottom: '64px',
+						},
+						'::-webkit-scrollbar-thumb': {
+							background: 'grey.200',
+							borderRadius: '8px',
+						},
+						'::-webkit-scrollbar-thumb:hover': {
+							background: 'grey.300',
+						},
+					}}
+				>
+					<VStack w="100%" align={{ base: 'center', lg: 'start' }}>
+						<VStack w="100%" spacing="16px">
+							<OnboardingMedicalHealthIssues
+								control={control}
+								errors={errors}
+								healthIssues={watch('healthIssues')}
+							/>
 						</VStack>
 					</VStack>
 					<Button type="submit" w={{ base: '100%', xl: 'auto' }} id="edgar-onboardingMedicalPage-next-button">
@@ -76,36 +103,6 @@ const OnboardingMedicalFields = (): JSX.Element => {
 					</Button>
 				</VStack>
 			</chakra.form>
-			<OnboardingMedicalWarningHandler
-				body={
-					<VStack spacing="8px" w="100%" align="start">
-						<Text size="boldLg">Les informations suivantes n'ont pas été remplies :</Text>
-						<UnorderedList>
-							{(!allergies || allergies.length === 0) && (
-								<ListItem id="edgar-onboardingMedicalPage-confirmationModalAllergies-text">
-									Vos allergies
-								</ListItem>
-							)}
-							{(!diseases || diseases.length === 0) && (
-								<ListItem id="edgar-onboardingMedicalPage-confirmationModalDiseases-text">
-									Vos maladies
-								</ListItem>
-							)}
-							{(!treatmentsInProgress || treatmentsInProgress.length === 0) && (
-								<ListItem id="edgar-onboardingMedicalPage-confirmationModalTreatments-text">
-									Vos traitements en cours
-								</ListItem>
-							)}
-						</UnorderedList>
-					</VStack>
-				}
-				isOpen={isOpen}
-				onClose={onClose}
-				onClick={() => {
-					isInfosGood = true;
-					void onSubmit();
-				}}
-			/>
 		</VStack>
 	);
 };

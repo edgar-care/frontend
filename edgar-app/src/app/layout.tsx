@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 export const metadata: Metadata = {
 	title: 'edgar',
 	description: "Gagne du temps avec l'assistant virtuel du pré-diagnostic",
-	icons: '/assets/edgar-logo-tabs.svg',
+	icons: '/assets/logo/edgar-logo-tabs.svg',
 };
 
 export const viewport: Viewport = {

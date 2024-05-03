@@ -13,7 +13,7 @@ const Patients = ({ patientSearch }: { patientSearch: string }): JSX.Element => 
 	const isMobile = useBreakpointValue({ base: true, md: false });
 
 	return (
-		<HStack spacing="16px" w="100%" h="100%" align="start">
+		<HStack spacing="16px" w="100%" h="100%" align="stretch">
 			{(!isMobile || !selectedPatientId) && (
 				<VStack
 					w="100%"

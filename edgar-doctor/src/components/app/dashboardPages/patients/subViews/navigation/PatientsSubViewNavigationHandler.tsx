@@ -41,22 +41,23 @@ const PatientsSubViewNavigationHandler = ({
 	return (
 		<>
 			{isMobile ? (
-				<HStack w="100%" justify="space-between">
+				<HStack w="100%" justify="space-between" bg="blue.700" borderRadius="12px" p="2px 4px">
 					{isReturnButtonDisplayed && (
 						<Box as="span" px="8px">
 							<Button variant="fullGhost" onClick={() => setSelectedPatientId('')}>
 								<HStack>
-									<Icon as={SmallLeftArrowIcon} w="12px" color="grey.700" />
-									<Text size="sm" color="grey.700">
+									<Icon as={SmallLeftArrowIcon} w="12px" color="white" />
+									<Text size="sm" color="white">
 										Revenir en arrière
 									</Text>
 								</HStack>
 							</Button>
 						</Box>
 					)}
+
 					<Menu autoSelect={false}>
 						<MenuButton as={Button} p="4px" variant="fullGhost">
-							<Icon fontSize="24px" as={HamburgerIcon} color="grey.700" />
+							<Icon fontSize="24px" as={HamburgerIcon} color="white" />
 						</MenuButton>
 						<MenuList px="8px">
 							<Text size="lg" w="100%" textAlign="center" textOverflow="ellipsis">
@@ -85,6 +86,12 @@ const PatientsSubViewNavigationHandler = ({
 							</MenuItem>
 						</MenuList>
 					</Menu>
+					{!isReturnButtonDisplayed && (
+						<>
+							<Text color="white">{navigationHandler[navigationPath].name}</Text>
+							<Box as="span" w="32px" />
+						</>
+					)}
 				</HStack>
 			) : (
 				<PatientsSubViewNavigation

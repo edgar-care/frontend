@@ -22,6 +22,7 @@ const OnboardingPersonalWeightInput = ({
 			w="100%"
 			type="number"
 			step="0.01"
+			min={0}
 			id="edgar-onboardingPersonalPage-formWeight-input"
 		/>
 		{errors.weight?.type === 'required' && (
