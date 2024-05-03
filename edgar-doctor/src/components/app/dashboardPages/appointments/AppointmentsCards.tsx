@@ -15,8 +15,12 @@ import { type AppointmentType } from 'types/app/dashboard/appointments/appointme
 const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }): JSX.Element => {
 	const [pageIndexNext, setPageIndexNext] = useState(1);
 	const [pageIndexOld, setPageIndexOld] = useState(1);
-	const upcomingAppointments = appointments.filter((appointment) => appointment.endDate > new Date().getTime());
-	const pastAppointments = appointments.filter((appointment) => appointment.endDate <= new Date().getTime());
+	const upcomingAppointments = appointments.filter(
+		(appointment) => appointment.endDate > new Date().getTime() && appointment.appointmentStatus !== 'CANCELED',
+	);
+	const pastAppointments = appointments.filter(
+		(appointment) => appointment.endDate <= new Date().getTime() && appointment.appointmentStatus !== 'CANCELED',
+	);
 
 	return (
 		<VStack spacing="32px" w="100%">
@@ -29,12 +33,13 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 						<AppointmentCard appointment={appointment} key={appointment.id} />
 					))}
 				</VStack>
-				{upcomingAppointments.length > 0 && (
+				{upcomingAppointments.length > 3 && (
 					<Pagination
 						pageIndex={pageIndexNext}
 						maxPageNumbers={countMaxNumberPage(upcomingAppointments, 3)}
 						setPageIndex={setPageIndexNext}
 						variant="secondary"
+						size="small"
 					/>
 				)}
 			</VStack>
@@ -47,12 +52,13 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 						<AppointmentCard appointment={appointment} key={appointment.id} />
 					))}
 				</VStack>
-				{pastAppointments.length > 0 && (
+				{pastAppointments.length > 3 && (
 					<Pagination
 						pageIndex={pageIndexOld}
 						maxPageNumbers={countMaxNumberPage(pastAppointments, 3)}
 						setPageIndex={setPageIndexOld}
 						variant="secondary"
+						size="small"
 					/>
 				)}
 			</VStack>
