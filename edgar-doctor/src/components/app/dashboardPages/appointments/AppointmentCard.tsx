@@ -1,16 +1,15 @@
+import { useState } from 'react';
 import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure, Button } from '@chakra-ui/react';
 
 import PatientInfosDrawer from 'components/app/dashboardPages/appointments/modals/PatientInfosDrawer';
 import UpdateAppointmentHandler from 'components/app/dashboardPages/appointments/modals/UpdateAppointmentHandler';
 import CancelAppointmentHandler from 'components/app/dashboardPages/appointments/modals/CancelAppointmentHandler';
 
-import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
-
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 import SidebarIcon from 'assets/icons/SidebarIcon';
 
+import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
 import { useGetPatientByIdQuery } from 'services/request/patients';
-import { useState } from 'react';
 
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const { data: patient, isLoading } = useGetPatientByIdQuery(appointment.patientId);
@@ -48,7 +47,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 					<VStack w="100%" spacing="0px" px="8px" align="start">
 						<HStack spacing="4px">
 							<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-								{patient?.onboarding_info.name} {patient?.onboarding_info.surname.toUpperCase()}
+								{patient?.medicalInfos.firstname} {patient?.medicalInfos.name.toUpperCase()}
 							</Text>
 							<HStack
 								p="4px 6px 4px 6px"
@@ -74,7 +73,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 							</Text>
 						</HStack>
 					</VStack>
-					{appointmentEndDate > new Date() && (
+					{appointmentStartDate > new Date() && (
 						<HStack px={{ base: '8px', xl: '0px' }} justify="end">
 							<Button
 								size="customSm"

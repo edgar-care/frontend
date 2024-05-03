@@ -33,9 +33,8 @@ const HowItWorks = (): JSX.Element => {
 							</Box>{' '}
 							et{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								rapide
+								rapide.
 							</Box>
-							.
 						</Text>
 						<Text
 							size={{ base: 'lg', lg: '2xl' }}
@@ -43,7 +42,7 @@ const HowItWorks = (): JSX.Element => {
 							maxW="1125px"
 							id="edgar-productPage-productDescription2-text"
 						>
-							Edgar: "Lors de la prise de rendez-vous, je vais échanger avec vous, vous posez plein de
+							Edgar: "Lors de la prise de rendez-vous, je vais échanger avec vous, vous poser plein de
 							questions afin de spécifier le plus possible vos symptômes.
 						</Text>
 						<Text
@@ -52,17 +51,17 @@ const HowItWorks = (): JSX.Element => {
 							maxW="1125px"
 							id="edgar-productPage-productDescription3-text"
 						>
-							Cette étape est très{' '}
+							Cette étape est{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								importante
+								très importante
 							</Box>{' '}
 							pour le médecin, parce qu’il est très compliqué de déceler la totalité de ses propres
-							symptômes, surtout quand on en est pas un. Une fois que j’ai suffisamment d’informations
+							symptômes, surtout quand on n'en est pas un. Une fois que j’ai suffisamment d’informations
 							pour générer un pré-diagnostic, le médecin pourra alors{' '}
 							<Box as="span" fontWeight="600" color="green.400">
-								valider ou non la nécessité
+								valider ou non
 							</Box>{' '}
-							de votre rendez-vous.
+							la nécessité de votre rendez-vous.
 						</Text>
 						<Text
 							size={{ base: 'lg', lg: '2xl' }}
@@ -102,7 +101,7 @@ const HowItWorks = (): JSX.Element => {
 					)}
 				</HStack>
 			</VStack>
-			<Link href="/product#milestones">
+			<Link href="/project#milestones">
 				<Button
 					size={{ base: 'customLg', xl: '2xl' }}
 					variant="primaryBordered"

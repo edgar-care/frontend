@@ -1,12 +1,8 @@
-const url = Cypress.env('url');
-const appUrl = Cypress.env('appUrl');
-const authToken = Cypress.env('authToken');
-
 describe('Good number of elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/appointments`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/appointments');
 	});
 
 	it('Good number of buttons', () => {
@@ -33,8 +29,8 @@ describe('Good number of elements - Desktop', () => {
 describe('Good content for buttons - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/appointments`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/appointments');
 	});
 
 	it('Good content for buttons', () => {
@@ -45,8 +41,8 @@ describe('Good content for buttons - Desktop', () => {
 describe('Good content for texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/appointments`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/appointments');
 	});
 
 	it('Good content for Next Appointments', () => {
@@ -67,8 +63,8 @@ describe('Good content for texts - Desktop', () => {
 describe('Visible elements - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/appointments`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/appointments');
 	});
 
 	it('Visible buttons', () => {
@@ -79,8 +75,8 @@ describe('Visible elements - Desktop', () => {
 describe('Visible texts - Desktop', () => {
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.window().then((win) => win.localStorage.setItem('token', authToken));
-		cy.visit(`${url}/dashboard/appointments`);
+		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
+		cy.visit('/dashboard/appointments');
 	});
 
 	it('Next Appointments', () => {

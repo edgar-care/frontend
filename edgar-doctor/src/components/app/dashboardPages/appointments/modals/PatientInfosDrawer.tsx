@@ -13,7 +13,7 @@ import PersonalInfosCard from 'components/app/dashboardPages/appointments/Person
 
 import PatientInfosIllustration from 'assets/illustrations/PatientInfosIllustration';
 
-import { PatientsType } from 'types/app/dashboard/patients/PatientsType';
+import { PatientType } from 'types/app/dashboard/patients/PatientType';
 
 const PatientInfosDrawer = ({
 	isOpen,
@@ -22,7 +22,7 @@ const PatientInfosDrawer = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	patientInfos: PatientsType;
+	patientInfos: PatientType;
 }): JSX.Element => (
 	<Drawer isOpen={isOpen} onClose={onClose} size="xl" placement="right">
 		<DrawerOverlay />
@@ -34,7 +34,7 @@ const PatientInfosDrawer = ({
 						<Icon as={PatientInfosIllustration} w="48px" h="48px" />
 						<VStack>
 							<Text size="xl" textAlign="center">
-								{patientInfos.onboarding_info.name} {patientInfos.onboarding_info.surname.toUpperCase()}
+								{patientInfos.medicalInfos.firstname} {patientInfos.medicalInfos.name.toUpperCase()}
 							</Text>
 						</VStack>
 					</VStack>

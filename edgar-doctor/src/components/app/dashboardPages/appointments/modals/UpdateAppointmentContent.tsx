@@ -28,15 +28,17 @@ const UpdateAppointmentContent = ({
 		appointments.forEach((appointment) => {
 			const appointmentDay = new Date(appointment.startDate).toLocaleDateString('fr-FR');
 
-			const appointmentIndex = groupedAppointments.findIndex((groupedAppointment) => {
-				const groupedAppointmentDay = new Date(groupedAppointment[0].startDate).toLocaleDateString('fr-FR');
-				return groupedAppointmentDay === appointmentDay;
-			});
+			if (new Date(appointment.startDate) > new Date()) {
+				const appointmentIndex = groupedAppointments.findIndex((groupedAppointment) => {
+					const groupedAppointmentDay = new Date(groupedAppointment[0].startDate).toLocaleDateString('fr-FR');
+					return groupedAppointmentDay === appointmentDay;
+				});
 
-			if (appointmentIndex === -1) {
-				groupedAppointments.push([appointment]);
-			} else {
-				groupedAppointments[appointmentIndex].push(appointment);
+				if (appointmentIndex === -1) {
+					groupedAppointments.push([appointment]);
+				} else {
+					groupedAppointments[appointmentIndex].push(appointment);
+				}
 			}
 		});
 		return groupedAppointments;

@@ -17,6 +17,7 @@ const AppointmentSlotHour = ({
 		borderRadius="8px"
 		cursor="pointer"
 		w="100%"
+		transition="all .3s ease-in-out"
 		onClick={onClick}
 		_hover={{
 			background: 'blue.700',
