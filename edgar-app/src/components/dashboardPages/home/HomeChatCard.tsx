@@ -1,53 +1,206 @@
-import { useEffect, useState } from 'react';
-
 import { VStack, Box, Button, HStack, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-import ChatCard from 'components/dashboardPages/home/ChatCard';
+import ChatCard from 'components/dashboardPages/chat/ChatCard';
+
+import { useAuthContext } from 'contexts/auth';
+
+import getLastUnseenMessage from 'utils/app/dashboard/chat/getLastUnseenMessage';
 
 import ChatIcon from 'assets/icons/ChatIcon';
 
-import { MessageType } from 'types/dashboard/home/MessageType';
+import { type ChatType } from 'types/dashboard/chat/ChatType';
 
 const HomeChatCard = (): JSX.Element => {
-	const [messages, setMessages] = useState<MessageType[]>([
-		{
-			id: 1,
-			sender: 'John',
-			doctorId: '65feebafd238ecea17cc0f4b',
-			notifications: 12,
-			date: new Date().getTime(),
-			lastMessage: 'Salut, ça va ?',
-		},
-		{
-			id: 2,
-			sender: 'Alice',
-			doctorId: 'test',
-			notifications: 5,
-			date: new Date().getTime(),
-			lastMessage: 'Coucou !',
-		},
-		{
-			id: 3,
-			sender: 'Bob',
-			doctorId: 'test',
-			notifications: 0,
-			date: new Date().getTime(),
-			lastMessage: 'Demain à quelle heure ?',
-		},
-	]);
+	const auth = useAuthContext();
 
-	useEffect(() => {
-		const newMessage = {
-			id: messages.length + 1,
-			sender: 'New Sender',
-			doctorId: 'test',
-			notifications: 0,
-			date: new Date().getTime(),
-			lastMessage: 'New Message',
-		};
-		setMessages((prevMessages) => [...prevMessages, newMessage]);
-	}, []);
+	const chats: ChatType[] = [
+		{
+			id: '1',
+			messages: [
+				{
+					message: 'Hello',
+					ownerId: '1',
+					sentTime: 1630512000,
+				},
+				{
+					message: 'Hi',
+					ownerId: '2',
+					sentTime: 1630512000,
+				},
+			],
+			participants: [
+				{
+					participantId: '66339682c58e46d31358dcf9',
+					lastSeen: 1630512000,
+				},
+				{
+					participantId: '65fa05bf3c449dfabded7f24',
+					lastSeen: 1630512000,
+				},
+			],
+		},
+		{
+			id: '2',
+			messages: [
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706555644000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '65feebafd238ecea17cc0f4b',
+					sentTime: 1706508844000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '65feebafd238ecea17cc0f4b',
+					sentTime: 1706260204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+				{
+					message:
+						'Bonjour Monsieur X,\n' +
+						'Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et. Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et.',
+					ownerId: '66339682c58e46d31358dcf9',
+					sentTime: 1706278204000,
+				},
+			],
+			participants: [
+				{
+					participantId: '66339682c58e46d31358dcf9',
+					lastSeen: 1706278204000,
+				},
+				{
+					participantId: '65feebafd238ecea17cc0f4b',
+					lastSeen: 1630512000000,
+				},
+			],
+		},
+	];
+
+	const router = useRouter();
+
+	const unseenChat = chats.filter((chat) => {
+		const userLastSeen =
+			chat?.participants.find((participant) => participant.participantId === auth.getId())?.lastSeen ||
+			new Date('2024-01-01').getTime();
+		const lastUnseenMessage = getLastUnseenMessage(chat.messages, userLastSeen);
+
+		return lastUnseenMessage !== undefined;
+	});
 
 	return (
 		<VStack
@@ -67,7 +220,7 @@ const HomeChatCard = (): JSX.Element => {
 				</Link>
 			</Box>
 			<Box w="100%" h="2px" bg="blue.700" />
-			{messages.length > 0 ? (
+			{chats.length > 0 ? (
 				<>
 					<HStack
 						w="100%"
@@ -81,13 +234,21 @@ const HomeChatCard = (): JSX.Element => {
 					>
 						<Icon as={ChatIcon} w="20px" h="19px" color="green.700" />
 						<Text size="boldMd" color="green.700">
-							{messages.length === 1
-								? 'Vous avec 1 message non lu'
-								: `Vous avez ${messages.length} messages non lus`}
+							{unseenChat.length === 1
+								? 'Vous avec 1 conversation non lue'
+								: `Vous avez ${unseenChat.length} conversations non lues`}
 						</Text>
 					</HStack>
 					<VStack w="100%" spacing="8px">
-						{messages?.map((message) => <ChatCard key={message.id} message={message} />)}
+						{unseenChat?.map((chat) => (
+							<ChatCard
+								key={chat.id}
+								chat={chat}
+								onClick={() => {
+									router.push(`/dashboard/chat?chatId=${chat.id}`);
+								}}
+							/>
+						))}
 					</VStack>
 				</>
 			) : (
