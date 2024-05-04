@@ -11,6 +11,8 @@ import { type ProfileTabType } from 'types/navigation/ProfileType';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
+import colors from 'theme/foundations/colors';
+
 const ProfileCard = (): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
 	const { isOpen, onToggle } = useDisclosure();
@@ -61,9 +63,9 @@ const ProfileCard = (): JSX.Element => {
 							<HStack spacing="16px" w="100%">
 								<Avatar
 									size={30}
-									name="Lucas LOUIS"
+									name={`${medicalInfo?.firstname} ${medicalInfo?.name.toUpperCase()}`}
 									variant="beam"
-									colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+									colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
 								/>
 								<Text
 									size="boldMd"
@@ -96,9 +98,9 @@ const ProfileCard = (): JSX.Element => {
 						<HStack spacing="16px" w="100%">
 							<Avatar
 								size={30}
-								name="Lucas LOUIS"
+								name={`${medicalInfo?.firstname} ${medicalInfo?.name.toUpperCase()}`}
 								variant="beam"
-								colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+								colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
 							/>
 							<Text
 								size="boldMd"
