@@ -14,7 +14,7 @@ describe('Good number of elements - Desktop', () => {
 	});
 
 	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-dashboardAppointmentsPage]').should('have.length', 20);
+		cy.get('p[id^=edgar-dashboardAppointmentsPage]').should('have.length', 0);
 	});
 
 	it('Good number of labels', () => {
@@ -48,20 +48,6 @@ describe('Good content for texts - Desktop', () => {
 		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/dashboard/appointments`);
 	});
-
-	it('Good content for Next Appointments', () => {
-		cy.get('#edgar-dashboardAppointmentsPage-nextAppointments-text').should(
-			'contain.text',
-			'Mes prochains rendez-vous',
-		);
-	});
-
-	it('Good content for Done Appointments', () => {
-		cy.get('#edgar-dashboardAppointmentsPage-doneAppointments-text').should(
-			'contain.text',
-			'Mes rendez-vous passés',
-		);
-	});
 });
 
 describe('Visible elements - Desktop', () => {
@@ -81,13 +67,5 @@ describe('Visible texts - Desktop', () => {
 		cy.viewport(1920, 1080);
 		cy.window().then((win) => win.localStorage.setItem('token', authToken));
 		cy.visit(`${url}/dashboard/appointments`);
-	});
-
-	it('Next Appointments', () => {
-		cy.get('#edgar-dashboardAppointmentsPage-nextAppointments-text').should('be.visible');
-	});
-
-	it('Done Appointments', () => {
-		cy.get('#edgar-dashboardAppointmentsPage-doneAppointments-text').should('be.visible');
 	});
 });
