@@ -1,3 +1,4 @@
+import { type Dispatch, type SetStateAction } from 'react';
 import { Text, VStack } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/next-js';
 
@@ -5,10 +6,16 @@ import ChatMessages from 'components/dashboardPages/chat/ChatMessages';
 
 import { type ChatType } from 'types/dashboard/chat/ChatType';
 
-const ChatMessagesHandler = ({ chat }: { chat: ChatType | undefined }): JSX.Element => (
+const ChatMessagesHandler = ({
+	chat,
+	setSelectedChatId,
+}: {
+	chat: ChatType | undefined;
+	setSelectedChatId: Dispatch<SetStateAction<string>>;
+}): JSX.Element => (
 	<>
 		{chat ? (
-			<ChatMessages chat={chat} />
+			<ChatMessages chat={chat} setSelectedChatId={setSelectedChatId} />
 		) : (
 			<VStack
 				w="100%"

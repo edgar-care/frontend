@@ -22,7 +22,7 @@ const ChatMessageGroup = ({
 				year: 'numeric',
 			})}
 		</Text>
-		<VStack w="100%" spacing="16px">
+		<VStack w="100%" spacing={{ base: '8px', md: '16px' }}>
 			{messages.map((message) => (
 				<VStack w="100%">
 					{lastUnseenMessage === message && (

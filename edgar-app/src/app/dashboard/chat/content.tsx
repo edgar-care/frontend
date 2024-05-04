@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { HStack, VStack } from '@chakra-ui/react';
+import { HStack, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { useSearchParams } from 'next/navigation';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
@@ -190,6 +190,8 @@ const ChatPageContent = (): JSX.Element => {
 
 	const searchParams = useSearchParams();
 
+	const isRecipientListDisplayed = useBreakpointValue({ base: false, '2xl': true });
+
 	useEffect(() => {
 		if (searchParams.get('chatId')) setSelectedChatId(searchParams.get('chatId') || '');
 	}, [searchParams.get('chatID')]);
@@ -201,8 +203,15 @@ const ChatPageContent = (): JSX.Element => {
 				subTitle="Retrouvez tous vos messages avec les personnels de santé."
 			/>
 			<HStack w="100%" spacing="32px" h="100%" align="start" overflowY="hidden">
-				<ChatRecipientsList chats={chats} setSelectedChatId={setSelectedChatId} />
-				<ChatMessagesHandler chat={chats.find((chat) => chat.id === selectedChatId)} />
+				{(isRecipientListDisplayed || !selectedChatId) && (
+					<ChatRecipientsList chats={chats} setSelectedChatId={setSelectedChatId} />
+				)}
+				{(isRecipientListDisplayed || selectedChatId) && (
+					<ChatMessagesHandler
+						chat={chats.find((chat) => chat.id === selectedChatId)}
+						setSelectedChatId={setSelectedChatId}
+					/>
+				)}
 			</HStack>
 		</VStack>
 	);

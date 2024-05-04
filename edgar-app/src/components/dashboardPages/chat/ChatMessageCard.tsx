@@ -12,7 +12,10 @@ const ChatMessageCard = ({ message }: { message: ChatMessageType }): JSX.Element
 			w="100%"
 			justify={message.ownerId === auth.getId() ? 'end' : 'start'}
 			align="end"
-			p={message.ownerId === auth.getId() ? '0px 0px 0px 128px' : '0px 128px 0px 0px'}
+			p={{
+				base: '0px',
+				md: message.ownerId === auth.getId() ? '0px 0px 0px 128px' : '0px 128px 0px 0px',
+			}}
 		>
 			{message.ownerId === auth.getId() && (
 				<Text size="sm">
@@ -25,7 +28,7 @@ const ChatMessageCard = ({ message }: { message: ChatMessageType }): JSX.Element
 				borderRadius="16px"
 				p="8px 16px"
 			>
-				<Text size="boldMd">{message.message}</Text>
+				<Text size={{ base: 'sm', md: 'boldMd' }}>{message.message}</Text>
 			</VStack>
 			{message.ownerId !== auth.getId() && (
 				<Text size="sm">

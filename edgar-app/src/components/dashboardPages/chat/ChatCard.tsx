@@ -1,4 +1,4 @@
-import { Box, HStack, Icon, Text, VStack, useDisclosure, Skeleton } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text, VStack, useDisclosure, Skeleton, Stack, useBreakpointValue } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
 
 import { useAuthContext } from 'contexts/auth';
@@ -34,6 +34,9 @@ const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): J
 
 	const { isOpen: isHover, onOpen: onHoverOpen, onClose: onHoverClose } = useDisclosure();
 
+	const isMobile = useBreakpointValue({ base: true, sm2: false });
+	const isSmallScreen = useBreakpointValue({ base: true, ssm2: false });
+
 	const numberOfUnreadMessages = getNumberOfUnreadMessage(chat, auth.getId());
 
 	const icons = [
@@ -50,7 +53,7 @@ const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): J
 	];
 
 	return (
-		<Skeleton isLoaded={doctorInfo !== undefined} w="100%">
+		<Skeleton isLoaded={doctorInfo !== undefined} w="100%" borderRadius="8px">
 			<HStack
 				bg="blue.100"
 				w="100%"
@@ -70,6 +73,7 @@ const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): J
 					p="8px 16px"
 					boxShadow={`0px 0px 0px 2px ${colors.blue[200]}`}
 					justify="space-between"
+					spacing="16px"
 					align="start"
 				>
 					<HStack spacing="8px">
@@ -79,18 +83,24 @@ const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): J
 							variant="beam"
 							colors={[colors.green[600], colors.green[200], colors.green[500]]}
 						/>
-						<VStack align="start" spacing="0px">
-							<HStack spacing="4px">
+						<VStack align="start" spacing={{ base: '4px', sm2: '0px' }}>
+							<Stack
+								direction={{ base: 'column', sm2: 'row' }}
+								spacing={{ base: '0px', sm2: '4px' }}
+								align={{ base: 'start', sm2: 'center' }}
+							>
 								<Text size="boldMd">Docteur {doctorInfo?.name.toUpperCase()}</Text>
 								{recipient.participantId === medicalFolder?.primaryDoctorId && (
 									<Text fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
-										- Médecin généraliste
+										{!isMobile && '-'} Médecin généraliste
 									</Text>
 								)}
-							</HStack>
-							<Text fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
-								{chat.messages.slice(-1)[0].message.slice(0, 40)}...
-							</Text>
+							</Stack>
+							{!isSmallScreen && (
+								<Text fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px">
+									{chat.messages.slice(-1)[0].message.slice(0, 40)}...
+								</Text>
+							)}
 						</VStack>
 					</HStack>
 					<VStack spacing="4px" align="end">

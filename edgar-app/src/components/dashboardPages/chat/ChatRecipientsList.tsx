@@ -34,7 +34,7 @@ const ChatRecipientsList = ({
 	}, [medicalFolder, chats]);
 
 	return (
-		<VStack w="100%" maxW="448px" align="start" spacing="16px" h="100%">
+		<VStack w="100%" maxW={{ base: '100%', '2xl': '448px' }} align="start" spacing="16px" h="100%">
 			<Button w="100%">Démarrer une nouvelle conversation</Button>
 			{primaryDoctorChat && (
 				<ChatCard chat={primaryDoctorChat} onClick={() => setSelectedChatId(primaryDoctorChat.id)} />
