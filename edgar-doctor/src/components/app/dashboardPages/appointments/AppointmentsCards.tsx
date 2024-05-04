@@ -16,10 +16,14 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 	const [pageIndexNext, setPageIndexNext] = useState(1);
 	const [pageIndexOld, setPageIndexOld] = useState(1);
 	const upcomingAppointments = appointments.filter(
-		(appointment) => appointment.endDate > new Date().getTime() && appointment.appointmentStatus !== 'CANCELED',
+		(appointment) =>
+			appointment.endDate > new Date().getTime() &&
+			!['CANCELED', 'CANCELED_DUE_TO_REVIEW'].includes(appointment.appointmentStatus),
 	);
 	const pastAppointments = appointments.filter(
-		(appointment) => appointment.endDate <= new Date().getTime() && appointment.appointmentStatus !== 'CANCELED',
+		(appointment) =>
+			appointment.endDate <= new Date().getTime() &&
+			!['CANCELED', 'CANCELED_DUE_TO_REVIEW'].includes(appointment.appointmentStatus),
 	);
 
 	return (
