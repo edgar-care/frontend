@@ -18,12 +18,12 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 	const upcomingAppointments = appointments.filter(
 		(appointment) =>
 			appointment.endDate > new Date().getTime() &&
-			!['CANCELED', 'CANCELED_DUE_TO_REVIEW'].includes(appointment.appointmentStatus),
+			!appointment.appointmentStatus.includes('CANCELED'),
 	);
 	const pastAppointments = appointments.filter(
 		(appointment) =>
 			appointment.endDate <= new Date().getTime() &&
-			!['CANCELED', 'CANCELED_DUE_TO_REVIEW'].includes(appointment.appointmentStatus),
+			!appointment.appointmentStatus.includes('CANCELED'),
 	);
 
 	return (
