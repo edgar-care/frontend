@@ -17,13 +17,11 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 	const [pageIndexOld, setPageIndexOld] = useState(1);
 	const upcomingAppointments = appointments.filter(
 		(appointment) =>
-			appointment.endDate > new Date().getTime() &&
-			!appointment.appointmentStatus.includes('CANCELED'),
+			appointment.endDate > new Date().getTime() && !appointment.appointmentStatus.includes('CANCELED'),
 	);
 	const pastAppointments = appointments.filter(
 		(appointment) =>
-			appointment.endDate <= new Date().getTime() &&
-			!appointment.appointmentStatus.includes('CANCELED'),
+			appointment.endDate <= new Date().getTime() && !appointment.appointmentStatus.includes('CANCELED'),
 	);
 
 	return (
