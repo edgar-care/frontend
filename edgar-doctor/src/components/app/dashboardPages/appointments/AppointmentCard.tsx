@@ -3,6 +3,7 @@ import { Box, HStack, Icon, Skeleton, Stack, Text, VStack, useDisclosure, Button
 
 import PatientInfosDrawer from 'components/app/dashboardPages/appointments/modals/PatientInfosDrawer';
 import UpdateAppointmentHandler from 'components/app/dashboardPages/appointments/modals/UpdateAppointmentHandler';
+import CancelAppointmentHandler from 'components/app/dashboardPages/appointments/modals/CancelAppointmentHandler';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 import SidebarIcon from 'assets/icons/SidebarIcon';
@@ -23,6 +24,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 		onClose: onClosePatientInfosDrawer,
 	} = useDisclosure();
 	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
+	const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
 
 	return (
 		<HStack
@@ -75,6 +77,18 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 						<HStack px={{ base: '8px', xl: '0px' }} justify="end">
 							<Button
 								size="customSm"
+								variant="delete"
+								w="auto"
+								id="edgar-dashboardAppointmentsPage-appointmentCardCancel-button"
+								onClick={() => {
+									setSelectedAppointmentId(appointment.id);
+									onOpenCancelModal();
+								}}
+							>
+								Annuler
+							</Button>
+							<Button
+								size="customSm"
 								variant="secondary"
 								w="auto"
 								id="edgar-dashboardAppointmentsPage-appointmentCardUpdate-button"
@@ -98,6 +112,11 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 				<UpdateAppointmentHandler
 					isOpen={isOpenUpdateModal}
 					onClose={onCloseUpdateModal}
+					appointmentId={selectedAppointmentId}
+				/>
+				<CancelAppointmentHandler
+					isOpen={isOpenCancelModal}
+					onClose={onCloseCancelModal}
 					appointmentId={selectedAppointmentId}
 				/>
 			</Skeleton>

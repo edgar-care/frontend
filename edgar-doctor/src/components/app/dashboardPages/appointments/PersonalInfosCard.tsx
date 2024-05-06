@@ -1,7 +1,9 @@
 import { VStack, HStack, Box, Text } from '@chakra-ui/react';
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
 import { PatientType } from 'types/app/dashboard/patients/PatientType';
 
 const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientType }): JSX.Element => {
+	const { data: doctor } = useGetDoctorByIdQuery(patientInfos.medicalInfos.primaryDoctorId);
 	const formatHeight = (height: number): string =>
 		(height / 100).toLocaleString('en-US', { minimumFractionDigits: 2 });
 	return (
@@ -26,7 +28,9 @@ const PersonalInfosCard = ({ patientInfos }: { patientInfos: PatientType }): JSX
 					<Text size="lg">Sexe: {patientInfos.medicalInfos.sex}</Text>
 					<Text size="lg">Taille: {formatHeight(patientInfos.medicalInfos.height)}m</Text>
 					<Text size="lg">Poids: {patientInfos.medicalInfos.weight}kg</Text>
-					<Text size="lg">Médecin traitant: {patientInfos.medicalInfos.primaryDoctorId}</Text>
+					<Text size="lg">
+						Médecin traitant: {doctor?.firstname} {doctor?.name}
+					</Text>
 				</VStack>
 			</VStack>
 		</HStack>
