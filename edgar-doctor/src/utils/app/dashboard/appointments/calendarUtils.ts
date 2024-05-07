@@ -8,7 +8,7 @@ export const months: string[] = [
 	'Mai',
 	'Juin',
 	'Juillet',
-	'Aout',
+	'Août',
 	'Septembre',
 	'Octobre',
 	'Novembre',
