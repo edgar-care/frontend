@@ -1,15 +1,16 @@
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { Button, Icon, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import MirageLoader from 'components/simulationPages/chat/loader/MirageLoader';
 
 import SimulationChatMessageGroup from 'components/simulationPages/chat/SimulationChatMessageGroup';
-import { type SimulationChatEdgarCardType } from 'types/simulation/SimulationChatEdgarCardType';
 
-import { useDiagnoseDiagnosticMutation, useInitiateDiagnosticMutation } from 'services/request/simulation';
+import { useDiagnoseDiagnosticMutation } from 'services/request/simulation';
 
-import { type SimulationChatMessageType } from 'types/simulation/SimulationChatMessageType';
+import { type SimulationChatMessageType } from 'types/simulation/chat/SimulationChatMessageType';
+import { type SimulationChatEdgarCardType } from 'types/simulation/chat/SimulationChatEdgarCardType';
 
 import colors from 'theme/foundations/colors';
 
@@ -22,7 +23,6 @@ const SimulationChat = ({
 	edgarState: SimulationChatEdgarCardType;
 	setEdgarState: Dispatch<SetStateAction<SimulationChatEdgarCardType>>;
 }): JSX.Element => {
-	const [triggerInitiateDiagnostic] = useInitiateDiagnosticMutation();
 	const [triggerDiagnoseDiagnostic] = useDiagnoseDiagnosticMutation();
 	const [messages, setMessages] = useState<SimulationChatMessageType[]>([
 		{
@@ -36,6 +36,9 @@ const SimulationChat = ({
 	const [displayedMessageIndex, setDisplayedMessageIndex] = useState(0);
 	const [messageInput, setMessageInput] = useState('');
 	const [sessionId, setSessionId] = useState('');
+
+	const searchParams = useSearchParams();
+	const router = useRouter();
 
 	const submitMessage = () => {
 		if (messageInput === '') return;
@@ -65,9 +68,8 @@ const SimulationChat = ({
 	};
 
 	useEffect(() => {
-		triggerInitiateDiagnostic()
-			.unwrap()
-			.then((response) => setSessionId(response));
+		if (searchParams.get('sessionId')) setSessionId(searchParams.get('sessionId') || '');
+		else router.push('/simulation/start');
 	}, []);
 
 	return (
@@ -112,7 +114,7 @@ const SimulationChat = ({
 						</Button>
 					)}
 					{messages[messages.length - 1].isLastMessage && (
-						<Link href="/simulation/doctor">
+						<Link href={`/simulation/appointments?sessionId=${sessionId}`}>
 							<Button size="customMd" variant="primary">
 								Continuer ma simulation
 							</Button>

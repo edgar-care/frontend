@@ -74,10 +74,15 @@ const NotificationsModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 				</ModalBody>
 				<ModalFooter p="16px 24px 24px 24px">
 					<HStack w="100%">
-						<Button variant="secondary" w="100%" onClick={onClose}>
+						<Button variant="secondary" w="100%" onClick={onClose} id="edgar-notificationsModal-no-button">
 							Je ne les active pas
 						</Button>
-						<Button w="100%" variant="validate" onClick={enableNotifications}>
+						<Button
+							w="100%"
+							variant="validate"
+							onClick={enableNotifications}
+							id="edgar-notificationsModal-yes-button"
+						>
 							J’active les notifications
 						</Button>
 					</HStack>

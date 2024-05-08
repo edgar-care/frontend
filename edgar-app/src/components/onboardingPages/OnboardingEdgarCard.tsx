@@ -11,7 +11,7 @@ const OnboardingEdgarCard = ({ title }: { title: string }): JSX.Element => {
 			bg="blue.700"
 			borderRadius={{ base: '0px 0px 48px 48px', sm: '48px' }}
 			w="100%"
-			maxW={{ base: '100%', lg: '600px', '4xl': '800px' }}
+			maxW={{ base: '100%', lg: '700px', '4xl': '800px' }}
 			p={{ base: '32px', sm: '32px 64px', md: '64px', lg: '32px 64px' }}
 			justify="space-between"
 			spacing="64px"

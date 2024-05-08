@@ -37,21 +37,24 @@ const AddDocumentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		const formData = new FormData();
-		formData.append('document', data.document[0]);
-		formData.append('documentType', data.documentType as DocumentTypeType);
-		formData.append('category', data.category as DocumentCategoryType);
-		formData.append('isFavorite', data.isFavorite ? 'true' : 'false');
+		if (data.document[0].size > 15728640) toast({ title: 'Le fichier ne doit pas dépasser 15Mo', status: 'error' });
+		else {
+			const formData = new FormData();
+			formData.append('document', data.document[0]);
+			formData.append('documentType', data.documentType as DocumentTypeType);
+			formData.append('category', data.category as DocumentCategoryType);
+			formData.append('isFavorite', data.isFavorite ? 'true' : 'false');
 
-		triggerAddDocument(formData)
-			.unwrap()
-			.then(() => {
-				toast({ title: 'Votre document a été ajouté', status: 'success' });
-				onClose();
-			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
+			triggerAddDocument(formData)
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre document a été ajouté', status: 'success' });
+					onClose();
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		}
 	});
 
 	return (

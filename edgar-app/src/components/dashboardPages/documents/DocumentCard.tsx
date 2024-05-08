@@ -74,10 +74,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 					/>
 					<VStack w="100%" alignItems="start" spacing="0">
 						<Text size="boldLg">{document.name}</Text>
-						<Text size="sm">
-							Ajouté {/* le {new Date(document.createdDate).toLocaleDateString('fr-FR')} */} par Vous
-							{/* {document.ownerId} */}
-						</Text>
+						<Text size="sm">Ajouté par Vous{/* {document.ownerId} */}</Text>
 					</VStack>
 				</HStack>
 				{isMobile ? (
