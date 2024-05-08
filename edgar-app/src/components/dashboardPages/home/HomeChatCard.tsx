@@ -50,15 +50,7 @@ const HomeChatCard = (): JSX.Element => {
 	}, []);
 
 	return (
-		<VStack
-			spacing="16px"
-			w={{ base: '100%', md: 'auto' }}
-			bg="white"
-			borderRadius="16px"
-			p="16px"
-			border="2px"
-			borderColor="blue.200"
-		>
+		<VStack spacing="16px" w="100%" bg="white" borderRadius="16px" p="16px" border="2px" borderColor="blue.200">
 			<Box w="100%">
 				<Link href="/dashboard/chat">
 					<Button w="100%" size="customLg" id="edgar-dashboardHomePage-chat-button">
