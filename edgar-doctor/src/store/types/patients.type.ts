@@ -6,7 +6,7 @@ import type { TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos
 export interface PatientsStoreType {
 	id: string;
 	email: string;
-	medical_info: {
+	medical_folder: {
 		name: string;
 		firstname: string;
 		birthdate: number;
@@ -25,7 +25,7 @@ export interface PatientsStoreType {
 				day: TreatmentDayType[];
 				quantity: number;
 			}[];
-			stillRelevant: boolean;
+			still_relevant: boolean;
 		}[];
 	};
 	rendez_vous_ids: string[];

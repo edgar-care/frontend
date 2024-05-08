@@ -1,8 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type OpenSlotDTO, type SlotsStoreType } from 'store/types/slots.type';
-
 import { type AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
+
+import { type OpenSlotDTO, SlotsStoreType } from 'store/types/slots.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -17,6 +17,21 @@ const extendedApi = backendApi.injectEndpoints({
 					patientId: elem.id_patient,
 					status: elem.id_patient ? 'BOOKED' : 'OPEN',
 				})),
+		}),
+
+		getOpenSlots: builder.query<AgendaSlotType[], void>({
+			query: () => '/doctor/slots',
+			providesTags: ['doctorSlots'],
+			transformResponse: (response: { slot: SlotsStoreType[] }) =>
+				response.slot
+					.filter((slot) => !slot.id_patient)
+					.map((slot) => ({
+						id: slot.id,
+						startDate: slot.start_date * 1000,
+						endDate: slot.end_date * 1000,
+						patientId: slot.id_patient,
+						status: 'OPEN',
+					})),
 		}),
 
 		openSlot: builder.mutation<SlotsStoreType, OpenSlotDTO>({
@@ -41,4 +56,11 @@ const extendedApi = backendApi.injectEndpoints({
 	}),
 });
 
-export const { useGetSlotsQuery, useLazyGetSlotsQuery, useOpenSlotMutation, useCloseSlotMutation } = extendedApi;
+export const {
+	useGetSlotsQuery,
+	useLazyGetSlotsQuery,
+	useGetOpenSlotsQuery,
+	useLazyGetOpenSlotsQuery,
+	useOpenSlotMutation,
+	useCloseSlotMutation,
+} = extendedApi;
