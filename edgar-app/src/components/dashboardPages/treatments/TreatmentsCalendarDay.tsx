@@ -20,11 +20,13 @@ const TreatmentsCalendarDay = ({
 	periods,
 	checkedTreatments,
 	medicinesInfo,
+	displayDay = true,
 }: {
 	day: HealthIssuesMedicinesDayType;
 	periods: Record<string, PatientMedicineType[]>;
 	checkedTreatments: Record<string, TreatmentFollowUpType[]>;
 	medicinesInfo: MedicineType[];
+	displayDay?: boolean;
 }): JSX.Element => {
 	const availableDays: HealthIssuesMedicinesDayType[] = [
 		'MONDAY',
@@ -41,9 +43,11 @@ const TreatmentsCalendarDay = ({
 
 	return (
 		<VStack align="start" w="100%">
-			<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
-				{displayedDay[availableDays.indexOf(day)]}
-			</Text>
+			{displayDay && (
+				<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
+					{displayedDay[availableDays.indexOf(day)]}
+				</Text>
+			)}
 			{Object.entries(periods).map(([period, treatments]) => {
 				const isToday =
 					(new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase() as TreatmentDayType) ===

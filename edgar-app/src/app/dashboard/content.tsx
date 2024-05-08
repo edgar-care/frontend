@@ -4,6 +4,7 @@ import NotificationsHandler from 'components/dashboardPages/notifications-modal/
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import HomeChatCard from 'components/dashboardPages/home/HomeChatCard';
 import HomeAppointmentsCard from 'components/dashboardPages/home/HomeAppointmentsCard';
+import HomeTreatmentsCard from 'components/dashboardPages/home/HomeTreatmentsCard';
 
 const DashboardContent = (): JSX.Element => {
 	const {
@@ -25,6 +26,7 @@ const DashboardContent = (): JSX.Element => {
 			<Stack direction={{ base: 'column', lg: 'row' }} w="100%" align="start" spacing="32px">
 				<HomeAppointmentsCard />
 				<HomeChatCard />
+				<HomeTreatmentsCard />
 			</Stack>
 			<NotificationsHandler isOpen={isOpenNotificationsModal} onClose={onCloseNotificationsModal} />
 		</VStack>
