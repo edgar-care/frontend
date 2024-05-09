@@ -102,14 +102,9 @@ const ChatMessages = ({
 					}}
 				>
 					{Object.entries(groupedMessages).map(([day, messages], index) => (
-						<VStack w="100%" spacing="16px">
+						<VStack w="100%" spacing="16px" key={day}>
 							{index !== 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
-							<ChatMessageGroup
-								key={day}
-								day={day}
-								messages={messages}
-								lastUnseenMessage={lastUnseenMessage}
-							/>
+							<ChatMessageGroup day={day} messages={messages} lastUnseenMessage={lastUnseenMessage} />
 						</VStack>
 					))}
 				</VStack>

@@ -23,8 +23,8 @@ const ChatMessageGroup = ({
 			})}
 		</Text>
 		<VStack w="100%" spacing={{ base: '8px', md: '16px' }}>
-			{messages.map((message) => (
-				<VStack w="100%">
+			{messages.map((message, index) => (
+				<VStack w="100%" key={`${message.ownerId}-${message.sentTime}-${index}`}>
 					{lastUnseenMessage === message && (
 						<HStack w="100%">
 							<Box as="span" w="100%" h="1px" bg="blue.500" />
