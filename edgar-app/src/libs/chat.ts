@@ -145,7 +145,7 @@ class Chat {
 		}
 	};
 
-	public createChat = async (message: string, recipientsIds: string[]) => {
+	public createChat = (message: string, recipientsIds: string[]) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
@@ -163,7 +163,7 @@ class Chat {
 		}
 	};
 
-	public readChat = async (chatId: string) => {
+	public readChat = (chatId: string) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
@@ -181,7 +181,7 @@ class Chat {
 		}
 	};
 
-	public sendMessage = async (message: string, chatId: string) => {
+	public sendMessage = (message: string, chatId: string) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
@@ -199,7 +199,7 @@ class Chat {
 		}
 	};
 
-	public getMessages = async () => {
+	public getMessages = () => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
