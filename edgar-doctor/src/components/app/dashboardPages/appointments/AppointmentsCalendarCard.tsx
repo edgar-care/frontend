@@ -77,7 +77,7 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments?: Appointment
 								appointments
 									.slice()
 									.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
-									.filter((appointment) => appointment.endDate > new Date().getTime())[0]
+									.filter((appointment) => !appointment.appointmentStatus.includes('CANCELED') && appointment.endDate > new Date().getTime())[0]
 							}
 						/>
 					</VStack>
