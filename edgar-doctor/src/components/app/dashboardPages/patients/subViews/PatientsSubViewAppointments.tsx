@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { Button, HStack, VStack } from '@chakra-ui/react';
 
 import paginationHandler from 'utils/navigation/paginationHandler';
-
-import { type PatientType } from 'types/app/dashboard/patients/PatientType';
-import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
 import Pagination from 'components/navigation/Pagination';
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import AppointmentCard from '../../appointments/AppointmentCard';
+
+import { type PatientType } from 'types/app/dashboard/patients/PatientType';
+import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
 
 const PatientsSubViewAppointments = ({
 	selectedPatient,
