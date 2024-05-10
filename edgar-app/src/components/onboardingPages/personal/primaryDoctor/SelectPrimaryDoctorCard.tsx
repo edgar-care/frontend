@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction } from 'react';
 import { HStack, Icon, Text, VStack } from '@chakra-ui/react';
 
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
+import { type DoctorType } from 'types/dashboard/DoctorType';
 
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
