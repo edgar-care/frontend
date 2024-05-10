@@ -7,6 +7,7 @@ import {
 	type AppointmentsStoreType,
 	type UpdatePatientAppointmentsDTO,
 } from 'store/types/appointments.type';
+import { AppointmentStatusType } from 'types/dashboard/appointments/AppointmentStatusType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -20,6 +21,9 @@ const extendedApi = backendApi.injectEndpoints({
 					patientId: appointment.id_patient,
 					startDate: appointment.start_date * 1000,
 					endDate: appointment.end_date * 1000,
+					cancelationReason: appointment.cancelation_reason,
+					appointmentStatus: appointment.appointment_status as AppointmentStatusType,
+					sessionId: appointment.session_id,
 				})),
 		}),
 
@@ -32,6 +36,9 @@ const extendedApi = backendApi.injectEndpoints({
 				patientId: response.rdv.Rdv.id_patient,
 				startDate: response.rdv.Rdv.start_date * 1000,
 				endDate: response.rdv.Rdv.end_date * 1000,
+				cancelationReason: response.rdv.Rdv.cancelation_reason,
+				appointmentStatus: response.rdv.Rdv.appointment_status as AppointmentStatusType,
+				sessionId: response.rdv.Rdv.session_id,
 			}),
 		}),
 
@@ -46,6 +53,9 @@ const extendedApi = backendApi.injectEndpoints({
 						patientId: appointment.id_patient,
 						startDate: appointment.start_date * 1000,
 						endDate: appointment.end_date * 1000,
+						cancelationReason: appointment.cancelation_reason,
+						appointmentStatus: appointment.appointment_status as AppointmentStatusType,
+						sessionId: appointment.session_id,
 					}))
 					.sort((a, b) => a.startDate - b.startDate),
 		}),

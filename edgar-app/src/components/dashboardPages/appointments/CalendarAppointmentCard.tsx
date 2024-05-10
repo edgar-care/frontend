@@ -15,7 +15,7 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
 
 	const appointmentStartDate = new Date(appointment.startDate);
-	const appointmentEndDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.endDate);
 
 	return (
 		<HStack spacing="4px" w="100%" p="12px" borderRadius="8px" border="2px solid" borderColor="blue.200" bg="white">

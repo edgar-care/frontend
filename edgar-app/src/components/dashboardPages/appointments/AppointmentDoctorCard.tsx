@@ -10,8 +10,8 @@ import CalendarNextIllustration from 'assets/illustrations/CalendarNextIllustrat
 
 import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
 
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
 import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
+import { type DoctorType } from 'types/dashboard/DoctorType';
 
 const AppointmentDoctorCard = ({
 	doctorInfos,
@@ -81,7 +81,7 @@ const AppointmentDoctorCard = ({
 			>
 				<VStack align="starts">
 					<VStack align="start" spacing="0px">
-						<Text size="boldLg">{doctorInfos.name}</Text>
+						<Text size="boldLg">Docteur {doctorInfos.name}</Text>
 						<Text>
 							{doctorInfos.address.street}, {doctorInfos.address.zipCode} - {doctorInfos.address.city}
 						</Text>
