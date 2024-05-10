@@ -148,7 +148,7 @@ const ChatMessages = ({
 							value={inputChatMessage}
 							onChange={(e) => setInputChatMessage(e.target.value)}
 							onKeyDown={(e) => {
-								if (e.key === 'Enter') submitMessage();
+								if (!e.shiftKey && e.key === 'Enter') submitMessage();
 							}}
 						/>
 						<InputRightElement>
