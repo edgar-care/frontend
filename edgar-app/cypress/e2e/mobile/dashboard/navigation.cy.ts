@@ -37,7 +37,7 @@ describe('Navigation tests - Mobile', () => {
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 7);
+				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 8);
 			});
 
 			it('Good number of labels', () => {
