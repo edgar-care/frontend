@@ -17,8 +17,8 @@ const PatientsSubViewAppointments = ({
 }: {
 	selectedPatient: PatientType | undefined;
 }): JSX.Element => {
-	const [pageIndexNext, setPageIndexNext] = useState(1);
-	const [pageIndexOld, setPageIndexOld] = useState(1);
+	const [pageIndexUpcoming, setPageIndexUpcoming] = useState(1);
+	const [pageIndexPast, setPageIndexPast] = useState(1);
 	const [appointmentType, setAppointmentType] = useState<'upcoming' | 'past'>('upcoming');
 	const { data: appointments } = useGetDoctorAppointmentsQuery();
 	const patientAppointments = appointments
@@ -38,25 +38,35 @@ const PatientsSubViewAppointments = ({
 	return (
 		<>
 			<HStack w="100%" spacing="8px">
-				<Button w="100%" size="md" variant="primary" onClick={() => setAppointmentType('upcoming')}>
+				<Button
+					w="100%"
+					size="md"
+					variant={appointmentType === 'upcoming' ? 'primary' : 'secondary'}
+					onClick={() => setAppointmentType('upcoming')}
+				>
 					Prochain rendez-vous
 				</Button>
-				<Button w="100%" size="md" variant="secondary" onClick={() => setAppointmentType('past')}>
+				<Button
+					w="100%"
+					size="md"
+					variant={appointmentType === 'past' ? 'primary' : 'secondary'}
+					onClick={() => setAppointmentType('past')}
+				>
 					Rendez-vous passés
 				</Button>
 			</HStack>
 			{appointmentType === 'upcoming' && upcomingAppointments && (
 				<VStack w="100%" h="100%" justify="space-between">
 					<VStack w="100%" spacing="4px">
-						{paginationHandler(upcomingAppointments, pageIndexNext, 7).map((patientAppointment) => (
+						{paginationHandler(upcomingAppointments, pageIndexUpcoming, 7).map((patientAppointment) => (
 							<AppointmentCard appointment={patientAppointment} key={patientAppointment.id} />
 						))}
 					</VStack>
 					{upcomingAppointments.length > 7 && (
 						<Pagination
-							pageIndex={pageIndexNext}
+							pageIndex={pageIndexUpcoming}
 							maxPageNumbers={countMaxNumberPage(upcomingAppointments, 7)}
-							setPageIndex={setPageIndexNext}
+							setPageIndex={setPageIndexUpcoming}
 							variant="secondary"
 							size="small"
 						/>
@@ -66,15 +76,15 @@ const PatientsSubViewAppointments = ({
 			{appointmentType === 'past' && pastAppointments && (
 				<VStack w="100%" h="100%" justify="space-between">
 					<VStack w="100%" spacing="4px">
-						{paginationHandler(pastAppointments, pageIndexOld, 3).map((patientAppointment) => (
+						{paginationHandler(pastAppointments, pageIndexPast, 3).map((patientAppointment) => (
 							<AppointmentCard appointment={patientAppointment} key={patientAppointment.id} />
 						))}
 					</VStack>
 					{pastAppointments.length > 7 && (
 						<Pagination
-							pageIndex={pageIndexOld}
+							pageIndex={pageIndexPast}
 							maxPageNumbers={countMaxNumberPage(pastAppointments, 7)}
-							setPageIndex={setPageIndexOld}
+							setPageIndex={setPageIndexPast}
 							variant="secondary"
 							size="small"
 						/>
