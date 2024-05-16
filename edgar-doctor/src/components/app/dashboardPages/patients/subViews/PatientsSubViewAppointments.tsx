@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Button, HStack, VStack } from '@chakra-ui/react';
+import { Button, HStack, VStack, useBreakpointValue } from '@chakra-ui/react';
 
 import paginationHandler from 'utils/navigation/paginationHandler';
 import Pagination from 'components/navigation/Pagination';
@@ -17,6 +17,7 @@ const PatientsSubViewAppointments = ({
 }: {
 	selectedPatient: PatientType | undefined;
 }): JSX.Element => {
+	const isMobile = useBreakpointValue({ base: true, smd: false });
 	const [pageIndexUpcoming, setPageIndexUpcoming] = useState(1);
 	const [pageIndexPast, setPageIndexPast] = useState(1);
 	const [appointmentType, setAppointmentType] = useState<'upcoming' | 'past'>('upcoming');
@@ -37,24 +38,45 @@ const PatientsSubViewAppointments = ({
 
 	return (
 		<>
-			<HStack w="100%" spacing="8px">
-				<Button
-					w="100%"
-					size="md"
-					variant={appointmentType === 'upcoming' ? 'primary' : 'secondary'}
-					onClick={() => setAppointmentType('upcoming')}
-				>
-					Prochain rendez-vous
-				</Button>
-				<Button
-					w="100%"
-					size="md"
-					variant={appointmentType === 'past' ? 'primary' : 'secondary'}
-					onClick={() => setAppointmentType('past')}
-				>
-					Rendez-vous passés
-				</Button>
-			</HStack>
+			{isMobile ? (
+				<VStack w="100%" spacing="8px">
+					<Button
+						w="100%"
+						size="customSm"
+						variant={appointmentType === 'upcoming' ? 'primary' : 'secondary'}
+						onClick={() => setAppointmentType('upcoming')}
+					>
+						Prochain rendez-vous
+					</Button>
+					<Button
+						w="100%"
+						size="customSm"
+						variant={appointmentType === 'past' ? 'primary' : 'secondary'}
+						onClick={() => setAppointmentType('past')}
+					>
+						Rendez-vous passés
+					</Button>
+				</VStack>
+			) : (
+				<HStack w="100%" spacing="8px">
+					<Button
+						w="100%"
+						size="md"
+						variant={appointmentType === 'upcoming' ? 'primary' : 'secondary'}
+						onClick={() => setAppointmentType('upcoming')}
+					>
+						Prochain rendez-vous
+					</Button>
+					<Button
+						w="100%"
+						size="md"
+						variant={appointmentType === 'past' ? 'primary' : 'secondary'}
+						onClick={() => setAppointmentType('past')}
+					>
+						Rendez-vous passés
+					</Button>
+				</HStack>
+			)}
 			{appointmentType === 'upcoming' && upcomingAppointments && (
 				<VStack w="100%" h="100%" justify="space-between">
 					<VStack w="100%" spacing="4px">
