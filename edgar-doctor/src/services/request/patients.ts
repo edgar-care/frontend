@@ -90,7 +90,7 @@ const extendedApi = backendApi.injectEndpoints({
 						height: params.medicalFolder.height,
 						weight: params.medicalFolder.weight,
 						primary_doctor_id: params.medicalFolder.primaryDoctorId,
-						medical_antecedents: params.medicalAntecedents.map((antecedent) => ({
+						medical_antecedents: params.medicalFolder.medicalAntecedents.map((antecedent) => ({
 							name: antecedent.name,
 							treatments: antecedent.medicines.map((medicine) => ({
 								medicine_id: medicine.medicineId,
