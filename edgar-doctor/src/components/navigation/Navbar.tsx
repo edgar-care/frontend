@@ -6,6 +6,7 @@ import ProfileCard from 'components/navigation/ProfileCard';
 
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import CalendarCheckIcon from 'assets/icons/CalendarCheckIcon';
+import ChatIconDot from 'assets/icons/ChatIconDot';
 import PeopleCardIcon from 'assets/icons/PeopleCardIcon';
 import HeartPulseIcon from 'assets/icons/HeartPulseIcon';
 import HelpIcon from 'assets/icons/HelpIcon';
@@ -44,7 +45,14 @@ const Navbar = (): JSX.Element => {
 		},
 	];
 
-	const secondaryTabs: NavbarTabType[] = [];
+	const secondaryTabs: NavbarTabType[] = [
+		{
+			name: 'Messagerie',
+			path: '/dashboard/chat',
+			icon: ChatIconDot,
+			id: 'chat',
+		},
+	];
 
 	const tertiaryTabs: NavbarTabType[] = [
 		{
