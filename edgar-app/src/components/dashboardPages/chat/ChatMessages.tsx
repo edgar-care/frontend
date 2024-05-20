@@ -9,6 +9,7 @@ import {
 	Stack,
 	Text,
 	useBreakpointValue,
+	useTimeout,
 	VStack,
 } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
@@ -67,6 +68,10 @@ const ChatMessages = ({
 			block: 'end',
 		});
 	}, [chat]);
+
+	useTimeout(() => {
+		actions.readChat(chat.id);
+	}, 3000);
 
 	return (
 		<VStack
