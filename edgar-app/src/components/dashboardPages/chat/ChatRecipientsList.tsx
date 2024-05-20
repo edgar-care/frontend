@@ -1,8 +1,9 @@
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
-import { Button, VStack } from '@chakra-ui/react';
+import { Button, useDisclosure, VStack } from '@chakra-ui/react';
 
 import ChatCard from 'components/dashboardPages/chat/ChatCard';
 import Pagination from 'components/navigation/Pagination';
+import SelectDoctorHandler from 'components/dashboardPages/chat/modals/SelectDoctorHandler';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
@@ -23,6 +24,8 @@ const ChatRecipientsList = ({
 	const [primaryDoctorChat, setPrimaryDoctorChat] = useState<ChatType | undefined>(undefined);
 	const [pageIndex, setPageIndex] = useState(1);
 
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	const nonPrimaryDoctorChats = chats.filter((chat) => chat !== primaryDoctorChat);
 
 	useEffect(() => {
@@ -35,7 +38,9 @@ const ChatRecipientsList = ({
 
 	return (
 		<VStack w="100%" maxW={{ base: '100%', '2xl': '448px' }} align="start" spacing="16px" h="100%">
-			<Button w="100%">Démarrer une nouvelle conversation</Button>
+			<Button w="100%" onClick={onOpen}>
+				Démarrer une nouvelle conversation
+			</Button>
 			{primaryDoctorChat && (
 				<ChatCard chat={primaryDoctorChat} onClick={() => setSelectedChatId(primaryDoctorChat.id)} />
 			)}
@@ -55,6 +60,7 @@ const ChatRecipientsList = ({
 					/>
 				)}
 			</VStack>
+			<SelectDoctorHandler isOpen={isOpen} onClose={onClose} />
 		</VStack>
 	);
 };

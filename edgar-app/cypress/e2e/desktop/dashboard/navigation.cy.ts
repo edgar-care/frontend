@@ -114,7 +114,7 @@ describe('Navigation tests - Desktop', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-medical-text').should('be.visible');
 			});
 
-			it('Good content for "Messagerie" tab', () => {
+			it('"Messagerie" tab visible', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-chat-text').should('be.visible');
 			});
 

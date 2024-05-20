@@ -137,7 +137,7 @@ class Chat {
 					authToken: localStorage.getItem('token'),
 					action: 'create_chat',
 					message,
-					recipients_ids: recipientsIds,
+					recipient_ids: recipientsIds,
 				}),
 			);
 			return { status: 'success', data: 'Chat created' };
