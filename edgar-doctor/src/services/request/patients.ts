@@ -1,8 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type PatientsStoreType } from 'store/types/patients.type';
+import { type PatientsStoreType, type AddPatientDTO } from 'store/types/patients.type';
 
-import { type PatientType, AddPatientDTO } from 'types/app/dashboard/patients/PatientType';
+import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
