@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Box, HStack, Icon, InputGroup, InputRightElement, Text, Textarea, VStack } from '@chakra-ui/react';
+import { Box, HStack, Icon, InputGroup, InputRightElement, Text, Textarea, useToast, VStack } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
 
 import { useChatContext } from 'contexts/chat';
+import { useAuthContext } from 'contexts/auth';
 
 import { type DoctorType } from 'types/dashboard/DoctorType';
 
@@ -17,16 +18,19 @@ const StartChatContent = ({
 	selectedDoctor: DoctorType;
 	onClose: () => void;
 }): JSX.Element => {
+	const auth = useAuthContext();
 	const { actions } = useChatContext();
 
 	const [inputChatMessage, setInputChatMessage] = useState('');
 
+	const toast = useToast({ duration: 3000, isClosable: true });
+
 	const submitMessage = () => {
 		if (inputChatMessage) {
-			actions.createChat(inputChatMessage, [selectedDoctor.id]);
+			actions.createChat(inputChatMessage, [auth.getId(), selectedDoctor.id]);
 			setInputChatMessage('');
 			onClose();
-		}
+		} else toast({ title: 'Veillez écrire un message', status: 'error' });
 	};
 
 	return (
