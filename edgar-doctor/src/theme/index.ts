@@ -11,7 +11,9 @@ import Drawer from 'theme/components/drawer';
 import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
+import Modal from 'theme/components/modal';
 import Text from 'theme/components/text';
+import Textarea from 'theme/components/textarea';
 import UnorderedList from 'theme/components/unorderedList';
 
 const breakpoints = {
@@ -42,7 +44,9 @@ const overrides = {
 		FormLabel,
 		Input,
 		Link,
+		Modal,
 		Text,
+		Textarea,
 		UnorderedList,
 	},
 };

@@ -9,14 +9,16 @@ import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 import SidebarIcon from 'assets/icons/SidebarIcon';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
+
 import { useGetPatientByIdQuery } from 'services/request/patients';
 
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
 	const { data: patient, isLoading } = useGetPatientByIdQuery(appointment.patientId);
-	const appointmentStartDate = new Date(appointment.startDate);
-	const appointmentEndDate = new Date(appointment.endDate);
 
 	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
+
+	const appointmentStartDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.endDate);
 
 	const {
 		isOpen: isOpenPatientInfosDrawer,
@@ -38,7 +40,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 			align="stretch"
 		>
 			<Box as="span" w="4px" bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'} borderRadius="4px" />
-			<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%">
+			<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%" borderRadius="8px">
 				<Stack
 					direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }}
 					justify="space-between"

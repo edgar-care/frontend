@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Box, HStack, Icon, Text, VStack, useDisclosure, Button, Skeleton } from '@chakra-ui/react';
 
 import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
-import { useState } from 'react';
 
 import { type AppointmentType } from 'types/app/dashboard/appointments/appointmentType';
+
 import { useGetPatientByIdQuery } from 'services/request/patients';
 import UpdateAppointmentHandler from './modals/UpdateAppointmentHandler';
 import CancelAppointmentHandler from './modals/CancelAppointmentHandler';
@@ -27,7 +28,7 @@ const CalendarAppointmentCard = ({ appointment }: { appointment: AppointmentType
 				bg={appointmentEndDate > new Date() ? 'green.500' : 'blue.200'}
 				borderRadius="4px"
 			/>
-			<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%">
+			<Skeleton isLoaded={!isLoading && patient !== undefined} w="100%" borderRadius="8px">
 				<VStack spacing="16px" w="100%" align="end">
 					<VStack w="100%" spacing="0px" px="8px" align="start">
 						<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCalendarCardDoctorName-text">
