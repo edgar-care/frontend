@@ -46,16 +46,16 @@ const ChatRecipientsList = ({
 			)}
 			<VStack w="100%" h="100%" justify="space-between">
 				<VStack w="100%">
-					{paginationHandler(nonPrimaryDoctorChats, pageIndex, 5).map((chat) => (
+					{paginationHandler(nonPrimaryDoctorChats, pageIndex, 8).map((chat) => (
 						<ChatCard chat={chat} key={chat.id} onClick={() => setSelectedChatId(chat.id)} />
 					))}
 				</VStack>
-				{nonPrimaryDoctorChats.length > 5 && (
+				{nonPrimaryDoctorChats.length > 8 && (
 					<Pagination
 						variant="secondary"
 						size="small"
 						pageIndex={pageIndex}
-						maxPageNumbers={countMaxNumberPage(nonPrimaryDoctorChats, 5)}
+						maxPageNumbers={countMaxNumberPage(nonPrimaryDoctorChats, 8)}
 						setPageIndex={setPageIndex}
 					/>
 				)}
