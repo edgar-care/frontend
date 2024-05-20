@@ -1,21 +1,24 @@
-export type WebSocketMessage = {
-	method:
-		| 'createChatResponse'
-		| 'readChatResponse'
-		| 'sendMessageResponse'
-		| 'getMessagesResponse'
-		| 'receiveMessage';
-	data: unknown;
-};
+export type WebSocketMessageAction = 'create_chat' | 'read_chat' | 'get_message' | 'receive_message';
 
 export type ReceiveChatMessage = {
+	action: WebSocketMessageAction;
 	owner_id: string;
 	message: string;
 	timestamp: number;
 	chat_id: string;
 };
 
+export type ChatResponses = {
+	action: WebSocketMessageAction;
+	chats: WebsocketChatType[];
+};
+
 export type ChatResponse = {
+	action: WebSocketMessageAction;
+	chat: WebsocketChatType;
+};
+
+export type WebsocketChatType = {
 	id: string;
 	participants: {
 		participant_id: string;
@@ -24,27 +27,6 @@ export type ChatResponse = {
 	messages: {
 		owner_id: string;
 		message: string;
-		sent_time: number;
-	}[];
-};
-
-export type MessageResponse = {
-	id: string;
-	participants: {
-		participant_id: string;
-		last_seen: number;
-	}[];
-	message: {
-		owner_id: string;
-		message: string;
-		sent_time: number;
-	};
-};
-
-export type ReadChatResponse = {
-	id: string;
-	participants: {
-		participant_id: string;
-		last_seen: number;
+		sended_time: number;
 	}[];
 };
