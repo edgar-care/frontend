@@ -31,3 +31,26 @@ export interface PatientsStoreType {
 	rendez_vous_ids: string[];
 	documents_ids: string[];
 }
+
+export interface AddPatientDTO {
+	email: string;
+	medicalFolder: {
+		name: string;
+		firstname: string;
+		birthdate: number;
+		sex: PatientSexType;
+		height: number;
+		weight: number;
+		primaryDoctorId: string;
+		medicalAntecedents: {
+			name: string;
+			medicines: {
+				medicineId: string;
+				period: TreatmentPeriodType[];
+				day: TreatmentDayType[];
+				quantity: number;
+			}[];
+			stillRelevant: boolean;
+		}[];
+	};
+}
