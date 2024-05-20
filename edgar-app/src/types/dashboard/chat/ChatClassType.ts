@@ -10,7 +10,7 @@ export type ReceiveChatMessage = {
 
 export type ChatResponses = {
 	action: WebSocketMessageAction;
-	chats: WebsocketChatType[];
+	chats: WebsocketChatType[] | null;
 };
 
 export type ChatResponse = {

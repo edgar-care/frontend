@@ -76,7 +76,7 @@ class Chat {
 	private handleGetMessagesResponse = (data: ChatResponses) => {
 		if (this.setChats) {
 			this.setChats(
-				data.chats.map((chat) => ({
+				data.chats?.map((chat) => ({
 					id: chat.id,
 					participants: chat.participants.map((participant) => ({
 						participantId: participant.participant_id,
@@ -87,7 +87,7 @@ class Chat {
 						message: message.message,
 						sentTime: message.sended_time * 1000,
 					})),
-				})),
+				})) || [],
 			);
 		}
 	};
