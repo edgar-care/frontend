@@ -2,7 +2,7 @@ import { backendApi } from 'services/apiService';
 
 import { type PatientsStoreType } from 'store/types/patients.type';
 
-import { type PatientType } from 'types/app/dashboard/patients/PatientType';
+import { type PatientType, AddPatientDTO } from 'types/app/dashboard/patients/PatientType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -76,8 +76,37 @@ const extendedApi = backendApi.injectEndpoints({
 					documentIds: patient.documents_ids,
 				})),
 		}),
+		addPatient: builder.mutation<void, AddPatientDTO>({
+			query: (params) => ({
+				url: '/doctor/patient',
+				method: 'POST',
+				body: {
+					email: params.email,
+					medical_info: {
+						name: params.medicalFolder.name,
+						firstname: params.medicalFolder.firstname,
+						birthname: params.medicalFolder.birthdate,
+						sex: params.medicalFolder.sex,
+						height: params.medicalFolder.height,
+						weight: params.medicalFolder.weight,
+						primary_doctor_id: params.medicalFolder.primaryDoctorId,
+						medical_antecedents: params.medicalAntecedents.map((antecedent) => ({
+							name: antecedent.name,
+							treatments: antecedent.medicines.map((medicine) => ({
+								medicine_id: medicine.medicineId,
+								period: medicine.period,
+								day: medicine.day,
+								quantity: medicine.quantity,
+							})),
+							still_relevant: antecedent.stillRelevant,
+						})),
+					},
+				},
+			}),
+			invalidatesTags: ['patients'],
+		}),
 	}),
 });
 
-export const { useGetPatientByIdQuery, useLazyGetPatientByIdQuery, useGetPatientsQuery, useLazyGetPatientsQuery } =
+export const { useGetPatientByIdQuery, useLazyGetPatientByIdQuery, useGetPatientsQuery, useLazyGetPatientsQuery, useAddPatientMutation } =
 	extendedApi;
