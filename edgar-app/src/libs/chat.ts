@@ -3,13 +3,7 @@ import { type Dispatch, type SetStateAction } from 'react';
 import { WS_URL } from 'config/constants';
 
 import { type ChatType } from 'types/dashboard/chat/ChatType';
-import type {
-	ChatResponse,
-	MessageResponse,
-	ReadChatResponse,
-	ReceiveChatMessage,
-	WebSocketMessage,
-} from 'types/dashboard/chat/ChatClassType';
+import type { ChatResponse, ChatResponses, ReceiveChatMessage } from 'types/dashboard/chat/ChatClassType';
 
 class Chat {
 	private readonly socket: WebSocket | undefined;
@@ -25,9 +19,6 @@ class Chat {
 				this.handleMessage(event.data);
 			});
 
-			if (socket.readyState === WebSocket.OPEN)
-				socket.send(JSON.stringify({ auth: localStorage.getItem('token'), method: 'available' }));
-
 			this.socket = socket;
 		} catch (error) {
 			console.error(error);
@@ -35,13 +26,12 @@ class Chat {
 	}
 
 	private handleMessage = (data: string) => {
-		const message: WebSocketMessage = JSON.parse(data);
+		const message = JSON.parse(data);
 
-		if (message.method === 'createChatResponse') this.handleCreateChatResponse(message.data as ChatResponse);
-		if (message.method === 'readChatResponse') this.handleReadChatResponse(message.data as ReadChatResponse);
-		if (message.method === 'sendMessageResponse') this.handleSendMessageResponse(message.data as MessageResponse);
-		if (message.method === 'getMessagesResponse') this.handleGetMessagesResponse(message.data as ChatResponse[]);
-		if (message.method === 'receiveMessage') this.handleReceiveMessage(message.data as ReceiveChatMessage);
+		if (message.action === 'get_message') this.handleGetMessagesResponse(message as ChatResponses);
+		if (message.action === 'receive_message') this.handleReceiveMessage(message as ReceiveChatMessage);
+		if (message.action === 'create_chat') this.handleCreateChatResponse(message as ChatResponse);
+		if (message.action === 'read_message') this.handleReadChatResponse(message as ChatResponse);
 	};
 
 	private handleCreateChatResponse = (data: ChatResponse) => {
@@ -49,31 +39,31 @@ class Chat {
 			this.setChats((prev) => [
 				...prev,
 				{
-					id: data.id,
-					participants: data.participants.map((participant) => ({
+					id: data.chat.id,
+					participants: data.chat.participants.map((participant) => ({
 						participantId: participant.participant_id,
-						lastSeen: participant.last_seen,
+						lastSeen: participant.last_seen * 1000,
 					})),
-					messages: data.messages.map((message) => ({
+					messages: data.chat.messages.map((message) => ({
 						ownerId: message.owner_id,
 						message: message.message,
-						sentTime: message.sent_time,
+						sentTime: message.sended_time * 1000,
 					})),
 				},
 			]);
 		}
 	};
 
-	private handleReadChatResponse = (data: ReadChatResponse) => {
+	private handleReadChatResponse = (data: ChatResponse) => {
 		if (this.setChats) {
 			this.setChats((prev) =>
 				prev.map((chat) =>
-					chat.id === data.id
+					chat.id === data.chat.id
 						? {
 								id: chat.id,
-								participants: chat.participants.map((participant) => ({
-									participantId: participant.participantId,
-									lastSeen: Date.now(),
+								participants: data.chat.participants.map((participant) => ({
+									participantId: participant.participant_id,
+									lastSeen: participant.last_seen * 1000,
 								})),
 								messages: chat.messages,
 							}
@@ -83,44 +73,21 @@ class Chat {
 		}
 	};
 
-	private handleSendMessageResponse = (data: MessageResponse) => {
-		if (this.setChats) {
-			this.setChats((prev) =>
-				prev.map((chat) =>
-					chat.id === data.id
-						? {
-								id: chat.id,
-								participants: chat.participants.map((participant) => ({
-									participantId: participant.participantId,
-									lastSeen: participant.lastSeen,
-								})),
-								messages: chat.messages.concat({
-									ownerId: data.message.owner_id,
-									message: data.message.message,
-									sentTime: data.message.sent_time,
-								}),
-							}
-						: chat,
-				),
-			);
-		}
-	};
-
-	private handleGetMessagesResponse = (data: ChatResponse[]) => {
+	private handleGetMessagesResponse = (data: ChatResponses) => {
 		if (this.setChats) {
 			this.setChats(
-				data.map((chat) => ({
+				data.chats?.map((chat) => ({
 					id: chat.id,
 					participants: chat.participants.map((participant) => ({
 						participantId: participant.participant_id,
-						lastSeen: participant.last_seen,
+						lastSeen: participant.last_seen * 1000,
 					})),
 					messages: chat.messages.map((message) => ({
 						ownerId: message.owner_id,
 						message: message.message,
-						sentTime: message.sent_time,
+						sentTime: message.sended_time * 1000,
 					})),
-				})),
+				})) || [],
 			);
 		}
 	};
@@ -132,11 +99,14 @@ class Chat {
 					chat.id === data.chat_id
 						? {
 								id: chat.id,
-								participants: chat.participants,
+								participants: chat.participants.map((participant) => ({
+									participantId: participant.participantId,
+									lastSeen: participant.lastSeen,
+								})),
 								messages: chat.messages.concat({
 									ownerId: data.owner_id,
 									message: data.message,
-									sentTime: data.timestamp,
+									sentTime: data.timestamp * 1000,
 								}),
 							}
 						: chat,
@@ -145,15 +115,29 @@ class Chat {
 		}
 	};
 
-	public createChat = async (message: string, recipientsIds: string[]) => {
+	public makeReady = () => {
+		if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+			this.socket.send(JSON.stringify({ action: 'ready', authToken: localStorage.getItem('token') }));
+			this.getMessages();
+		}
+	};
+
+	public getSocketState = () => this.socket?.readyState;
+
+	public closeSocket = () => {
+		if (this.socket && this.socket.readyState === WebSocket.OPEN) this.socket.close();
+	};
+
+	public createChat = (message: string, recipientsIds: string[]) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
 			this.socket.send(
 				JSON.stringify({
-					auth: localStorage.getItem('token'),
-					method: 'createChat',
-					content: { message, recipients_ids: recipientsIds },
+					authToken: localStorage.getItem('token'),
+					action: 'create_chat',
+					message,
+					recipients_ids: recipientsIds,
 				}),
 			);
 			return { status: 'success', data: 'Chat created' };
@@ -163,15 +147,15 @@ class Chat {
 		}
 	};
 
-	public readChat = async (chatId: string) => {
+	public readChat = (chatId: string) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
 			this.socket.send(
 				JSON.stringify({
-					auth: localStorage.getItem('token'),
-					method: 'readChat',
-					content: { chat_id: chatId },
+					authToken: localStorage.getItem('token'),
+					action: 'read_message',
+					chat_id: chatId,
 				}),
 			);
 			return { status: 'success', data: 'Chat read' };
@@ -181,15 +165,16 @@ class Chat {
 		}
 	};
 
-	public sendMessage = async (message: string, chatId: string) => {
+	public sendMessage = (message: string, chatId: string) => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
 			this.socket.send(
 				JSON.stringify({
-					auth: localStorage.getItem('token'),
-					method: 'sendMessage',
-					content: { message, chat_id: chatId },
+					authToken: localStorage.getItem('token'),
+					action: 'send_message',
+					message,
+					chat_id: chatId,
 				}),
 			);
 			return { status: 'success', data: 'Message sent' };
@@ -199,11 +184,11 @@ class Chat {
 		}
 	};
 
-	public getMessages = async () => {
+	public getMessages = () => {
 		try {
 			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
 
-			this.socket.send(JSON.stringify({ auth: localStorage.getItem('token'), method: 'getMessages' }));
+			this.socket.send(JSON.stringify({ authToken: localStorage.getItem('token'), action: 'get_messages' }));
 			return { status: 'success', data: 'Message sent' };
 		} catch (error) {
 			console.error(error);
