@@ -5,17 +5,22 @@ import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/
 export type PatientType = {
 	id: string;
 	email: string;
-	medicalInfos: {
-		name: string;
-		firstname: string;
-		birthdate: number;
-		sex: PatientSexType;
-		height: number;
-		weight: number;
-		primaryDoctorId: string;
-		onboardingStatus: PatientOnboardingStatusType;
-		medicalAntecedents: PatientMedicalAntecedentType[];
-	};
+	medicalInfos: PatientMedicalInfosType & PatientMedicalInfosHealthType;
 	appointmentIds: string[];
 	documentIds: string[];
+};
+
+export type PatientMedicalInfosType = {
+	name: string;
+	firstname: string;
+	birthdate: number;
+	sex: PatientSexType;
+	height: number;
+	weight: number;
+	primaryDoctorId: string;
+};
+
+export type PatientMedicalInfosHealthType = {
+	onboardingStatus: PatientOnboardingStatusType;
+	medicalAntecedents: PatientMedicalAntecedentType[];
 };
