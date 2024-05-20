@@ -15,12 +15,13 @@ import {
 
 import AppointmentDoctorCard from 'components/dashboardPages/appointments/AppointmentDoctorCard';
 import UpdateAppointmentFooterContent from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterContent';
+import Pagination from 'components/navigation/Pagination';
 
 import { useGetDoctorsQuery } from 'services/request/doctor';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 import CalendarIllustration from 'assets/illustrations/Calendarllustration';
-import Pagination from 'components/navigation/Pagination';
+
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import paginationHandler from 'utils/navigation/paginationHandler';
 
