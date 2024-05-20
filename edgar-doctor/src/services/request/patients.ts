@@ -108,5 +108,10 @@ const extendedApi = backendApi.injectEndpoints({
 	}),
 });
 
-export const { useGetPatientByIdQuery, useLazyGetPatientByIdQuery, useGetPatientsQuery, useLazyGetPatientsQuery, useAddPatientMutation } =
-	extendedApi;
+export const {
+	useGetPatientByIdQuery,
+	useLazyGetPatientByIdQuery,
+	useGetPatientsQuery,
+	useLazyGetPatientsQuery,
+	useAddPatientMutation,
+} = extendedApi;
