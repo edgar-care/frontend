@@ -35,7 +35,7 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 7);
+				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 8);
 			});
 
 			it('Good number of labels', () => {
@@ -76,6 +76,10 @@ describe('Navigation tests - Desktop', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-medical-text').should('contain.text', 'Dossier médical');
 			});
 
+			it('Good content for "Messagerie" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-chat-text').should('contain.text', 'Messagerie');
+			});
+
 			it('Good content for "Aide" tab', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-help-text').should('contain.text', 'Aide');
 			});
@@ -108,6 +112,10 @@ describe('Navigation tests - Desktop', () => {
 
 			it('"Dossier médical" tab visible', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-medical-text').should('be.visible');
+			});
+
+			it('"Messagerie" tab visible', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-chat-text').should('be.visible');
 			});
 
 			it('"Aide" tab visible', () => {
@@ -157,6 +165,13 @@ describe('Navigation tests - Desktop', () => {
 					.click()
 					.url()
 					.should('be.equal', `${Cypress.env('url')}/dashboard/medical`);
+			});
+
+			it('Good redirection for "Messagerie" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-chat')
+					.click()
+					.url()
+					.should('be.equal', `${Cypress.env('url')}/dashboard/chat`);
 			});
 		});
 	});

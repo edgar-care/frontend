@@ -27,7 +27,7 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 	const groupedFollowUpTreatments = groupFollowUpTreatmentsByDayPeriod(checkedTreatments || []);
 
 	return (
-		<Skeleton isLoaded={!isLoading} w="100%">
+		<Skeleton isLoaded={!isLoading} w="100%" borderRadius="8px">
 			<HStack
 				w="100%"
 				bg="white"

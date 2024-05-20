@@ -15,7 +15,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 	const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
 
 	const appointmentStartDate = new Date(appointment.startDate);
-	const appointmentEndDate = new Date(appointment.startDate);
+	const appointmentEndDate = new Date(appointment.endDate);
 
 	return (
 		<HStack

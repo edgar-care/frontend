@@ -1,4 +1,3 @@
-import { type Dispatch, type SetStateAction } from 'react';
 import { HStack, Icon, Text, VStack } from '@chakra-ui/react';
 
 import { type DoctorType } from 'types/dashboard/DoctorType';
@@ -7,14 +6,10 @@ import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
 const SelectPrimaryDoctorCard = ({
 	doctorInfos,
-	onChange,
-	onClose,
-	setPrimaryDoctorName,
+	onClick,
 }: {
 	doctorInfos: DoctorType;
-	onChange: (...event: unknown[]) => void;
-	onClose: () => void;
-	setPrimaryDoctorName: Dispatch<SetStateAction<string>>;
+	onClick: (doctorInfos: DoctorType) => void;
 }): JSX.Element => (
 	<HStack
 		bg="white"
@@ -26,16 +21,14 @@ const SelectPrimaryDoctorCard = ({
 		spacing="16px"
 		justify="space-between"
 		onClick={() => {
-			onChange(doctorInfos.id);
-			setPrimaryDoctorName(`Docteur ${doctorInfos.firstname.substring(0, 1)}. ${doctorInfos.name}`);
-			onClose();
+			onClick(doctorInfos);
 		}}
 		cursor="pointer"
 		transition="all .3s ease-in-out"
 		_hover={{
 			p: '8px 16px',
 		}}
-		id={`edgar-onboardingPersonalPage-formPrimaryDoctor-element-${doctorInfos.id}`}
+		id={`edgar-dashboardPage-formDoctor-element-${doctorInfos.id}`}
 	>
 		<VStack w="100%" align="start" spacing="0px">
 			<Text size="boldLg">
