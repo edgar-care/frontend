@@ -92,9 +92,9 @@ const ChatMessages = ({
 					justify={isRecipientListDisplayed ? 'center' : 'space-between'}
 				>
 					{!isRecipientListDisplayed && (
-						<HStack onClick={() => setSelectedChatId('')}>
+						<HStack onClick={() => setSelectedChatId('')} cursor="pointer">
 							<Icon as={SmallLeftArrowIcon} w="12px" h="12px" />
-							<Text size={{ base: 'boldSm', md: 'boldMd' }}>Revenir à la patientèle</Text>
+							<Text size={{ base: 'boldSm', md: 'boldMd' }}>Revenir à la messagerie</Text>
 						</HStack>
 					)}
 					<HStack spacing="16px">
