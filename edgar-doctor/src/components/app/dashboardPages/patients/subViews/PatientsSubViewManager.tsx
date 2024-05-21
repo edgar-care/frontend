@@ -3,7 +3,7 @@ import { Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
-import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
+import PatientsSubViewChat from 'components/app/dashboardPages/patients/subViews/chat/PatientsSubViewChat';
 import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
 import PatientsSubViewDocuments from 'components/app/dashboardPages/patients/subViews/documents/PatientsSubViewDocuments';
 
@@ -15,6 +15,7 @@ import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 
 import MedicalIcon from 'assets/icons/MedicalIcon';
+import PatientsSubViewMedicalInfo from 'components/app/dashboardPages/patients/subViews/medicalInfo/PatientsSubViewMedicalInfo';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -28,7 +29,7 @@ const PatientsSubViewManager = ({
 	const navigationHandler: PatientsSubViewNavigationHandlerType = {
 		'/medical': {
 			name: 'Dossier médical',
-			content: <>Dossier médical</>,
+			content: <PatientsSubViewMedicalInfo patientId={selectedPatient?.id} />,
 			icon: MedicalIcon,
 			id: '/medical',
 		},
@@ -46,7 +47,7 @@ const PatientsSubViewManager = ({
 		},
 		'/chat': {
 			name: 'Messagerie',
-			content: <PatientsChatSubView patientId={selectedPatient?.id} />,
+			content: <PatientsSubViewChat patientId={selectedPatient?.id} />,
 			icon: ChatIcon,
 			id: '/chat',
 		},
