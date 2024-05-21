@@ -3,6 +3,8 @@ import { Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
+import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
+import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
@@ -12,7 +14,6 @@ import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 
 import MedicalIcon from 'assets/icons/MedicalIcon';
-import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -38,7 +39,7 @@ const PatientsSubViewManager = ({
 		},
 		'/appointments': {
 			name: 'Rendez-vous',
-			content: <>Rendez-vous</>,
+			content: <PatientsSubViewAppointments selectedPatient={selectedPatient} />,
 			icon: CalendarIcon,
 			id: '/appointments',
 		},

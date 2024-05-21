@@ -15,7 +15,7 @@ const extendedApi = backendApi.injectEndpoints({
 				medicalInfos: {
 					name: response.medical_folder.name,
 					firstname: response.medical_folder.firstname,
-					birthdate: response.medical_folder.birthdate,
+					birthdate: response.medical_folder.birthdate * 1000,
 					sex: response.medical_folder.sex,
 					height: response.medical_folder.height,
 					weight: response.medical_folder.weight,
