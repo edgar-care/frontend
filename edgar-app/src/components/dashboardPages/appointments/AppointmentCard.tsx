@@ -8,7 +8,11 @@ import RightArrowIcon from 'assets/icons/Arrow/RightArrowIcon';
 
 import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
 
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
+
 const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX.Element => {
+	const { data: doctorInfo } = useGetDoctorByIdQuery(appointment.doctorId);
+
 	const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
 	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
 
@@ -32,7 +36,7 @@ const AppointmentCard = ({ appointment }: { appointment: AppointmentType }): JSX
 			<Stack direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }} justify="space-between" w="100%">
 				<VStack w="100%" spacing="0px" px="8px" align="start">
 					<Text size="boldLg" id="edgar-dashboardAppointmentsPage-appointmentCardDoctorName-text">
-						Docteur XX
+						Docteur {doctorInfo?.name.toUpperCase()}
 					</Text>
 					<HStack>
 						<Text textAlign="center" id="edgar-dashboardAppointmentsPage-appointmentCardHour-text">
