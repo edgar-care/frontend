@@ -9,6 +9,7 @@ import CalendarPreviousIllustration from 'assets/illustrations/CalendarPreviousI
 import CalendarNextIllustration from 'assets/illustrations/CalendarNextIllustration';
 
 import { useGetOpenSlotsQuery } from 'services/request/slots';
+
 import { AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
 
 const UpdateAppointmentContent = ({

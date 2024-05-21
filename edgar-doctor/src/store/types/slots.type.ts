@@ -4,6 +4,7 @@ export interface SlotsStoreType {
 	id_patient: string;
 	start_date: number;
 	end_date: number;
+	appointment_status: string;
 }
 
 export interface OpenSlotDTO {
