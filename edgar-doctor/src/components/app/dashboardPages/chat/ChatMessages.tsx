@@ -36,7 +36,7 @@ const ChatMessages = ({
 	setSelectedChatId,
 }: {
 	chat: ChatType;
-	setSelectedChatId: Dispatch<SetStateAction<string>>;
+	setSelectedChatId?: Dispatch<SetStateAction<string>>;
 }): JSX.Element => {
 	const auth = useAuthContext();
 	const { actions } = useChatContext();
@@ -89,9 +89,9 @@ const ChatMessages = ({
 					direction={{ base: 'column', lg: 'row' }}
 					spacing={{ base: '16px', lg: '8px' }}
 					w="100%"
-					justify={isRecipientListDisplayed ? 'center' : 'space-between'}
+					justify={isRecipientListDisplayed || !setSelectedChatId ? 'center' : 'space-between'}
 				>
-					{!isRecipientListDisplayed && (
+					{!isRecipientListDisplayed && setSelectedChatId && (
 						<HStack onClick={() => setSelectedChatId('')} cursor="pointer">
 							<Icon as={SmallLeftArrowIcon} w="12px" h="12px" />
 							<Text size={{ base: 'boldSm', md: 'boldMd' }}>Revenir à la patientèle</Text>
@@ -108,7 +108,7 @@ const ChatMessages = ({
 							{patientInfo?.medicalInfos.firstname} {patientInfo?.medicalInfos.name.toUpperCase()}
 						</Text>
 					</HStack>
-					{!isRecipientListDisplayed && <Box as="span" w="180px" />}
+					{!isRecipientListDisplayed && setSelectedChatId && <Box as="span" w="180px" />}
 				</Stack>
 				<Box as="span" w="100%" h="2px" bg="blue.100" />
 				<VStack

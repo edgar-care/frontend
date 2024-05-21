@@ -12,6 +12,7 @@ import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 
 import MedicalIcon from 'assets/icons/MedicalIcon';
+import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -43,7 +44,7 @@ const PatientsSubViewManager = ({
 		},
 		'/chat': {
 			name: 'Messagerie',
-			content: <>Messagerie</>,
+			content: <PatientsChatSubView patientId={selectedPatient?.id} />,
 			icon: ChatIcon,
 			id: '/chat',
 		},
@@ -63,6 +64,7 @@ const PatientsSubViewManager = ({
 			borderColor="blue.200"
 			borderRadius="16px"
 			align="start"
+			overflow="hidden"
 		>
 			<PatientsSubViewNavigationHandler
 				navigationHandler={navigationHandler}
@@ -71,7 +73,7 @@ const PatientsSubViewManager = ({
 				setNavigationPath={setNavigationPath}
 				setSelectedPatientId={setSelectedPatientId}
 			/>
-			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }}>
+			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }} overflowY="hidden">
 				{navigationHandler[navigationPath].content}
 			</VStack>
 		</Stack>
