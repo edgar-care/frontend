@@ -10,13 +10,15 @@ const extendedApi = backendApi.injectEndpoints({
 			query: () => '/doctor/slots',
 			providesTags: ['doctorSlots'],
 			transformResponse: (response: { slot: SlotsStoreType[] }) =>
-				response.slot.map((elem) => ({
-					id: elem.id,
-					startDate: elem.start_date * 1000,
-					endDate: elem.end_date * 1000,
-					patientId: elem.id_patient,
-					status: elem.id_patient ? 'BOOKED' : 'OPEN',
-				})),
+				response.slot
+					.filter((slot) => !slot.appointment_status.includes('CANCEL'))
+					.map((slot) => ({
+						id: slot.id,
+						startDate: slot.start_date * 1000,
+						endDate: slot.end_date * 1000,
+						patientId: slot.id_patient,
+						status: slot.appointment_status === 'OPENED' ? 'OPEN' : 'BOOKED',
+					})),
 		}),
 
 		getOpenSlots: builder.query<AgendaSlotType[], void>({
@@ -24,7 +26,7 @@ const extendedApi = backendApi.injectEndpoints({
 			providesTags: ['doctorSlots'],
 			transformResponse: (response: { slot: SlotsStoreType[] }) =>
 				response.slot
-					.filter((slot) => !slot.id_patient)
+					.filter((slot) => slot.appointment_status === 'OPENED')
 					.map((slot) => ({
 						id: slot.id,
 						startDate: slot.start_date * 1000,
