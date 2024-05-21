@@ -14,17 +14,17 @@ import {
 } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
 
-import ChatMessageGroup from 'components/dashboardPages/chat/ChatMessageGroup';
+import ChatMessageGroup from 'components/app/dashboardPages/chat/ChatMessageGroup';
 
 import { useAuthContext } from 'contexts/auth';
 import { useChatContext } from 'contexts/chat';
 
-import { useGetDoctorByIdQuery } from 'services/request/doctor';
+import { useGetPatientByIdQuery } from 'services/request/patients';
 
 import groupMessagesPerDay from 'utils/app/dashboard/chat/groupMessagesPerDay';
 import getLastUnseenMessage from 'utils/app/dashboard/chat/getLastUnseenMessage';
 
-import { type ChatType } from 'types/dashboard/chat/ChatType';
+import { type ChatType } from 'types/app/dashboard/chat/ChatType';
 
 import SmallLeftArrowIcon from 'assets/icons/Arrow/Small/SmallLeftArrowIcon';
 import PaperPlaneIcon from 'assets/icons/PaperPlaneIcon';
@@ -42,7 +42,7 @@ const ChatMessages = ({
 	const { actions } = useChatContext();
 
 	const recipient = chat?.participants.filter((participant) => participant.participantId !== auth.getId())[0];
-	const { data: doctorInfo } = useGetDoctorByIdQuery(recipient?.participantId);
+	const { data: patientInfo } = useGetPatientByIdQuery(recipient.participantId);
 
 	const [inputChatMessage, setInputChatMessage] = useState('');
 	const inputChatRef = useRef<HTMLDivElement | null>(null);
@@ -94,18 +94,18 @@ const ChatMessages = ({
 					{!isRecipientListDisplayed && (
 						<HStack onClick={() => setSelectedChatId('')} cursor="pointer">
 							<Icon as={SmallLeftArrowIcon} w="12px" h="12px" />
-							<Text size={{ base: 'boldSm', md: 'boldMd' }}>Revenir à la messagerie</Text>
+							<Text size={{ base: 'boldSm', md: 'boldMd' }}>Revenir à la patientèle</Text>
 						</HStack>
 					)}
 					<HStack spacing="16px">
 						<Avatar
 							size={28}
-							name={`${doctorInfo?.firstname} ${doctorInfo?.name.toUpperCase()}`}
+							name={`${patientInfo?.medicalInfos.firstname} ${patientInfo?.medicalInfos.name.toUpperCase()}`}
 							variant="beam"
-							colors={[colors.green[600], colors.green[200], colors.green[500]]}
+							colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
 						/>
-						<Text size={{ base: 'boldMd', sm: 'boldLg', md: 'boldXl' }}>
-							Docteur {doctorInfo?.name.toUpperCase()}
+						<Text size="boldMd">
+							{patientInfo?.medicalInfos.firstname} {patientInfo?.medicalInfos.name.toUpperCase()}
 						</Text>
 					</HStack>
 					{!isRecipientListDisplayed && <Box as="span" w="180px" />}
