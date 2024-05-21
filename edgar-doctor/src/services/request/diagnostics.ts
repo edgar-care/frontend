@@ -28,7 +28,7 @@ const extendedApi = backendApi.injectEndpoints({
 				body: {
 					reason: params.reason,
 					validation: params.validation,
-					health_methode: params.healMethod,
+					health_method: params.healMethod,
 				},
 			}),
 			invalidatesTags: ['doctorAppointments'],
