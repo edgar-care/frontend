@@ -3,6 +3,8 @@ import { Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
+import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
+import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
 import PatientsSubViewDocuments from 'components/app/dashboardPages/patients/subViews/documents/PatientsSubViewDocuments';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
@@ -13,7 +15,6 @@ import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 
 import MedicalIcon from 'assets/icons/MedicalIcon';
-import PatientsSubViewAppointments from './PatientsSubViewAppointments';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -45,7 +46,7 @@ const PatientsSubViewManager = ({
 		},
 		'/chat': {
 			name: 'Messagerie',
-			content: <>Messagerie</>,
+			content: <PatientsChatSubView patientId={selectedPatient?.id} />,
 			icon: ChatIcon,
 			id: '/chat',
 		},
@@ -65,6 +66,7 @@ const PatientsSubViewManager = ({
 			borderColor="blue.200"
 			borderRadius="16px"
 			align="start"
+			overflow="hidden"
 		>
 			<PatientsSubViewNavigationHandler
 				navigationHandler={navigationHandler}
@@ -73,7 +75,7 @@ const PatientsSubViewManager = ({
 				setNavigationPath={setNavigationPath}
 				setSelectedPatientId={setSelectedPatientId}
 			/>
-			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }}>
+			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }} overflowY="hidden">
 				{navigationHandler[navigationPath].content}
 			</VStack>
 		</Stack>
