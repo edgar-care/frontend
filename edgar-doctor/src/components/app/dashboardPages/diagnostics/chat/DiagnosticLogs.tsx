@@ -13,7 +13,7 @@ const DiagnosticLogs = ({
 	logs: DiagnosticSummaryLogType[] | undefined;
 	isLoading: boolean;
 }): JSX.Element => (
-	<VStack w="100%">
+	<VStack w="100%" minW="300px">
 		<DiagnosticTitleCard title="Retranscription du chat" icon={FileIcon} />
 		<Skeleton isLoaded={!isLoading && logs !== undefined} w="100%" h="100%" borderRadius="8px">
 			{logs && (
