@@ -56,7 +56,7 @@ const PatientsCard = ({
 					<Text size="sm">
 						{auth.getId() === patient.medicalInfos.primaryDoctorId
 							? 'Vous êtes le médecin traitant'
-							: `${!isMobile && 'Médecin traitant: '}Dr. ${doctorInfo?.name.toUpperCase()} ${doctorInfo?.firstname}`}
+							: `${!isMobile ? 'Médecin traitant: ' : ''}Dr. ${doctorInfo?.name.toUpperCase()} ${doctorInfo?.firstname}`}
 					</Text>
 				</VStack>
 				<Icon as={RightChevronIcon} w="16px" />
