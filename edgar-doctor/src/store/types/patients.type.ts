@@ -2,6 +2,8 @@ import type { PatientSexType } from 'types/app/dashboard/patients/PatientSexType
 import type { PatientOnboardingStatusType } from 'types/app/dashboard/patients/PatientOnboardingStatusType';
 import type { TreatmentPeriodType } from 'types/app/dashboard/patients/medicalInfos/TreatmentPeriodType';
 import type { TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
+import type { DocumentCategoryType } from 'types/app/dashboard/patients/documents/DocumentCategoryType';
+import type { DocumentTypeType } from 'types/app/dashboard/patients/documents/DocumentTypeType';
 
 export interface PatientsStoreType {
 	id: string;
@@ -29,7 +31,25 @@ export interface PatientsStoreType {
 		}[];
 	};
 	rendez_vous_ids: string[];
-	documents_ids: string[];
+	document_ids: string[];
+}
+
+export interface PatientDocumentStoreType {
+	id: string;
+	owner_id: string;
+	name: string;
+	document_type: DocumentTypeType;
+	category: DocumentCategoryType;
+	is_favorite: boolean;
+	download_url: string;
+}
+
+export interface UploadAPatientDocumentDTO {
+	documentType: DocumentTypeType;
+	category: DocumentCategoryType;
+	document: FileList;
+	isFavorite: boolean;
+	patientId: string;
 }
 
 export interface AddPatientDTO {

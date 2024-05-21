@@ -70,15 +70,15 @@ class Auth {
 		return localStorage.getItem('token');
 	}
 
-	public getId(): string | null {
+	public getId(): string {
 		try {
 			const token = this.getToken();
-			if (!token) return null;
+			if (!token) return '';
 
 			const payload: { doctor: { id: string } } = JSON.parse(atob(token.split('.')[1]));
 			return payload.doctor.id;
 		} catch (error) {
-			return null;
+			return '';
 		}
 	}
 }

@@ -4,13 +4,24 @@ import Avatar from 'boring-avatars';
 
 import ProfileTab from 'components/navigation/ProfileTab';
 
+import { useAuthContext } from 'contexts/auth';
+
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
+
 import SelectorIcon from 'assets/icons/SelectorIcon';
 import LogoutIcon from 'assets/icons/LogoutIcon';
 
 import { type ProfileTabType } from 'types/navigation/ProfileType';
 
+import colors from 'theme/foundations/colors';
+
 const ProfileCard = (): JSX.Element => {
+	const auth = useAuthContext();
+
+	const { data: doctorInfo } = useGetDoctorByIdQuery(auth.getId());
+
 	const { isOpen, onToggle } = useDisclosure();
+
 	const router = useRouter();
 
 	const profileTabs: ProfileTabType[] = [
@@ -57,13 +68,17 @@ const ProfileCard = (): JSX.Element => {
 						>
 							<HStack spacing="16px" w="100%">
 								<Avatar
-									size={30}
-									name="Lucas LOUIS"
+									size={28}
+									name={`${doctorInfo?.firstname} ${doctorInfo?.name.toUpperCase()}`}
 									variant="beam"
-									colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+									colors={[colors.green[600], colors.green[200], colors.green[500]]}
 								/>
-								<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
-									Nom Prénom
+								<Text
+									size="boldMd"
+									textTransform="capitalize"
+									id="edgar-dashboardNavbar-profileCard-userName-text"
+								>
+									{doctorInfo?.firstname} {doctorInfo?.name}
 								</Text>
 							</HStack>
 							<Icon as={SelectorIcon} w="12px" h="16px" />
@@ -88,13 +103,17 @@ const ProfileCard = (): JSX.Element => {
 					<HStack justify="space-between" w="100%" p="8px 16px">
 						<HStack spacing="16px" w="100%">
 							<Avatar
-								size={30}
-								name="Lucas LOUIS"
+								size={28}
+								name={`${doctorInfo?.firstname} ${doctorInfo?.name.toUpperCase()}`}
 								variant="beam"
-								colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+								colors={[colors.green[600], colors.green[200], colors.green[500]]}
 							/>
-							<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
-								Nom Prénom
+							<Text
+								size="boldMd"
+								textTransform="capitalize"
+								id="edgar-dashboardNavbar-profileCard-userName-text"
+							>
+								{doctorInfo?.firstname} {doctorInfo?.name}
 							</Text>
 						</HStack>
 						<Icon as={SelectorIcon} w="12px" h="16px" />

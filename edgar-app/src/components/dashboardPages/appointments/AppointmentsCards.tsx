@@ -14,7 +14,11 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 			</Text>
 			<VStack w="100%">
 				{appointments
-					.filter((appointment) => appointment.endDate > new Date().getTime())
+					.filter(
+						(appointment) =>
+							!appointment.appointmentStatus.includes('CANCELED') &&
+							appointment.endDate > new Date().getTime(),
+					)
 					.map((appointment) => (
 						<AppointmentCard appointment={appointment} key={appointment.id} />
 					))}
@@ -26,7 +30,11 @@ const AppointmentsCards = ({ appointments }: { appointments: AppointmentType[] }
 			</Text>
 			<VStack w="100%">
 				{appointments
-					.filter((appointment) => appointment.endDate <= new Date().getTime())
+					.filter(
+						(appointment) =>
+							!appointment.appointmentStatus.includes('CANCELED') &&
+							appointment.endDate <= new Date().getTime(),
+					)
 					.map((appointment) => (
 						<AppointmentCard appointment={appointment} key={appointment.id} />
 					))}

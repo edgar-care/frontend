@@ -10,8 +10,8 @@ import CalendarNextIllustration from 'assets/illustrations/CalendarNextIllustrat
 
 import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
 
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
 import { type AppointmentType } from 'types/dashboard/appointments/appointmentType';
+import { type DoctorType } from 'types/dashboard/DoctorType';
 
 const AppointmentDoctorCard = ({
 	doctorInfos,
@@ -52,6 +52,8 @@ const AppointmentDoctorCard = ({
 		return groupedAppointments;
 	};
 
+	const openedSlot = doctorAppointments?.filter((appointment) => appointment.appointmentStatus === 'OPENED') || [];
+
 	return (
 		<VStack
 			w="100%"
@@ -61,38 +63,34 @@ const AppointmentDoctorCard = ({
 			borderColor="blue.200"
 			borderRadius="8px"
 			spacing="16px"
-			cursor={doctorAppointments && doctorAppointments.length > 0 ? 'pointer' : ''}
+			cursor={openedSlot && openedSlot.length > 0 ? 'pointer' : ''}
 			transition="all .3s ease-in-out"
 			_hover={{
 				borderColor: 'blue.400',
 				transition: 'all .3s ease-in-out',
 			}}
-			onClick={() =>
-				!isDetailsOpen && doctorAppointments && doctorAppointments.length > 0 ? onToggleDetails() : {}
-			}
+			onClick={() => (!isDetailsOpen && openedSlot && openedSlot.length > 0 ? onToggleDetails() : {})}
 		>
 			<HStack
 				w="100%"
 				justify="space-between"
 				px="4px"
-				onClick={() =>
-					isDetailsOpen && doctorAppointments && doctorAppointments.length > 0 ? onToggleDetails() : {}
-				}
+				onClick={() => (isDetailsOpen && openedSlot && openedSlot.length > 0 ? onToggleDetails() : {})}
 			>
 				<VStack align="starts">
 					<VStack align="start" spacing="0px">
-						<Text size="boldLg">{doctorInfos.name}</Text>
+						<Text size="boldLg">Docteur {doctorInfos.name}</Text>
 						<Text>
 							{doctorInfos.address.street}, {doctorInfos.address.zipCode} - {doctorInfos.address.city}
 						</Text>
 					</VStack>
-					{!isDetailsOpen && doctorAppointments && (
+					{!isDetailsOpen && openedSlot && (
 						<>
-							{doctorAppointments.length > 0 ? (
+							{openedSlot.length > 0 ? (
 								<Text maxW={{ base: '250px', sm: '350px', smd: '100%' }}>
 									Prochain créneau disponible{isDrawer ? ':' : ' le '}
 									<Box as="span" color="blue.700" textTransform="capitalize" display="inline-block">
-										{new Date(doctorAppointments[0].startDate).toLocaleDateString('fr-FR', {
+										{new Date(openedSlot[0].startDate).toLocaleDateString('fr-FR', {
 											weekday: isMobile ? 'short' : 'long',
 											day: 'numeric',
 											month: isMobile ? 'short' : 'long',
@@ -101,12 +99,12 @@ const AppointmentDoctorCard = ({
 									<Box as="span" color="blue.700">
 										{' '}
 										de{' '}
-										{new Date(doctorAppointments[0].startDate).toLocaleTimeString('fr-FR', {
+										{new Date(openedSlot[0].startDate).toLocaleTimeString('fr-FR', {
 											hour: '2-digit',
 											minute: '2-digit',
 										})}{' '}
 										à{' '}
-										{new Date(doctorAppointments[0].startDate).toLocaleTimeString('fr-FR', {
+										{new Date(openedSlot[0].startDate).toLocaleTimeString('fr-FR', {
 											hour: '2-digit',
 											minute: '2-digit',
 										})}
@@ -120,11 +118,11 @@ const AppointmentDoctorCard = ({
 						</>
 					)}
 				</VStack>
-				{doctorAppointments && doctorAppointments.length > 0 && (
+				{openedSlot && openedSlot.length > 0 && (
 					<Icon as={isDetailsOpen ? UpChevronIcon : DownChevronIcon} w="16px" color="black" />
 				)}
 			</HStack>
-			{isDetailsOpen && doctorAppointments && (
+			{isDetailsOpen && openedSlot && (
 				<HStack>
 					<Icon
 						as={CalendarPreviousIllustration}
@@ -135,7 +133,7 @@ const AppointmentDoctorCard = ({
 						}}
 					/>
 					<HStack align="strech">
-						{groupAppointmentsOnSameDay(doctorAppointments)
+						{groupAppointmentsOnSameDay(openedSlot)
 							.filter(
 								(_, index) =>
 									index >= firstAppointmentIndex &&
@@ -157,7 +155,7 @@ const AppointmentDoctorCard = ({
 						onClick={() => {
 							if (
 								firstAppointmentIndex + nbrDisplayedAppointments <
-								groupAppointmentsOnSameDay(doctorAppointments).length
+								groupAppointmentsOnSameDay(openedSlot).length
 							)
 								setFirstAppointmentIndex(firstAppointmentIndex + 1);
 						}}

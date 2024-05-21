@@ -3,6 +3,9 @@ import { Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
+import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
+import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
+import PatientsSubViewDocuments from 'components/app/dashboardPages/patients/subViews/documents/PatientsSubViewDocuments';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
@@ -31,19 +34,19 @@ const PatientsSubViewManager = ({
 		},
 		'/documents': {
 			name: 'Documents',
-			content: <>Documents</>,
+			content: <PatientsSubViewDocuments selectedPatient={selectedPatient} />,
 			icon: DocumentIcon,
 			id: '/documents',
 		},
 		'/appointments': {
 			name: 'Rendez-vous',
-			content: <>Rendez-vous</>,
+			content: <PatientsSubViewAppointments selectedPatient={selectedPatient} />,
 			icon: CalendarIcon,
 			id: '/appointments',
 		},
 		'/chat': {
 			name: 'Messagerie',
-			content: <>Messagerie</>,
+			content: <PatientsChatSubView patientId={selectedPatient?.id} />,
 			icon: ChatIcon,
 			id: '/chat',
 		},
@@ -63,6 +66,7 @@ const PatientsSubViewManager = ({
 			borderColor="blue.200"
 			borderRadius="16px"
 			align="start"
+			overflow="hidden"
 		>
 			<PatientsSubViewNavigationHandler
 				navigationHandler={navigationHandler}
@@ -71,7 +75,7 @@ const PatientsSubViewManager = ({
 				setNavigationPath={setNavigationPath}
 				setSelectedPatientId={setSelectedPatientId}
 			/>
-			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }}>
+			<VStack w="100%" h="100%" spacing="16px" p={{ base: '0px', xl: '16px' }} overflowY="hidden">
 				{navigationHandler[navigationPath].content}
 			</VStack>
 		</Stack>

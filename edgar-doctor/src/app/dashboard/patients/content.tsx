@@ -16,7 +16,7 @@ const PatientsPageContent = (): JSX.Element => {
 	return (
 		<VStack w="100%" spacing="32px" h="100%">
 			<DashboardPageBanner title="Mes patients" subTitle="Retrouvez toutes les informations de vos patients." />
-			<VStack w="100%" spacing="16px" h="100%">
+			<VStack w="100%" spacing="16px" h="100%" overflow="hidden">
 				<Stack direction={{ base: 'column', sm2: 'row' }} w="100%" spacing="16px">
 					<Button
 						id="edgar-dashboardPatientsPage-addPatient-button"

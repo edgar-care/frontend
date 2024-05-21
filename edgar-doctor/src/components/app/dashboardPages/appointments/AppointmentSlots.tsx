@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction } from 'react';
 import { Text, VStack } from '@chakra-ui/react';
 
-import { AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
+import { type AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
 
 import AppointmentSlotHour from './AppointmentSlotHour';
 

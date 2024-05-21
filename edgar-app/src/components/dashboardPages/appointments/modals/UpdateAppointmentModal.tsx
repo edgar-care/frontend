@@ -15,11 +15,15 @@ import {
 
 import AppointmentDoctorCard from 'components/dashboardPages/appointments/AppointmentDoctorCard';
 import UpdateAppointmentFooterContent from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterContent';
+import Pagination from 'components/navigation/Pagination';
+
+import { useGetDoctorsQuery } from 'services/request/doctor';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 import CalendarIllustration from 'assets/illustrations/Calendarllustration';
 
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
+import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
+import paginationHandler from 'utils/navigation/paginationHandler';
 
 const UpdateAppointmentModal = ({
 	isOpen,
@@ -30,47 +34,26 @@ const UpdateAppointmentModal = ({
 	onClose: () => void;
 	appointmentId: string;
 }): JSX.Element => {
+	const { data: doctors } = useGetDoctorsQuery();
+
+	const [pageIndex, setPageIndex] = useState(1);
 	const [selectedAppointment, setSelectedAppointment] = useState('');
 	const [searchValue, setSearchValue] = useState('');
 
-	const doctors: DoctorType[] = [
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-	];
+	const filteredDoctors =
+		doctors?.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase())) || [];
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size={{ base: '2xl', lg: '4xl' }}>
+		<Modal
+			isOpen={isOpen}
+			onClose={() => {
+				setPageIndex(1);
+				setSelectedAppointment('');
+				setSearchValue('');
+				onClose();
+			}}
+			size={{ base: '2xl', lg: '4xl' }}
+		>
 			<ModalOverlay />
 			<ModalContent
 				maxH={{ base: 'auto', smd: 'calc(100vh - 128px)' }}
@@ -114,23 +97,38 @@ const UpdateAppointmentModal = ({
 								</InputGroup>
 							</VStack>
 						</VStack>
-						<VStack w="100%">
-							{doctors
-								.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
-								.map((doctor) => (
-									<AppointmentDoctorCard
-										key={doctor.name}
-										doctorInfos={doctor}
-										selectedAppointment={selectedAppointment}
-										setSelectedAppointment={setSelectedAppointment}
-									/>
-								))}
+						<VStack w="100%" spacing="16px">
+							<VStack w="100%">
+								{filteredDoctors &&
+									paginationHandler(filteredDoctors, pageIndex, 3).map((doctor) => (
+										<AppointmentDoctorCard
+											key={doctor.id}
+											doctorInfos={doctor}
+											selectedAppointment={selectedAppointment}
+											setSelectedAppointment={setSelectedAppointment}
+										/>
+									))}
+							</VStack>
+							{filteredDoctors && filteredDoctors.length > 3 && (
+								<Pagination
+									pageIndex={pageIndex}
+									maxPageNumbers={countMaxNumberPage(filteredDoctors, 3)}
+									setPageIndex={setPageIndex}
+									variant="secondary"
+									size="small"
+								/>
+							)}
 						</VStack>
 					</VStack>
 				</ModalBody>
 				<ModalFooter p="24px 32px 32px 32px">
 					<UpdateAppointmentFooterContent
-						onClose={onClose}
+						onClose={() => {
+							setPageIndex(1);
+							setSelectedAppointment('');
+							setSearchValue('');
+							onClose();
+						}}
 						selectedAppointment={selectedAppointment}
 						appointmentId={appointmentId}
 					/>

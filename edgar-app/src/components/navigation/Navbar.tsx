@@ -9,6 +9,7 @@ import CalendarIcon from 'assets/icons/CalendarIcon';
 import MedicineIcon from 'assets/icons/MedicineIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 import MedicalIcon from 'assets/icons/MedicalIcon';
+import ChatIconDot from 'assets/icons/ChatIconDot';
 import HelpIcon from 'assets/icons/HelpIcon';
 
 import colors from 'theme/foundations/colors';
@@ -51,6 +52,12 @@ const Navbar = (): JSX.Element => {
 			path: '/dashboard/medical',
 			icon: MedicalIcon,
 			id: 'medical',
+		},
+		{
+			name: 'Messagerie',
+			path: '/dashboard/chat',
+			icon: ChatIconDot,
+			id: 'chat',
 		},
 	];
 

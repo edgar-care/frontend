@@ -13,6 +13,7 @@ import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Select from 'theme/components/select';
 import Text from 'theme/components/text';
+import Textarea from 'theme/components/textarea';
 import UnorderedList from 'theme/components/unorderedList';
 
 const breakpoints = {
@@ -47,6 +48,7 @@ const overrides = {
 		Link,
 		Select,
 		Text,
+		Textarea,
 		UnorderedList,
 	},
 };

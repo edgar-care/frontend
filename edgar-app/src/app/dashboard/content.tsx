@@ -1,3 +1,5 @@
+'use client';
+
 import { Stack, useDisclosure, useTimeout, VStack } from '@chakra-ui/react';
 
 import NotificationsHandler from 'components/dashboardPages/notifications-modal/NotificationsHandler';

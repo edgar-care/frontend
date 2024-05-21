@@ -16,10 +16,10 @@ import {
 import AppointmentDoctorCard from 'components/dashboardPages/appointments/AppointmentDoctorCard';
 import UpdateAppointmentFooterContent from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterContent';
 
+import { useGetDoctorsQuery } from 'services/request/doctor';
+
 import SearchIcon from 'assets/icons/SearchIcon';
 import CalendarIllustration from 'assets/illustrations/Calendarllustration';
-
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
 
 const UpdateAppointmentDrawer = ({
 	isOpen,
@@ -30,44 +30,10 @@ const UpdateAppointmentDrawer = ({
 	onClose: () => void;
 	appointmentId: string;
 }): JSX.Element => {
+	const { data: doctors } = useGetDoctorsQuery();
+
 	const [selectedAppointment, setSelectedAppointment] = useState('');
 	const [searchValue, setSearchValue] = useState('');
-
-	const doctors: DoctorType[] = [
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			firstname: 'Quentin',
-			address: {
-				street: '1 rue de la paix',
-				city: 'Paris',
-				zipCode: '75000',
-				country: 'France',
-			},
-		},
-	];
 
 	return (
 		<Drawer isOpen={isOpen} onClose={onClose} size="sm" placement="bottom">
@@ -117,7 +83,7 @@ const UpdateAppointmentDrawer = ({
 						</VStack>
 						<VStack w="100%">
 							{doctors
-								.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
+								?.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
 								.map((doctor) => (
 									<AppointmentDoctorCard
 										key={doctor.name}

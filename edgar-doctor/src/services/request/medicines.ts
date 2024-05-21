@@ -2,7 +2,7 @@ import { backendApi } from 'services/apiService';
 
 import { type MedicinesStoreType } from 'store/types/medicines.type';
 
-import { type MedicineType } from 'types/app/dashboard/medical/MedicineType';
+import { type MedicineType } from 'types/app/dashboard/diagnostics/MedicineType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
