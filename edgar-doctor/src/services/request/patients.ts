@@ -1,8 +1,9 @@
 import { backendApi } from 'services/apiService';
 
-import { type PatientsStoreType } from 'store/types/patients.type';
+import type { PatientDocumentStoreType, PatientsStoreType } from 'store/types/patients.type';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
+import { type PatientDocumentType } from 'types/app/dashboard/patients/documents/PatientDocumentType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -37,7 +38,7 @@ const extendedApi = backendApi.injectEndpoints({
 						})) || [],
 				},
 				appointmentIds: response.rendez_vous_ids,
-				documentIds: response.documents_ids,
+				documentIds: response.document_ids,
 			}),
 		}),
 
@@ -73,11 +74,40 @@ const extendedApi = backendApi.injectEndpoints({
 							})) || [],
 					},
 					appointmentIds: patient.rendez_vous_ids,
-					documentIds: patient.documents_ids,
+					documentIds: patient.document_ids,
 				})),
+		}),
+
+		getPatientDocumentById: builder.query<PatientDocumentType, string>({
+			query: (documentId) => `/doctor/document/${documentId}`,
+			transformResponse: (response: { download: PatientDocumentStoreType }) => ({
+				id: response.download.id,
+				ownerId: response.download.owner_id,
+				name: response.download.name,
+				documentType: response.download.document_type,
+				category: response.download.category,
+				isFavorite: response.download.is_favorite,
+				downloadUrl: response.download.download_url,
+			}),
+		}),
+
+		uploadAPatientDocument: builder.mutation<void, FormData>({
+			query: (params) => ({
+				url: '/doctor/document/upload',
+				method: 'POST',
+				body: params,
+			}),
+			invalidatesTags: ['patients'],
 		}),
 	}),
 });
 
-export const { useGetPatientByIdQuery, useLazyGetPatientByIdQuery, useGetPatientsQuery, useLazyGetPatientsQuery } =
-	extendedApi;
+export const {
+	useGetPatientByIdQuery,
+	useLazyGetPatientByIdQuery,
+	useGetPatientsQuery,
+	useLazyGetPatientsQuery,
+	useGetPatientDocumentByIdQuery,
+	useLazyGetPatientDocumentByIdQuery,
+	useUploadAPatientDocumentMutation,
+} = extendedApi;

@@ -12,6 +12,7 @@ import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Modal from 'theme/components/modal';
+import Select from 'theme/components/select';
 import Text from 'theme/components/text';
 import Textarea from 'theme/components/textarea';
 import UnorderedList from 'theme/components/unorderedList';
@@ -45,6 +46,7 @@ const overrides = {
 		Input,
 		Link,
 		Modal,
+		Select,
 		Text,
 		Textarea,
 		UnorderedList,

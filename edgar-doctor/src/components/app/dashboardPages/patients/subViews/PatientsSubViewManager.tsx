@@ -5,6 +5,7 @@ import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/sub
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
 import PatientsChatSubView from 'components/app/dashboardPages/patients/subViews/chat/PatientsChatSubView';
 import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
+import PatientsSubViewDocuments from 'components/app/dashboardPages/patients/subViews/documents/PatientsSubViewDocuments';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
@@ -33,7 +34,7 @@ const PatientsSubViewManager = ({
 		},
 		'/documents': {
 			name: 'Documents',
-			content: <>Documents</>,
+			content: <PatientsSubViewDocuments selectedPatient={selectedPatient} />,
 			icon: DocumentIcon,
 			id: '/documents',
 		},
