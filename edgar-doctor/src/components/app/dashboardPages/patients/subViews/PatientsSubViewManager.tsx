@@ -12,6 +12,7 @@ import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
 
 import MedicalIcon from 'assets/icons/MedicalIcon';
+import PatientsSubViewAppointments from './PatientsSubViewAppointments';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -37,7 +38,7 @@ const PatientsSubViewManager = ({
 		},
 		'/appointments': {
 			name: 'Rendez-vous',
-			content: <>Rendez-vous</>,
+			content: <PatientsSubViewAppointments selectedPatient={selectedPatient} />,
 			icon: CalendarIcon,
 			id: '/appointments',
 		},
