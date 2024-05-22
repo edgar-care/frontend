@@ -13,7 +13,7 @@ const SelectMedicalAntecedentsStillRelevantInput = ({
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%" pb={errors.stillRelevant ? '0px' : '16px'}>
-		<FormLabel size="boldLg">Le de santé est-il toujours en cours ?</FormLabel>
+		<FormLabel size="boldLg">Le sujet de santé est-il toujours en cours ?</FormLabel>
 		<Controller
 			control={control}
 			name="stillRelevant"
