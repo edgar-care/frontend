@@ -4,6 +4,7 @@ import {
 	Input,
 	InputGroup,
 	InputRightElement,
+	Text,
 	VStack,
 	Wrap,
 	WrapItem,
@@ -12,6 +13,8 @@ import {
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessageM from 'components/forms/ErrorMessage';
+import SelectMedicalAntecedentsHandler from 'components/app/dashboardPages/patients/modal/SelectMedicalAntecedentsHandler';
+import MedicalAntecedentsCard from 'components/app/dashboardPages/patients/modal/forms/medicalAntecedents/MedicalAntecedentsCard';
 
 import AddIcon from 'assets/icons/AddIcon';
 
@@ -55,7 +58,7 @@ const AddPatientModalMedicalAntecedents = ({
 									isOpen={isOpen}
 									onClose={onClose}
 									onChange={onChange}
-									healthIssues={value}
+									medicalAntecedents={value}
 								/>
 							</>
 						)}
@@ -80,7 +83,14 @@ const AddPatientModalMedicalAntecedents = ({
 							<Controller
 								control={control}
 								name="medicalFolder.medicalAntecedents"
-								render={({ field: { value, onChange } }) => <MedicalAntecedentsCard />}
+								render={({ field: { value, onChange } }) => (
+									<MedicalAntecedentsCard
+										medicalAntecedent={medicalAntecedent}
+										onClick={() =>
+											onChange(value.filter((item) => item.name !== medicalAntecedent.name))
+										}
+									/>
+								)}
 							/>
 						</WrapItem>
 					))}

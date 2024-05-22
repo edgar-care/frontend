@@ -10,12 +10,12 @@ const SelectMedicalAntecedentsHandler = ({
 	isOpen,
 	onClose,
 	onChange,
-	healthIssues,
+	medicalAntecedents,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
 	onChange: (event: unknown) => void;
-	healthIssues: PatientMedicalAntecedentType[];
+	medicalAntecedents: PatientMedicalAntecedentType[];
 }): JSX.Element => {
 	const {
 		handleSubmit,
@@ -30,21 +30,21 @@ const SelectMedicalAntecedentsHandler = ({
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		if (healthIssues.some((healthIssue) => healthIssue.name === data.name)) {
+		if (medicalAntecedents.some((medicalAntecedent) => medicalAntecedent.name === data.name)) {
 			toast({
 				title: 'Ce sujet de santé a déjà été ajouté',
 				status: 'error',
 			});
 			return;
 		}
-		if (!data.medicines.every((medicine) => medicine.day.length > 0 && medicine.period.length > 0)) {
+		if (!data.medicines.every((medicine) => medicine.days.length > 0 && medicine.periods.length > 0)) {
 			toast({
 				title: 'Veuillez sélectionner au moins un jour et une période pour les traitements',
 				status: 'error',
 			});
 			return;
 		}
-		onChange([...healthIssues, data]);
+		onChange([...medicalAntecedents, data]);
 		onClose();
 		reset();
 		toast({ title: 'Votre sujet de santé a été ajouté', status: 'success' });

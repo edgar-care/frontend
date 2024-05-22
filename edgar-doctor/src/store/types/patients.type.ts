@@ -4,6 +4,7 @@ import type { TreatmentPeriodType } from 'types/app/dashboard/patients/medicalIn
 import type { TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
 import type { DocumentCategoryType } from 'types/app/dashboard/patients/documents/DocumentCategoryType';
 import type { DocumentTypeType } from 'types/app/dashboard/patients/documents/DocumentTypeType';
+import type { PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 
 export interface PatientsStoreType {
 	id: string;
@@ -62,15 +63,6 @@ export interface AddPatientDTO {
 		height: number;
 		weight: number;
 		primaryDoctorId: string;
-		medicalAntecedents: {
-			name: string;
-			medicines: {
-				medicineId: string;
-				period: TreatmentPeriodType[];
-				day: TreatmentDayType[];
-				quantity: number;
-			}[];
-			stillRelevant: boolean;
-		}[];
+		medicalAntecedents: PatientMedicalAntecedentType[];
 	};
 }

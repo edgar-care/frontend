@@ -11,6 +11,7 @@ import SearchIcon from 'assets/icons/SearchIcon';
 
 const PatientsPageContent = (): JSX.Element => {
 	const [patientSearch, setPatientSearch] = useState('');
+
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (

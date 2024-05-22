@@ -27,13 +27,13 @@ const AddPatientModalContent = ({
 			<AddPatientModalFirstnameInput register={register} errors={errors} />
 			<AddPatientModalNameInput register={register} errors={errors} />
 		</HStack>
-		<AddPatientModalBirthdateInput register={register} errors={errors} />
+		<AddPatientModalBirthdateInput control={control} errors={errors} />
 		<AddPatientModalSexInput control={control} errors={errors} />
 		<HStack w="100%" spacing="32px">
 			<AddPatientModalSizeInput register={register} errors={errors} />
 			<AddPatientModalWeightInput register={register} errors={errors} />
 		</HStack>
-		<AddPatientModalPrimaryDoctorInput register={register} errors={errors} />
+		<AddPatientModalPrimaryDoctorInput control={control} errors={errors} />
 	</VStack>
 );
 

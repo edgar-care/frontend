@@ -35,14 +35,35 @@ const AddPatientModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 		formState: { errors },
 		register,
 		control,
+		reset,
 		watch,
 	} = useForm<AddPatientDTO>({
 		mode: 'onChange',
+		defaultValues: {
+			medicalFolder: {
+				medicalAntecedents: [],
+			},
+		},
 	});
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
+		// TODO: clean this code
+		console.log(data.medicalFolder.birthdate);
+		if (
+			!data.email ||
+			!data.medicalFolder.name ||
+			!data.medicalFolder.firstname ||
+			!data.medicalFolder.birthdate ||
+			!data.medicalFolder.sex ||
+			!data.medicalFolder.height ||
+			!data.medicalFolder.weight ||
+			!data.medicalFolder.primaryDoctorId
+		) {
+			toast({ title: 'Veuillez remplir tous les champs', status: 'error' });
+			return;
+		}
 		triggerAddPatient({
 			email: data.email,
 			medicalFolder: data.medicalFolder,
@@ -51,6 +72,7 @@ const AddPatientModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 			.then(() => {
 				toast({ title: 'La patient a bien été ajouté', status: 'success' });
 				setStep(0);
+				reset();
 				onClose();
 			})
 			.catch(() => {
@@ -64,6 +86,7 @@ const AddPatientModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 			onClose={() => {
 				setStep(0);
 				onClose();
+				reset();
 			}}
 			size="2xl"
 		>
@@ -97,8 +120,10 @@ const AddPatientModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 							variant="secondary"
 							w="100%"
 							onClick={() => {
-								if (step === 0) onClose();
-								else setStep(0);
+								if (step === 0) {
+									onClose();
+									reset();
+								} else setStep(0);
 							}}
 						>
 							{step === 0 ? 'Annuler' : 'Revenir en arrière'}

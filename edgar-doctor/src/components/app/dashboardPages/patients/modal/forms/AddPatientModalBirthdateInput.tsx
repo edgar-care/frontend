@@ -1,42 +1,52 @@
 import { FormLabel, Input, VStack } from '@chakra-ui/react';
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import { Control, Controller, type FieldErrors } from 'react-hook-form';
 
-import ErrorMessageM from 'components/forms/ErrorMessage';
+import ErrorMessage from 'components/forms/ErrorMessage';
 
 import { type AddPatientDTO } from 'store/types/patients.type';
 
 const AddPatientModalBirthdateInput = ({
-	register,
+	control,
 	errors,
 }: {
-	register: UseFormRegister<AddPatientDTO>;
+	control: Control<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%" maxW="264px">
-		<FormLabel size="boldLg" id="edgar-addPatientModal-formBirthdate-text">
+		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formBirthdate-text">
 			Date de naissance
 		</FormLabel>
-		<Input
-			{...register('medicalFolder.birthdate', { required: true, valueAsDate: false })}
-			placeholder="26/09/2022"
-			w="100%"
-			type="date"
-			id="edgar-addPatientModal-formBirthdate-input"
+		<Controller
+			control={control}
+			name="medicalFolder.birthdate"
+			rules={{ min: Date.UTC(0, 0), max: Date.now(), required: true }}
+			render={({ field: { value, onChange } }) => (
+				<Input
+					value={new Date(value || 0).toISOString().split('T')[0]}
+					min="1900-01-01"
+					max={new Date().toISOString().split('T')[0]}
+					placeholder="Sélectionner votre date de naissance"
+					w="100%"
+					type="date"
+					onChange={(e) => onChange(new Date(e.target.value).getTime())}
+					id="edgar-onboardingPersonalPage-formBirthdate-input"
+				/>
+			)}
 		/>
 		{errors.medicalFolder?.birthdate?.type === 'required' && (
-			<ErrorMessageM id="edgar-addPatientModal-formBirthdateErrorRequired-text">
+			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorRequired-text">
 				Ce champ est nécessaire
-			</ErrorMessageM>
+			</ErrorMessage>
 		)}
 		{errors.medicalFolder?.birthdate?.type === 'min' && (
-			<ErrorMessageM id="edgar-addPatientModal-formBirthdateErrorMin-text">
+			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMin-text">
 				Renseigner une date de naissance après le 1 janvier 1900
-			</ErrorMessageM>
+			</ErrorMessage>
 		)}
 		{errors.medicalFolder?.birthdate?.type === 'max' && (
-			<ErrorMessageM id="edgar-addPatientModal-formBirthdateErrorMax-text">
+			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMax-text">
 				Renseigner une date de naissance avant celle d'aujourd'hui
-			</ErrorMessageM>
+			</ErrorMessage>
 		)}
 	</VStack>
 );

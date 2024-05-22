@@ -17,6 +17,23 @@ const Input = {
 			},
 		},
 	},
+	variants: {
+		noStyle: {
+			field: {
+				border: '0px',
+				borderColor: 'transparent',
+				borderRadius: '0px',
+
+				height: '21px',
+				p: '0px',
+				bg: 'transparent',
+
+				_hover: {
+					borderColor: 'transparent',
+				},
+			},
+		},
+	},
 	defaultProps: {
 		variant: null,
 		size: null,

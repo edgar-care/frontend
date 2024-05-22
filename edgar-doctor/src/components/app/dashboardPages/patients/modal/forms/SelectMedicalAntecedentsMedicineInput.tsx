@@ -2,15 +2,16 @@ import { VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { type Control, Controller, type FieldErrors, type UseFormWatch } from 'react-hook-form';
 
 import AdvancedSelector from 'components/AdvancedSelector';
-import SelectHealthIssueMedicineInputCard from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueMedicineInputCard';
-import MedicineCard from 'components/dashboardPages/medical/medicine/MedicineCard';
 import ErrorMessageM from 'components/forms/ErrorMessage';
+import MedicineCard from 'components/app/dashboardPages/patients/modal/forms/medicine/MedicineCard';
 
 import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 
 import AddIcon from 'assets/icons/AddIcon';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
+
+import SelectMedicalAntecedentsMedicineInputCard from './SelectMedicalAntecedentsMedicineInputCard';
 
 const SelectMedicalAntecedentsMedicineInput = ({
 	control,
@@ -41,17 +42,17 @@ const SelectMedicalAntecedentsMedicineInput = ({
 										id: medicine.id,
 										name: medicine.name,
 										content: (
-											<SelectHealthIssueMedicineInputCard
+											<SelectMedicalAntecedentsMedicineInputCard
 												onClick={() => {
 													onChange([
 														...value,
-														{ medicineId: medicine.id, day: [], period: [], quantity: '1' },
+														{ medicineId: medicine.id, days: [], periods: [], quantity: 1 },
 													]);
 												}}
 												id={`edgar-onboardingMedicalPage-medicine-option-${medicine.id}`}
 											>
 												<>{medicine.name}</>
-											</SelectHealthIssueMedicineInputCard>
+											</SelectMedicalAntecedentsMedicineInputCard>
 										),
 									})) || []
 							}

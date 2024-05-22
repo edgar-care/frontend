@@ -1,6 +1,6 @@
 import { backendApi } from 'services/apiService';
 
-import { type PatientsStoreType, type PatientDocumentStoreType,  type AddPatientDTO } from 'store/types/patients.type';
+import { type PatientsStoreType, type PatientDocumentStoreType, type AddPatientDTO } from 'store/types/patients.type';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientDocumentType } from 'types/app/dashboard/patients/documents/PatientDocumentType';
@@ -100,17 +100,17 @@ const extendedApi = backendApi.injectEndpoints({
 					medical_info: {
 						name: params.medicalFolder.name,
 						firstname: params.medicalFolder.firstname,
-						birthname: params.medicalFolder.birthdate,
+						birthdate: params.medicalFolder.birthdate / 100,
 						sex: params.medicalFolder.sex,
-						height: params.medicalFolder.height,
-						weight: params.medicalFolder.weight,
+						height: params.medicalFolder.height * 100,
+						weight: params.medicalFolder.weight * 100,
 						primary_doctor_id: params.medicalFolder.primaryDoctorId,
 						medical_antecedents: params.medicalFolder.medicalAntecedents.map((antecedent) => ({
 							name: antecedent.name,
 							treatments: antecedent.medicines.map((medicine) => ({
 								medicine_id: medicine.medicineId,
-								period: medicine.period,
-								day: medicine.day,
+								period: medicine.periods,
+								day: medicine.days,
 								quantity: medicine.quantity,
 							})),
 							still_relevant: antecedent.stillRelevant,

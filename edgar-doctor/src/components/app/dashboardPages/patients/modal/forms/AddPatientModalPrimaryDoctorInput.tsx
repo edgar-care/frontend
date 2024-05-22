@@ -1,35 +1,67 @@
-import { FormLabel, Input, VStack } from '@chakra-ui/react';
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import { useState } from 'react';
+import { FormLabel, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
+import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
-import ErrorMessageM from 'components/forms/ErrorMessage';
+import ErrorMessage from 'components/forms/ErrorMessage';
+import SelectPrimaryDoctorHandler from 'components/app/dashboardPages/patients/modal/forms/primaryDoctor/SelectPrimaryDoctorHandler';
 
-import { type AddPatientDTO } from 'store/types/patients.type';
+import { AddPatientDTO } from 'store/types/patients.type';
 
-const AddPatientModalPrimaryDoctorInput = ({
-	register,
+import AddIcon from 'assets/icons/AddIcon';
+
+const OnboardingPersonalPrimaryDoctorInput = ({
+	control,
 	errors,
 }: {
-	register: UseFormRegister<AddPatientDTO>;
+	control: Control<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
-}): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-addPatientModal-formPrimaryDoctor-text">
-			Nom du médecin traitant
-		</FormLabel>
-		<Input
-			{...register('medicalFolder.primaryDoctorId', { minLength: 1, maxLength: 100, required: true })}
-			placeholder="Docteur Edgar"
-			w="100%"
-			maxLength={100}
-			id="edgar-addPatientModal-formPrimaryDoctor-input"
-		/>
+}): JSX.Element => {
+	const [primaryDoctorName, setPrimaryDoctorName] = useState('');
 
-		{errors.medicalFolder?.primaryDoctorId?.type === 'required' && (
-			<ErrorMessageM id="edgar-addPatientModal-formPrimaryDoctorError-text">
-				Ce champ est nécessaire
-			</ErrorMessageM>
-		)}
-	</VStack>
-);
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
-export default AddPatientModalPrimaryDoctorInput;
+	return (
+		<VStack spacing="8px" align="start" w="100%" pb={errors.medicalFolder?.primaryDoctorId ? '0px' : '16px'}>
+			<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formPrimaryDoctor-text">
+				Nom du médecin traitant
+			</FormLabel>
+			<InputGroup>
+				<Controller
+					control={control}
+					name="medicalFolder.primaryDoctorId"
+					rules={{ required: true }}
+					render={({ field: { onChange } }) => (
+						<>
+							<Input
+								placeholder="Docteur Edgar"
+								value={primaryDoctorName}
+								type="text"
+								w="100%"
+								readOnly
+								onClick={onOpen}
+								cursor="pointer"
+								id="edgar-onboardingPersonalPage-formPrimaryDoctor-input"
+							/>
+							<SelectPrimaryDoctorHandler
+								isOpen={isOpen}
+								onClose={onClose}
+								onChange={onChange}
+								setPrimaryDoctorName={setPrimaryDoctorName}
+							/>
+						</>
+					)}
+				/>
+				<InputRightElement>
+					<Icon as={AddIcon} color="blue.700" />
+				</InputRightElement>
+			</InputGroup>
+			{errors.medicalFolder?.primaryDoctorId?.type === 'required' && (
+				<ErrorMessage id="edgar-onboardingPersonalPage-formPrimaryDoctorErrorRequired-text">
+					Ce champ est nécessaire
+				</ErrorMessage>
+			)}
+		</VStack>
+	);
+};
+
+export default OnboardingPersonalPrimaryDoctorInput;

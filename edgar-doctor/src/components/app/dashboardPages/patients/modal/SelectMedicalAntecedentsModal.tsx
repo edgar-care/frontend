@@ -12,11 +12,10 @@ import {
 } from '@chakra-ui/react';
 import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
-import SelectMedicalAntecedentsContent from 'components/app/dashboard/patients/modal/SelectMedicalAntecedentsContent';
-
 import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 
 import AddMedicalAntecedentsIllustration from 'assets/illustrations/AddMedicalAntecedentsIllustration';
+import SelectMedicalAntecedentsContent from './SelectMedicalAntecedentsContent';
 
 const SelectMedicalAntecedentsModal = ({
 	isOpen,

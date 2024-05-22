@@ -15,7 +15,7 @@ const AddPatientModalSexInput = ({
 	<VStack spacing="8px" align="start" w="100%">
 		<HStack>
 			<FormLabel size="boldLg" id="edgar-addPatientModal-formSex-text">
-				Adresse mail
+				Sexe
 			</FormLabel>
 		</HStack>
 		<Controller
