@@ -4,6 +4,7 @@ import type { TreatmentPeriodType } from 'types/app/dashboard/patients/medicalIn
 import type { TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
 import type { DocumentCategoryType } from 'types/app/dashboard/patients/documents/DocumentCategoryType';
 import type { DocumentTypeType } from 'types/app/dashboard/patients/documents/DocumentTypeType';
+import type { PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 
 export interface PatientsStoreType {
 	id: string;
@@ -50,4 +51,18 @@ export interface UploadAPatientDocumentDTO {
 	document: FileList;
 	isFavorite: boolean;
 	patientId: string;
+}
+
+export interface AddPatientDTO {
+	email: string;
+	medicalFolder: {
+		name: string;
+		firstname: string;
+		birthdate: number;
+		sex: PatientSexType;
+		height: number;
+		weight: number;
+		primaryDoctorId: string;
+		medicalAntecedents: PatientMedicalAntecedentType[];
+	};
 }
