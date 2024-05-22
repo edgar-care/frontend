@@ -4,7 +4,7 @@ import ChatMessages from 'components/app/dashboardPages/chat/ChatMessages';
 
 import { useChatContext } from 'contexts/chat';
 
-const PatientsChatSubView = ({ patientId }: { patientId: string | undefined }): JSX.Element => {
+const PatientsSubViewChat = ({ patientId }: { patientId: string | undefined }): JSX.Element => {
 	const { chats } = useChatContext();
 
 	return (
@@ -20,4 +20,4 @@ const PatientsChatSubView = ({ patientId }: { patientId: string | undefined }): 
 	);
 };
 
-export default PatientsChatSubView;
+export default PatientsSubViewChat;
