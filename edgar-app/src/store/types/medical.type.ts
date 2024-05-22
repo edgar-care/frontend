@@ -14,18 +14,22 @@ export interface MedicalFolderStoreType {
 		weight: number;
 		primary_doctor_id: string;
 		onboarding_status: PatientOnboardingStatusType;
-		medical_antecedents: {
-			id: string;
-			name: string;
-			medicines: {
-				id: string;
-				medicine_id: string;
-				period: TreatmentPeriodType[];
-				day: TreatmentDayType[];
-				quantity: number;
-			}[];
-			still_relevant: boolean;
-		}[];
+		medical_antecedents:
+			| {
+					id: string;
+					name: string;
+					medicines:
+						| {
+								id: string;
+								medicine_id: string;
+								period: TreatmentPeriodType[];
+								day: TreatmentDayType[];
+								quantity: number;
+						  }[]
+						| null;
+					still_relevant: boolean;
+			  }[]
+			| null;
 	};
 }
 

@@ -27,13 +27,14 @@ const extendedApi = backendApi.injectEndpoints({
 					response.medical_folder.medical_antecedents?.map((antecedent) => ({
 						id: antecedent.id,
 						name: antecedent.name,
-						medicines: antecedent.medicines.map((medicine) => ({
-							id: medicine.id,
-							medicineId: medicine.medicine_id,
-							periods: medicine.period,
-							days: medicine.day,
-							quantity: medicine.quantity,
-						})),
+						medicines:
+							antecedent.medicines?.map((medicine) => ({
+								id: medicine.id,
+								medicineId: medicine.medicine_id,
+								periods: medicine.period,
+								days: medicine.day,
+								quantity: medicine.quantity,
+							})) || [],
 						stillRelevant: antecedent.still_relevant,
 					})) || [],
 			}),
