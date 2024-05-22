@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useState } from 'react';
-import { Stack, VStack } from '@chakra-ui/react';
+import { Skeleton, Stack, VStack } from '@chakra-ui/react';
 
 import PatientsSubViewNoPatient from 'components/app/dashboardPages/patients/subViews/PatientsSubViewNoPatient';
 import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigationHandler';
@@ -29,7 +29,11 @@ const PatientsSubViewManager = ({
 	const navigationHandler: PatientsSubViewNavigationHandlerType = {
 		'/medical': {
 			name: 'Dossier médical',
-			content: <PatientsSubViewMedicalInfo patientId={selectedPatient?.id} />,
+			content: (
+				<Skeleton isLoaded={selectedPatient !== undefined} w="100%" h="100%" borderRadius="8px">
+					{selectedPatient && <PatientsSubViewMedicalInfo patientId={selectedPatient?.id} />}
+				</Skeleton>
+			),
 			icon: MedicalIcon,
 			id: '/medical',
 		},
