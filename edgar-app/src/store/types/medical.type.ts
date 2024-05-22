@@ -63,12 +63,14 @@ export interface UpdatePatientMedicalFolderDTO {
 	primaryDoctorId: string;
 	onboardingStatus: PatientOnboardingStatusType;
 	medicalAntecedents: {
+		id: string;
 		name: string;
 		medicines: {
+			id: string;
 			medicineId: string;
 			period: TreatmentPeriodType[];
 			day: TreatmentDayType[];
-			quantity: string;
+			quantity: number;
 		}[];
 		stillRelevant: boolean;
 	}[];

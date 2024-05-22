@@ -58,7 +58,18 @@ const UpdateMedicalModal = ({
 			height: data.height,
 			weight: data.weight,
 			primaryDoctorId: data.primaryDoctorId,
-			medicalAntecedents: [],
+			medicalAntecedents: data.medicalAntecedents.map((antecedent) => ({
+				name: antecedent.name,
+				id: antecedent.id,
+				medicines: antecedent.medicines.map((medicine) => ({
+					id: medicine.id,
+					medicineId: medicine.medicineId,
+					period: medicine.periods,
+					day: medicine.days,
+					quantity: medicine.quantity,
+				})),
+				stillRelevant: antecedent.stillRelevant,
+			})),
 			onboardingStatus: data.onboardingStatus,
 		})
 			.unwrap()
