@@ -13,11 +13,13 @@ const PatientsSubViewNavigation = ({
 	navigationPath,
 	setNavigationPath,
 	tabs,
+	onDeletePatientOpen,
 }: {
 	patient: PatientType;
 	navigationPath: string;
 	setNavigationPath: Dispatch<SetStateAction<string>>;
 	tabs: { [key: string]: PatientsSubViewNavigationTabType };
+	onDeletePatientOpen: () => void;
 }): JSX.Element => (
 	<VStack
 		h="100%"
@@ -44,7 +46,7 @@ const PatientsSubViewNavigation = ({
 				))}
 			</VStack>
 			<Box w="100%" h="2px" bg="blue.200" />
-			<Button size="customSm" variant="delete" w="100%">
+			<Button size="customSm" variant="delete" w="100%" onClick={onDeletePatientOpen}>
 				Retirer le patient
 			</Button>
 		</VStack>
