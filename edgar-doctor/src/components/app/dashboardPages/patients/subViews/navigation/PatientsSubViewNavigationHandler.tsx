@@ -11,10 +11,12 @@ import {
 	MenuList,
 	Text,
 	useBreakpointValue,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import PatientsSubViewNavigation from 'components/app/dashboardPages/patients/subViews/navigation/PatientsSubViewNavigation';
+import DeletePatientHandler from 'components/app/dashboardPages/patients/subViews/deletePatient/DeletePatientHandler';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
@@ -37,6 +39,8 @@ const PatientsSubViewNavigationHandler = ({
 }): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, xl: false });
 	const isReturnButtonDisplayed = useBreakpointValue({ base: true, md: false });
+
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
 		<>
@@ -81,7 +85,7 @@ const PatientsSubViewNavigationHandler = ({
 								</MenuItem>
 							))}
 							<MenuDivider />
-							<MenuItem icon={<Icon as={TrashIcon} color="red.500" />}>
+							<MenuItem icon={<Icon as={TrashIcon} color="red.500" />} onClick={onOpen}>
 								<Text color="red.500">Retirer le patient</Text>
 							</MenuItem>
 						</MenuList>
@@ -99,8 +103,10 @@ const PatientsSubViewNavigationHandler = ({
 					patient={selectedPatient}
 					navigationPath={navigationPath}
 					setNavigationPath={setNavigationPath}
+					onDeletePatientOpen={onOpen}
 				/>
 			)}
+			<DeletePatientHandler isOpen={isOpen} onClose={onClose} patientId={selectedPatient.id} />
 		</>
 	);
 };
