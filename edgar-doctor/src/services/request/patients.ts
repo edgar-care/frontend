@@ -45,8 +45,8 @@ const extendedApi = backendApi.injectEndpoints({
 		getPatients: builder.query<PatientType[], void>({
 			query: () => '/doctor/patients',
 			providesTags: ['patients'],
-			transformResponse: (response: { patients: PatientsStoreType[] }) =>
-				response.patients.map((patient) => ({
+			transformResponse: (response: { patients?: PatientsStoreType[] }) =>
+				response.patients?.map((patient) => ({
 					id: patient.id,
 					email: patient.email,
 					medicalInfos: {
@@ -75,7 +75,7 @@ const extendedApi = backendApi.injectEndpoints({
 					},
 					appointmentIds: patient.rendez_vous_ids,
 					documentIds: patient.document_ids,
-				})),
+				})) || [],
 		}),
 
 		getPatientDocumentById: builder.query<PatientDocumentType, string>({

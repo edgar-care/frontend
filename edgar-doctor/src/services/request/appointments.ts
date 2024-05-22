@@ -23,7 +23,7 @@ const extendedApi = backendApi.injectEndpoints({
 					cancelationReason: appointment.cancelation_reason,
 					appointmentStatus: appointment.appointment_status,
 					sessionId: appointment.session_id,
-				})),
+				})) || [],
 		}),
 		updateDoctorAppointment: builder.mutation<void, UpdateAppointmentDTO>({
 			query: (params) => ({
