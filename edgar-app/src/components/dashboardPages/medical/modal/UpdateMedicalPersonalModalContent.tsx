@@ -24,7 +24,7 @@ const UpdateMedicalPersonalModal = ({
 			<UpdateMedicalPersonalModalFirstnameInput register={register} errors={errors} />
 			<UpdateMedicalPersonalModalNameInput register={register} errors={errors} />
 		</HStack>
-		<UpdateMedicalPersonalModalBirthdateInput errors={errors} register={register} />
+		<UpdateMedicalPersonalModalBirthdateInput errors={errors} control={control} />
 		<UpdateMedicalPersonalModalSexInput control={control} errors={errors} />
 		<HStack w="100%" spacing="32px">
 			<UpdateMedicalPersonalModalSizeInput register={register} errors={errors} />

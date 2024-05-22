@@ -1,5 +1,5 @@
 import { FormLabel, Input, VStack } from '@chakra-ui/react';
-import { type FieldErrors, UseFormRegister } from 'react-hook-form';
+import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -7,21 +7,31 @@ import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalT
 
 const UpdateMedicalPersonalModalBirthdateInput = ({
 	errors,
-	register,
+	control,
 }: {
 	errors: FieldErrors<PatientMedicalType>;
-	register: UseFormRegister<PatientMedicalType>;
+	control: Control<PatientMedicalType>;
 }): JSX.Element => (
 	<VStack spacing="8px" align="start" w="100%" maxW="264px">
 		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formBirthdate-text">
 			Votre date de naissance
 		</FormLabel>
-		<Input
-			{...register('birthdate', { required: true, valueAsDate: false })}
-			placeholder="Sélectionner votre date de naissance"
-			w="100%"
-			type="date"
-			id="edgar-updateMedicalPersonalModal-formBirthdate-input"
+		<Controller
+			control={control}
+			name="birthdate"
+			rules={{ min: Date.UTC(0, 0), max: Date.now(), required: true }}
+			render={({ field: { value, onChange } }) => (
+				<Input
+					value={new Date(value || 0).toISOString().split('T')[0]}
+					min="1900-01-01"
+					max={new Date().toISOString().split('T')[0]}
+					placeholder="Sélectionner votre date de naissance"
+					w="100%"
+					type="date"
+					onChange={(e) => onChange(new Date(e.target.value).getTime())}
+					id="edgar-updateMedicalPersonalModal-formBirthdate-input"
+				/>
+			)}
 		/>
 		{errors.birthdate?.type === 'required' && (
 			<ErrorMessage id="edgar-updateMedicalPersonalModal-formBirthdateErrorRequired-text">
