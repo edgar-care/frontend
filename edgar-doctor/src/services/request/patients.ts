@@ -129,6 +129,14 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['patients'],
 		}),
+
+		deleteAPatient: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/doctor/patient/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patients'],
+		}),
 	}),
 });
 
@@ -141,4 +149,5 @@ export const {
 	useLazyGetPatientDocumentByIdQuery,
 	useUploadAPatientDocumentMutation,
 	useAddPatientMutation,
+	useDeleteAPatientMutation,
 } = extendedApi;
