@@ -74,6 +74,7 @@ const UpdateDocumentDrawer = ({
 							</FormLabel>
 							<Input
 								placeholder="Mon document de santé"
+								maxLength={100}
 								{...register('documentName', { required: true })}
 							/>
 							{errors.documentName?.type === 'required' && (

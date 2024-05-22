@@ -16,10 +16,10 @@ import {
 import AppointmentDoctorCard from 'components/dashboardPages/appointments/AppointmentDoctorCard';
 import UpdateAppointmentFooterContent from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterContent';
 
+import { useGetDoctorsQuery } from 'services/request/doctor';
+
 import SearchIcon from 'assets/icons/SearchIcon';
 import CalendarIllustration from 'assets/illustrations/Calendarllustration';
-
-import { type DoctorType } from 'types/dashboard/appointments/doctorTypes';
 
 const UpdateAppointmentDrawer = ({
 	isOpen,
@@ -30,26 +30,10 @@ const UpdateAppointmentDrawer = ({
 	onClose: () => void;
 	appointmentId: string;
 }): JSX.Element => {
+	const { data: doctors } = useGetDoctorsQuery();
+
 	const [selectedAppointment, setSelectedAppointment] = useState('');
 	const [searchValue, setSearchValue] = useState('');
-
-	const doctors: DoctorType[] = [
-		{
-			id: 'Quentin',
-			name: 'Doctor XX',
-			address: '1 rue de la paix',
-		},
-		{
-			id: '1',
-			name: 'Doctor YY',
-			address: '1 rue de la paix',
-		},
-		{
-			id: '1',
-			name: 'Doctor ZZ',
-			address: '1 rue de la paix',
-		},
-	];
 
 	return (
 		<Drawer isOpen={isOpen} onClose={onClose} size="sm" placement="bottom">
@@ -88,6 +72,7 @@ const UpdateAppointmentDrawer = ({
 								<InputGroup>
 									<Input
 										placeholder="Docteur Edgar"
+										maxLength={100}
 										onChange={(e) => setSearchValue(e.target.value)}
 									/>
 									<InputRightElement>
@@ -98,7 +83,7 @@ const UpdateAppointmentDrawer = ({
 						</VStack>
 						<VStack w="100%">
 							{doctors
-								.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
+								?.filter((doctor) => doctor.name.toLowerCase().includes(searchValue.toLowerCase()))
 								.map((doctor) => (
 									<AppointmentDoctorCard
 										key={doctor.name}

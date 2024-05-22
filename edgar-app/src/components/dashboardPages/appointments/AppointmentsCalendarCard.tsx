@@ -61,12 +61,19 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments: AppointmentT
 				<AppointmentCalendar month={month} year={year} appointments={appointments} />
 				<Box as="span" w="100%" h="2px" bg="blue.700" />
 			</VStack>
-			{appointments.filter((appointment) => appointment.endDate > new Date().getTime()).length > 0 && (
+			{appointments.filter(
+				(appointment) =>
+					!appointment.appointmentStatus.includes('CANCELED') && appointment.endDate > new Date().getTime(),
+			).length > 0 && (
 				<VStack w="100%" align="start">
 					<Text size="boldMd">Prochain rendez-vous</Text>
 					<CalendarAppointmentCard
 						appointment={
-							appointments.filter((appointment) => appointment.endDate > new Date().getTime())[0]
+							appointments.filter(
+								(appointment) =>
+									!appointment.appointmentStatus.includes('CANCELED') &&
+									appointment.endDate > new Date().getTime(),
+							)[0]
 						}
 					/>
 				</VStack>

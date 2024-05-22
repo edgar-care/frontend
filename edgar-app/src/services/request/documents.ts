@@ -9,16 +9,18 @@ const extendedApi = backendApi.injectEndpoints({
 		getDocuments: builder.query<DocumentType[], void>({
 			query: () => '/document/download',
 			providesTags: ['patientDocuments'],
-			transformResponse: (response: { document: DocumentsStoreType[] }) =>
-				response.document.map((document) => ({
-					...document,
+			transformResponse: (response: { document: DocumentsStoreType[] | null }) =>
+				response.document?.map((document) => ({
+					id: document.id,
 					ownerId: document.owner_id,
+					name: document.name,
 					documentType: document.document_type,
+					category: document.category,
 					url: document.download_url,
 					isFavorite: document.is_favorite,
-					createdDate: document.createdDate * 1000,
-					updatedDate: document.updatedDate * 1000,
-				})),
+					createdDate: 0,
+					updatedDate: 0,
+				})) || [],
 		}),
 
 		addDocument: builder.mutation<void, FormData>({

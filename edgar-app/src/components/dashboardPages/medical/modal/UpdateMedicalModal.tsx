@@ -21,21 +21,18 @@ import Stepper from 'components/stepper/Stepper';
 
 import MedicalIllustration from 'assets/illustrations/MedicalIllustration';
 
-import { type HealthInfos, type PersonalInfos } from 'types/onboarding/OnboardingInfos';
-import { type MedicalProfileType } from 'types/dashboard/medical/MedicalProfileType';
+import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 
 import { useUpdatePatientMedicalFolderMutation } from 'services/request/medical';
 
 const UpdateMedicalModal = ({
 	isOpen,
 	onClose,
-	personalInfos,
 	medicalInfos,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	personalInfos: PersonalInfos;
-	medicalInfos: HealthInfos;
+	medicalInfos: PatientMedicalType;
 }): JSX.Element => {
 	const [triggerUpdatePatientMedicalFolder] = useUpdatePatientMedicalFolderMutation();
 
@@ -46,16 +43,35 @@ const UpdateMedicalModal = ({
 		register,
 		control,
 		reset,
-		setValue,
-		watch,
-	} = useForm<MedicalProfileType>({
+	} = useForm<PatientMedicalType>({
 		mode: 'onChange',
 	});
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
-		triggerUpdatePatientMedicalFolder(data)
+		triggerUpdatePatientMedicalFolder({
+			name: data.name,
+			firstname: data.firstname,
+			birthdate: data.birthdate,
+			sex: data.sex,
+			height: data.height,
+			weight: data.weight,
+			primaryDoctorId: data.primaryDoctorId,
+			medicalAntecedents: data.medicalAntecedents.map((antecedent) => ({
+				name: antecedent.name,
+				id: antecedent.id,
+				medicines: antecedent.medicines.map((medicine) => ({
+					id: medicine.id,
+					medicineId: medicine.medicineId,
+					period: medicine.periods,
+					day: medicine.days,
+					quantity: medicine.quantity,
+				})),
+				stillRelevant: antecedent.stillRelevant,
+			})),
+			onboardingStatus: data.onboardingStatus,
+		})
 			.unwrap()
 			.then(() => {
 				toast({ title: 'Votre dossier médical a bien été modifié', status: 'success' });
@@ -68,7 +84,7 @@ const UpdateMedicalModal = ({
 	});
 
 	useEffect(() => {
-		reset({ ...personalInfos, ...medicalInfos });
+		reset(medicalInfos);
 	}, []);
 
 	return (
@@ -100,12 +116,7 @@ const UpdateMedicalModal = ({
 						{step === 0 ? (
 							<UpdateMedicalPersonalModalContent register={register} control={control} errors={errors} />
 						) : (
-							<UpdateMedicalMedicalModalContent
-								register={register}
-								errors={errors}
-								watch={watch}
-								setValue={setValue}
-							/>
+							<UpdateMedicalMedicalModalContent register={register} errors={errors} />
 						)}
 					</VStack>
 				</ModalBody>

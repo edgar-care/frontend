@@ -17,7 +17,7 @@ const OnboardingPersonalSexInput = ({
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<VStack spacing="8px" align="start" w="100%">
+		<VStack spacing="8px" align="start" w="100%" pb={errors.sex ? '0px' : '16px'}>
 			<HStack>
 				<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formSex-text">
 					Votre sexe
@@ -32,27 +32,30 @@ const OnboardingPersonalSexInput = ({
 					<Wrap ref={ref}>
 						<WrapItem>
 							<Button
-								variant={value === 'MALE' ? 'primary' : 'secondary'}
+								variant={value === 'MALE' ? 'primary' : 'selector'}
 								onClick={() => onChange('MALE')}
 								id="edgar-onboardingPersonalPage-sexMale-button"
+								size="selectorMd"
 							>
 								Masculin
 							</Button>
 						</WrapItem>
 						<WrapItem>
 							<Button
-								variant={value === 'FEMALE' ? 'primary' : 'secondary'}
+								variant={value === 'FEMALE' ? 'primary' : 'selector'}
 								onClick={() => onChange('FEMALE')}
 								id="edgar-onboardingPersonalPage-sexFemale-button"
+								size="selectorMd"
 							>
 								Féminin
 							</Button>
 						</WrapItem>
 						<WrapItem>
 							<Button
-								variant={value === 'OTHER' ? 'primary' : 'secondary'}
+								variant={value === 'OTHER' ? 'primary' : 'selector'}
 								onClick={() => onChange('OTHER')}
 								id="edgar-onboardingPersonalPage-sexOther-button"
+								size="selectorMd"
 							>
 								Autre
 							</Button>

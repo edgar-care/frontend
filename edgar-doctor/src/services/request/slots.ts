@@ -1,8 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type OpenSlotDTO, type SlotsStoreType } from 'store/types/slots.type';
-
 import { type AgendaSlotType } from 'types/app/dashboard/agenda/AgendaSlotType';
+
+import { type OpenSlotDTO, SlotsStoreType } from 'store/types/slots.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -10,13 +10,30 @@ const extendedApi = backendApi.injectEndpoints({
 			query: () => '/doctor/slots',
 			providesTags: ['doctorSlots'],
 			transformResponse: (response: { slot: SlotsStoreType[] }) =>
-				response.slot.map((slot) => ({
-					id: slot.id,
-					startDate: slot.start_date * 1000,
-					endDate: slot.end_date * 1000,
-					patientId: slot.id_patient,
-					status: slot.id_patient ? 'BOOKED' : 'OPEN',
-				})),
+				response.slot
+					.filter((slot) => !slot.appointment_status.includes('CANCEL'))
+					.map((slot) => ({
+						id: slot.id,
+						startDate: slot.start_date * 1000,
+						endDate: slot.end_date * 1000,
+						patientId: slot.id_patient,
+						status: slot.appointment_status === 'OPENED' ? 'OPEN' : 'BOOKED',
+					})),
+		}),
+
+		getOpenSlots: builder.query<AgendaSlotType[], void>({
+			query: () => '/doctor/slots',
+			providesTags: ['doctorSlots'],
+			transformResponse: (response: { slot: SlotsStoreType[] }) =>
+				response.slot
+					.filter((slot) => slot.appointment_status === 'OPENED')
+					.map((slot) => ({
+						id: slot.id,
+						startDate: slot.start_date * 1000,
+						endDate: slot.end_date * 1000,
+						patientId: slot.id_patient,
+						status: 'OPEN',
+					})),
 		}),
 
 		openSlot: builder.mutation<SlotsStoreType, OpenSlotDTO>({
@@ -41,4 +58,11 @@ const extendedApi = backendApi.injectEndpoints({
 	}),
 });
 
-export const { useGetSlotsQuery, useLazyGetSlotsQuery, useOpenSlotMutation, useCloseSlotMutation } = extendedApi;
+export const {
+	useGetSlotsQuery,
+	useLazyGetSlotsQuery,
+	useGetOpenSlotsQuery,
+	useLazyGetOpenSlotsQuery,
+	useOpenSlotMutation,
+	useCloseSlotMutation,
+} = extendedApi;

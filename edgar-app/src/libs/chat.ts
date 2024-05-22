@@ -1,49 +1,200 @@
-import basicFetch from 'utils/basicFetch';
+import { type Dispatch, type SetStateAction } from 'react';
 
-import { SymptomsType } from 'types/SymptomsType';
-import { SymptomsContextType } from 'types/SymptomsContextType';
+import { WS_URL } from 'config/constants';
+
+import { type ChatType } from 'types/dashboard/chat/ChatType';
+import type { ChatResponse, ChatResponses, ReceiveChatMessage } from 'types/dashboard/chat/ChatClassType';
 
 class Chat {
-	public async sendMessage(
-		message: string,
-		symptoms: SymptomsType[],
-		context: SymptomsContextType[],
-	): Promise<{
-		symptoms: SymptomsType[];
-		context: SymptomsContextType[];
-		question: string;
-		isDone: boolean;
-	}> {
+	private readonly socket: WebSocket | undefined;
+
+	private readonly setChats: Dispatch<SetStateAction<ChatType[]>> | undefined;
+
+	constructor(setChats: Dispatch<SetStateAction<ChatType[]>>) {
 		try {
-			if (message) {
-				const nlp = await basicFetch('nlp', 'POST', JSON.stringify({ input: message, symptoms }));
+			this.setChats = setChats;
+			const socket = new WebSocket(WS_URL);
 
-				if (nlp.status === 200) {
-					const nlpContext = await nlp.json();
-					const response = await basicFetch(
-						'exam',
-						'POST',
-						JSON.stringify({
-							context: [...context, ...nlpContext.context],
-						}),
-					);
+			socket.addEventListener('message', (event) => {
+				this.handleMessage(event.data);
+			});
 
-					const data = await response.json();
-					if (response.status === 200)
-						return {
-							symptoms: data.symptoms,
-							context: data.context,
-							question: data.done ? 'Merci pour vos informations' : data.question,
-							isDone: data.done,
-						};
-				}
-			}
-			return { symptoms, context: [], question: '', isDone: true };
+			this.socket = socket;
 		} catch (error) {
 			console.error(error);
-			return { symptoms: [], context: [], question: '', isDone: true };
 		}
 	}
+
+	private handleMessage = (data: string) => {
+		const message = JSON.parse(data);
+
+		if (message.action === 'get_message') this.handleGetMessagesResponse(message as ChatResponses);
+		if (message.action === 'receive_message') this.handleReceiveMessage(message as ReceiveChatMessage);
+		if (message.action === 'create_chat') this.handleCreateChatResponse(message as ChatResponse);
+		if (message.action === 'read_message') this.handleReadChatResponse(message as ChatResponse);
+	};
+
+	private handleCreateChatResponse = (data: ChatResponse) => {
+		if (this.setChats) {
+			this.setChats((prev) => [
+				...prev,
+				{
+					id: data.chat.id,
+					participants: data.chat.participants.map((participant) => ({
+						participantId: participant.participant_id,
+						lastSeen: participant.last_seen * 1000,
+					})),
+					messages: data.chat.messages.map((message) => ({
+						ownerId: message.owner_id,
+						message: message.message,
+						sentTime: message.sended_time * 1000,
+					})),
+				},
+			]);
+		}
+	};
+
+	private handleReadChatResponse = (data: ChatResponse) => {
+		if (this.setChats) {
+			this.setChats((prev) =>
+				prev.map((chat) =>
+					chat.id === data.chat.id
+						? {
+								id: chat.id,
+								participants: data.chat.participants.map((participant) => ({
+									participantId: participant.participant_id,
+									lastSeen: participant.last_seen * 1000,
+								})),
+								messages: chat.messages,
+							}
+						: chat,
+				),
+			);
+		}
+	};
+
+	private handleGetMessagesResponse = (data: ChatResponses) => {
+		if (this.setChats) {
+			this.setChats(
+				data.chats?.map((chat) => ({
+					id: chat.id,
+					participants: chat.participants.map((participant) => ({
+						participantId: participant.participant_id,
+						lastSeen: participant.last_seen * 1000,
+					})),
+					messages: chat.messages.map((message) => ({
+						ownerId: message.owner_id,
+						message: message.message,
+						sentTime: message.sended_time * 1000,
+					})),
+				})) || [],
+			);
+		}
+	};
+
+	private handleReceiveMessage = (data: ReceiveChatMessage) => {
+		if (this.setChats) {
+			this.setChats((prev) =>
+				prev.map((chat) =>
+					chat.id === data.chat_id
+						? {
+								id: chat.id,
+								participants: chat.participants.map((participant) => ({
+									participantId: participant.participantId,
+									lastSeen: participant.lastSeen,
+								})),
+								messages: chat.messages.concat({
+									ownerId: data.owner_id,
+									message: data.message,
+									sentTime: data.timestamp * 1000,
+								}),
+							}
+						: chat,
+				),
+			);
+		}
+	};
+
+	public makeReady = () => {
+		if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+			this.socket.send(JSON.stringify({ action: 'ready', authToken: localStorage.getItem('token') }));
+			this.getMessages();
+		}
+	};
+
+	public getSocketState = () => this.socket?.readyState;
+
+	public closeSocket = () => {
+		if (this.socket && this.socket.readyState === WebSocket.OPEN) this.socket.close();
+	};
+
+	public createChat = (message: string, recipientsIds: string[]) => {
+		try {
+			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
+
+			this.socket.send(
+				JSON.stringify({
+					authToken: localStorage.getItem('token'),
+					action: 'create_chat',
+					message,
+					recipient_ids: recipientsIds,
+				}),
+			);
+			return { status: 'success', data: 'Chat created' };
+		} catch (error) {
+			console.error(error);
+			return { status: error, data: error };
+		}
+	};
+
+	public readChat = (chatId: string) => {
+		try {
+			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
+
+			this.socket.send(
+				JSON.stringify({
+					authToken: localStorage.getItem('token'),
+					action: 'read_message',
+					chat_id: chatId,
+				}),
+			);
+			return { status: 'success', data: 'Chat read' };
+		} catch (error) {
+			console.error(error);
+			return { status: error, data: error };
+		}
+	};
+
+	public sendMessage = (message: string, chatId: string) => {
+		try {
+			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
+
+			this.socket.send(
+				JSON.stringify({
+					authToken: localStorage.getItem('token'),
+					action: 'send_message',
+					message,
+					chat_id: chatId,
+				}),
+			);
+			return { status: 'success', data: 'Message sent' };
+		} catch (error) {
+			console.error(error);
+			return { status: error, data: error };
+		}
+	};
+
+	public getMessages = () => {
+		try {
+			if (!this.socket) return { status: 'error', data: 'Socket is not connected' };
+
+			this.socket.send(JSON.stringify({ authToken: localStorage.getItem('token'), action: 'get_messages' }));
+			return { status: 'success', data: 'Message sent' };
+		} catch (error) {
+			console.error(error);
+			return { status: error, data: error };
+		}
+	};
 }
 
 export default Chat;

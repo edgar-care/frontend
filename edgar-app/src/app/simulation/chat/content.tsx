@@ -1,16 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HStack, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 import SimulationChat from 'components/simulationPages/chat/SimulationChat';
 import SimulationChatEdgarCard from 'components/simulationPages/chat/SimulationChatEdgarCard';
 
-import { type SimulationChatEdgarCardType } from 'types/simulation/SimulationChatEdgarCardType';
+import { type SimulationChatEdgarCardType } from 'types/simulation/chat/SimulationChatEdgarCardType';
+
+import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+import { useAuthContext } from 'contexts/auth';
 
 const SimulationChatContent = (): JSX.Element => {
+	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 	const [edgarState, setEdgarState] = useState<SimulationChatEdgarCardType>('START');
+
+	const auth = useAuthContext();
+
+	const router = useRouter();
+
 	const isTablet = useBreakpointValue({ base: true, lg: false });
+
+	useEffect(() => {
+		if (auth.checkToken().status === 'error') router.push('/simulation/connection');
+		else if (!isLoading && !medicalInfo) router.push('/onboarding/personal?redirect=simulation/chat');
+	}, [isLoading]);
 
 	return (
 		<>

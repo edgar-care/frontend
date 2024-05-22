@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
-import { SerializedError } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery, type FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
+import { type SerializedError } from '@reduxjs/toolkit';
 
 import { API_URL } from 'config/constants';
 
@@ -28,6 +28,8 @@ export const backendApi = createApi({
 		'patientMedicalFolder',
 		'patientDocuments',
 		'patientSimulation',
+		'patientFollowUpTreatments',
+		'doctor',
 	],
 	reducerPath: 'backendApi',
 	baseQuery: apiBase,

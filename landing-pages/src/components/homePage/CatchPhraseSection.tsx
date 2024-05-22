@@ -29,7 +29,7 @@ const CatchPhraseSection = (): JSX.Element => {
 							chez le médecin généraliste ?
 						</Text>
 						<Text size={{ base: 'lg', lg: '2xl' }} color="white" id="edgar-homePage-subTitle2-text">
-							Un Français attend en moyenne 6 jours avant d'avoir un rendez-vous chez un médecin
+							Un Français attend en moyenne 6 jours avant d'assister à son rendez-vous chez un médecin
 							généraliste.
 						</Text>
 					</VStack>

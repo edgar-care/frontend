@@ -13,6 +13,7 @@ import Input from 'theme/components/input';
 import Link from 'theme/components/link';
 import Select from 'theme/components/select';
 import Text from 'theme/components/text';
+import Textarea from 'theme/components/textarea';
 import UnorderedList from 'theme/components/unorderedList';
 
 const breakpoints = {
@@ -23,6 +24,8 @@ const breakpoints = {
 	sm2: '600px',
 	smd: '700px',
 	md: '768px',
+	md2: '850px',
+	md3: '960px',
 	lg: '1024px',
 	xl: '1280px',
 	'2xl': '1440px',
@@ -45,6 +48,7 @@ const overrides = {
 		Link,
 		Select,
 		Text,
+		Textarea,
 		UnorderedList,
 	},
 };

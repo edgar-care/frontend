@@ -9,7 +9,12 @@ import LogoutIcon from 'assets/icons/LogoutIcon';
 
 import { type ProfileTabType } from 'types/navigation/ProfileType';
 
+import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
+
+import colors from 'theme/foundations/colors';
+
 const ProfileCard = (): JSX.Element => {
+	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
 	const { isOpen, onToggle } = useDisclosure();
 	const router = useRouter();
 
@@ -58,12 +63,16 @@ const ProfileCard = (): JSX.Element => {
 							<HStack spacing="16px" w="100%">
 								<Avatar
 									size={30}
-									name="Lucas LOUIS"
+									name={`${medicalInfo?.firstname} ${medicalInfo?.name.toUpperCase()}`}
 									variant="beam"
-									colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+									colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
 								/>
-								<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
-									Nom Prénom
+								<Text
+									size="boldMd"
+									id="edgar-dashboardNavbar-profileCard-userName-text"
+									textTransform="capitalize"
+								>
+									{medicalInfo?.firstname} {medicalInfo?.name}
 								</Text>
 							</HStack>
 							<Icon as={SelectorIcon} w="12px" h="16px" />
@@ -89,12 +98,16 @@ const ProfileCard = (): JSX.Element => {
 						<HStack spacing="16px" w="100%">
 							<Avatar
 								size={30}
-								name="Lucas LOUIS"
+								name={`${medicalInfo?.firstname} ${medicalInfo?.name.toUpperCase()}`}
 								variant="beam"
-								colors={['#335FC2', '#C3EAAC', '#C6DEF7', '#5AAF33']}
+								colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
 							/>
-							<Text size="boldMd" id="edgar-dashboardNavbar-profileCard-userName-text">
-								Nom Prénom
+							<Text
+								size="boldMd"
+								id="edgar-dashboardNavbar-profileCard-userName-text"
+								textTransform="capitalize"
+							>
+								{medicalInfo?.firstname} {medicalInfo?.name}
 							</Text>
 						</HStack>
 						<Icon as={SelectorIcon} w="12px" h="16px" />
