@@ -1,15 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, Stack, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Icon, Input, InputGroup, InputRightElement, Stack, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import TreatmentsCalendar from 'components/dashboardPages/treatments/TreatmentsCalendar';
+import TreatmentsCurrentAntecedents from 'components/dashboardPages/treatments/TreatmentsCurrentAntecedents';
+import TreatmentsPastAntecedents from 'components/dashboardPages/treatments/TreatmentsPastAntecedents';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 import { type TreatmentSubNavigationType } from 'types/dashboard/treatments/TreatmentSubNavigationType';
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 
@@ -25,10 +28,22 @@ const TreatmentsPageContent = (): JSX.Element => {
 			.map((antecedent) => antecedent.medicines)
 			.flat() || [];
 
+	const currentAntecedents: PatientMedicalAntecedentType[] =
+		medicalInfo?.medicalAntecedents
+			.filter((antecedent) => antecedent.stillRelevant)
+			.map((antecedent) => antecedent)
+			.flat() || [];
+
+	const pastAntecedents: PatientMedicalAntecedentType[] =
+		medicalInfo?.medicalAntecedents
+			.filter((antecedent) => !antecedent.stillRelevant)
+			.map((antecedent) => antecedent)
+			.flat() || [];
+
 	const subNavigation: { [key: string]: JSX.Element } = {
 		CALENDAR: <TreatmentsCalendar treatments={treatments} />,
-		CURRENT: <Text>Text</Text>,
-		PASSED: <Text>Past</Text>,
+		CURRENT: <TreatmentsCurrentAntecedents antecedents={currentAntecedents} />,
+		PASSED: <TreatmentsPastAntecedents antecedents={pastAntecedents} />,
 	};
 
 	return (
