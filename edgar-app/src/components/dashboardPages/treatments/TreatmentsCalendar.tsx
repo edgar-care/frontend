@@ -20,16 +20,15 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 	const { data: checkedTreatments } = useGetFollowUpTreatmentsQuery();
 
 	const [startDay, setStartDay] = useState(0);
-	const nbrOfDays = useBreakpointValue({ base: 1, ssm2: 2, sm2: 3, md: 4, lg: 4, xl: 5, '2xl': 7 }) || 1;
+	const nbrOfDays = 1;
 
 	const groupedTreatments = groupTreatmentsByDayPeriod(treatments);
 
 	const groupedFollowUpTreatments = groupFollowUpTreatmentsByDayPeriod(checkedTreatments || []);
 
 	return (
-		<Skeleton isLoaded={!isLoading} w="100%" borderRadius="8px">
+		<Skeleton isLoaded={!isLoading} borderRadius="8px">
 			<HStack
-				w="100%"
 				bg="white"
 				p="12px 16px"
 				borderRadius="16px"
@@ -37,7 +36,7 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 				borderColor="blue.200"
 				spacing="16px"
 			>
-				{startDay > 0 && nbrOfDays !== 7 && (
+				{startDay > 0 && (
 					<Icon
 						as={LeftChevronIcon}
 						h="16px"
