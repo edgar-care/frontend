@@ -24,14 +24,12 @@ const TreatmentsCalendarDay = ({
 	checkedTreatments,
 	medicinesInfo,
 	displayDay = true,
-	setStartDay,
 }: {
 	day: HealthIssuesMedicinesDayType;
 	periods: Record<string, PatientMedicineType[]>;
 	checkedTreatments: Record<string, TreatmentFollowUpType[]>;
 	medicinesInfo: MedicineType[];
 	displayDay?: boolean;
-	setStartDay: React.Dispatch<React.SetStateAction<number>>;
 }): JSX.Element => {
 	const availableDays: HealthIssuesMedicinesDayType[] = [
 		'MONDAY',
@@ -47,27 +45,37 @@ const TreatmentsCalendarDay = ({
 	const displayedPeriods = ['Matin', 'Midi', 'Soir', 'Nuit'];
 
 	return (
-		<VStack align="start" w="100%" minW="300px" bg="white" p="12px 16px" borderRadius="16px" border="2px solid" borderColor="blue.200" spacing="8px">
+		<VStack
+			align="start"
+			w="100%"
+			minW="300px"
+			bg="white"
+			p="12px 16px"
+			borderRadius="16px"
+			border="2px solid"
+			borderColor="blue.200"
+			spacing="8px"
+		>
 			{displayDay && (
 				<HStack w="100%" justify="space-between">
 					<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
 						{displayedDay[availableDays.indexOf(day)]}
 					</Text>
 					<HStack spacing="8px">
-					<Icon
-						as={LeftChevronIcon}
-						h="16px"
-						w="auto"
-						cursor="pointer"
-						onClick={() => setStartDay((prev) => prev - 1)}
-					/>
-					<Icon
-						as={RightChevronIcon}
-						h="16px"
-						w="auto"
-						cursor="pointer"
-						onClick={() => setStartDay((prev) => prev + 1)}
-					/>
+						<Icon
+							as={LeftChevronIcon}
+							h="16px"
+							w="auto"
+							cursor="pointer"
+							// onClick={() => setStartDay((prev) => prev - 1)}
+						/>
+						<Icon
+							as={RightChevronIcon}
+							h="16px"
+							w="auto"
+							cursor="pointer"
+							// onClick={() => setStartDay((prev) => prev + 1)}
+						/>
 					</HStack>
 				</HStack>
 			)}

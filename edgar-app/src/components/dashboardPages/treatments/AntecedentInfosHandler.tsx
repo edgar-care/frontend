@@ -1,4 +1,4 @@
-import { VStack, Text, Image, HStack, Button } from '@chakra-ui/react';
+import { VStack, Text, HStack, Button } from '@chakra-ui/react';
 
 import TreatmentCard from 'components/dashboardPages/treatments/TreatmentCard';
 

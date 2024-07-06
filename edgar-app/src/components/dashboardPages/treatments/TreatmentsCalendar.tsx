@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, Icon, Skeleton, useBreakpointValue } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 
 import TreatmentsCalendarDay from 'components/dashboardPages/treatments/TreatmentsCalendarDay';
 
@@ -24,18 +24,17 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 
 	return (
 		<Skeleton isLoaded={!isLoading} borderRadius="8px">
-				{Object.entries(groupedTreatments)
-					.slice(startDay, 1 + startDay)
-					.map(([day, periods]) => (
-						<TreatmentsCalendarDay
-							key={day}
-							day={day as HealthIssuesMedicinesDayType}
-							periods={periods}
-							checkedTreatments={groupedFollowUpTreatments[day]}
-							medicinesInfo={medicinesInfo || []}
-							setStartDay={setStartDay}
-						/>
-					))}
+			{Object.entries(groupedTreatments)
+				.slice(startDay, 1 + startDay)
+				.map(([day, periods]) => (
+					<TreatmentsCalendarDay
+						key={day}
+						day={day as HealthIssuesMedicinesDayType}
+						periods={periods}
+						checkedTreatments={groupedFollowUpTreatments[day]}
+						medicinesInfo={medicinesInfo || []}
+					/>
+				))}
 		</Skeleton>
 	);
 };

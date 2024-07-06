@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, Stack, VStack } from '@chakra-ui/react';
+import { Button, HStack, Icon, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import TreatmentsCalendar from 'components/dashboardPages/treatments/TreatmentsCalendar';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
-import { type TreatmentSubNavigationType } from 'types/dashboard/treatments/TreatmentSubNavigationType';
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
