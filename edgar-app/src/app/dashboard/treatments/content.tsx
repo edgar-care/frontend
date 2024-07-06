@@ -29,10 +29,9 @@ const TreatmentsPageContent = (): JSX.Element => {
 			.flat() || [];
 
 	const allAntecedents: PatientMedicalAntecedentType[] =
-		(medicalInfo?.medicalAntecedents
+		medicalInfo?.medicalAntecedents
 			.filter((antecedent) => antecedent.stillRelevant)
-			.concat(medicalInfo?.medicalAntecedents
-				.filter((antecedent) => !antecedent.stillRelevant)) || []);
+			.concat(medicalInfo?.medicalAntecedents.filter((antecedent) => !antecedent.stillRelevant)) || [];
 
 	return (
 		<VStack w="100%" spacing="32px">
@@ -49,27 +48,33 @@ const TreatmentsPageContent = (): JSX.Element => {
 					>
 						Ajouter un traitement
 					</Button>
-						<InputGroup w="100%">
-							<Input
-								placeholder="Rechercher par nom de maladie ou de traitement"
-								value={searchText}
-								onChange={(e) => setSearchText(e.target.value)}
-							/>
-							<InputRightElement>
-								<Icon as={SearchIcon} w="16px" h="16px" />
-							</InputRightElement>
-						</InputGroup>
+					<InputGroup w="100%">
+						<Input
+							placeholder="Rechercher par nom de maladie ou de traitement"
+							value={searchText}
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
+						<InputRightElement>
+							<Icon as={SearchIcon} w="16px" h="16px" />
+						</InputRightElement>
+					</InputGroup>
 				</HStack>
 				<HStack w="100%" spacing="16px" align="start">
 					<TreatmentsCalendar treatments={treatments} />
 					<HStack w="100%" align="start" h="100%">
 						<VStack w="100%" spacing="8px" h="100%">
 							{allAntecedents.map((antecedent) => (
-								<AntecedentCard key={antecedent.id} antecedent={antecedent} manageOnClick={() => setSelectedAntecedentId(antecedent.id)} />
+								<AntecedentCard
+									key={antecedent.id}
+									antecedent={antecedent}
+									manageOnClick={() => setSelectedAntecedentId(antecedent.id)}
+								/>
 							))}
 						</VStack>
 						{selectedAntecedentId && (
-							<AntecedentInfosHandler antecedent={allAntecedents.find((antecedent) => antecedent.id === selectedAntecedentId)} />
+							<AntecedentInfosHandler
+								antecedent={allAntecedents.find((antecedent) => antecedent.id === selectedAntecedentId)}
+							/>
 						)}
 					</HStack>
 				</HStack>

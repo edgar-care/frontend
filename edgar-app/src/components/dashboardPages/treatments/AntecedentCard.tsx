@@ -31,7 +31,11 @@ const AntecedentCard = ({
 			onClick={() => manageOnClick()}
 		>
 			<HStack w="100%" spacing="8px">
-				<Icon as={antecedent.stillRelevant ? AntecedentIllustration : AntecedentPastIllustration} w="32px" h="32px" />
+				<Icon
+					as={antecedent.stillRelevant ? AntecedentIllustration : AntecedentPastIllustration}
+					w="32px"
+					h="32px"
+				/>
 				<VStack w="100%" align="start" spacing="4px">
 					<HStack w="100%" spacing="4px">
 						<Text size="boldMd">{antecedent.name}</Text>
@@ -42,9 +46,9 @@ const AntecedentCard = ({
 						)}
 					</HStack>
 					<HStack w="100%" spacing="8px">
-					{antecedent.medicines.map((medicine) => (
-						<TreatmentLabel key={medicine.id} treatment={medicine} />
-					))}
+						{antecedent.medicines.map((medicine) => (
+							<TreatmentLabel key={medicine.id} treatment={medicine} />
+						))}
 					</HStack>
 				</VStack>
 			</HStack>
