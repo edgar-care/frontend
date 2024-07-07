@@ -1,6 +1,6 @@
 import { backendApi } from 'services/apiService';
 
-import type { CheckFollowUpTreatmentDTO, FollowUpTreatmentsStoreType } from 'store/types/treatments.type';
+import type { CheckFollowUpTreatmentDTO, FollowUpTreatmentsStoreType, AddTreatmentDTO } from 'store/types/treatments.type';
 import { type TreatmentFollowUpType } from 'types/dashboard/treatments/TreatmentFollowUpType';
 
 const extendedApi = backendApi.injectEndpoints({
@@ -47,6 +47,25 @@ const extendedApi = backendApi.injectEndpoints({
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['patientFollowUpTreatments'],
+		}),
+
+		addTreatment: builder.mutation<void, AddTreatmentDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'POST',
+				body: {
+					name: params.name,
+					disease_id: params.diseaseId,
+					still_relevant: params.stillRelevant,
+					treatments: params.treatments.map((treatment => ({
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+						medicine_id: treatment.medicineId,
+					}))),
+				},
+			}),
+			invalidatesTags: ['patientTreatments'],
 		}),
 	}),
 });
