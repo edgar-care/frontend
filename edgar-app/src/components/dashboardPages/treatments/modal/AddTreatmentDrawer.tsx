@@ -11,7 +11,7 @@ import {
 	Icon,
 	Text,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 
 import AddTreatmentIllustration from 'assets/illustrations/AddTreatmentIllustration';
 
