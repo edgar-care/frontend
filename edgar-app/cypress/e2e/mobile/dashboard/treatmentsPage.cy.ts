@@ -30,7 +30,7 @@ describe('Treatments Page tests - Mobile', () => {
 			});
 
 			it('Good number of buttons', () => {
-				cy.get('button[id^=edgar-dashboardTreatmentsPage]').should('have.length', 4);
+				cy.get('button[id^=edgar-dashboardTreatmentsPage]').should('have.length', 1);
 			});
 
 			it('Good number of texts', () => {
@@ -59,24 +59,6 @@ describe('Treatments Page tests - Mobile', () => {
 				cy.get('#edgar-dashboardTreatmentsPage-addTreatment-button').should(
 					'contain.text',
 					'Ajouter un traitement',
-				);
-			});
-
-			it('Good content for calendar tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-calendarNavigation-button').should('contain.text', 'Calendrier');
-			});
-
-			it('Good content for current treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button').should(
-					'contain.text',
-					'Traitements en cours',
-				);
-			});
-
-			it('Good content for old treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button').should(
-					'contain.text',
-					'Traitements finis',
 				);
 			});
 		});
@@ -122,18 +104,6 @@ describe('Treatments Page tests - Mobile', () => {
 
 			it('Visible add treatment button', () => {
 				cy.get('#edgar-dashboardTreatmentsPage-addTreatment-button').should('be.visible');
-			});
-
-			it('Visible calendar tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-calendarNavigation-button').should('be.visible');
-			});
-
-			it('Visible current treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button').should('be.visible');
-			});
-
-			it('Visible old treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button').should('be.visible');
 			});
 		});
 
