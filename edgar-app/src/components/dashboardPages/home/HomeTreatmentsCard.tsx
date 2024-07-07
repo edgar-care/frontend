@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Icon, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import TreatmentsCalendarDay from 'components/dashboardPages/treatments/TreatmentsCalendarDay';
+import TreatmentsCalendarHome from 'components/dashboardPages/treatments/TreatmentsCalendarHome';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
 import { useGetFollowUpTreatmentsQuery } from 'services/request/treatments';
@@ -44,7 +44,7 @@ const HomeTreatmentsCard = (): JSX.Element => {
 			{treatments.length > 0 ? (
 				<VStack w="100%" align="start">
 					<Text size="boldMd">Vos médicaments d'aujourd'hui</Text>
-					<TreatmentsCalendarDay
+					<TreatmentsCalendarHome
 						day={todayDay as HealthIssuesMedicinesDayType}
 						periods={groupedTreatments[todayDay]}
 						checkedTreatments={groupedFollowUpTreatments[todayDay]}

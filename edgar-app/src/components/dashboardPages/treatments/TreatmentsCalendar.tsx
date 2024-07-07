@@ -22,6 +22,14 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 
 	const groupedFollowUpTreatments = groupFollowUpTreatmentsByDayPeriod(checkedTreatments || []);
 
+	const handlePreviousDay = () => {
+		setStartDay((prev) => (prev === 0 ? 6 : prev - 1));
+	};
+
+	const handleNextDay = () => {
+		setStartDay((prev) => (prev === 6 ? 0 : prev + 1));
+	};
+
 	return (
 		<Skeleton isLoaded={!isLoading} borderRadius="8px">
 			{Object.entries(groupedTreatments)
@@ -33,6 +41,8 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 						periods={periods}
 						checkedTreatments={groupedFollowUpTreatments[day]}
 						medicinesInfo={medicinesInfo || []}
+						handlePreviousDay={handlePreviousDay}
+						handleNextDay={handleNextDay}
 					/>
 				))}
 		</Skeleton>
