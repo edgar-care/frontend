@@ -32,7 +32,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 		medicalInfo?.medicalAntecedents
 			.filter((antecedent) => antecedent.stillRelevant)
 			.concat(medicalInfo?.medicalAntecedents.filter((antecedent) => !antecedent.stillRelevant)) || [];
-	
+
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (

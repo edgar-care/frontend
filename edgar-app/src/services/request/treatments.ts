@@ -1,6 +1,10 @@
 import { backendApi } from 'services/apiService';
 
-import type { CheckFollowUpTreatmentDTO, FollowUpTreatmentsStoreType, AddTreatmentDTO } from 'store/types/treatments.type';
+import type {
+	CheckFollowUpTreatmentDTO,
+	FollowUpTreatmentsStoreType,
+	AddTreatmentDTO,
+} from 'store/types/treatments.type';
 import { type TreatmentFollowUpType } from 'types/dashboard/treatments/TreatmentFollowUpType';
 
 const extendedApi = backendApi.injectEndpoints({
@@ -57,12 +61,12 @@ const extendedApi = backendApi.injectEndpoints({
 					name: params.name,
 					disease_id: params.diseaseId,
 					still_relevant: params.stillRelevant,
-					treatments: params.treatments.map((treatment => ({
+					treatments: params.treatments.map((treatment) => ({
 						period: treatment.period,
 						day: treatment.day,
 						quantity: treatment.quantity,
 						medicine_id: treatment.medicineId,
-					}))),
+					})),
 				},
 			}),
 			invalidatesTags: ['patientTreatments'],
@@ -77,4 +81,5 @@ export const {
 	useLazyGetFollowUpTreatmentByIdQuery,
 	useCheckFollowUpTreatmentMutation,
 	useUncheckFollowUpTreatmentMutation,
+	useAddTreatmentMutation,
 } = extendedApi;
