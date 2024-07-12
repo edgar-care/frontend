@@ -46,7 +46,7 @@ const SelectHealthIssueContent = ({
 				}}
 			>
 				<VStack w="100%">
-					<VStack w="100%" spacing="16px">
+					<VStack w="100%" spacing="12px">
 						<SelectHealthIssueNameInput register={register} errors={errors} />
 						<SelectHealthIssueStillRelevantInput control={control} errors={errors} />
 						<SelectHealthIssueMedicineInput control={control} watch={watch} errors={errors} />

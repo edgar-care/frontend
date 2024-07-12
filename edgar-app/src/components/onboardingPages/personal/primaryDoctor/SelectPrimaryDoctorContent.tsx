@@ -60,7 +60,6 @@ const SelectPrimaryDoctorContent = ({
 					/>
 				)}
 			</VStack>
-			{/*	TODO: add pagination */}
 		</VStack>
 	);
 };

@@ -12,8 +12,8 @@ const SelectHealthIssueNameInput = ({
 	register: UseFormRegister<HealthIssuesType>;
 	errors: FieldErrors<HealthIssuesType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.name ? '0px' : '16px'}>
-		<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-medicineName-text">
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-onboardingMedicalPage-medicineName-text">
 			Nom de votre sujet de santé
 		</FormLabel>
 		<Input
