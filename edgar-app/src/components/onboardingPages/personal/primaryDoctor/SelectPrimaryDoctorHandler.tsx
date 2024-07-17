@@ -1,8 +1,9 @@
 import { type Dispatch, type SetStateAction } from 'react';
-import { useBreakpointValue } from '@chakra-ui/react';
 
-import SelectPrimaryDoctorModal from 'components/onboardingPages/personal/primaryDoctor/SelectPrimaryDoctorModal';
-import SelectPrimaryDoctorDrawer from 'components/onboardingPages/personal/primaryDoctor/SelectPrimaryDoctorDrawer';
+import ModalHandler from 'components/modals/ModalHandler';
+import SelectPrimaryDoctorContent from 'components/onboardingPages/personal/primaryDoctor/SelectPrimaryDoctorContent';
+
+import PeopleIllustration from 'assets/illustrations/PeopleIllustration';
 
 const SelectPrimaryDoctorHandler = ({
 	isOpen,
@@ -14,27 +15,21 @@ const SelectPrimaryDoctorHandler = ({
 	onClose: () => void;
 	onChange: (event: unknown) => void;
 	setPrimaryDoctorName: Dispatch<SetStateAction<string>>;
-}): JSX.Element => {
-	const isMobile = useBreakpointValue({ base: true, smd: false });
-
-	return (
-		<>
-			{isMobile ? (
-				<SelectPrimaryDoctorDrawer
-					isOpen={isOpen}
-					onClose={onClose}
-					onChange={onChange}
-					setPrimaryDoctorName={setPrimaryDoctorName}
-				/>
-			) : (
-				<SelectPrimaryDoctorModal
-					isOpen={isOpen}
-					onClose={onClose}
-					onChange={onChange}
-					setPrimaryDoctorName={setPrimaryDoctorName}
-				/>
-			)}
-		</>
-	);
-};
+}): JSX.Element => (
+	<ModalHandler
+		isOpen={isOpen}
+		onClose={onClose}
+		size="3xl"
+		headerTitle="Ajout de vos informations médicales"
+		headerSubtitle="Sélectionner votre médecin traitant."
+		headerIcon={PeopleIllustration}
+		bodyContent={
+			<SelectPrimaryDoctorContent
+				onChange={onChange}
+				onClose={onClose}
+				setPrimaryDoctorName={setPrimaryDoctorName}
+			/>
+		}
+	/>
+);
 export default SelectPrimaryDoctorHandler;

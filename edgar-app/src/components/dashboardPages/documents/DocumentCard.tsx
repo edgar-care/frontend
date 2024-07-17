@@ -5,7 +5,7 @@ import UpdateDocumentHandler from 'components/dashboardPages/documents/modal/Upd
 
 import { useAddDocumentToFavoriteMutation, useRemoveDocumentToFavoriteMutation } from 'services/request/documents';
 
-import { DocumentType } from 'types/dashboard/documents/DocumentType';
+import type { DocumentType } from 'types/dashboard/documents/DocumentType';
 
 import StarFillIcon from 'assets/icons/Stars/StarFillIcon';
 import StarOutlineIcon from 'assets/icons/Stars/StarOutlineIcon';
@@ -123,7 +123,7 @@ const DocumentCard = ({ document }: { document: DocumentType }) => {
 					</HStack>
 				)}
 			</Stack>
-			<UpdateDocumentHandler isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal} documentId={document.id} />
+			<UpdateDocumentHandler isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal} document={document} />
 			<DeleteDocumentHandler isOpen={isOpenDeleteModal} onClose={onCloseDeleteModal} documentId={document.id} />
 		</>
 	);

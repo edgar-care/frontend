@@ -9,6 +9,7 @@ import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import paginationHandler from 'utils/navigation/paginationHandler';
+import getLastMessage from 'utils/app/dashboard/chat/getLastMessage';
 
 import { type ChatType } from 'types/dashboard/chat/ChatType';
 
@@ -26,7 +27,9 @@ const ChatRecipientsList = ({
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-	const nonPrimaryDoctorChats = chats.filter((chat) => chat !== primaryDoctorChat);
+	const nonPrimaryDoctorChats = chats
+		.filter((chat) => chat !== primaryDoctorChat)
+		.sort((a, b) => getLastMessage(b.messages).sentTime - getLastMessage(a.messages).sentTime);
 
 	useEffect(() => {
 		setPrimaryDoctorChat(
