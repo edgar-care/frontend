@@ -11,24 +11,33 @@ import {
 	Icon,
 	Text,
 } from '@chakra-ui/react';
-// import { useForm } from 'react-hook-form';
+import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import AddTreatmentIllustration from 'assets/illustrations/AddTreatmentIllustration';
+import AddTreatmentContent from 'components/dashboardPages/treatments/modal/AddTreatmentContent';
 
-const AddTreatmentDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-	// const {
-	//     handleSubmit,
-	//     formState: { errors },
-	//     register,
-	//     reset,
-	// } = useForm<AddTreatmentType>({
-	//     mode: 'onChange',
-	// });
+import { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
+const AddTreatmentDrawer = ({
+	isOpen,
+	onClose,
+	onSubmit,
+	register,
+	control,
+	errors,
+	watch,
+}: {
+	isOpen: boolean;
+	onClose: () => void;
+	onSubmit: () => void;
+	register: UseFormRegister<TreatmentType>;
+	control: Control<TreatmentType>;
+	errors: FieldErrors<TreatmentType>;
+	watch: UseFormWatch<TreatmentType>;
+}) => {
 	const isMobile = useBreakpointValue({ base: true, sm: false });
 
 	return (
-		// <Drawer isOpen={isOpen} onClose={() => {reset({}); onClose();}} size="sm" placement="bottom">
 		<Drawer isOpen={isOpen} onClose={() => onClose()} size="sm" placement="bottom">
 			<DrawerOverlay />
 			<DrawerBody p="24px 24px 16px 24px">
@@ -39,6 +48,7 @@ const AddTreatmentDrawer = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 							Ajoutez un traitement
 						</Text>
 					</VStack>
+					<AddTreatmentContent />
 				</VStack>
 			</DrawerBody>
 			<DrawerFooter p="16px 24px 24px 24px">

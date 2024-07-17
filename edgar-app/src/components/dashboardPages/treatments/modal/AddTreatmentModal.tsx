@@ -10,10 +10,30 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
+import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import AddTreatmentIllustration from 'assets/illustrations/AddTreatmentIllustration';
+import AddTreatmentContent from 'components/dashboardPages/treatments/modal/AddTreatmentContent';
 
-const AddTreatmentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
+import { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
+
+const AddTreatmentModal = ({
+	isOpen,
+	onClose,
+	onSubmit,
+	register,
+	control,
+	errors,
+	watch,
+ }: { 
+	isOpen: boolean;
+	onClose: () => void;
+	onSubmit: () => void;
+	register: UseFormRegister<TreatmentType>;
+	control: Control<TreatmentType>;
+	errors: FieldErrors<TreatmentType>;
+	watch: UseFormWatch<TreatmentType>;
+}) => (
 	// <Modal isOpen={isOpen} onClose={() => { reset({}); onClose();}} size={{ base: 'xl', lg: '2xl'}}>
 	<Modal isOpen={isOpen} onClose={() => onClose()} size={{ base: 'xl', lg: '2xl' }}>
 		<ModalOverlay />
@@ -24,6 +44,7 @@ const AddTreatmentModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 						<Icon as={AddTreatmentIllustration} w="48px" h="48px" />
 						<Text size="xl">Ajoutez un traitement</Text>
 					</VStack>
+					<AddTreatmentContent />
 				</VStack>
 			</ModalBody>
 			<ModalFooter p="16px 24px 24px 24px">
