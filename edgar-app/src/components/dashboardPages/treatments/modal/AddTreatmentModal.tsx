@@ -15,7 +15,7 @@ import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-
 import AddTreatmentIllustration from 'assets/illustrations/AddTreatmentIllustration';
 import AddTreatmentContent from 'components/dashboardPages/treatments/modal/AddTreatmentContent';
 
-import { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
+import { type TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
 const AddTreatmentModal = ({
 	isOpen,
@@ -25,7 +25,7 @@ const AddTreatmentModal = ({
 	control,
 	errors,
 	watch,
- }: { 
+}: {
 	isOpen: boolean;
 	onClose: () => void;
 	onSubmit: () => void;
@@ -34,7 +34,6 @@ const AddTreatmentModal = ({
 	errors: FieldErrors<TreatmentType>;
 	watch: UseFormWatch<TreatmentType>;
 }) => (
-	// <Modal isOpen={isOpen} onClose={() => { reset({}); onClose();}} size={{ base: 'xl', lg: '2xl'}}>
 	<Modal isOpen={isOpen} onClose={() => onClose()} size={{ base: 'xl', lg: '2xl' }}>
 		<ModalOverlay />
 		<ModalContent borderRadius="12px">
@@ -44,7 +43,13 @@ const AddTreatmentModal = ({
 						<Icon as={AddTreatmentIllustration} w="48px" h="48px" />
 						<Text size="xl">Ajoutez un traitement</Text>
 					</VStack>
-					<AddTreatmentContent />
+					<AddTreatmentContent
+						onSubmit={onSubmit}
+						register={register}
+						control={control}
+						errors={errors}
+						watch={watch}
+					/>
 				</VStack>
 			</ModalBody>
 			<ModalFooter p="16px 24px 24px 24px">
@@ -52,7 +57,7 @@ const AddTreatmentModal = ({
 					<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
 						Annuler
 					</Button>
-					<Button size="customMd" variant="validate" w="100%" onClick={() => {}}>
+					<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
 						Ajouter
 					</Button>
 				</HStack>
