@@ -45,64 +45,61 @@ const UpdateAppointmentContent = ({
 		return groupedAppointments;
 	};
 
+	const groupedAppointments = groupAppointmentsOnSameDay(doctorAppointments || [])
+		.sort((a, b) => a[0].startDate - b[0].startDate)
+		.filter(
+			(_, index) => index >= firstAppointmentIndex && index < firstAppointmentIndex + nbrDisplayedAppointments,
+		);
+
 	return (
-		<VStack spacing="32px" w="100%">
-			<VStack spacing="8px">
-				<Icon as={CalendarIllustration} w="48px" h="48px" />
-				<Text size="xl">Modifiez un rendez-vous</Text>
-			</VStack>
-			<VStack spacing="16px" w="100%">
-				<HStack
-					spacing="16px"
-					borderRadius="16px"
-					w="100%"
-					p="16px"
-					bg="orange.100"
-					border="2px solid"
-					borderColor="orange.300"
-				>
-					<Icon as={DiamondWarningIcon} w="32px" h="32px" color="orange.600" />
-					<Text size="boldMd" color="orange.600">
-						Assurez-vous de la disponibilité de votre patient avant de modifier la date de son rendez-vous
-					</Text>
-				</HStack>
-				<HStack>
-					{firstAppointmentIndex > 0 && (
-						<Icon
-							as={CalendarPreviousIllustration}
-							w="24px"
-							h="24px"
-							onClick={() => setFirstAppointmentIndex(firstAppointmentIndex - 1)}
-						/>
-					)}
-					<HStack align="stretch">
-						{groupAppointmentsOnSameDay(doctorAppointments || [])
-							.sort((a, b) => a[0].startDate - b[0].startDate)
-							.filter(
-								(_, index) =>
-									index >= firstAppointmentIndex &&
-									index < firstAppointmentIndex + nbrDisplayedAppointments,
-							)
-							.map((appointment) => (
-								<AppointmentSlots
-									key={appointment[0].id}
-									appointments={appointment}
-									selectedAppointment={selectedAppointment}
-									setSelectedAppointment={setSelectedAppointment}
-								/>
-							))}
-					</HStack>
-					{firstAppointmentIndex + nbrDisplayedAppointments <
-						groupAppointmentsOnSameDay(doctorAppointments || []).length && (
-						<Icon
-							as={CalendarNextIllustration}
-							w="24px"
-							h="24px"
-							onClick={() => setFirstAppointmentIndex(firstAppointmentIndex + 1)}
-						/>
+		<VStack spacing="16px" w="100%">
+			<HStack
+				spacing="16px"
+				borderRadius="16px"
+				w="100%"
+				p="16px"
+				bg="orange.100"
+				border="2px solid"
+				borderColor="orange.300"
+			>
+				<Icon as={DiamondWarningIcon} w="32px" h="32px" color="orange.600" />
+				<Text size="boldMd" color="orange.600">
+					Assurez-vous de la disponibilité de votre patient avant de modifier la date de son rendez-vous
+				</Text>
+			</HStack>
+			<HStack>
+				{firstAppointmentIndex > 0 && (
+					<Icon
+						as={CalendarPreviousIllustration}
+						w="24px"
+						h="24px"
+						onClick={() => setFirstAppointmentIndex(firstAppointmentIndex - 1)}
+					/>
+				)}
+				<HStack align="stretch">
+					{groupedAppointments.length > 0 ? (
+						groupedAppointments.map((appointment) => (
+							<AppointmentSlots
+								key={appointment[0].id}
+								appointments={appointment}
+								selectedAppointment={selectedAppointment}
+								setSelectedAppointment={setSelectedAppointment}
+							/>
+						))
+					) : (
+						<Text>Pas de créneaux disponible</Text>
 					)}
 				</HStack>
-			</VStack>
+				{firstAppointmentIndex + nbrDisplayedAppointments <
+					groupAppointmentsOnSameDay(doctorAppointments || []).length && (
+					<Icon
+						as={CalendarNextIllustration}
+						w="24px"
+						h="24px"
+						onClick={() => setFirstAppointmentIndex(firstAppointmentIndex + 1)}
+					/>
+				)}
+			</HStack>
 		</VStack>
 	);
 };
