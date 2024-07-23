@@ -5,10 +5,12 @@ export type TreatmentType = {
 	name: string;
 	diseaseId: string;
 	stillRelevant: boolean;
-	treatments: {
-		period: TreatmentPeriodType;
-		day: TreatmentDayType;
-		quantity: string;
-		medicineId: string;
-	}[];
+	treatments: TreatmentMedicinesType[];
+};
+
+export type TreatmentMedicinesType = {
+	period: TreatmentPeriodType[];
+	day: TreatmentDayType[];
+	quantity: string;
+	medicineId: string;
 };

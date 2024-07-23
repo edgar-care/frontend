@@ -59,7 +59,6 @@ const extendedApi = backendApi.injectEndpoints({
 				method: 'POST',
 				body: {
 					name: params.name,
-					disease_id: params.diseaseId,
 					still_relevant: params.stillRelevant,
 					treatments: params.treatments.map((treatment) => ({
 						period: treatment.period,

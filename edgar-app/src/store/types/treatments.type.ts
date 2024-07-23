@@ -16,12 +16,11 @@ export interface CheckFollowUpTreatmentDTO {
 
 export interface AddTreatmentDTO {
 	name: string;
-	diseaseId: string;
 	stillRelevant: boolean;
 	treatments: {
-		period: TreatmentPeriodType;
-		day: TreatmentDayType;
-		quantity: string;
+		period: TreatmentPeriodType[];
+		day: TreatmentDayType[];
+		quantity: number;
 		medicineId: string;
 	}[];
 }
