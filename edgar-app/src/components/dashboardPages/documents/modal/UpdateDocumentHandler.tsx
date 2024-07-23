@@ -12,7 +12,7 @@ import getDocumentExtension from 'utils/app/dashboard/documents/getDocumentExten
 import type { UpdateDocumentType } from 'types/dashboard/documents/UpdateDocumentType';
 import type { DocumentType } from 'types/dashboard/documents/DocumentType';
 
-import CalendarIllustration from 'assets/illustrations/Calendarllustration';
+import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
 
 const UpdateDocumentHandler = ({
 	isOpen,

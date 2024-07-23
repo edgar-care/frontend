@@ -5,7 +5,7 @@ import ModalHandler from 'components/modals/ModalHandler';
 import UpdateAppointmentBody from 'components/dashboardPages/appointments/modals/UpdateAppointmentBody';
 import UpdateAppointmentFooterPrimaryButton from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterPrimaryButton';
 
-import CalendarIllustration from 'assets/illustrations/Calendarllustration';
+import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
 
 const UpdateAppointmentHandler = ({
 	isOpen,
