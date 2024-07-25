@@ -1,15 +1,4 @@
-import { HStack, Icon, Skeleton, Text, VStack } from '@chakra-ui/react';
-
-import LIcon from 'assets/icons/TreatmentCardIcon/Days/LIcon';
-import MIcon from 'assets/icons/TreatmentCardIcon/Days/MIcon';
-import JIcon from 'assets/icons/TreatmentCardIcon/Days/JIcon';
-import VIcon from 'assets/icons/TreatmentCardIcon/Days/VIcon';
-import SIcon from 'assets/icons/TreatmentCardIcon/Days/SIcon';
-import DIcon from 'assets/icons/TreatmentCardIcon/Days/DIcon';
-import MorningIcon from 'assets/icons/TreatmentCardIcon/Periods/MorningIcon';
-import NoonIcon from 'assets/icons/TreatmentCardIcon/Periods/NoonIcon';
-import EveningIcon from 'assets/icons/TreatmentCardIcon/Periods/EveningIcon';
-import NightIcon from 'assets/icons/TreatmentCardIcon/Periods/NightIcon';
+import { HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
@@ -17,41 +6,28 @@ import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicin
 import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
 import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
 
-const dayIconMap: Record<TreatmentDayType, typeof LIcon> = {
-	MONDAY: LIcon,
-	TUESDAY: MIcon,
-	WEDNESDAY: MIcon,
-	THURSDAY: JIcon,
-	FRIDAY: VIcon,
-	SATURDAY: SIcon,
-	SUNDAY: DIcon,
+const dayLetterMap: Record<TreatmentDayType, string> = {
+	MONDAY: 'L',
+	TUESDAY: 'M',
+	WEDNESDAY: 'M',
+	THURSDAY: 'J',
+	FRIDAY: 'V',
+	SATURDAY: 'S',
+	SUNDAY: 'D',
 };
 
-const periodIconMap: Record<TreatmentPeriodType, typeof MorningIcon> = {
-	MORNING: MorningIcon,
-	NOON: NoonIcon,
-	EVENING: EveningIcon,
-	NIGHT: NightIcon,
-};
-
-const periodIconWidthMap: Record<TreatmentPeriodType, string> = {
-	MORNING: '52px',
-	NOON: '43px',
-	EVENING: '40px',
-	NIGHT: '41px',
+const periodLetterMap: Record<TreatmentPeriodType, string> = {
+	MORNING: 'Matin',
+	NOON: 'Midi',
+	EVENING: 'Soir',
+	NIGHT: 'Nuit',
 };
 
 const TreatmentDisplayCard = ({ treatment }: { treatment: PatientMedicineType }) => {
 	const { data: medicineInfo, isLoading } = useGetMedicineByIdQuery(treatment.medicineId);
-	console.log(treatment.days);
-	console.log(treatment.periods);
-	const getDayIconColor = (day: TreatmentDayType): string => (treatment.days.includes(day) ? 'blue.700' : 'grey.300');
-	const getPeriodIconColor = (period: TreatmentPeriodType): string =>
-		treatment.periods.includes(period) ? 'blue.700' : 'grey.300';
-	const getPeriodIconWidth = (period: TreatmentPeriodType): string => periodIconWidthMap[period];
 
 	return (
-		<Skeleton isLoaded={!isLoading} w="100%">
+		<Skeleton isLoaded={!isLoading && medicineInfo !== undefined} w="100%">
 			<VStack
 				bg="blue.50"
 				borderRadius="8px"
@@ -69,26 +45,34 @@ const TreatmentDisplayCard = ({ treatment }: { treatment: PatientMedicineType })
 					</Text>
 				</HStack>
 				<VStack spacing="4px" align="start">
-					<HStack spacing="9px">
-						{Object.keys(dayIconMap).map((day) => (
-							<Icon
+					<HStack w="100%" justify="space-between">
+						{Object.keys(dayLetterMap).map((day) => (
+							<VStack
 								key={day}
-								as={dayIconMap[day as TreatmentDayType]}
-								w="20px"
-								h="20px"
-								color={getDayIconColor(day as TreatmentDayType)}
-							/>
+								px="6px"
+								borderRadius="4px"
+								bg={treatment.days.includes(day as TreatmentDayType) ? 'blue.700' : 'grey.300'}
+							>
+								<Text color="white" userSelect="none">
+									{dayLetterMap[day as TreatmentDayType]}
+								</Text>
+							</VStack>
 						))}
 					</HStack>
-					<HStack spacing="6px">
-						{Object.keys(periodIconMap).map((period) => (
-							<Icon
+					<HStack w="100%" justify="space-between">
+						{Object.keys(periodLetterMap).map((period) => (
+							<VStack
 								key={period}
-								as={periodIconMap[period as TreatmentPeriodType]}
-								w={getPeriodIconWidth(period as TreatmentPeriodType)}
-								h="21px"
-								color={getPeriodIconColor(period as TreatmentPeriodType)}
-							/>
+								px="6px"
+								borderRadius="4px"
+								bg={treatment.periods.includes(period as TreatmentPeriodType) ? 'blue.700' : 'grey.300'}
+								cursor="pointer"
+								_hover={{ bg: 'blue.300' }}
+							>
+								<Text color="white" userSelect="none">
+									{periodLetterMap[period as TreatmentPeriodType]}
+								</Text>
+							</VStack>
 						))}
 					</HStack>
 				</VStack>
