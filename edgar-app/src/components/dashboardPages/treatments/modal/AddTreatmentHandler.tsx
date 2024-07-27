@@ -5,9 +5,10 @@ import AddTreatmentDrawer from 'components/dashboardPages/treatments/modal/AddTr
 import AddTreatmentModal from 'components/dashboardPages/treatments/modal/AddTreatmentModal';
 
 import { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
-import { useAddTreatmentMutation } from 'services/request/treatments';
+import { useAddTreatmentAndHealthIssueMutation, useAddTreatmentMutation } from 'services/request/treatments';
 
 const AddTreatmentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }): JSX.Element => {
+	const [triggerAddTreatmentAndHealthIssueMutation] = useAddTreatmentAndHealthIssueMutation();
 	const [triggerAddTreatmentMutation] = useAddTreatmentMutation();
 	const {
 		handleSubmit,
@@ -21,6 +22,8 @@ const AddTreatmentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
+	const existing = watch('existing');
+
 	const onSubmit = handleSubmit((data) => {
 		if (!data.treatments.every((medicine) => medicine.day.length > 0 && medicine.period.length > 0)) {
 			toast({
@@ -29,25 +32,48 @@ const AddTreatmentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 			});
 			return;
 		}
-		triggerAddTreatmentMutation({
-			name: data.name,
-			stillRelevant: data.stillRelevant,
-			treatments: data.treatments.map((treatment) => ({
-				period: treatment.period,
-				day: treatment.day,
-				quantity: parseInt(treatment.quantity, 10),
-				medicineId: treatment.medicineId,
-			})),
-		})
-			.unwrap()
-			.then(() => {
-				onClose();
-				reset();
-				toast({ title: 'Votre traitement à été ajouté', status: 'success' });
+		if (data.name && !existing) {
+			triggerAddTreatmentAndHealthIssueMutation({
+				name: data.name,
+				stillRelevant: data.stillRelevant,
+				treatments: data.treatments.map((treatment) => ({
+					period: treatment.period,
+					day: treatment.day,
+					quantity: parseInt(treatment.quantity, 10),
+					medicineId: treatment.medicineId,
+				})),
 			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
+				.unwrap()
+				.then(() => {
+					onClose();
+					reset();
+					toast({ title: 'Votre traitement à été ajouté', status: 'success' });
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		}
+		if (data.diseaseId && existing) {
+			triggerAddTreatmentMutation({
+				diseaseId: data.diseaseId,
+				stillRelevant: data.stillRelevant,
+				treatments: data.treatments.map((treatment) => ({
+					period: treatment.period,
+					day: treatment.day,
+					quantity: parseInt(treatment.quantity, 10),
+					medicineId: treatment.medicineId,
+				})),
+			})
+				.unwrap()
+				.then(() => {
+					onClose();
+					reset();
+					toast({ title: 'Votre traitement à été ajouté', status: 'success' });
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		}
 	});
 
 	return (

@@ -24,15 +24,7 @@ const TreatmentCard = ({
 	if (!medicineInfo) return <></>;
 
 	return (
-		<VStack
-			align="start"
-			p="8px 16px"
-			borderRadius="8px"
-			bg="blue.50"
-			border="2px solid"
-			borderColor="blue.200"
-			id={`edgar-onboardingMedicalPage-medicineCard-${medicine.medicineId}-card`}
-		>
+		<VStack align="start" p="8px 16px" borderRadius="8px" bg="blue.50" border="2px solid" borderColor="blue.200">
 			<VStack w="100%" align="start" spacing="0px">
 				<HStack w="100%" justify="space-between">
 					<Text size="boldLg">{medicineInfo.name}</Text>

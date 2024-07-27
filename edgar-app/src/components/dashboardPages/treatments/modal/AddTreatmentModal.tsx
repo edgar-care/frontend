@@ -10,7 +10,7 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
-import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { type Control, type FieldErrors, type UseFormRegister, type UseFormWatch } from 'react-hook-form';
 
 import AddTreatmentIllustration from 'assets/illustrations/AddTreatmentIllustration';
 import AddTreatmentContent from 'components/dashboardPages/treatments/modal/AddTreatmentContent';

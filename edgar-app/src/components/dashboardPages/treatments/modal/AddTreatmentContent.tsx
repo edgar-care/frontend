@@ -1,6 +1,7 @@
 import { VStack, chakra } from '@chakra-ui/react';
 import { UseFormRegister, UseFormWatch, FieldErrors, Control } from 'react-hook-form';
 
+import AddTreatmentExisting from 'components/dashboardPages/treatments/modal/AddTreatmentExisting';
 import AddTreatmentNameInput from 'components/dashboardPages/treatments/modal/AddTreatmentNameInput';
 import AddTreatmentStillRelevantInput from 'components/dashboardPages/treatments/modal/AddTreatmentStillRelevantInput';
 import AddTreatmentMedicineInput from 'components/dashboardPages/treatments/modal/AddTreatmentMedicineInput';
@@ -47,7 +48,8 @@ const AddTreatmentContent = ({
 			>
 				<VStack w="100%">
 					<VStack w="100%" spacing="16px">
-						<AddTreatmentNameInput register={register} errors={errors} />
+						<AddTreatmentExisting control={control} errors={errors} />
+						<AddTreatmentNameInput register={register} control={control} watch={watch} errors={errors} />
 						<AddTreatmentStillRelevantInput control={control} errors={errors} />
 						<AddTreatmentMedicineInput control={control} watch={watch} errors={errors} />
 					</VStack>

@@ -6,9 +6,9 @@ import SelectHealthIssueMedicineInputCard from 'components/onboardingPages/medic
 import TreatmentCard from 'components/dashboardPages/treatments/TreatmentCard';
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type TreatmentType } from 'types/dashboard/treatments/TreatmentType';
-
 import AddIcon from 'assets/icons/AddIcon';
+
+import { type TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
 
@@ -61,11 +61,7 @@ const AddTreatmentMedicineInput = ({
 						/>
 					)}
 				/>
-				{errors.treatments?.type === 'validate' && (
-					<ErrorMessage id="edgar-onboardingMedicalPage-medicineError-text">
-						Ce champ est nécessaire
-					</ErrorMessage>
-				)}
+				{errors.treatments?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>
 			<Wrap w="100%">
 				{addedMedicines.map((medicine) => (
