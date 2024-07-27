@@ -2,8 +2,9 @@ import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPerio
 import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
 
 export type TreatmentType = {
-	name: string;
-	diseaseId: string;
+	name?: string;
+	diseaseId?: string;
+	existing: boolean;
 	stillRelevant: boolean;
 	treatments: TreatmentMedicinesType[];
 };

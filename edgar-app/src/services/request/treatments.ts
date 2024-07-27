@@ -4,6 +4,7 @@ import type {
 	CheckFollowUpTreatmentDTO,
 	FollowUpTreatmentsStoreType,
 	AddTreatmentDTO,
+	AddTreatmentAndHealthIssueDTO,
 } from 'store/types/treatments.type';
 import { type TreatmentFollowUpType } from 'types/dashboard/treatments/TreatmentFollowUpType';
 
@@ -58,7 +59,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: '/dashboard/treatment',
 				method: 'POST',
 				body: {
-					name: params.name,
+					disease_id: params.diseaseId,
 					still_relevant: params.stillRelevant,
 					treatments: params.treatments.map((treatment) => ({
 						period: treatment.period,
@@ -69,6 +70,23 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 			}),
 			invalidatesTags: ['patientTreatments'],
+		}),
+
+		addTreatmentAndHealthIssue: builder.mutation<void, AddTreatmentAndHealthIssueDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'POST',
+				body: {
+					name: params.name,
+					still_relevant: params.stillRelevant,
+					treatments: params.treatments.map((treatment) => ({
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+						medicine_id: treatment.medicineId,
+					})),
+				},
+			}),
 		}),
 	}),
 });
@@ -81,4 +99,5 @@ export const {
 	useCheckFollowUpTreatmentMutation,
 	useUncheckFollowUpTreatmentMutation,
 	useAddTreatmentMutation,
+	useAddTreatmentAndHealthIssueMutation,
 } = extendedApi;
