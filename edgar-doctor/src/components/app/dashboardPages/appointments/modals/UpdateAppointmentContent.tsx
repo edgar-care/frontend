@@ -4,7 +4,6 @@ import { VStack, Icon, Text, HStack, useBreakpointValue } from '@chakra-ui/react
 import AppointmentSlots from 'components/app/dashboardPages/appointments/AppointmentSlots';
 
 import DiamondWarningIcon from 'assets/icons/DiamondWarningIcon';
-import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
 import CalendarPreviousIllustration from 'assets/illustrations/CalendarPreviousIllustration';
 import CalendarNextIllustration from 'assets/illustrations/CalendarNextIllustration';
 

@@ -1,4 +1,4 @@
-import {Button, FormLabel, Input, useToast, VStack} from '@chakra-ui/react';
+import { Button, FormLabel, Input, useToast, VStack } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import ModalHandler from 'components/modals/ModalHandler';
