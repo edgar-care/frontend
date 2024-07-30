@@ -3,9 +3,11 @@ import { useRouter } from 'next/navigation';
 import Avatar from 'boring-avatars';
 
 import ProfileTab from 'components/navigation/ProfileTab';
+import SettingsHandler from 'components/navigation/settingsModals/SettingsHandler';
 
 import SelectorIcon from 'assets/icons/SelectorIcon';
 import LogoutIcon from 'assets/icons/LogoutIcon';
+import SettingsIcon from 'assets/icons/SettingsIcon';
 
 import { type ProfileTabType } from 'types/navigation/ProfileType';
 
@@ -15,10 +17,19 @@ import colors from 'theme/foundations/colors';
 
 const ProfileCard = (): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
+
 	const { isOpen, onToggle } = useDisclosure();
+	const { isOpen: isOpenSettingsModal, onOpen: onOpenSettingsModal, onClose: onCloseSettingsModal } = useDisclosure();
+
 	const router = useRouter();
 
 	const profileTabs: ProfileTabType[] = [
+		{
+			name: 'Paramètres',
+			icon: SettingsIcon,
+			action: onOpenSettingsModal,
+			actionComponent: <SettingsHandler isOpen={isOpenSettingsModal} onClose={onCloseSettingsModal} />,
+		},
 		{
 			name: 'Déconnexion',
 			icon: LogoutIcon,
@@ -42,7 +53,7 @@ const ProfileCard = (): JSX.Element => {
 					transition="all .3s ease-out"
 					id="edgar-dashboardNavbar-profileCard"
 				>
-					<VStack w="100%" p="4px" pb="0px">
+					<VStack w="100%" p="4px" pb="0px" spacing="0px">
 						{profileTabs.map((tab) => (
 							<ProfileTab tab={tab} key={tab.name} />
 						))}
