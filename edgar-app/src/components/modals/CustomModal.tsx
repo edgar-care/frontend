@@ -22,6 +22,7 @@ import SmallLeftArrowIcon from 'assets/icons/Arrow/Small/SmallLeftArrowIcon';
 const CustomModal = ({
 	isOpen,
 	onClose,
+	onReturn,
 	size,
 	hasReturnButton,
 	headerTitle,
@@ -33,6 +34,7 @@ const CustomModal = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
+	onReturn: () => void;
 	size: ModalSizeType;
 	hasReturnButton: boolean;
 	headerTitle: string;
@@ -89,7 +91,7 @@ const CustomModal = ({
 					{sizeLeftBanner[size] && (
 						<VStack w="64px" spacing="16px" align="start">
 							{hasReturnButton && (
-								<Icon h="16px" w="auto" as={SmallLeftArrowIcon} onClick={onClose} cursor="pointer" />
+								<Icon h="16px" w="auto" as={SmallLeftArrowIcon} onClick={onReturn} cursor="pointer" />
 							)}
 							<Box
 								w="100%"
@@ -111,7 +113,7 @@ const CustomModal = ({
 												w="16px"
 												h="16px"
 												cursor="pointer"
-												onClick={onClose}
+												onClick={onReturn}
 											/>
 										)
 									) : (

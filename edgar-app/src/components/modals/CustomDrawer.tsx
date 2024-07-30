@@ -20,6 +20,7 @@ import SmallLeftArrowIcon from 'assets/icons/Arrow/Small/SmallLeftArrowIcon';
 const CustomDrawer = ({
 	isOpen,
 	onClose,
+	onReturn,
 	hasReturnButton,
 	placement,
 	maxW = 'calc(100vw - 24px) !important',
@@ -32,6 +33,7 @@ const CustomDrawer = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
+	onReturn: () => void;
 	hasReturnButton: boolean;
 	placement?: SlideOptions['direction'];
 	maxW?: string;
@@ -50,7 +52,7 @@ const CustomDrawer = ({
 					<HStack w="100%" justify="space-between" align="center" pr="12px">
 						<Icon as={headerIcon} w="48px" h="48px" />
 						{hasReturnButton ? (
-							<Icon as={SmallLeftArrowIcon} w="16px" h="16px" cursor="pointer" onClick={onClose} />
+							<Icon as={SmallLeftArrowIcon} w="16px" h="16px" cursor="pointer" onClick={onReturn} />
 						) : (
 							<Icon as={CrossIcon} w="16px" h="16px" cursor="pointer" onClick={onClose} />
 						)}
