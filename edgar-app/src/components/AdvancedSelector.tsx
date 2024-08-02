@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box, Icon, Input, InputGroup, InputRightElement, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { type ComponentWithAs } from '@chakra-ui/system';
 import { type IconProps } from '@chakra-ui/icons';
@@ -9,12 +9,14 @@ import { type AdvancedSelectorOptionType } from 'types/AdvancedSelectorOptionTyp
 
 const AdvancedSelector = ({
 	data,
+	defaultValue = '',
 	placeholder,
 	rightIcon = DownChevronIcon,
 	maxH = '200px',
 	id,
 }: {
 	data: AdvancedSelectorOptionType[];
+	defaultValue?: string;
 	placeholder: string;
 	rightIcon?: ComponentWithAs<'svg', IconProps>;
 	maxH?: string;
@@ -40,6 +42,10 @@ const AdvancedSelector = ({
 				{option.content}
 			</Box>
 		));
+
+	useEffect(() => {
+		setSelectSearch(defaultValue);
+	}, [defaultValue]);
 
 	return (
 		<VStack spacing="0px" align="start" w="100%">
