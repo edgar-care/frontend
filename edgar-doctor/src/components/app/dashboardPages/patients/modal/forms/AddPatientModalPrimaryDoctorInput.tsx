@@ -21,8 +21,8 @@ const OnboardingPersonalPrimaryDoctorInput = ({
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<VStack spacing="8px" align="start" w="100%" pb={errors.medicalFolder?.primaryDoctorId ? '0px' : '16px'}>
-			<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formPrimaryDoctor-text">
+		<VStack spacing="4px" align="start" w="100%" pb={errors.medicalFolder?.primaryDoctorId ? '0px' : '16px'}>
+			<FormLabel size="lg" id="edgar-onboardingPersonalPage-formPrimaryDoctor-text">
 				Nom du médecin traitant
 			</FormLabel>
 			<InputGroup>

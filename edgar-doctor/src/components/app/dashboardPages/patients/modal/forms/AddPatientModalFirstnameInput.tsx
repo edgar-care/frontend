@@ -12,8 +12,8 @@ const AddPatientModalFirstnameInput = ({
 	register: UseFormRegister<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-addPatientModal-formFirstname-text">
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-addPatientModal-formFirstname-text">
 			Prénom
 		</FormLabel>
 		<Input

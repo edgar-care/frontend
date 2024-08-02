@@ -12,8 +12,8 @@ const AddPatientModalBirthdateInput = ({
 	control: Control<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" maxW="264px">
-		<FormLabel size="boldLg" id="edgar-onboardingPersonalPage-formBirthdate-text">
+	<VStack spacing="4px" align="start" w="100%" maxW="264px">
+		<FormLabel size="lg" id="edgar-onboardingPersonalPage-formBirthdate-text">
 			Date de naissance
 		</FormLabel>
 		<Controller
