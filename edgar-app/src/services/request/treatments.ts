@@ -69,7 +69,7 @@ const extendedApi = backendApi.injectEndpoints({
 					})),
 				},
 			}),
-			invalidatesTags: ['patientTreatments'],
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 
 		addTreatmentAndHealthIssue: builder.mutation<void, AddTreatmentAndHealthIssueDTO>({
@@ -87,6 +87,7 @@ const extendedApi = backendApi.injectEndpoints({
 					})),
 				},
 			}),
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 	}),
 });
