@@ -13,10 +13,12 @@ import colors from 'theme/foundations/colors';
 const SettingsBody = ({
 	sections,
 	hasProfileBanner,
+	id,
 	setSelectedPageStack,
 }: {
 	sections: SettingsSectionType[];
 	hasProfileBanner: boolean;
+	id?: string;
 	setSelectedPageStack: Dispatch<SetStateAction<string[]>>;
 }): JSX.Element => {
 	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
@@ -38,10 +40,10 @@ const SettingsBody = ({
 					<Skeleton isLoaded={!isLoading && medicalInfo !== undefined}>
 						{medicalInfo && (
 							<VStack spacing="0px" align="start">
-								<Text size="boldMd" color="white">
+								<Text size="boldMd" color="white" id={`edgar-${id}-profileFirstnameName-text`}>
 									{medicalInfo.firstname} {medicalInfo.name.toUpperCase()}
 								</Text>
-								<Text size="sm" color="white">
+								<Text size="sm" color="white" id={`edgar-${id}-profileBirthdate-text`}>
 									{medicalInfo.sex === 'FEMALE' ? 'Née' : 'Né'} le{' '}
 									{new Date(medicalInfo.birthdate).toLocaleDateString('fr-FR')}
 								</Text>
@@ -59,7 +61,12 @@ const SettingsBody = ({
 				borderColor="blue.100"
 			>
 				{sections.map((section) => (
-					<SettingsSection section={section} key={section.name} setSelectedPageStack={setSelectedPageStack} />
+					<SettingsSection
+						section={section}
+						key={section.name}
+						id={`${id}-${section.name.replace(/ /g, '')}Section`}
+						setSelectedPageStack={setSelectedPageStack}
+					/>
 				))}
 			</VStack>
 		</VStack>

@@ -19,8 +19,8 @@ const SettingsHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 	// TODO: update 2fa and backup codes values
 	const modalPages: { [key: string]: SettingsPageType } = {
 		settings: settingsPage,
-		account: settingsAccountPage(auth.getEmail(), false, false),
-		'settings-account-2fa': settingsAccount2FAPage(false, false, false),
+		settingsAccount: settingsAccountPage(auth.getEmail(), false, false),
+		settingsAccount2fa: settingsAccount2FAPage(false, false, false),
 	};
 
 	if (!modalPages[selectedPageStack[selectedPageStack.length - 1]]) {
@@ -38,6 +38,7 @@ const SettingsHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 			}}
 			onReturn={() => setSelectedPageStack(selectedPageStack.slice(0, -1))}
 			size="3xl"
+			id={`${selectedPageStack[selectedPageStack.length - 1]}Modal`}
 			headerTitle={modalPages[selectedPageStack[selectedPageStack.length - 1]].headerTitle}
 			headerSubtitle={modalPages[selectedPageStack[selectedPageStack.length - 1]].headerSubtitle}
 			headerIcon={modalPages[selectedPageStack[selectedPageStack.length - 1]].headerIcon}
@@ -49,6 +50,7 @@ const SettingsHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 					<SettingsBody
 						sections={modalPages[selectedPageStack[selectedPageStack.length - 1]].sections}
 						hasProfileBanner={modalPages[selectedPageStack[selectedPageStack.length - 1]].hasProfileBanner}
+						id={`${selectedPageStack[selectedPageStack.length - 1]}Modal`}
 						setSelectedPageStack={setSelectedPageStack}
 					/>
 				)
