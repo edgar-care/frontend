@@ -12,6 +12,7 @@ const ModalHandler = ({
 	onClose,
 	onReturn = () => {},
 	size,
+	id,
 	hasReturnButton = false,
 	placement = 'bottom',
 	headerTitle,
@@ -25,6 +26,7 @@ const ModalHandler = ({
 	onClose: () => void;
 	onReturn?: () => void;
 	size: ModalSizeType;
+	id?: string;
 	hasReturnButton?: boolean;
 	placement?: SlideOptions['direction'];
 	headerTitle: string;
@@ -44,6 +46,7 @@ const ModalHandler = ({
 					onClose={onClose}
 					onReturn={onReturn}
 					hasReturnButton={hasReturnButton}
+					id={id}
 					placement={placement}
 					headerTitle={headerTitle}
 					headerSubtitle={headerSubtitle}
@@ -58,6 +61,7 @@ const ModalHandler = ({
 					onClose={onClose}
 					onReturn={onReturn}
 					size={size}
+					id={id}
 					hasReturnButton={hasReturnButton}
 					headerTitle={headerTitle}
 					headerSubtitle={headerSubtitle}

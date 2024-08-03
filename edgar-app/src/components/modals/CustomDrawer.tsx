@@ -22,6 +22,7 @@ const CustomDrawer = ({
 	onClose,
 	onReturn,
 	hasReturnButton,
+	id,
 	placement,
 	maxW = 'calc(100vw - 24px) !important',
 	headerTitle,
@@ -33,8 +34,9 @@ const CustomDrawer = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	onReturn: () => void;
+	onReturn?: () => void;
 	hasReturnButton: boolean;
+	id?: string;
 	placement?: SlideOptions['direction'];
 	maxW?: string;
 	headerTitle: string;
@@ -50,19 +52,33 @@ const CustomDrawer = ({
 			<DrawerHeader p="0px 0px 16px 0px">
 				<VStack w="100%" spacing="16px">
 					<HStack w="100%" justify="space-between" align="center" pr="12px">
-						<Icon as={headerIcon} w="48px" h="48px" />
+						<Icon as={headerIcon} w="48px" h="48px" id={`edgar-${id}-headerIcon-icon`} />
 						{hasReturnButton ? (
-							<Icon as={SmallLeftArrowIcon} w="16px" h="16px" cursor="pointer" onClick={onReturn} />
+							<Icon
+								as={SmallLeftArrowIcon}
+								w="16px"
+								h="16px"
+								cursor="pointer"
+								onClick={onReturn}
+								id={`edgar-${id}-returnButton-icon`}
+							/>
 						) : (
-							<Icon as={CrossIcon} w="16px" h="16px" cursor="pointer" onClick={onClose} />
+							<Icon
+								as={CrossIcon}
+								w="16px"
+								h="16px"
+								cursor="pointer"
+								onClick={onClose}
+								id={`edgar-${id}-closeButton-icon`}
+							/>
 						)}
 					</HStack>
 					<VStack w="100%" spacing="0px">
-						<Text size="boldXl" w="100%">
+						<Text size="boldXl" w="100%" id={`edgar-${id}-headerTitle-text`}>
 							{headerTitle}
 						</Text>
 						{headerSubtitle && (
-							<Text color="grey.600" w="100%">
+							<Text color="grey.600" w="100%" id={`edgar-${id}-headerSubtitle-text`}>
 								{headerSubtitle}
 							</Text>
 						)}
