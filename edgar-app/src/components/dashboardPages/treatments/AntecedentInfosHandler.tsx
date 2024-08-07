@@ -2,6 +2,7 @@ import { VStack, Text, HStack, Button, useDisclosure } from '@chakra-ui/react';
 
 import TreatmentDisplayCard from 'components/dashboardPages/treatments/TreatmentDisplayCard';
 import DeleteTreatmentHandler from 'components/dashboardPages/treatments/modal/DeleteTreatmentHandler';
+import UpdateTreatmentHandler from 'components/dashboardPages/treatments/modal/UpdateTreatmentHandler';
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
@@ -11,6 +12,8 @@ const AntecedentInfosHandler = ({
 	antecedent: PatientMedicalAntecedentType | undefined;
 }): JSX.Element => {
 	const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
+	const { isOpen: isOpenUpdateModal, onOpen: onOpenUpdateModal, onClose: onCloseUpdateModal } = useDisclosure();
+
 	return (
 		<VStack
 			w="100%"
@@ -44,13 +47,18 @@ const AntecedentInfosHandler = ({
 				</VStack>
 			</VStack>
 			<HStack spacing="16px" w="100%">
-				<Button size="sm" w="100%" variant="secondary">
+				<Button size="sm" w="100%" variant="secondary" onClick={onOpenUpdateModal}>
 					Modifier
 				</Button>
 				<Button size="sm" w="100%" variant="delete" onClick={onOpenDeleteModal}>
 					Supprimer
 				</Button>
 			</HStack>
+			<UpdateTreatmentHandler 
+				isOpen={isOpenUpdateModal}
+				onClose={onCloseUpdateModal}
+				antecedent={antecedent}
+			/>
 			<DeleteTreatmentHandler
 				isOpen={isOpenDeleteModal}
 				onClose={onCloseDeleteModal}
