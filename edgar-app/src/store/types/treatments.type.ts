@@ -35,3 +35,13 @@ export interface AddTreatmentAndHealthIssueDTO {
 		medicineId: string;
 	}[];
 }
+
+export interface UpdateTreatmentDTO {
+	treatments: {
+		id: string;
+		medicine_id: string;
+		period: TreatmentPeriodType[];
+		day: TreatmentDayType[];
+		quantity: number;
+	}[];
+}

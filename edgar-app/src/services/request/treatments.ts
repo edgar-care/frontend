@@ -5,6 +5,7 @@ import type {
 	FollowUpTreatmentsStoreType,
 	AddTreatmentDTO,
 	AddTreatmentAndHealthIssueDTO,
+	UpdateTreatmentDTO,
 } from 'store/types/treatments.type';
 import { type TreatmentFollowUpType } from 'types/dashboard/treatments/TreatmentFollowUpType';
 
@@ -97,6 +98,23 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['patientTreatments'],
 		}),
+
+		updateTreatment: builder.mutation<void, UpdateTreatmentDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'PUT',
+				body: {
+					treatments: params.treatments.map((treatment) => ({
+						id: treatment.id,
+						medicine_id: treatment.medicine_id,
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+					})),
+				},
+			}),
+			invalidatesTags: ['patientTreatments'],
+		}),
 	}),
 });
 
@@ -110,4 +128,5 @@ export const {
 	useAddTreatmentMutation,
 	useAddTreatmentAndHealthIssueMutation,
 	useDeleteTreatmentMutation,
+	useUpdateTreatmentMutation,
 } = extendedApi;
