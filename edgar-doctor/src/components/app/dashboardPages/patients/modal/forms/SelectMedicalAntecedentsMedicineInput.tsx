@@ -27,7 +27,7 @@ const SelectMedicalAntecedentsMedicineInput = ({
 
 	return (
 		<VStack spacing="12px" align="start" w="100%">
-			<VStack spacing="8px" align="start" w="100%">
+			<VStack spacing="4px" align="start" w="100%">
 				<Controller
 					control={control}
 					name="medicines"

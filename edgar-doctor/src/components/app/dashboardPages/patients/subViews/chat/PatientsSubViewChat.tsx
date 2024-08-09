@@ -9,13 +9,15 @@ const PatientsSubViewChat = ({ patientId }: { patientId: string | undefined }): 
 
 	return (
 		<Skeleton isLoaded={patientId !== undefined} w="100%" h="100%" borderRadius="8px">
-			<ChatMessages
-				chat={
-					chats.filter((chat) =>
-						chat.participants.some((participant) => participant.participantId === patientId),
-					)[0]
-				}
-			/>
+			{chats && (
+				<ChatMessages
+					chat={
+						chats.filter((chat) =>
+							chat.participants.some((participant) => participant.participantId === patientId),
+						)[0]
+					}
+				/>
+			)}
 		</Skeleton>
 	);
 };

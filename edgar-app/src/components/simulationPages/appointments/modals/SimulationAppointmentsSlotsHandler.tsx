@@ -8,7 +8,7 @@ import { type DoctorType } from 'types/dashboard/DoctorType';
 import { type SlotType } from 'types/simulation/appointments/SlotType';
 import { type ModalSizeType } from 'types/modals/ModalSizeType';
 
-import CalendarIllustration from 'assets/illustrations/Calendarllustration';
+import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
 
 const SimulationAppointmentsSlotsHandler = ({
 	isOpen,
