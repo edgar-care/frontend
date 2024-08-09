@@ -10,7 +10,9 @@ import type { ModalSizeType } from 'types/modals/ModalSizeType';
 const ModalHandler = ({
 	isOpen,
 	onClose,
+	onReturn = () => {},
 	size,
+	id,
 	hasReturnButton = false,
 	placement = 'bottom',
 	headerTitle,
@@ -22,7 +24,9 @@ const ModalHandler = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
+	onReturn?: () => void;
 	size: ModalSizeType;
+	id?: string;
 	hasReturnButton?: boolean;
 	placement?: SlideOptions['direction'];
 	headerTitle: string;
@@ -40,7 +44,9 @@ const ModalHandler = ({
 				<CustomDrawer
 					isOpen={isOpen}
 					onClose={onClose}
+					onReturn={onReturn}
 					hasReturnButton={hasReturnButton}
+					id={id}
 					placement={placement}
 					headerTitle={headerTitle}
 					headerSubtitle={headerSubtitle}
@@ -53,7 +59,9 @@ const ModalHandler = ({
 				<CustomModal
 					isOpen={isOpen}
 					onClose={onClose}
+					onReturn={onReturn}
 					size={size}
+					id={id}
 					hasReturnButton={hasReturnButton}
 					headerTitle={headerTitle}
 					headerSubtitle={headerSubtitle}

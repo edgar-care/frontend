@@ -22,7 +22,9 @@ import SmallLeftArrowIcon from 'assets/icons/Arrow/Small/SmallLeftArrowIcon';
 const CustomModal = ({
 	isOpen,
 	onClose,
+	onReturn,
 	size,
+	id,
 	hasReturnButton,
 	headerTitle,
 	headerSubtitle,
@@ -33,7 +35,9 @@ const CustomModal = ({
 }: {
 	isOpen: boolean;
 	onClose: () => void;
+	onReturn: () => void;
 	size: ModalSizeType;
+	id?: string;
 	hasReturnButton: boolean;
 	headerTitle: string;
 	headerSubtitle?: string;
@@ -89,13 +93,21 @@ const CustomModal = ({
 					{sizeLeftBanner[size] && (
 						<VStack w="64px" spacing="16px" align="start">
 							{hasReturnButton && (
-								<Icon h="16px" w="auto" as={SmallLeftArrowIcon} onClick={onClose} cursor="pointer" />
+								<Icon
+									h="16px"
+									w="auto"
+									as={SmallLeftArrowIcon}
+									onClick={onReturn}
+									cursor="pointer"
+									id={`edgar-${id}-returnButton-icon`}
+								/>
 							)}
 							<Box
 								w="100%"
 								h="100%"
 								bg="radial-gradient(circle at center, #A0C9F0 0, #335FC2 100%);"
 								borderRadius="12px"
+								id={`edgar-${id}-banner-div`}
 							/>
 						</VStack>
 					)}
@@ -103,7 +115,7 @@ const CustomModal = ({
 						<ModalHeader p="0px" w="100%">
 							<VStack w="100%" spacing="16px" align="start">
 								<HStack w="100%" justify="space-between" align="center" pr="12px">
-									<Icon as={headerIcon} w="48px" h="48px" />
+									<Icon as={headerIcon} w="48px" h="48px" id={`edgar-${id}-headerIcon-icon`} />
 									{hasReturnButton ? (
 										!sizeLeftBanner[size] && (
 											<Icon
@@ -111,19 +123,27 @@ const CustomModal = ({
 												w="16px"
 												h="16px"
 												cursor="pointer"
-												onClick={onClose}
+												onClick={onReturn}
+												id={`edgar-${id}-returnButton-icon`}
 											/>
 										)
 									) : (
-										<Icon as={CrossIcon} w="16px" h="16px" cursor="pointer" onClick={onClose} />
+										<Icon
+											as={CrossIcon}
+											w="16px"
+											h="16px"
+											cursor="pointer"
+											onClick={onClose}
+											id={`edgar-${id}-closeButton-icon`}
+										/>
 									)}
 								</HStack>
 								<VStack w="100%" spacing="0px">
-									<Text size="boldXl" w="100%">
+									<Text size="boldXl" w="100%" id={`edgar-${id}-headerTitle-text`}>
 										{headerTitle}
 									</Text>
 									{headerSubtitle && (
-										<Text color="grey.600" w="100%">
+										<Text color="grey.600" w="100%" id={`edgar-${id}-headerSubtitle-text`}>
 											{headerSubtitle}
 										</Text>
 									)}

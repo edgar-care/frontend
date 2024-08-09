@@ -82,6 +82,18 @@ class Auth {
 			return '';
 		}
 	}
+
+	public getEmail(): string {
+		try {
+			const token = this.getToken();
+			if (!token) return '';
+
+			const payload: { patient: { email: string } } = JSON.parse(atob(token.split('.')[1]));
+			return payload.patient.email;
+		} catch (error) {
+			return '';
+		}
+	}
 }
 
 export default Auth;
