@@ -19,6 +19,7 @@ const ProfileTab = ({ tab }: { tab: ProfileTabType }): JSX.Element => (
 		<Text color="blue.900" size="md" id={`edgar-dashboardNavbar-profileTab-${tab.name}-text`}>
 			{tab.name}
 		</Text>
+		{tab.actionComponent}
 	</HStack>
 );
 
