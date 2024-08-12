@@ -4,13 +4,14 @@ import { HStack, Icon, Input, Text, VStack } from '@chakra-ui/react';
 import TreatmentUpdateCardDays from 'components/dashboardPages/treatments/TreatmentUpdateCardDays';
 import TreatmentUpdateCardPeriods from 'components/dashboardPages/treatments/TreatmentUpdateCardPeriods';
 
-import CrossIcon from 'assets/icons/CrossIcon';
-
 import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
-import { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+
+import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+
+import CrossIcon from 'assets/icons/CrossIcon';
 
 const TreatmentUpdateCard = ({
 	medicine,
