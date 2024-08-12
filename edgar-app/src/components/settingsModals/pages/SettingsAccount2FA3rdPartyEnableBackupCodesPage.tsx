@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, useToast } from '@chakra-ui/react';
 
-import BackupCodes from 'components/navigation/settingsModals/BackupCodes';
+import BackupCodes from 'components/settingsModals/BackupCodes';
 
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
 

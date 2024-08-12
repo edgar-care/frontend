@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import ModalHandler from 'components/modals/ModalHandler';
-import SettingsBody from 'components/navigation/settingsModals/SettingsBody';
-import ModalPages from 'components/navigation/settingsModals/ModalPages';
+import SettingsBody from 'components/settingsModals/SettingsBody';
+import ModalPages from 'components/settingsModals/ModalPages';
 
 const SettingsHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }): JSX.Element => {
 	const [selectedPageStack, setSelectedPageStack] = useState<string[]>(['settings']);

@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import settingsPage from 'components/navigation/settingsModals/pages/settingsPage';
-import settingsAccountPage from 'components/navigation/settingsModals/pages/settingsAccountPage';
-import settingsAccount2FAPage from 'components/navigation/settingsModals/pages/settingsAccount2FAPage';
-import SettingsAccount2FAEmailEnablePage from 'components/navigation/settingsModals/pages/SettingsAccount2FAEmailEnablePage';
-import SettingsAccount2FA3rdPartyEnableQRCodePage from 'components/navigation/settingsModals/pages/SettingsAccount2FA3rdPartyEnableQRCodePage';
-import SettingsAccount2FA3rdPartyEnableInputPage from 'components/navigation/settingsModals/pages/SettingsAccount2FA3rdPartyEnableInputPage';
-import SettingsAccount2FA3rdPartyEnableBackupCodesPage from 'components/navigation/settingsModals/pages/SettingsAccount2FA3rdPartyEnableBackupCodesPage';
-import SettingsAccount2FAEdgarEnablePage from 'components/navigation/settingsModals/pages/SettingsAccount2FAEdgarEnablePage';
+import settingsPage from 'components/settingsModals/pages/settingsPage';
+import settingsAccountPage from 'components/settingsModals/pages/settingsAccountPage';
+import settingsAccount2FAPage from 'components/settingsModals/pages/settingsAccount2FAPage';
+import SettingsAccount2FAEmailEnablePage from 'components/settingsModals/pages/SettingsAccount2FAEmailEnablePage';
+import SettingsAccount2FA3rdPartyEnableQRCodePage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyEnableQRCodePage';
+import SettingsAccount2FA3rdPartyEnableInputPage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyEnableInputPage';
+import SettingsAccount2FA3rdPartyEnableBackupCodesPage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyEnableBackupCodesPage';
+import SettingsAccount2FAEdgarEnablePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarEnablePage';
 
 import { useAuthContext } from 'contexts/auth';
 

@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
 
-import SettingsSection from 'components/navigation/settingsModals/SettingsSection';
+import SettingsSection from 'components/settingsModals/SettingsSection';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
