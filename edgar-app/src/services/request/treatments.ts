@@ -106,7 +106,7 @@ const extendedApi = backendApi.injectEndpoints({
 				body: {
 					treatments: params.treatments.map((treatment) => ({
 						id: treatment.id,
-						medicine_id: treatment.medicine_id,
+						medicine_id: treatment.medicineId,
 						period: treatment.period,
 						day: treatment.day,
 						quantity: treatment.quantity,
