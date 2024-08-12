@@ -13,19 +13,23 @@ import {
 } from '@chakra-ui/react';
 
 import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
-// import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
+import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
 
-import { type TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import { Control } from 'react-hook-form';
 
 const UpdateTreatmentDrawer = ({
 	isOpen,
 	onClose,
 	antecedent,
+	onSubmit,
+	control,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
 	antecedent: PatientMedicalAntecedentType | undefined;
+	onSubmit: () => void;
+	control: Control<PatientMedicalAntecedentType>;
 }) => {
 	const isMobile = useBreakpointValue({ base: true, sm: false });
 
@@ -40,15 +44,15 @@ const UpdateTreatmentDrawer = ({
 							Modifiez un traitement
 						</Text>
 					</VStack>
-					{/* <UpdateTreatmentContent /> */}
+					<UpdateTreatmentContent antecedent={antecedent} onSubmit={onSubmit} control={control} />
 				</VStack>
 			</DrawerBody>
 			<DrawerFooter p="16px 24px 24px 24px">
 				{isMobile ? (
 					<VStack w="100%" spacing="12px">
-						{/* <Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
-							Ajouter
-						</Button> */}
+						<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+							Modifier
+						</Button>
 						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
 							Annuler
 						</Button>
@@ -58,9 +62,9 @@ const UpdateTreatmentDrawer = ({
 						<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
 							Annuler
 						</Button>
-						{/* <Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
-							Ajouter
-						</Button> */}
+						<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+							Modifier
+						</Button>
 					</HStack>
 				)}
 			</DrawerFooter>

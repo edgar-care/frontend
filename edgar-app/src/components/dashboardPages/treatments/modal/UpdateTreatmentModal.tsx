@@ -12,19 +12,23 @@ import {
 } from '@chakra-ui/react';
 
 import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
-// import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
+import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
 
-import { type TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import { Control } from 'react-hook-form';
 
 const UpdateTreatmentModal = ({
 	isOpen,
 	onClose,
 	antecedent,
+	onSubmit,
+	control,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
 	antecedent: PatientMedicalAntecedentType | undefined;
+	onSubmit: () => void;
+	control: Control<PatientMedicalAntecedentType>;
 }) => (
 	<Modal isOpen={isOpen} onClose={() => onClose()} size={{ base: 'xl', lg: '2xl' }}>
 		<ModalOverlay />
@@ -35,7 +39,7 @@ const UpdateTreatmentModal = ({
 						<Icon as={UpdateTreatmentIllustration} w="48px" h="48px" />
 						<Text size="xl">Modifiez un traitement</Text>
 					</VStack>
-					{/* <UpdateTreatmentContent /> */}
+					<UpdateTreatmentContent antecedent={antecedent} onSubmit={onSubmit} control={control} />
 				</VStack>
 			</ModalBody>
 			<ModalFooter p="16px 24px 24px 24px">
@@ -43,9 +47,9 @@ const UpdateTreatmentModal = ({
 					<Button size="customMd" variant="secondary" w="100%" onClick={onClose}>
 						Annuler
 					</Button>
-					{/* <Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
-						Ajouter
-					</Button> */}
+					<Button size="customMd" variant="validate" w="100%" onClick={onSubmit}>
+						Modifier
+					</Button>
 				</HStack>
 			</ModalFooter>
 		</ModalContent>
