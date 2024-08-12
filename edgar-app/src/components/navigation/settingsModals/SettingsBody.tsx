@@ -52,23 +52,25 @@ const SettingsBody = ({
 					</Skeleton>
 				</HStack>
 			)}
-			<VStack
-				w="100%"
-				p="4px 8px"
-				borderRadius={`${hasProfileBanner ? '0px 0px' : '16px 16px'} 16px 16px`}
-				border="2px solid"
-				borderTop={hasProfileBanner ? '0px' : '2px'}
-				borderColor="blue.100"
-			>
-				{sections.map((section) => (
-					<SettingsSection
-						section={section}
-						key={section.name}
-						id={`${id}-${section.name.replace(/ /g, '')}Section`}
-						setSelectedPageStack={setSelectedPageStack}
-					/>
-				))}
-			</VStack>
+			{sections.length > 0 && (
+				<VStack
+					w="100%"
+					p="4px 8px"
+					borderRadius={`${hasProfileBanner ? '0px 0px' : '16px 16px'} 16px 16px`}
+					border="2px solid"
+					borderTop={hasProfileBanner ? '0px' : '2px'}
+					borderColor="blue.100"
+				>
+					{sections.map((section) => (
+						<SettingsSection
+							section={section}
+							key={section.name}
+							id={`${id}-${section.name.replace(/ /g, '')}Section`}
+							setSelectedPageStack={setSelectedPageStack}
+						/>
+					))}
+				</VStack>
+			)}
 		</VStack>
 	);
 };
