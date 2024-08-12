@@ -2,7 +2,6 @@ import { useBreakpointValue } from '@chakra-ui/react';
 
 import UpdateTreatmentDrawer from 'components/dashboardPages/treatments/modal/UpdateTreatmentDrawer';
 import UpdateTreatmentModal from 'components/dashboardPages/treatments/modal/UpdateTreatmentModal';
-import { useForm } from 'react-hook-form';
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
@@ -16,9 +15,6 @@ const UpdateTreatmentHandler = ({
 	antecedent: PatientMedicalAntecedentType | undefined;
 }): JSX.Element => {
 	const isMobile = useBreakpointValue({ base: true, smd: false });
-	const {
-		
-	} = useForm
 
 	return (
 		<>

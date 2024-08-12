@@ -10,7 +10,6 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
-import { type Control, type FieldErrors, type UseFormRegister, type UseFormWatch } from 'react-hook-form';
 
 import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
 // import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
@@ -21,7 +20,7 @@ import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMed
 const UpdateTreatmentModal = ({
 	isOpen,
 	onClose,
-	antecedent
+	antecedent,
 }: {
 	isOpen: boolean;
 	onClose: () => void;

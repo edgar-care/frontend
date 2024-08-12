@@ -54,11 +54,7 @@ const AntecedentInfosHandler = ({
 					Supprimer
 				</Button>
 			</HStack>
-			<UpdateTreatmentHandler 
-				isOpen={isOpenUpdateModal}
-				onClose={onCloseUpdateModal}
-				antecedent={antecedent}
-			/>
+			<UpdateTreatmentHandler isOpen={isOpenUpdateModal} onClose={onCloseUpdateModal} antecedent={antecedent} />
 			<DeleteTreatmentHandler
 				isOpen={isOpenDeleteModal}
 				onClose={onCloseDeleteModal}

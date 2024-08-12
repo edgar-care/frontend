@@ -11,7 +11,6 @@ import {
 	Icon,
 	Text,
 } from '@chakra-ui/react';
-import type { Control, FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
 // import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
