@@ -15,20 +15,20 @@ import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIll
 import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
 
 import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
-import { Control } from 'react-hook-form';
+import { Control, UseFormWatch } from 'react-hook-form';
 
 const UpdateTreatmentModal = ({
 	isOpen,
 	onClose,
-	antecedent,
 	onSubmit,
 	control,
+	watch,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	antecedent: PatientMedicalAntecedentType | undefined;
 	onSubmit: () => void;
 	control: Control<PatientMedicalAntecedentType>;
+	watch: UseFormWatch<PatientMedicalAntecedentType>;
 }) => (
 	<Modal isOpen={isOpen} onClose={() => onClose()} size={{ base: 'xl', lg: '2xl' }}>
 		<ModalOverlay />
@@ -39,7 +39,7 @@ const UpdateTreatmentModal = ({
 						<Icon as={UpdateTreatmentIllustration} w="48px" h="48px" />
 						<Text size="xl">Modifiez un traitement</Text>
 					</VStack>
-					<UpdateTreatmentContent antecedent={antecedent} onSubmit={onSubmit} control={control} />
+					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} />
 				</VStack>
 			</ModalBody>
 			<ModalFooter p="16px 24px 24px 24px">

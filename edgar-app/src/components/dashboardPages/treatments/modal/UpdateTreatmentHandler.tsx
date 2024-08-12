@@ -5,6 +5,7 @@ import UpdateTreatmentDrawer from 'components/dashboardPages/treatments/modal/Up
 import UpdateTreatmentModal from 'components/dashboardPages/treatments/modal/UpdateTreatmentModal';
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+
 import { useUpdateTreatmentMutation } from 'services/request/treatments';
 
 const UpdateTreatmentHandler = ({
@@ -17,21 +18,21 @@ const UpdateTreatmentHandler = ({
 	antecedent: PatientMedicalAntecedentType | undefined;
 }): JSX.Element => {
 	const [triggerUpdateTreatmentMutation] = useUpdateTreatmentMutation();
-	const { handleSubmit, control, reset } = useForm<PatientMedicalAntecedentType>({
+	const { handleSubmit, control, reset, watch } = useForm<PatientMedicalAntecedentType>({
 		mode: 'onChange',
-		defaultValues: { medicines: [] },
+		defaultValues: antecedent,
 	});
 	const isMobile = useBreakpointValue({ base: true, smd: false });
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = handleSubmit((data) => {
+		console.log(data);
 		if (!data.medicines.every((medicine) => medicine.days.length > 0 && medicine.periods.length > 0)) {
 			toast({
 				title: 'Veuillez sélectionner au moins un jour et une période pour vos traitements',
 				status: 'error',
 			});
-			return;
 		}
 		if (data.medicines) {
 			triggerUpdateTreatmentMutation({
@@ -64,9 +65,9 @@ const UpdateTreatmentHandler = ({
 						onClose();
 						reset();
 					}}
-					antecedent={antecedent}
 					onSubmit={onSubmit}
 					control={control}
+					watch={watch}
 				/>
 			) : (
 				<UpdateTreatmentModal
@@ -75,9 +76,9 @@ const UpdateTreatmentHandler = ({
 						onClose();
 						reset();
 					}}
-					antecedent={antecedent}
 					onSubmit={onSubmit}
 					control={control}
+					watch={watch}
 				/>
 			)}
 		</>

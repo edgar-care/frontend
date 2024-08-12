@@ -3,8 +3,8 @@ import { type Control, Controller } from 'react-hook-form';
 
 import TreatmentSmallCard from 'components/dashboardPages/treatments/TreatmentSmallCard';
 
-import { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
 
 const TreatmentUpdateCardPeriods = ({
@@ -25,8 +25,7 @@ const TreatmentUpdateCardPeriods = ({
 				render={({ field: { value, onChange } }) => (
 					<>
 						{displayAvailablePeriods.map((period, index) => {
-							const selectedMedicine = value.find((item) => item.medicineId === medicine.medicineId);
-							const isPeriodSelected = selectedMedicine?.periods.includes(availablePeriods[index]);
+							const isPeriodSelected = medicine?.periods.includes(availablePeriods[index]);
 
 							return (
 								<TreatmentSmallCard
@@ -34,29 +33,15 @@ const TreatmentUpdateCardPeriods = ({
 									variant={isPeriodSelected ? 'SELECTED' : 'DEFAULT'}
 									key={index}
 									onClick={() => {
-										let updatedMedicines;
+										const updatedPeriods = isPeriodSelected
+											? medicine.periods.filter((item) => item !== availablePeriods[index])
+											: [...medicine.periods, availablePeriods[index]];
 
-										if (!selectedMedicine) {
-											updatedMedicines = [
-												...value,
-												{
-													...medicine,
-													periods: [availablePeriods[index]],
-												},
-											];
-										} else {
-											const updatedPeriods = isPeriodSelected
-												? selectedMedicine.periods.filter(
-														(item) => item !== availablePeriods[index],
-													)
-												: [...selectedMedicine.periods, availablePeriods[index]];
-
-											updatedMedicines = value.map((item) =>
-												item.medicineId === medicine.medicineId
-													? { ...item, periods: updatedPeriods }
-													: item,
-											);
-										}
+										const updatedMedicines = value.map((item) =>
+											item.medicineId === medicine.medicineId
+												? { ...item, periods: updatedPeriods }
+												: item,
+										);
 
 										onChange(updatedMedicines);
 									}}

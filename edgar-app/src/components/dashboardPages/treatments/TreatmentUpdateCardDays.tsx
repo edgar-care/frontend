@@ -3,9 +3,9 @@ import { type Control, Controller } from 'react-hook-form';
 
 import TreatmentSmallCard from 'components/dashboardPages/treatments/TreatmentSmallCard';
 
-import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
-import { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import type { TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
+import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
 const TreatmentUpdateCardDays = ({
 	medicine,
@@ -33,8 +33,7 @@ const TreatmentUpdateCardDays = ({
 				render={({ field: { value, onChange } }) => (
 					<>
 						{displayAvailableDays.map((day, index) => {
-							const selectedMedicine = value.find((item) => item.medicineId === medicine.medicineId);
-							const isDaySelected = selectedMedicine?.days.includes(availableDays[index]);
+							const isDaySelected = medicine.days.includes(availableDays[index]);
 
 							return (
 								<TreatmentSmallCard
@@ -42,27 +41,15 @@ const TreatmentUpdateCardDays = ({
 									variant={isDaySelected ? 'SELECTED' : 'DEFAULT'}
 									key={index}
 									onClick={() => {
-										let updatedMedicines;
+										const updatedDays = isDaySelected
+											? medicine.days.filter((item) => item !== availableDays[index])
+											: [...medicine.days, availableDays[index]];
 
-										if (!selectedMedicine) {
-											updatedMedicines = [
-												...value,
-												{
-													...medicine,
-													days: [availableDays[index]],
-												},
-											];
-										} else {
-											const updatedDays = isDaySelected
-												? selectedMedicine.days.filter((item) => item !== availableDays[index])
-												: [...selectedMedicine.days, availableDays[index]];
-
-											updatedMedicines = value.map((item) =>
-												item.medicineId === medicine.medicineId
-													? { ...item, days: updatedDays }
-													: item,
-											);
-										}
+										const updatedMedicines = value.map((item) =>
+											item.medicineId === medicine.medicineId
+												? { ...item, days: updatedDays }
+												: item,
+										);
 
 										onChange(updatedMedicines);
 									}}
