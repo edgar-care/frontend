@@ -7,6 +7,8 @@ import UpdateTreatmentModal from 'components/dashboardPages/treatments/modal/Upd
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
 import { useUpdateTreatmentMutation } from 'services/request/treatments';
+import { useAddTreatmentMutation } from 'services/request/treatments';
+
 
 const UpdateTreatmentHandler = ({
 	isOpen,
@@ -18,13 +20,16 @@ const UpdateTreatmentHandler = ({
 	antecedent: PatientMedicalAntecedentType | undefined;
 }): JSX.Element => {
 	const [triggerUpdateTreatmentMutation] = useUpdateTreatmentMutation();
-	const { handleSubmit, control, reset, watch } = useForm<PatientMedicalAntecedentType>({
+	const [triggerAddTreatmentMutation] = useAddTreatmentMutation();
+	const { handleSubmit, control, reset, watch, formState: { errors } } = useForm<PatientMedicalAntecedentType>({
 		mode: 'onChange',
 		defaultValues: antecedent,
 	});
 	const isMobile = useBreakpointValue({ base: true, smd: false });
 
 	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const stillRelevant = watch('stillRelevant');
 
 	const onSubmit = handleSubmit((data) => {
 		console.log(data);
@@ -33,6 +38,18 @@ const UpdateTreatmentHandler = ({
 				title: 'Veuillez sélectionner au moins un jour et une période pour vos traitements',
 				status: 'error',
 			});
+		}
+		if (antecedent?.stillRelevant !== stillRelevant) {
+			triggerAddTreatmentMutation({
+				diseaseId: data.id,
+				stillRelevant: data.stillRelevant,
+				treatments: data.medicines.map((medicine) => ({
+					period: medicine.periods,
+					day: medicine.days,
+					quantity: medicine.quantity,
+					medicineId: medicine.medicineId,
+				}))
+			})
 		}
 		if (data.medicines) {
 			triggerUpdateTreatmentMutation({
@@ -68,6 +85,7 @@ const UpdateTreatmentHandler = ({
 					onSubmit={onSubmit}
 					control={control}
 					watch={watch}
+					errors={errors}
 				/>
 			) : (
 				<UpdateTreatmentModal
@@ -79,6 +97,7 @@ const UpdateTreatmentHandler = ({
 					onSubmit={onSubmit}
 					control={control}
 					watch={watch}
+					errors={errors}
 				/>
 			)}
 		</>

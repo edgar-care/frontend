@@ -11,7 +11,7 @@ import {
 	Icon,
 	Text,
 } from '@chakra-ui/react';
-import type { Control, UseFormWatch } from 'react-hook-form';
+import type { Control, FieldErrors, UseFormWatch } from 'react-hook-form';
 
 import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
 
@@ -25,12 +25,14 @@ const UpdateTreatmentDrawer = ({
 	onSubmit,
 	control,
 	watch,
+	errors,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
 	onSubmit: () => void;
 	control: Control<PatientMedicalAntecedentType>;
 	watch: UseFormWatch<PatientMedicalAntecedentType>;
+	errors: FieldErrors<PatientMedicalAntecedentType>;
 }) => {
 	const isMobile = useBreakpointValue({ base: true, sm: false });
 
@@ -45,7 +47,7 @@ const UpdateTreatmentDrawer = ({
 							Modifiez un traitement
 						</Text>
 					</VStack>
-					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} />
+					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} errors={errors}/>
 				</VStack>
 			</DrawerBody>
 			<DrawerFooter p="16px 24px 24px 24px">
