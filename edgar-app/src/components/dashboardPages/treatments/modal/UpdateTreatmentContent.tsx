@@ -45,7 +45,12 @@ const UpdateTreatmentContent = ({
 				<VStack w="100%">
 					<VStack w="100%" spacing="16px">
 						<UpdateTreatmentExisting control={control} errors={errors} />
-						<UpdateTreatmentMedicineInput medicines={watch('medicines')} control={control} watch={watch} errors={errors} />
+						<UpdateTreatmentMedicineInput
+							medicines={watch('medicines')}
+							control={control}
+							watch={watch}
+							errors={errors}
+						/>
 					</VStack>
 				</VStack>
 			</VStack>

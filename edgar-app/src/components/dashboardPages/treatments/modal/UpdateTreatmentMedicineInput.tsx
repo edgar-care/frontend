@@ -28,7 +28,7 @@ const UpdateTreatmentMedicineInput = ({
 	const addedMedicines = watch('medicines');
 	return (
 		<VStack spacing="12px" align="start" w="100%">
-		<VStack spacing="8px" align="start" w="100%">
+			<VStack spacing="8px" align="start" w="100%">
 				<Controller
 					control={control}
 					name="medicines"
@@ -61,21 +61,17 @@ const UpdateTreatmentMedicineInput = ({
 						/>
 					)}
 				/>
-				{errors.medicines?.type === 'validate' && (
-					<ErrorMessage>
-						Ce champ est nécessaire
-					</ErrorMessage>
-				)}
+				{errors.medicines?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>
-		<Wrap w="100%">
-			{medicines.map((medicine) => (
-				<WrapItem key={medicine.medicineId}>
-					<TreatmentUpdateCard medicine={medicine} control={control} />
-				</WrapItem>
-			))}
-		</Wrap>
-	</VStack>
-	)
+			<Wrap w="100%">
+				{medicines.map((medicine) => (
+					<WrapItem key={medicine.medicineId}>
+						<TreatmentUpdateCard medicine={medicine} control={control} />
+					</WrapItem>
+				))}
+			</Wrap>
+		</VStack>
+	);
 };
 
 export default UpdateTreatmentMedicineInput;

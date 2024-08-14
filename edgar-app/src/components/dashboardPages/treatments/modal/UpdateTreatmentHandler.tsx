@@ -6,9 +6,7 @@ import UpdateTreatmentModal from 'components/dashboardPages/treatments/modal/Upd
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
-import { useUpdateTreatmentMutation } from 'services/request/treatments';
-import { useAddTreatmentMutation } from 'services/request/treatments';
-
+import { useUpdateTreatmentMutation, useAddTreatmentMutation } from 'services/request/treatments';
 
 const UpdateTreatmentHandler = ({
 	isOpen,
@@ -21,7 +19,13 @@ const UpdateTreatmentHandler = ({
 }): JSX.Element => {
 	const [triggerUpdateTreatmentMutation] = useUpdateTreatmentMutation();
 	const [triggerAddTreatmentMutation] = useAddTreatmentMutation();
-	const { handleSubmit, control, reset, watch, formState: { errors } } = useForm<PatientMedicalAntecedentType>({
+	const {
+		handleSubmit,
+		control,
+		reset,
+		watch,
+		formState: { errors },
+	} = useForm<PatientMedicalAntecedentType>({
 		mode: 'onChange',
 		defaultValues: antecedent,
 	});
@@ -48,8 +52,8 @@ const UpdateTreatmentHandler = ({
 					day: medicine.days,
 					quantity: medicine.quantity,
 					medicineId: medicine.medicineId,
-				}))
-			})
+				})),
+			});
 		}
 		if (data.medicines) {
 			triggerUpdateTreatmentMutation({

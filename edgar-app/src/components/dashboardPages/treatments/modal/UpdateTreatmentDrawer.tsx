@@ -47,7 +47,7 @@ const UpdateTreatmentDrawer = ({
 							Modifiez un traitement
 						</Text>
 					</VStack>
-					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} errors={errors}/>
+					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} errors={errors} />
 				</VStack>
 			</DrawerBody>
 			<DrawerFooter p="16px 24px 24px 24px">
