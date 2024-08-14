@@ -90,7 +90,7 @@ const extendedApi = backendApi.injectEndpoints({
 			invalidatesTags: ['patientTreatments'],
 		}),
 
-		DeleteTreatment: builder.mutation<void, string>({
+		deleteTreatment: builder.mutation<void, string>({
 			query: (id) => ({
 				url: `/dashboard/treatment/${id}`,
 				method: 'DELETE',
