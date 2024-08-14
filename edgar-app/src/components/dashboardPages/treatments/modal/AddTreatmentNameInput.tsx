@@ -22,7 +22,7 @@ const AddTreatmentNameInput = ({
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
-	const existing = watch('existing');
+	const existing = watch('alreadyExist');
 
 	const [selectedDiseaseName, setSelectedDiseaseName] = useState<string>('');
 
