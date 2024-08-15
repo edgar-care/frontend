@@ -8,6 +8,7 @@ import SettingsAccount2FA3rdPartyEnableQRCodePage from 'components/settingsModal
 import SettingsAccount2FA3rdPartyEnableInputPage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyEnableInputPage';
 import SettingsAccount2FA3rdPartyEnableBackupCodesPage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyEnableBackupCodesPage';
 import SettingsAccount2FAEdgarEnablePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarEnablePage';
+import SettingsAccount2FAEdgarEnableBackupCodePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarEnableBackupCodePage';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -21,6 +22,9 @@ const ModalPages = ({
 	setSelectedPageStack: Dispatch<SetStateAction<string[]>>;
 }): { [key: string]: SettingsPageType } => {
 	const auth = useAuthContext();
+
+	// TODO: get this value from the backend
+	const isBackupCodeGenerated = true;
 
 	const onPreviousPage = () => setSelectedPageStack(selectedPageStack.slice(0, -1));
 	const onNextPage = (pageIndex: string) => setSelectedPageStack((prev) => [...prev, pageIndex]);
@@ -41,7 +45,10 @@ const ModalPages = ({
 			() => setSelectedPageStack((prev) => prev.slice(0, -3)),
 		),
 		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(onPreviousPage, () =>
-			onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
+			isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
+		),
+		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
+			setSelectedPageStack((prev) => prev.slice(0, -2)),
 		),
 	};
 };
