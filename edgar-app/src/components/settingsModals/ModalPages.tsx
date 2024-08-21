@@ -13,6 +13,9 @@ import SettingsAccount2FAEdgarEnableBackupCodePage from 'components/settingsModa
 import { useAuthContext } from 'contexts/auth';
 
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
+import SettingsAccount2FAEmailDisablePage from 'components/settingsModals/pages/SettingsAccount2FAEmailDisablePage';
+import SettingsAccount2FA3rdPartyDisablePage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyDisablePage';
+import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarDisablePage';
 
 const ModalPages = ({
 	selectedPageStack,
@@ -32,8 +35,9 @@ const ModalPages = ({
 	return {
 		settings: settingsPage,
 		settingsAccount: settingsAccountPage(auth.getEmail(), false, false),
-		settingsAccount2fa: settingsAccount2FAPage(false, false, false),
+		settingsAccount2fa: settingsAccount2FAPage(true, true, true),
 		settingsAccount2faEmailEnable: SettingsAccount2FAEmailEnablePage(auth.getEmail(), onPreviousPage),
+		settingsAccount2faEmailDisable: SettingsAccount2FAEmailDisablePage(auth.getEmail(), onPreviousPage),
 		settingsAccount2fa3rdPartyEnableQRCode: SettingsAccount2FA3rdPartyEnableQRCodePage(onPreviousPage, () =>
 			onNextPage('settingsAccount2fa3rdPartyEnableInput'),
 		),
@@ -44,12 +48,14 @@ const ModalPages = ({
 			selectedPageStack,
 			() => setSelectedPageStack((prev) => prev.slice(0, -3)),
 		),
+		settingsAccount2fa3rdPartyDisable: SettingsAccount2FA3rdPartyDisablePage(onPreviousPage),
 		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(onPreviousPage, () =>
 			isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
 		),
 		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
 			setSelectedPageStack((prev) => prev.slice(0, -2)),
 		),
+		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(onPreviousPage),
 	};
 };
 
