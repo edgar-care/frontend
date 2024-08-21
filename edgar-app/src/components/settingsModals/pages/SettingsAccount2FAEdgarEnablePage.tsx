@@ -50,7 +50,7 @@ const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () =>
 		bodyContent: (
 			<VStack w="100%" p="8px" borderRadius="16px" border="2px solid" borderColor="blue.100">
 				{devices.map((device, index) => (
-					<>
+					<VStack spacing="8px" key={device.id}>
 						{index > 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
 						<DeviceCard
 							device={device}
@@ -58,7 +58,7 @@ const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () =>
 							onClick={() => setSelectedDevice((prev) => (prev === device.id ? '' : device.id))}
 							isClicked={selectedDevice === device.id}
 						/>
-					</>
+					</VStack>
 				))}
 			</VStack>
 		),
