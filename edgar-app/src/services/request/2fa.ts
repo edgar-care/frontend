@@ -1,12 +1,12 @@
 import { backendApi } from 'services/apiService';
 
 import type { ThirdPartyCredentials } from 'types/dashboard/2fa/thirdPartyCredentialsType';
+import type { Enabled2FAMethods, Method2FA } from 'types/dashboard/2fa/enabled2FAMethods';
 import {
 	Enabled2FAMethodsStoreType,
 	GeneratedBackupCodesStoreType,
 	ThirdPartyCredentialsStoreType,
 } from 'store/types/2fa.type';
-import { Enabled2FAMethods } from 'types/dashboard/2fa/enabled2FAMethods';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -68,6 +68,14 @@ const extendedApi = backendApi.injectEndpoints({
 			invalidatesTags: ['patient2faBackupCodes'],
 			transformResponse: (double_auth: GeneratedBackupCodesStoreType) => double_auth.code,
 		}),
+
+		disable2faMethod: builder.mutation<void, Method2FA>({
+			query: (method) => ({
+				url: `/2fa/method/${method}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patient2faMethod'],
+		}),
 	}),
 });
 
@@ -80,4 +88,5 @@ export const {
 	useEnable2faWith3rdPartyMutation,
 	useEnable2faWithMobileAppMutation,
 	useGenerateBackupCodesMutation,
+	useDisable2faMethodMutation,
 } = extendedApi;
