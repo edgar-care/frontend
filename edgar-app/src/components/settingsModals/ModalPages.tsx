@@ -9,12 +9,15 @@ import SettingsAccount2FA3rdPartyEnableInputPage from 'components/settingsModals
 import SettingsAccount2FA3rdPartyEnableBackupCodesPage from 'components/settingsModals/pages/account/SettingsAccount2FA3rdPartyEnableBackupCodesPage';
 import SettingsAccount2FAEdgarEnablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarEnablePage';
 import SettingsAccount2FAEdgarEnableBackupCodePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarEnableBackupCodePage';
+import SettingsAccount2FAEmailEnableBackupCodesPage from 'components/settingsModals/pages/SettingsAccount2FAEmailEnableBackupCodesPage';
 import SettingsAccount2FAEmailDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEmailDisablePage';
 import SettingsAccount2FA3rdPartyDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FA3rdPartyDisablePage';
-import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
 import SettingsAccount2FAEdgarPage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarPage';
 import SettingsDeviceInfoPage from 'components/settingsModals/pages/devices/SettingsDeviceInfoPage';
 import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarAddTrustDevicePage';
+import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
+
+import { useGet2faEnabledMethodsQuery } from 'services/request/2fa';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -28,38 +31,55 @@ const ModalPages = ({
 	selectedPageStack: string[];
 	setSelectedPageStack: Dispatch<SetStateAction<string[]>>;
 }): { [key: string]: SettingsPageType } => {
+	const { data: enabled2faMethods } = useGet2faEnabledMethodsQuery();
 	const auth = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
 
-	// TODO: get this value from the backend
-	const isBackupCodeGenerated = true;
+	const isBackupCodeGenerated = enabled2faMethods?.isBackupCodeGenerated || false;
+	const isAuthenticationEnabled = (enabled2faMethods?.enabledMethods.length || 0) > 0;
 
 	const onPreviousPage = () => setSelectedPageStack(selectedPageStack.slice(0, -1));
+	const onPreviousOfPage = (nbrOfPage: number) => setSelectedPageStack(selectedPageStack.slice(0, -nbrOfPage));
 	const onNextPage = (pageIndex: string) => setSelectedPageStack((prev) => [...prev, pageIndex]);
 
 	return {
 		settings: settingsPage,
-		settingsAccount: settingsAccountPage(auth.getEmail(), false, false),
-		settingsAccount2fa: settingsAccount2FAPage(true, true, true),
-		settingsAccount2faEmailEnable: SettingsAccount2FAEmailEnablePage(auth.getEmail(), onPreviousPage),
+		settingsAccount: settingsAccountPage(auth.getEmail(), isAuthenticationEnabled, isBackupCodeGenerated),
+		settingsAccount2fa: settingsAccount2FAPage(
+			enabled2faMethods?.enabledMethods.includes('EMAIL') || false,
+			enabled2faMethods?.enabledMethods.includes('AUTHENTIFICATOR') || false,
+			enabled2faMethods?.enabledMethods.includes('MOBILE') || false,
+		),
+		settingsAccount2faEmailEnable: SettingsAccount2FAEmailEnablePage(
+			auth.getEmail(),
+			onPreviousPage,
+			isBackupCodeGenerated ? onPreviousPage : () => onNextPage('settingsAccount2faEmailEnableBackupCodes'),
+		),
+		settingsAccount2faEmailEnableBackupCodes: SettingsAccount2FAEmailEnableBackupCodesPage(selectedPageStack, () =>
+			onPreviousOfPage(2),
+		),
 		settingsAccount2faEmailDisable: SettingsAccount2FAEmailDisablePage(auth.getEmail(), onPreviousPage),
-		settingsAccount2fa3rdPartyEnableQRCode: SettingsAccount2FA3rdPartyEnableQRCodePage(onPreviousPage, () =>
-			onNextPage('settingsAccount2fa3rdPartyEnableInput'),
+		settingsAccount2fa3rdPartyEnableQRCode: SettingsAccount2FA3rdPartyEnableQRCodePage(
+			selectedPageStack,
+			onPreviousPage,
+			() => onNextPage('settingsAccount2fa3rdPartyEnableInput'),
 		),
 		settingsAccount2fa3rdPartyEnableInput: SettingsAccount2FA3rdPartyEnableInputPage(onPreviousPage, () =>
-			onNextPage('settingsAccount2fa3rdPartyEnableBackupCodes'),
+			isBackupCodeGenerated ? onPreviousOfPage(2) : onNextPage('settingsAccount2fa3rdPartyEnableBackupCodes'),
 		),
 		settingsAccount2fa3rdPartyEnableBackupCodes: SettingsAccount2FA3rdPartyEnableBackupCodesPage(
 			selectedPageStack,
-			() => setSelectedPageStack((prev) => prev.slice(0, -3)),
+			() => onPreviousOfPage(3),
 		),
 		settingsAccount2fa3rdPartyDisable: SettingsAccount2FA3rdPartyDisablePage(onPreviousPage),
 		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(onPreviousPage, () =>
-			isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
+			isBackupCodeGenerated
+				? () => setSelectedPageStack((prev) => [...prev.slice(0, -1), 'settingsAccount2faEdgar'])
+				: onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
 		),
 		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
-			setSelectedPageStack((prev) => prev.slice(0, -2)),
+			setSelectedPageStack((prev) => [...prev.slice(0, -1), 'settingsAccount2faEdgar']),
 		),
 		settingsAccount2faEdgar: SettingsAccount2FAEdgarPage(
 			() => onNextPage('settingsAccount2faEdgarAddTrustDevice'),
@@ -71,9 +91,7 @@ const ModalPages = ({
 		),
 		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo),
 		settingsAccount2faEdgarAddTrustDevice: SettingsAccount2FAEdgarAddTrustDevicePage(onPreviousPage),
-		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() =>
-			setSelectedPageStack((prev) => prev.slice(0, -2)),
-		),
+		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
 	};
 };
 

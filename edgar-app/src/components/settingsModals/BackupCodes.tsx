@@ -1,5 +1,10 @@
 import { SimpleGrid, Skeleton, Text, VStack } from '@chakra-ui/react';
 
+const splitBackupCode = (code: string): string => {
+	const middle = Math.floor(code.length / 2);
+	return `${code.slice(0, middle)} ${code.slice(middle)}`;
+};
+
 const BackupCodes = ({ backupCodes }: { backupCodes: string[] }): JSX.Element => (
 	<VStack spacing="12px">
 		<Text textAlign="center">
@@ -9,7 +14,7 @@ const BackupCodes = ({ backupCodes }: { backupCodes: string[] }): JSX.Element =>
 		<SimpleGrid columns={2} spacingX="24px" spacingY="8px">
 			{backupCodes.map((backupCode) => (
 				<Skeleton isLoaded={backupCode !== 'XXXX XXXX'}>
-					<Text size="lg">{backupCode}</Text>
+					<Text size="lg">{splitBackupCode(backupCode)}</Text>
 				</Skeleton>
 			))}
 		</SimpleGrid>

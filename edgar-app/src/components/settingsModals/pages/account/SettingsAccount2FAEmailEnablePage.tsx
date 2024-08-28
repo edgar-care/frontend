@@ -6,7 +6,11 @@ import type { SettingsPageType } from 'types/navigation/SettingsPageType';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
-const SettingsAccount2FAEmailEnablePage = (emailAddress: string, onCancel: () => void): SettingsPageType => {
+const SettingsAccount2FAEmailEnablePage = (
+	emailAddress: string,
+	onCancel: () => void,
+	onNext: () => void,
+): SettingsPageType => {
 	const [triggerEnable2faWithEmailMutation] = useEnable2faWithEmailMutation();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
@@ -29,7 +33,7 @@ const SettingsAccount2FAEmailEnablePage = (emailAddress: string, onCancel: () =>
 								title: 'La double authentification a bien été activée',
 								status: 'success',
 							});
-							onCancel();
+							onNext();
 						})
 						.catch(() => {
 							toast({ title: 'Une erreur est survenue', status: 'error' });

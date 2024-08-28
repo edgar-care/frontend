@@ -23,7 +23,7 @@ const SettingsAccount2FA3rdPartyDisablePage = (onCancel: () => void): SettingsPa
 				w="100%"
 				variant="delete"
 				onClick={() => {
-					triggerDisable2faMethodMutation('AUTHENTICATOR')
+					triggerDisable2faMethodMutation('AUTHENTIFICATOR')
 						.unwrap()
 						.then(() => {
 							toast({

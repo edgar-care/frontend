@@ -4,8 +4,8 @@ import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 const settingsAccount2FAPage = (
 	emailMethod: boolean,
-	edgarMethod: boolean,
 	rdPartyMethod: boolean,
+	edgarMethod: boolean,
 ): SettingsPageType => ({
 	headerTitle: 'Méthode de double authentification',
 	headerSubtitle: 'Paramétrer vos méthodes de double authentification.',

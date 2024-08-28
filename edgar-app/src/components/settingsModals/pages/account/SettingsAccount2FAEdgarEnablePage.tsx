@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Box, Button, VStack } from '@chakra-ui/react';
+import { Box, Button, Skeleton, useToast, VStack } from '@chakra-ui/react';
 
 import DeviceCard from 'components/settingsModals/DeviceCard';
+
+import { useGetConnectedDevicesQuery } from 'services/request/devices';
+import { useAddTrustedDeviceMutation, useEnable2faWithMobileAppMutation } from 'services/request/2fa';
+
 import Pagination from 'components/navigation/Pagination';
 
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
-import type { DeviceType } from 'types/dashboard/devices/DeviceType';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
@@ -13,37 +16,42 @@ import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import paginationHandler from 'utils/navigation/paginationHandler';
 
 const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () => void): SettingsPageType => {
-	const [pageIndex, setPageIndex] = useState(1);
-	const [selectedDevice, setSelectedDevice] = useState('');
+	const { data: devices, isLoading } = useGetConnectedDevicesQuery();
+	const [triggerEnable2faWithMobileApp] = useEnable2faWithMobileAppMutation();
+	const [triggerAddTrustedDevice] = useAddTrustedDeviceMutation();
 
-	const devices: DeviceType[] = [
-		{
-			id: '1',
-			name: 'iPhone de John',
-			location: 'Paris, France',
-			lastConnectedTime: 1723707006000,
-			type: 'MOBILE',
-		},
-		{
-			id: '2',
-			name: 'iPhone de John 2',
-			location: 'Paris, France',
-			lastConnectedTime: Date.now() - 1000 * 60 * 60 * 24 * 30,
-			type: 'DESKTOP',
-		},
-		{
-			id: '3',
-			name: 'iPhone de John 3',
-			location: 'Paris, France',
-			lastConnectedTime: Date.now() - 1000 * 60 * 60 * 24 * 30,
-			type: 'MOBILE',
-		},
-	];
+	const [selectedDeviceId, setSelectedDeviceId] = useState('');
+	const [pageIndex, setPageIndex] = useState(1);
+
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = () => {
-		// TODO: send request to the backend to enable 2FA with edgar + add toast
-		setSelectedDevice('');
-		onNext();
+		triggerAddTrustedDevice(selectedDeviceId)
+			.unwrap()
+			.then(() => {
+				triggerEnable2faWithMobileApp(selectedDeviceId)
+					.unwrap()
+					.then(() => {
+						toast({
+							title: 'Double authentification activée',
+							status: 'success',
+						});
+						setSelectedDeviceId('');
+						onNext();
+					})
+					.catch(() => {
+						toast({
+							title: "Erreur lors de l'activation de la double authentification",
+							status: 'error',
+						});
+					});
+			})
+			.catch(() => {
+				toast({
+					title: "Erreur lors de l'activation de la double authentification",
+					status: 'error',
+				});
+			});
 	};
 
 	return {
@@ -55,18 +63,20 @@ const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () =>
 		sections: [],
 		bodyContent: (
 			<VStack w="100%" p="8px" borderRadius="16px" border="2px solid" borderColor="blue.100">
-				{paginationHandler(devices, pageIndex, 5).map((device, index) => (
-					<VStack spacing="8px" key={device.id} w="100%">
-						{index > 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
-						<DeviceCard
-							device={device}
-							hasChevronIcon
-							onClick={() => setSelectedDevice((prev) => (prev === device.id ? '' : device.id))}
-							isClicked={selectedDevice === device.id}
-						/>
-					</VStack>
-				))}
-				{devices.length > 5 && (
+				<Skeleton isLoaded={devices !== undefined && !isLoading} w="100%">
+					{paginationHandler(devices || [], pageIndex, 5).map((device, index) => (
+						<VStack spacing="8px" key={device.id}>
+							{index > 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
+							<DeviceCard
+								device={device}
+								hasChevronIcon
+								onClick={() => setSelectedDeviceId((prev) => (prev === device.id ? '' : device.id))}
+								isClicked={selectedDeviceId === device.id}
+							/>
+						</VStack>
+					))}
+				</Skeleton>
+				{devices && devices.length > 5 && (
 					<Pagination
 						variant="secondary"
 						size="small"

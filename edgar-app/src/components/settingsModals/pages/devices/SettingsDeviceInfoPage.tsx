@@ -8,10 +8,12 @@ import PinIcon from 'assets/icons/PinIcon';
 import DevicePhoneIllustration from 'assets/illustrations/devices/DevicePhoneIllustration';
 import DeviceComputerIllustration from 'assets/illustrations/devices/DeviceComputerIllustration';
 
+import deviceBrowserTypeName from 'utils/app/dashboard/devices/deviceBrowserTypeName';
+
 const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined): SettingsPageType => ({
-	headerTitle: deviceInfo?.name || '',
+	headerTitle: deviceBrowserTypeName[deviceInfo?.browserType || 'OTHER'],
 	headerSubtitle: 'Connecté à votre compte edgar.',
-	headerIcon: deviceInfo?.type === 'MOBILE' ? DevicePhoneIllustration : DeviceComputerIllustration,
+	headerIcon: deviceInfo?.deviceType === 'MOBILE' ? DevicePhoneIllustration : DeviceComputerIllustration,
 	hasProfileBanner: false,
 	hasReturnButton: true,
 	sections: [],
@@ -28,11 +30,13 @@ const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined): SettingsPag
 					</HStack>
 				)}
 			</Skeleton>
-			<Skeleton isLoaded={deviceInfo !== undefined && deviceInfo.location !== ''}>
+			<Skeleton isLoaded={deviceInfo !== undefined && deviceInfo.city !== '' && deviceInfo.country !== ''}>
 				{deviceInfo && (
 					<HStack spacing="12px">
 						<Icon as={PinIcon} w="16px" h="16px" />
-						<Text>{deviceInfo.location}</Text>
+						<Text>
+							{deviceInfo.city}, {deviceInfo.region && `${deviceInfo.region},`} {deviceInfo.country}
+						</Text>
 					</HStack>
 				)}
 			</Skeleton>
