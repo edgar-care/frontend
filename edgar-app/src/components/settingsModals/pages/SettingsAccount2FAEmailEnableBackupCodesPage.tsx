@@ -9,7 +9,7 @@ import { useGenerateBackupCodesMutation } from 'services/request/2fa';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
-const SettingsAccount2FAEdgarEnableBackupCodePage = (
+const SettingsAccount2FAEmailEnableBackupCodesPage = (
 	selectedPageStack: string[],
 	onNext: () => void,
 ): SettingsPageType => {
@@ -29,7 +29,7 @@ const SettingsAccount2FAEdgarEnableBackupCodePage = (
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	useEffect(() => {
-		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2fa3rdPartyEnableBackupCode') return;
+		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2faEmailEnableBackupCodes') return;
 		triggerGenerateBackupCodes()
 			.unwrap()
 			.then((res) => setBackupCodes(res))
@@ -37,7 +37,7 @@ const SettingsAccount2FAEdgarEnableBackupCodePage = (
 	}, [selectedPageStack]);
 
 	return {
-		headerTitle: 'La double authentification avec edgar est activée !',
+		headerTitle: 'La double authentification par email est activée !',
 		headerSubtitle:
 			'Avec la double authentification activée, vous aurez besoin de ces codes de sauvegarde si vous n’avez plus accès à votre appareil.',
 		headerIcon: ShieldIllustration,
@@ -53,4 +53,4 @@ const SettingsAccount2FAEdgarEnableBackupCodePage = (
 	};
 };
 
-export default SettingsAccount2FAEdgarEnableBackupCodePage;
+export default SettingsAccount2FAEmailEnableBackupCodesPage;
