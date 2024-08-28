@@ -1,27 +1,67 @@
-import { useState } from 'react';
-import { Box, Button, Skeleton, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { Box, Button, Skeleton, Text, useToast, VStack } from '@chakra-ui/react';
 
 import DeviceCard from 'components/settingsModals/DeviceCard';
 import Pagination from 'components/navigation/Pagination';
 
+import { useAddTrustedDeviceMutation } from 'services/request/2fa';
+
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
+import type { DeviceType } from 'types/dashboard/devices/DeviceType';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 import paginationHandler from 'utils/navigation/paginationHandler';
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
-import { useGetConnectedDevicesQuery } from 'services/request/devices';
 
-const SettingsAccount2FAEdgarAddTrustDevicePage = (onPrevious: () => void): SettingsPageType => {
-	const { data: devices, isLoading } = useGetConnectedDevicesQuery();
+const SettingsAccount2FAEdgarAddTrustDevicePage = (
+	devices: DeviceType[] | undefined,
+	trustedDevices: DeviceType[] | undefined,
+	isLoadingDevices: boolean,
+	isLoadingTrustedDevices: boolean,
+	onPrevious: () => void,
+): SettingsPageType => {
+	const [triggerAddTrustedDevice] = useAddTrustedDeviceMutation();
 
-	const [selectedDevice, setSelectedDevice] = useState('');
+	const [selectedDeviceId, setSelectedDeviceId] = useState('');
 	const [pageIndex, setPageIndex] = useState(1);
+	const [availableDevices, setAvailableDevices] = useState<DeviceType[]>([]);
+
+	const toast = useToast({ duration: 3000, isClosable: true });
+
+	useEffect(() => {
+		if (devices) {
+			if (!trustedDevices) setAvailableDevices(devices);
+			else
+				setAvailableDevices(
+					devices.filter((device) => trustedDevices.every((trustedDevice) => trustedDevice.id !== device.id)),
+				);
+		}
+	}, [devices, trustedDevices]);
 
 	const onSubmit = () => {
-		// TODO: send request to the backend to add the trust device + add toast
-		setSelectedDevice('');
-		onPrevious();
+		if (selectedDeviceId === '')
+			toast({
+				title: 'Veuillez sélectionner un appareil',
+				status: 'error',
+			});
+		else
+			triggerAddTrustedDevice(selectedDeviceId)
+				.unwrap()
+				.then(() => {
+					toast({
+						title: 'L’appareil a bien été ajouté',
+						status: 'success',
+					});
+					setSelectedDeviceId('');
+					onPrevious();
+				})
+				.catch(() => {
+					toast({
+						title: 'Une erreur est survenue',
+						status: 'error',
+					});
+				});
 	};
 
 	return {
@@ -33,18 +73,26 @@ const SettingsAccount2FAEdgarAddTrustDevicePage = (onPrevious: () => void): Sett
 		sections: [],
 		bodyContent: (
 			<VStack w="100%" p="8px" borderRadius="16px" border="2px solid" borderColor="blue.100">
-				<Skeleton isLoaded={devices !== undefined && !isLoading} w="100%">
-					{paginationHandler(devices || [], pageIndex, 5).map((device, index) => (
-						<VStack spacing="8px" key={device.id} w="100%">
-							{index > 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
-							<DeviceCard
-								device={device}
-								hasChevronIcon
-								onClick={() => setSelectedDevice((prev) => (prev === device.id ? '' : device.id))}
-								isClicked={selectedDevice === device.id}
-							/>
-						</VStack>
-					))}
+				<Skeleton isLoaded={devices !== undefined && !isLoadingDevices && !isLoadingTrustedDevices} w="100%">
+					{availableDevices.length > 0 ? (
+						<>
+							{paginationHandler(availableDevices, pageIndex, 5).map((device, index) => (
+								<VStack spacing="8px" key={device.id} w="100%">
+									{index > 0 && <Box as="span" w="100%" h="2px" bg="blue.100" />}
+									<DeviceCard
+										device={device}
+										hasChevronIcon
+										onClick={() =>
+											setSelectedDeviceId((prev) => (prev === device.id ? '' : device.id))
+										}
+										isClicked={selectedDeviceId === device.id}
+									/>
+								</VStack>
+							))}
+						</>
+					) : (
+						<Text>Aucun appareil disponible</Text>
+					)}
 				</Skeleton>
 				{devices && devices.length > 5 && (
 					<Pagination

@@ -3,20 +3,24 @@ import { Box, Button, Skeleton, useToast, VStack } from '@chakra-ui/react';
 
 import DeviceCard from 'components/settingsModals/DeviceCard';
 
-import { useGetConnectedDevicesQuery } from 'services/request/devices';
 import { useAddTrustedDeviceMutation, useEnable2faWithMobileAppMutation } from 'services/request/2fa';
 
 import Pagination from 'components/navigation/Pagination';
 
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
+import type { DeviceType } from 'types/dashboard/devices/DeviceType';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import paginationHandler from 'utils/navigation/paginationHandler';
 
-const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () => void): SettingsPageType => {
-	const { data: devices, isLoading } = useGetConnectedDevicesQuery();
+const SettingsAccount2FAEdgarEnablePage = (
+	devices: DeviceType[] | undefined,
+	isLoading: boolean,
+	onPrevious: () => void,
+	onNext: () => void,
+): SettingsPageType => {
 	const [triggerEnable2faWithMobileApp] = useEnable2faWithMobileAppMutation();
 	const [triggerAddTrustedDevice] = useAddTrustedDeviceMutation();
 
@@ -26,32 +30,38 @@ const SettingsAccount2FAEdgarEnablePage = (onPrevious: () => void, onNext: () =>
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = () => {
-		triggerAddTrustedDevice(selectedDeviceId)
-			.unwrap()
-			.then(() => {
-				triggerEnable2faWithMobileApp(selectedDeviceId)
-					.unwrap()
-					.then(() => {
-						toast({
-							title: 'Double authentification activée',
-							status: 'success',
-						});
-						setSelectedDeviceId('');
-						onNext();
-					})
-					.catch(() => {
-						toast({
-							title: "Erreur lors de l'activation de la double authentification",
-							status: 'error',
-						});
-					});
-			})
-			.catch(() => {
-				toast({
-					title: "Erreur lors de l'activation de la double authentification",
-					status: 'error',
-				});
+		if (!selectedDeviceId)
+			toast({
+				title: 'Veuillez sélectionner un appareil',
+				status: 'error',
 			});
+		else
+			triggerAddTrustedDevice(selectedDeviceId)
+				.unwrap()
+				.then(() => {
+					triggerEnable2faWithMobileApp(selectedDeviceId)
+						.unwrap()
+						.then(() => {
+							toast({
+								title: 'Double authentification activée',
+								status: 'success',
+							});
+							setSelectedDeviceId('');
+							onNext();
+						})
+						.catch(() => {
+							toast({
+								title: "Erreur lors de l'activation de la double authentification",
+								status: 'error',
+							});
+						});
+				})
+				.catch(() => {
+					toast({
+						title: "Erreur lors de l'activation de la double authentification",
+						status: 'error',
+					});
+				});
 	};
 
 	return {

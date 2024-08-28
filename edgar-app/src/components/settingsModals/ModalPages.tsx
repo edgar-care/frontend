@@ -17,7 +17,8 @@ import SettingsDeviceInfoPage from 'components/settingsModals/pages/devices/Sett
 import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarAddTrustDevicePage';
 import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
 
-import { useGet2faEnabledMethodsQuery } from 'services/request/2fa';
+import { useGet2faEnabledMethodsQuery, useGetTrustedDevicesQuery } from 'services/request/2fa';
+import { useGetConnectedDevicesQuery } from 'services/request/devices';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -32,6 +33,9 @@ const ModalPages = ({
 	setSelectedPageStack: Dispatch<SetStateAction<string[]>>;
 }): { [key: string]: SettingsPageType } => {
 	const { data: enabled2faMethods } = useGet2faEnabledMethodsQuery();
+	const { data: devices, isLoading: isLoadingDevices } = useGetConnectedDevicesQuery();
+	const { data: trustedDevices, isLoading: isLoadingTrustedDevices } = useGetTrustedDevicesQuery();
+
 	const auth = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
@@ -73,15 +77,18 @@ const ModalPages = ({
 			() => onPreviousOfPage(3),
 		),
 		settingsAccount2fa3rdPartyDisable: SettingsAccount2FA3rdPartyDisablePage(onPreviousPage),
-		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(onPreviousPage, () =>
-			isBackupCodeGenerated
-				? () => setSelectedPageStack((prev) => [...prev.slice(0, -1), 'settingsAccount2faEdgar'])
-				: onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
+		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(
+			devices,
+			isLoadingDevices,
+			onPreviousPage,
+			() => (isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes')),
 		),
 		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
-			setSelectedPageStack((prev) => [...prev.slice(0, -1), 'settingsAccount2faEdgar']),
+			onPreviousOfPage(2),
 		),
 		settingsAccount2faEdgar: SettingsAccount2FAEdgarPage(
+			trustedDevices,
+			isLoadingTrustedDevices,
 			() => onNextPage('settingsAccount2faEdgarAddTrustDevice'),
 			() => onNextPage('settingsAccount2faEdgarDisable'),
 			(device: DeviceType) => {
@@ -89,8 +96,14 @@ const ModalPages = ({
 				onNextPage('settingsAccount2faEdgarDeviceInfo');
 			},
 		),
-		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo),
-		settingsAccount2faEdgarAddTrustDevice: SettingsAccount2FAEdgarAddTrustDevicePage(onPreviousPage),
+		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo, () => onPreviousOfPage(1)),
+		settingsAccount2faEdgarAddTrustDevice: SettingsAccount2FAEdgarAddTrustDevicePage(
+			devices,
+			trustedDevices,
+			isLoadingDevices,
+			isLoadingTrustedDevices,
+			onPreviousPage,
+		),
 		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
 	};
 };

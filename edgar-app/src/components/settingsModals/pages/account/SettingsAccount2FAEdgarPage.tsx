@@ -11,14 +11,14 @@ import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 import paginationHandler from 'utils/navigation/paginationHandler';
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
-import { useGetTrustedDevicesQuery } from 'services/request/2fa';
 
 const SettingsAccount2FAEdgarPage = (
+	devices: DeviceType[] | undefined,
+	isLoading: boolean,
 	addTrustDevice: () => void,
 	disabled2FA: () => void,
 	displayDeviceInfo: (device: DeviceType) => void,
 ): SettingsPageType => {
-	const { data: devices, isLoading } = useGetTrustedDevicesQuery();
 	const [pageIndex, setPageIndex] = useState(1);
 
 	return {
