@@ -13,8 +13,10 @@ const BackupCodes = ({ backupCodes }: { backupCodes: string[] }): JSX.Element =>
 		</Text>
 		<SimpleGrid columns={2} spacingX="24px" spacingY="8px">
 			{backupCodes.map((backupCode) => (
-				<Skeleton isLoaded={backupCode !== 'XXXX XXXX'}>
-					<Text size="lg">{splitBackupCode(backupCode)}</Text>
+				<Skeleton isLoaded={backupCode !== 'XXXX XXXX'} key={backupCode}>
+					<Text size="lg" fontFamily="Roboto Mono">
+						{splitBackupCode(backupCode)}
+					</Text>
 				</Skeleton>
 			))}
 		</SimpleGrid>
