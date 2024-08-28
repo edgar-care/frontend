@@ -1,15 +1,13 @@
 export interface ThirdPartyCredentialsStoreType {
-	url: string;
-	secret: string;
+	base32: string;
+	otpauth_url: string;
 }
 
-export interface GeneratedBackupCodesStoreType {
-	id: string;
-	code: string[];
-}
-
-type Method2FA = 'MOBILE' | 'EMAIL' | 'AUTHENTICATOR';
+type Method2FA = 'MOBILE' | 'EMAIL' | 'AUTHENTIFICATOR';
 
 export interface Enabled2FAMethodsStoreType {
+	id: string;
 	methods: Method2FA[];
+	secret: string;
+	code: string;
 }

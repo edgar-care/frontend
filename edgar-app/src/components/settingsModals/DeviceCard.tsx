@@ -30,6 +30,11 @@ const DeviceCard = ({
 		DESKTOP: DeviceComputerIcon,
 	};
 
+	const deviceTypeName: Record<DeviceTypeType, string> = {
+		MOBILE: 'Mobile',
+		DESKTOP: 'Ordinateur',
+	};
+
 	return (
 		<HStack
 			w="100%"
@@ -49,8 +54,10 @@ const DeviceCard = ({
 			<HStack spacing="16px">
 				<Icon as={deviceIcon[device.type]} w="20px" h="auto" />
 				<VStack spacing="0px" align="start">
-					<Text size="boldMd">{device.name}</Text>
-					<Text size="sm">{device.location}</Text>
+					<Text size="boldMd">{deviceTypeName[device.type]}</Text>
+					<Text size="sm">
+						{device.city}, {device.region && `${device.region},`} {device.country}
+					</Text>
 					<Text size="sm">{deviceFormatTime(device.lastConnectedTime)}</Text>
 				</VStack>
 			</HStack>
