@@ -71,7 +71,7 @@ const extendedApi = backendApi.injectEndpoints({
 
 		disable2faMethod: builder.mutation<void, Method2FA>({
 			query: (method) => ({
-				url: `/2fa/method/${method}`,
+				url: `/dashboard/2fa/${method}`,
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['patient2faMethod'],
