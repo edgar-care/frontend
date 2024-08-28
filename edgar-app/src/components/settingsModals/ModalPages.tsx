@@ -10,6 +10,9 @@ import SettingsAccount2FA3rdPartyEnableBackupCodesPage from 'components/settings
 import SettingsAccount2FAEdgarEnablePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarEnablePage';
 import SettingsAccount2FAEdgarEnableBackupCodePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarEnableBackupCodePage';
 import SettingsAccount2FAEmailEnableBackupCodesPage from 'components/settingsModals/pages/SettingsAccount2FAEmailEnableBackupCodesPage';
+import SettingsAccount2FAEmailDisablePage from 'components/settingsModals/pages/SettingsAccount2FAEmailDisablePage';
+import SettingsAccount2FA3rdPartyDisablePage from 'components/settingsModals/pages/SettingsAccount2FA3rdPartyDisablePage';
+import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/SettingsAccount2FAEdgarDisablePage';
 
 import { useGet2faEnabledMethodsQuery } from 'services/request/2fa';
 
@@ -49,6 +52,7 @@ const ModalPages = ({
 		settingsAccount2faEmailEnableBackupCodes: SettingsAccount2FAEmailEnableBackupCodesPage(selectedPageStack, () =>
 			setSelectedPageStack((prev) => prev.slice(0, -2)),
 		),
+		settingsAccount2faEmailDisable: SettingsAccount2FAEmailDisablePage(auth.getEmail(), onPreviousPage),
 		settingsAccount2fa3rdPartyEnableQRCode: SettingsAccount2FA3rdPartyEnableQRCodePage(
 			selectedPageStack,
 			onPreviousPage,
@@ -63,12 +67,14 @@ const ModalPages = ({
 			selectedPageStack,
 			() => setSelectedPageStack((prev) => prev.slice(0, -3)),
 		),
+		settingsAccount2fa3rdPartyDisable: SettingsAccount2FA3rdPartyDisablePage(onPreviousPage),
 		settingsAccount2faEdgarEnable: SettingsAccount2FAEdgarEnablePage(onPreviousPage, () =>
 			isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes'),
 		),
 		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
 			setSelectedPageStack((prev) => prev.slice(0, -2)),
 		),
+		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(onPreviousPage),
 	};
 };
 

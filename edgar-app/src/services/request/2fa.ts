@@ -1,10 +1,10 @@
 import { backendApi } from 'services/apiService';
 
 import type { ThirdPartyCredentials } from 'types/dashboard/2fa/thirdPartyCredentialsType';
-import { Enabled2FAMethodsStoreType, ThirdPartyCredentialsStoreType } from 'store/types/2fa.type';
-import { Method2FAType } from 'types/dashboard/2fa/Method2FAType';
-import { DeviceType } from 'types/dashboard/devices/DeviceType';
-import { DeviceStoreType } from 'store/types/devices.type';
+import type { Enabled2FAMethodsStoreType, ThirdPartyCredentialsStoreType } from 'store/types/2fa.type';
+import type { EnabledMethod2FAType, Method2FAType } from 'types/dashboard/2fa/Method2FAType';
+import type { DeviceType } from 'types/dashboard/devices/DeviceType';
+import type { DeviceStoreType } from 'store/types/devices.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -115,6 +115,14 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['patient2faTrustedDevices'],
 		}),
+
+		disable2faMethod: builder.mutation<void, EnabledMethod2FAType>({
+			query: (method) => ({
+				url: `/dashboard/2fa/${method}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patient2faMethod'],
+		}),
 	}),
 });
 
@@ -132,4 +140,5 @@ export const {
 	useLazyGetTrustedDeviceByIdQuery,
 	useAddTrustedDeviceMutation,
 	useRemoveTrustedDeviceMutation,
+	useDisable2faMethodMutation,
 } = extendedApi;
