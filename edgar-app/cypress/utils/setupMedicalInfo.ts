@@ -35,6 +35,7 @@ const setupMedicalInfo = async (accountAuthToken: string): Promise<void> => {
 					still_relevant: true,
 				},
 			],
+			family_members_med_info_id: [],
 		}),
 	});
 
