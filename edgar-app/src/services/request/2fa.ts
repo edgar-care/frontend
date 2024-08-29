@@ -44,8 +44,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: '/2fa/method/third_party',
 				method: 'POST',
 				body: {
-					method_2fa: 'AUTHENTIFICATOR',
-					code,
+					token: code,
 				},
 			}),
 			invalidatesTags: ['patient2faMethod'],
@@ -75,15 +74,16 @@ const extendedApi = backendApi.injectEndpoints({
 		// ===== TRUSTED DEVICES =====
 		getTrustedDevices: builder.query<DeviceType[], void>({
 			query: () => '/dashboard/2fa/devices',
-			transformResponse: (response: { devices: DeviceStoreType[] }) =>
-				response.devices.map((device) => ({
+			transformResponse: (response: { devices: DeviceStoreType[] | null }) =>
+				response.devices?.map((device) => ({
 					id: device.id,
-					type: 'DESKTOP',
+					deviceType: device.device_type,
+					browserType: device.browser,
 					city: device.city,
 					region: device.region,
 					country: device.country,
-					lastConnectedTime: device.date,
-				})),
+					lastConnectedTime: device.date * 1000,
+				})) || [],
 			providesTags: ['patient2faTrustedDevices'],
 		}),
 
@@ -91,11 +91,12 @@ const extendedApi = backendApi.injectEndpoints({
 			query: (id) => `/dashboard/2fa/device/${id}`,
 			transformResponse: (response: { double_auth: DeviceStoreType }) => ({
 				id: response.double_auth.id,
-				type: 'DESKTOP',
+				deviceType: response.double_auth.device_type,
+				browserType: response.double_auth.browser,
 				city: response.double_auth.city,
 				region: response.double_auth.region,
 				country: response.double_auth.country,
-				lastConnectedTime: response.double_auth.date,
+				lastConnectedTime: response.double_auth.date * 1000,
 			}),
 			providesTags: ['patient2faTrustedDevices'],
 		}),

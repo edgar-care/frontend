@@ -4,8 +4,8 @@ import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 const settingsAccount2FAPage = (
 	emailMethod: boolean,
-	edgarMethod: boolean,
 	rdPartyMethod: boolean,
+	edgarMethod: boolean,
 ): SettingsPageType => ({
 	headerTitle: 'Méthode de double authentification',
 	headerSubtitle: 'Paramétrer vos méthodes de double authentification.',
@@ -37,7 +37,7 @@ const settingsAccount2FAPage = (
 					badge: edgarMethod ? 'Activée' : 'Désactivée',
 					badgeStyle: edgarMethod ? 'green' : 'red',
 					hasChevron: true,
-					pageIndex: edgarMethod ? 'settingsAccount2faEdgarDisable' : 'settingsAccount2faEdgarEnable',
+					pageIndex: edgarMethod ? 'settingsAccount2faEdgar' : 'settingsAccount2faEdgarEnable',
 				},
 			],
 		},

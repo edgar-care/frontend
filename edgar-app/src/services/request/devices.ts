@@ -11,10 +11,12 @@ const extendedApi = backendApi.injectEndpoints({
 			transformResponse: (response: { devices: DeviceStoreType[] }) =>
 				response.devices.map((device) => ({
 					id: device.id,
+					deviceType: device.device_type,
+					browserType: device.browser,
 					city: device.city,
 					region: device.region,
 					country: device.country,
-					lastConnectedTime: device.date,
+					lastConnectedTime: device.date * 1000,
 					type: 'DESKTOP',
 				})),
 		}),
@@ -23,10 +25,12 @@ const extendedApi = backendApi.injectEndpoints({
 			query: (id) => `dashboard/device/${id}`,
 			transformResponse: (response: { double_auth: DeviceStoreType }) => ({
 				id: response.double_auth.id,
+				deviceType: response.double_auth.device_type,
+				browserType: response.double_auth.browser,
 				city: response.double_auth.city,
 				region: response.double_auth.region,
 				country: response.double_auth.country,
-				lastConnectedTime: response.double_auth.date,
+				lastConnectedTime: response.double_auth.date * 1000,
 				type: 'DESKTOP',
 			}),
 		}),
