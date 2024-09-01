@@ -1,31 +1,33 @@
 import { VStack } from '@chakra-ui/react';
-import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
+import { type Control, type FieldErrors, type UseFormWatch } from 'react-hook-form';
 
-import UpdateMedicalMedicalModalPrimaryDoctorInput from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalMedicalModalPrimaryDoctorInput';
+import UpdateMedicalHealthModalAntecedent from 'components/dashboardPages/medical/modal/forms/medical/UpdateMedicalHealthModalAntecedent';
 
-import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
+import type { UpdatePatientMedicalHealthType } from 'types/dashboard/medical/form/UpdatePatientMedicalType';
 
 const UpdateMedicalMedicalModalContent = ({
-	register,
+	control,
+	watch,
 	errors,
 }: {
-	register: UseFormRegister<PatientMedicalType>;
-	errors: FieldErrors<PatientMedicalType>;
+	control: Control<UpdatePatientMedicalHealthType>;
+	watch: UseFormWatch<UpdatePatientMedicalHealthType>;
+	errors: FieldErrors<UpdatePatientMedicalHealthType>;
 }): JSX.Element => (
 	<VStack
 		w="100%"
-		spacing="24px"
-		px={{ base: '0px', smd: '32px' }}
+		h="100%"
+		spacing="16px"
 		align="start"
-		maxH={{ base: 'auto', smd: 'calc(100vh - 400px)' }}
-		overflowY={{ base: 'hidden', smd: 'scroll' }}
 		sx={{
 			'::-webkit-scrollbar': {
 				width: '6px',
 			},
 			'::-webkit-scrollbar-track': {
-				background: '#F1F1F1',
+				background: 'grey.100',
 				borderRadius: '8px',
+				marginTop: '64px',
+				marginBottom: '64px',
 			},
 			'::-webkit-scrollbar-thumb': {
 				background: 'grey.200',
@@ -34,11 +36,13 @@ const UpdateMedicalMedicalModalContent = ({
 			'::-webkit-scrollbar-thumb:hover': {
 				background: 'grey.300',
 			},
-			scrollbarWidth: 'thin',
-			scrollbarColor: '#CCC #F1F1F1',
 		}}
 	>
-		<UpdateMedicalMedicalModalPrimaryDoctorInput errors={errors} register={register} />
+		<UpdateMedicalHealthModalAntecedent
+			control={control}
+			errors={errors}
+			healthIssues={watch('medicalAntecedents')}
+		/>
 	</VStack>
 );
 
