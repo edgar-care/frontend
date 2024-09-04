@@ -11,9 +11,9 @@ const BackupCodes = ({ backupCodes }: { backupCodes: string[] }): JSX.Element =>
 			Ces codes sont très importants, vous ne pourrez les lire qu’une seule fois.
 			<br /> Nous vous recommandons de les stocker dans un lieu sûr:
 		</Text>
-		<SimpleGrid columns={2} spacingX="24px" spacingY="8px">
-			{backupCodes.map((backupCode) => (
-				<Skeleton isLoaded={backupCode !== 'XXXX XXXX'} key={backupCode}>
+		<SimpleGrid columns={2} spacingX="32px" spacingY="8px">
+			{backupCodes.map((backupCode, index) => (
+				<Skeleton isLoaded={backupCode !== 'XXXX XXXX'} key={index}>
 					<Text size="lg" fontFamily="Roboto Mono">
 						{splitBackupCode(backupCode)}
 					</Text>
