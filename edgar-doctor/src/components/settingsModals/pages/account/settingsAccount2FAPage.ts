@@ -4,8 +4,8 @@ import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 const settingsAccount2FAPage = (
 	emailMethod: boolean,
-	edgarMethod: boolean,
 	rdPartyMethod: boolean,
+	edgarMethod: boolean,
 ): SettingsPageType => ({
 	headerTitle: 'Méthode de double authentification',
 	headerSubtitle: 'Paramétrer vos méthodes de double authentification.',
@@ -21,7 +21,7 @@ const settingsAccount2FAPage = (
 					badge: emailMethod ? 'Activée' : 'Désactivée',
 					badgeStyle: emailMethod ? 'green' : 'red',
 					hasChevron: true,
-					pageIndex: emailMethod ? 'settings-account-2fa-emailDisable' : 'settings-account-2fa-emailEnable',
+					pageIndex: emailMethod ? 'settingsAccount2faEmailDisable' : 'settingsAccount2faEmailEnable',
 				},
 				{
 					name: 'Double authentification via application tierces',
@@ -29,15 +29,15 @@ const settingsAccount2FAPage = (
 					badgeStyle: rdPartyMethod ? 'green' : 'red',
 					hasChevron: true,
 					pageIndex: rdPartyMethod
-						? 'settings-account-2fa-rdPartyDisable'
-						: 'settings-account-2fa-rdPartyEnable',
+						? 'settingsAccount2fa3rdPartyDisable'
+						: 'settingsAccount2fa3rdPartyEnableQRCode',
 				},
 				{
 					name: 'Double authentification via application edgar',
 					badge: edgarMethod ? 'Activée' : 'Désactivée',
 					badgeStyle: edgarMethod ? 'green' : 'red',
 					hasChevron: true,
-					pageIndex: edgarMethod ? 'settings-account-2fa-edgar' : 'settings-account-2fa-edgarEnable',
+					pageIndex: edgarMethod ? 'settingsAccount2faEdgar' : 'settingsAccount2faEdgarEnable',
 				},
 			],
 		},

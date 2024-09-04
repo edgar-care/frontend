@@ -75,8 +75,8 @@ class Auth {
 			const token = this.getToken();
 			if (!token) return '';
 
-			const payload: { doctor: { id: string } } = JSON.parse(atob(token.split('.')[1]));
-			return payload.doctor.id;
+			const payload: { id: string } = JSON.parse(atob(token.split('.')[1]));
+			return payload.id;
 		} catch (error) {
 			return '';
 		}
@@ -87,8 +87,8 @@ class Auth {
 			const token = this.getToken();
 			if (!token) return '';
 
-			const payload: { doctor: { email: string } } = JSON.parse(atob(token.split('.')[1]));
-			return payload.doctor.email;
+			const payload: { doctor: string } = JSON.parse(atob(token.split('.')[1]));
+			return payload.doctor;
 		} catch (error) {
 			return '';
 		}
