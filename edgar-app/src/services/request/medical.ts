@@ -64,6 +64,7 @@ const extendedApi = backendApi.injectEndpoints({
 						})),
 						still_relevant: antecedent.stillRelevant,
 					})),
+					family_members_med_info_id: [],
 				},
 			}),
 			invalidatesTags: ['patientMedicalFolder'],

@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 
-import SettingsSectionTab from 'components/navigation/settingsModals/SettingsSectionTab';
+import SettingsSectionTab from 'components/settingsModals/SettingsSectionTab';
 
 import { type SettingsSectionType } from 'types/navigation/SettingsSectionType';
 

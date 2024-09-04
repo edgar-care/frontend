@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import Avatar from 'boring-avatars';
 
 import ProfileTab from 'components/navigation/ProfileTab';
-import SettingsHandler from 'components/navigation/settingsModals/SettingsHandler';
+import SettingsHandler from 'components/settingsModals/SettingsHandler';
 
 import SelectorIcon from 'assets/icons/SelectorIcon';
 import LogoutIcon from 'assets/icons/LogoutIcon';
