@@ -1,1 +1,1 @@
-export type DeviceTypeType = 'MOBILE' | 'DESKTOP';
+export type DeviceTypeType = 'Windows' | 'MacOs' | 'Linux' | 'Android' | 'iPhone' | 'Other';
