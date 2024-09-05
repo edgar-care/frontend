@@ -7,10 +7,8 @@ import type { DeviceType } from 'types/dashboard/devices/DeviceType';
 
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import PinIcon from 'assets/icons/PinIcon';
-import DevicePhoneIllustration from 'assets/illustrations/devices/DevicePhoneIllustration';
-import DeviceComputerIllustration from 'assets/illustrations/devices/DeviceComputerIllustration';
 
-import deviceBrowserTypeName from 'utils/app/dashboard/devices/deviceBrowserTypeName';
+import deviceIllustration from 'utils/app/dashboard/devices/deviceIllustration';
 
 const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () => void): SettingsPageType => {
 	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
@@ -42,9 +40,9 @@ const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () =
 	};
 
 	return {
-		headerTitle: deviceBrowserTypeName[deviceInfo?.browserType || 'OTHER'],
+		headerTitle: deviceInfo?.browserType || '',
 		headerSubtitle: 'Connecté à votre compte edgar.',
-		headerIcon: deviceInfo?.deviceType === 'MOBILE' ? DevicePhoneIllustration : DeviceComputerIllustration,
+		headerIcon: deviceIllustration[deviceInfo?.deviceType || 'Other'],
 		hasProfileBanner: false,
 		hasReturnButton: true,
 		sections: [],

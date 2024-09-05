@@ -1,5 +1,4 @@
 import type { DeviceTypeType } from 'types/dashboard/devices/DeviceTypeType';
-import type { DeviceBrowserType } from 'types/dashboard/devices/DeviceBrowserType';
 
 export type DeviceType = {
 	id: string;
@@ -8,5 +7,5 @@ export type DeviceType = {
 	country: string;
 	lastConnectedTime: number;
 	deviceType: DeviceTypeType;
-	browserType: DeviceBrowserType;
+	browserType: string;
 };

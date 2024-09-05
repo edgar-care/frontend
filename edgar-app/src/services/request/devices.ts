@@ -17,7 +17,6 @@ const extendedApi = backendApi.injectEndpoints({
 					region: device.region,
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
-					type: 'DESKTOP',
 				})),
 		}),
 
@@ -31,7 +30,6 @@ const extendedApi = backendApi.injectEndpoints({
 				region: response.double_auth.region,
 				country: response.double_auth.country,
 				lastConnectedTime: response.double_auth.date * 1000,
-				type: 'DESKTOP',
 			}),
 		}),
 	}),

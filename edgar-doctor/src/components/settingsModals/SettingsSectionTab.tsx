@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { HStack, Icon, Text } from '@chakra-ui/react';
 
-import SettingsSectionTabBadge from 'components/navigation/settingsModals/SettingsSectionTabBadge';
+import SettingsSectionTabBadge from 'components/settingsModals/SettingsSectionTabBadge';
 
 import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 

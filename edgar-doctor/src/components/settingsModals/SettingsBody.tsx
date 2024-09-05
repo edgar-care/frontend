@@ -2,11 +2,11 @@ import type { Dispatch, SetStateAction } from 'react';
 import { HStack, Skeleton, Text, VStack } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
 
-import SettingsSection from 'components/navigation/settingsModals/SettingsSection';
-
-import { useAuthContext } from 'contexts/auth';
+import SettingsSection from 'components/settingsModals/SettingsSection';
 
 import { useGetDoctorByIdQuery } from 'services/request/doctor';
+
+import { useAuthContext } from 'contexts/auth';
 
 import { type SettingsSectionType } from 'types/navigation/SettingsSectionType';
 
@@ -37,7 +37,7 @@ const SettingsBody = ({
 								size={48}
 								name={`${doctorInfo.firstname} ${doctorInfo.name.toUpperCase()}`}
 								variant="beam"
-								colors={[colors.blue[700], colors.blue[200], colors.blue[500]]}
+								colors={[colors.green[600], colors.green[200], colors.green[500]]}
 							/>
 						)}
 					</Skeleton>
@@ -52,23 +52,25 @@ const SettingsBody = ({
 					</Skeleton>
 				</HStack>
 			)}
-			<VStack
-				w="100%"
-				p="4px 8px"
-				borderRadius={`${hasProfileBanner ? '0px 0px' : '16px 16px'} 16px 16px`}
-				border="2px solid"
-				borderTop={hasProfileBanner ? '0px' : '2px'}
-				borderColor="blue.100"
-			>
-				{sections.map((section) => (
-					<SettingsSection
-						section={section}
-						key={section.name}
-						id={`${id}-${section.name.replace(/ /g, '')}Section`}
-						setSelectedPageStack={setSelectedPageStack}
-					/>
-				))}
-			</VStack>
+			{sections.length > 0 && (
+				<VStack
+					w="100%"
+					p="4px 8px"
+					borderRadius={`${hasProfileBanner ? '0px 0px' : '16px 16px'} 16px 16px`}
+					border="2px solid"
+					borderTop={hasProfileBanner ? '0px' : '2px'}
+					borderColor="blue.100"
+				>
+					{sections.map((section) => (
+						<SettingsSection
+							section={section}
+							key={section.name}
+							id={`${id}-${section.name.replace(/ /g, '')}Section`}
+							setSelectedPageStack={setSelectedPageStack}
+						/>
+					))}
+				</VStack>
+			)}
 		</VStack>
 	);
 };

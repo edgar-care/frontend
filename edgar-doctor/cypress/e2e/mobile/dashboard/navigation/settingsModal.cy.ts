@@ -1,6 +1,6 @@
 import createDoctorAccount from 'utils/createDoctorAccount';
 
-describe('Settings Modal tests - Desktop', () => {
+describe('Settings Modal tests - Mobile', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {
@@ -81,7 +81,7 @@ describe('Settings Modal tests - Desktop', () => {
 			});
 
 			it('Good content for patient name', () => {
-				cy.get('#edgar-settingsModal-profileFirstnameName-text').should('contain.text', 'Medecin EDGAR');
+				cy.get('#edgar-settingsModal-profileFirstnameName-text').should('contain.text', 'Edgar MEDECIN');
 			});
 
 			it('Good content for account settings section name', () => {
