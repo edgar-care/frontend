@@ -3,17 +3,17 @@ import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
+import type { UpdatePatientMedicalPersonalType } from 'types/dashboard/medical/form/UpdatePatientMedicalType';
 
 const UpdateMedicalPersonalModalBirthdateInput = ({
 	errors,
 	control,
 }: {
-	errors: FieldErrors<PatientMedicalType>;
-	control: Control<PatientMedicalType>;
+	errors: FieldErrors<UpdatePatientMedicalPersonalType>;
+	control: Control<UpdatePatientMedicalPersonalType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" maxW="264px">
-		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formBirthdate-text">
+	<VStack spacing="4px" align="start" w="100%" maxW="264px">
+		<FormLabel size="lg" id="edgar-updateMedicalPersonalModal-formBirthdate-text">
 			Votre date de naissance
 		</FormLabel>
 		<Controller
