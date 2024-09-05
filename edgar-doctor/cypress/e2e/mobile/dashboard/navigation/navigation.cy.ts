@@ -1,6 +1,6 @@
 import createDoctorAccount from 'utils/createDoctorAccount';
 
-describe('Navigation tests - Desktop', () => {
+describe('Navigation tests - Mobile', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {
@@ -77,7 +77,7 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good content for Username Profile Card', () => {
-				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Medecin Edgar');
+				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Edgar MEDECIN');
 			});
 		});
 
