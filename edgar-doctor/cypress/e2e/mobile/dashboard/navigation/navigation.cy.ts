@@ -77,7 +77,7 @@ describe('Navigation tests - Mobile', () => {
 			});
 
 			it('Good content for Username Profile Card', () => {
-				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Edgar MEDECIN');
+				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Edgar Medecin');
 			});
 		});
 
