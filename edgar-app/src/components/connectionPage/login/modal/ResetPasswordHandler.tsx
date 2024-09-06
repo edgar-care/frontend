@@ -29,27 +29,25 @@ const ResetPasswordHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: (
 	};
 
 	const onSubmit = handleSubmit((data) => {
-		if (data.email) {
-			triggerMissingPassword({
-				email: data.email,
+		triggerMissingPassword({
+			email: data.email,
+		})
+			.unwrap()
+			.then(() => {
+				onClose();
+				reset();
+				toast({ title: 'Votre demande à été prise en compte', status: 'success' });
 			})
-				.unwrap()
-				.then(() => {
-					onClose();
-					reset();
-					toast({ title: 'Votre demande à été prise en compte', status: 'success' });
-				})
-				.catch(() => {
-					toast({ title: 'Une erreur est survenue', status: 'error' });
-				});
-		}
+			.catch(() => {
+				toast({ title: 'Une erreur est survenue', status: 'error' });
+			});
 	});
 
 	return (
 		<ModalHandler
 			isOpen={isOpen}
 			onClose={onCloseAction}
-			size="md"
+			size="lg"
 			headerTitle="Mot de passe oublié ?"
 			headerSubtitle="Renseigner votre adresse mail pour rénitialiser votre mot de passe."
 			headerIcon={ShieldIllustration}
