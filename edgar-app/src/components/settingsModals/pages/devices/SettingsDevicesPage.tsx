@@ -15,10 +15,10 @@ import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 const SettingsDevicesPage = (devices: DeviceType[] | undefined, isLoadingDevices: boolean): SettingsPageType => {
 	const [selectedDeviceId, setSelectedDeviceId] = useState('');
 	const [pageIndex, setPageIndex] = useState(1);
-	console.log(devices);
+
 	return {
 		headerTitle: 'Appareils connectés',
-		headerSubtitle: 'Consulter et gérer tous les appareils connecté à votre compte edgar.',
+		headerSubtitle: 'Consulter et gérer tous les appareils connectés à votre compte edgar.',
 		headerIcon: DeviceComputerIllustration,
 		hasProfileBanner: false,
 		hasReturnButton: true,
