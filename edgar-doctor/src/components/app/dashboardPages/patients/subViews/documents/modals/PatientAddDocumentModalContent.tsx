@@ -12,9 +12,9 @@ const PatientAddDocumentModalContent = ({
 	register: UseFormRegister<UploadAPatientDocumentDTO>;
 	errors: FieldErrors<UploadAPatientDocumentDTO>;
 }): JSX.Element => (
-	<VStack spacing="24px" w="100%" px={{ base: '0px', smd: '32px' }}>
-		<VStack w="100%" align="start">
-			<FormLabel size="boldLg">Votre document</FormLabel>
+	<VStack spacing="24px" w="100%">
+		<VStack w="100%" align="start" spacing="4px">
+			<FormLabel size="lg">Votre document</FormLabel>
 			<Input
 				{...register('document', { required: true })}
 				type="file"
@@ -22,9 +22,9 @@ const PatientAddDocumentModalContent = ({
 			/>
 			{errors.document?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 		</VStack>
-		<Stack direction={{ base: 'column', smd: 'row' }} w="100%" spacing={{ base: '24px', smd: '32px' }}>
-			<VStack w="100%" align="start">
-				<FormLabel size="boldLg">Le type de votre document</FormLabel>
+		<Stack direction={{ base: 'column', smd: 'row' }} w="100%" spacing="16px">
+			<VStack w="100%" align="start" spacing="4px">
+				<FormLabel size="lg">Le type de votre document</FormLabel>
 				<Select {...register('documentType', { required: true })}>
 					<option value="PRESCRIPTION">Ordonnance</option>
 					<option value="CERTIFICATE">Certificat</option>
@@ -33,8 +33,8 @@ const PatientAddDocumentModalContent = ({
 				</Select>
 				{errors.documentType?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>
-			<VStack w="100%" align="start">
-				<FormLabel size="boldLg">Le type de médecine</FormLabel>
+			<VStack w="100%" align="start" spacing="4px">
+				<FormLabel size="lg">Le type de médecine</FormLabel>
 				<Select {...register('category', { required: true })}>
 					<option value="GENERAL">Générale</option>
 				</Select>

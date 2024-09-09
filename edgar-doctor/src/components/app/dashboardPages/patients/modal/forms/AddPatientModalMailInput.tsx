@@ -12,8 +12,8 @@ const AddPatientModalMailInput = ({
 	register: UseFormRegister<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-addPatientModal-formMail-text">
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-addPatientModal-formMail-text">
 			Adresse mail
 		</FormLabel>
 		<Input

@@ -33,9 +33,9 @@ const AddPatientModalMedicalAntecedents = ({
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<VStack w="100%" spacing="24px" px={{ base: '0px', smd: '32px' }} align="start">
-			<VStack spacing="8px" align="start" w="100%">
-				<FormLabel size="boldLg" id="edgar-addPatientModal-formMedicalAntecedents-text">
+		<VStack w="100%" spacing="24px" align="start">
+			<VStack spacing="4px" align="start" w="100%">
+				<FormLabel size="lg" id="edgar-addPatientModal-formMedicalAntecedents-text">
 					Antécédents médicaux et sujets de santé
 				</FormLabel>
 				<InputGroup>
@@ -86,6 +86,7 @@ const AddPatientModalMedicalAntecedents = ({
 								render={({ field: { value, onChange } }) => (
 									<MedicalAntecedentsCard
 										medicalAntecedent={medicalAntecedent}
+										isDeletable
 										onClick={() =>
 											onChange(value.filter((item) => item.name !== medicalAntecedent.name))
 										}

@@ -21,7 +21,7 @@ const AddPatientModalContent = ({
 	control: Control<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack w="100%" spacing="24px" px={{ base: '0px', smd: '32px' }} align="start">
+	<VStack w="100%" spacing="16px" align="start">
 		<AddPatientModalMailInput register={register} errors={errors} />
 		<HStack w="100%" spacing="32px">
 			<AddPatientModalFirstnameInput register={register} errors={errors} />

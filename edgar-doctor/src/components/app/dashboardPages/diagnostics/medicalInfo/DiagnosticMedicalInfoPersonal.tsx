@@ -30,8 +30,8 @@ const DiagnosticMedicalInfoPersonal = ({
 	const displayPersonalInfos = (key: string, info: string | number): string => {
 		if (key === 'birthdate') return new Date(info).toLocaleDateString('fr-FR');
 		if (key === 'sex') return sexLabel[info as PatientSexType];
-		if (key === 'height') return `${((info as number) / 100).toPrecision(3)}m`;
-		if (key === 'weight') return `${(info as number) / 100}kg`;
+		if (key === 'height') return `${(info as number).toPrecision(3)}m`;
+		if (key === 'weight') return `${info as number}kg`;
 		if (key === 'primaryDoctorId') return `Dr. ${doctorInfo?.name.toUpperCase()} ${doctorInfo?.firstname}`;
 		return info.toString();
 	};
