@@ -12,7 +12,7 @@ const AddTreatmentStillRelevantInput = ({
 	control: Control<TreatmentType>;
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.stillRelevant ? '0px' : '16px'}>
+	<VStack spacing="8px" align="start" w="100%">
 		<FormLabel size="boldLg">Votre sujet de santé est-il toujours en cours ?</FormLabel>
 		<Controller
 			control={control}

@@ -12,7 +12,7 @@ const AddTreatmentExisting = ({
 	control: Control<TreatmentType>;
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.alreadyExist ? '0px' : '16px'}>
+	<VStack spacing="8px" align="start" w="100%">
 		<FormLabel size="boldLg">Avez-vous déjà ajouté votre sujet de santé ?</FormLabel>
 		<Controller
 			control={control}
