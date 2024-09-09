@@ -14,7 +14,7 @@ import { type HealthIssuesMedicinesDayType } from 'types/dashboard/medical/Healt
 
 const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] }): JSX.Element => {
 	const { data: medicinesInfo, isLoading } = useGetMedicinesQuery();
-	const { data: checkedTreatments } = useGetFollowUpTreatmentsQuery();
+	const { data: checkedTreatments, isLoading: isLoadingCheckedTreatments } = useGetFollowUpTreatmentsQuery();
 
 	const [startDay, setStartDay] = useState(0);
 
@@ -31,20 +31,22 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 	};
 
 	return (
-		<Skeleton isLoaded={!isLoading} borderRadius="8px">
-			{Object.entries(groupedTreatments)
-				.slice(startDay, 1 + startDay)
-				.map(([day, periods]) => (
-					<TreatmentsCalendarDay
-						key={day}
-						day={day as HealthIssuesMedicinesDayType}
-						periods={periods}
-						checkedTreatments={groupedFollowUpTreatments[day]}
-						medicinesInfo={medicinesInfo || []}
-						handlePreviousDay={handlePreviousDay}
-						handleNextDay={handleNextDay}
-					/>
-				))}
+		<Skeleton isLoaded={!isLoading && !isLoadingCheckedTreatments} borderRadius="8px">
+			{!isLoading &&
+				!isLoadingCheckedTreatments &&
+				Object.entries(groupedTreatments)
+					.slice(startDay, 1 + startDay)
+					.map(([day, periods]) => (
+						<TreatmentsCalendarDay
+							key={day}
+							day={day as HealthIssuesMedicinesDayType}
+							periods={periods}
+							checkedTreatments={groupedFollowUpTreatments[day]}
+							medicinesInfo={medicinesInfo || []}
+							handlePreviousDay={handlePreviousDay}
+							handleNextDay={handleNextDay}
+						/>
+					))}
 		</Skeleton>
 	);
 };
