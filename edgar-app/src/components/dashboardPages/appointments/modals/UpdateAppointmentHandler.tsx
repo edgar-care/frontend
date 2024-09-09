@@ -1,7 +1,11 @@
-import { useBreakpointValue } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Button } from '@chakra-ui/react';
 
-import UpdateAppointmentModal from 'components/dashboardPages/appointments/modals/UpdateAppointmentModal';
-import UpdateAppointmentDrawer from 'components/dashboardPages/appointments/modals/UpdateAppointmentDrawer';
+import ModalHandler from 'components/modals/ModalHandler';
+import UpdateAppointmentBody from 'components/dashboardPages/appointments/modals/UpdateAppointmentBody';
+import UpdateAppointmentFooterPrimaryButton from 'components/dashboardPages/appointments/modals/UpdateAppointmentFooterPrimaryButton';
+
+import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
 
 const UpdateAppointmentHandler = ({
 	isOpen,
@@ -12,16 +16,48 @@ const UpdateAppointmentHandler = ({
 	onClose: () => void;
 	appointmentId: string;
 }): JSX.Element => {
-	const isMobile = useBreakpointValue({ base: true, smd: false });
+	const [pageIndex, setPageIndex] = useState(1);
+	const [newAppointmentId, setNewAppointmentId] = useState('');
+	const [searchValue, setSearchValue] = useState('');
+
+	const onCloseAction = () => {
+		setPageIndex(1);
+		setNewAppointmentId('');
+		setSearchValue('');
+		onClose();
+	};
 
 	return (
-		<>
-			{isMobile ? (
-				<UpdateAppointmentDrawer isOpen={isOpen} onClose={onClose} appointmentId={appointmentId} />
-			) : (
-				<UpdateAppointmentModal isOpen={isOpen} onClose={onClose} appointmentId={appointmentId} />
-			)}
-		</>
+		<ModalHandler
+			isOpen={isOpen}
+			onClose={onCloseAction}
+			size="3xl"
+			headerTitle="Modifier votre rendez-vous"
+			headerSubtitle="Sélectionner une nouvelle date pour votre rendez-vous. Vous pouvez garder le même médecin ou en choisir un autre."
+			headerIcon={CalendarIllustration}
+			bodyContent={
+				<UpdateAppointmentBody
+					pageIndex={pageIndex}
+					newAppointmentId={newAppointmentId}
+					searchValue={searchValue}
+					setPageIndex={setPageIndex}
+					setNewAppointmentId={setNewAppointmentId}
+					setSearchValue={setSearchValue}
+				/>
+			}
+			footerPrimaryButton={
+				<UpdateAppointmentFooterPrimaryButton
+					appointmentId={appointmentId}
+					newAppointmentId={newAppointmentId}
+					onClose={onCloseAction}
+				/>
+			}
+			footerSecondaryButton={
+				<Button size="customMd" variant="secondary" w="100%" onClick={onCloseAction}>
+					Annuler
+				</Button>
+			}
+		/>
 	);
 };
 export default UpdateAppointmentHandler;

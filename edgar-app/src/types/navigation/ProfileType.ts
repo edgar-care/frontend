@@ -6,4 +6,5 @@ export type ProfileTabType = {
 	name: string;
 	icon: ComponentWithAs<'svg', IconProps> | IconType;
 	action: () => void;
+	actionComponent?: JSX.Element;
 };

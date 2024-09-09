@@ -1,5 +1,5 @@
 import { Button, FormLabel, HStack, VStack } from '@chakra-ui/react';
-import { Control, Controller, type FieldErrors } from 'react-hook-form';
+import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -12,8 +12,8 @@ const SelectHealthIssueStillRelevantInput = ({
 	control: Control<HealthIssuesType>;
 	errors: FieldErrors<HealthIssuesType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.stillRelevant ? '0px' : '16px'}>
-		<FormLabel size="boldLg" id="edgar-onboardingMedicalPage-medicineStillRelevant-text">
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-onboardingMedicalPage-medicineStillRelevant-text">
 			Votre sujet de santé est-il toujours en cours ?
 		</FormLabel>
 		<Controller

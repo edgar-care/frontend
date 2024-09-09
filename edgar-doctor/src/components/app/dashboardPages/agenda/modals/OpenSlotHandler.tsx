@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useBreakpointValue, useToast } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import OpenSlotDrawer from 'components/app/dashboardPages/agenda/modals/OpenSlotDrawer';
-import OpenSlotModal from 'components/app/dashboardPages/agenda/modals/OpenSlotModal';
+import ModalHandler from 'components/modals/ModalHandler';
+import OpenSlotModalContent from 'components/app/dashboardPages/agenda/modals/OpenSlotModalContent';
 
 import { useGetSlotsQuery, useOpenSlotMutation } from 'services/request/slots';
 
@@ -11,6 +11,8 @@ import { type OpenSlotType } from 'types/app/dashboard/agenda/OpenSlotType';
 
 import getAvailableHourSlot from 'utils/app/dashboard/agenda/getAvailableHourSlot';
 import groupSlotByDay from 'utils/app/dashboard/agenda/groupSlotByDay';
+
+import CheckCircleIllustration from 'assets/illustrations/CheckCircleIllustration';
 
 const OpenSlotHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }): JSX.Element => {
 	const { data: openedSlot } = useGetSlotsQuery();
@@ -48,38 +50,26 @@ const OpenSlotHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
 		if (watch('date')) setAvailableHours(getAvailableHourSlot(groupSlotByDay(openedSlot || [])[watch('date')]));
 	}, [watch('date'), openedSlot]);
 
-	const isMobile = useBreakpointValue({ base: true, smd: false });
-
 	return (
-		<>
-			{isMobile ? (
-				<OpenSlotDrawer
-					isOpen={isOpen}
-					onClose={() => {
-						onClose();
-						reset();
-						setAvailableHours([]);
-					}}
-					register={register}
-					errors={errors}
-					onSubmit={onSubmit}
-					availableHours={availableHours}
-				/>
-			) : (
-				<OpenSlotModal
-					isOpen={isOpen}
-					onClose={() => {
-						onClose();
-						reset();
-						setAvailableHours([]);
-					}}
-					register={register}
-					errors={errors}
-					onSubmit={onSubmit}
-					availableHours={availableHours}
-				/>
-			)}
-		</>
+		<ModalHandler
+			isOpen={isOpen}
+			onClose={onClose}
+			size="3xl"
+			headerTitle="Ouvrir un créneau"
+			headerSubtitle="Sélectionner la date et l’horraire du créneau à ouvrir."
+			headerIcon={CheckCircleIllustration}
+			bodyContent={<OpenSlotModalContent register={register} errors={errors} availableHours={availableHours} />}
+			footerPrimaryButton={
+				<Button w="100%" onClick={onSubmit}>
+					Ouvrir le créneau
+				</Button>
+			}
+			footerSecondaryButton={
+				<Button variant="secondary" w="100%" onClick={onClose}>
+					Annuler
+				</Button>
+			}
+		/>
 	);
 };
 export default OpenSlotHandler;

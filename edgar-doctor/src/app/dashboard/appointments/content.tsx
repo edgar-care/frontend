@@ -7,9 +7,11 @@ import AppointmentsCalendarCard from 'components/app/dashboardPages/appointments
 import AppointmentsCards from 'components/app/dashboardPages/appointments/AppointmentsCards';
 
 import { useGetDoctorAppointmentsQuery } from 'services/request/appointments';
+import { useGetPatientsQuery } from 'services/request/patients';
 
 const AppointmentsPageContent = (): JSX.Element => {
 	const { data: appointments } = useGetDoctorAppointmentsQuery();
+	const { data: patients } = useGetPatientsQuery();
 
 	return (
 		<VStack w="100%" spacing="32px" h="100%">
@@ -26,11 +28,11 @@ const AppointmentsPageContent = (): JSX.Element => {
 				<VStack spacing="16px" w={{ base: '100%', md: 'auto' }}>
 					<AppointmentsCalendarCard appointments={appointments} />
 				</VStack>
-				{appointments && (
+				{appointments && patients && (
 					<AppointmentsCards
-						appointments={[...appointments].sort(
-							(a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
-						)}
+						appointments={[...appointments]
+							.filter((appointment) => patients.some((patient) => patient.id === appointment.patientId))
+							.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())}
 					/>
 				)}
 			</Stack>
