@@ -12,7 +12,7 @@ const extendedApi = backendApi.injectEndpoints({
 					email: params.email,
 				},
 			}),
-			invalidatesTags: ['patientAccount'],
+			invalidatesTags: ['doctorAccount'],
 		}),
 	}),
 });
