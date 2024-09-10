@@ -1,99 +1,94 @@
-import { HStack, Icon, Skeleton, Text, VStack } from '@chakra-ui/react';
+import { type Control, Controller } from 'react-hook-form';
+import { HStack, Icon, Input, Text, VStack } from '@chakra-ui/react';
 
-import LIcon from 'assets/icons/TreatmentCardIcon/Days/LIcon';
-import MIcon from 'assets/icons/TreatmentCardIcon/Days/MIcon';
-import JIcon from 'assets/icons/TreatmentCardIcon/Days/JIcon';
-import VIcon from 'assets/icons/TreatmentCardIcon/Days/VIcon';
-import SIcon from 'assets/icons/TreatmentCardIcon/Days/SIcon';
-import DIcon from 'assets/icons/TreatmentCardIcon/Days/DIcon';
-import MorningIcon from 'assets/icons/TreatmentCardIcon/Periods/MorningIcon';
-import NoonIcon from 'assets/icons/TreatmentCardIcon/Periods/NoonIcon';
-import EveningIcon from 'assets/icons/TreatmentCardIcon/Periods/EveningIcon';
-import NightIcon from 'assets/icons/TreatmentCardIcon/Periods/NightIcon';
+import TreatmentCardDays from 'components/dashboardPages/treatments/TreatmentCardDays';
+import TreatmentCardPeriods from 'components/dashboardPages/treatments/TreatmentCardPeriods';
+
+import { type TreatmentType, type TreatmentMedicinesType } from 'types/dashboard/treatments/TreatmentType';
+
+import CrossIcon from 'assets/icons/CrossIcon';
+
+import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
-import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
-import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
+const TreatmentCard = ({
+	medicine,
+	control,
+}: {
+	medicine: TreatmentMedicinesType;
+	control: Control<TreatmentType>;
+}): JSX.Element => {
+	const { data: medicineInfo } = useGetMedicineByIdQuery(medicine.medicineId);
 
-const dayIconMap: Record<TreatmentDayType, typeof LIcon> = {
-	MONDAY: LIcon,
-	TUESDAY: MIcon,
-	WEDNESDAY: MIcon,
-	THURSDAY: JIcon,
-	FRIDAY: VIcon,
-	SATURDAY: SIcon,
-	SUNDAY: DIcon,
-};
-
-const periodIconMap: Record<TreatmentPeriodType, typeof MorningIcon> = {
-	MORNING: MorningIcon,
-	NOON: NoonIcon,
-	EVENING: EveningIcon,
-	NIGHT: NightIcon,
-};
-
-const periodIconWidthMap: Record<TreatmentPeriodType, string> = {
-	MORNING: '52px',
-	NOON: '43px',
-	EVENING: '40px',
-	NIGHT: '41px',
-};
-
-const TreatmentCard = ({ treatment }: { treatment: PatientMedicineType }) => {
-	const { data: medicineInfo, isLoading } = useGetMedicineByIdQuery(treatment.medicineId);
-	console.log(treatment.days);
-	console.log(treatment.periods);
-	const getDayIconColor = (day: TreatmentDayType): string => (treatment.days.includes(day) ? 'blue.700' : 'grey.300');
-	const getPeriodIconColor = (period: TreatmentPeriodType): string =>
-		treatment.periods.includes(period) ? 'blue.700' : 'grey.300';
-	const getPeriodIconWidth = (period: TreatmentPeriodType): string => periodIconWidthMap[period];
+	if (!medicineInfo) return <></>;
 
 	return (
-		<Skeleton isLoaded={!isLoading} w="100%">
-			<VStack
-				bg="blue.50"
-				borderRadius="8px"
-				p="8px 16px"
-				border="2px solid"
-				borderColor="blue.200"
-				align="start"
-				w="100%"
-			>
-				<HStack spacing="4px">
-					<Text size="boldLg">{medicineInfo?.name}</Text>
-					<Text size="md">-</Text>
-					<Text size="md">
-						{treatment?.quantity} {medicineInfo?.unit}
-					</Text>
+		<VStack align="start" p="8px 16px" borderRadius="8px" bg="blue.50" border="2px solid" borderColor="blue.200">
+			<VStack w="100%" align="start" spacing="0px">
+				<HStack w="100%" justify="space-between">
+					<Text size="boldLg">{medicineInfo.name}</Text>
+					<Controller
+						control={control}
+						name="treatments"
+						render={({ field: { value, onChange } }) => (
+							<Icon
+								as={CrossIcon}
+								w="16px"
+								h="16px"
+								cursor="pointer"
+								onClick={() => {
+									const medicineArray = [...value];
+
+									medicineArray.splice(
+										value.findIndex((item) => item.medicineId === medicine.medicineId),
+										1,
+									);
+									onChange(medicineArray);
+								}}
+							/>
+						)}
+					/>
 				</HStack>
-				<VStack spacing="4px" align="start">
-					<HStack spacing="9px">
-						{Object.keys(dayIconMap).map((day) => (
-							<Icon
-								key={day}
-								as={dayIconMap[day as TreatmentDayType]}
-								w="20px"
-								h="20px"
-								color={getDayIconColor(day as TreatmentDayType)}
+				<HStack spacing="4px">
+					<Controller
+						control={control}
+						name="treatments"
+						rules={{ validate: (value) => value.every((item) => item.quantity !== '') }}
+						render={({ field: { value, onChange } }) => (
+							<Input
+								placeholder="1"
+								w="30px"
+								variant="noStyle"
+								borderBottom="2px solid"
+								borderColor="blue.500"
+								p="8px 4px"
+								type="number"
+								value={medicine.quantity}
+								onChange={(e) => {
+									const medicineArray = [...value];
+
+									medicineArray.splice(
+										value.findIndex((item) => item.medicineId === medicine.medicineId),
+										1,
+										{
+											...medicine,
+											quantity: parseInt(e.target.value, 10) > 99 ? '99' : e.target.value,
+										},
+									);
+									onChange(medicineArray);
+								}}
 							/>
-						))}
-					</HStack>
-					<HStack spacing="6px">
-						{Object.keys(periodIconMap).map((period) => (
-							<Icon
-								key={period}
-								as={periodIconMap[period as TreatmentPeriodType]}
-								w={getPeriodIconWidth(period as TreatmentPeriodType)}
-								h="21px"
-								color={getPeriodIconColor(period as TreatmentPeriodType)}
-							/>
-						))}
-					</HStack>
-				</VStack>
+						)}
+					/>
+					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
+				</HStack>
 			</VStack>
-		</Skeleton>
+			<VStack spacing="4px" w="100%" maxW="200px" align="start">
+				<TreatmentCardDays medicine={medicine} control={control} />
+				<TreatmentCardPeriods medicine={medicine} control={control} />
+			</VStack>
+		</VStack>
 	);
 };
 

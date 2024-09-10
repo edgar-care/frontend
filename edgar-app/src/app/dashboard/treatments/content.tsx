@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
+import { Button, HStack, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import TreatmentsCalendar from 'components/dashboardPages/treatments/TreatmentsCalendar';
+import AddTreatmentHandler from 'components/dashboardPages/treatments/modal/AddTreatmentHandler';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
@@ -32,6 +33,8 @@ const TreatmentsPageContent = (): JSX.Element => {
 			.filter((antecedent) => antecedent.stillRelevant)
 			.concat(medicalInfo?.medicalAntecedents.filter((antecedent) => !antecedent.stillRelevant)) || [];
 
+	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
+
 	return (
 		<VStack w="100%" spacing="32px">
 			<DashboardPageBanner
@@ -43,6 +46,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 					<Button
 						whiteSpace="nowrap"
 						w={{ base: '100%', md: 'auto' }}
+						onClick={onOpenAddModal}
 						id="edgar-dashboardTreatmentsPage-addTreatment-button"
 					>
 						Ajouter un traitement
@@ -78,6 +82,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 					</HStack>
 				</HStack>
 			</VStack>
+			<AddTreatmentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 		</VStack>
 	);
 };

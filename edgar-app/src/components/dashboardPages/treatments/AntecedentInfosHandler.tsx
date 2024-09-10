@@ -1,6 +1,6 @@
 import { VStack, Text, HStack, Button } from '@chakra-ui/react';
 
-import TreatmentCard from 'components/dashboardPages/treatments/TreatmentCard';
+import TreatmentDisplayCard from 'components/dashboardPages/treatments/TreatmentDisplayCard';
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
@@ -35,7 +35,9 @@ const AntecedentInfosHandler = ({
 			</VStack>
 			<VStack spacing="8px" align="start" w="100%">
 				<Text size="md">Le nom de vos médicaments</Text>
-				{antecedent?.medicines.map((medicine) => <TreatmentCard key={medicine.id} treatment={medicine} />)}
+				{antecedent?.medicines.map((medicine) => (
+					<TreatmentDisplayCard key={medicine.id} treatment={medicine} />
+				))}
 			</VStack>
 		</VStack>
 		<HStack spacing="16px" w="100%">

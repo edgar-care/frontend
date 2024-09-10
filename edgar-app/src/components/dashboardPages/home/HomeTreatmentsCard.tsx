@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, HStack, Icon, Skeleton, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import TreatmentsCalendarHome from 'components/dashboardPages/treatments/TreatmentsCalendarHome';
@@ -18,7 +18,7 @@ import WarningIcon from 'assets/icons/WarningIcon';
 const HomeTreatmentsCard = (): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
 	const { data: medicinesInfo } = useGetMedicinesQuery();
-	const { data: checkedTreatments } = useGetFollowUpTreatmentsQuery();
+	const { data: checkedTreatments, isLoading } = useGetFollowUpTreatmentsQuery();
 
 	const todayDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
 
@@ -44,13 +44,17 @@ const HomeTreatmentsCard = (): JSX.Element => {
 			{treatments.length > 0 ? (
 				<VStack w="100%" align="start">
 					<Text size="boldMd">Vos médicaments d'aujourd'hui</Text>
-					<TreatmentsCalendarHome
-						day={todayDay as HealthIssuesMedicinesDayType}
-						periods={groupedTreatments[todayDay]}
-						checkedTreatments={groupedFollowUpTreatments[todayDay]}
-						medicinesInfo={medicinesInfo || []}
-						displayDay={false}
-					/>
+					<Skeleton isLoaded={!isLoading}>
+						{!isLoading && (
+							<TreatmentsCalendarHome
+								day={todayDay as HealthIssuesMedicinesDayType}
+								periods={groupedTreatments[todayDay]}
+								checkedTreatments={groupedFollowUpTreatments[todayDay]}
+								medicinesInfo={medicinesInfo || []}
+								displayDay={false}
+							/>
+						)}
+					</Skeleton>
 				</VStack>
 			) : (
 				<VStack
