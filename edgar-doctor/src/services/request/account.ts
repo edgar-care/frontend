@@ -6,7 +6,7 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		missingPassword: builder.mutation<void, ResetPasswordDTO>({
 			query: (params) => ({
-				url: '/auth/p/missing-password',
+				url: '/auth/missing-password',
 				method: 'POST',
 				body: {
 					email: params.email,
