@@ -49,6 +49,7 @@ export const backendApi = createApi({
 		'patient2faMethod',
 		'patient2faBackupCodes',
 		'patient2faTrustedDevices',
+		'patientDevice',
 		'doctor',
 		'patientAccount',
 	],

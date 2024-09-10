@@ -32,6 +32,14 @@ const extendedApi = backendApi.injectEndpoints({
 				lastConnectedTime: response.double_auth.date * 1000,
 			}),
 		}),
+
+		removeDevice: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/dashboard/device/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patientDevice'],
+		}),
 	}),
 });
 
@@ -40,4 +48,5 @@ export const {
 	useLazyGetConnectedDevicesQuery,
 	useGetConnectedDeviceByIdQuery,
 	useLazyGetConnectedDeviceByIdQuery,
+	useRemoveDeviceMutation,
 } = extendedApi;
