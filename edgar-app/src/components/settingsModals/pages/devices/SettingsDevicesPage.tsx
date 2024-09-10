@@ -18,7 +18,6 @@ const SettingsDevicesPage = (
 	onNext: () => void,
 	setSelectedDevice: Dispatch<SetStateAction<DeviceType | undefined>>,
 ): SettingsPageType => {
-	const [selectedDeviceId, setSelectedDeviceId] = useState('');
 	const [pageIndex, setPageIndex] = useState(1);
 
 	return {
@@ -40,11 +39,9 @@ const SettingsDevicesPage = (
 										device={device}
 										hasChevronIcon
 										onClick={() => {
-											setSelectedDeviceId((prev) => (prev === device.id ? '' : device.id));
 											setSelectedDevice(device);
 											onNext();
 										}}
-										isClicked={selectedDeviceId === device.id}
 									/>
 								</VStack>
 							))}

@@ -8,11 +8,7 @@ import PinIcon from 'assets/icons/PinIcon';
 
 import deviceIllustration from 'utils/app/dashboard/devices/deviceIllustration';
 
-const SettingsDeviceInfoPage = (
-	deviceInfo: DeviceType | undefined,
-	onNext: () => void,
-	triggerRemove: (deviceId: string) => any,
-): SettingsPageType => {
+const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onClick: () => void): SettingsPageType => {
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = () => {
@@ -21,22 +17,7 @@ const SettingsDeviceInfoPage = (
 				title: 'Une erreur est survenue',
 				status: 'error',
 			});
-		else
-			triggerRemove(deviceInfo.id)
-				.unwrap()
-				.then(() => {
-					toast({
-						title: 'L’appareil a bien été déconnecté',
-						status: 'success',
-					});
-					onNext();
-				})
-				.catch(() => {
-					toast({
-						title: 'Une erreur est survenue',
-						status: 'error',
-					});
-				});
+		else onClick();
 	};
 
 	return {
