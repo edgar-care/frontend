@@ -7,6 +7,7 @@ import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
 import getNumberOfUnreadMessage from 'utils/app/dashboard/chat/getNumberOfUnreadMessage';
+import getLastMessage from 'utils/app/dashboard/chat/getLastMessage';
 
 import CircleRightArrowIcon from 'assets/icons/Arrow/Circle/CircleRightArrowIcon';
 import CircleZeroIcon from 'assets/icons/CircleNumber/CircleZeroIcon';
@@ -105,7 +106,7 @@ const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): J
 					</HStack>
 					<VStack spacing="4px" align="end">
 						<Text fontSize="12" color="grey.500" fontWeight="500" lineHeight="18px" whiteSpace="nowrap">
-							{new Date(chat.messages.slice(-1)[0].sentTime).toLocaleDateString('fr-FR', {
+							{new Date(getLastMessage(chat.messages).sentTime).toLocaleDateString('fr-FR', {
 								month: 'short',
 								day: 'numeric',
 							})}

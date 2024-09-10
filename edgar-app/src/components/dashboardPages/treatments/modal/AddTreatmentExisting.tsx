@@ -12,11 +12,11 @@ const AddTreatmentExisting = ({
 	control: Control<TreatmentType>;
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.existing ? '0px' : '16px'}>
+	<VStack spacing="8px" align="start" w="100%">
 		<FormLabel size="boldLg">Avez-vous déjà ajouté votre sujet de santé ?</FormLabel>
 		<Controller
 			control={control}
-			name="existing"
+			name="alreadyExist"
 			rules={{ validate: (value) => value !== undefined }}
 			render={({ field: { value, onChange } }) => (
 				<HStack spacing="16px">
@@ -29,7 +29,7 @@ const AddTreatmentExisting = ({
 				</HStack>
 			)}
 		/>
-		{errors.existing?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+		{errors.alreadyExist?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 	</VStack>
 );
 

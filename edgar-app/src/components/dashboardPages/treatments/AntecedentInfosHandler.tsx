@@ -11,6 +11,7 @@ const AntecedentInfosHandler = ({
 	antecedent: PatientMedicalAntecedentType | undefined;
 }): JSX.Element => {
 	const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
+
 	return (
 		<VStack
 			w="100%"
@@ -28,10 +29,10 @@ const AntecedentInfosHandler = ({
 				<VStack spacing="8px" align="start">
 					<Text size="md">Votre sujet de santé est-il toujours en cours ?</Text>
 					<HStack spacing="16px">
-						<Button size="sm" variant={antecedent?.stillRelevant ? 'primary' : 'secondary'}>
+						<Button size="customSm" variant={antecedent?.stillRelevant ? 'primary' : 'secondary'}>
 							Oui
 						</Button>
-						<Button size="sm" variant={antecedent?.stillRelevant ? 'secondary' : 'primary'}>
+						<Button size="customSm" variant={antecedent?.stillRelevant ? 'secondary' : 'primary'}>
 							Non
 						</Button>
 					</HStack>
@@ -44,10 +45,10 @@ const AntecedentInfosHandler = ({
 				</VStack>
 			</VStack>
 			<HStack spacing="16px" w="100%">
-				<Button size="sm" w="100%" variant="secondary">
+				<Button size="customSm" w="100%" variant="secondary">
 					Modifier
 				</Button>
-				<Button size="sm" w="100%" variant="delete" onClick={onOpenDeleteModal}>
+				<Button size="customSm" w="100%" variant="delete" onClick={onOpenDeleteModal}>
 					Supprimer
 				</Button>
 			</HStack>

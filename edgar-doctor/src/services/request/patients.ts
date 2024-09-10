@@ -1,6 +1,11 @@
 import { backendApi } from 'services/apiService';
 
-import { type PatientsStoreType, type PatientDocumentStoreType, type AddPatientDTO } from 'store/types/patients.type';
+import {
+	type PatientsStoreType,
+	type PatientDocumentStoreType,
+	type AddPatientDTO,
+	type UpdatePatientDTO,
+} from 'store/types/patients.type';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientDocumentType } from 'types/app/dashboard/patients/documents/PatientDocumentType';
@@ -18,8 +23,8 @@ const extendedApi = backendApi.injectEndpoints({
 					firstname: response.medical_folder.firstname,
 					birthdate: response.medical_folder.birthdate * 1000,
 					sex: response.medical_folder.sex,
-					height: response.medical_folder.height,
-					weight: response.medical_folder.weight,
+					height: response.medical_folder.height / 100,
+					weight: response.medical_folder.weight / 100,
 					primaryDoctorId: response.medical_folder.primary_doctor_id,
 					onboardingStatus: response.medical_folder.onboarding_status,
 					medicalAntecedents:
@@ -54,8 +59,8 @@ const extendedApi = backendApi.injectEndpoints({
 						firstname: patient.medical_folder.firstname,
 						birthdate: patient.medical_folder.birthdate * 1000,
 						sex: patient.medical_folder.sex,
-						height: patient.medical_folder.height,
-						weight: patient.medical_folder.weight,
+						height: patient.medical_folder.height / 100,
+						weight: patient.medical_folder.weight / 100,
 						primaryDoctorId: patient.medical_folder.primary_doctor_id,
 						onboardingStatus: patient.medical_folder.onboarding_status,
 						medicalAntecedents:
@@ -100,7 +105,7 @@ const extendedApi = backendApi.injectEndpoints({
 					medical_info: {
 						name: params.medicalFolder.name,
 						firstname: params.medicalFolder.firstname,
-						birthdate: params.medicalFolder.birthdate / 100,
+						birthdate: params.medicalFolder.birthdate / 1000,
 						sex: params.medicalFolder.sex,
 						height: params.medicalFolder.height * 100,
 						weight: params.medicalFolder.weight * 100,
@@ -115,7 +120,38 @@ const extendedApi = backendApi.injectEndpoints({
 							})),
 							still_relevant: antecedent.stillRelevant,
 						})),
+						family_members_med_info_id: [],
 					},
+				},
+			}),
+			invalidatesTags: ['patients'],
+		}),
+
+		updatePatient: builder.mutation<void, UpdatePatientDTO>({
+			query: (params) => ({
+				url: `/doctor/patient/${params.patientId}`,
+				method: 'PUT',
+				body: {
+					name: params.medicalFolder.name,
+					firstname: params.medicalFolder.firstname,
+					birthdate: params.medicalFolder.birthdate / 1000,
+					sex: params.medicalFolder.sex,
+					height: params.medicalFolder.height * 100,
+					weight: params.medicalFolder.weight * 100,
+					primary_doctor_id: params.medicalFolder.primaryDoctorId,
+					medical_antecedents: params.medicalFolder.medicalAntecedents.map((antecedent) => ({
+						antedisease_id: antecedent.id,
+						name: antecedent.name,
+						treatments: antecedent.medicines.map((medicine) => ({
+							treatment_id: medicine.id,
+							medicine_id: medicine.medicineId,
+							period: medicine.periods,
+							day: medicine.days,
+							quantity: medicine.quantity,
+						})),
+						still_relevant: antecedent.stillRelevant,
+					})),
+					family_members_med_info_id: [],
 				},
 			}),
 			invalidatesTags: ['patients'],
@@ -149,5 +185,6 @@ export const {
 	useLazyGetPatientDocumentByIdQuery,
 	useUploadAPatientDocumentMutation,
 	useAddPatientMutation,
+	useUpdatePatientMutation,
 	useDeleteAPatientMutation,
 } = extendedApi;

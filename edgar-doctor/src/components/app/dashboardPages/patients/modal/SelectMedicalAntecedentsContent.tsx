@@ -20,7 +20,7 @@ const SelectMedicalAntecedentsContent = ({
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 	watch: UseFormWatch<PatientMedicalAntecedentType>;
 }): JSX.Element => (
-	<VStack w="100%" spacing="24px">
+	<VStack w="100%" spacing="16px">
 		<chakra.form onSubmit={onSubmit} w="100%" h="100%">
 			<VStack
 				w="100%"

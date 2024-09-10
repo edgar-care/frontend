@@ -12,9 +12,9 @@ const AddPatientModalSexInput = ({
 	control: Control<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
+	<VStack spacing="4px" align="start" w="100%">
 		<HStack>
-			<FormLabel size="boldLg" id="edgar-addPatientModal-formSex-text">
+			<FormLabel size="lg" id="edgar-addPatientModal-formSex-text">
 				Sexe
 			</FormLabel>
 		</HStack>

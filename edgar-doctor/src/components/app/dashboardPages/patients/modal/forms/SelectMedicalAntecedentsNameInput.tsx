@@ -12,8 +12,8 @@ const SelectMedicalAntecedentsNameInput = ({
 	register: UseFormRegister<PatientMedicalAntecedentType>;
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%" pb={errors.name ? '0px' : '16px'}>
-		<FormLabel size="boldLg">Nom du sujet de santé</FormLabel>
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg">Nom du sujet de santé</FormLabel>
 		<Input
 			{...register('name', { minLength: 1, maxLength: 50, required: true })}
 			placeholder="Edgar"

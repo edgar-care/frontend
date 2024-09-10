@@ -1,10 +1,11 @@
 import { Box, HStack, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 
-import OnboardingMedicalSmallCard from 'components/onboardingPages/medical/OnboardingMedicalSmallCard';
+import HealthIssueCard from 'components/dashboardPages/medical/modal/forms/medical/healthIssues/HealthIssueCard';
+
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
 import type { PatientHealthType, PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
 import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
-import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
 const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
 	const { data: doctorInfo } = useGetDoctorByIdQuery(medicalInfos.primaryDoctorId);
@@ -57,11 +58,7 @@ const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedical
 									<Wrap w="100%" gap="8px">
 										{(info as PatientMedicalAntecedentType[]).map((value) => (
 											<WrapItem key={value.id}>
-												<OnboardingMedicalSmallCard
-													title={value.name}
-													onClick={() => {}}
-													canBeDeleted={false}
-												/>
+												<HealthIssueCard healthIssue={value} isDeletable={false} />
 											</WrapItem>
 										))}
 									</Wrap>

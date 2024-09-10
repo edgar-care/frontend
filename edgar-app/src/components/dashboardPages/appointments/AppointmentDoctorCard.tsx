@@ -42,17 +42,17 @@ const AppointmentDoctorCard = ({
 				return groupedAppointmentDay === appointmentDay;
 			});
 
-			if (appointmentIndex === -1) {
-				groupedAppointments.push([appointment]);
-			} else {
-				groupedAppointments[appointmentIndex].push(appointment);
-			}
+			if (appointmentIndex === -1) groupedAppointments.push([appointment]);
+			else groupedAppointments[appointmentIndex].push(appointment);
 		});
 
 		return groupedAppointments;
 	};
 
-	const openedSlot = doctorAppointments?.filter((appointment) => appointment.appointmentStatus === 'OPENED') || [];
+	const openedSlot =
+		doctorAppointments?.filter(
+			(appointment) => appointment.appointmentStatus === 'OPENED' && appointment.startDate > new Date().getTime(),
+		) || [];
 
 	return (
 		<VStack

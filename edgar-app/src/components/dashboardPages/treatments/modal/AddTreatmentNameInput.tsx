@@ -22,13 +22,13 @@ const AddTreatmentNameInput = ({
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
-	const existing = watch('existing');
+	const existing = watch('alreadyExist');
 
-	const [selectedDiseaseName, setSelectedDiseaseName] = useState<string | undefined>(undefined);
+	const [selectedDiseaseName, setSelectedDiseaseName] = useState<string>('');
 
 	return existing ? (
-		<VStack spacing="8px" align="start" w="100%" pb={errors.diseaseId ? '0px' : '16px'}>
-			<Text size="boldLg">Nom de votre sujet de santé : {selectedDiseaseName}</Text>
+		<VStack spacing="8px" align="start" w="100%">
+			<Text size="boldLg">Nom de votre sujet de santé</Text>
 			<Controller
 				control={control}
 				name="diseaseId"
@@ -50,6 +50,7 @@ const AddTreatmentNameInput = ({
 								),
 							})) || []
 						}
+						defaultValue={selectedDiseaseName}
 						placeholder="Nom de maladie"
 					/>
 				)}
@@ -57,7 +58,7 @@ const AddTreatmentNameInput = ({
 			{errors.diseaseId?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 		</VStack>
 	) : (
-		<VStack spacing="8px" align="start" w="100%" pb={errors.name ? '0px' : '16px'}>
+		<VStack spacing="8px" align="start" w="100%">
 			<FormLabel size="boldLg">Nom de votre sujet de santé</FormLabel>
 			<Input
 				{...register('name', { minLength: 1, maxLength: 50, required: true })}
