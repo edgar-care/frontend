@@ -89,6 +89,14 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
+
+		deleteTreatment: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/dashboard/treatment/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patientTreatments'],
+		}),
 	}),
 });
 
@@ -101,4 +109,5 @@ export const {
 	useUncheckFollowUpTreatmentMutation,
 	useAddTreatmentMutation,
 	useAddTreatmentAndHealthIssueMutation,
+	useDeleteTreatmentMutation,
 } = extendedApi;
