@@ -25,7 +25,7 @@ export const eventEmitter = new EventEmitter();
 
 const baseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (args, api, extraOptions) => {
 	const result = await apiBase(args, api, extraOptions);
-	if (result.error && result.error.status === 401) {
+	if (result.error && (result.error.status === 401 || result.error.status === 409)) {
 		eventEmitter.emit('logout');
 		localStorage.removeItem('token');
 	}
