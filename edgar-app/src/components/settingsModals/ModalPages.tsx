@@ -106,7 +106,12 @@ const ModalPages = ({
 			onPreviousPage,
 		),
 		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
-		settingsDevices: SettingsDevicesPage(devices, isLoadingDevices),
+		settingsDevices: SettingsDevicesPage(
+			devices,
+			isLoadingDevices,
+			() => onNextPage('settingsAccount2faEdgarDeviceInfo'),
+			setSelectedDeviceInfo,
+		),
 	};
 };
 
