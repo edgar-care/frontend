@@ -18,8 +18,12 @@ import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals
 import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
 import SettingsDevicesPage from 'components/settingsModals/pages/devices/SettingsDevicesPage';
 
-import { useGet2faEnabledMethodsQuery, useGetTrustedDevicesQuery } from 'services/request/2fa';
-import { useGetConnectedDevicesQuery } from 'services/request/devices';
+import {
+	useGet2faEnabledMethodsQuery,
+	useGetTrustedDevicesQuery,
+	useRemoveTrustedDeviceMutation,
+} from 'services/request/2fa';
+import { useGetConnectedDevicesQuery, useRemoveDeviceMutation } from 'services/request/devices';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -36,6 +40,8 @@ const ModalPages = ({
 	const { data: enabled2faMethods } = useGet2faEnabledMethodsQuery();
 	const { data: devices, isLoading: isLoadingDevices } = useGetConnectedDevicesQuery();
 	const { data: trustedDevices, isLoading: isLoadingTrustedDevices } = useGetTrustedDevicesQuery();
+	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
+	const [triggerRemoveDevice] = useRemoveDeviceMutation();
 
 	const auth = useAuthContext();
 
@@ -97,7 +103,11 @@ const ModalPages = ({
 				onNextPage('settingsAccount2faEdgarDeviceInfo');
 			},
 		),
-		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo, () => onPreviousOfPage(1)),
+		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(
+			selectedDeviceInfo,
+			() => onPreviousOfPage(1),
+			triggerRemoveTrustedDevice,
+		),
 		settingsAccount2faEdgarAddTrustDevice: SettingsAccount2FAEdgarAddTrustDevicePage(
 			devices,
 			trustedDevices,
@@ -105,11 +115,12 @@ const ModalPages = ({
 			isLoadingTrustedDevices,
 			onPreviousPage,
 		),
+		settingsDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo, () => onPreviousOfPage(1), triggerRemoveDevice),
 		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
 		settingsDevices: SettingsDevicesPage(
 			devices,
 			isLoadingDevices,
-			() => onNextPage('settingsAccount2faEdgarDeviceInfo'),
+			() => onNextPage('settingsDeviceInfo'),
 			setSelectedDeviceInfo,
 		),
 	};
