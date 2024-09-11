@@ -1,7 +1,5 @@
 import { Button, HStack, Icon, Skeleton, Text, useToast, VStack } from '@chakra-ui/react';
 
-import { useRemoveTrustedDeviceMutation } from 'services/request/2fa';
-
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
 import type { DeviceType } from 'types/app/dashboard/devices/DeviceType';
 
@@ -11,8 +9,6 @@ import PinIcon from 'assets/icons/PinIcon';
 import deviceIllustration from 'utils/app/dashboard/devices/deviceIllustration';
 
 const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onClick: () => void): SettingsPageType => {
-	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
-
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = () => {
