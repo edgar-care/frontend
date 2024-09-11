@@ -10,7 +10,7 @@ import PinIcon from 'assets/icons/PinIcon';
 
 import deviceIllustration from 'utils/app/dashboard/devices/deviceIllustration';
 
-const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () => void): SettingsPageType => {
+const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onClick: () => void): SettingsPageType => {
 	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
@@ -21,22 +21,7 @@ const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () =
 				title: 'Une erreur est survenue',
 				status: 'error',
 			});
-		else
-			triggerRemoveTrustedDevice(deviceInfo.id)
-				.unwrap()
-				.then(() => {
-					toast({
-						title: 'L’appareil a bien été déconnecté',
-						status: 'success',
-					});
-					onNext();
-				})
-				.catch(() => {
-					toast({
-						title: 'Une erreur est survenue',
-						status: 'error',
-					});
-				});
+		else onClick();
 	};
 
 	return {
