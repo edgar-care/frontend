@@ -1,12 +1,9 @@
-import { Box, HStack, Text, VStack, Icon } from '@chakra-ui/react';
+import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 
 import TreatmentsCheckboxTreatment from 'components/dashboardPages/treatments/TreatmentsCheckboxTreatment';
 
 import getPeriodOfTheDay from 'utils/app/dashboard/treatments/getPeriodOfTheDay';
 import getDateOfTheDay from 'utils/app/dashboard/treatments/getDateOfTheDay';
-
-import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
-import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
 import type {
@@ -18,22 +15,18 @@ import { type MedicineType } from 'types/dashboard/medical/MedicineType';
 import type { TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
 import { TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
 
-const TreatmentsCalendarDay = ({
+const TreatmentsCalendarHome = ({
 	day,
 	periods,
 	checkedTreatments,
 	medicinesInfo,
 	displayDay = true,
-	handlePreviousDay,
-	handleNextDay,
 }: {
 	day: HealthIssuesMedicinesDayType;
 	periods: Record<string, PatientMedicineType[]>;
 	checkedTreatments: Record<string, TreatmentFollowUpType[]>;
 	medicinesInfo: MedicineType[];
 	displayDay?: boolean;
-	handlePreviousDay: () => void;
-	handleNextDay: () => void;
 }): JSX.Element => {
 	const availableDays: HealthIssuesMedicinesDayType[] = [
 		'MONDAY',
@@ -65,10 +58,6 @@ const TreatmentsCalendarDay = ({
 					<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
 						{displayedDay[availableDays.indexOf(day)]}
 					</Text>
-					<HStack spacing="8px">
-						<Icon as={LeftChevronIcon} h="16px" w="auto" cursor="pointer" onClick={handlePreviousDay} />
-						<Icon as={RightChevronIcon} h="16px" w="auto" cursor="pointer" onClick={handleNextDay} />
-					</HStack>
 				</HStack>
 			)}
 			{Object.entries(periods).map(([period, treatments]) => {
@@ -137,4 +126,4 @@ const TreatmentsCalendarDay = ({
 	);
 };
 
-export default TreatmentsCalendarDay;
+export default TreatmentsCalendarHome;
