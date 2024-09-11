@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import settingsPage from 'components/settingsModals/pages/settingsPage';
 import settingsAccountPage from 'components/settingsModals/pages/account/settingsAccountPage';
@@ -41,13 +41,19 @@ const ModalPages = ({
 	const auth = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
-
-	const isBackupCodeGenerated = false;
-	const isAuthenticationEnabled = (enabled2faMethods?.enabledMethods.length || 0) > 0;
+	const [isBackupCodeGenerated, setIsBackupCodeGenerated] = useState(false);
+	const [isAuthenticationEnabled, setIsAuthenticationEnabled] = useState(false);
 
 	const onPreviousPage = () => setSelectedPageStack(selectedPageStack.slice(0, -1));
 	const onPreviousOfPage = (nbrOfPage: number) => setSelectedPageStack(selectedPageStack.slice(0, -nbrOfPage));
 	const onNextPage = (pageIndex: string) => setSelectedPageStack((prev) => [...prev, pageIndex]);
+
+	useEffect(() => {
+		if (enabled2faMethods) {
+			setIsBackupCodeGenerated(enabled2faMethods.isBackupCodeGenerated);
+			setIsAuthenticationEnabled(enabled2faMethods.enabledMethods.length > 0);
+		}
+	}, [enabled2faMethods]);
 
 	return {
 		settings: settingsPage,
