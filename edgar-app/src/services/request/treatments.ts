@@ -95,7 +95,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: `/dashboard/treatment/${id}`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['patientTreatments'],
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 	}),
 });
