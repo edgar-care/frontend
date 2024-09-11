@@ -1,7 +1,5 @@
 import { Button, HStack, Icon, Skeleton, Text, useToast, VStack } from '@chakra-ui/react';
 
-import { useRemoveTrustedDeviceMutation } from 'services/request/2fa';
-
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
 import type { DeviceType } from 'types/app/dashboard/devices/DeviceType';
 
@@ -10,9 +8,7 @@ import PinIcon from 'assets/icons/PinIcon';
 
 import deviceIllustration from 'utils/app/dashboard/devices/deviceIllustration';
 
-const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () => void): SettingsPageType => {
-	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
-
+const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onClick: () => void): SettingsPageType => {
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onSubmit = () => {
@@ -21,22 +17,7 @@ const SettingsDeviceInfoPage = (deviceInfo: DeviceType | undefined, onNext: () =
 				title: 'Une erreur est survenue',
 				status: 'error',
 			});
-		else
-			triggerRemoveTrustedDevice(deviceInfo.id)
-				.unwrap()
-				.then(() => {
-					toast({
-						title: 'L’appareil a bien été déconnecté',
-						status: 'success',
-					});
-					onNext();
-				})
-				.catch(() => {
-					toast({
-						title: 'Une erreur est survenue',
-						status: 'error',
-					});
-				});
+		else onClick();
 	};
 
 	return {
