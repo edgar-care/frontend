@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 
 import settingsPage from 'components/settingsModals/pages/settingsPage';
 import settingsAccountPage from 'components/settingsModals/pages/account/settingsAccountPage';
@@ -18,8 +19,12 @@ import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals
 import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
 import SettingsDevicesPage from 'components/settingsModals/pages/devices/SettingsDevicesPage';
 
-import { useGet2faEnabledMethodsQuery, useGetTrustedDevicesQuery } from 'services/request/2fa';
-import { useGetConnectedDevicesQuery } from 'services/request/devices';
+import {
+	useGet2faEnabledMethodsQuery,
+	useGetTrustedDevicesQuery,
+	useRemoveTrustedDeviceMutation,
+} from 'services/request/2fa';
+import { useGetConnectedDevicesQuery, useRemoveDeviceMutation } from 'services/request/devices';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -36,10 +41,14 @@ const ModalPages = ({
 	const { data: enabled2faMethods } = useGet2faEnabledMethodsQuery();
 	const { data: devices, isLoading: isLoadingDevices } = useGetConnectedDevicesQuery();
 	const { data: trustedDevices, isLoading: isLoadingTrustedDevices } = useGetTrustedDevicesQuery();
+	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
+	const [triggerRemoveDevice] = useRemoveDeviceMutation();
 
 	const auth = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
+
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const isBackupCodeGenerated = enabled2faMethods?.isBackupCodeGenerated || false;
 	const isAuthenticationEnabled = (enabled2faMethods?.enabledMethods.length || 0) > 0;
@@ -97,7 +106,26 @@ const ModalPages = ({
 				onNextPage('settingsAccount2faEdgarDeviceInfo');
 			},
 		),
-		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(selectedDeviceInfo, () => onPreviousOfPage(1)),
+		settingsAccount2faEdgarDeviceInfo: SettingsDeviceInfoPage(
+			selectedDeviceInfo,
+			() =>
+				selectedDeviceInfo &&
+				triggerRemoveTrustedDevice(selectedDeviceInfo.id)
+					.unwrap()
+					.then(() => {
+						toast({
+							title: 'L’appareil a bien été déconnecté',
+							status: 'success',
+						});
+						onPreviousOfPage(1);
+					})
+					.catch(() => {
+						toast({
+							title: 'Une erreur est survenue',
+							status: 'error',
+						});
+					}),
+		),
 		settingsAccount2faEdgarAddTrustDevice: SettingsAccount2FAEdgarAddTrustDevicePage(
 			devices,
 			trustedDevices,
@@ -105,8 +133,33 @@ const ModalPages = ({
 			isLoadingTrustedDevices,
 			onPreviousPage,
 		),
+		settingsDeviceInfo: SettingsDeviceInfoPage(
+			selectedDeviceInfo,
+			() =>
+				selectedDeviceInfo &&
+				triggerRemoveDevice(selectedDeviceInfo.id)
+					.unwrap()
+					.then(() => {
+						toast({
+							title: 'L’appareil a bien été déconnecté',
+							status: 'success',
+						});
+						onPreviousOfPage(1);
+					})
+					.catch(() => {
+						toast({
+							title: 'Une erreur est survenue',
+							status: 'error',
+						});
+					}),
+		),
 		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
-		settingsDevices: SettingsDevicesPage(devices, isLoadingDevices),
+		settingsDevices: SettingsDevicesPage(
+			devices,
+			isLoadingDevices,
+			() => onNextPage('settingsDeviceInfo'),
+			setSelectedDeviceInfo,
+		),
 	};
 };
 
