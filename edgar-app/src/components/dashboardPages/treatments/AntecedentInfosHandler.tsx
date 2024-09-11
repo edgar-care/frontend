@@ -48,7 +48,7 @@ const AntecedentInfosHandler = ({
 				<Button size="customSm" w="100%" variant="secondary">
 					Modifier
 				</Button>
-				<Button size="customSm" w="100%" variant="delete" onClick={onOpenDeleteModal}>
+				<Button size="customSm" w="100%" variant="deleteBordered" onClick={onOpenDeleteModal}>
 					Supprimer
 				</Button>
 			</HStack>
