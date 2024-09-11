@@ -29,7 +29,9 @@ const PatientAddPrescriptionQSPInputs = ({
 					onChange={(e) =>
 						onChange(
 							value.map((v) =>
-								v.medicineId !== prescriptionMedicine.medicineId ? v : { ...v, qsp: e.target.value },
+								v.medicineId !== prescriptionMedicine.medicineId
+									? v
+									: { ...v, qsp: parseInt(e.target.value, 10) },
 							),
 						)
 					}

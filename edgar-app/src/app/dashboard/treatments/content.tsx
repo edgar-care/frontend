@@ -1,23 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, Stack, Text, VStack } from '@chakra-ui/react';
+import { Button, HStack, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import TreatmentsCalendar from 'components/dashboardPages/treatments/TreatmentsCalendar';
+import AddTreatmentHandler from 'components/dashboardPages/treatments/modal/AddTreatmentHandler';
 
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
-import { type TreatmentSubNavigationType } from 'types/dashboard/treatments/TreatmentSubNavigationType';
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
 import SearchIcon from 'assets/icons/SearchIcon';
+import AntecedentCard from 'components/dashboardPages/treatments/AntecedentCard';
+import AntecedentInfosHandler from 'components/dashboardPages/treatments/AntecedentInfosHandler';
 
 const TreatmentsPageContent = (): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
 
 	const [searchText, setSearchText] = useState('');
-	const [subNavigationState, setSubNavigationState] = useState<TreatmentSubNavigationType>('CALENDAR');
+	const [selectedAntecedentId, setSelectedAntecedentId] = useState('');
 
 	const treatments: PatientMedicineType[] =
 		medicalInfo?.medicalAntecedents
@@ -25,11 +28,12 @@ const TreatmentsPageContent = (): JSX.Element => {
 			.map((antecedent) => antecedent.medicines)
 			.flat() || [];
 
-	const subNavigation: { [key: string]: JSX.Element } = {
-		CALENDAR: <TreatmentsCalendar treatments={treatments} />,
-		CURRENT: <Text>Text</Text>,
-		PASSED: <Text>Past</Text>,
-	};
+	const allAntecedents: PatientMedicalAntecedentType[] =
+		medicalInfo?.medicalAntecedents
+			.filter((antecedent) => antecedent.stillRelevant)
+			.concat(medicalInfo?.medicalAntecedents.filter((antecedent) => !antecedent.stillRelevant)) || [];
+
+	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (
 		<VStack w="100%" spacing="32px">
@@ -42,51 +46,43 @@ const TreatmentsPageContent = (): JSX.Element => {
 					<Button
 						whiteSpace="nowrap"
 						w={{ base: '100%', md: 'auto' }}
+						onClick={onOpenAddModal}
 						id="edgar-dashboardTreatmentsPage-addTreatment-button"
 					>
 						Ajouter un traitement
 					</Button>
-					{subNavigationState !== 'CALENDAR' && (
-						<InputGroup w="100%">
-							<Input
-								placeholder="Rechercher par nom du document ou nom du médecin"
-								value={searchText}
-								onChange={(e) => setSearchText(e.target.value)}
-							/>
-							<InputRightElement>
-								<Icon as={SearchIcon} w="16px" h="16px" />
-							</InputRightElement>
-						</InputGroup>
-					)}
+					<InputGroup w="100%">
+						<Input
+							placeholder="Rechercher par nom de maladie ou de traitement"
+							value={searchText}
+							onChange={(e) => setSearchText(e.target.value)}
+						/>
+						<InputRightElement>
+							<Icon as={SearchIcon} w="16px" h="16px" />
+						</InputRightElement>
+					</InputGroup>
 				</HStack>
-				<Stack direction={{ base: 'column', md: 'row' }} w="100%">
-					<Button
-						variant={subNavigationState === 'CALENDAR' ? 'primary' : 'secondary'}
-						onClick={() => setSubNavigationState('CALENDAR')}
-						w="100%"
-						id="edgar-dashboardTreatmentsPage-calendarNavigation-button"
-					>
-						Calendrier
-					</Button>
-					<Button
-						variant={subNavigationState === 'CURRENT' ? 'primary' : 'secondary'}
-						onClick={() => setSubNavigationState('CURRENT')}
-						w="100%"
-						id="edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button"
-					>
-						Traitements en cours
-					</Button>
-					<Button
-						variant={subNavigationState === 'PASSED' ? 'primary' : 'secondary'}
-						onClick={() => setSubNavigationState('PASSED')}
-						w="100%"
-						id="edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button"
-					>
-						Traitements finis
-					</Button>
-				</Stack>
-				{subNavigation[subNavigationState]}
+				<HStack w="100%" spacing="16px" align="start">
+					<TreatmentsCalendar treatments={treatments} />
+					<HStack w="100%" align="start" h="100%">
+						<VStack w="100%" spacing="8px" h="100%">
+							{allAntecedents.map((antecedent) => (
+								<AntecedentCard
+									key={antecedent.id}
+									antecedent={antecedent}
+									manageOnClick={() => setSelectedAntecedentId(antecedent.id)}
+								/>
+							))}
+						</VStack>
+						{selectedAntecedentId && (
+							<AntecedentInfosHandler
+								antecedent={allAntecedents.find((antecedent) => antecedent.id === selectedAntecedentId)}
+							/>
+						)}
+					</HStack>
+				</HStack>
 			</VStack>
+			<AddTreatmentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 		</VStack>
 	);
 };

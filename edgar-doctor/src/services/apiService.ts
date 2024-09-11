@@ -54,6 +54,7 @@ export const backendApi = createApi({
 		'doctor2faTrustedDevices',
 		'doctorAccount',
 		'doctorDevice',
+		'doctorPrescriptions',
 	],
 	reducerPath: 'backendApi',
 	baseQuery,
