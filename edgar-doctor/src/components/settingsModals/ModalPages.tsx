@@ -51,7 +51,7 @@ const ModalPages = ({
 	const [isBackupCodeGenerated, setIsBackupCodeGenerated] = useState(false);
 	const [isAuthenticationEnabled, setIsAuthenticationEnabled] = useState(false);
 
-  const toast = useToast({ duration: 3000, isClosable: true });
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onPreviousPage = () => setSelectedPageStack(selectedPageStack.slice(0, -1));
 	const onPreviousOfPage = (nbrOfPage: number) => setSelectedPageStack(selectedPageStack.slice(0, -nbrOfPage));
