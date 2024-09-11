@@ -52,7 +52,10 @@ const PatientAddPrescriptionPeriodInputs = ({
 															periods: v.periods.map((period, index) =>
 																index !== periodIndex
 																	? period
-																	: { ...period, quantity: e.target.value },
+																	: {
+																			...period,
+																			quantity: parseInt(e.target.value, 10),
+																		},
 															),
 														},
 											),
@@ -84,7 +87,10 @@ const PatientAddPrescriptionPeriodInputs = ({
 															periods: v.periods.map((period, index) =>
 																index !== periodIndex
 																	? period
-																	: { ...period, frequency: e.target.value },
+																	: {
+																			...period,
+																			frequency: parseInt(e.target.value, 10),
+																		},
 															),
 														},
 											),
@@ -114,7 +120,13 @@ const PatientAddPrescriptionPeriodInputs = ({
 															periods: v.periods.map((period, index) =>
 																index !== periodIndex
 																	? period
-																	: { ...period, frequencyRatio: e.target.value },
+																	: {
+																			...period,
+																			frequencyRatio: parseInt(
+																				e.target.value,
+																				10,
+																			),
+																		},
 															),
 														},
 											),
@@ -180,7 +192,10 @@ const PatientAddPrescriptionPeriodInputs = ({
 															periods: v.periods.map((period, index) =>
 																index !== periodIndex
 																	? period
-																	: { ...period, periodLength: e.target.value },
+																	: {
+																			...period,
+																			periodLength: parseInt(e.target.value, 10),
+																		},
 															),
 														},
 											),

@@ -15,10 +15,11 @@ const extendedApi = backendApi.injectEndpoints({
 				downloadUrl: response.prescription.URL,
 				createdAt: response.prescription.createdAt * 1000,
 			}),
+			providesTags: ['doctorPrescriptions'],
 		}),
 
 		getPrescriptions: builder.query<PatientPrescriptionType[], void>({
-			query: () => '/dashboard/prescriptions',
+			query: () => '/dashboard/prescription',
 			transformResponse: (response: { prescriptions: PatientPrescriptionStoreType[] }) =>
 				response.prescriptions.map((prescription) => ({
 					id: prescription.id,
@@ -27,6 +28,7 @@ const extendedApi = backendApi.injectEndpoints({
 					downloadUrl: prescription.URL,
 					createdAt: prescription.createdAt * 1000,
 				})),
+			providesTags: ['doctorPrescriptions'],
 		}),
 
 		uploadPrescription: builder.mutation<void, UploadPatientPrescriptionDTO>({
@@ -51,6 +53,7 @@ const extendedApi = backendApi.injectEndpoints({
 					})),
 				},
 			}),
+			invalidatesTags: ['doctorPrescriptions'],
 		}),
 	}),
 });
