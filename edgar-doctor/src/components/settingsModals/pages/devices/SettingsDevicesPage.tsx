@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Box, Skeleton, Text, VStack } from '@chakra-ui/react';
 
 import DeviceCard from 'components/settingsModals/DeviceCard';
@@ -12,8 +12,12 @@ import type { DeviceType } from 'types/app/dashboard/devices/DeviceType';
 import paginationHandler from 'utils/navigation/paginationHandler';
 import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 
-const SettingsDevicesPage = (devices: DeviceType[] | undefined, isLoadingDevices: boolean): SettingsPageType => {
-	const [selectedDeviceId, setSelectedDeviceId] = useState('');
+const SettingsDevicesPage = (
+	devices: DeviceType[] | undefined,
+	isLoadingDevices: boolean,
+	onNext: () => void,
+	setSelectedDevice: Dispatch<SetStateAction<DeviceType | undefined>>,
+): SettingsPageType => {
 	const [pageIndex, setPageIndex] = useState(1);
 
 	return {
@@ -34,10 +38,10 @@ const SettingsDevicesPage = (devices: DeviceType[] | undefined, isLoadingDevices
 									<DeviceCard
 										device={device}
 										hasChevronIcon
-										onClick={() =>
-											setSelectedDeviceId((prev) => (prev === device.id ? '' : device.id))
-										}
-										isClicked={selectedDeviceId === device.id}
+										onClick={() => {
+											setSelectedDevice(device);
+											onNext();
+										}}
 									/>
 								</VStack>
 							))}
