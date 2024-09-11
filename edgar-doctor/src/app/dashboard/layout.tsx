@@ -25,6 +25,10 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 		eventEmitter.on('logout', () => {
 			router.push('/login');
 		});
+
+		eventEmitter.on('disabled', () => {
+			router.push('/disabled');
+		});
 	}, 750);
 
 	return (
