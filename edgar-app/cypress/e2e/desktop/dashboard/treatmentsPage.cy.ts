@@ -30,11 +30,11 @@ describe('Treatments Page tests - Desktop', () => {
 			});
 
 			it('Good number of buttons', () => {
-				cy.get('button[id^=edgar-dashboardTreatmentsPage]').should('have.length', 4);
+				cy.get('button[id^=edgar-dashboardTreatmentsPage]').should('have.length', 1);
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardTreatmentsPage]').should('have.length', 35);
+				cy.get('p[id^=edgar-dashboardTreatmentsPage]').should('have.length', 5);
 			});
 
 			it('Good number of labels', () => {
@@ -46,7 +46,7 @@ describe('Treatments Page tests - Desktop', () => {
 			});
 
 			it('Good number of inputs', () => {
-				cy.get('input[id^=edgar-dashboardTreatmentsPage]').should('have.length', 15);
+				cy.get('input[id^=edgar-dashboardTreatmentsPage]').should('have.length', 5);
 			});
 		});
 
@@ -61,57 +61,11 @@ describe('Treatments Page tests - Desktop', () => {
 					'Ajouter un traitement',
 				);
 			});
-
-			it('Good content for calendar tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-calendarNavigation-button').should('contain.text', 'Calendrier');
-			});
-
-			it('Good content for current treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button').should(
-					'contain.text',
-					'Traitements en cours',
-				);
-			});
-
-			it('Good content for old treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button').should(
-					'contain.text',
-					'Traitements finis',
-				);
-			});
 		});
 
 		describe('Good content for texts', () => {
 			beforeEach(() => {
 				cy.viewport(1920, 1080);
-			});
-
-			it('Good content for Monday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-MONDAY-text').should('contain.text', 'Lundi');
-			});
-
-			it('Good content for Tuesday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-TUESDAY-text').should('contain.text', 'Mardi');
-			});
-
-			it('Good content for Wednesday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-WEDNESDAY-text').should('contain.text', 'Mercredi');
-			});
-
-			it('Good content for Thursday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-THURSDAY-text').should('contain.text', 'Jeudi');
-			});
-
-			it('Good content for Friday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-FRIDAY-text').should('contain.text', 'Vendredi');
-			});
-
-			it('Good content for Saturday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-SATURDAY-text').should('contain.text', 'Samedi');
-			});
-
-			it('Good content for Sunday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-SUNDAY-text').should('contain.text', 'Dimanche');
 			});
 
 			it('Good content for Morning period labels', () => {
@@ -147,51 +101,11 @@ describe('Treatments Page tests - Desktop', () => {
 			it('Visible add treatment button', () => {
 				cy.get('#edgar-dashboardTreatmentsPage-addTreatment-button').should('be.visible');
 			});
-
-			it('Visible calendar tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-calendarNavigation-button').should('be.visible');
-			});
-
-			it('Visible current treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-currentTreatmentsNavigation-button').should('be.visible');
-			});
-
-			it('Visible old treatments tab button', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-passedTreatmentsNavigation-button').should('be.visible');
-			});
 		});
 
 		describe('Visible texts', () => {
 			beforeEach(() => {
 				cy.viewport(1920, 1080);
-			});
-
-			it('Visible Monday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-MONDAY-text').should('be.visible');
-			});
-
-			it('Visible Tuesday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-TUESDAY-text').should('be.visible');
-			});
-
-			it('Visible Wednesday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-WEDNESDAY-text').should('be.visible');
-			});
-
-			it('Visible Thursday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-THURSDAY-text').should('be.visible');
-			});
-
-			it('Visible Friday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-FRIDAY-text').should('be.visible');
-			});
-
-			it('Visible Saturday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-SATURDAY-text').should('be.visible');
-			});
-
-			it('Visible Sunday label', () => {
-				cy.get('#edgar-dashboardTreatmentsPage-dayTitle-SUNDAY-text').should('be.visible');
 			});
 
 			it('Visible Morning period labels', () => {

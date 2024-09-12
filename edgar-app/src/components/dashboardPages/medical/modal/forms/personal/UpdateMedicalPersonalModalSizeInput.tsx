@@ -3,17 +3,17 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
+import type { UpdatePatientMedicalPersonalType } from 'types/dashboard/medical/form/UpdatePatientMedicalType';
 
 const UpdateMedicalPersonalModalSizeInput = ({
 	register,
 	errors,
 }: {
-	register: UseFormRegister<PatientMedicalType>;
-	errors: FieldErrors<PatientMedicalType>;
+	register: UseFormRegister<UpdatePatientMedicalPersonalType>;
+	errors: FieldErrors<UpdatePatientMedicalPersonalType>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-updateMedicalPersonalModal-formSize-text">
+	<VStack spacing="4px" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-updateMedicalPersonalModal-formSize-text">
 			Votre taille
 		</FormLabel>
 		<Input

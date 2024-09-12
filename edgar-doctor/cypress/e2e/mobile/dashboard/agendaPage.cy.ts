@@ -1,63 +1,81 @@
-describe('Good number of elements - Desktop', () => {
-	beforeEach(() => {
-		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
+import createDoctorAccount from 'utils/createDoctorAccount';
+
+describe('Agenda Page tests - Mobile', () => {
+	let authToken: string;
+
+	describe('Init test', async () => {
+		it('Create an account', async () => {
+			const response = await createDoctorAccount();
+			authToken = response.authToken;
+		});
 	});
 
-	it('Good number of buttons', () => {
-		cy.get('button[id^=edgar-dashboardAgendaPage]').should('have.length', 1);
-	});
+	describe('Good UI', { testIsolation: false }, () => {
+		before(() => {
+			cy.clearAllLocalStorage();
+			cy.clearAllCookies();
+			cy.clearAllSessionStorage();
+			cy.window().then((win) => win.localStorage.setItem('token', authToken));
+			cy.visit('/dashboard/agenda');
+			cy.viewport(390, 844);
+		});
 
-	it('Good number of texts', () => {
-		cy.get('p[id^=edgar-dashboardAgendaPage]').should('have.length', 25);
-	});
+		describe('Good number of elements', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
+			});
 
-	it('Good number of labels', () => {
-		cy.get('label[id^=edgar-dashboardAgendaPage]').should('have.length', 0);
-	});
+			it('Good number of buttons', () => {
+				cy.get('button[id^=edgar-dashboardAgendaPage]').should('have.length', 1);
+			});
 
-	it('Good number of images', () => {
-		cy.get('img').should('have.length', 1);
-	});
+			it('Good number of texts', () => {
+				cy.get('p[id^=edgar-dashboardAgendaPage]').should('have.length', 25);
+			});
 
-	it('Good number of inputs', () => {
-		cy.get('input[id^=edgar-dashboardAgendaPage]').should('have.length', 0);
-	});
-});
+			it('Good number of labels', () => {
+				cy.get('label[id^=edgar-dashboardAgendaPage]').should('have.length', 0);
+			});
 
-describe('Good content for buttons - Desktop', () => {
-	beforeEach(() => {
-		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
-	});
+			it('Good number of images', () => {
+				cy.get('img').should('have.length', 1);
+			});
 
-	it('Good content for open slot button', () => {
-		cy.get('#edgar-dashboardAgendaPage-openSlot-button').should('contain.text', 'Ouvrir un créneau');
-	});
-});
+			it('Good number of inputs', () => {
+				cy.get('input[id^=edgar-dashboardAgendaPage]').should('have.length', 0);
+			});
+		});
 
-describe('Visible elements - Desktop', () => {
-	beforeEach(() => {
-		cy.viewport(390, 844);
-		cy.window().then((win) => win.localStorage.setItem('token', Cypress.env('authToken')));
-		cy.visit('/dashboard/agenda');
-	});
+		describe('Good content for buttons', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
+			});
 
-	it('Visible open slot button', () => {
-		cy.get('#edgar-dashboardAgendaPage-openSlot-button').should('be.visible');
-	});
+			it('Good content for open slot button', () => {
+				cy.get('#edgar-dashboardAgendaPage-openSlot-button').should('contain.text', 'Ouvrir un créneau');
+			});
+		});
 
-	it('Visible day view button', () => {
-		cy.get('#edgar-dashboardAgendaPage-dayView-button').should('not.exist');
-	});
+		describe('Visible elements', () => {
+			beforeEach(() => {
+				cy.viewport(390, 844);
+			});
 
-	it('Visible 3 days view button', () => {
-		cy.get('#edgar-dashboardAgendaPage-3daysView-button').should('not.exist');
-	});
+			it('Visible open slot button', () => {
+				cy.get('#edgar-dashboardAgendaPage-openSlot-button').should('be.visible');
+			});
 
-	it('Visible week view button', () => {
-		cy.get('#edgar-dashboardAgendaPage-weekView-button').should('not.exist');
+			it('Visible day view button', () => {
+				cy.get('#edgar-dashboardAgendaPage-dayView-button').should('not.exist');
+			});
+
+			it('Visible 3 days view button', () => {
+				cy.get('#edgar-dashboardAgendaPage-3daysView-button').should('not.exist');
+			});
+
+			it('Visible week view button', () => {
+				cy.get('#edgar-dashboardAgendaPage-weekView-button').should('not.exist');
+			});
+		});
 	});
 });

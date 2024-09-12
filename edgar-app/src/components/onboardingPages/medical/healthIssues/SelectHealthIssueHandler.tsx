@@ -1,10 +1,12 @@
-import { useBreakpointValue, useToast } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import SelectHealthIssueDrawer from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueDrawer';
-import SelectHealthIssueModal from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueModal';
+import ModalHandler from 'components/modals/ModalHandler';
+import SelectHealthIssueContent from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueContent';
 
 import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+
+import AddHealthIssueIllustration from 'assets/illustrations/AddHealthIssueIllustration';
 
 const SelectHealthIssueHandler = ({
 	isOpen,
@@ -25,9 +27,13 @@ const SelectHealthIssueHandler = ({
 		watch,
 		reset,
 	} = useForm<HealthIssuesType>({ mode: 'onChange', defaultValues: { medicines: [] } });
-	const isMobile = useBreakpointValue({ base: true, md: false });
 
 	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const onCloseAction = () => {
+		onClose();
+		reset();
+	};
 
 	const onSubmit = handleSubmit((data) => {
 		if (healthIssues.some((healthIssue) => healthIssue.name === data.name)) {
@@ -45,41 +51,43 @@ const SelectHealthIssueHandler = ({
 			return;
 		}
 		onChange([...healthIssues, data]);
-		onClose();
-		reset();
+		onCloseAction();
 		toast({ title: 'Votre sujet de santé a été ajouté', status: 'success' });
 	});
 
 	return (
-		<>
-			{isMobile ? (
-				<SelectHealthIssueDrawer
-					isOpen={isOpen}
-					onClose={() => {
-						onClose();
-						reset();
-					}}
+		<ModalHandler
+			isOpen={isOpen}
+			onClose={onCloseAction}
+			size="3xl"
+			headerTitle="Ajouter un sujet de santé"
+			headerSubtitle="Renseigner les informations de votre sujet de santé."
+			headerIcon={AddHealthIssueIllustration}
+			bodyContent={
+				<SelectHealthIssueContent
 					onSubmit={onSubmit}
 					register={register}
 					control={control}
 					errors={errors}
 					watch={watch}
 				/>
-			) : (
-				<SelectHealthIssueModal
-					isOpen={isOpen}
-					onClose={() => {
-						onClose();
-						reset();
-					}}
-					onSubmit={onSubmit}
-					register={register}
-					control={control}
-					errors={errors}
-					watch={watch}
-				/>
-			)}
-		</>
+			}
+			footerPrimaryButton={
+				<Button w="100%" onClick={onSubmit} id="edgar-onboardingMedicalPage-addHealthIssue-validate-button">
+					Ajouter
+				</Button>
+			}
+			footerSecondaryButton={
+				<Button
+					variant="secondary"
+					w="100%"
+					onClick={onCloseAction}
+					id="edgar-onboardingMedicalPage-addHealthIssue-cancel-button"
+				>
+					Annuler
+				</Button>
+			}
+		/>
 	);
 };
 export default SelectHealthIssueHandler;

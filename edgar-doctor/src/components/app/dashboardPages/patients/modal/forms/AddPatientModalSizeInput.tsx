@@ -12,8 +12,8 @@ const AddPatientModalSizeInput = ({
 	register: UseFormRegister<AddPatientDTO>;
 	errors: FieldErrors<AddPatientDTO>;
 }): JSX.Element => (
-	<VStack spacing="8px" align="start" w="100%">
-		<FormLabel size="boldLg" id="edgar-addPatientModal-formSize-text">
+	<VStack spacing="84x" align="start" w="100%">
+		<FormLabel size="lg" id="edgar-addPatientModal-formSize-text">
 			Taille
 		</FormLabel>
 		<Input

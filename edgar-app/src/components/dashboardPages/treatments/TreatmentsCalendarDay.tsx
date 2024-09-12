@@ -1,9 +1,12 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, HStack, Text, VStack, Icon } from '@chakra-ui/react';
 
 import TreatmentsCheckboxTreatment from 'components/dashboardPages/treatments/TreatmentsCheckboxTreatment';
 
 import getPeriodOfTheDay from 'utils/app/dashboard/treatments/getPeriodOfTheDay';
 import getDateOfTheDay from 'utils/app/dashboard/treatments/getDateOfTheDay';
+
+import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
+import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
 
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
 import type {
@@ -21,12 +24,16 @@ const TreatmentsCalendarDay = ({
 	checkedTreatments,
 	medicinesInfo,
 	displayDay = true,
+	handlePreviousDay,
+	handleNextDay,
 }: {
 	day: HealthIssuesMedicinesDayType;
 	periods: Record<string, PatientMedicineType[]>;
 	checkedTreatments: Record<string, TreatmentFollowUpType[]>;
 	medicinesInfo: MedicineType[];
 	displayDay?: boolean;
+	handlePreviousDay: () => void;
+	handleNextDay: () => void;
 }): JSX.Element => {
 	const availableDays: HealthIssuesMedicinesDayType[] = [
 		'MONDAY',
@@ -42,11 +49,27 @@ const TreatmentsCalendarDay = ({
 	const displayedPeriods = ['Matin', 'Midi', 'Soir', 'Nuit'];
 
 	return (
-		<VStack align="start" w="100%">
+		<VStack
+			align="start"
+			w="100%"
+			minW="300px"
+			bg="white"
+			p="12px 16px"
+			borderRadius="16px"
+			border="2px solid"
+			borderColor="blue.200"
+			spacing="8px"
+		>
 			{displayDay && (
-				<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
-					{displayedDay[availableDays.indexOf(day)]}
-				</Text>
+				<HStack w="100%" justify="space-between">
+					<Text size="boldLg" id={`edgar-dashboardTreatmentsPage-dayTitle-${day}-text`}>
+						{displayedDay[availableDays.indexOf(day)]}
+					</Text>
+					<HStack spacing="8px">
+						<Icon as={LeftChevronIcon} h="16px" w="auto" cursor="pointer" onClick={handlePreviousDay} />
+						<Icon as={RightChevronIcon} h="16px" w="auto" cursor="pointer" onClick={handleNextDay} />
+					</HStack>
+				</HStack>
 			)}
 			{Object.entries(periods).map(([period, treatments]) => {
 				const isToday =

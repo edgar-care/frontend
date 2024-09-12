@@ -11,6 +11,7 @@ import Drawer from 'theme/components/drawer';
 import FormLabel from 'theme/components/formLabel';
 import Input from 'theme/components/input';
 import Link from 'theme/components/link';
+import PinInput from 'theme/components/pinInput';
 import Select from 'theme/components/select';
 import Text from 'theme/components/text';
 import Textarea from 'theme/components/textarea';
@@ -46,6 +47,7 @@ const overrides = {
 		FormLabel,
 		Input,
 		Link,
+		PinInput,
 		Select,
 		Text,
 		Textarea,

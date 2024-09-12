@@ -6,6 +6,8 @@ import PatientsSubViewNavigationHandler from 'components/app/dashboardPages/pati
 import PatientsSubViewChat from 'components/app/dashboardPages/patients/subViews/chat/PatientsSubViewChat';
 import PatientsSubViewAppointments from 'components/app/dashboardPages/patients/subViews/PatientsSubViewAppointments';
 import PatientsSubViewDocuments from 'components/app/dashboardPages/patients/subViews/documents/PatientsSubViewDocuments';
+import PatientsSubViewMedicalInfo from 'components/app/dashboardPages/patients/subViews/medicalInfo/PatientsSubViewMedicalInfo';
+import PatientsSubViewPrescriptions from 'components/app/dashboardPages/patients/subViews/prescriptions/PatientsSubViewPrescriptions';
 
 import { type PatientType } from 'types/app/dashboard/patients/PatientType';
 import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/patients/navigation/PatientsSubViewNavigationHandlerType';
@@ -13,9 +15,8 @@ import { type PatientsSubViewNavigationHandlerType } from 'types/app/dashboard/p
 import CalendarIcon from 'assets/icons/CalendarIcon';
 import ChatIcon from 'assets/icons/ChatIcon';
 import DocumentIcon from 'assets/icons/DocumentIcon';
-
 import MedicalIcon from 'assets/icons/MedicalIcon';
-import PatientsSubViewMedicalInfo from 'components/app/dashboardPages/patients/subViews/medicalInfo/PatientsSubViewMedicalInfo';
+import PrescriptionIcon from 'assets/icons/PrescriptionIcon';
 
 const PatientsSubViewManager = ({
 	selectedPatient,
@@ -42,6 +43,12 @@ const PatientsSubViewManager = ({
 			content: <PatientsSubViewDocuments selectedPatient={selectedPatient} />,
 			icon: DocumentIcon,
 			id: '/documents',
+		},
+		'/prescriptions': {
+			name: 'Ordonnances',
+			content: <PatientsSubViewPrescriptions selectedPatient={selectedPatient} />,
+			icon: PrescriptionIcon,
+			id: '/prescriptions',
 		},
 		'/appointments': {
 			name: 'Rendez-vous',

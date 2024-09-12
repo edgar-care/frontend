@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import Avatar from 'boring-avatars';
 
 import ProfileTab from 'components/navigation/ProfileTab';
+import SettingsHandler from 'components/settingsModals/SettingsHandler';
 
 import { useAuthContext } from 'contexts/auth';
 
@@ -10,6 +11,7 @@ import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
 import SelectorIcon from 'assets/icons/SelectorIcon';
 import LogoutIcon from 'assets/icons/LogoutIcon';
+import SettingsIcon from 'assets/icons/SettingsIcon';
 
 import { type ProfileTabType } from 'types/navigation/ProfileType';
 
@@ -21,10 +23,17 @@ const ProfileCard = (): JSX.Element => {
 	const { data: doctorInfo } = useGetDoctorByIdQuery(auth.getId());
 
 	const { isOpen, onToggle } = useDisclosure();
+	const { isOpen: isOpenSettingsModal, onOpen: onOpenSettingsModal, onClose: onCloseSettingsModal } = useDisclosure();
 
 	const router = useRouter();
 
 	const profileTabs: ProfileTabType[] = [
+		{
+			name: 'Paramètres',
+			icon: SettingsIcon,
+			action: onOpenSettingsModal,
+			actionComponent: <SettingsHandler isOpen={isOpenSettingsModal} onClose={onCloseSettingsModal} />,
+		},
 		{
 			name: 'Déconnexion',
 			icon: LogoutIcon,

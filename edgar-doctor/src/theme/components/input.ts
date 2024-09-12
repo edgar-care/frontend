@@ -24,8 +24,9 @@ const Input = {
 				borderColor: 'transparent',
 				borderRadius: '0px',
 
-				height: '21px',
+				minHeight: '21px',
 				p: '0px',
+				pl: '4px',
 				bg: 'transparent',
 
 				_hover: {
