@@ -29,7 +29,7 @@ const SettingsAccount2FAEdgarEnableBackupCodePage = (
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	useEffect(() => {
-		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2fa3rdPartyEnableBackupCode') return;
+		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2faEdgarEnableBackupCodes') return;
 		triggerGenerateBackupCodes()
 			.unwrap()
 			.then((res) => setBackupCodes(res))

@@ -106,7 +106,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: `/dashboard/2fa/device/${id}`,
 				method: 'POST',
 			}),
-			invalidatesTags: ['patient2faTrustedDevices'],
+			invalidatesTags: ['patient2faTrustedDevices', 'patient2faMethod'],
 		}),
 
 		removeTrustedDevice: builder.mutation<void, string>({
@@ -114,7 +114,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: `/dashboard/2fa/device/${id}`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['patient2faTrustedDevices'],
+			invalidatesTags: ['patient2faTrustedDevices', 'patient2faMethod'],
 		}),
 
 		disable2faMethod: builder.mutation<void, EnabledMethod2FAType>({

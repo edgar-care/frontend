@@ -3,7 +3,7 @@ import { Box, Button, Skeleton, useToast, VStack } from '@chakra-ui/react';
 
 import DeviceCard from 'components/settingsModals/DeviceCard';
 
-import { useAddTrustedDeviceMutation, useEnable2faWithMobileAppMutation } from 'services/request/2fa';
+import { useEnable2faWithMobileAppMutation } from 'services/request/2fa';
 
 import Pagination from 'components/navigation/Pagination';
 
@@ -22,7 +22,6 @@ const SettingsAccount2FAEdgarEnablePage = (
 	onNext: () => void,
 ): SettingsPageType => {
 	const [triggerEnable2faWithMobileApp] = useEnable2faWithMobileAppMutation();
-	const [triggerAddTrustedDevice] = useAddTrustedDeviceMutation();
 
 	const [selectedDeviceId, setSelectedDeviceId] = useState('');
 	const [pageIndex, setPageIndex] = useState(1);
@@ -36,25 +35,15 @@ const SettingsAccount2FAEdgarEnablePage = (
 				status: 'error',
 			});
 		else
-			triggerAddTrustedDevice(selectedDeviceId)
+			triggerEnable2faWithMobileApp(selectedDeviceId)
 				.unwrap()
 				.then(() => {
-					triggerEnable2faWithMobileApp(selectedDeviceId)
-						.unwrap()
-						.then(() => {
-							toast({
-								title: 'Double authentification activée',
-								status: 'success',
-							});
-							setSelectedDeviceId('');
-							onNext();
-						})
-						.catch(() => {
-							toast({
-								title: "Erreur lors de l'activation de la double authentification",
-								status: 'error',
-							});
-						});
+					toast({
+						title: 'Double authentification activée',
+						status: 'success',
+					});
+					setSelectedDeviceId('');
+					onNext();
 				})
 				.catch(() => {
 					toast({
