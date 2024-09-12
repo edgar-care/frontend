@@ -8,11 +8,14 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getPrescriptionById: builder.query<PatientPrescriptionType, string>({
 			query: (prescriptionId) => `/dashboard/prescription/${prescriptionId}`,
-			transformResponse: (response: { prescription: PatientPrescriptionStoreType }) => ({
+			transformResponse: (response: {
+				prescription: PatientPrescriptionStoreType;
+				url_prescription: string;
+			}) => ({
 				id: response.prescription.id,
 				createdBy: response.prescription.created_by,
 				patientId: response.prescription.patient_id,
-				downloadUrl: response.prescription.URL,
+				downloadUrl: response.url_prescription,
 				createdAt: response.prescription.createdAt * 1000,
 			}),
 			providesTags: ['doctorPrescriptions'],
