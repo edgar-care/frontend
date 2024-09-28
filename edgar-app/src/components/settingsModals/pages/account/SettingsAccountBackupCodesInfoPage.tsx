@@ -13,7 +13,7 @@ const SettingsAccountBackupCodesInfoPage = (onNext: () => void): SettingsPageTyp
 	sections: [],
 	footerPrimaryButton: (
 		<Button w="100%" onClick={onNext}>
-			Générer de nouveaux codes.
+			Générer de nouveaux codes
 		</Button>
 	),
 });

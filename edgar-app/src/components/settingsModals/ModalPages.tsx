@@ -107,7 +107,7 @@ const ModalPages = ({
 			onPreviousOfPage(2),
 		),
 		settingsAccountBackupCodesActivation: SettingsAccountBackupCodesActivationPage(() =>
-			onNextPage('settingsAccount2fa'),
+			setSelectedPageStack((prev) => [...prev.slice(0, -1), 'settingsAccount2fa']),
 		),
 		settingsAccountBackupCodesInfo: SettingsAccountBackupCodesInfoPage(() =>
 			onNextPage('settingsAccountBackupCodesGenerate'),
