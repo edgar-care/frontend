@@ -43,7 +43,9 @@ const settingsAccountPage = (
 					badge: backupCodeGenerated ? 'Consultés' : 'Non consultés',
 					badgeStyle: backupCodeGenerated ? 'green' : 'red',
 					hasChevron: true,
-					pageIndex: 'settingsAccountBackupCodes',
+					pageIndex: backupCodeGenerated
+						? 'settingsAccountBackupCodesInfo'
+						: 'settingsAccountBackupCodesActivation',
 				},
 			],
 		},
