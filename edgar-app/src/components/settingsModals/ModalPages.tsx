@@ -19,6 +19,9 @@ import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals
 import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
 import SettingsAccountDeletePage from 'components/settingsModals/pages/account/SettingsAccountDeletePage';
 import SettingsDevicesPage from 'components/settingsModals/pages/devices/SettingsDevicesPage';
+import SettingsAccountBackupCodesActivationPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesActivationPage';
+import SettingsAccountBackupCodesInfoPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesInfoPage';
+import SettingsAccountBackupCodesGeneratePage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesGeneratePage';
 
 import {
 	useGet2faEnabledMethodsQuery,
@@ -101,6 +104,15 @@ const ModalPages = ({
 			() => (isBackupCodeGenerated ? onPreviousPage() : onNextPage('settingsAccount2faEdgarEnableBackupCodes')),
 		),
 		settingsAccount2faEdgarEnableBackupCodes: SettingsAccount2FAEdgarEnableBackupCodePage(selectedPageStack, () =>
+			onPreviousOfPage(2),
+		),
+		settingsAccountBackupCodesActivation: SettingsAccountBackupCodesActivationPage(() =>
+			onNextPage('settingsAccount2fa'),
+		),
+		settingsAccountBackupCodesInfo: SettingsAccountBackupCodesInfoPage(() =>
+			onNextPage('settingsAccountBackupCodesGenerate'),
+		),
+		settingsAccountBackupCodesGenerate: SettingsAccountBackupCodesGeneratePage(selectedPageStack, () =>
 			onPreviousOfPage(2),
 		),
 		settingsAccount2faEdgar: SettingsAccount2FAEdgarPage(
