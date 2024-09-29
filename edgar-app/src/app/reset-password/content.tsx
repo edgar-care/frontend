@@ -30,6 +30,7 @@ const ResetPasswordContent = (): JSX.Element => {
 				spacing="32px"
 				p="32px"
 				h="100%"
+				maxW="896px"
 			>
 				{!isTablet && <ResetPasswordBanner />}
 				<ResetPasswordFields uuid={uuid} />
