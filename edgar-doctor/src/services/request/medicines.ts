@@ -9,12 +9,12 @@ const extendedApi = backendApi.injectEndpoints({
 		getMedicines: builder.query<MedicineType[], void>({
 			query: () => '/medicine',
 			providesTags: [],
-			transformResponse: (response: { medicament: MedicinesStoreType[] }) =>
-				response.medicament.map((medicament) => ({
+			transformResponse: (response: { medicament?: MedicinesStoreType[] }) =>
+				response.medicament?.map((medicament) => ({
 					id: medicament.id,
 					name: medicament.name,
 					unit: medicament.unit,
-				})),
+				})) || [],
 		}),
 
 		getMedicineById: builder.query<MedicineType, string>({

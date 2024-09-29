@@ -75,7 +75,7 @@ const extendedApi = backendApi.injectEndpoints({
 		// ===== TRUSTED DEVICES =====
 		getTrustedDevices: builder.query<DeviceType[], void>({
 			query: () => '/dashboard/2fa/devices',
-			transformResponse: (response: { devices: DeviceStoreType[] | null }) =>
+			transformResponse: (response: { devices?: DeviceStoreType[] }) =>
 				response.devices?.map((device) => ({
 					id: device.id,
 					deviceType: device.device_type,

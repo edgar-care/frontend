@@ -10,7 +10,7 @@ import {
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
-		getDoctorAppointments: builder.query<AppointmentType[] | undefined, void>({
+		getDoctorAppointments: builder.query<AppointmentType[], void>({
 			query: () => '/doctor/appointments',
 			providesTags: ['doctorAppointments'],
 			transformResponse: (response: { appointments?: AppointmentsStoreType[] }) =>
