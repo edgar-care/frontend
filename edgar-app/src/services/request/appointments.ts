@@ -14,8 +14,8 @@ const extendedApi = backendApi.injectEndpoints({
 		getPatientAppointments: builder.query<AppointmentType[], void>({
 			query: () => '/patient/appointments',
 			providesTags: ['patientAppointments'],
-			transformResponse: (response: { rdv: AppointmentsStoreType[] }) =>
-				response.rdv.map((appointment) => ({
+			transformResponse: (response: { rdv?: AppointmentsStoreType[] }) =>
+				response.rdv?.map((appointment) => ({
 					id: appointment.id,
 					doctorId: appointment.doctor_id,
 					patientId: appointment.id_patient,
@@ -24,7 +24,7 @@ const extendedApi = backendApi.injectEndpoints({
 					cancelationReason: appointment.cancelation_reason,
 					appointmentStatus: appointment.appointment_status as AppointmentStatusType,
 					sessionId: appointment.session_id,
-				})),
+				})) || [],
 		}),
 
 		getPatientAppointmentById: builder.query<AppointmentType, string>({
@@ -45,9 +45,9 @@ const extendedApi = backendApi.injectEndpoints({
 		getDoctorAppointments: builder.query<AppointmentType[], string>({
 			query: (id) => `/doctor/${id}/appointments`,
 			providesTags: ['doctorAppointments'],
-			transformResponse: (response: { rdv: AppointmentsStoreType[] }) =>
+			transformResponse: (response: { rdv?: AppointmentsStoreType[] }) =>
 				response.rdv
-					.map((appointment) => ({
+					?.map((appointment) => ({
 						id: appointment.id,
 						doctorId: appointment.doctor_id,
 						patientId: appointment.id_patient,
@@ -57,7 +57,7 @@ const extendedApi = backendApi.injectEndpoints({
 						appointmentStatus: appointment.appointment_status as AppointmentStatusType,
 						sessionId: appointment.session_id,
 					}))
-					.sort((a, b) => a.startDate - b.startDate),
+					.sort((a, b) => a.startDate - b.startDate) || [],
 		}),
 
 		addPatientAppointment: builder.mutation<void, AddPatientAppointmentsDTO>({
