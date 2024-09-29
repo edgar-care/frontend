@@ -12,7 +12,6 @@ const extendedApi = backendApi.injectEndpoints({
 					email: params.email,
 				},
 			}),
-			invalidatesTags: ['patientAccount'],
 		}),
 		resetPassword: builder.mutation<void, ResetPasswordDTO>({
 			query: (params) => ({
@@ -22,7 +21,6 @@ const extendedApi = backendApi.injectEndpoints({
 					new_password: params.password,
 				},
 			}),
-			invalidatesTags: ['patientAccount'],
 		}),
 	}),
 });
