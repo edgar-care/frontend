@@ -1,3 +1,8 @@
-export interface ResetPasswordDTO {
+export interface MissingPasswordDTO {
 	email: string;
+}
+
+export interface ResetPasswordDTO {
+	password: string;
+	uuid: string;
 }
