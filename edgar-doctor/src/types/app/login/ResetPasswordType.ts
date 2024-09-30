@@ -1,3 +1,4 @@
 export type ResetPasswordType = {
-	email: string;
+	password: string;
+	confirmPassword: string;
 };
