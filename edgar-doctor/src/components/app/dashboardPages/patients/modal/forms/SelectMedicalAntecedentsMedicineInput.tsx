@@ -1,4 +1,4 @@
-import { VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { type Control, Controller, type FieldErrors, type UseFormWatch } from 'react-hook-form';
 
 import AdvancedSelector from 'components/AdvancedSelector';
@@ -10,6 +10,8 @@ import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/
 import AddIcon from 'assets/icons/AddIcon';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
+
+import displayMedicineUnit from 'utils/app/dashboard/diagnostic/displayMedicineUnit';
 
 import SelectMedicalAntecedentsMedicineInputCard from './SelectMedicalAntecedentsMedicineInputCard';
 
@@ -51,7 +53,9 @@ const SelectMedicalAntecedentsMedicineInput = ({
 												}}
 												id={`edgar-onboardingMedicalPage-medicine-option-${medicine.id}`}
 											>
-												<>{medicine.name}</>
+												<Text>
+													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
+												</Text>
 											</SelectMedicalAntecedentsMedicineInputCard>
 										),
 									})) || []
