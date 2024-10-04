@@ -1,6 +1,6 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
 
-import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/medical/displayMedicineUsageUnit';
 
 import {
 	type HealthIssuesMedicinesDayType,
@@ -44,7 +44,8 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: HealthIssuesMedicinesTyp
 				<Text size="boldLg">{medicineInfo.name}</Text>
 				<HStack spacing="4px">
 					<Text size="sm">
-						{medicine.quantity} {displayMedicineUnit(medicineInfo.unit)}(s)
+						{medicine.quantity} {displayMedicineUsageUnit(medicineInfo.dosageForm)}
+						{parseInt(medicine.quantity, 10) > 1 && 's'}
 					</Text>
 				</HStack>
 			</VStack>
