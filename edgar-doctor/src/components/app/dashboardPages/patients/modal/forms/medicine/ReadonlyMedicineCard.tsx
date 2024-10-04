@@ -6,7 +6,7 @@ import { type PatientMedicineType } from 'types/app/dashboard/patients/medicalIn
 import { type TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
 import { type TreatmentPeriodType } from 'types/app/dashboard/patients/medicalInfos/TreatmentPeriodType';
 
-import displayMedicineUnit from 'utils/app/dashboard/diagnostic/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/diagnostic/displayMedicineUsageUnit';
 
 import MedicineSmallCard from './MedicineSmallCard';
 
@@ -42,7 +42,8 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: PatientMedicineType }): 
 				<Text size="boldLg">{medicineInfo.name}</Text>
 				<HStack spacing="4px">
 					<Text size="sm">
-						{medicine.quantity} {displayMedicineUnit(medicineInfo.unit)}(s)
+						{medicine.quantity} {displayMedicineUsageUnit(medicineInfo.dosageForm)}
+						{medicine.quantity > 1 ? 's' : ''}
 					</Text>
 				</HStack>
 			</VStack>

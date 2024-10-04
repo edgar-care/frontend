@@ -2,7 +2,7 @@ import { HStack, Text, VStack } from '@chakra-ui/react';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
-import displayMedicineUnit from 'utils/app/dashboard/diagnostic/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/diagnostic/displayMedicineUsageUnit';
 
 import { type TreatmentDayType } from 'types/app/dashboard/patients/medicalInfos/TreatmentDayType';
 import { type TreatmentPeriodType } from 'types/app/dashboard/patients/medicalInfos/TreatmentPeriodType';
@@ -42,7 +42,8 @@ const MedicineCard = ({ medicine }: { medicine: PatientMedicineType }): JSX.Elem
 				<Text size="boldLg">{medicineInfo.name}</Text>
 				<HStack spacing="4px">
 					<Text size="sm">
-						{medicine.quantity} {displayMedicineUnit(medicineInfo.unit)}(s)
+						{medicine.quantity} {displayMedicineUsageUnit(medicineInfo.dosageForm)}
+						{medicine.quantity > 1 ? 's' : ''}
 					</Text>
 				</HStack>
 			</VStack>
