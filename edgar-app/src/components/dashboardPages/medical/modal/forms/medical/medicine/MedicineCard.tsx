@@ -11,7 +11,7 @@ import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicin
 
 import CrossIcon from 'assets/icons/CrossIcon';
 
-import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/medical/displayMedicineUsageUnit';
 
 const MedicineCard = ({
 	medicine,
@@ -91,7 +91,7 @@ const MedicineCard = ({
 							/>
 						)}
 					/>
-					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
+					<Text size="sm">{displayMedicineUsageUnit(medicineInfo.dosageForm)}</Text>
 				</HStack>
 			</VStack>
 			<VStack spacing="4px" w="100%" maxW="200px" align="start">

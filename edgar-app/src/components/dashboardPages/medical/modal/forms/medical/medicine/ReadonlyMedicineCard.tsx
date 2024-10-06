@@ -4,7 +4,7 @@ import MedicineSmallCard from 'components/dashboardPages/medical/modal/forms/med
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
-import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/medical/displayMedicineUsageUnit';
 
 import type {
 	HealthIssuesMedicinesDayType,
@@ -44,7 +44,8 @@ const ReadonlyMedicineCard = ({ medicine }: { medicine: PatientMedicineType }): 
 				<Text size="boldLg">{medicineInfo.name}</Text>
 				<HStack spacing="4px">
 					<Text size="sm">
-						{medicine.quantity} {displayMedicineUnit(medicineInfo.unit)}(s)
+						{medicine.quantity} {displayMedicineUsageUnit(medicineInfo.dosageForm)}
+						{medicine.quantity > 1 && 's'}
 					</Text>
 				</HStack>
 			</VStack>

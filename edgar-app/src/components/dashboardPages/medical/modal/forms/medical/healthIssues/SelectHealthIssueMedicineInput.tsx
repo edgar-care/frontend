@@ -1,4 +1,4 @@
-import { VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { type Control, Controller, type FieldErrors, type UseFormWatch } from 'react-hook-form';
 
 import AdvancedSelector from 'components/AdvancedSelector';
@@ -7,6 +7,8 @@ import MedicineCard from 'components/dashboardPages/medical/modal/forms/medical/
 import SelectHealthIssueMedicineInputCard from 'components/dashboardPages/medical/modal/forms/medical/healthIssues/SelectHealthIssueMedicineInputCard';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
+
+import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
 
 import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
@@ -50,7 +52,9 @@ const MedicineStillRelevantInput = ({
 												}}
 												id={`edgar-onboardingMedicalPage-medicine-option-${medicine.id}`}
 											>
-												<>{medicine.name}</>
+												<Text>
+													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
+												</Text>
 											</SelectHealthIssueMedicineInputCard>
 										),
 									})) || []
