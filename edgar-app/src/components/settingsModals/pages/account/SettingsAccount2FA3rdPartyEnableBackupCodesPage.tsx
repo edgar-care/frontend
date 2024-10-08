@@ -29,7 +29,7 @@ const SettingsAccount2FA3rdPartyEnableBackupCodesPage = (
 	const toast = useToast({ duration: 3000, isClosable: true });
 
 	useEffect(() => {
-		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2fa3rdPartyEnableBackupCode') return;
+		if (selectedPageStack[selectedPageStack.length - 1] !== 'settingsAccount2fa3rdPartyEnableBackupCodes') return;
 		triggerGenerateBackupCodes()
 			.unwrap()
 			.then((res) => setBackupCodes(res))
