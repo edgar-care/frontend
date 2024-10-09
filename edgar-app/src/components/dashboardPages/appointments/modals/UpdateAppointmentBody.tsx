@@ -34,7 +34,14 @@ const UpdateAppointmentBody = ({
 	return (
 		<VStack w="100%" spacing="16px">
 			<InputGroup>
-				<Input placeholder="Docteur Edgar" maxLength={100} onChange={(e) => setSearchValue(e.target.value)} />
+				<Input
+					placeholder="Docteur Edgar"
+					maxLength={100}
+					onChange={(e) => {
+						setPageIndex(1);
+						setSearchValue(e.target.value);
+					}}
+				/>
 				<InputRightElement>
 					<Icon as={SearchIcon} />
 				</InputRightElement>

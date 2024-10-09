@@ -10,7 +10,7 @@ const CatchPhraseSection = (): JSX.Element => {
 
 	return (
 		<VStack w="100%" spacing="64px" align="start">
-			<HStack w="100%" spacing="64px">
+			<HStack w="100%" spacing="32px" justify="space-between">
 				<VStack align="start" w="100%" spacing="32px">
 					<Text
 						size={{ base: '3xl', lg: '6xl', '2xl': '7xl' }}
@@ -36,11 +36,15 @@ const CatchPhraseSection = (): JSX.Element => {
 				</VStack>
 				{imageDisplayed && (
 					<Image
-						src="/assets/Edgars/edgar-high-five.svg"
+						src="/assets/mockups/landing-page-mockup.png"
 						alt="edgar-high-five-image"
-						height={250}
-						width={233}
 						id="edgar-homePage-highFiveEdgar-img"
+						width={1000}
+						height={700}
+						w="100%"
+						maxW={{ base: '300px', lg: '750px' }}
+						h="auto"
+						priority
 					/>
 				)}
 			</HStack>
