@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -30,7 +31,6 @@ const ResetPasswordFields = ({ uuid }: { uuid: string | null }): JSX.Element => 
 		handleSubmit,
 		formState: { errors },
 		register,
-		reset,
 	} = useForm<ResetPasswordType>({
 		mode: 'onChange',
 	});
@@ -38,6 +38,8 @@ const ResetPasswordFields = ({ uuid }: { uuid: string | null }): JSX.Element => 
 	const { isOpen: showConfirmPassword, onToggle: toggleShowConfirmPassword } = useDisclosure();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const router = useRouter();
 
 	const onSubmit = handleSubmit((data) => {
 		if (data.password !== data.confirmPassword) {
@@ -52,7 +54,7 @@ const ResetPasswordFields = ({ uuid }: { uuid: string | null }): JSX.Element => 
 				.unwrap()
 				.then(() => {
 					toast({ title: 'Votre mot de passe a été mis à jour', status: 'success' });
-					reset();
+					router.push('/login');
 				})
 				.catch(() => {
 					toast({ title: 'Une erreur est survenue', status: 'error' });
