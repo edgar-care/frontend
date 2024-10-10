@@ -31,7 +31,7 @@ describe('Navigation tests - Mobile', () => {
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 7);
+				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 8);
 			});
 
 			it('Good number of labels', () => {
@@ -50,6 +50,10 @@ describe('Navigation tests - Mobile', () => {
 		describe('Good content for texts', () => {
 			beforeEach(() => {
 				cy.viewport(390, 844);
+			});
+
+			it('Good content for "Home" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home-text').should('contain.text', 'Accueil');
 			});
 
 			it('Good content for "Agenda" tab', () => {
@@ -86,6 +90,10 @@ describe('Navigation tests - Mobile', () => {
 				cy.viewport(390, 844);
 			});
 
+			it('"Home" tab visible', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home-text').should('be.visible');
+			});
+
 			it('"Agenda" tab visible', () => {
 				cy.get('#edgar-dashboardNavbar-navbarTab-agenda-text').should('be.visible');
 			});
@@ -118,6 +126,13 @@ describe('Navigation tests - Mobile', () => {
 		describe('Good redirection on elements', () => {
 			beforeEach(() => {
 				cy.viewport(390, 844);
+			});
+
+			it('Good redirection for "Accueil" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home')
+					.click()
+					.url()
+					.should('be.equal', `${Cypress.env('url')}/dashboard`);
 			});
 
 			it('Good redirection for "Agenda" tab', () => {

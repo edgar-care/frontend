@@ -2,6 +2,12 @@
 
 import DashboardContent from 'app/dashboard/content';
 
-const DashboardPage = (): JSX.Element => <DashboardContent />;
+import ChatProvider from 'app/dashboard/chat/ChatProvider';
+
+const DashboardPage = (): JSX.Element => (
+	<ChatProvider>
+		<DashboardContent />
+	</ChatProvider>
+);
 
 export default DashboardPage;
