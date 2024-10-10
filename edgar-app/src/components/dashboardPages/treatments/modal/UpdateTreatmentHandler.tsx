@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useBreakpointValue, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -6,7 +7,11 @@ import UpdateTreatmentModal from 'components/dashboardPages/treatments/modal/Upd
 
 import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
-import { useUpdateTreatmentMutation, useAddTreatmentMutation } from 'services/request/treatments';
+import {
+	useUpdateTreatmentMutation,
+	useAddTreatmentMutation,
+	useDeleteTreatmentMutation,
+} from 'services/request/treatments';
 
 const UpdateTreatmentHandler = ({
 	isOpen,
@@ -19,6 +24,8 @@ const UpdateTreatmentHandler = ({
 }): JSX.Element => {
 	const [triggerUpdateTreatmentMutation] = useUpdateTreatmentMutation();
 	const [triggerAddTreatmentMutation] = useAddTreatmentMutation();
+	const [triggerDeleteTreatmentMutation] = useDeleteTreatmentMutation();
+
 	const {
 		handleSubmit,
 		control,
@@ -33,32 +40,31 @@ const UpdateTreatmentHandler = ({
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
-	const stillRelevant = watch('stillRelevant');
+	const addedMedicines = watch('medicines') || [];
 
 	const onSubmit = handleSubmit((data) => {
-		console.log(data);
-		if (!data.medicines.every((medicine) => medicine.days.length > 0 && medicine.periods.length > 0)) {
+		if (
+			!data.medicines.every(
+				(medicine) => medicine.days.length > 0 && medicine.periods.length > 0 && medicine.quantity > 0,
+			)
+		) {
 			toast({
-				title: 'Veuillez sélectionner au moins un jour et une période pour vos traitements',
+				title: 'Veuillez sélectionner au moins un jour, une période et une quantité supérieure à 0 pour vos traitements',
 				status: 'error',
 			});
 		}
-		if (antecedent?.stillRelevant !== stillRelevant) {
+
+		const treatmentToAdd = data.medicines.filter((medicine) => !medicine.id);
+		const treatmentToUpdate = data.medicines.filter((medicine) => medicine.id);
+		const treatmentToDelete =
+			antecedent?.medicines.filter((medicine) => !data.medicines.find((m) => m.id === medicine.id)) || [];
+
+		if (treatmentToAdd.length > 0) {
+			console.log('frghjkioltgyhujk', treatmentToAdd);
 			triggerAddTreatmentMutation({
 				diseaseId: data.id,
 				stillRelevant: data.stillRelevant,
-				treatments: data.medicines.map((medicine) => ({
-					period: medicine.periods,
-					day: medicine.days,
-					quantity: medicine.quantity,
-					medicineId: medicine.medicineId,
-				})),
-			});
-		}
-		if (data.medicines) {
-			triggerUpdateTreatmentMutation({
-				treatments: data.medicines.map((medicine) => ({
-					id: medicine.id,
+				treatments: treatmentToAdd.map((medicine) => ({
 					medicineId: medicine.medicineId,
 					period: medicine.periods,
 					day: medicine.days,
@@ -67,20 +73,64 @@ const UpdateTreatmentHandler = ({
 			})
 				.unwrap()
 				.then(() => {
+					toast({ title: 'Votre traitement à été ajouté', status: 'success' });
 					onClose();
 					reset();
-					toast({ title: 'Votre tratiement à été mis à jour', status: 'success' });
 				})
 				.catch(() => {
 					toast({ title: 'Une erreur est survenue', status: 'error' });
 				});
 		}
+
+		if (treatmentToUpdate.length > 0) {
+			triggerUpdateTreatmentMutation({
+				treatments: treatmentToUpdate.map((medicine) => ({
+					id: medicine.id || '',
+					medicineId: medicine.medicineId,
+					period: medicine.periods,
+					day: medicine.days,
+					quantity: medicine.quantity,
+				})),
+			})
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre traitement à été mis à jour', status: 'success' });
+					onClose();
+					reset();
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		}
+
+		if (treatmentToDelete.length > 0) {
+			console.log(treatmentToDelete);
+			Promise.all(
+				treatmentToDelete.map(async (treatment) => {
+					const res = await triggerDeleteTreatmentMutation(treatment.id || '');
+					if ('error' in res) return false;
+					return true;
+				}),
+			).then((res) => {
+				if (res.some((response) => !response)) toast({ title: 'Une erreur est survenue', status: 'error' });
+				else {
+					toast({ title: 'Votre traitement à été supprimé', status: 'success' });
+					onClose();
+					reset();
+				}
+			});
+		}
 	});
+
+	useEffect(() => {
+		reset(antecedent);
+	}, [antecedent]);
 
 	return (
 		<>
 			{isMobile ? (
 				<UpdateTreatmentDrawer
+					addedMedicines={addedMedicines}
 					isOpen={isOpen}
 					onClose={() => {
 						onClose();
@@ -88,11 +138,11 @@ const UpdateTreatmentHandler = ({
 					}}
 					onSubmit={onSubmit}
 					control={control}
-					watch={watch}
 					errors={errors}
 				/>
 			) : (
 				<UpdateTreatmentModal
+					addedMedicines={addedMedicines}
 					isOpen={isOpen}
 					onClose={() => {
 						onClose();
@@ -100,7 +150,6 @@ const UpdateTreatmentHandler = ({
 					}}
 					onSubmit={onSubmit}
 					control={control}
-					watch={watch}
 					errors={errors}
 				/>
 			)}

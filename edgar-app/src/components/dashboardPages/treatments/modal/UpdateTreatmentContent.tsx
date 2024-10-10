@@ -1,20 +1,20 @@
 import { chakra, VStack } from '@chakra-ui/react';
-import { Control, FieldErrors, UseFormWatch } from 'react-hook-form';
+import { Control, FieldErrors } from 'react-hook-form';
 
 import UpdateTreatmentMedicineInput from 'components/dashboardPages/treatments/modal/UpdateTreatmentMedicineInput';
-import UpdateTreatmentExisting from 'components/dashboardPages/treatments/modal/UpdateTreatmentExisting';
 
 import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
 
 const UpdateTreatmentContent = ({
+	addedMedicines,
 	onSubmit,
 	control,
-	watch,
 	errors,
 }: {
+	addedMedicines: PatientMedicineType[];
 	onSubmit: () => void;
 	control: Control<PatientMedicalAntecedentType>;
-	watch: UseFormWatch<PatientMedicalAntecedentType>;
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 }): JSX.Element => (
 	<VStack w="100%" spacing="24px">
@@ -44,11 +44,9 @@ const UpdateTreatmentContent = ({
 			>
 				<VStack w="100%">
 					<VStack w="100%" spacing="16px">
-						<UpdateTreatmentExisting control={control} errors={errors} />
 						<UpdateTreatmentMedicineInput
-							medicines={watch('medicines')}
+							addedMedicines={addedMedicines}
 							control={control}
-							watch={watch}
 							errors={errors}
 						/>
 					</VStack>

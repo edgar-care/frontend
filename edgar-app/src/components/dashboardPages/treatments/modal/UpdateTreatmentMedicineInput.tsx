@@ -1,5 +1,5 @@
 import { VStack, Wrap, WrapItem } from '@chakra-ui/react';
-import { type Control, Controller, FieldErrors, UseFormWatch } from 'react-hook-form';
+import { type Control, Controller, FieldErrors } from 'react-hook-form';
 
 import TreatmentUpdateCard from 'components/dashboardPages/treatments/TreatmentUpdateCard';
 import AdvancedSelector from 'components/AdvancedSelector';
@@ -14,18 +14,16 @@ import AddIcon from 'assets/icons/AddIcon';
 import { useGetMedicinesQuery } from 'services/request/medicines';
 
 const UpdateTreatmentMedicineInput = ({
-	medicines,
+	addedMedicines,
 	control,
-	watch,
 	errors,
 }: {
-	medicines: PatientMedicineType[];
+	addedMedicines: PatientMedicineType[];
 	control: Control<PatientMedicalAntecedentType>;
-	watch: UseFormWatch<PatientMedicalAntecedentType>;
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 }): JSX.Element => {
 	const { data: medicinesData } = useGetMedicinesQuery();
-	const addedMedicines = watch('medicines');
+
 	return (
 		<VStack spacing="12px" align="start" w="100%">
 			<VStack spacing="8px" align="start" w="100%">
@@ -47,7 +45,12 @@ const UpdateTreatmentMedicineInput = ({
 												onClick={() => {
 													onChange([
 														...value,
-														{ medicineId: medicine.id, day: [], period: [], quantity: '1' },
+														{
+															medicineId: medicine.id,
+															days: [],
+															periods: [],
+															quantity: 1,
+														},
 													]);
 												}}
 											>
@@ -64,7 +67,7 @@ const UpdateTreatmentMedicineInput = ({
 				{errors.medicines?.type === 'validate' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
 			</VStack>
 			<Wrap w="100%">
-				{medicines.map((medicine) => (
+				{addedMedicines.map((medicine) => (
 					<WrapItem key={medicine.medicineId}>
 						<TreatmentUpdateCard medicine={medicine} control={control} />
 					</WrapItem>

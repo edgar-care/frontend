@@ -10,26 +10,28 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react';
+import { Control, FieldErrors } from 'react-hook-form';
 
-import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
 import UpdateTreatmentContent from 'components/dashboardPages/treatments/modal/UpdateTreatmentContent';
 
-import { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
-import { Control, FieldErrors, UseFormWatch } from 'react-hook-form';
+import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+
+import UpdateTreatmentIllustration from 'assets/illustrations/UpdateTreatmentIllustration';
 
 const UpdateTreatmentModal = ({
+	addedMedicines,
 	isOpen,
 	onClose,
 	onSubmit,
 	control,
-	watch,
 	errors,
 }: {
+	addedMedicines: PatientMedicineType[];
 	isOpen: boolean;
 	onClose: () => void;
 	onSubmit: () => void;
 	control: Control<PatientMedicalAntecedentType>;
-	watch: UseFormWatch<PatientMedicalAntecedentType>;
 	errors: FieldErrors<PatientMedicalAntecedentType>;
 }) => (
 	<Modal isOpen={isOpen} onClose={() => onClose()} size={{ base: 'xl', lg: '2xl' }}>
@@ -41,7 +43,12 @@ const UpdateTreatmentModal = ({
 						<Icon as={UpdateTreatmentIllustration} w="48px" h="48px" />
 						<Text size="xl">Modifiez un traitement</Text>
 					</VStack>
-					<UpdateTreatmentContent onSubmit={onSubmit} control={control} watch={watch} errors={errors} />
+					<UpdateTreatmentContent
+						addedMedicines={addedMedicines}
+						onSubmit={onSubmit}
+						control={control}
+						errors={errors}
+					/>
 				</VStack>
 			</ModalBody>
 			<ModalFooter p="16px 24px 24px 24px">
