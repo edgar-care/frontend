@@ -25,9 +25,14 @@ const AddTreatmentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 	const existing = watch('alreadyExist');
 
 	const onSubmit = handleSubmit((data) => {
-		if (!data.treatments.every((medicine) => medicine.day.length > 0 && medicine.period.length > 0)) {
+		if (
+			!data.treatments.every(
+				(medicine) =>
+					medicine.day.length > 0 && medicine.period.length > 0 && parseInt(medicine.quantity, 10) > 0,
+			)
+		) {
 			toast({
-				title: 'Veuillez sélectionner au moins un jour et une période pour vos traitements',
+				title: 'Veuillez sélectionner au moins un jour, une période et une quantité supérieure à 0 pour vos traitements',
 				status: 'error',
 			});
 			return;
