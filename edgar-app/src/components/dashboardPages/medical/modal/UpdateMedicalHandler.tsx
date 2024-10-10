@@ -75,7 +75,7 @@ const UpdateMedicalHandler = ({
 					name: antecedent.name,
 					id: antecedent.id,
 					medicines: antecedent.medicines.map((medicine) => ({
-						id: medicine.id,
+						id: medicine.id || '',
 						medicineId: medicine.medicineId,
 						period: medicine.periods,
 						day: medicine.days,
