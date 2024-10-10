@@ -10,6 +10,7 @@ import LoadingScreen from 'components/loader/LoadingScreen';
 import { useAuthContext } from 'contexts/auth';
 
 import { useLazyGetPatientMedicalFolderQuery } from 'services/request/medical';
+import { eventEmitter } from 'services/apiService';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const [triggerGetPatientMedicalFolder, medicalInfo] = useLazyGetPatientMedicalFolderQuery();
@@ -22,6 +23,14 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	useEffect(() => {
 		triggerGetPatientMedicalFolder();
+
+		eventEmitter.on('logout', () => {
+			router.push('/login');
+		});
+
+		eventEmitter.on('disabled', () => {
+			router.push('/disabled');
+		});
 	}, []);
 
 	useEffect(() => {

@@ -9,7 +9,7 @@ const extendedApi = backendApi.injectEndpoints({
 		getDocuments: builder.query<DocumentType[], void>({
 			query: () => '/document/download',
 			providesTags: ['patientDocuments'],
-			transformResponse: (response: { document: DocumentsStoreType[] | null }) =>
+			transformResponse: (response: { document?: DocumentsStoreType[] }) =>
 				response.document?.map((document) => ({
 					id: document.id,
 					ownerId: document.owner_id,

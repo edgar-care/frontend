@@ -8,7 +8,7 @@ const TreatmentLabel = ({ treatment }: { treatment: PatientMedicineType }) => {
 	const { data: medicineInfo, isLoading } = useGetMedicineByIdQuery(treatment.medicineId);
 	return (
 		<Skeleton isLoaded={!isLoading}>
-			<HStack bg="blue.100" borderRadius="4px" p="2px">
+			<HStack bg="blue.100" borderRadius="4px" p="4px">
 				<Text size="sm">{medicineInfo?.name}</Text>
 			</HStack>
 		</Skeleton>

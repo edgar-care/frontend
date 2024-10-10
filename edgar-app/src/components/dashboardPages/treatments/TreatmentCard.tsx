@@ -8,7 +8,7 @@ import { type TreatmentType, type TreatmentMedicinesType } from 'types/dashboard
 
 import CrossIcon from 'assets/icons/CrossIcon';
 
-import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/medical/displayMedicineUsageUnit';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
@@ -81,7 +81,7 @@ const TreatmentCard = ({
 							/>
 						)}
 					/>
-					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
+					<Text size="md">{displayMedicineUsageUnit(medicineInfo.dosageForm)}</Text>
 				</HStack>
 			</VStack>
 			<VStack spacing="4px" w="100%" maxW="200px" align="start">

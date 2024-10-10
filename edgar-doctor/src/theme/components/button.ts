@@ -214,6 +214,34 @@ const Button = {
 				transition: 'all .3s ease-in-out',
 			},
 		},
+		deleteBordered: {
+			bg: 'white',
+			color: 'red.700',
+			border: '2px solid',
+			borderColor: 'red.300',
+
+			mozTransition: 'all .3s ease-in-out',
+			oTransition: 'all .3s ease-in-out',
+			webkitTransition: 'all .3s ease-in-out',
+			transition: 'all .3s ease-in-out',
+			_hover: {
+				_disabled: {
+					bg: 'white',
+					color: 'red.700',
+					border: '2px solid',
+					borderColor: 'red.300',
+				},
+				color: 'white',
+				background: 'red.800',
+				border: '2px solid',
+				borderColor: 'red.800',
+
+				mozTransition: 'all .3s ease-in-out',
+				oTransition: 'all .3s ease-in-out',
+				webkitTransition: 'all .3s ease-in-out',
+				transition: 'all .3s ease-in-out',
+			},
+		},
 		fullGhost: {
 			padding: '0px',
 			_hover: {

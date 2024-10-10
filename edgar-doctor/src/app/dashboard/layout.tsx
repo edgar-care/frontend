@@ -9,6 +9,8 @@ import LoadingScreen from 'components/loader/LoadingScreen';
 
 import { useAuthContext } from 'contexts/auth';
 
+import { eventEmitter } from 'services/apiService';
+
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const auth = useAuthContext();
 	const router = useRouter();
@@ -19,6 +21,14 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 	useTimeout(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
 		else setIsAuthenticated(true);
+
+		eventEmitter.on('logout', () => {
+			router.push('/login');
+		});
+
+		eventEmitter.on('disabled', () => {
+			router.push('/disabled');
+		});
 	}, 750);
 
 	return (

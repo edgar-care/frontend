@@ -29,18 +29,18 @@ const AntecedentInfosHandler = ({
 		>
 			<VStack spacing="16px" align="start" w="100%">
 				<VStack spacing="8px" align="start">
-					<Text size="md">Votre sujet de santé est-il toujours en cours ?</Text>
+					<Text size="boldMd">Votre sujet de santé est-il toujours en cours ?</Text>
 					<HStack spacing="16px">
-						<Button size="sm" variant={antecedent?.stillRelevant ? 'primary' : 'secondary'}>
+						<Button size="customSm" variant={antecedent?.stillRelevant ? 'primary' : 'secondary'}>
 							Oui
 						</Button>
-						<Button size="sm" variant={antecedent?.stillRelevant ? 'secondary' : 'primary'}>
+						<Button size="customSm" variant={antecedent?.stillRelevant ? 'secondary' : 'primary'}>
 							Non
 						</Button>
 					</HStack>
 				</VStack>
 				<VStack spacing="8px" align="start" w="100%">
-					<Text size="md">Le nom de vos médicaments</Text>
+					<Text size="boldMd">Le nom de vos médicaments</Text>
 					{antecedent?.medicines.map((medicine) => (
 						<TreatmentDisplayCard key={medicine.id} treatment={medicine} />
 					))}
@@ -50,7 +50,7 @@ const AntecedentInfosHandler = ({
 				<Button size="sm" w="100%" variant="secondary" onClick={onOpenUpdateModal}>
 					Modifier
 				</Button>
-				<Button size="sm" w="100%" variant="delete" onClick={onOpenDeleteModal}>
+				<Button size="customSm" w="100%" variant="deleteBordered" onClick={onOpenDeleteModal}>
 					Supprimer
 				</Button>
 			</HStack>

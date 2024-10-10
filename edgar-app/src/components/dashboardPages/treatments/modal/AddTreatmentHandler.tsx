@@ -22,7 +22,7 @@ const AddTreatmentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
-	const existing = watch('existing');
+	const existing = watch('alreadyExist');
 
 	const onSubmit = handleSubmit((data) => {
 		if (!data.treatments.every((medicine) => medicine.day.length > 0 && medicine.period.length > 0)) {

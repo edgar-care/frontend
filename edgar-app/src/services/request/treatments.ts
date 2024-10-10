@@ -14,7 +14,7 @@ const extendedApi = backendApi.injectEndpoints({
 		getFollowUpTreatments: builder.query<TreatmentFollowUpType[], void>({
 			query: () => '/dashboard/treatment/follow-up',
 			providesTags: ['patientFollowUpTreatments'],
-			transformResponse: (response: FollowUpTreatmentsStoreType[]) =>
+			transformResponse: (response?: FollowUpTreatmentsStoreType[]) =>
 				response?.map((treatment) => ({
 					id: treatment.id,
 					date: treatment.date * 1000,
@@ -70,7 +70,7 @@ const extendedApi = backendApi.injectEndpoints({
 					})),
 				},
 			}),
-			invalidatesTags: ['patientTreatments'],
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 
 		addTreatmentAndHealthIssue: builder.mutation<void, AddTreatmentAndHealthIssueDTO>({
@@ -88,15 +88,15 @@ const extendedApi = backendApi.injectEndpoints({
 					})),
 				},
 			}),
-			invalidatesTags: ['patientTreatments'],
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 
-		DeleteTreatment: builder.mutation<void, string>({
+		deleteTreatment: builder.mutation<void, string>({
 			query: (id) => ({
 				url: `/dashboard/treatment/${id}`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['patientTreatments'],
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
 		}),
 
 		updateTreatment: builder.mutation<void, UpdateTreatmentDTO>({

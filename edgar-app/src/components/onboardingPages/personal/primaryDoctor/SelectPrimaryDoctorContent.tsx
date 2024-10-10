@@ -33,7 +33,14 @@ const SelectPrimaryDoctorContent = ({
 	return (
 		<VStack w="100%" spacing="24px">
 			<InputGroup>
-				<Input placeholder="Nom du médecin" maxLength={100} onChange={(e) => setSearchValue(e.target.value)} />
+				<Input
+					placeholder="Nom du médecin"
+					maxLength={100}
+					onChange={(e) => {
+						setPageIndex(1);
+						setSearchValue(e.target.value);
+					}}
+				/>
 				<InputRightElement>
 					<Icon as={SearchIcon} />
 				</InputRightElement>
@@ -60,7 +67,6 @@ const SelectPrimaryDoctorContent = ({
 					/>
 				)}
 			</VStack>
-			{/*	TODO: add pagination */}
 		</VStack>
 	);
 };
