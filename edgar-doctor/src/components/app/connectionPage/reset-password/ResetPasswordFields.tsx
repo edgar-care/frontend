@@ -21,7 +21,7 @@ import ErrorMessage from 'components/forms/ErrorMessage';
 import CrossIcon from 'assets/icons/CrossIcon';
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
-import type { ResetPasswordType } from 'types/password/ResetPasswordType';
+import type { ResetPasswordType } from 'types/app/login/ResetPasswordType';
 
 import { useResetPasswordMutation } from 'services/request/account';
 
