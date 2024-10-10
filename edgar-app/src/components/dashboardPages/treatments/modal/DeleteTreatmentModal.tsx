@@ -32,7 +32,7 @@ const DeleteTreatmentModal = ({
 	const handleDelete = () => {
 		if (medicineIds) {
 			medicineIds.forEach((medicine) => {
-				triggerDeleteTreatment(medicine.id);
+				if (medicine.id) triggerDeleteTreatment(medicine.id);
 			});
 		}
 		onClose();
