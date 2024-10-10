@@ -72,8 +72,6 @@ const TreatmentDisplayCard = ({ treatment }: { treatment: PatientMedicineType })
 											? 'blue.700'
 											: 'grey.300'
 									}
-									cursor="pointer"
-									_hover={{ bg: 'blue.300' }}
 								>
 									<Text color="white" userSelect="none">
 										{periodLetterMap[period as TreatmentPeriodType]}

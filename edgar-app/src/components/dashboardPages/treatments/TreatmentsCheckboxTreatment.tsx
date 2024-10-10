@@ -53,7 +53,7 @@ const TreatmentsCheckboxTreatment = ({
 							});
 					else
 						triggerCheckFollowUpTreatment({
-							treatmentId: treatment.id,
+							treatmentId: treatment.id || '',
 							date: day.getTime(),
 							periods: [period],
 						})

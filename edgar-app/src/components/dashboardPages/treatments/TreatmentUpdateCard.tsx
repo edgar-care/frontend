@@ -83,7 +83,7 @@ const TreatmentUpdateCard = ({
 							/>
 						)}
 					/>
-					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
+					<Text size="sm">{displayMedicineUnit(medicineInfo.dosageForm)}</Text>
 				</HStack>
 			</VStack>
 			<VStack spacing="4px" w="100%" maxW="200px" align="start">
