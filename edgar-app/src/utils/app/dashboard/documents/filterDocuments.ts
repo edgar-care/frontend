@@ -15,11 +15,14 @@ const filterDocuments = (
 		CERTIFICATE: (document) => document.documentType === 'CERTIFICATE',
 		OTHER: (document) => document.documentType === 'OTHER',
 	};
+
 	let filteredDocuments = [...documents];
 
-	selectedFilters.forEach((filter) => {
-		filteredDocuments = filteredDocuments.filter(filters[filter]);
-	});
+	if (selectedFilters.length > 0) {
+		filteredDocuments = filteredDocuments.filter((document) =>
+			selectedFilters.some((filter) => filters[filter](document)),
+		);
+	}
 
 	filteredDocuments = filteredDocuments.filter(
 		(document) =>
