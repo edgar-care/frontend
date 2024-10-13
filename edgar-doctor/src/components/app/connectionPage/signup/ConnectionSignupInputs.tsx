@@ -3,11 +3,12 @@ import { Button, VStack, useToast } from '@chakra-ui/react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
+import ConnectionSignupRegister from 'components/app/connectionPage/signup/ConnectionSignupRegister';
+import ConnectionSignupInfos from 'components/app/connectionPage/signup/ConnectionSignupInfos';
+
 import { useRegisterMutation } from 'services/request/account';
 
-import { RegisterType } from 'types/app/login/RegisterType';
-import ConnectionSignupRegister from './ConnectionSignupRegister';
-import ConnectionSignupInfos from './ConnectionSignupInfos';
+import type { RegisterTypeDTO } from 'store/types/account.type';
 
 const ConnectionSignupInputs = (): JSX.Element => {
 	const [triggerRegister] = useRegisterMutation();
@@ -15,7 +16,7 @@ const ConnectionSignupInputs = (): JSX.Element => {
 		handleSubmit,
 		formState: { errors },
 		register,
-	} = useForm<RegisterType>({ mode: 'onChange', defaultValues: {} });
+	} = useForm<RegisterTypeDTO>({ mode: 'onChange', defaultValues: {} });
 
 	const [step, setStep] = useState(0);
 
@@ -33,13 +34,14 @@ const ConnectionSignupInputs = (): JSX.Element => {
 			address: {
 				street: data.address.street,
 				city: data.address.city,
-				zip_code: data.address.zip_code,
+				zipCode: data.address.zipCode,
 				country: data.address.country,
 			},
 		})
 			.unwrap()
-			.then(() => {
+			.then((token) => {
 				toast({ title: 'Inscription réussie', status: 'success' });
+				localStorage.setItem('token', token);
 				if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
 				else router.push('/dashboard');
 			})
