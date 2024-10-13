@@ -1,17 +1,17 @@
 import { FormLabel, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import type { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type RegisterType } from 'types/app/login/RegisterType';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import type { RegisterTypeDTO } from 'store/types/account.type';
 
 const ConnectionSignupRegister = ({
 	register,
 	errors,
 }: {
-	register: UseFormRegister<RegisterType>;
-	errors: FieldErrors<RegisterType>;
+	register: UseFormRegister<RegisterTypeDTO>;
+	errors: FieldErrors<RegisterTypeDTO>;
 }) => {
 	const { isOpen: showPassword, onToggle: toggleShowPassword } = useDisclosure();
 	return (
