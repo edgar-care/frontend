@@ -12,21 +12,21 @@ const ConnectionSignupFields = (): JSX.Element => {
 		<VStack borderRadius="48px" w="100%" spacing="64px" p={{ base: '16px', sm: '64px' }}>
 			<VStack w="100%" align="start" spacing="0px">
 				<Text size="3xl">Inscription</Text>
-			<Text size="boldXl" maxW="750px" id="edgar-loginPage-title-text">
-				Un compte edgar vous permettra de suivre vos{' '}
-				<Box as="span" fontWeight="600" color="green.600">
-					patients
-				</Box>
-				,{' '}
-				<Box as="span" fontWeight="600" color="green.600">
-					rendez-vous
-				</Box>{' '}
-				ainsi que de valider vos{' '}
-				<Box as="span" fontWeight="600" color="green.600">
-					pré-diagnostics
-				</Box>
-				.
-			</Text>
+				<Text size="boldXl" maxW="750px" id="edgar-loginPage-title-text">
+					Un compte edgar vous permettra de suivre vos{' '}
+					<Box as="span" fontWeight="600" color="green.600">
+						patients
+					</Box>
+					,{' '}
+					<Box as="span" fontWeight="600" color="green.600">
+						rendez-vous
+					</Box>{' '}
+					ainsi que de valider vos{' '}
+					<Box as="span" fontWeight="600" color="green.600">
+						pré-diagnostics
+					</Box>
+					.
+				</Text>
 			</VStack>
 			<VStack w="100%" spacing="48px">
 				<ConnectionSignupInputs />
