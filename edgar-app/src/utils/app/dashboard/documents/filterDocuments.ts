@@ -18,9 +18,21 @@ const filterDocuments = (
 
 	let filteredDocuments = [...documents];
 
-	if (selectedFilters.length > 0) {
+	if (selectedFilters.includes('FAVORITE')) {
+		filteredDocuments = filteredDocuments.filter(filters.FAVORITE);
+	}
+	if (selectedFilters.includes('OWN')) {
+		filteredDocuments = filteredDocuments.filter(filters.OWN);
+	}
+	if (selectedFilters.includes('DOCTOR')) {
+		filteredDocuments = filteredDocuments.filter(filters.DOCTOR);
+	}
+
+	const remainingFilters = selectedFilters.filter((filter) => !['FAVORITE', 'OWN', 'DOCTOR'].includes(filter));
+
+	if (remainingFilters.length > 0) {
 		filteredDocuments = filteredDocuments.filter((document) =>
-			selectedFilters.some((filter) => filters[filter](document)),
+			remainingFilters.some((filter) => filters[filter](document)),
 		);
 	}
 
