@@ -21,7 +21,7 @@ const ConnectionLoginFields = (): JSX.Element => {
 					, gérer vos{' '}
 					<Box as="span" fontWeight="600" color="green.600">
 						rendez-vous
-					</Box>{' '}
+					</Box>
 					, vos{' '}
 					<Box as="span" fontWeight="600" color="green.600">
 						patients
