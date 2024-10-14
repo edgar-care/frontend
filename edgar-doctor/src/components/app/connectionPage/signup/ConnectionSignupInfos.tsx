@@ -3,14 +3,14 @@ import type { UseFormRegister, FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
-import { type RegisterType } from 'types/app/login/RegisterType';
+import type { RegisterTypeDTO } from 'store/types/account.type';
 
 const ConnectionSignupInfos = ({
 	register,
 	errors,
 }: {
-	register: UseFormRegister<RegisterType>;
-	errors: FieldErrors<RegisterType>;
+	register: UseFormRegister<RegisterTypeDTO>;
+	errors: FieldErrors<RegisterTypeDTO>;
 }): JSX.Element => (
 	<VStack w="100%" spacing="16px">
 		<VStack w="100%" spacing="8px" align="start">
@@ -57,12 +57,14 @@ const ConnectionSignupInfos = ({
 			<VStack w="100%" spacing="8px" align="start">
 				<FormLabel size="boldLg">Code postal</FormLabel>
 				<Input
-					{...register('address.zip_code', { minLength: 1, maxLength: 50, required: true })}
+					{...register('address.zipCode', { minLength: 5, maxLength: 50, required: true })}
 					placeholder="69000"
+					type="number"
 					w="100%"
 					maxLength={50}
 				/>
-				{errors.address?.zip_code?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+				{errors.address?.zipCode?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+				{errors.address?.zipCode?.type === 'minLength' && <ErrorMessage>Code postal invalide</ErrorMessage>}
 			</VStack>
 		</HStack>
 		<VStack w="100%" spacing="8px" align="start">

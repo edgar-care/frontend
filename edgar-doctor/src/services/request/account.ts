@@ -13,6 +13,7 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 			}),
 		}),
+
 		resetPassword: builder.mutation<void, ResetPasswordDTO>({
 			query: (params) => ({
 				url: `/auth/reset-password?uuid=${params.uuid}`,
@@ -22,7 +23,8 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 			}),
 		}),
-		register: builder.mutation<void, RegisterTypeDTO>({
+
+		register: builder.mutation<string, RegisterTypeDTO>({
 			query: (params) => ({
 				url: '/auth/d/register',
 				method: 'POST',
@@ -31,14 +33,15 @@ const extendedApi = backendApi.injectEndpoints({
 					password: params.password,
 					name: params.name,
 					firstname: params.firstname,
-					adress: {
+					address: {
 						street: params.address.street,
-						zip_code: params.address.zip_code,
+						zip_code: params.address.zipCode,
 						country: params.address.country,
 						city: params.address.city,
 					},
 				},
 			}),
+			transformResponse: (response: { token: string }) => response.token,
 		}),
 	}),
 });

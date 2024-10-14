@@ -15,7 +15,7 @@ export interface RegisterTypeDTO {
 	address: {
 		street: string;
 		city: string;
-		zip_code: string;
+		zipCode: string;
 		country: string;
 	};
 }
