@@ -25,11 +25,11 @@ describe('Login Page tests - Mobile', () => {
 			});
 
 			it('Good number of buttons', () => {
-				cy.get('button[id^=edgar-loginPage]').should('have.length', 1);
+				cy.get('button[id^=edgar-loginPage]').should('have.length', 2);
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-loginPage]').should('have.length', 2);
+				cy.get('p[id^=edgar-loginPage]').should('have.length', 3);
 			});
 
 			it('Good number of labels', () => {
