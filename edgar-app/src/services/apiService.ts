@@ -58,7 +58,6 @@ export const backendApi = createApi({
 		'patientDevice',
 		'doctor',
 		'patientTreatments',
-		'patientAccount',
 	],
 	reducerPath: 'backendApi',
 	baseQuery,

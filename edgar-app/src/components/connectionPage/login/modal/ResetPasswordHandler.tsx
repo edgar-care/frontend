@@ -6,7 +6,7 @@ import ErrorMessage from 'components/forms/ErrorMessage';
 
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
-import type { ResetPasswordType } from 'types/login/ResetPasswordType';
+import type { MissingPasswordType } from 'types/password/MissingPasswordType';
 
 import { useMissingPasswordMutation } from 'services/request/account';
 
@@ -17,7 +17,7 @@ const ResetPasswordHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: (
 		formState: { errors },
 		register,
 		reset,
-	} = useForm<ResetPasswordType>({
+	} = useForm<MissingPasswordType>({
 		mode: 'onChange',
 	});
 

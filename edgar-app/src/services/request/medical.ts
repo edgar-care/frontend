@@ -12,7 +12,7 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getPatientMedicalFolder: builder.query<PatientMedicalType, void>({
 			query: () => '/dashboard/medical-info',
-			providesTags: ['patientMedicalFolder'],
+			providesTags: ['patientMedicalFolder', 'patientTreatments'],
 			transformResponse: (response: MedicalFolderStoreType) => ({
 				id: response.medical_folder.id,
 				name: response.medical_folder.name,

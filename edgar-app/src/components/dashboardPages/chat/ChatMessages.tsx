@@ -149,7 +149,7 @@ const ChatMessages = ({
 					<InputGroup w="100%" ref={inputChatRef}>
 						<Input
 							maxLength={500}
-							placeholder="Ecriver votre message ici..."
+							placeholder="Ecrivez votre message ici..."
 							value={inputChatMessage}
 							onChange={(e) => setInputChatMessage(e.target.value)}
 							onKeyDown={(e) => {
@@ -162,7 +162,7 @@ const ChatMessages = ({
 								w="16px"
 								h="16px"
 								color="blue.950"
-								cursor="pointer"
+								cursor={inputChatMessage ? 'pointer' : 'not-allowed'}
 								onClick={submitMessage}
 							/>
 						</InputRightElement>

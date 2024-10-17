@@ -10,7 +10,7 @@ import { useGetMedicineByIdQuery } from 'services/request/medicines';
 import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 import { type PatientMedicineType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicineType';
 
-import displayMedicineUnit from 'utils/app/dashboard/diagnostic/displayMedicineUnit';
+import displayMedicineUsageUnit from 'utils/app/dashboard/diagnostic/displayMedicineUsageUnit';
 
 import MedicineCardDays from './MedicineCardDays';
 
@@ -92,7 +92,7 @@ const MedicineCard = ({
 							/>
 						)}
 					/>
-					<Text size="sm">{displayMedicineUnit(medicineInfo.unit)}</Text>
+					<Text size="sm">{displayMedicineUsageUnit(medicineInfo.dosageForm)}</Text>
 				</HStack>
 			</VStack>
 			<VStack spacing="4px" w="100%" maxW="200px" align="start">

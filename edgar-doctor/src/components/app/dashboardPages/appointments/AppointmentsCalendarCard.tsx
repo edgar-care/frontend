@@ -27,7 +27,7 @@ const AppointmentsCalendarCard = ({ appointments }: { appointments?: Appointment
 		>
 			<VStack spacing="16px">
 				<Box w="100%">
-					<Link href="/simulation">
+					<Link href="/dashboard/agenda">
 						<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
 							Consulter mon agenda
 						</Button>

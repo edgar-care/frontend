@@ -16,6 +16,7 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import BetaWarningBanner from 'components/BetaWarningBanner';
 import ResetPasswordHandler from 'components/connectionPage/login/modal/ResetPasswordHandler';
 
 import useCustomState from 'hooks/useCustomState';
@@ -124,21 +125,24 @@ const ConnectionLoginInputs = (): JSX.Element => {
 					</Text>
 				</VStack>
 			</FormControl>
-			<Button
-				w="100%"
-				onClick={() =>
-					onSubmitLogin(email, password, setEmailError, setPasswordError, auth).then((response) => {
-						toast({ title: response.title, status: response.status });
-						if (response.status === 'success') {
-							if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
-							else router.push('/dashboard');
-						}
-					})
-				}
-				id="edgar-loginPage-form-button"
-			>
-				Se connecter
-			</Button>
+			<VStack w="100%" spacing="16px">
+				<BetaWarningBanner />
+				<Button
+					w="100%"
+					onClick={() =>
+						onSubmitLogin(email, password, setEmailError, setPasswordError, auth).then((response) => {
+							toast({ title: response.title, status: response.status });
+							if (response.status === 'success') {
+								if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
+								else router.push('/dashboard');
+							}
+						})
+					}
+					id="edgar-loginPage-form-button"
+				>
+					Se connecter
+				</Button>
+			</VStack>
 			<ResetPasswordHandler isOpen={isOpenResetModal} onClose={onCloseResetModal} />
 		</VStack>
 	);

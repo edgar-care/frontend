@@ -2,6 +2,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { chakra, Button, VStack, useToast, useTimeout } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
+import BetaWarningBanner from 'components/BetaWarningBanner';
 import OnboardingMedicalHealthIssues from 'components/onboardingPages/medical/OnboardingMedicalHealthIssues';
 
 import { useOnboardingContext } from 'contexts/onboarding';
@@ -91,6 +92,7 @@ const OnboardingMedicalFields = (): JSX.Element => {
 				>
 					<VStack w="100%" align={{ base: 'center', lg: 'start' }}>
 						<VStack w="100%" spacing="16px">
+							<BetaWarningBanner />
 							<OnboardingMedicalHealthIssues
 								control={control}
 								errors={errors}

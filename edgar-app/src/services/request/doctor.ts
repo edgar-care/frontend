@@ -27,8 +27,8 @@ const extendedApi = backendApi.injectEndpoints({
 		getDoctors: builder.query<DoctorType[], void>({
 			query: () => `/doctors`,
 			providesTags: ['doctor'],
-			transformResponse: (response: { Doctors: DoctorStoreType[] }) =>
-				response.Doctors.map((doctor) => ({
+			transformResponse: (response: { Doctors?: DoctorStoreType[] }) =>
+				response.Doctors?.map((doctor) => ({
 					id: doctor.id,
 					email: doctor.email,
 					name: doctor.name,
@@ -39,15 +39,15 @@ const extendedApi = backendApi.injectEndpoints({
 						zipCode: doctor.address.zip_code,
 						country: doctor.address.country,
 					},
-				})),
+				})) || [],
 		}),
 
 		getDoctorByIdSlots: builder.query<SlotType[], string>({
 			query: (id) => `/doctor/${id}/appointments`,
 			providesTags: ['doctor'],
-			transformResponse: (response: { rdv: SlotsStoreType[] }) =>
+			transformResponse: (response: { rdv?: SlotsStoreType[] }) =>
 				response.rdv
-					.filter(
+					?.filter(
 						(slot) => slot.appointment_status === 'OPENED' && slot.start_date * 1000 > new Date().getTime(),
 					)
 					.map((slot) => ({
@@ -55,7 +55,7 @@ const extendedApi = backendApi.injectEndpoints({
 						startDate: slot.start_date * 1000,
 						endDate: slot.end_date * 1000,
 						doctorId: slot.doctor_id,
-					})),
+					})) || [],
 		}),
 	}),
 });

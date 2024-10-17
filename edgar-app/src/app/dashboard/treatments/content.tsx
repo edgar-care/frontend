@@ -1,7 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, HStack, Icon, Input, InputGroup, InputRightElement, useDisclosure, VStack } from '@chakra-ui/react';
+import {
+	Button,
+	HStack,
+	Icon,
+	Input,
+	InputGroup,
+	InputRightElement,
+	Stack,
+	useBreakpointValue,
+	useDisclosure,
+	VStack,
+} from '@chakra-ui/react';
 
 import DashboardPageBanner from 'components/dashboardPages/DashboardPageBanner';
 import TreatmentsCalendar from 'components/dashboardPages/treatments/TreatmentsCalendar';
@@ -10,7 +21,6 @@ import AddTreatmentHandler from 'components/dashboardPages/treatments/modal/AddT
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import { type PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 import AntecedentCard from 'components/dashboardPages/treatments/AntecedentCard';
@@ -18,6 +28,8 @@ import AntecedentInfosHandler from 'components/dashboardPages/treatments/Anteced
 
 const TreatmentsPageContent = (): JSX.Element => {
 	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
+
+	const hasDrawerOnTheLeft = useBreakpointValue({ base: false, '2xl': true });
 
 	const [searchText, setSearchText] = useState('');
 	const [selectedAntecedentId, setSelectedAntecedentId] = useState('');
@@ -28,11 +40,6 @@ const TreatmentsPageContent = (): JSX.Element => {
 			.map((antecedent) => antecedent.medicines)
 			.flat() || [];
 
-	const allAntecedents: PatientMedicalAntecedentType[] =
-		medicalInfo?.medicalAntecedents
-			.filter((antecedent) => antecedent.stillRelevant)
-			.concat(medicalInfo?.medicalAntecedents.filter((antecedent) => !antecedent.stillRelevant)) || [];
-
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (
@@ -42,7 +49,7 @@ const TreatmentsPageContent = (): JSX.Element => {
 				subTitle="Retrouvez tous vos traitements en cours et passés."
 			/>
 			<VStack w="100%" spacing="16px">
-				<HStack w="100%" spacing="16px">
+				<Stack direction={{ base: 'column', md: 'row' }} w="100%" spacing="16px">
 					<Button
 						whiteSpace="nowrap"
 						w={{ base: '100%', md: 'auto' }}
@@ -61,26 +68,33 @@ const TreatmentsPageContent = (): JSX.Element => {
 							<Icon as={SearchIcon} w="16px" h="16px" />
 						</InputRightElement>
 					</InputGroup>
-				</HStack>
-				<HStack w="100%" spacing="16px" align="start">
+				</Stack>
+				<Stack direction={{ base: 'column', md: 'row' }} w="100%" spacing="16px" align="start">
 					<TreatmentsCalendar treatments={treatments} />
 					<HStack w="100%" align="start" h="100%">
 						<VStack w="100%" spacing="8px" h="100%">
-							{allAntecedents.map((antecedent) => (
-								<AntecedentCard
-									key={antecedent.id}
-									antecedent={antecedent}
-									manageOnClick={() => setSelectedAntecedentId(antecedent.id)}
-								/>
+							{medicalInfo?.medicalAntecedents.map((antecedent) => (
+								<VStack w="100%">
+									<AntecedentCard
+										key={antecedent.id}
+										antecedent={antecedent}
+										manageOnClick={() => setSelectedAntecedentId(antecedent.id)}
+									/>
+									{!hasDrawerOnTheLeft && selectedAntecedentId === antecedent.id && (
+										<AntecedentInfosHandler antecedent={antecedent} />
+									)}
+								</VStack>
 							))}
 						</VStack>
-						{selectedAntecedentId && (
+						{hasDrawerOnTheLeft && selectedAntecedentId && (
 							<AntecedentInfosHandler
-								antecedent={allAntecedents.find((antecedent) => antecedent.id === selectedAntecedentId)}
+								antecedent={medicalInfo?.medicalAntecedents.find(
+									(antecedent) => antecedent.id === selectedAntecedentId,
+								)}
 							/>
 						)}
 					</HStack>
-				</HStack>
+				</Stack>
 			</VStack>
 			<AddTreatmentHandler isOpen={isOpenAddModal} onClose={onCloseAddModal} />
 		</VStack>

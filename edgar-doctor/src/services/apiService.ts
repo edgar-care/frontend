@@ -52,7 +52,6 @@ export const backendApi = createApi({
 		'doctor2faMethod',
 		'doctor2faBackupCodes',
 		'doctor2faTrustedDevices',
-		'doctorAccount',
 		'doctorDevice',
 		'doctorPrescriptions',
 	],

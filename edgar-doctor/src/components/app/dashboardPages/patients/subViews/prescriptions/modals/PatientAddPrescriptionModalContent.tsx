@@ -1,5 +1,5 @@
 import { type Control, Controller, type FieldErrors, type UseFormWatch } from 'react-hook-form';
-import { VStack } from '@chakra-ui/react';
+import { Text, VStack } from '@chakra-ui/react';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 import AdvancedSelector from 'components/AdvancedSelector';
@@ -9,6 +9,8 @@ import PatientAddPrescriptionCard from 'components/app/dashboardPages/patients/s
 import type { UploadPatientPrescriptionDTO } from 'store/types/prescriptions.type';
 
 import { useGetMedicinesQuery } from 'services/request/medicines';
+
+import displayMedicineUnit from 'utils/app/dashboard/diagnostic/displayMedicineUnit';
 
 import AddIcon from 'assets/icons/AddIcon';
 
@@ -55,7 +57,9 @@ const PatientAddPrescriptionModalContent = ({
 													]);
 												}}
 											>
-												<>{medicine.name}</>
+												<Text>
+													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
+												</Text>
 											</SelectMedicalAntecedentsMedicineInputCard>
 										),
 									})) || []

@@ -25,11 +25,11 @@ describe('Login Page tests - Mobile', () => {
 			});
 
 			it('Good number of buttons', () => {
-				cy.get('button[id^=edgar-loginPage]').should('have.length', 1);
+				cy.get('button[id^=edgar-loginPage]').should('have.length', 2);
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-loginPage]').should('have.length', 2);
+				cy.get('p[id^=edgar-loginPage]').should('have.length', 3);
 			});
 
 			it('Good number of labels', () => {
@@ -57,11 +57,11 @@ describe('Login Page tests - Mobile', () => {
 			it('Good content for texts', () => {
 				cy.get('#edgar-loginPage-EdgarCard-title-text').should(
 					'contain.text',
-					'Bienvenue sur la plateforme edgar',
+					'Heureux de vous revoir',
 				);
 				cy.get('#edgar-loginPage-title-text').should(
 					'contain.text',
-					'Connectez-vous avec votre compte pour accéder à votre espace patient, gérer vos rendez-vous et bien plus',
+					'Connectez-vous avec votre compte pour accéder à votre espace médecin, gérer vos rendez-vous, vos patients et bien plus.',
 				);
 				cy.get('#edgar-loginPage-formEmail-text').should('contain.text', 'Adresse mail');
 				cy.get('#edgar-loginPage-formPassword-text').should('contain.text', 'Mot de passe');

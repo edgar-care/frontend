@@ -8,8 +8,8 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getConnectedDevices: builder.query<DeviceType[], void>({
 			query: () => 'dashboard/devices',
-			transformResponse: (response: { devices: DeviceStoreType[] }) =>
-				response.devices.map((device) => ({
+			transformResponse: (response: { devices?: DeviceStoreType[] }) =>
+				response.devices?.map((device) => ({
 					id: device.id,
 					deviceType: device.device_type,
 					browserType: device.browser,
@@ -17,7 +17,7 @@ const extendedApi = backendApi.injectEndpoints({
 					region: device.region,
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
-				})),
+				})) || [],
 		}),
 
 		getConnectedDeviceById: builder.query<DeviceType, string>({

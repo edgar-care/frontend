@@ -2,7 +2,7 @@ import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPerio
 import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
 
 export type PatientMedicineType = {
-	id: string;
+	id?: string;
 	medicineId: string;
 	periods: TreatmentPeriodType[];
 	days: TreatmentDayType[];
