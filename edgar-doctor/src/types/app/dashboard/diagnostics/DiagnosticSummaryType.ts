@@ -19,6 +19,6 @@ export type DiagnosticSummaryLogType = {
 
 export type DiagnosticSummarySymptomType = {
 	name: string;
-	presence: boolean | null;
+	presence: number; // 0 = null | 1 = true | 2 = false
 	duration: number;
 };

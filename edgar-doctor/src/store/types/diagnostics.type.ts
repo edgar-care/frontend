@@ -11,5 +11,5 @@ export interface DiagnosticSummaryStoreType {
 	fiability: number;
 	logs: { question: string; answer: string }[];
 	session_id: string;
-	symptoms: { name: string; presence: boolean | null; duration: number }[];
+	symptoms: { name: string; presence: number; duration: number }[];
 }
