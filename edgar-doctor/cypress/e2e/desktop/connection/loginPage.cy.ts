@@ -57,7 +57,7 @@ describe('Login Page tests - Desktop', () => {
 			it('Good content for texts', () => {
 				cy.get('#edgar-loginPage-EdgarCard-title-text').should(
 					'contain.text',
-					'Bienvenue sur la plateforme edgar',
+					'Heureux de vous revoir',
 				);
 				cy.get('#edgar-loginPage-title-text').should(
 					'contain.text',
