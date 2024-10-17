@@ -57,11 +57,11 @@ describe('Login Page tests - Mobile', () => {
 			it('Good content for texts', () => {
 				cy.get('#edgar-loginPage-EdgarCard-title-text').should(
 					'contain.text',
-					'Bienvenue sur la plateforme edgar',
+					'Heureux de vous revoir',
 				);
 				cy.get('#edgar-loginPage-title-text').should(
 					'contain.text',
-					'Connectez-vous avec votre compte pour accéder à votre espace patient, gérer vos rendez-vous et bien plus',
+					'Connectez-vous avec votre compte pour accéder à votre espace médecin, gérer vos rendez-vous, vos patients et bien plus.',
 				);
 				cy.get('#edgar-loginPage-formEmail-text').should('contain.text', 'Adresse mail');
 				cy.get('#edgar-loginPage-formPassword-text').should('contain.text', 'Mot de passe');
