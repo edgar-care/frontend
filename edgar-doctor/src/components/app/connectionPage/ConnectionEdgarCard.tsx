@@ -3,7 +3,7 @@
 import { Text, useBreakpointValue, VStack } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/next-js';
 
-const ConnectionEdgarCard = (): JSX.Element => {
+const ConnectionEdgarCard = ({ title }: { title: string }): JSX.Element => {
 	const isTablet = useBreakpointValue({ base: true, lg: false });
 
 	return (
@@ -21,7 +21,7 @@ const ConnectionEdgarCard = (): JSX.Element => {
 				mt={{ base: '0px', lg: '32px' }}
 				id="edgar-loginPage-EdgarCard-title-text"
 			>
-				Bienvenue sur la plateforme edgar
+				{title}
 			</Text>
 			{!isTablet && (
 				<>

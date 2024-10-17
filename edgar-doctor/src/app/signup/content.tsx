@@ -42,7 +42,7 @@ const SignupPageContent = (): JSX.Element => {
 					spacing="16px"
 					h="100%"
 				>
-					<ConnectionEdgarCard />
+					<ConnectionEdgarCard title={'Bienvenue sur la plateforme edgar'} />
 					<ConnectionSignupFields />
 				</VStack>
 			) : (
@@ -57,7 +57,7 @@ const SignupPageContent = (): JSX.Element => {
 					maxW="1750px"
 				>
 					<ConnectionSignupFields />
-					<ConnectionEdgarCard />
+					<ConnectionEdgarCard title={'Bienvenue sur la plateforme edgar'} />
 				</HStack>
 			)}
 		</VStack>
