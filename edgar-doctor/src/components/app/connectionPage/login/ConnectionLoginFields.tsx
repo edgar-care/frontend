@@ -16,7 +16,7 @@ const ConnectionLoginFields = (): JSX.Element => {
 				<Text size="boldXl" maxW="750px" id="edgar-loginPage-title-text">
 					Connectez-vous avec votre compte pour accéder à votre{' '}
 					<Box as="span" fontWeight="600" color="green.600">
-						espace patient
+						espace médecin
 					</Box>
 					, gérer vos{' '}
 					<Box as="span" fontWeight="600" color="green.600">
