@@ -42,7 +42,7 @@ const LoginPageContent = (): JSX.Element => {
 					spacing="16px"
 					h="100%"
 				>
-					<ConnectionEdgarCard />
+					<ConnectionEdgarCard title={'Heureux de vous revoir'} />
 					<ConnectionLoginFields />
 				</VStack>
 			) : (
@@ -56,7 +56,7 @@ const LoginPageContent = (): JSX.Element => {
 					spacing="0px"
 					maxW="1750px"
 				>
-					<ConnectionEdgarCard />
+					<ConnectionEdgarCard title={'Heureux de vous revoir'} />
 					<ConnectionLoginFields />
 				</HStack>
 			)}
