@@ -15,11 +15,26 @@ const filterDocuments = (
 		CERTIFICATE: (document) => document.documentType === 'CERTIFICATE',
 		OTHER: (document) => document.documentType === 'OTHER',
 	};
+
 	let filteredDocuments = [...documents];
 
-	selectedFilters.forEach((filter) => {
-		filteredDocuments = filteredDocuments.filter(filters[filter]);
-	});
+	if (selectedFilters.includes('FAVORITE')) {
+		filteredDocuments = filteredDocuments.filter(filters.FAVORITE);
+	}
+	if (selectedFilters.includes('OWN')) {
+		filteredDocuments = filteredDocuments.filter(filters.OWN);
+	}
+	if (selectedFilters.includes('DOCTOR')) {
+		filteredDocuments = filteredDocuments.filter(filters.DOCTOR);
+	}
+
+	const remainingFilters = selectedFilters.filter((filter) => !['FAVORITE', 'OWN', 'DOCTOR'].includes(filter));
+
+	if (remainingFilters.length > 0) {
+		filteredDocuments = filteredDocuments.filter((document) =>
+			remainingFilters.some((filter) => filters[filter](document)),
+		);
+	}
 
 	filteredDocuments = filteredDocuments.filter(
 		(document) =>
