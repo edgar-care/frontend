@@ -27,7 +27,7 @@ const SimulationChat = ({
 	const [messages, setMessages] = useState<SimulationChatMessageType[]>([
 		{
 			message:
-				'Bonjour, je m’appel Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
+				'Bonjour, je m’appelle Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
 			createdAt: new Date(),
 			isUserSender: false,
 			isLastMessage: false,
