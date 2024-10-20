@@ -10,7 +10,7 @@ import { useAuthContext } from 'contexts/auth';
 import LoadingScreen from 'components/loader/LoadingScreen';
 
 const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const auth = useAuthContext();
 	const router = useRouter();
@@ -21,7 +21,7 @@ const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element 
 
 	useTimeout(() => {
 		setIsLoading(false);
-	}, 750);
+	}, 1000);
 
 	return (
 		<OnboardingProvider>

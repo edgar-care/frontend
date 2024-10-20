@@ -33,7 +33,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 		watch,
 	} = useForm<PersonalInfos>({
 		mode: 'onChange',
-		defaultValues: onboardingInfos,
+		defaultValues: { ...onboardingInfos, birthdate: 0 },
 	});
 
 	const router = useRouter();
