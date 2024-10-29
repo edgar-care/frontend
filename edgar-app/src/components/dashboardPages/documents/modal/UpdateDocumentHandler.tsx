@@ -43,7 +43,7 @@ const UpdateDocumentHandler = ({
 	const onSubmit = handleSubmit((data) => {
 		const newExtension = getDocumentExtension(data.documentName);
 		const newDocumentName = handleDocumentExtension(data.documentName, newExtension);
-	
+
 		if (newExtension) {
 			setFormData(data);
 			openConfirmation();
@@ -52,34 +52,34 @@ const UpdateDocumentHandler = ({
 				id: document.id,
 				documentName: newDocumentName,
 			})
-			.unwrap()
-			.then(() => {
-				toast({ title: 'Votre document a été mis à jour', status: 'success' });
-				onCloseAction();
-			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre document a été mis à jour', status: 'success' });
+					onCloseAction();
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
 		}
 	});
-	
+
 	const confirmSubmit = () => {
 		if (formData) {
 			const newExtension = getDocumentExtension(formData.documentName);
 			const newDocumentName = handleDocumentExtension(formData.documentName, newExtension);
-	
+
 			triggerUpdateDocument({
 				id: document.id,
 				documentName: newDocumentName,
 			})
-			.unwrap()
-			.then(() => {
-				toast({ title: 'Votre document a été mis à jour', status: 'success' });
-				onCloseAction();
-			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
+				.unwrap()
+				.then(() => {
+					toast({ title: 'Votre document a été mis à jour', status: 'success' });
+					onCloseAction();
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
 			closeConfirmation();
 		}
 	};
