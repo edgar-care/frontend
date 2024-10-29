@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, useToast } from '@chakra-ui/react';
+import { Button, useToast, useDisclosure } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import ModalHandler from 'components/modals/ModalHandler';
@@ -24,18 +24,15 @@ const UpdateDocumentHandler = ({
 	onClose: () => void;
 	document: DocumentType;
 }): JSX.Element => {
+	const { isOpen: isConfirmationOpen, onOpen: openConfirmation, onClose: closeConfirmation } = useDisclosure();
 	const [triggerUpdateDocument] = useUpdateDocumentMutation();
 	const {
 		handleSubmit,
 		formState: { errors },
 		register,
 		reset,
-	} = useForm<UpdateDocumentType>({
-		mode: 'onChange',
-	});
+	} = useForm<UpdateDocumentType>({ mode: 'onChange' });
 	const toast = useToast({ duration: 3000, isClosable: true });
-
-	const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 	const [formData, setFormData] = useState<UpdateDocumentType | null>(null);
 
 	const onCloseAction = () => {
@@ -43,47 +40,49 @@ const UpdateDocumentHandler = ({
 		onClose();
 	};
 
-	const handleConfirmationClose = () => {
-		setIsConfirmationOpen(false);
-	};
-
-	const confirmSubmit = () => {
-		if (formData) {
-			triggerUpdateDocument({
-				id: document.id,
-				documentName: handleDocumentExtension(formData.documentName, getDocumentExtension(document.name)),
-			})
-				.unwrap()
-				.then(() => {
-					toast({ title: 'Votre document a été mis à jour', status: 'success' });
-					onCloseAction();
-				})
-				.catch(() => {
-					toast({ title: 'Une erreur est survenue', status: 'error' });
-				});
-			handleConfirmationClose();
-		}
-	};
-
 	const onSubmit = handleSubmit((data) => {
-		if (data.documentName.includes('.')) {
+		const newExtension = getDocumentExtension(data.documentName);
+		const newDocumentName = handleDocumentExtension(data.documentName, newExtension);
+	
+		if (newExtension) {
 			setFormData(data);
-			setIsConfirmationOpen(true);
+			openConfirmation();
 		} else {
 			triggerUpdateDocument({
 				id: document.id,
-				documentName: handleDocumentExtension(data.documentName, getDocumentExtension(document.name)),
+				documentName: newDocumentName,
 			})
-				.unwrap()
-				.then(() => {
-					toast({ title: 'Votre document a été mis à jour', status: 'success' });
-					onCloseAction();
-				})
-				.catch(() => {
-					toast({ title: 'Une erreur est survenue', status: 'error' });
-				});
+			.unwrap()
+			.then(() => {
+				toast({ title: 'Votre document a été mis à jour', status: 'success' });
+				onCloseAction();
+			})
+			.catch(() => {
+				toast({ title: 'Une erreur est survenue', status: 'error' });
+			});
 		}
 	});
+	
+	const confirmSubmit = () => {
+		if (formData) {
+			const newExtension = getDocumentExtension(formData.documentName);
+			const newDocumentName = handleDocumentExtension(formData.documentName, newExtension);
+	
+			triggerUpdateDocument({
+				id: document.id,
+				documentName: newDocumentName,
+			})
+			.unwrap()
+			.then(() => {
+				toast({ title: 'Votre document a été mis à jour', status: 'success' });
+				onCloseAction();
+			})
+			.catch(() => {
+				toast({ title: 'Une erreur est survenue', status: 'error' });
+			});
+			closeConfirmation();
+		}
+	};
 
 	return (
 		<>
@@ -110,7 +109,7 @@ const UpdateDocumentHandler = ({
 			/>
 			<ModalHandler
 				isOpen={isConfirmationOpen}
-				onClose={handleConfirmationClose}
+				onClose={closeConfirmation}
 				size="md"
 				headerTitle="Confirmation requise"
 				headerSubtitle="Le nom de votre document contient un point ('.'). Voulez-vous vraiment continuer ?"
@@ -121,7 +120,7 @@ const UpdateDocumentHandler = ({
 					</Button>
 				}
 				footerSecondaryButton={
-					<Button size="customMd" variant="secondary" w="100%" onClick={handleConfirmationClose}>
+					<Button size="customMd" variant="secondary" w="100%" onClick={closeConfirmation}>
 						Annuler
 					</Button>
 				}
