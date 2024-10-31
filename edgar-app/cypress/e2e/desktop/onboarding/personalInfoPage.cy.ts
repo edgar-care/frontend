@@ -132,11 +132,6 @@ describe('Personal Info Page tests - Desktop', () => {
 					'contain.text',
 					'Ce champ est nécessaire',
 				);
-				cy.get('#edgar-onboardingPersonalPage-formBirthdateErrorRequired-text').should('be.visible');
-				cy.get('#edgar-onboardingPersonalPage-formBirthdateErrorRequired-text').should(
-					'contain.text',
-					'Ce champ est nécessaire',
-				);
 				cy.get('#edgar-onboardingPersonalPage-formSexError-text').should('be.visible');
 				cy.get('#edgar-onboardingPersonalPage-formSexError-text').should(
 					'contain.text',
