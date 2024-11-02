@@ -10,7 +10,7 @@ import ConnectionEdgarCard from 'components/connectionPage/ConnectionEdgarCard';
 import { useAuthContext } from 'contexts/auth';
 
 const SignupPageContent = (): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 

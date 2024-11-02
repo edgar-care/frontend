@@ -16,7 +16,7 @@ const SimulationStartPageContent = (): JSX.Element => {
 	const [triggerInitiateDiagnostic] = useInitiateDiagnosticMutation();
 	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 
 	useEffect(() => {

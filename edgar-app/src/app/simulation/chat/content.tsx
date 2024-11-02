@@ -16,7 +16,7 @@ const SimulationChatContent = (): JSX.Element => {
 	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 	const [edgarState, setEdgarState] = useState<SimulationChatEdgarCardType>('START');
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const router = useRouter();
 

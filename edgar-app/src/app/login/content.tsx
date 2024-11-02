@@ -10,7 +10,7 @@ import ConnectionLoginFields from 'components/connectionPage/login/ConnectionLog
 import { useAuthContext } from 'contexts/auth';
 
 const LoginPageContent = (): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 

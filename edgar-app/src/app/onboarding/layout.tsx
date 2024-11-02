@@ -12,7 +12,7 @@ import LoadingScreen from 'components/loader/LoadingScreen';
 const OnboardingLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 
 	useEffect(() => {
