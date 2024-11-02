@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 
 import settingsPage from 'components/settingsModals/pages/settingsPage';
@@ -48,7 +48,7 @@ const ModalPages = ({
 	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
 	const [triggerRemoveDevice] = useRemoveDeviceMutation();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
 	const [isBackupCodeGenerated, setIsBackupCodeGenerated] = useState(false);

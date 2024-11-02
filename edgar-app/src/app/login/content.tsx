@@ -6,14 +6,14 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import ConnectionEdgarCard from 'components/connectionPage/ConnectionEdgarCard';
 import ConnectionLoginFields from 'components/connectionPage/login/ConnectionLoginFields';
+import LoadingScreen from 'components/loader/LoadingScreen';
 
 import { useAuthContext } from 'contexts/auth';
-import LoadingScreen from 'components/loader/LoadingScreen';
 
 const LoginPageContent = (): JSX.Element => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
