@@ -12,7 +12,7 @@ import getDocumentExtension from 'utils/app/dashboard/documents/getDocumentExten
 import type { UpdateDocumentType } from 'types/dashboard/documents/UpdateDocumentType';
 import type { DocumentType } from 'types/dashboard/documents/DocumentType';
 
-import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
+import UpdateDocumentIllustration from 'assets/illustrations/UpdateDocumentIllustration';
 
 const UpdateDocumentHandler = ({
 	isOpen,
@@ -62,7 +62,7 @@ const UpdateDocumentHandler = ({
 			size="3xl"
 			headerTitle="Modifier votre document"
 			headerSubtitle="Modifier le nom de votre document."
-			headerIcon={CalendarIllustration}
+			headerIcon={UpdateDocumentIllustration}
 			bodyContent={<UpdateDocumentModalContent placeholder={document.name} errors={errors} register={register} />}
 			footerPrimaryButton={
 				<Button size="customMd" w="100%" onClick={onSubmit}>
