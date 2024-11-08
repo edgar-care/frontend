@@ -5,7 +5,7 @@ import { useAuthContext } from 'contexts/auth';
 import { type ChatMessageType } from 'types/dashboard/chat/ChatType';
 
 const ChatMessageCard = ({ message }: { message: ChatMessageType }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	return (
 		<HStack

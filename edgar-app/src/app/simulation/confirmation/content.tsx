@@ -18,7 +18,7 @@ const SimulationConfirmationContent = (): JSX.Element => {
 	const [triggerAppointment, resultAppointment] = useLazyGetPatientAppointmentByIdQuery();
 	const [triggerDoctor, resultDoctor] = useLazyGetDoctorByIdQuery();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const appointmentId = searchParams.get('appointmentId');
