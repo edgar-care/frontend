@@ -4,7 +4,7 @@ import { useGetPrescriptionByIdQuery } from 'services/request/prescriptions';
 import { useAuthContext } from 'contexts/auth';
 
 const PatientPrescriptionCard = ({ prescriptionId }: { prescriptionId: string }) => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { data: prescription } = useGetPrescriptionByIdQuery(prescriptionId);
 
 	return (

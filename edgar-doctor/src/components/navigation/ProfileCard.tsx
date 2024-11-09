@@ -18,7 +18,7 @@ import { type ProfileTabType } from 'types/navigation/ProfileType';
 import colors from 'theme/foundations/colors';
 
 const ProfileCard = (): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const { data: doctorInfo } = useGetDoctorByIdQuery(auth.getId());
 

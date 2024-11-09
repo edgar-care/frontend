@@ -48,7 +48,7 @@ const ModalPages = ({
 	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
 	const [triggerRemoveDevice] = useRemoveDeviceMutation();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
 	const [isBackupCodeGenerated, setIsBackupCodeGenerated] = useState(false);

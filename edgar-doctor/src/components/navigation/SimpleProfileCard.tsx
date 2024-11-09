@@ -8,7 +8,7 @@ import { useGetDoctorByIdQuery } from 'services/request/doctor';
 import colors from 'theme/foundations/colors';
 
 const SimpleProfileCard = (): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const { data: doctorInfo } = useGetDoctorByIdQuery(auth.getId());
 

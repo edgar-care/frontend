@@ -38,7 +38,7 @@ const ChatMessages = ({
 	chat: ChatType;
 	setSelectedChatId?: Dispatch<SetStateAction<string>>;
 }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { actions } = useChatContext();
 
 	const recipient = chat?.participants.filter((participant) => participant.participantId !== auth.getId())[0];

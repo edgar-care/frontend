@@ -23,7 +23,7 @@ const SettingsBody = ({
 	id?: string;
 	setSelectedPageStack: Dispatch<SetStateAction<string[]>>;
 }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const { data: doctorInfo, isLoading } = useGetDoctorByIdQuery(auth.getId());
 
