@@ -38,7 +38,13 @@ const ConnectionLoginInputs = (): JSX.Element => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
-	const auth = useAuthContext();
+	const {
+		auth,
+		setAvailableMethods,
+		setDeviceInfos,
+		setEmail: setEmail2fa,
+		setPassword: setPassword2fa,
+	} = useAuthContext();
 
 	const toast = useToast({ duration: 2000, isClosable: true });
 
@@ -127,7 +133,21 @@ const ConnectionLoginInputs = (): JSX.Element => {
 			<Button
 				w="100%"
 				onClick={() =>
-					onSubmitLogin(email, password, setEmailError, setPasswordError, auth).then((response) => {
+					onSubmitLogin(
+						email,
+						password,
+						setEmailError,
+						setPasswordError,
+						auth,
+						setAvailableMethods,
+						setDeviceInfos,
+					).then((response) => {
+						if (response.status === 'info') {
+							setEmail2fa(email);
+							setPassword2fa(password);
+							router.push('/login-2fa');
+							return;
+						}
 						toast({ title: response.title, status: response.status });
 						if (response.status === 'success') {
 							if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
