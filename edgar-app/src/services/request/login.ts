@@ -6,7 +6,7 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		sendLogin2faEmail: builder.mutation<void, string>({
 			query: (email) => ({
-				url: '/auth/sending_email',
+				url: '/auth/p/sending_email',
 				method: 'POST',
 				body: {
 					email,
@@ -16,7 +16,7 @@ const extendedApi = backendApi.injectEndpoints({
 
 		loginWithEmail: builder.mutation<string, Login2faDTO>({
 			query: (params) => ({
-				url: '/auth/email_2fa',
+				url: '/auth/p/email_2fa',
 				method: 'POST',
 				body: {
 					email: params.email,
@@ -29,7 +29,7 @@ const extendedApi = backendApi.injectEndpoints({
 
 		loginWithAuthenticator: builder.mutation<string, Login2faDTO>({
 			query: (params) => ({
-				url: '/auth/third_party_2fa',
+				url: '/auth/p/third_party_2fa',
 				method: 'POST',
 				body: {
 					email: params.email,
@@ -42,7 +42,7 @@ const extendedApi = backendApi.injectEndpoints({
 
 		loginWithMobile: builder.mutation<string, Login2faDTO>({
 			query: (params) => ({
-				url: '/auth/mobile_2fa',
+				url: '/auth/p/mobile_2fa',
 				method: 'POST',
 				body: {
 					email: params.email,
@@ -55,7 +55,7 @@ const extendedApi = backendApi.injectEndpoints({
 
 		loginWithBackupCodes: builder.mutation<string, Login2faDTO>({
 			query: (params) => ({
-				url: '/auth/backup_code_2fa',
+				url: '/auth/p/backup_code_2fa',
 				method: 'POST',
 				body: {
 					email: params.email,

@@ -16,7 +16,7 @@ class Auth {
 				localStorage.setItem('token', data.token);
 				return { title: 'Connexion réussie', status: 'success' };
 			}
-			if (data['2fa_methods']) return { methods: data['2fa_methods'], deviceInfos: data.device };
+			if (data.Methods) return { methods: data.Methods, deviceInfos: data.DeviceInfo };
 
 			return { title: 'Echec de la connexion, veuillez réessayer', status: 'error' };
 		} catch (error) {
