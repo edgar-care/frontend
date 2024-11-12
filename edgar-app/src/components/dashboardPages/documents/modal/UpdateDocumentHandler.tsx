@@ -41,10 +41,11 @@ const UpdateDocumentHandler = ({
 	};
 
 	const onSubmit = handleSubmit((data) => {
-		const newExtension = getDocumentExtension(data.documentName);
-		const newDocumentName = handleDocumentExtension(data.documentName, newExtension);
-
-		if (newExtension) {
+		const currentExtension = getDocumentExtension(document.name);
+		const newDocumentName = data.documentName.includes('.')
+			? data.documentName
+			: handleDocumentExtension(data.documentName, currentExtension);
+		if (data.documentName.includes('.')) {
 			setFormData(data);
 			openConfirmation();
 		} else {
@@ -65,8 +66,10 @@ const UpdateDocumentHandler = ({
 
 	const confirmSubmit = () => {
 		if (formData) {
-			const newExtension = getDocumentExtension(formData.documentName);
-			const newDocumentName = handleDocumentExtension(formData.documentName, newExtension);
+			const currentExtension = getDocumentExtension(document.name);
+			const newDocumentName = formData.documentName.includes('.')
+				? formData.documentName
+				: handleDocumentExtension(formData.documentName, currentExtension);
 
 			triggerUpdateDocument({
 				id: document.id,
