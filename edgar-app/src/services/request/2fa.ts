@@ -84,7 +84,7 @@ const extendedApi = backendApi.injectEndpoints({
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
 				})) || [],
-			providesTags: ['patient2faTrustedDevices'],
+			providesTags: ['patient2faTrustedDevices', 'patientDevice'],
 		}),
 
 		getTrustedDeviceById: builder.query<DeviceType, string>({
@@ -98,7 +98,7 @@ const extendedApi = backendApi.injectEndpoints({
 				country: response.double_auth.country,
 				lastConnectedTime: response.double_auth.date * 1000,
 			}),
-			providesTags: ['patient2faTrustedDevices'],
+			providesTags: ['patient2faTrustedDevices', 'patientDevice'],
 		}),
 
 		addTrustedDevice: builder.mutation<void, string>({
