@@ -10,7 +10,7 @@ import { useAuthContext } from 'contexts/auth';
 
 const SimulationConditionsPageContent = (): JSX.Element => {
 	const router = useRouter();
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const handleClick = () => {
 		const token = auth.getToken();

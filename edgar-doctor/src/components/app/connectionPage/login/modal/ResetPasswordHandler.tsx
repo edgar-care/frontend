@@ -56,7 +56,15 @@ const ResetPasswordHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: (
 					<Text>Adresse mail du compte perdu</Text>
 					<Input
 						type="email"
-						{...register('email', { minLength: 1, maxLength: 50, required: true })}
+						{...register('email', {
+							minLength: 1,
+							maxLength: 50,
+							required: true,
+							pattern: {
+								value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+								message: 'Format de mail invalide',
+							},
+						})}
 						w="100%"
 						placeholder="prenom.nom@gmail.com"
 						border="2px solid"
@@ -70,6 +78,7 @@ const ResetPasswordHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: (
 						}}
 					/>
 					{errors.email?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+					{errors.email?.type === 'pattern' && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 				</VStack>
 			}
 			footerPrimaryButton={

@@ -36,7 +36,7 @@ const ConnectionSignupInputs = (): JSX.Element => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const toast = useToast({ duration: 2000, isClosable: true });
 

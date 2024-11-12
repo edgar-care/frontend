@@ -14,7 +14,7 @@ import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 const SimulationAppointmentsPageContent = (): JSX.Element => {
 	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 	const isTablet = useBreakpointValue({ base: true, '2xl': false });
 

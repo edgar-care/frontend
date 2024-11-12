@@ -13,7 +13,7 @@ import getDocumentExtension from 'utils/app/dashboard/documents/getDocumentExten
 import type { UpdateDocumentType } from 'types/dashboard/documents/UpdateDocumentType';
 import type { DocumentType } from 'types/dashboard/documents/DocumentType';
 
-import CalendarIllustration from 'assets/illustrations/CalendarIllustration';
+import UpdateDocumentIllustration from 'assets/illustrations/UpdateDocumentIllustration';
 
 const UpdateDocumentHandler = ({
 	isOpen,
@@ -95,7 +95,7 @@ const UpdateDocumentHandler = ({
 				size="3xl"
 				headerTitle="Modifier votre document"
 				headerSubtitle="Modifier le nom de votre document."
-				headerIcon={CalendarIllustration}
+				headerIcon={UpdateDocumentIllustration}
 				bodyContent={
 					<UpdateDocumentModalContent placeholder={document.name} errors={errors} register={register} />
 				}
@@ -116,7 +116,7 @@ const UpdateDocumentHandler = ({
 				size="md"
 				headerTitle="Confirmation requise"
 				headerSubtitle="Le nom de votre document contient un point ('.'). Voulez-vous vraiment continuer ?"
-				headerIcon={CalendarIllustration}
+				headerIcon={UpdateDocumentIllustration}
 				footerPrimaryButton={
 					<Button size="customMd" w="100%" onClick={confirmSubmit}>
 						Confirmer
