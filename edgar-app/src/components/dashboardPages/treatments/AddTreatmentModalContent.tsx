@@ -1,0 +1,99 @@
+import { type Control, Controller, type FieldErrors, type UseFormWatch } from 'react-hook-form';
+import { FormLabel, Stack, Text, VStack } from '@chakra-ui/react';
+
+import ErrorMessage from 'components/forms/ErrorMessage';
+import AdvancedSelector from 'components/AdvancedSelector';
+import SelectHealthIssueMedicineInputCard from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueMedicineInputCard';
+import AddTreatmentCard from 'components/dashboardPages/treatments/AddTreatmentCard';
+import AddTreatmentStartDateInput from 'components/dashboardPages/treatments/AddTreatmentStartDateInput';
+import AddTreatmentEndDateInput from 'components/dashboardPages/treatments/AddTreatmentEndDateInput';
+
+import { useGetMedicinesQuery } from 'services/request/medicines';
+
+import type { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
+
+import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
+
+import SearchIcon from 'assets/icons/SearchIcon';
+
+const AddTreatmentModalContent = ({
+	control,
+	watch,
+	errors,
+}: {
+	control: Control<TreatmentType>;
+	watch: UseFormWatch<TreatmentType>;
+	errors: FieldErrors<TreatmentType>;
+}): JSX.Element => {
+	const { data: medicines } = useGetMedicinesQuery();
+
+	const addedMedicines = watch('medicines');
+
+	return (
+		<VStack w="100%" spacing="12px" align="start">
+			<VStack spacing="12px" align="start" w="100%">
+				<Stack direction={{ base: 'column', sm: 'row' }} w="100%">
+					<AddTreatmentStartDateInput control={control} errors={errors} />
+					<AddTreatmentEndDateInput control={control} errors={errors} />
+				</Stack>
+				<VStack spacing="4px" align="start" w="100%">
+					<FormLabel size="lg">Le nom du médicament</FormLabel>
+					<Controller
+						control={control}
+						name="medicines"
+						rules={{ validate: (value) => value.length > 0 }}
+						render={({ field: { value, onChange } }) => (
+							<AdvancedSelector
+								data={
+									medicines
+										?.filter((medicine) =>
+											addedMedicines.every((item) => item.medicineId !== medicine.id),
+										)
+										.map((medicine) => ({
+											id: medicine.id,
+											name: medicine.name,
+											content: (
+												<SelectHealthIssueMedicineInputCard
+													onClick={() => {
+														onChange([
+															...value,
+															{
+																medicineId: medicine.id,
+																periods: [],
+															},
+														]);
+													}}
+												>
+													<Text>
+														{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
+													</Text>
+												</SelectHealthIssueMedicineInputCard>
+											),
+										})) || []
+								}
+								placeholder="Rechercher le nom du médicament"
+								rightIcon={SearchIcon}
+							/>
+						)}
+					/>
+				</VStack>
+				{errors.medicines?.type === 'validate' && (
+					<ErrorMessage>Veuillez ajouter au moins un médicament</ErrorMessage>
+				)}
+			</VStack>
+			<VStack w="100%">
+				{medicines &&
+					addedMedicines.map((addedMedicine) => (
+						<AddTreatmentCard
+							treatmentMedicine={addedMedicine}
+							medicine={medicines.filter((medicine) => medicine.id === addedMedicine.medicineId)[0]}
+							control={control}
+							key={addedMedicine.medicineId}
+						/>
+					))}
+			</VStack>
+		</VStack>
+	);
+};
+
+export default AddTreatmentModalContent;

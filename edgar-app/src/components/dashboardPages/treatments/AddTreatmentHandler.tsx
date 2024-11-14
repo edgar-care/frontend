@@ -1,34 +1,33 @@
-import { Button, useToast } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import ModalHandler from 'components/modals/ModalHandler';
-import SelectHealthIssueContent from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueContent';
 
-import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+import type { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
 import AddHealthIssueIllustration from 'assets/illustrations/AddHealthIssueIllustration';
+import AddTreatmentModalContent from 'components/dashboardPages/treatments/AddTreatmentModalContent';
 
-const SelectHealthIssueHandler = ({
+const AddTreatmentHandler = ({
 	isOpen,
 	onClose,
 	onChange,
-	healthIssues,
+	medicalAntecedentId,
+	treatments,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
 	onChange: (event: unknown) => void;
-	healthIssues: HealthIssuesType[];
+	medicalAntecedentId?: string;
+	treatments: TreatmentType[];
 }): JSX.Element => {
 	const {
 		handleSubmit,
 		formState: { errors },
-		register,
 		control,
 		watch,
 		reset,
-	} = useForm<HealthIssuesType>({ mode: 'onChange', defaultValues: { treatments: [] } });
-
-	const toast = useToast({ duration: 3000, isClosable: true });
+	} = useForm<TreatmentType>({ mode: 'onChange', defaultValues: { medicalAntecedentId, medicines: [] } });
 
 	const onCloseAction = () => {
 		onClose();
@@ -36,16 +35,8 @@ const SelectHealthIssueHandler = ({
 	};
 
 	const onSubmit = handleSubmit((data) => {
-		if (healthIssues.some((healthIssue) => healthIssue.name === data.name)) {
-			toast({
-				title: 'Ce sujet de santé a déjà été ajouté',
-				status: 'error',
-			});
-			return;
-		}
-		onChange([...healthIssues, data]);
+		onChange([...treatments, data]);
 		onCloseAction();
-		toast({ title: 'Votre sujet de santé a été ajouté', status: 'success' });
 	});
 
 	return (
@@ -56,15 +47,7 @@ const SelectHealthIssueHandler = ({
 			headerTitle="Ajouter un sujet de santé"
 			headerSubtitle="Renseigner les informations de votre sujet de santé."
 			headerIcon={AddHealthIssueIllustration}
-			bodyContent={
-				<SelectHealthIssueContent
-					onSubmit={onSubmit}
-					register={register}
-					control={control}
-					watch={watch}
-					errors={errors}
-				/>
-			}
+			bodyContent={<AddTreatmentModalContent control={control} errors={errors} watch={watch} />}
 			footerPrimaryButton={
 				<Button w="100%" onClick={onSubmit} id="edgar-onboardingMedicalPage-addHealthIssue-validate-button">
 					Ajouter
@@ -83,4 +66,4 @@ const SelectHealthIssueHandler = ({
 		/>
 	);
 };
-export default SelectHealthIssueHandler;
+export default AddTreatmentHandler;

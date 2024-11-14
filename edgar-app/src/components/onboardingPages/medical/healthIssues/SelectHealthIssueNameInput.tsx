@@ -14,7 +14,7 @@ const SelectHealthIssueNameInput = ({
 }): JSX.Element => (
 	<VStack spacing="4px" align="start" w="100%">
 		<FormLabel size="lg" id="edgar-onboardingMedicalPage-medicineName-text">
-			Nom de votre sujet de santé
+			Le nom du votre sujet de santé
 		</FormLabel>
 		<Input
 			{...register('name', { minLength: 1, maxLength: 50, required: true })}

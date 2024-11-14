@@ -1,6 +1,6 @@
 import { HStack, Icon, Text, useDisclosure } from '@chakra-ui/react';
 
-import HealthIssueInfoDrawer from 'components/dashboardPages/medical/healthIssue/HealthIssueInfoDrawer';
+import DisplayTreatmentsHandler from 'components/dashboardPages/treatments/DisplayTreatmentsHandler';
 
 import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
 
@@ -32,9 +32,9 @@ const HealthIssueCard = ({
 						as={TreatmentIcon}
 						w="16px"
 						h="16px"
-						color={healthIssue.medicines.length > 0 ? 'blue.700' : 'grey.300'}
-						cursor={healthIssue.medicines.length > 0 ? 'pointer' : 'default'}
-						onClick={healthIssue.medicines.length > 0 ? onOpen : undefined}
+						color={healthIssue.treatments.length > 0 ? 'blue.700' : 'grey.300'}
+						cursor={healthIssue.treatments.length > 0 ? 'pointer' : 'default'}
+						onClick={healthIssue.treatments.length > 0 ? onOpen : undefined}
 						id={`edgar-onboardingMedicalPage-healthIssueCard-moreInfo-${healthIssue.name}-icon`}
 					/>
 					<Text size="boldLg">{healthIssue.name}</Text>
@@ -48,7 +48,12 @@ const HealthIssueCard = ({
 					id={`edgar-onboardingMedicalPage-healthIssueCard-close-${healthIssue.name}-icon`}
 				/>
 			</HStack>
-			<HealthIssueInfoDrawer isOpen={isOpen} onClose={onClose} healthIssue={healthIssue} />
+			<DisplayTreatmentsHandler
+				isOpen={isOpen}
+				onClose={onClose}
+				medicalAntecedentName={healthIssue.name}
+				treatments={healthIssue.treatments}
+			/>
 		</>
 	);
 };
