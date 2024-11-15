@@ -85,7 +85,7 @@ describe('Settings Account Modal tests - Desktop', () => {
 			});
 
 			it('Good content for patient name', () => {
-				cy.get('#edgar-settingsAccountModal-profileFirstnameName-text').should('contain.text', 'Medecin EDGAR');
+				cy.get('#edgar-settingsAccountModal-profileFirstnameName-text').should('contain.text', 'Edgar MEDECIN');
 			});
 
 			it('Good content for account settings section name', () => {

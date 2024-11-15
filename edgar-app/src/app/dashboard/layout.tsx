@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 
@@ -27,12 +27,16 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 		eventEmitter.on('logout', () => {
 			router.push('/login');
 		});
+
+		eventEmitter.on('disabled', () => {
+			router.push('/disabled');
+		});
 	}, []);
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-		else if (medicalInfo.isError) router.push('/onboarding/personal');
-		else setIsAuthenticated(true);
+		if (medicalInfo.isError) router.push('/onboarding/personal');
+		if (medicalInfo.status === 'fulfilled') setIsAuthenticated(true);
 	}, [medicalInfo]);
 
 	return (

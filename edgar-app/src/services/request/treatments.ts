@@ -1,6 +1,12 @@
 import { backendApi } from 'services/apiService';
 
-import type { CheckFollowUpTreatmentDTO, FollowUpTreatmentsStoreType } from 'store/types/treatments.type';
+import type {
+	CheckFollowUpTreatmentDTO,
+	FollowUpTreatmentsStoreType,
+	AddTreatmentDTO,
+	AddTreatmentAndHealthIssueDTO,
+	UpdateTreatmentDTO,
+} from 'store/types/treatments.type';
 import { type TreatmentFollowUpType } from 'types/dashboard/treatments/TreatmentFollowUpType';
 
 const extendedApi = backendApi.injectEndpoints({
@@ -8,7 +14,7 @@ const extendedApi = backendApi.injectEndpoints({
 		getFollowUpTreatments: builder.query<TreatmentFollowUpType[], void>({
 			query: () => '/dashboard/treatment/follow-up',
 			providesTags: ['patientFollowUpTreatments'],
-			transformResponse: (response: FollowUpTreatmentsStoreType[]) =>
+			transformResponse: (response?: FollowUpTreatmentsStoreType[]) =>
 				response?.map((treatment) => ({
 					id: treatment.id,
 					date: treatment.date * 1000,
@@ -48,6 +54,67 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			invalidatesTags: ['patientFollowUpTreatments'],
 		}),
+
+		addTreatment: builder.mutation<void, AddTreatmentDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'POST',
+				body: {
+					disease_id: params.diseaseId,
+					still_relevant: params.stillRelevant,
+					treatments: params.treatments.map((treatment) => ({
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+						medicine_id: treatment.medicineId,
+					})),
+				},
+			}),
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
+		}),
+
+		addTreatmentAndHealthIssue: builder.mutation<void, AddTreatmentAndHealthIssueDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'POST',
+				body: {
+					name: params.name,
+					still_relevant: params.stillRelevant,
+					treatments: params.treatments.map((treatment) => ({
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+						medicine_id: treatment.medicineId,
+					})),
+				},
+			}),
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
+		}),
+
+		deleteTreatment: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/dashboard/treatment/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patientTreatments', 'patientMedicalFolder'],
+		}),
+
+		updateTreatment: builder.mutation<void, UpdateTreatmentDTO>({
+			query: (params) => ({
+				url: '/dashboard/treatment',
+				method: 'PUT',
+				body: {
+					treatments: params.treatments.map((treatment) => ({
+						id: treatment.id,
+						medicine_id: treatment.medicineId,
+						period: treatment.period,
+						day: treatment.day,
+						quantity: treatment.quantity,
+					})),
+				},
+			}),
+			invalidatesTags: ['patientTreatments'],
+		}),
 	}),
 });
 
@@ -58,4 +125,8 @@ export const {
 	useLazyGetFollowUpTreatmentByIdQuery,
 	useCheckFollowUpTreatmentMutation,
 	useUncheckFollowUpTreatmentMutation,
+	useAddTreatmentMutation,
+	useAddTreatmentAndHealthIssueMutation,
+	useDeleteTreatmentMutation,
+	useUpdateTreatmentMutation,
 } = extendedApi;

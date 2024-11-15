@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Checkbox, HStack, Text, useToast } from '@chakra-ui/react';
 
 import { useCheckFollowUpTreatmentMutation, useUncheckFollowUpTreatmentMutation } from 'services/request/treatments';
@@ -29,6 +29,10 @@ const TreatmentsCheckboxTreatment = ({
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
+	useEffect(() => {
+		setIsChecked(!!checkedTreatmentId);
+	}, [checkedTreatmentId]);
+
 	return (
 		<HStack w="100%" key={treatment.id}>
 			<Checkbox
@@ -49,7 +53,7 @@ const TreatmentsCheckboxTreatment = ({
 							});
 					else
 						triggerCheckFollowUpTreatment({
-							treatmentId: treatment.id,
+							treatmentId: treatment.id || '',
 							date: day.getTime(),
 							periods: [period],
 						})

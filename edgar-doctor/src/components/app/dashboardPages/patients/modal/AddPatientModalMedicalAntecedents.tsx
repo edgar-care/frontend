@@ -86,6 +86,7 @@ const AddPatientModalMedicalAntecedents = ({
 								render={({ field: { value, onChange } }) => (
 									<MedicalAntecedentsCard
 										medicalAntecedent={medicalAntecedent}
+										isDeletable
 										onClick={() =>
 											onChange(value.filter((item) => item.name !== medicalAntecedent.name))
 										}

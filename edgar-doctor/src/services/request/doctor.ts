@@ -23,8 +23,8 @@ const extendedApi = backendApi.injectEndpoints({
 
 		getDoctors: builder.query<DoctorType[], void>({
 			query: () => `/doctors`,
-			transformResponse: (response: { Doctors: DoctorStoreType[] }) =>
-				response.Doctors.map((doctor) => ({
+			transformResponse: (response: { Doctors?: DoctorStoreType[] }) =>
+				response.Doctors?.map((doctor) => ({
 					id: doctor.id,
 					email: doctor.email,
 					name: doctor.name,
@@ -35,7 +35,7 @@ const extendedApi = backendApi.injectEndpoints({
 						zipCode: doctor.address.zip_code,
 						country: doctor.address.country,
 					},
-				})),
+				})) || [],
 		}),
 	}),
 });

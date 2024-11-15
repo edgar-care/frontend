@@ -40,7 +40,7 @@ const DiagnosticCard = ({ diagnostic }: { diagnostic: AppointmentType }): JSX.El
 					}
 				/>
 				<Stack
-					direction={{ base: 'column', sm: 'row' }}
+					direction={{ base: 'column', smd: 'row', lg: 'column', xl: 'row' }}
 					w="100%"
 					justify="space-between"
 					align="center"
@@ -57,9 +57,11 @@ const DiagnosticCard = ({ diagnostic }: { diagnostic: AppointmentType }): JSX.El
 							{appointmentEndDate.getMinutes().toString().padStart(2, '0')}
 						</Text>
 					</VStack>
-					<Button size="customSm" w={{ base: '100%', sm: 'auto' }} onClick={onOpen}>
-						{diagnostic.appointmentStatus === 'WAITING_FOR_REVIEW' ? 'Examiner' : 'Consulter'}
-					</Button>
+					<VStack w={{ base: '100%', smd: 'auto', lg: '100%', xl: 'auto' }} align="end">
+						<Button size="customSm" w={{ base: '100%', sm: 'auto' }} onClick={onOpen}>
+							{diagnostic.appointmentStatus === 'WAITING_FOR_REVIEW' ? 'Examiner' : 'Consulter'}
+						</Button>
+					</VStack>
 				</Stack>
 			</HStack>
 			<DiagnosticHandler

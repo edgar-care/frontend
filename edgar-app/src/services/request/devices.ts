@@ -8,8 +8,8 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		getConnectedDevices: builder.query<DeviceType[], void>({
 			query: () => 'dashboard/devices',
-			transformResponse: (response: { devices: DeviceStoreType[] }) =>
-				response.devices.map((device) => ({
+			transformResponse: (response: { devices?: DeviceStoreType[] }) =>
+				response.devices?.map((device) => ({
 					id: device.id,
 					deviceType: device.device_type,
 					browserType: device.browser,
@@ -17,8 +17,7 @@ const extendedApi = backendApi.injectEndpoints({
 					region: device.region,
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
-					type: 'DESKTOP',
-				})),
+				})) || [],
 		}),
 
 		getConnectedDeviceById: builder.query<DeviceType, string>({
@@ -31,8 +30,15 @@ const extendedApi = backendApi.injectEndpoints({
 				region: response.double_auth.region,
 				country: response.double_auth.country,
 				lastConnectedTime: response.double_auth.date * 1000,
-				type: 'DESKTOP',
 			}),
+		}),
+
+		removeDevice: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/dashboard/device/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['patientDevice'],
 		}),
 	}),
 });
@@ -42,4 +48,5 @@ export const {
 	useLazyGetConnectedDevicesQuery,
 	useGetConnectedDeviceByIdQuery,
 	useLazyGetConnectedDeviceByIdQuery,
+	useRemoveDeviceMutation,
 } = extendedApi;

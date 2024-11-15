@@ -7,7 +7,6 @@ import CrossIcon from 'assets/icons/CrossIcon';
 
 import deviceFormatTime from 'utils/app/dashboard/devices/deviceFormatTime';
 import deviceIcon from 'utils/app/dashboard/devices/deviceTypeIcon';
-import deviceTypeName from 'utils/app/dashboard/devices/deviceTypeName';
 
 const DeviceCard = ({
 	device,
@@ -40,7 +39,9 @@ const DeviceCard = ({
 		<HStack spacing="16px">
 			<Icon as={deviceIcon[device.deviceType]} w="20px" h="auto" />
 			<VStack spacing="0px" align="start">
-				<Text size="boldMd">{deviceTypeName[device.deviceType]}</Text>
+				<Text size="boldMd">
+					{device.deviceType} {'·'} {device.browserType}
+				</Text>
 				<Text size="sm">
 					{device.city}, {device.region && `${device.region},`} {device.country}
 				</Text>

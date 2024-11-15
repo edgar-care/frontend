@@ -4,6 +4,8 @@ import { Button, VStack, chakra, Stack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import BetaWarningBanner from 'components/BetaWarningBanner';
+
 import { type PersonalInfos } from 'types/onboarding/OnboardingInfos';
 
 import { useOnboardingContext } from 'contexts/onboarding';
@@ -31,7 +33,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 		watch,
 	} = useForm<PersonalInfos>({
 		mode: 'onChange',
-		defaultValues: onboardingInfos,
+		defaultValues: { ...onboardingInfos, birthdate: 0 },
 	});
 
 	const router = useRouter();
@@ -97,6 +99,7 @@ const OnboardingPersonalFields = (): JSX.Element => {
 				>
 					<VStack w="100%" align={{ base: 'center', lg: 'start' }}>
 						<VStack w="100%" spacing="16px">
+							<BetaWarningBanner />
 							<OnboardingPersonalFirstnameInput register={register} errors={errors} />
 							<OnboardingPersonalNameInput register={register} errors={errors} />
 							<OnboardingPersonalBirthdateInput control={control} errors={errors} />

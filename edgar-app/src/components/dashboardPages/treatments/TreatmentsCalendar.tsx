@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, Icon, Skeleton, useBreakpointValue } from '@chakra-ui/react';
+import { Skeleton } from '@chakra-ui/react';
 
 import TreatmentsCalendarDay from 'components/dashboardPages/treatments/TreatmentsCalendarDay';
 
@@ -12,42 +12,30 @@ import { useGetFollowUpTreatmentsQuery } from 'services/request/treatments';
 import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
 import { type HealthIssuesMedicinesDayType } from 'types/dashboard/medical/HealthIssueType';
 
-import LeftChevronIcon from 'assets/icons/Chevron/LeftChevronIcon';
-import RightChevronIcon from 'assets/icons/Chevron/RightChevronIcon';
-
 const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] }): JSX.Element => {
 	const { data: medicinesInfo, isLoading } = useGetMedicinesQuery();
-	const { data: checkedTreatments } = useGetFollowUpTreatmentsQuery();
+	const { data: checkedTreatments, isLoading: isLoadingCheckedTreatments } = useGetFollowUpTreatmentsQuery();
 
 	const [startDay, setStartDay] = useState(0);
-	const nbrOfDays = useBreakpointValue({ base: 1, ssm2: 2, sm2: 3, md: 4, lg: 4, xl: 5, '2xl': 7 }) || 1;
 
 	const groupedTreatments = groupTreatmentsByDayPeriod(treatments);
 
 	const groupedFollowUpTreatments = groupFollowUpTreatmentsByDayPeriod(checkedTreatments || []);
 
+	const handlePreviousDay = () => {
+		setStartDay((prev) => (prev === 0 ? 6 : prev - 1));
+	};
+
+	const handleNextDay = () => {
+		setStartDay((prev) => (prev === 6 ? 0 : prev + 1));
+	};
+
 	return (
-		<Skeleton isLoaded={!isLoading} w="100%" borderRadius="8px">
-			<HStack
-				w="100%"
-				bg="white"
-				p="12px 16px"
-				borderRadius="16px"
-				border="2px solid"
-				borderColor="blue.200"
-				spacing="16px"
-			>
-				{startDay > 0 && nbrOfDays !== 7 && (
-					<Icon
-						as={LeftChevronIcon}
-						h="16px"
-						w="auto"
-						cursor="pointer"
-						onClick={() => setStartDay((prev) => prev - 1)}
-					/>
-				)}
-				{Object.entries(groupedTreatments)
-					.slice(startDay, nbrOfDays + startDay)
+		<Skeleton isLoaded={!isLoading && !isLoadingCheckedTreatments} borderRadius="8px">
+			{!isLoading &&
+				!isLoadingCheckedTreatments &&
+				Object.entries(groupedTreatments)
+					.slice(startDay, 1 + startDay)
 					.map(([day, periods]) => (
 						<TreatmentsCalendarDay
 							key={day}
@@ -55,18 +43,10 @@ const TreatmentsCalendar = ({ treatments }: { treatments: PatientMedicineType[] 
 							periods={periods}
 							checkedTreatments={groupedFollowUpTreatments[day]}
 							medicinesInfo={medicinesInfo || []}
+							handlePreviousDay={handlePreviousDay}
+							handleNextDay={handleNextDay}
 						/>
 					))}
-				{nbrOfDays + startDay < 7 && (
-					<Icon
-						as={RightChevronIcon}
-						h="16px"
-						w="auto"
-						cursor="pointer"
-						onClick={() => setStartDay((prev) => prev + 1)}
-					/>
-				)}
-			</HStack>
 		</Skeleton>
 	);
 };

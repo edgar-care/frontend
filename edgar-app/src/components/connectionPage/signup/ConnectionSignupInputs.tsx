@@ -15,6 +15,8 @@ import {
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import BetaWarningBanner from 'components/BetaWarningBanner';
+
 import { useAuthContext } from 'contexts/auth';
 
 import useCustomState from 'hooks/useCustomState';
@@ -34,7 +36,7 @@ const ConnectionSignupInputs = (): JSX.Element => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const toast = useToast({ duration: 2000, isClosable: true });
 
@@ -115,21 +117,24 @@ const ConnectionSignupInputs = (): JSX.Element => {
 					)}
 				</VStack>
 			</FormControl>
-			<Button
-				w="100%"
-				onClick={() =>
-					onSubmitSignup(email, password, setEmailError, setPasswordError, auth).then((response) => {
-						toast({ title: response.title, status: response.status });
-						if (response.status === 'success') {
-							if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
-							else router.push('/dashboard');
-						}
-					})
-				}
-				id="edgar-signupPage-form-button"
-			>
-				S'inscrire
-			</Button>
+			<VStack w="100%" spacing="16px">
+				<BetaWarningBanner />
+				<Button
+					w="100%"
+					onClick={() =>
+						onSubmitSignup(email, password, setEmailError, setPasswordError, auth).then((response) => {
+							toast({ title: response.title, status: response.status });
+							if (response.status === 'success') {
+								if (searchParams.get('redirect')) router.push(searchParams.get('redirect')!);
+								else router.push('/dashboard');
+							}
+						})
+					}
+					id="edgar-signupPage-form-button"
+				>
+					S'inscrire
+				</Button>
+			</VStack>
 		</VStack>
 	);
 };

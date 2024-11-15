@@ -6,11 +6,11 @@ import { useState } from 'react';
 import LoadingScreen from 'components/loader/LoadingScreen';
 
 const SimulationLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	useTimeout(() => {
 		setIsLoading(false);
-	}, 750);
+	}, 1000);
 
 	return (
 		<>

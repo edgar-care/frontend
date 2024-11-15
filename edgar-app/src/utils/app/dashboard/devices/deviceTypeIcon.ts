@@ -7,8 +7,12 @@ import DevicePhoneIcon from 'assets/icons/Devices/DevicePhoneIcon';
 import DeviceComputerIcon from 'assets/icons/Devices/DeviceComputerIcon';
 
 const deviceIcon: Record<DeviceTypeType, ComponentWithAs<'svg', IconProps>> = {
-	MOBILE: DevicePhoneIcon,
-	DESKTOP: DeviceComputerIcon,
+	Windows: DeviceComputerIcon,
+	MacOs: DeviceComputerIcon,
+	Linux: DeviceComputerIcon,
+	iPhone: DevicePhoneIcon,
+	Android: DevicePhoneIcon,
+	Other: DevicePhoneIcon,
 };
 
 export default deviceIcon;

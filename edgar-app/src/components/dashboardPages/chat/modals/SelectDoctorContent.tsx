@@ -12,13 +12,23 @@ import countMaxNumberPage from 'utils/navigation/countMaxNumberPage';
 import SearchIcon from 'assets/icons/SearchIcon';
 
 import { type DoctorType } from 'types/dashboard/DoctorType';
+import { useChatContext } from 'contexts/chat';
 
 const SelectDoctorContent = ({ onClick }: { onClick: (doctorInfos: DoctorType) => void }): JSX.Element => {
 	const { data: doctors } = useGetDoctorsQuery();
+
+	const { chats } = useChatContext();
+
 	const [pageIndex, setPageIndex] = useState(1);
 	const [searchValue, setSearchValue] = useState('');
 
-	const filteredDoctors = doctors?.filter(
+	const notAlreadyInChat =
+		doctors?.filter(
+			(doctor) =>
+				!chats.some((chat) => chat.participants.some((participant) => participant.participantId === doctor.id)),
+		) || [];
+
+	const filteredDoctors = notAlreadyInChat.filter(
 		(doctor) =>
 			doctor.name.toLowerCase().includes(searchValue.toLowerCase()) ||
 			doctor.firstname.toLowerCase().includes(searchValue.toLowerCase()),
@@ -27,7 +37,14 @@ const SelectDoctorContent = ({ onClick }: { onClick: (doctorInfos: DoctorType) =
 	return (
 		<VStack w="100%" spacing="24px">
 			<InputGroup>
-				<Input placeholder="Nom du médecin" maxLength={100} onChange={(e) => setSearchValue(e.target.value)} />
+				<Input
+					placeholder="Nom du médecin"
+					maxLength={100}
+					onChange={(e) => {
+						setPageIndex(1);
+						setSearchValue(e.target.value);
+					}}
+				/>
 				<InputRightElement>
 					<Icon as={SearchIcon} />
 				</InputRightElement>

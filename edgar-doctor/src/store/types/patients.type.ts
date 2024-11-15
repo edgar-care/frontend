@@ -66,3 +66,17 @@ export interface AddPatientDTO {
 		medicalAntecedents: PatientMedicalAntecedentType[];
 	};
 }
+
+export interface UpdatePatientDTO {
+	patientId: string;
+	medicalFolder: {
+		name: string;
+		firstname: string;
+		birthdate: number;
+		sex: PatientSexType;
+		height: number;
+		weight: number;
+		primaryDoctorId: string;
+		medicalAntecedents: PatientMedicalAntecedentType[];
+	};
+}

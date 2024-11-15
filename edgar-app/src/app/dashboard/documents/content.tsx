@@ -23,7 +23,7 @@ const DocumentsPageContent = (): JSX.Element => {
 	const [sortOption, setSortOption] = useState<string>('asc');
 	const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
 
 	return (

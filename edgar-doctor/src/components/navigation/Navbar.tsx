@@ -10,6 +10,7 @@ import ChatIconDot from 'assets/icons/ChatIconDot';
 import PeopleCardIcon from 'assets/icons/PeopleCardIcon';
 import HeartPulseIcon from 'assets/icons/HeartPulseIcon';
 import HelpIcon from 'assets/icons/HelpIcon';
+import HomeIcon from 'assets/icons/HomeIcon';
 
 import colors from 'theme/foundations/colors';
 
@@ -19,6 +20,12 @@ const Navbar = (): JSX.Element => {
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 
 	const primaryTabs: NavbarTabType[] = [
+		{
+			name: 'Accueil',
+			path: '/dashboard',
+			icon: HomeIcon,
+			id: 'home',
+		},
 		{
 			name: 'Agenda',
 			path: '/dashboard/agenda',

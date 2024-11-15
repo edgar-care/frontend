@@ -3,8 +3,8 @@ import { Button, Icon, Input, InputGroup, InputRightElement, VStack } from '@cha
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import BetaWarningBanner from 'components/BetaWarningBanner';
 import MirageLoader from 'components/simulationPages/chat/loader/MirageLoader';
-
 import SimulationChatMessageGroup from 'components/simulationPages/chat/SimulationChatMessageGroup';
 
 import { useDiagnoseDiagnosticMutation } from 'services/request/simulation';
@@ -27,7 +27,7 @@ const SimulationChat = ({
 	const [messages, setMessages] = useState<SimulationChatMessageType[]>([
 		{
 			message:
-				'Bonjour, je m’appel Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
+				'Bonjour, je m’appelle Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
 			createdAt: new Date(),
 			isUserSender: false,
 			isLastMessage: false,
@@ -86,6 +86,7 @@ const SimulationChat = ({
 					setDisplayedMessageIndex((prevDisplayedMessageIndex) => prevDisplayedMessageIndex - 1);
 			}}
 		>
+			<BetaWarningBanner />
 			<VStack w="100%" spacing="32px" align="start" h="100%">
 				{Array.from({ length: messages.length > 4 ? 2 : Math.ceil(messages.length / 2) }, (_, i) => i).map(
 					(_, index) => {

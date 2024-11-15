@@ -1,6 +1,6 @@
 import createDoctorAccount from 'utils/createDoctorAccount';
 
-describe('Navigation tests - Desktop', () => {
+describe('Navigation tests - Mobile', () => {
 	let authToken: string;
 
 	describe('Init test', async () => {
@@ -31,7 +31,7 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good number of texts', () => {
-				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 7);
+				cy.get('p[id^=edgar-dashboardNavbar]').should('have.length', 8);
 			});
 
 			it('Good number of labels', () => {
@@ -50,6 +50,10 @@ describe('Navigation tests - Desktop', () => {
 		describe('Good content for texts', () => {
 			beforeEach(() => {
 				cy.viewport(390, 844);
+			});
+
+			it('Good content for "Home" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home-text').should('contain.text', 'Accueil');
 			});
 
 			it('Good content for "Agenda" tab', () => {
@@ -77,13 +81,17 @@ describe('Navigation tests - Desktop', () => {
 			});
 
 			it('Good content for Username Profile Card', () => {
-				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Medecin Edgar');
+				cy.get('#edgar-dashboardNavbar-profileCard-userName-text').should('contain.text', 'Edgar Medecin');
 			});
 		});
 
 		describe('Visible texts', () => {
 			beforeEach(() => {
 				cy.viewport(390, 844);
+			});
+
+			it('"Home" tab visible', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home-text').should('be.visible');
 			});
 
 			it('"Agenda" tab visible', () => {
@@ -118,6 +126,13 @@ describe('Navigation tests - Desktop', () => {
 		describe('Good redirection on elements', () => {
 			beforeEach(() => {
 				cy.viewport(390, 844);
+			});
+
+			it('Good redirection for "Accueil" tab', () => {
+				cy.get('#edgar-dashboardNavbar-navbarTab-home')
+					.click()
+					.url()
+					.should('be.equal', `${Cypress.env('url')}/dashboard`);
 			});
 
 			it('Good redirection for "Agenda" tab', () => {

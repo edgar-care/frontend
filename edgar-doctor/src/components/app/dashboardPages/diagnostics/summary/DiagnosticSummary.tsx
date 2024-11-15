@@ -26,15 +26,15 @@ const DiagnosticSummary = ({
 					/>
 					<DiagnosticSummarySymptoms
 						title="Symptômes présents"
-						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === true)}
+						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === 1)}
 					/>
 					<DiagnosticSummarySymptoms
 						title="Symptômes non présents"
-						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === false)}
+						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === 2)}
 					/>
 					<DiagnosticSummarySymptoms
 						title="Symptômes potentiellement présents"
-						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === null)}
+						suggestedSymptoms={summary.symptoms.filter((symptom) => symptom.presence === 0)}
 					/>
 				</VStack>
 			)}

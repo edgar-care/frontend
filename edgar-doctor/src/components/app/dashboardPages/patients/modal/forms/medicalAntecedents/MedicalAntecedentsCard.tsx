@@ -9,10 +9,12 @@ import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/
 
 const MedicalAntecedentsCard = ({
 	medicalAntecedent,
+	isDeletable,
 	onClick,
 }: {
 	medicalAntecedent: PatientMedicalAntecedentType;
-	onClick: () => void;
+	isDeletable: boolean;
+	onClick?: () => void;
 }): JSX.Element => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -40,14 +42,16 @@ const MedicalAntecedentsCard = ({
 					/>
 					<Text size="boldLg">{medicalAntecedent.name}</Text>
 				</HStack>
-				<Icon
-					as={CrossIcon}
-					w="12spx"
-					h="12px"
-					cursor="pointer"
-					onClick={onClick}
-					id={`edgar-onboardingMedicalPage-healthIssueCard-close-${medicalAntecedent.name}-icon`}
-				/>
+				{isDeletable && (
+					<Icon
+						as={CrossIcon}
+						w="12spx"
+						h="12px"
+						cursor="pointer"
+						onClick={onClick}
+						id={`edgar-onboardingMedicalPage-healthIssueCard-close-${medicalAntecedent.name}-icon`}
+					/>
+				)}
 			</HStack>
 			<MedicalAntecedentsInfoDrawer isOpen={isOpen} onClose={onClose} medicalAntecedent={medicalAntecedent} />
 		</>
