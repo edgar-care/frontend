@@ -26,6 +26,7 @@ const AddTreatmentCommentInputs = ({
 					<Input
 						placeholder="Commentaire"
 						w="100%"
+						value={value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.comment}
 						onChange={(e) =>
 							onChange(
 								value.map((v) =>

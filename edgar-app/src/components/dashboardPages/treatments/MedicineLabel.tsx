@@ -2,10 +2,9 @@ import { HStack, Skeleton, Text } from '@chakra-ui/react';
 
 import { useGetMedicineByIdQuery } from 'services/request/medicines';
 
-import { type PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
+const MedicineLabel = ({ medicineId }: { medicineId: string }) => {
+	const { data: medicineInfo, isLoading } = useGetMedicineByIdQuery(medicineId);
 
-const TreatmentLabel = ({ treatment }: { treatment: PatientMedicineType }) => {
-	const { data: medicineInfo, isLoading } = useGetMedicineByIdQuery(treatment.medicineId);
 	return (
 		<Skeleton isLoaded={!isLoading}>
 			<HStack bg="blue.100" borderRadius="4px" p="4px">
@@ -15,4 +14,4 @@ const TreatmentLabel = ({ treatment }: { treatment: PatientMedicineType }) => {
 	);
 };
 
-export default TreatmentLabel;
+export default MedicineLabel;

@@ -6,9 +6,11 @@ import ErrorMessage from 'components/forms/ErrorMessage';
 import type { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
 const AddTreatmentEndDateInput = ({
+	startDate,
 	control,
 	errors,
 }: {
+	startDate?: number;
 	control: Control<TreatmentType>;
 	errors: FieldErrors<TreatmentType>;
 }): JSX.Element => (
@@ -17,7 +19,7 @@ const AddTreatmentEndDateInput = ({
 		<Controller
 			control={control}
 			name="endDate"
-			rules={{ min: Date.UTC(0, 0), max: Date.UTC(2100, 0) }}
+			rules={{ min: startDate || Date.UTC(0, 0), max: Date.UTC(2100, 0) }}
 			render={({ field: { value, onChange } }) => (
 				<Input
 					value={value ? new Date(value).toISOString().split('T')[0] : undefined}
@@ -31,7 +33,10 @@ const AddTreatmentEndDateInput = ({
 			)}
 		/>
 		{errors.endDate?.type === 'min' && (
-			<ErrorMessage>Renseigner une date de fin après le 1 janvier 1900</ErrorMessage>
+			<ErrorMessage>
+				Renseigner une date de fin après le{' '}
+				{startDate ? new Date(startDate).toLocaleDateString('fr-FR') : '1 janvier 1900'}
+			</ErrorMessage>
 		)}
 		{errors.endDate?.type === 'max' && (
 			<ErrorMessage>Renseigner une date de fin avant le 1 janvier 2100</ErrorMessage>

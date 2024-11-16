@@ -1,36 +1,35 @@
-import { Button } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
 import ModalHandler from 'components/modals/ModalHandler';
 import AddTreatmentModalContent from 'components/dashboardPages/treatments/AddTreatmentModalContent';
 
-import type { HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+import { useUpdateTreatmentMutation } from 'services/request/treatments';
+
 import type { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
 
 import AddHealthIssueIllustration from 'assets/illustrations/AddHealthIssueIllustration';
 
-const AddTreatmentHandler = ({
+const UpdateTreatmentHandler = ({
 	isOpen,
 	onClose,
-	onChange,
-	treatments,
-	hasHealthIssueSearch = false,
-	healthIssues = [],
+	treatment,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	onChange: (event: unknown) => void;
-	treatments: TreatmentType[];
-	hasHealthIssueSearch?: boolean;
-	healthIssues?: HealthIssuesType[];
+	treatment: TreatmentType;
 }): JSX.Element => {
+	const [triggerUpdateTreatment] = useUpdateTreatmentMutation();
+
 	const {
 		handleSubmit,
 		formState: { errors },
 		control,
 		watch,
 		reset,
-	} = useForm<TreatmentType>({ mode: 'onChange', defaultValues: { medicines: [] } });
+	} = useForm<TreatmentType>({ mode: 'onChange', defaultValues: treatment });
+
+	const toast = useToast({ duration: 3000, isClosable: true });
 
 	const onCloseAction = () => {
 		onClose();
@@ -38,8 +37,18 @@ const AddTreatmentHandler = ({
 	};
 
 	const onSubmit = handleSubmit((data) => {
-		onChange([...treatments, data]);
-		onCloseAction();
+		triggerUpdateTreatment({
+			id: data.id,
+			startDate: data.startDate,
+			endDate: data.endDate ?? undefined,
+			medicines: data.medicines,
+		})
+			.unwrap()
+			.then(() => {
+				toast({ title: 'Traitement mis à jour', status: 'success' });
+				onCloseAction();
+			})
+			.catch(() => toast({ title: 'Erreur lors de la mise à jour du traitement', status: 'error' }));
 	});
 
 	return (
@@ -47,34 +56,29 @@ const AddTreatmentHandler = ({
 			isOpen={isOpen}
 			onClose={onCloseAction}
 			size="3xl"
-			headerTitle="Ajouter un sujet de santé"
+			headerTitle="Mise à jour du traitement"
 			headerSubtitle="Renseigner les informations de votre sujet de santé."
 			headerIcon={AddHealthIssueIllustration}
 			bodyContent={
 				<AddTreatmentModalContent
-					hasHealthIssueSearch={hasHealthIssueSearch}
-					healthIssues={healthIssues}
+					hasHealthIssueSearch={false}
+					healthIssues={[]}
 					control={control}
 					errors={errors}
 					watch={watch}
 				/>
 			}
 			footerPrimaryButton={
-				<Button w="100%" onClick={onSubmit} id="edgar-onboardingMedicalPage-addHealthIssue-validate-button">
-					Ajouter
+				<Button w="100%" onClick={onSubmit}>
+					Mettre à jour
 				</Button>
 			}
 			footerSecondaryButton={
-				<Button
-					variant="secondary"
-					w="100%"
-					onClick={onCloseAction}
-					id="edgar-onboardingMedicalPage-addHealthIssue-cancel-button"
-				>
+				<Button variant="secondary" w="100%" onClick={onCloseAction}>
 					Annuler
 				</Button>
 			}
 		/>
 	);
 };
-export default AddTreatmentHandler;
+export default UpdateTreatmentHandler;

@@ -11,16 +11,21 @@ import AddTreatmentEndDateInput from 'components/dashboardPages/treatments/AddTr
 import { useGetMedicinesQuery } from 'services/request/medicines';
 
 import type { TreatmentType } from 'types/dashboard/treatments/TreatmentType';
+import type { HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
 
 import displayMedicineUnit from 'utils/app/dashboard/medical/displayMedicineUnit';
 
 import SearchIcon from 'assets/icons/SearchIcon';
 
 const AddTreatmentModalContent = ({
+	hasHealthIssueSearch,
+	healthIssues,
 	control,
 	watch,
 	errors,
 }: {
+	hasHealthIssueSearch: boolean;
+	healthIssues: HealthIssuesType[];
 	control: Control<TreatmentType>;
 	watch: UseFormWatch<TreatmentType>;
 	errors: FieldErrors<TreatmentType>;
@@ -32,9 +37,46 @@ const AddTreatmentModalContent = ({
 	return (
 		<VStack w="100%" spacing="12px" align="start">
 			<VStack spacing="12px" align="start" w="100%">
+				{hasHealthIssueSearch && (
+					<VStack spacing="4px" align="start" w="100%">
+						<FormLabel size="lg">Le nom de votre sujet de santé</FormLabel>
+						<Controller
+							control={control}
+							name="medicalAntecedentId"
+							rules={{ validate: (value) => value !== undefined }}
+							render={({ field: { value, onChange } }) => (
+								<AdvancedSelector
+									data={
+										healthIssues
+											.filter((healthIssue) => healthIssue.id)
+											.map((healthIssue) => ({
+												id: healthIssue.id ?? '',
+												name: healthIssue.name,
+												content: (
+													<SelectHealthIssueMedicineInputCard
+														onClick={() => {
+															onChange(healthIssue.id);
+														}}
+													>
+														<Text>{healthIssue.name}</Text>
+													</SelectHealthIssueMedicineInputCard>
+												),
+											})) ?? []
+									}
+									defaultValue={healthIssues.find((healthIssue) => healthIssue.id === value)?.name}
+									placeholder="Nom votre sujet de santé"
+									rightIcon={SearchIcon}
+								/>
+							)}
+						/>
+						{errors.medicalAntecedentId?.type === 'validate' && (
+							<ErrorMessage>Veuillez sélectionner un sujet de santé</ErrorMessage>
+						)}
+					</VStack>
+				)}
 				<Stack direction={{ base: 'column', sm: 'row' }} w="100%">
 					<AddTreatmentStartDateInput control={control} errors={errors} />
-					<AddTreatmentEndDateInput control={control} errors={errors} />
+					<AddTreatmentEndDateInput startDate={watch('startDate')} control={control} errors={errors} />
 				</Stack>
 				<VStack spacing="4px" align="start" w="100%">
 					<FormLabel size="lg">Le nom du médicament</FormLabel>
