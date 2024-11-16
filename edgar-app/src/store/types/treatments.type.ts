@@ -1,5 +1,5 @@
-import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
-import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
+import type { TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
+import type { TreatmentMedicinesType } from 'types/dashboard/treatments/TreatmentType';
 
 export interface FollowUpTreatmentsStoreType {
 	id: string;
@@ -15,33 +15,15 @@ export interface CheckFollowUpTreatmentDTO {
 }
 
 export interface AddTreatmentDTO {
-	diseaseId: string;
-	stillRelevant: boolean;
-	treatments: {
-		period: TreatmentPeriodType[];
-		day: TreatmentDayType[];
-		quantity: number;
-		medicineId: string;
-	}[];
-}
-
-export interface AddTreatmentAndHealthIssueDTO {
-	name: string;
-	stillRelevant: boolean;
-	treatments: {
-		period: TreatmentPeriodType[];
-		day: TreatmentDayType[];
-		quantity: number;
-		medicineId: string;
-	}[];
+	healthIssueId: string;
+	startDate: number;
+	endDate?: number;
+	medicines: TreatmentMedicinesType[];
 }
 
 export interface UpdateTreatmentDTO {
-	treatments: {
-		id: string;
-		medicineId: string;
-		period: TreatmentPeriodType[];
-		day: TreatmentDayType[];
-		quantity: number;
-	}[];
+	id: string;
+	startDate: number;
+	endDate?: number;
+	medicines: TreatmentMedicinesType[];
 }
