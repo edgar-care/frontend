@@ -1,4 +1,5 @@
 export interface TreatmentType {
+	id: string;
 	medicalAntecedentId?: string;
 	startDate: number;
 	endDate?: number;
