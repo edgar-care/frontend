@@ -30,7 +30,7 @@ const DisablePageFields = (): JSX.Element => {
 				<VStack w="100%" spacing="16px">
 					<Button
 						w="100%"
-						size="lg"
+						size="customLg"
 						variant="primary"
 						onClick={() => {
 							triggerEnableAccountMutation()

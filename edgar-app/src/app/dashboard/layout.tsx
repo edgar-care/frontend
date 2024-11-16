@@ -29,13 +29,14 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 		});
 
 		eventEmitter.on('disabled', () => {
-			router.push('/disabled');
+			router.push('/disable');
 		});
 	}, []);
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-		if (medicalInfo.isError) router.push('/onboarding/personal');
+		// @ts-ignore
+		if (medicalInfo.isError && medicalInfo.error.originalStatus !== 409) router.push('/onboarding/personal');
 		if (medicalInfo.status === 'fulfilled') setIsAuthenticated(true);
 	}, [medicalInfo]);
 
