@@ -21,8 +21,7 @@ describe('Navigation tests - Desktop', () => {
 			cy.clearAllCookies();
 			cy.clearAllSessionStorage();
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 		});
 
 		describe('Good number of elements', () => {
@@ -180,8 +179,7 @@ describe('Navigation tests - Desktop', () => {
 		beforeEach(() => {
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
 			cy.viewport(1920, 1080);
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 		});
 
 		it('Logout working', () => {

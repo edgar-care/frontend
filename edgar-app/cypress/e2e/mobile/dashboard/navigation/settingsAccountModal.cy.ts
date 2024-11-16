@@ -23,8 +23,7 @@ describe('Settings Account Modal tests - Mobile', () => {
 			cy.clearAllCookies();
 			cy.clearAllSessionStorage();
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 			cy.viewport(390, 844);
 			cy.get('#edgar-dashboardNavbar-menu-button').click();
 			cy.get('#edgar-dashboardNavbar-profileCard').click();
@@ -297,8 +296,7 @@ describe('Settings Account Modal tests - Mobile', () => {
 		beforeEach(() => {
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
 			cy.viewport(390, 844);
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 			cy.get('#edgar-dashboardNavbar-menu-button').click();
 			cy.get('#edgar-dashboardNavbar-profileCard').click();
 			cy.get('#edgar-dashboardNavbar-profileTab-Paramètres').click();
