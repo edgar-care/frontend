@@ -20,6 +20,11 @@ const displayMedicineUsageUnit = (unit: MedicineUnitType, plural: boolean = fals
 		GRANULER_EN_SACHET: plural ? 'sachets' : 'sachet',
 		PASTILLE: plural ? 'pastilles' : 'pastille',
 		SIROP: plural ? 'doses' : 'dose',
+		COMPRIME_PELLICULE: plural ? 'comprimés pelliculés' : 'comprimé pelliculé',
+		COMPRIME_ORODISPERSIBLE: plural ? 'comprimés orodispersibles' : 'comprimé orodispersible',
+		COMPRIME_ENROBE: plural ? 'comprimés enrobés' : 'comprimé enrobé',
+		CAPSULE_MOLLE: plural ? 'capsules molles' : 'capsule molle',
+		SOLUTION_INHALATION: plural ? 'inhalations' : 'inhalation',
 	};
 
 	return units[unit];
