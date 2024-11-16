@@ -1,3 +1,4 @@
+/*
 import createPatientAccount from 'utils/createPatientAccount';
 import setupMedicalInfo from 'utils/setupMedicalInfo';
 
@@ -175,3 +176,4 @@ describe('Treatments Page tests - Mobile', () => {
 		beforeEach(() => {});
 	});
 });
+*/

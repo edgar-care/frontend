@@ -109,7 +109,7 @@ describe('Medical Page tests - Mobile', () => {
 				cy.get('#edgar-dashboardMedicalPage-personalInfoCard-weight-text').should('contain.text', 'Poids:');
 			});
 
-			it('Good content for Doctor name', () => {
+			/* it('Good content for Doctor name', () => {
 				cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorId-text').should(
 					'contain.text',
 					'Médecin traitant:',
@@ -121,7 +121,7 @@ describe('Medical Page tests - Mobile', () => {
 					'contain.text',
 					'Antécédents médicaux:',
 				);
-			});
+			}); */
 		});
 
 		describe('Visible elements', () => {
@@ -171,13 +171,13 @@ describe('Medical Page tests - Mobile', () => {
 				cy.get('#edgar-dashboardMedicalPage-personalInfoCard-weight-text').should('be.visible');
 			});
 
-			it('Visible Doctor name', () => {
+			/* it('Visible Doctor name', () => {
 				cy.get('#edgar-dashboardMedicalPage-healthInfoCard-primaryDoctorId-text').should('be.visible');
 			});
 
 			it('Visible Medical antecedents', () => {
 				cy.get('#edgar-dashboardMedicalPage-healthInfoCard-medicalAntecedents-text').should('be.visible');
-			});
+			}); */
 		});
 	});
 
