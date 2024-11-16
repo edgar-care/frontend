@@ -86,7 +86,16 @@ const OnboardingMedicalHealthIssues = ({
 								render={({ field: { value, onChange } }) => (
 									<HealthIssueCard
 										healthIssue={healthIssue}
-										onClick={() => onChange(value.filter((item) => item.name !== healthIssue.name))}
+										onUpdate={(name: string) =>
+											onChange(
+												value.map((item) =>
+													item.name === healthIssue.name ? { ...item, name } : item,
+												),
+											)
+										}
+										onDelete={() =>
+											onChange(value.filter((item) => item.name !== healthIssue.name))
+										}
 									/>
 								)}
 							/>

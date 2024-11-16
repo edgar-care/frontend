@@ -18,7 +18,7 @@ const SelectHealthIssueNameInput = ({
 		</FormLabel>
 		<Input
 			{...register('name', { minLength: 1, maxLength: 50, required: true })}
-			placeholder="Edgar"
+			placeholder="Allergie"
 			w="100%"
 			maxLength={50}
 			id="edgar-onboardingMedicalPage-medicineName-input"
