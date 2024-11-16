@@ -1,61 +1,47 @@
 import { Box, Button, HStack, Icon, Skeleton, Text, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import TreatmentsCalendarHome from 'components/dashboardPages/treatments/TreatmentsCalendarHome';
+import TreatmentCard from 'components/dashboardPages/treatments/TreatmentCard';
 
-import { useGetMedicinesQuery } from 'services/request/medicines';
-import { useGetFollowUpTreatmentsQuery } from 'services/request/treatments';
 import { useGetPatientMedicalFolderQuery } from 'services/request/medical';
 
-import groupTreatmentsByDayPeriod from 'utils/app/dashboard/treatments/groupTreatmentsByDayPeriod';
-import groupFollowUpTreatmentsByDayPeriod from 'utils/app/dashboard/treatments/groupFollowUpTreatmentsByDayPeriod';
-
-import type { PatientMedicineType } from 'types/dashboard/medical/PatientMedicineType';
-import type { HealthIssuesMedicinesDayType } from 'types/dashboard/medical/HealthIssueType';
+import type { HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
 
 import WarningIcon from 'assets/icons/WarningIcon';
 
 const HomeTreatmentsCard = (): JSX.Element => {
-	const { data: medicalInfo } = useGetPatientMedicalFolderQuery();
-	const { data: medicinesInfo } = useGetMedicinesQuery();
-	const { data: checkedTreatments, isLoading } = useGetFollowUpTreatmentsQuery();
+	const { data: medicalInfo, isLoading } = useGetPatientMedicalFolderQuery();
 
-	const todayDay = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
-
-	const treatments: PatientMedicineType[] =
-		medicalInfo?.medicalAntecedents
-			.filter((antecedent) => antecedent.stillRelevant)
-			.map((antecedent) => antecedent.medicines)
-			.flat() || [];
-
-	const groupedTreatments = groupTreatmentsByDayPeriod(treatments);
-	const groupedFollowUpTreatments = groupFollowUpTreatmentsByDayPeriod(checkedTreatments || []);
+	const healthIssuesWithActiveTreatments: HealthIssuesType[] =
+		medicalInfo?.healthIssues
+			.map((healthIssue) => ({
+				...healthIssue,
+				treatments: healthIssue.treatments.filter(
+					(treatment) => !treatment.endDate || new Date(treatment.endDate) > new Date(),
+				),
+			}))
+			.filter((healthIssue) => healthIssue.treatments.length > 0) ?? [];
 
 	return (
-		<VStack spacing="16px" w="100%" bg="white" borderRadius="16px" p="16px" border="2px" borderColor="blue.200">
-			<Box w="100%">
-				<Link href="/dashboard/treatments">
-					<Button w="100%" size="customLg" id="edgar-dashboardHomePage-chat-button">
-						Consulter mes traitements
-					</Button>
-				</Link>
-			</Box>
+		<VStack w="100%" bg="white" borderRadius="16px" p="16px" border="2px" borderColor="blue.200" align="start">
+			<Text size="boldXl">Mes traitements en cours</Text>
 			<Box w="100%" h="2px" bg="blue.700" />
-			{treatments.length > 0 ? (
-				<VStack w="100%" align="start">
-					<Text size="boldMd">Vos médicaments d'aujourd'hui</Text>
-					<Skeleton isLoaded={!isLoading}>
-						{!isLoading && (
-							<TreatmentsCalendarHome
-								day={todayDay as HealthIssuesMedicinesDayType}
-								periods={groupedTreatments[todayDay]}
-								checkedTreatments={groupedFollowUpTreatments[todayDay]}
-								medicinesInfo={medicinesInfo || []}
-								displayDay={false}
-							/>
-						)}
-					</Skeleton>
-				</VStack>
+			{healthIssuesWithActiveTreatments.length > 0 ? (
+				<Skeleton isLoaded={!isLoading} w="100%">
+					<VStack w="100%" align="start">
+						{!isLoading &&
+							healthIssuesWithActiveTreatments.map((healthIssue) =>
+								healthIssue.treatments.slice(0, 5).map((treatment) => (
+									<VStack w="100%" key={treatment.id}>
+										<TreatmentCard treatment={treatment} healthIssueName={healthIssue.name} />
+									</VStack>
+								)),
+							)}
+						<Link href="/dashboard/treatments">
+							<Text textDecoration="underline">Voir plus de traitements</Text>
+						</Link>
+					</VStack>
+				</Skeleton>
 			) : (
 				<VStack
 					w="100%"
@@ -69,12 +55,16 @@ const HomeTreatmentsCard = (): JSX.Element => {
 					<HStack spacing="16px" w="100%">
 						<Icon as={WarningIcon} w="32px" h="32px" color="orange.600" />
 						<Text color="orange.600" size="boldMd">
-							Vous n’avez pas encore enregistré de suivi sur vos traitements
+							Vous n’avez pas encore enregistré de traitements
 						</Text>
 					</HStack>
-					<Button size="sm" variant="secondary" w="100%">
-						Ajouter un suivi
-					</Button>
+					<Box w="100%">
+						<Link href="/dashboard/treatments">
+							<Button variant="secondary" w="100%">
+								Ajouter un traitement
+							</Button>
+						</Link>
+					</Box>
 				</VStack>
 			)}
 		</VStack>
