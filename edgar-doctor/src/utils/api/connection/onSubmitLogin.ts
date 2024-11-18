@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+import { type Dispatch, type SetStateAction } from 'react';
 
-import { type MessageResponse } from 'types/MessageResponse';
+import type { MessageResponse } from 'types/MessageResponse';
+import type { AvailableMethod, Login2FADevice } from 'types/app/login-2fa/Login2FAResponse';
 
 import Auth from 'libs/auth';
 
@@ -12,6 +13,8 @@ const onSubmitLogin = async (
 	setEmailError: Dispatch<SetStateAction<boolean>>,
 	setPasswordError: Dispatch<SetStateAction<boolean>>,
 	auth: Auth,
+	setAvailableMethods: Dispatch<SetStateAction<AvailableMethod[]>>,
+	setDeviceInfos: Dispatch<SetStateAction<Login2FADevice | undefined>>,
 ): Promise<MessageResponse> => {
 	if (!emailValidityChecker(email)) {
 		setEmailError(true);
@@ -23,6 +26,11 @@ const onSubmitLogin = async (
 	}
 
 	const response = await auth.login(email, password);
+	if ('methods' in response && 'deviceInfos' in response) {
+		setAvailableMethods(response.methods);
+		setDeviceInfos(response.deviceInfos);
+		return { title: '2FA required', status: 'info' };
+	}
 	if (response.status === 'success') return { title: 'Connexion réussie', status: 'success' };
 	return { title: 'Identifiants incorrects', status: 'error' };
 };

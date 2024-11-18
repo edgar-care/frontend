@@ -11,7 +11,7 @@ import getLastUnseenMessage from 'utils/app/dashboard/chat/getLastUnseenMessage'
 import ChatIcon from 'assets/icons/ChatIcon';
 
 const HomeChatCard = (): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { chats } = useChatContext();
 
 	const router = useRouter();
