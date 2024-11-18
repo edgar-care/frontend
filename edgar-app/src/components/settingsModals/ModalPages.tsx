@@ -17,6 +17,7 @@ import SettingsAccount2FAEdgarPage from 'components/settingsModals/pages/account
 import SettingsDeviceInfoPage from 'components/settingsModals/pages/devices/SettingsDeviceInfoPage';
 import SettingsAccount2FAEdgarAddTrustDevicePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarAddTrustDevicePage';
 import SettingsAccount2FAEdgarDisablePage from 'components/settingsModals/pages/account/SettingsAccount2FAEdgarDisablePage';
+import SettingsAccountDisablePage from 'components/settingsModals/pages/account/SettingsAccountDisablePage';
 import SettingsAccountDeletePage from 'components/settingsModals/pages/account/SettingsAccountDeletePage';
 import SettingsDevicesPage from 'components/settingsModals/pages/devices/SettingsDevicesPage';
 import SettingsAccountBackupCodesActivationPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesActivationPage';
@@ -173,6 +174,7 @@ const ModalPages = ({
 					}),
 		),
 		settingsAccount2faEdgarDisable: SettingsAccount2FAEdgarDisablePage(() => onPreviousOfPage(2)),
+		settingsAccountDisable: SettingsAccountDisablePage(() => onPreviousOfPage(1)),
 		settingsAccountDelete: SettingsAccountDeletePage(() => onPreviousOfPage(1)),
 		settingsDevices: SettingsDevicesPage(
 			devices,
