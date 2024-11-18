@@ -1,12 +1,19 @@
 import { Button, useToast } from '@chakra-ui/react';
+
+import { useRouter } from 'next/navigation';
+
 import DisableAccountIllustration from 'assets/illustrations/DisableAccountIllustration';
+
 import { useDisableAccountMutation } from 'services/request/auth';
+
 import type { SettingsPageType } from 'types/navigation/SettingsPageType';
 
 const SettingsAccountDisablePage = (onCancel: () => void): SettingsPageType => {
 	const [triggerDisableAccountMutation] = useDisableAccountMutation();
 
 	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const router = useRouter();
 
 	return {
 		headerTitle: 'Désactiver votre compte',
@@ -24,6 +31,8 @@ const SettingsAccountDisablePage = (onCancel: () => void): SettingsPageType => {
 					triggerDisableAccountMutation()
 						.unwrap()
 						.then(() => {
+							localStorage.removeItem('token');
+							router.push('/login');
 							toast({
 								title: 'Le compte à été désactivé',
 								status: 'success',
