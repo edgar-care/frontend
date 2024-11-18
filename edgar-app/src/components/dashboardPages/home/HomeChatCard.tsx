@@ -28,6 +28,10 @@ const HomeChatCard = (): JSX.Element => {
 
 	return (
 		<VStack spacing="16px" w="100%" bg="white" borderRadius="16px" p="16px" border="2px" borderColor="blue.200">
+			<VStack w="100%" align="start">
+				<Text size="boldXl">Ma messagerie</Text>
+				<Box w="100%" h="2px" bg="blue.700" />
+			</VStack>
 			<Box w="100%">
 				<Link href="/dashboard/chat">
 					<Button w="100%" size="customLg" id="edgar-dashboardHomePage-chat-button">
@@ -35,7 +39,6 @@ const HomeChatCard = (): JSX.Element => {
 					</Button>
 				</Link>
 			</Box>
-			<Box w="100%" h="2px" bg="blue.700" />
 			{unseenChat.length > 0 ? (
 				<>
 					<HStack

@@ -1,17 +1,24 @@
-import { type TreatmentPeriodType } from 'types/dashboard/medical/TreatmentPeriodType';
-import { type TreatmentDayType } from 'types/dashboard/medical/TreatmentDayType';
+export interface TreatmentType {
+	id: string;
+	medicalAntecedentId?: string;
+	startDate: number;
+	endDate?: number;
+	medicines: TreatmentMedicinesType[];
+}
 
-export type TreatmentType = {
-	name?: string;
-	diseaseId?: string;
-	alreadyExist: boolean;
-	stillRelevant: boolean;
-	treatments: TreatmentMedicinesType[];
-};
-
-export type TreatmentMedicinesType = {
-	period: TreatmentPeriodType[];
-	day: TreatmentDayType[];
-	quantity: string;
+export interface TreatmentMedicinesType {
 	medicineId: string;
-};
+	comment: string;
+	periods: TreatmentPeriodType[];
+}
+
+export interface TreatmentPeriodType {
+	quantity: number;
+	frequency: number;
+	frequencyRatio: number;
+	frequencyUnit: PrescriptionTimeUnitType;
+	periodLength?: number;
+	periodUnit?: PrescriptionTimeUnitType;
+}
+
+export type PrescriptionTimeUnitType = 'JOUR' | 'SEMAINE' | 'MOIS' | 'ANNEE';

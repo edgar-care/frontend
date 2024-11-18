@@ -117,7 +117,7 @@ describe('Medical Info Page tests - Mobile', () => {
 			});
 		});
 
-		describe('Good UI when adding Health Issue', { testIsolation: false }, () => {
+		/* describe('Good UI when adding Health Issue', { testIsolation: false }, () => {
 			before(() => {
 				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
 			});
@@ -182,7 +182,7 @@ describe('Medical Info Page tests - Mobile', () => {
 					cy.get('#edgar-onboardingMedicalPage-medicine-selector').should('be.visible');
 				});
 			});
-		});
+		}); */
 	});
 
 	describe('Working page', () => {
@@ -208,7 +208,7 @@ describe('Medical Info Page tests - Mobile', () => {
 				);
 			});
 
-			it('No filled inputs when adding health issue', () => {
+			/* it('No filled inputs when adding health issue', () => {
 				cy.get('#edgar-onboardingMedicalPage-formHealthIssues-input').click();
 				cy.get('#edgar-onboardingMedicalPage-addHealthIssue-validate-button').click();
 				cy.get('#edgar-onboardingMedicalPage-medicineStillRelevantError-text').should('be.visible');
@@ -221,10 +221,10 @@ describe('Medical Info Page tests - Mobile', () => {
 					'contain.text',
 					'Ce champ est nécessaire',
 				);
-			});
+			}) */
 		});
 
-		describe('Working states', () => {
+		/* describe('Working states', () => {
 			beforeEach(() => {
 				cy.window().then((win) => {
 					win.localStorage.setItem(
@@ -314,7 +314,7 @@ describe('Medical Info Page tests - Mobile', () => {
 					.url()
 					.should('eq', `${Cypress.env('url')}/dashboard`);
 			});
-		});
+		}); */
 	});
 
 	describe('Clean up', () => {

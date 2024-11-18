@@ -26,7 +26,7 @@ const SelectHealthIssueHandler = ({
 		control,
 		watch,
 		reset,
-	} = useForm<HealthIssuesType>({ mode: 'onChange', defaultValues: { medicines: [] } });
+	} = useForm<HealthIssuesType>({ mode: 'onChange', defaultValues: { treatments: [] } });
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
@@ -39,13 +39,6 @@ const SelectHealthIssueHandler = ({
 		if (healthIssues.some((healthIssue) => healthIssue.name === data.name)) {
 			toast({
 				title: 'Ce sujet de santé a déjà été ajouté',
-				status: 'error',
-			});
-			return;
-		}
-		if (!data.medicines.every((medicine) => medicine.day.length > 0 && medicine.period.length > 0)) {
-			toast({
-				title: 'Veuillez sélectionner au moins un jour et une période pour vos traitements',
 				status: 'error',
 			});
 			return;
@@ -68,8 +61,8 @@ const SelectHealthIssueHandler = ({
 					onSubmit={onSubmit}
 					register={register}
 					control={control}
-					errors={errors}
 					watch={watch}
+					errors={errors}
 				/>
 			}
 			footerPrimaryButton={

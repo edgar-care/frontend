@@ -1,7 +1,7 @@
 import type { MedicineUnitType } from 'types/dashboard/medical/MedicineType';
 
 const displayMedicineUnit = (unit: MedicineUnitType): string => {
-	const units: { [key: string]: string } = {
+	const units: Record<MedicineUnitType, string> = {
 		CREME: 'Crème',
 		POMMADE: 'Pommade',
 		GELULE: 'Gélule',
@@ -20,6 +20,11 @@ const displayMedicineUnit = (unit: MedicineUnitType): string => {
 		GRANULER_EN_SACHET: 'Granulé en sachet',
 		PASTILLE: 'Pastille',
 		SIROP: 'Sirop',
+		CAPSULE_MOLLE: 'Capsule molle',
+		COMPRIME_ENROBE: 'Comprimé enrobé',
+		COMPRIME_ORODISPERSIBLE: 'Comprimé orodispersible',
+		COMPRIME_PELLICULE: 'Comprimé pelliculé',
+		SOLUTION_INHALATION: 'Solution pour inhalation',
 	};
 
 	return units[unit];

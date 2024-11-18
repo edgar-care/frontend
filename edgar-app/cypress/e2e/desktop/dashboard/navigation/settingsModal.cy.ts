@@ -21,8 +21,7 @@ describe('Settings Modal tests - Desktop', () => {
 			cy.clearAllCookies();
 			cy.clearAllSessionStorage();
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 			cy.viewport(1920, 1080);
 			cy.get('#edgar-dashboardNavbar-profileCard').click();
 			cy.get('#edgar-dashboardNavbar-profileTab-Paramètres').click();
@@ -177,8 +176,7 @@ describe('Settings Modal tests - Desktop', () => {
 		beforeEach(() => {
 			cy.window().then((win) => win.localStorage.setItem('token', authToken));
 			cy.viewport(1920, 1080);
-			cy.visit('/dashboard').wait(6000);
-			cy.get('#edgar-notificationsModal-no-button').click();
+			cy.visit('/dashboard/appointments').wait(1000);
 			cy.get('#edgar-dashboardNavbar-profileCard').click();
 			cy.get('#edgar-dashboardNavbar-profileTab-Paramètres').click();
 		});

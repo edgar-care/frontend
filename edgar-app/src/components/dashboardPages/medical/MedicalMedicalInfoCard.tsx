@@ -1,18 +1,28 @@
-import { Box, HStack, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Button, HStack, Text, useDisclosure, useToast, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 
-import HealthIssueCard from 'components/dashboardPages/medical/modal/forms/medical/healthIssues/HealthIssueCard';
+import HealthIssueCard from 'components/dashboardPages/medical/healthIssue/HealthIssueCard';
+import SelectHealthIssueHandler from 'components/onboardingPages/medical/healthIssues/SelectHealthIssueHandler';
 
-import { useGetDoctorByIdQuery } from 'services/request/doctor';
+import { useAddHealthIssueMutation } from 'services/request/medical';
 
-import type { PatientHealthType, PatientMedicalType } from 'types/dashboard/medical/PatientMedicalType';
-import type { PatientMedicalAntecedentType } from 'types/dashboard/medical/PatientMedicalAntecedentType';
+import type { HealthInfos } from 'types/onboarding/OnboardingInfos';
+import type { HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
 
-const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
-	const { data: doctorInfo } = useGetDoctorByIdQuery(medicalInfos.primaryDoctorId);
+const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: HealthInfos }): JSX.Element => {
+	const [triggerAddHealthIssue] = useAddHealthIssueMutation();
+	const {
+		isOpen: isOpenAddHealthIssue,
+		onOpen: onOpenAddHealthIssue,
+		onClose: onCloseAddHealthIssue,
+	} = useDisclosure();
 
-	const medicalInfosLabels = {
-		primaryDoctorId: 'Médecin traitant',
-		medicalAntecedents: 'Antécédents médicaux',
+	const toast = useToast({ duration: 3000, isClosable: true });
+
+	const onSubmit = (data: HealthIssuesType) => {
+		triggerAddHealthIssue(data)
+			.unwrap()
+			.then(() => toast({ title: 'Sujet de santé ajouté', status: 'success' }))
+			.catch(() => toast({ title: "Erreur lors de l'ajout du sujet de santé", status: 'error' }));
 	};
 
 	return (
@@ -29,45 +39,33 @@ const MedicalMedicalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedical
 		>
 			<Box as="span" w="4px" alignSelf="stretch" bg="green.500" borderRadius="4px" />
 			<VStack pl="8px" w="100%" align="start" spacing={{ base: '8px', lg: '12px' }}>
-				{Object.keys({
-					primaryDoctorId: medicalInfos.primaryDoctorId,
-					medicalAntecedents: medicalInfos.medicalAntecedents,
-				}).map((key, index) => {
-					const info = medicalInfos[key as keyof PatientHealthType];
-					return (
-						<Box as="div" key={index}>
-							{(key as keyof PatientHealthType) === 'primaryDoctorId' && doctorInfo && (
-								<Text
-									size={{ base: 'md', lg: 'lg' }}
-									id={`edgar-dashboardMedicalPage-healthInfoCard-${key as keyof PatientHealthType}-text`}
-								>
-									{medicalInfosLabels[key as keyof PatientHealthType]}: Dr.{' '}
-									{doctorInfo.name.toUpperCase()} {doctorInfo.firstname}
-								</Text>
-							)}
-							{(key as keyof PatientHealthType) === 'medicalAntecedents' && (
-								<VStack w="100%" align="start">
-									<Text
-										size={{ base: 'md', lg: 'lg' }}
-										id={`edgar-dashboardMedicalPage-healthInfoCard-${
-											key as keyof PatientHealthType
-										}-text`}
-									>
-										{medicalInfosLabels[key as keyof PatientHealthType]}:
-									</Text>
-									<Wrap w="100%" gap="8px">
-										{(info as PatientMedicalAntecedentType[]).map((value) => (
-											<WrapItem key={value.id}>
-												<HealthIssueCard healthIssue={value} isDeletable={false} />
-											</WrapItem>
-										))}
-									</Wrap>
-								</VStack>
-							)}
-						</Box>
-					);
-				})}
+				<VStack w="100%" spacing="16px">
+					<Button w="100%" onClick={onOpenAddHealthIssue}>
+						Ajouter un sujet de santé
+					</Button>
+					<VStack w="100%" align="start">
+						<Text
+							size={{ base: 'md', lg: 'lg' }}
+							id={`edgar-dashboardMedicalPage-healthInfoCard-healthIssues-text`}
+						>
+							Antécédents médicaux et sujets de santé:
+						</Text>
+						<Wrap w="100%" gap="8px">
+							{medicalInfos.healthIssues.map((healthIssue) => (
+								<WrapItem key={healthIssue.id}>
+									<HealthIssueCard healthIssue={healthIssue} />
+								</WrapItem>
+							))}
+						</Wrap>
+					</VStack>
+				</VStack>
 			</VStack>
+			<SelectHealthIssueHandler
+				isOpen={isOpenAddHealthIssue}
+				onClose={onCloseAddHealthIssue}
+				onChange={(data: unknown) => onSubmit((data as HealthIssuesType[])[0])}
+				healthIssues={[]}
+			/>
 		</HStack>
 	);
 };

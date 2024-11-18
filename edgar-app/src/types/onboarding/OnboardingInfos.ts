@@ -1,7 +1,8 @@
-import { type HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
-import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
+import type { HealthIssuesType } from 'types/dashboard/medical/HealthIssueType';
+import type { PatientSexType } from 'types/dashboard/medical/PatientSexType';
 
 export type PersonalInfos = {
+	id: string;
 	name: string;
 	firstname: string;
 	birthdate: number;

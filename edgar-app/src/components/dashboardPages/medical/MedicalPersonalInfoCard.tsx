@@ -1,28 +1,37 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 
-import type { PatientMedicalType, PatientPersonalType } from 'types/dashboard/medical/PatientMedicalType';
-import { type PatientSexType } from 'types/dashboard/medical/PatientSexType';
+import { useGetDoctorByIdQuery } from 'services/request/doctor';
 
-const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedicalType }): JSX.Element => {
-	const personalInfosLabels = {
+import type { PatientSexType } from 'types/dashboard/medical/PatientSexType';
+import type { PersonalInfos } from 'types/onboarding/OnboardingInfos';
+
+const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PersonalInfos }): JSX.Element => {
+	const { data: doctorInfo } = useGetDoctorByIdQuery(medicalInfos.primaryDoctorId);
+
+	const personalInfosLabels: Record<keyof PersonalInfos, string> = {
 		firstname: 'Prénom',
 		name: 'Nom',
 		birthdate: 'Date de naissance',
 		sex: 'Sexe',
 		height: 'Taille',
 		weight: 'Poids',
+		primaryDoctorId: 'Médecin traitant',
+		hasMedicalAntecedents: '',
+		id: '',
 	};
-	const sexLabel: { [key: string]: string } = {
+	const sexLabel: Record<PatientSexType, string> = {
 		MALE: 'Masculin',
 		FEMALE: 'Féminin',
 		OTHER: 'Autre',
 	};
 
 	const displayPersonalInfos = (key: string, info: string | number): string => {
-		if ((key as keyof PatientPersonalType) === 'birthdate') return new Date(info).toLocaleDateString('fr-FR');
-		if ((key as keyof PatientPersonalType) === 'sex') return sexLabel[info as PatientSexType];
-		if ((key as keyof PatientPersonalType) === 'height') return `${(info as number).toPrecision(3)}m`;
-		if ((key as keyof PatientPersonalType) === 'weight') return `${info}kg`;
+		if ((key as keyof PersonalInfos) === 'birthdate') return new Date(info).toLocaleDateString('fr-FR');
+		if ((key as keyof PersonalInfos) === 'sex') return sexLabel[info as PatientSexType];
+		if ((key as keyof PersonalInfos) === 'height') return `${(info as number).toPrecision(3)}m`;
+		if ((key as keyof PersonalInfos) === 'weight') return `${info}kg`;
+		if ((key as keyof PersonalInfos) === 'primaryDoctorId')
+			return `Dr. ${doctorInfo?.name.toUpperCase()} ${doctorInfo?.firstname}`;
 		return info.toString();
 	};
 
@@ -47,16 +56,17 @@ const MedicalPersonalInfoCard = ({ medicalInfos }: { medicalInfos: PatientMedica
 					sex: medicalInfos.sex,
 					height: medicalInfos.height,
 					weight: medicalInfos.weight,
+					primaryDoctorId: medicalInfos.primaryDoctorId,
 				}).map((key, index) => {
-					const info = medicalInfos[key as keyof PatientPersonalType];
+					const info = medicalInfos[key as keyof PersonalInfos] as string | number;
 
 					return (
 						<Text
 							key={index}
 							size={{ base: 'md', lg: 'lg' }}
-							id={`edgar-dashboardMedicalPage-personalInfoCard-${key as keyof PatientPersonalType}-text`}
+							id={`edgar-dashboardMedicalPage-personalInfoCard-${key as keyof PersonalInfos}-text`}
 						>
-							{personalInfosLabels[key as keyof PatientPersonalType]}: {displayPersonalInfos(key, info)}
+							{personalInfosLabels[key as keyof PersonalInfos]}: {displayPersonalInfos(key, info)}
 						</Text>
 					);
 				})}
