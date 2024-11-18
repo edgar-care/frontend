@@ -34,12 +34,12 @@ const SettingsAccountDeletePage = (onCancel: () => void): SettingsPageType => {
 							localStorage.removeItem('token');
 							router.push('/login');
 							toast({
-								title: 'Un mail de confirmation vous a été envoyé',
+								title: 'Un mail de confirmation vous a été envoyé.',
 								status: 'success',
 							});
 						})
 						.catch(() => {
-							toast({ title: 'Une erreur est survenue', status: 'error' });
+							toast({ title: 'Une erreur est survenue.', status: 'error' });
 						});
 				}}
 			>
