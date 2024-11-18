@@ -18,7 +18,7 @@ const extendedApi = backendApi.injectEndpoints({
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
 				})) || [],
-				providesTags: ['patientDevice'],
+			providesTags: ['patientDevice'],
 		}),
 
 		getConnectedDeviceById: builder.query<DeviceType, string>({
