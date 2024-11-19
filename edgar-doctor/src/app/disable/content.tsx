@@ -9,31 +9,29 @@ const DisablePageContent = (): JSX.Element => {
 	const isTablet = useBreakpointValue({ base: true, lg: false });
 
 	return (
-		<>
-			<VStack
-				p={{ base: '0px', sm: '16px 128px', lg: '64px 256px', xl: '128px 512px' }}
+		<VStack
+			p={{ base: '0px', sm: '16px 128px', lg: '64px 256px', xl: '128px 512px' }}
+			w="100%"
+			h={{ base: '100%', lg: 'auto' }}
+			justify={{ base: 'start', sm: 'center' }}
+			minH={{ base: 'auto', sm: '100vh' }}
+		>
+			<HStack
+				bg="white"
+				borderRadius="48px"
 				w="100%"
-				h={{ base: '100%', lg: 'auto' }}
-				justify={{ base: 'start', sm: 'center' }}
-				minH={{ base: 'auto', sm: '100vh' }}
+				border="2px solid"
+				borderColor="blue.200"
+				align="stretch"
+				spacing="32px"
+				p="32px"
+				h="100%"
+				maxW="896px"
 			>
-				<HStack
-					bg="white"
-					borderRadius="48px"
-					w="100%"
-					border="2px solid"
-					borderColor="blue.200"
-					align="stretch"
-					spacing="32px"
-					p="32px"
-					h="100%"
-					maxW="896px"
-				>
-					{!isTablet && <DisablePageBanner />}
-					<DisablePageFields />
-				</HStack>
-			</VStack>
-		</>
+				{!isTablet && <DisablePageBanner />}
+				<DisablePageFields />
+			</HStack>
+		</VStack>
 	);
 };
 
