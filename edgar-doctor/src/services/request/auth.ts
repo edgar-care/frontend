@@ -5,7 +5,7 @@ const extendedApi = backendApi.injectEndpoints({
 		deleteAccount: builder.mutation<void, void>({
 			query: () => ({
 				url: '/auth/delete_account',
-				method: 'PUT',
+				method: 'POST',
 			}),
 		}),
 	}),
