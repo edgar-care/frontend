@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 		});
 
 		eventEmitter.on('disabled', () => {
-			router.push('/disabled');
+			router.push('/disable');
 		});
 	}, 750);
 
