@@ -14,7 +14,13 @@ const extendedApi = backendApi.injectEndpoints({
 				method: 'PUT',
 			}),
 		}),
+		deleteAccount: builder.mutation<void, void>({
+			query: () => ({
+				url: '/auth/delete_account',
+				method: 'POST',
+			}),
+		}),
 	}),
 });
 
-export const { useDisableAccountMutation, useEnableAccountMutation } = extendedApi;
+export const { useDisableAccountMutation, useEnableAccountMutation, useDeleteAccountMutation } = extendedApi;
