@@ -5,7 +5,7 @@ import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 import ErrorMessage from 'components/forms/ErrorMessage';
 import SelectPrimaryDoctorHandler from 'components/app/dashboardPages/patients/modal/forms/primaryDoctor/SelectPrimaryDoctorHandler';
 
-import { AddPatientDTO } from 'store/types/patients.type';
+import type { AddPatientDTO } from 'store/types/patients.type';
 
 import AddIcon from 'assets/icons/AddIcon';
 
@@ -21,14 +21,14 @@ const OnboardingPersonalPrimaryDoctorInput = ({
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
-		<VStack spacing="4px" align="start" w="100%" pb={errors.medicalFolder?.primaryDoctorId ? '0px' : '16px'}>
+		<VStack spacing="4px" align="start" w="100%" pb={errors.medicalInfo?.primaryDoctorId ? '0px' : '16px'}>
 			<FormLabel size="lg" id="edgar-onboardingPersonalPage-formPrimaryDoctor-text">
 				Nom du médecin traitant
 			</FormLabel>
 			<InputGroup>
 				<Controller
 					control={control}
-					name="medicalFolder.primaryDoctorId"
+					name="medicalInfo.primaryDoctorId"
 					rules={{ required: true }}
 					render={({ field: { onChange } }) => (
 						<>
@@ -55,7 +55,7 @@ const OnboardingPersonalPrimaryDoctorInput = ({
 					<Icon as={AddIcon} color="blue.700" />
 				</InputRightElement>
 			</InputGroup>
-			{errors.medicalFolder?.primaryDoctorId?.type === 'required' && (
+			{errors.medicalInfo?.primaryDoctorId?.type === 'required' && (
 				<ErrorMessage id="edgar-onboardingPersonalPage-formPrimaryDoctorErrorRequired-text">
 					Ce champ est nécessaire
 				</ErrorMessage>

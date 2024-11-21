@@ -3,7 +3,7 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessageM from 'components/forms/ErrorMessage';
 
-import { type AddPatientDTO } from 'store/types/patients.type';
+import type { AddPatientDTO } from 'store/types/patients.type';
 
 const AddPatientModalMailInput = ({
 	register,
@@ -17,7 +17,7 @@ const AddPatientModalMailInput = ({
 			Adresse mail
 		</FormLabel>
 		<Input
-			{...register('email', { minLength: 1, maxLength: 50, required: true })}
+			{...register('email', { minLength: 1, maxLength: 50, required: true, pattern: /^\S+@\S+.\S+$/ })}
 			placeholder="edgar.assistant@edgar-sante.fr"
 			w="100%"
 			maxLength={50}
@@ -25,6 +25,9 @@ const AddPatientModalMailInput = ({
 		/>
 		{errors.email?.type === 'required' && (
 			<ErrorMessageM id="edgar-addPatientModal-formMailError-text">Ce champ est nécessaire</ErrorMessageM>
+		)}
+		{errors.email?.type === 'pattern' && (
+			<ErrorMessageM id="edgar-addPatientModal-formMailError-text">Adresse mail invalide</ErrorMessageM>
 		)}
 	</VStack>
 );

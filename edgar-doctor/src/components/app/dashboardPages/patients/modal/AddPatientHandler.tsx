@@ -8,62 +8,69 @@ import AddPatientModalMedicalAntecedents from 'components/app/dashboardPages/pat
 
 import { useAddPatientMutation } from 'services/request/patients';
 
-import AddPatientIllustration from 'assets/illustrations/AddPatientIllustration';
-
 import type { AddPatientDTO } from 'store/types/patients.type';
+
+import type { PatientMedicalHealthInfosType } from 'types/app/dashboard/patients/PatientType';
+
+import AddPatientIllustration from 'assets/illustrations/AddPatientIllustration';
 
 const AddPatientHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }): JSX.Element => {
 	const [triggerAddPatient] = useAddPatientMutation();
 
 	const [step, setStep] = useState(0);
 	const {
-		handleSubmit,
-		formState: { errors },
-		register,
-		control,
-		reset,
-		watch,
+		handleSubmit: handleSubmitFirstStep,
+		formState: { errors: errorsFirstStep },
+		register: registerFirstStep,
+		control: controlFirstStep,
+		reset: resetFirstStep,
 	} = useForm<AddPatientDTO>({
 		mode: 'onChange',
 		defaultValues: {
-			medicalFolder: {
-				medicalAntecedents: [],
+			medicalInfo: {
+				healthIssues: [],
 			},
+		},
+	});
+
+	const {
+		handleSubmit,
+		formState: { errors },
+		control,
+		reset,
+		watch,
+	} = useForm<PatientMedicalHealthInfosType>({
+		mode: 'onChange',
+		defaultValues: {
+			healthIssues: [],
 		},
 	});
 
 	const toast = useToast({ duration: 3000, isClosable: true });
 
-	const onSubmit = handleSubmit((data) => {
-		// TODO: clean this code
-		console.log(data.medicalFolder.birthdate);
-		if (
-			!data.email ||
-			!data.medicalFolder.name ||
-			!data.medicalFolder.firstname ||
-			!data.medicalFolder.birthdate ||
-			!data.medicalFolder.sex ||
-			!data.medicalFolder.height ||
-			!data.medicalFolder.weight ||
-			!data.medicalFolder.primaryDoctorId
-		) {
-			toast({ title: 'Veuillez remplir tous les champs', status: 'error' });
-			return;
-		}
-		triggerAddPatient({
-			email: data.email,
-			medicalFolder: data.medicalFolder,
-		})
-			.unwrap()
-			.then(() => {
-				toast({ title: 'La patient a bien été ajouté', status: 'success' });
-				setStep(0);
-				reset();
-				onClose();
+	const onSubmit = handleSubmitFirstStep((dataFirstStep) => {
+		const onFinalSubmit = handleSubmit((data) => {
+			triggerAddPatient({
+				email: dataFirstStep.email,
+				medicalInfo: { ...dataFirstStep.medicalInfo, healthIssues: data.healthIssues },
 			})
-			.catch(() => {
-				toast({ title: 'Une erreur est survenue', status: 'error' });
-			});
+				.unwrap()
+				.then(() => {
+					toast({ title: 'La patient a bien été ajouté', status: 'success' });
+					setStep(0);
+					reset();
+					resetFirstStep();
+					onClose();
+				})
+				.catch(() => {
+					toast({ title: 'Une erreur est survenue', status: 'error' });
+				});
+		});
+		onFinalSubmit();
+	});
+
+	const onNext = handleSubmitFirstStep(() => {
+		setStep(1);
 	});
 
 	return (
@@ -71,17 +78,23 @@ const AddPatientHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 			isOpen={isOpen}
 			onClose={onClose}
 			size="3xl"
-			headerTitle="Ajout des informations médicales du patient"
-			headerSubtitle="Ajouter les informations personnelles."
+			headerTitle="Ajout les informations médicales du patient"
+			headerSubtitle={
+				step === 0 ? 'Ajouter les informations personnelles.' : 'Ajouter les informations médicales.'
+			}
 			headerIcon={AddPatientIllustration}
 			bodyContent={
 				step === 0 ? (
-					<AddPatientModalContent register={register} control={control} errors={errors} />
+					<AddPatientModalContent
+						register={registerFirstStep}
+						control={controlFirstStep}
+						errors={errorsFirstStep}
+					/>
 				) : (
 					<AddPatientModalMedicalAntecedents
 						control={control}
 						errors={errors}
-						medicalAntecedents={watch('medicalFolder.medicalAntecedents')}
+						healthIssues={watch('healthIssues')}
 					/>
 				)
 			}
@@ -89,7 +102,7 @@ const AddPatientHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 				<Button
 					w="100%"
 					onClick={() => {
-						if (step === 0) setStep(1);
+						if (step === 0) onNext();
 						else void onSubmit();
 					}}
 					type={step === 0 ? 'button' : 'submit'}
@@ -104,6 +117,7 @@ const AddPatientHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 					onClick={() => {
 						if (step === 0) {
 							onClose();
+							resetFirstStep();
 							reset();
 						} else setStep(0);
 					}}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HStack, useBreakpointValue, VStack } from '@chakra-ui/react';
+import { HStack, Skeleton, useBreakpointValue, VStack } from '@chakra-ui/react';
 
 import PatientsCard from 'components/app/dashboardPages/patients/PatientsCard';
 import PatientsSubViewManager from 'components/app/dashboardPages/patients/subViews/PatientsSubViewManager';
@@ -7,7 +7,7 @@ import PatientsSubViewManager from 'components/app/dashboardPages/patients/subVi
 import { useGetPatientsQuery } from 'services/request/patients';
 
 const Patients = ({ patientSearch }: { patientSearch: string }): JSX.Element => {
-	const { data: patients } = useGetPatientsQuery();
+	const { data: patients, isLoading } = useGetPatientsQuery();
 	const [selectedPatientId, setSelectedPatientId] = useState('');
 
 	const isMobile = useBreakpointValue({ base: true, md: false });
@@ -22,23 +22,25 @@ const Patients = ({ patientSearch }: { patientSearch: string }): JSX.Element => 
 					h="100%"
 					justify="space-between"
 				>
-					<VStack w="100%" h="100%">
-						{patients
-							?.filter((patient) =>
-								`${patient.medicalInfos.name} ${patient.medicalInfos.firstname}`
-									.toLowerCase()
-									.includes(patientSearch.toLowerCase()),
-							)
-							.map((patient) => (
-								<PatientsCard
-									key={patient.id}
-									patient={patient}
-									selectedPatientId={selectedPatientId}
-									setSelectedPatientId={setSelectedPatientId}
-								/>
-							))}
-					</VStack>
-					{/*	TODO: add pagination */}
+					<Skeleton isLoaded={!isLoading && patients !== undefined} w="100%" h="100%" borderRadius="8px">
+						<VStack w="100%" h="100%">
+							{patients
+								?.filter((patient) =>
+									`${patient.medicalInfos.name} ${patient.medicalInfos.firstname}`
+										.toLowerCase()
+										.includes(patientSearch.toLowerCase()),
+								)
+								.map((patient) => (
+									<PatientsCard
+										key={patient.id}
+										patient={patient}
+										selectedPatientId={selectedPatientId}
+										setSelectedPatientId={setSelectedPatientId}
+									/>
+								))}
+						</VStack>
+						{/*	TODO: add pagination */}
+					</Skeleton>
 				</VStack>
 			)}
 			{(!isMobile || selectedPatientId) && (

@@ -12,23 +12,23 @@ import {
 } from '@chakra-ui/react';
 import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
+import SelectHealthIssueHandler from 'components/app/dashboardPages/patients/modal/healthIssues/SelectHealthIssueHandler';
+import HealthIssueCard from 'components/app/dashboardPages/patients/modal/healthIssues/treatments/HealthIssueCard';
 import ErrorMessageM from 'components/forms/ErrorMessage';
-import SelectMedicalAntecedentsHandler from 'components/app/dashboardPages/patients/modal/SelectMedicalAntecedentsHandler';
-import MedicalAntecedentsCard from 'components/app/dashboardPages/patients/modal/forms/medicalAntecedents/MedicalAntecedentsCard';
+
+import type { HealthIssuesType } from 'types/app/dashboard/patients/medicalInfos/HealthIssueType';
+import type { PatientMedicalHealthInfosType } from 'types/app/dashboard/patients/PatientType';
 
 import AddIcon from 'assets/icons/AddIcon';
-
-import { type AddPatientDTO } from 'store/types/patients.type';
-import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
 
 const AddPatientModalMedicalAntecedents = ({
 	control,
 	errors,
-	medicalAntecedents,
+	healthIssues,
 }: {
-	control: Control<AddPatientDTO>;
-	errors: FieldErrors<AddPatientDTO>;
-	medicalAntecedents: PatientMedicalAntecedentType[];
+	control: Control<PatientMedicalHealthInfosType>;
+	errors: FieldErrors<PatientMedicalHealthInfosType>;
+	healthIssues: HealthIssuesType[];
 }): JSX.Element => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -41,7 +41,7 @@ const AddPatientModalMedicalAntecedents = ({
 				<InputGroup>
 					<Controller
 						control={control}
-						name="medicalFolder.medicalAntecedents"
+						name="healthIssues"
 						rules={{ required: true }}
 						render={({ field: { value, onChange } }) => (
 							<>
@@ -54,11 +54,11 @@ const AddPatientModalMedicalAntecedents = ({
 									cursor="pointer"
 									id="edgar-addPatientModal-formMedicalAntecedents-input"
 								/>
-								<SelectMedicalAntecedentsHandler
+								<SelectHealthIssueHandler
 									isOpen={isOpen}
 									onClose={onClose}
 									onChange={onChange}
-									medicalAntecedents={value}
+									healthIssues={value}
 								/>
 							</>
 						)}
@@ -67,7 +67,7 @@ const AddPatientModalMedicalAntecedents = ({
 						<Icon as={AddIcon} color="blue.700" w="14px" h="14px" />
 					</InputRightElement>
 				</InputGroup>
-				{errors.medicalFolder?.medicalAntecedents?.type === 'required' && (
+				{errors.healthIssues?.type === 'required' && (
 					<ErrorMessageM id="edgar-addPatientModal-formMedicalAntecedentsErrorRequired-text">
 						Ce champ est nécessaire
 					</ErrorMessageM>
@@ -78,17 +78,23 @@ const AddPatientModalMedicalAntecedents = ({
 					Antécédents médicaux et sujets de santé renseignés
 				</Text>
 				<Wrap w="100%">
-					{medicalAntecedents.map((medicalAntecedent) => (
-						<WrapItem key={medicalAntecedent.name}>
+					{healthIssues.map((healthIssue) => (
+						<WrapItem key={healthIssue.name}>
 							<Controller
 								control={control}
-								name="medicalFolder.medicalAntecedents"
+								name="healthIssues"
 								render={({ field: { value, onChange } }) => (
-									<MedicalAntecedentsCard
-										medicalAntecedent={medicalAntecedent}
-										isDeletable
-										onClick={() =>
-											onChange(value.filter((item) => item.name !== medicalAntecedent.name))
+									<HealthIssueCard
+										healthIssue={healthIssue}
+										onUpdate={(name: string) =>
+											onChange(
+												value.map((item) =>
+													item.name === healthIssue.name ? { ...item, name } : item,
+												),
+											)
+										}
+										onDelete={() =>
+											onChange(value.filter((item) => item.name !== healthIssue.name))
 										}
 									/>
 								)}
