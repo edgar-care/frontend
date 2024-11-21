@@ -1,11 +1,10 @@
-import { type PatientSexType } from 'types/app/dashboard/patients/PatientSexType';
-import { type PatientOnboardingStatusType } from 'types/app/dashboard/patients/PatientOnboardingStatusType';
-import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
+import type { PatientSexType } from 'types/app/dashboard/patients/PatientSexType';
+import type { HealthIssuesType } from 'types/app/dashboard/patients/medicalInfos/HealthIssueType';
 
 export type PatientType = {
 	id: string;
 	email: string;
-	medicalInfos: PatientMedicalInfosType & PatientMedicalInfosHealthType;
+	medicalInfos: PatientMedicalInfosType & PatientMedicalHealthInfosType;
 	appointmentIds: string[];
 	documentIds: string[];
 };
@@ -20,7 +19,6 @@ export type PatientMedicalInfosType = {
 	primaryDoctorId: string;
 };
 
-export type PatientMedicalInfosHealthType = {
-	onboardingStatus: PatientOnboardingStatusType;
-	medicalAntecedents: PatientMedicalAntecedentType[];
+export type PatientMedicalHealthInfosType = {
+	healthIssues: HealthIssuesType[];
 };
