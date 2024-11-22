@@ -65,6 +65,11 @@ const ModalPages = ({
 		if (enabled2faMethods) {
 			setIsBackupCodeGenerated(enabled2faMethods.isBackupCodeGenerated);
 			setIsAuthenticationEnabled(enabled2faMethods.enabledMethods.length > 0);
+			if (
+				selectedPageStack[selectedPageStack.length - 1] === 'settingsAccount2faEdgar' &&
+				!enabled2faMethods.enabledMethods.includes('MOBILE')
+			)
+				onPreviousPage();
 		}
 	}, [enabled2faMethods]);
 

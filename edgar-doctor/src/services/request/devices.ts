@@ -18,6 +18,7 @@ const extendedApi = backendApi.injectEndpoints({
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
 				})) || [],
+			providesTags: ['doctorDevice'],
 		}),
 
 		getConnectedDeviceById: builder.query<DeviceType, string>({
@@ -31,6 +32,7 @@ const extendedApi = backendApi.injectEndpoints({
 				country: response.double_auth.country,
 				lastConnectedTime: response.double_auth.date * 1000,
 			}),
+			providesTags: ['doctorDevice'],
 		}),
 
 		removeDevice: builder.mutation<void, string>({
