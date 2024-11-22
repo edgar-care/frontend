@@ -10,7 +10,7 @@ import { useGenerateBackupCodesMutation } from 'services/request/2fa';
 import ShieldIllustration from 'assets/illustrations/ShieldIllustration';
 
 const SettingsAccountBackupCodesGeneratePage = (selectedPageStack: string[], onNext: () => void): SettingsPageType => {
-	const [backupCodes, setBackupCodes] = useState<string[]>([
+	const defaultBackupCodes = [
 		'XXXX XXXX',
 		'XXXX XXXX',
 		'XXXX XXXX',
@@ -19,7 +19,10 @@ const SettingsAccountBackupCodesGeneratePage = (selectedPageStack: string[], onN
 		'XXXX XXXX',
 		'XXXX XXXX',
 		'XXXX XXXX',
-	]);
+		'XXXX XXXX',
+		'XXXX XXXX',
+	];
+	const [backupCodes, setBackupCodes] = useState<string[]>(defaultBackupCodes);
 
 	const [triggerGenerateBackupCodes] = useGenerateBackupCodesMutation();
 
@@ -43,7 +46,13 @@ const SettingsAccountBackupCodesGeneratePage = (selectedPageStack: string[], onN
 		sections: [],
 		bodyContent: <BackupCodes backupCodes={backupCodes} />,
 		footerPrimaryButton: (
-			<Button w="100%" onClick={onNext}>
+			<Button
+				w="100%"
+				onClick={() => {
+					setBackupCodes(defaultBackupCodes);
+					onNext();
+				}}
+			>
 				Mes codes sont sauvegardés
 			</Button>
 		),

@@ -67,7 +67,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: '/auth/creation_backup_code',
 				method: 'POST',
 			}),
-			invalidatesTags: ['patient2faBackupCodes'],
+			invalidatesTags: ['patient2faBackupCodes', 'patient2faMethod'],
 			transformResponse: (response: { double_auth: string[] }) => response.double_auth,
 		}),
 

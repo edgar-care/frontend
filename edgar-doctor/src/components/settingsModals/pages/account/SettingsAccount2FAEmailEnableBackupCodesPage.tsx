@@ -13,7 +13,7 @@ const SettingsAccount2FAEmailEnableBackupCodesPage = (
 	selectedPageStack: string[],
 	onNext: () => void,
 ): SettingsPageType => {
-	const [backupCodes, setBackupCodes] = useState<string[]>([
+	const defaultBackupCodes = [
 		'XXXX XXXX',
 		'XXXX XXXX',
 		'XXXX XXXX',
@@ -24,7 +24,8 @@ const SettingsAccount2FAEmailEnableBackupCodesPage = (
 		'XXXX XXXX',
 		'XXXX XXXX',
 		'XXXX XXXX',
-	]);
+	];
+	const [backupCodes, setBackupCodes] = useState<string[]>(defaultBackupCodes);
 
 	const [triggerGenerateBackupCodes] = useGenerateBackupCodesMutation();
 
@@ -48,7 +49,13 @@ const SettingsAccount2FAEmailEnableBackupCodesPage = (
 		sections: [],
 		bodyContent: <BackupCodes backupCodes={backupCodes} />,
 		footerPrimaryButton: (
-			<Button w="100%" onClick={onNext}>
+			<Button
+				w="100%"
+				onClick={() => {
+					setBackupCodes(defaultBackupCodes);
+					onNext();
+				}}
+			>
 				Mes codes sont sauvegardés
 			</Button>
 		),
