@@ -6,7 +6,7 @@ const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
 		sendLogin2faEmail: builder.mutation<void, string>({
 			query: (email) => ({
-				url: '/auth/d/sending_email',
+				url: '/auth/sending_email',
 				method: 'POST',
 				body: {
 					email,
