@@ -6,6 +6,11 @@ import { type SimulationChatDiagnoseDiagnosticType } from 'types/simulation/chat
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
+		getNlpStatus: builder.query<boolean, void>({
+			query: () => '/nlp/status',
+			transformResponse: (response: { status: string }) => response.status === 'running',
+		}),
+
 		// Diagnostic mutations
 		initiateDiagnostic: builder.mutation<string, void>({
 			query: () => ({
@@ -26,4 +31,10 @@ const extendedApi = backendApi.injectEndpoints({
 		}),
 	}),
 });
-export const { useInitiateDiagnosticMutation, useDiagnoseDiagnosticMutation } = extendedApi;
+
+export const {
+	useGetNlpStatusQuery,
+	useLazyGetNlpStatusQuery,
+	useInitiateDiagnosticMutation,
+	useDiagnoseDiagnosticMutation,
+} = extendedApi;
