@@ -20,7 +20,7 @@ const DiagnosticMedicalInfo = ({ patientId }: { patientId: string }): JSX.Elemen
 						<DiagnosticMedicalInfoPersonal
 							patientInfo={{ email: patientInfo.email, ...patientInfo.medicalInfos }}
 						/>
-						<DiagnosticMedicalInfoHealth medicalAntecedents={patientInfo.medicalInfos.medicalAntecedents} />
+						<DiagnosticMedicalInfoHealth healthIssues={patientInfo.medicalInfos.healthIssues} />
 					</Stack>
 				)}
 			</Skeleton>

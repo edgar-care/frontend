@@ -16,11 +16,16 @@ export type MedicineUnitType =
 	| 'COMPRIMER_EFERVESCENT'
 	| 'GRANULER_EN_SACHET'
 	| 'PASTILLE'
-	| 'SIROP';
+	| 'SIROP'
+	| 'COMPRIME_ENROBE'
+	| 'COMPRIME_ORODISPERSIBLE'
+	| 'SOLUTION_INHALATION'
+	| 'COMPRIME_PELLICULE'
+	| 'CAPSULE_MOLLE';
 
 export type MedicineDosageUnitType = 'mg' | 'g' | 'ml';
 
-export type MedicineContainerType = 'BOITE' | 'FLACON' | 'TUBE';
+export type MedicineContainerType = 'BOITE' | 'FLACON' | 'TUBE' | 'AMPOULE';
 
 export type MedicineType = {
 	id: string;
