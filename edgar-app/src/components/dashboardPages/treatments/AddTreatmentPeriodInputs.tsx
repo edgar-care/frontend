@@ -57,7 +57,7 @@ const AddTreatmentPeriodInputs = ({
 									value={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].quantity
+										]?.quantity
 									}
 									onChange={(e) =>
 										onChange(
@@ -95,7 +95,7 @@ const AddTreatmentPeriodInputs = ({
 									value={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].frequency
+										]?.frequency
 									}
 									onChange={(e) =>
 										onChange(
@@ -128,7 +128,7 @@ const AddTreatmentPeriodInputs = ({
 									value={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].frequencyRatio
+										]?.frequencyRatio
 									}
 									onChange={(e) =>
 										onChange(
@@ -161,7 +161,7 @@ const AddTreatmentPeriodInputs = ({
 									defaultValue={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].frequencyUnit
+										]?.frequencyUnit
 									}
 									onChange={(e) =>
 										onChange(
@@ -187,7 +187,7 @@ const AddTreatmentPeriodInputs = ({
 							</HStack>
 						</Stack>
 						{value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[periodIndex]
-							.periodLength && (
+							?.periodLength && (
 							<HStack>
 								<Text>Pendant</Text>
 								<Input
@@ -200,7 +200,7 @@ const AddTreatmentPeriodInputs = ({
 									value={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].periodLength
+										]?.periodLength
 									}
 									onChange={(e) =>
 										onChange(
@@ -230,7 +230,7 @@ const AddTreatmentPeriodInputs = ({
 									defaultValue={
 										value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[
 											periodIndex
-										].periodUnit
+										]?.periodUnit
 									}
 									onChange={(e) =>
 										onChange(
@@ -258,7 +258,7 @@ const AddTreatmentPeriodInputs = ({
 					</VStack>
 					<Stack direction={{ base: 'column', sm: 'row' }} align={{ base: 'start', sm: 'center' }}>
 						{value.find((v) => v.medicineId === treatmentMedicine.medicineId)?.periods[periodIndex]
-							.periodLength ? (
+							?.periodLength ? (
 							<AddTreatmentButton
 								icon={ClockIcon}
 								variant="RED"
