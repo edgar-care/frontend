@@ -9,6 +9,8 @@ import Login2faModals from 'components/app/connectionPage/login-2fa/Login2faModa
 
 import { useAuthContext } from 'contexts/auth';
 
+import { decrypt } from 'utils/crypt';
+
 import type { AvailableMethod } from 'types/app/login-2fa/Login2FAResponse';
 import type { Login2faModalPageType } from 'types/app/login-2fa/Login2faModalPageType';
 
@@ -39,8 +41,8 @@ const Login2FAPageContent = (): JSX.Element => {
 				const { email, password, methods, deviceInfo } = JSON.parse(credentials);
 
 				if (email && password && methods && deviceInfo && methods.length > 0) {
-					setEmail(email);
-					setPassword(password);
+					setEmail(decrypt(email));
+					setPassword(decrypt(password));
 					setAvailableMethods(methods);
 					setDeviceInfos(deviceInfo);
 					localStorage.removeItem('2fa');
