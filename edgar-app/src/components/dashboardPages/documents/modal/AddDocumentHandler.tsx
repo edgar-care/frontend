@@ -31,7 +31,7 @@ const AddDocumentHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 	};
 
 	const onSubmit = handleSubmit((data) => {
-		if (data.document[0].size > 15728640) toast({ title: 'Le fichier ne doit pas dépasser 15Mo', status: 'error' });
+		if (data.document[0].size > 3145728) toast({ title: 'Le fichier ne doit pas dépasser 3Mo', status: 'error' });
 		else {
 			const formData = new FormData();
 			formData.append('document', data.document[0]);
