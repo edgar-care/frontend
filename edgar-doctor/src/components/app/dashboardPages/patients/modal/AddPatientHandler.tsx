@@ -28,6 +28,7 @@ const AddPatientHandler = ({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 		mode: 'onChange',
 		defaultValues: {
 			medicalInfo: {
+				birthdate: 0,
 				healthIssues: [],
 			},
 		},
