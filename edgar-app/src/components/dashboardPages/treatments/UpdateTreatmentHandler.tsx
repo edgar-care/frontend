@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Button, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
@@ -50,6 +51,10 @@ const UpdateTreatmentHandler = ({
 			})
 			.catch(() => toast({ title: 'Erreur lors de la mise à jour du traitement', status: 'error' }));
 	});
+
+	useEffect(() => {
+		reset(treatment);
+	}, [treatment]);
 
 	return (
 		<ModalHandler
