@@ -1,6 +1,6 @@
 import { backendApi } from 'services/apiService';
 
-import { type MissingPasswordDTO, type ResetPasswordDTO } from 'store/types/account.type';
+import { type MissingPasswordDTO, type ResetPasswordDTO, type UpdatePasswordDTO } from 'store/types/account.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -22,7 +22,17 @@ const extendedApi = backendApi.injectEndpoints({
 				},
 			}),
 		}),
+		updatePassword: builder.mutation<void, UpdatePasswordDTO>({
+			query: (params) => ({
+				url: '/auth/update_password',
+				method: 'POST',
+				body: {
+					old_password: params.oldPassword,
+					new_password: params.newPassword,
+				},
+			}),
+		}),
 	}),
 });
 
-export const { useMissingPasswordMutation, useResetPasswordMutation } = extendedApi;
+export const { useMissingPasswordMutation, useResetPasswordMutation, useUpdatePasswordMutation } = extendedApi;
