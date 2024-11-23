@@ -1,6 +1,11 @@
 import { backendApi } from 'services/apiService';
 
-import { type MissingPasswordDTO, type ResetPasswordDTO, type RegisterTypeDTO } from 'store/types/account.type';
+import {
+	type MissingPasswordDTO,
+	type ResetPasswordDTO,
+	type RegisterTypeDTO,
+	type UpdatePasswordDTO,
+} from 'store/types/account.type';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -43,7 +48,18 @@ const extendedApi = backendApi.injectEndpoints({
 			}),
 			transformResponse: (response: { token: string }) => response.token,
 		}),
+		updatePassword: builder.mutation<void, UpdatePasswordDTO>({
+			query: (params) => ({
+				url: '/auth/update_password',
+				method: 'POST',
+				body: {
+					old_password: params.oldPassword,
+					new_password: params.newPassword,
+				},
+			}),
+		}),
 	}),
 });
 
-export const { useMissingPasswordMutation, useResetPasswordMutation, useRegisterMutation } = extendedApi;
+export const { useMissingPasswordMutation, useResetPasswordMutation, useRegisterMutation, useUpdatePasswordMutation } =
+	extendedApi;

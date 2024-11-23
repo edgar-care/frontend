@@ -23,6 +23,7 @@ import SettingsAccountBackupCodesActivationPage from 'components/settingsModals/
 import SettingsAccountBackupCodesInfoPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesInfoPage';
 import SettingsAccountBackupCodesGeneratePage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesGeneratePage';
 import SettingsAccountDisablePage from 'components/settingsModals/pages/account/SettingsAccountDisablePage';
+import SettingsAccountResetPasswordPage from 'components/settingsModals/pages/account/SettingsAccountResetPasswordPage';
 
 import {
 	useGet2faEnabledMethodsQuery,
@@ -187,6 +188,7 @@ const ModalPages = ({
 			setSelectedDeviceInfo,
 		),
 		settingsAccountDisable: SettingsAccountDisablePage(() => onPreviousOfPage(1)),
+		SettingsAccountResetPassword: SettingsAccountResetPasswordPage(() => onPreviousOfPage(1)),
 	};
 };
 
