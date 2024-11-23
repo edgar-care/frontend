@@ -53,32 +53,32 @@ const SettingsAccountResetPasswordPage = (onCancel: () => void): SettingsPageTyp
 		sections: [],
 		bodyContent: (
 			<VStack as="form" spacing="8px" align="start">
-                <VStack w="100%" spacing="4px" align="start">
-                <FormLabel size="lg">Votre mot de passe actuel</FormLabel>
-				<Input
-					type="password"
-					{...register('oldPassword', { required: 'Ce champ est obligatoire.' })}
-					isInvalid={!!errors.oldPassword}
-				/>
-                </VStack>
-                <VStack w="100%" spacing="4px" align="start">
-                <FormLabel size="lg">Votre nouveau mot de passe</FormLabel>
-				<Input
-					placeholder="Minimum 8 caractères"
-					type="password"
-					{...register('password', { required: 'Ce champ est obligatoire.' })}
-					isInvalid={!!errors.password}
-				/>
-                </VStack>
-                <VStack w="100%" spacing="4px" align="start">
-                <FormLabel size="lg">Confirmer votre nouveau mot de passe</FormLabel>
-				<Input
-					placeholder="Minimum 8 caractères"
-					type="password"
-					{...register('confirmPassword', { required: 'Ce champ est obligatoire.' })}
-					isInvalid={!!errors.confirmPassword}
-				/>
-                </VStack>
+				<VStack w="100%" spacing="4px" align="start">
+					<FormLabel size="lg">Votre mot de passe actuel</FormLabel>
+					<Input
+						type="password"
+						{...register('oldPassword', { required: 'Ce champ est obligatoire.' })}
+						isInvalid={!!errors.oldPassword}
+					/>
+				</VStack>
+				<VStack w="100%" spacing="4px" align="start">
+					<FormLabel size="lg">Votre nouveau mot de passe</FormLabel>
+					<Input
+						placeholder="Minimum 8 caractères"
+						type="password"
+						{...register('password', { required: 'Ce champ est obligatoire.' })}
+						isInvalid={!!errors.password}
+					/>
+				</VStack>
+				<VStack w="100%" spacing="4px" align="start">
+					<FormLabel size="lg">Confirmer votre nouveau mot de passe</FormLabel>
+					<Input
+						placeholder="Minimum 8 caractères"
+						type="password"
+						{...register('confirmPassword', { required: 'Ce champ est obligatoire.' })}
+						isInvalid={!!errors.confirmPassword}
+					/>
+				</VStack>
 			</VStack>
 		),
 		footerPrimaryButton: (
