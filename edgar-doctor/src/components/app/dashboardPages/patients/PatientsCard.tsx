@@ -19,7 +19,7 @@ const PatientsCard = ({
 	setSelectedPatientId: Dispatch<SetStateAction<string>>;
 }) => {
 	const { data: doctorInfo } = useGetDoctorByIdQuery(patient.medicalInfos.primaryDoctorId);
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const isMobile = useBreakpointValue({ base: true, xl: false });
 

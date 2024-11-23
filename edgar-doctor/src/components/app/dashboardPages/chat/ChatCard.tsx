@@ -25,7 +25,7 @@ import { type ChatType } from 'types/app/dashboard/chat/ChatType';
 import colors from 'theme/foundations/colors';
 
 const ChatCard = ({ chat, onClick }: { chat: ChatType; onClick: () => void }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const recipient = chat.participants.filter((participant) => participant.participantId !== auth.getId())[0];
 
 	const { data: patientInfo } = useGetPatientByIdQuery(recipient.participantId);

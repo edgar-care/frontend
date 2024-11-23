@@ -3,7 +3,7 @@ import { type FieldErrors, type Control, Controller } from 'react-hook-form';
 
 import ErrorMessageM from 'components/forms/ErrorMessage';
 
-import { type AddPatientDTO } from 'store/types/patients.type';
+import type { AddPatientDTO } from 'store/types/patients.type';
 
 const AddPatientModalSexInput = ({
 	control,
@@ -20,7 +20,7 @@ const AddPatientModalSexInput = ({
 		</HStack>
 		<Controller
 			control={control}
-			name="medicalFolder.sex"
+			name="medicalInfo.sex"
 			rules={{ required: true }}
 			render={({ field: { value, onChange, ref } }) => (
 				<Wrap ref={ref}>
@@ -54,7 +54,7 @@ const AddPatientModalSexInput = ({
 				</Wrap>
 			)}
 		/>
-		{errors.medicalFolder?.sex?.type === 'required' && (
+		{errors.medicalInfo?.sex?.type === 'required' && (
 			<ErrorMessageM id="edgar-addPatientModal-formSexError-text">Ce champ est nécessaire</ErrorMessageM>
 		)}
 	</VStack>

@@ -15,6 +15,12 @@ const createDoctorAccount = async (): Promise<{ email: string; authToken: string
 			password: Cypress.env('loginTestPassword'),
 			name: 'Medecin',
 			firstname: 'Edgar',
+			address: {
+				street: '25 Rue des médecins',
+				zip_code: '69000',
+				country: 'France',
+				city: 'Lyon',
+			},
 		}),
 	});
 

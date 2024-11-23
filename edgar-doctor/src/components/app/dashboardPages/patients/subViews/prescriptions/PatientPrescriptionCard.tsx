@@ -4,7 +4,7 @@ import { useGetPrescriptionByIdQuery } from 'services/request/prescriptions';
 import { useAuthContext } from 'contexts/auth';
 
 const PatientPrescriptionCard = ({ prescriptionId }: { prescriptionId: string }) => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { data: prescription } = useGetPrescriptionByIdQuery(prescriptionId);
 
 	return (
@@ -35,7 +35,7 @@ const PatientPrescriptionCard = ({ prescriptionId }: { prescriptionId: string })
 								Ordonnance
 							</Text>
 							<Text
-								size="boldLg"
+								size="sm"
 								maxW={{ base: '100%', md: '200px', '3xl': '400px', '4xl': '600px' }}
 								whiteSpace="nowrap"
 								overflow="hidden"

@@ -20,7 +20,7 @@ const PatientsSubViewMedicalInfo = ({ patientId }: { patientId: string }): JSX.E
 						<DiagnosticMedicalInfoPersonal
 							patientInfo={{ email: patientInfo.email, ...patientInfo.medicalInfos }}
 						/>
-						<DiagnosticMedicalInfoHealth medicalAntecedents={patientInfo.medicalInfos.medicalAntecedents} />
+						<DiagnosticMedicalInfoHealth healthIssues={patientInfo.medicalInfos.healthIssues} />
 					</VStack>
 					<UpdateMedicalHandler
 						isOpen={isOpenUpdateModal}

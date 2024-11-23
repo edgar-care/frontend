@@ -28,6 +28,10 @@ const HomeAppointmentsCard = (): JSX.Element => {
 			border="2px solid"
 			borderColor="blue.200"
 		>
+			<VStack w="100%" align="start">
+				<Text size="boldXl">Mes rendez-vous</Text>
+				<Box w="100%" h="2px" bg="blue.700" />
+			</VStack>
 			<Box w="100%">
 				<Link href="/simulation">
 					<Button w="100%" size="customLg" id="edgar-dashboardAppointmentsPage-appointments-button">
@@ -75,7 +79,6 @@ const HomeAppointmentsCard = (): JSX.Element => {
 							/>
 						</HStack>
 					</HStack>
-					<Box as="span" w="100%" h="2px" bg="blue.700" />
 					<AppointmentCalendar month={month} year={year} appointments={appointments || []} />
 					<Box as="span" w="100%" h="2px" bg="blue.700" />
 				</VStack>

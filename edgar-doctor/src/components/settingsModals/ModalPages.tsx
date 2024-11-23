@@ -22,6 +22,7 @@ import SettingsDevicesPage from 'components/settingsModals/pages/devices/Setting
 import SettingsAccountBackupCodesActivationPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesActivationPage';
 import SettingsAccountBackupCodesInfoPage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesInfoPage';
 import SettingsAccountBackupCodesGeneratePage from 'components/settingsModals/pages/account/SettingsAccountBackupCodesGeneratePage';
+import SettingsAccountDisablePage from 'components/settingsModals/pages/account/SettingsAccountDisablePage';
 
 import {
 	useGet2faEnabledMethodsQuery,
@@ -48,7 +49,7 @@ const ModalPages = ({
 	const [triggerRemoveTrustedDevice] = useRemoveTrustedDeviceMutation();
 	const [triggerRemoveDevice] = useRemoveDeviceMutation();
 
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 
 	const [selectedDeviceInfo, setSelectedDeviceInfo] = useState<DeviceType | undefined>(undefined);
 	const [isBackupCodeGenerated, setIsBackupCodeGenerated] = useState(false);
@@ -64,6 +65,11 @@ const ModalPages = ({
 		if (enabled2faMethods) {
 			setIsBackupCodeGenerated(enabled2faMethods.isBackupCodeGenerated);
 			setIsAuthenticationEnabled(enabled2faMethods.enabledMethods.length > 0);
+			if (
+				selectedPageStack[selectedPageStack.length - 1] === 'settingsAccount2faEdgar' &&
+				!enabled2faMethods.enabledMethods.includes('MOBILE')
+			)
+				onPreviousPage();
 		}
 	}, [enabled2faMethods]);
 
@@ -180,6 +186,7 @@ const ModalPages = ({
 			() => onNextPage('settingsDeviceInfo'),
 			setSelectedDeviceInfo,
 		),
+		settingsAccountDisable: SettingsAccountDisablePage(() => onPreviousOfPage(1)),
 	};
 };
 

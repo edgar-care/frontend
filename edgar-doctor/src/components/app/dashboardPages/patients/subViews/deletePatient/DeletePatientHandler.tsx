@@ -24,8 +24,8 @@ const DeletePatientHandler = ({
 			isOpen={isOpen}
 			onClose={onClose}
 			size="3xl"
-			headerTitle="Supprimer le document"
-			headerSubtitle="Vous êtes sur le point de supprimer le document. Si vous supprimez ce document, le patient ne pourra plus y accéder."
+			headerTitle="Êtes-vous sûr ?"
+			headerSubtitle="Si vous retirez ce patient, vous ne pourrez plus accéder à ses informations médicales."
 			headerIcon={DeleteCrossIllustration}
 			footerPrimaryButton={
 				<Button
@@ -44,7 +44,7 @@ const DeletePatientHandler = ({
 							});
 					}}
 				>
-					Supprimer le document
+					Retirer le patient
 				</Button>
 			}
 			footerSecondaryButton={

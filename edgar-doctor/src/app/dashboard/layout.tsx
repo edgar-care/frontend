@@ -12,7 +12,7 @@ import { useAuthContext } from 'contexts/auth';
 import { eventEmitter } from 'services/apiService';
 
 const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const router = useRouter();
 	const isDrawer = useBreakpointValue({ base: true, lg: false }) || false;
 
@@ -27,7 +27,7 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 		});
 
 		eventEmitter.on('disabled', () => {
-			router.push('/disabled');
+			router.push('/disable');
 		});
 	}, 750);
 

@@ -3,7 +3,7 @@ import { type FieldErrors, type UseFormRegister } from 'react-hook-form';
 
 import ErrorMessageM from 'components/forms/ErrorMessage';
 
-import { type AddPatientDTO } from 'store/types/patients.type';
+import type { AddPatientDTO } from 'store/types/patients.type';
 
 const AddPatientModalNameInput = ({
 	register,
@@ -17,13 +17,13 @@ const AddPatientModalNameInput = ({
 			Nom
 		</FormLabel>
 		<Input
-			{...register('medicalFolder.name', { minLength: 1, maxLength: 50, required: true })}
+			{...register('medicalInfo.name', { minLength: 1, maxLength: 50, required: true })}
 			placeholder="L'assistant numérique"
 			w="100%"
 			maxLength={50}
 			id="edgar-addPatientModal-formName-input"
 		/>
-		{errors.medicalFolder?.name?.type === 'required' && (
+		{errors.medicalInfo?.name?.type === 'required' && (
 			<ErrorMessageM id="edgar-addPatientModal-formNameError-text">Ce champ est nécessaire</ErrorMessageM>
 		)}
 	</VStack>

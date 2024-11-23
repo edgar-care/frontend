@@ -1,5 +1,5 @@
 import { FormLabel, Input, VStack } from '@chakra-ui/react';
-import { Control, Controller, type FieldErrors } from 'react-hook-form';
+import { type Control, Controller, type FieldErrors } from 'react-hook-form';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 
@@ -18,7 +18,7 @@ const AddPatientModalBirthdateInput = ({
 		</FormLabel>
 		<Controller
 			control={control}
-			name="medicalFolder.birthdate"
+			name="medicalInfo.birthdate"
 			rules={{ min: Date.UTC(0, 0), max: Date.now(), required: true }}
 			render={({ field: { value, onChange } }) => (
 				<Input
@@ -33,17 +33,17 @@ const AddPatientModalBirthdateInput = ({
 				/>
 			)}
 		/>
-		{errors.medicalFolder?.birthdate?.type === 'required' && (
+		{errors.medicalInfo?.birthdate?.type === 'required' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorRequired-text">
 				Ce champ est nécessaire
 			</ErrorMessage>
 		)}
-		{errors.medicalFolder?.birthdate?.type === 'min' && (
+		{errors.medicalInfo?.birthdate?.type === 'min' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMin-text">
 				Renseigner une date de naissance après le 1 janvier 1900
 			</ErrorMessage>
 		)}
-		{errors.medicalFolder?.birthdate?.type === 'max' && (
+		{errors.medicalInfo?.birthdate?.type === 'max' && (
 			<ErrorMessage id="edgar-onboardingPersonalPage-formBirthdateErrorMax-text">
 				Renseigner une date de naissance avant celle d'aujourd'hui
 			</ErrorMessage>

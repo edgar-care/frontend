@@ -7,9 +7,9 @@ export interface AddDiagnosticDTO {
 
 export interface DiagnosticSummaryStoreType {
 	alerts: null;
-	diseases: { name: string; presence: number }[];
+	diseases: { name: string; presence: number }[] | null;
 	fiability: number;
-	logs: { question: string; answer: string }[];
+	logs: { question: string; answer: string }[] | null;
 	session_id: string;
-	symptoms: { name: string; presence: number; duration: number }[];
+	symptoms: { name: string; presence: number; duration: number }[] | null;
 }

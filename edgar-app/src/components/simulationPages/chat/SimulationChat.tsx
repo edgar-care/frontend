@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react';
 import { Button, Icon, Input, InputGroup, InputRightElement, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -7,7 +7,7 @@ import BetaWarningBanner from 'components/BetaWarningBanner';
 import MirageLoader from 'components/simulationPages/chat/loader/MirageLoader';
 import SimulationChatMessageGroup from 'components/simulationPages/chat/SimulationChatMessageGroup';
 
-import { useDiagnoseDiagnosticMutation } from 'services/request/simulation';
+import { useDiagnoseDiagnosticMutation, useLazyGetNlpStatusQuery } from 'services/request/simulation';
 
 import { type SimulationChatMessageType } from 'types/simulation/chat/SimulationChatMessageType';
 import { type SimulationChatEdgarCardType } from 'types/simulation/chat/SimulationChatEdgarCardType';
@@ -23,19 +23,14 @@ const SimulationChat = ({
 	edgarState: SimulationChatEdgarCardType;
 	setEdgarState: Dispatch<SetStateAction<SimulationChatEdgarCardType>>;
 }): JSX.Element => {
+	const [triggerGetNlpStatus, nlpStatus] = useLazyGetNlpStatusQuery();
 	const [triggerDiagnoseDiagnostic] = useDiagnoseDiagnosticMutation();
-	const [messages, setMessages] = useState<SimulationChatMessageType[]>([
-		{
-			message:
-				'Bonjour, je m’appelle Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
-			createdAt: new Date(),
-			isUserSender: false,
-			isLastMessage: false,
-		},
-	]);
+	const [messages, setMessages] = useState<SimulationChatMessageType[]>([]);
 	const [displayedMessageIndex, setDisplayedMessageIndex] = useState(0);
 	const [messageInput, setMessageInput] = useState('');
 	const [sessionId, setSessionId] = useState('');
+
+	const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
 	const searchParams = useSearchParams();
 	const router = useRouter();
@@ -71,6 +66,35 @@ const SimulationChat = ({
 		if (searchParams.get('sessionId')) setSessionId(searchParams.get('sessionId') || '');
 		else router.push('/simulation/start');
 	}, []);
+
+	useEffect(() => {
+		setEdgarState('THINKING');
+		triggerGetNlpStatus();
+
+		intervalRef.current = setInterval(() => {
+			triggerGetNlpStatus();
+		}, 10000);
+
+		return () => {
+			if (intervalRef.current) clearInterval(intervalRef.current);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (nlpStatus.data) {
+			setMessages([
+				{
+					message:
+						'Bonjour, je m’appelle Edgar et je serai votre assistant tout au long de cette simulation.\nPour commencer, pouvez-vous me dire où vous avez mal ?',
+					createdAt: new Date(),
+					isUserSender: false,
+					isLastMessage: false,
+				},
+			]);
+			if (intervalRef.current) clearInterval(intervalRef.current);
+			setEdgarState('SMILE');
+		}
+	}, [nlpStatus]);
 
 	return (
 		<VStack
@@ -114,7 +138,7 @@ const SimulationChat = ({
 							Revenir au message le plus récent
 						</Button>
 					)}
-					{messages[messages.length - 1].isLastMessage && (
+					{messages.length > 0 && messages[messages.length - 1].isLastMessage && (
 						<Link href={`/simulation/appointments?sessionId=${sessionId}`}>
 							<Button size="customMd" variant="primary">
 								Continuer ma simulation
@@ -129,11 +153,14 @@ const SimulationChat = ({
 					maxLength={300}
 					value={messageInput}
 					placeholder={
-						messages[messages.length - 1].isLastMessage
+						messages.length > 0 && messages[messages.length - 1].isLastMessage
 							? 'Votre échange avec Edgar est fini'
 							: 'Ecriver votre message ici...'
 					}
-					disabled={messages[messages.length - 1].isLastMessage}
+					disabled={
+						(messages.length > 0 && messages[messages.length - 1].isLastMessage) ||
+						edgarState === 'THINKING'
+					}
 					onChange={(e) => {
 						setMessageInput(e.target.value);
 					}}

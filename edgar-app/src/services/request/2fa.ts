@@ -67,7 +67,7 @@ const extendedApi = backendApi.injectEndpoints({
 				url: '/auth/creation_backup_code',
 				method: 'POST',
 			}),
-			invalidatesTags: ['patient2faBackupCodes'],
+			invalidatesTags: ['patient2faBackupCodes', 'patient2faMethod'],
 			transformResponse: (response: { double_auth: string[] }) => response.double_auth,
 		}),
 
@@ -84,7 +84,7 @@ const extendedApi = backendApi.injectEndpoints({
 					country: device.country,
 					lastConnectedTime: device.date * 1000,
 				})) || [],
-			providesTags: ['patient2faTrustedDevices'],
+			providesTags: ['patient2faTrustedDevices', 'patientDevice', 'patient2faMethod'],
 		}),
 
 		getTrustedDeviceById: builder.query<DeviceType, string>({
@@ -98,7 +98,7 @@ const extendedApi = backendApi.injectEndpoints({
 				country: response.double_auth.country,
 				lastConnectedTime: response.double_auth.date * 1000,
 			}),
-			providesTags: ['patient2faTrustedDevices'],
+			providesTags: ['patient2faTrustedDevices', 'patientDevice', 'patient2faMethod'],
 		}),
 
 		addTrustedDevice: builder.mutation<void, string>({

@@ -1,14 +1,10 @@
 import { Box, HStack, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 
-import MedicalAntecedentsCard from 'components/app/dashboardPages/diagnostics/medicalInfo/medicalAntecedents/MedicalAntecedentsCard';
+import HealthIssueCard from 'components/app/dashboardPages/patients/modal/healthIssues/treatments/HealthIssueCard';
 
-import { type PatientMedicalAntecedentType } from 'types/app/dashboard/patients/medicalInfos/PatientMedicalAntecedentType';
+import type { HealthIssuesType } from 'types/app/dashboard/patients/medicalInfos/HealthIssueType';
 
-const DiagnosticMedicalInfoPersonal = ({
-	medicalAntecedents,
-}: {
-	medicalAntecedents: PatientMedicalAntecedentType[];
-}): JSX.Element => (
+const DiagnosticMedicalInfoPersonal = ({ healthIssues }: { healthIssues: HealthIssuesType[] }): JSX.Element => (
 	<HStack
 		p="16px"
 		w="100%"
@@ -23,9 +19,9 @@ const DiagnosticMedicalInfoPersonal = ({
 		<VStack pl="8px" w="100%" align="start" spacing={{ base: '8px', lg: '12px' }}>
 			<Text size={{ base: 'md', lg: 'lg' }}>Antécédents médicaux et sujets de santé:</Text>
 			<Wrap>
-				{medicalAntecedents.map((medicalAntecedent) => (
-					<WrapItem key={medicalAntecedent.id}>
-						<MedicalAntecedentsCard medicalAntecedent={medicalAntecedent} />
+				{healthIssues.map((healthIssue) => (
+					<WrapItem key={healthIssue.id}>
+						<HealthIssueCard healthIssue={healthIssue} />
 					</WrapItem>
 				))}
 			</Wrap>

@@ -3,8 +3,8 @@ import { Text, VStack } from '@chakra-ui/react';
 
 import ErrorMessage from 'components/forms/ErrorMessage';
 import AdvancedSelector from 'components/AdvancedSelector';
-import SelectMedicalAntecedentsMedicineInputCard from 'components/app/dashboardPages/patients/modal/forms/SelectMedicalAntecedentsMedicineInputCard';
 import PatientAddPrescriptionCard from 'components/app/dashboardPages/patients/subViews/prescriptions/modals/PatientAddPrescriptionCard';
+import SelectHealthIssueMedicineInputCard from 'components/app/dashboardPages/patients/modal/healthIssues/SelectHealthIssueMedicineInputCard';
 
 import type { UploadPatientPrescriptionDTO } from 'store/types/prescriptions.type';
 
@@ -44,7 +44,7 @@ const PatientAddPrescriptionModalContent = ({
 										id: medicine.id,
 										name: medicine.name,
 										content: (
-											<SelectMedicalAntecedentsMedicineInputCard
+											<SelectHealthIssueMedicineInputCard
 												onClick={() => {
 													onChange([
 														...value,
@@ -60,7 +60,7 @@ const PatientAddPrescriptionModalContent = ({
 												<Text>
 													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
 												</Text>
-											</SelectMedicalAntecedentsMedicineInputCard>
+											</SelectHealthIssueMedicineInputCard>
 										),
 									})) || []
 							}

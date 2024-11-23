@@ -21,7 +21,7 @@ const StartChatContent = ({
 	setSelectedDoctor: Dispatch<SetStateAction<DoctorType | undefined>>;
 	onClose: () => void;
 }): JSX.Element => {
-	const auth = useAuthContext();
+	const { auth } = useAuthContext();
 	const { actions } = useChatContext();
 
 	const [inputChatMessage, setInputChatMessage] = useState('');

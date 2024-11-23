@@ -1,9 +1,10 @@
 import basicFetch from 'utils/basicFetch';
 
-import { MessageResponse } from 'types/MessageResponse';
+import type { MessageResponse } from 'types/MessageResponse';
+import type { Login2FAResponse } from 'types/app/login-2fa/Login2FAResponse';
 
 class Auth {
-	public async login(email: string, password: string): Promise<MessageResponse> {
+	public async login(email: string, password: string): Promise<MessageResponse | Login2FAResponse> {
 		try {
 			if (!email || !password) return { title: 'Veuillez remplir tous les champs', status: 'error' };
 			const auth = await basicFetch('auth/d/login', 'POST', JSON.stringify({ email, password }));
@@ -15,6 +16,7 @@ class Auth {
 				localStorage.setItem('token', data.token);
 				return { title: 'Connexion réussie', status: 'success' };
 			}
+			if (data.Methods) return { methods: data.Methods, deviceInfos: data.DeviceInfo };
 			return { title: 'Echec de la connexion, veuillez réessayer', status: 'error' };
 		} catch (error) {
 			console.error(error);

@@ -27,7 +27,13 @@ const OnboardingEdgarCard = ({ title }: { title: string }): JSX.Element => {
 			</Text>
 			{!isTablet && (
 				<>
-					<Image src="/assets/Edgars/edgar-high-five.svg" alt="Edgar high five" width={280} height={300} />
+					<Image
+						src="/assets/Edgars/edgar-high-five.svg"
+						alt="Edgar high five"
+						width={280}
+						height={300}
+						priority
+					/>
 					<Image src="/assets/logo/white-edgar-logo.svg" alt="edgar logo" width={125} height={63} />
 				</>
 			)}

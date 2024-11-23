@@ -29,18 +29,47 @@ const setupMedicalInfo = async (accountAuthToken: string): Promise<void> => {
 			medical_antecedents: [
 				{
 					name: 'Allergie',
+					symptoms: [],
 					treatments: [
 						{
-							day: ['WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY', 'TUESDAY', 'MONDAY'],
-							medicine_id: '66116e725ee223d8f1b39bfd',
-							period: ['NOON'],
-							quantity: 2,
+							start_date: 1625596400,
+							end_date: 1625596400,
+							medicines: [
+								{
+									medicine_id: '66116e725ee223d8f1b39bfd',
+									comment: 'Take 1 pill',
+									period: [
+										{
+											quantity: 1,
+											frequency: 2,
+											frequency_ratio: 3,
+											frequency_unit: 'JOUR',
+											period_length: 4,
+											period_unit: 'SEMAINE',
+										},
+									],
+								},
+							],
 						},
 						{
-							day: ['MONDAY', 'FRIDAY'],
-							medicine_id: '66116f1a5ee223d8f1b39c00',
-							period: ['MORNING', 'NOON', 'EVENING', 'NIGHT'],
-							quantity: 1,
+							start_date: 1625596400,
+							end_date: 1625596400,
+							medicines: [
+								{
+									medicine_id: '66116f1a5ee223d8f1b39c00',
+									comment: 'Take 1 pill',
+									period: [
+										{
+											quantity: 1,
+											frequency: 2,
+											frequency_ratio: 3,
+											frequency_unit: 'JOUR',
+											period_length: 4,
+											period_unit: 'SEMAINE',
+										},
+									],
+								},
+							],
 						},
 					],
 					still_relevant: true,

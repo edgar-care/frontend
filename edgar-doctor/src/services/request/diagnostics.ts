@@ -1,8 +1,8 @@
 import { backendApi } from 'services/apiService';
 
-import { type AddDiagnosticDTO, type DiagnosticSummaryStoreType } from 'store/types/diagnostics.type';
+import type { AddDiagnosticDTO, DiagnosticSummaryStoreType } from 'store/types/diagnostics.type';
 
-import { type DiagnosticSummaryType } from 'types/app/dashboard/diagnostics/DiagnosticSummaryType';
+import type { DiagnosticSummaryType } from 'types/app/dashboard/diagnostics/DiagnosticSummaryType';
 
 const extendedApi = backendApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -10,14 +10,15 @@ const extendedApi = backendApi.injectEndpoints({
 			query: (id) => `/diagnostic/summary/${id}`,
 			transformResponse: (response: DiagnosticSummaryStoreType) => ({
 				alerts: response.alerts,
-				diseases: response.diseases.map((disease) => ({
-					name: disease.name,
-					presence: Math.round(disease.presence * 100),
-				})),
+				diseases:
+					response.diseases?.map((disease) => ({
+						name: disease.name,
+						presence: Math.round(disease.presence * 100),
+					})) ?? [],
 				fiability: Math.round(response.fiability * 100),
-				logs: response.logs,
+				logs: response.logs ?? [],
 				sessionId: response.session_id,
-				symptoms: response.symptoms,
+				symptoms: response.symptoms ?? [],
 			}),
 		}),
 

@@ -13,7 +13,7 @@ export interface MedicinesStoreType {
 	container: MedicineContainerType;
 	name: string;
 	unit: MedicineUnitType;
-	target_diseases: string[];
-	treated_symptoms: string[];
-	side_effects: string[];
+	target_diseases: string[] | null;
+	treated_symptoms: string[] | null;
+	side_effects: string[] | null;
 }
