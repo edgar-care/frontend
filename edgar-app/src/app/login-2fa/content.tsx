@@ -9,6 +9,8 @@ import Login2faModals from 'components/connectionPage/login-2fa/Login2faModals';
 
 import { useAuthContext } from 'contexts/auth';
 
+import { decrypt } from 'utils/crypt';
+
 import type { AvailableMethod } from 'types/login-2fa/Login2FAResponse';
 import type { Login2faModalPageType } from 'types/login-2fa/Login2faModalPageType';
 
@@ -22,7 +24,7 @@ import DiagonalKeyIcon from 'assets/icons/DiagonalKeyIcon';
 const Login2FAPageContent = (): JSX.Element => {
 	const [selectedMethod, setSelectedMethod] = useState<Login2faModalPageType | undefined>(undefined);
 
-	const { auth, availableMethods } = useAuthContext();
+	const { auth, availableMethods, setAvailableMethods, setDeviceInfos, setEmail, setPassword } = useAuthContext();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
@@ -33,7 +35,22 @@ const Login2FAPageContent = (): JSX.Element => {
 			router.push(
 				searchParams.get('redirect') ? searchParams.get('redirect')! : `/dashboard?${searchParams.toString()}`,
 			);
-		if (availableMethods.length === 0) router.push('/login');
+		if (availableMethods.length === 0) {
+			const credentials = localStorage.getItem('2fa');
+			if (credentials) {
+				const { email, password, methods, deviceInfo } = JSON.parse(credentials);
+
+				if (email && password && methods && deviceInfo && methods.length > 0) {
+					setEmail(decrypt(email));
+					setPassword(decrypt(password));
+					setAvailableMethods(methods);
+					setDeviceInfos(deviceInfo);
+					localStorage.removeItem('2fa');
+					return;
+				}
+			}
+			router.push('/login');
+		}
 	}, []);
 
 	const openedSelectedMethodPage = (selectedMethodPage: Login2faModalPageType) => {

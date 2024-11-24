@@ -19,3 +19,8 @@ export interface RegisterTypeDTO {
 		country: string;
 	};
 }
+
+export interface UpdatePasswordDTO {
+	oldPassword: string;
+	newPassword: string;
+}

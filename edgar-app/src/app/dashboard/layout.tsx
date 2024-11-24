@@ -35,8 +35,14 @@ const DashboardLayout = ({ children }: { children: JSX.Element }): JSX.Element =
 
 	useEffect(() => {
 		if (auth.checkToken().status === 'error') router.push('/login');
-		// @ts-ignore
-		if (medicalInfo.isError && medicalInfo.error.originalStatus !== 409) router.push('/onboarding/personal');
+
+		if (
+			medicalInfo.isError &&
+			medicalInfo.error &&
+			(('originalStatus' in medicalInfo.error && medicalInfo.error.originalStatus !== 409) ||
+				(medicalInfo.error && 'status' in medicalInfo.error && medicalInfo.error.status !== 409))
+		)
+			router.push('/onboarding/personal');
 		if (medicalInfo.status === 'fulfilled') setIsAuthenticated(true);
 	}, [medicalInfo]);
 

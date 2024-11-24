@@ -24,7 +24,7 @@ const settingsAccountPage = (
 				{
 					name: 'Mot de passe',
 					hasChevron: true,
-					pageIndex: 'settingsAccountResetPassword',
+					pageIndex: 'SettingsAccountResetPassword',
 				},
 			],
 		},

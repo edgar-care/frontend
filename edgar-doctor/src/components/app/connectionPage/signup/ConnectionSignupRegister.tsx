@@ -19,12 +19,21 @@ const ConnectionSignupRegister = ({
 			<VStack w="100%" spacing="8px" align="start">
 				<FormLabel size="boldLg">Adresse mail</FormLabel>
 				<Input
-					{...register('email', { minLength: 1, maxLength: 50, required: true })}
+					{...register('email', {
+						minLength: 1,
+						maxLength: 50,
+						required: true,
+						pattern: {
+							value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+							message: 'Adresse e-mail invalide',
+						},
+					})}
 					placeholder="prenom.nom@gmail.com"
 					w="100%"
 					maxLength={50}
 				/>
 				{errors.email?.type === 'required' && <ErrorMessage>Ce champ est nécessaire</ErrorMessage>}
+				{errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 			</VStack>
 			<VStack w="100%" spacing="8px" align="start">
 				<FormLabel size="boldLg">Mot de passe</FormLabel>

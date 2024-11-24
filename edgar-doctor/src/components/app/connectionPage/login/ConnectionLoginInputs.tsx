@@ -22,7 +22,10 @@ import useCustomState from 'hooks/useCustomState';
 
 import { useAuthContext } from 'contexts/auth';
 
+import { encrypt } from 'utils/crypt';
 import onSubmitLogin from 'utils/api/connection/onSubmitLogin';
+
+import type { MessageResponseWithData } from 'types/MessageResponse';
 
 const ConnectionLoginInputs = (): JSX.Element => {
 	const { value: email, setValue: setEmail, error: emailError, setError: setEmailError } = useCustomState('');
@@ -145,6 +148,14 @@ const ConnectionLoginInputs = (): JSX.Element => {
 						if (response.status === 'info') {
 							setEmail2fa(email);
 							setPassword2fa(password);
+							localStorage.setItem(
+								'2fa',
+								JSON.stringify({
+									email: encrypt(email),
+									password: encrypt(password),
+									...((response as MessageResponseWithData).data as object),
+								}),
+							);
 							router.push('/login-2fa');
 							return;
 						}

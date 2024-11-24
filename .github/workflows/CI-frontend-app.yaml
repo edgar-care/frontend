@@ -51,6 +51,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_WS_URL: ${{ secrets.NEXT_PUBLIC_WS_URL }}/demo
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
+          NEXT_PUBLIC_SECRET_ENCRYPT_KEY: ${{ secrets.NEXT_PUBLIC_SECRET_ENCRYPT_KEY }}
 
   Lint:
     runs-on: ubuntu-latest
@@ -126,6 +127,7 @@ jobs:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}/demo
           NEXT_PUBLIC_WS_URL: ${{ secrets.NEXT_PUBLIC_WS_URL }}/demo
           NEXT_PUBLIC_VAPIDPUBLICKEY: ${{ secrets.NEXT_PUBLIC_VAPIDPUBLICKEY }}
+          NEXT_PUBLIC_SECRET_ENCRYPT_KEY: ${{ secrets.NEXT_PUBLIC_SECRET_ENCRYPT_KEY }}
 
       - name: Run cypress
         uses: cypress-io/github-action@v6
