@@ -16,6 +16,7 @@ const ConnectionSignupInputs = (): JSX.Element => {
 		handleSubmit,
 		formState: { errors },
 		register,
+		trigger,
 	} = useForm<RegisterTypeDTO>({ mode: 'onChange', defaultValues: {} });
 
 	const [step, setStep] = useState(0);
@@ -50,6 +51,15 @@ const ConnectionSignupInputs = (): JSX.Element => {
 			});
 	});
 
+	const handleNextStep = async () => {
+		if (step === 0) {
+			const isValid = await trigger(['email', 'password']);
+			if (isValid) setStep(1);
+		} else {
+			void onSubmit();
+		}
+	};
+
 	return (
 		<VStack w="100%" maxW="500px" spacing={step === 0 ? '32px' : '16px'}>
 			{step === 0 ? (
@@ -57,15 +67,7 @@ const ConnectionSignupInputs = (): JSX.Element => {
 			) : (
 				<ConnectionSignupInfos register={register} errors={errors} />
 			)}
-			<Button
-				w="100%"
-				size="customLg"
-				variant="primary"
-				onClick={() => {
-					if (step === 0) void setStep(1);
-					else void onSubmit();
-				}}
-			>
+			<Button w="100%" size="customLg" variant="primary" onClick={handleNextStep}>
 				{step === 0 ? 'Continuer' : "S'inscrire"}
 			</Button>
 		</VStack>
