@@ -62,47 +62,49 @@ const extendedApi = backendApi.injectEndpoints({
 			query: () => '/doctor/patients',
 			providesTags: ['patients'],
 			transformResponse: (response: { patients?: PatientsStoreType[] }) =>
-				response.patients?.map((patient) => ({
-					id: patient.id,
-					email: patient.email,
-					medicalInfos: {
-						name: patient.medical_folder.name,
-						firstname: patient.medical_folder.firstname,
-						birthdate: patient.medical_folder.birthdate * 1000,
-						sex: patient.medical_folder.sex,
-						height: patient.medical_folder.height / 100,
-						weight: patient.medical_folder.weight / 100,
-						primaryDoctorId: patient.medical_folder.primary_doctor_id,
-						onboardingStatus: patient.medical_folder.onboarding_status,
-						healthIssues:
-							patient.medical_folder.medical_antecedents?.map((antecedent) => ({
-								id: antecedent.id,
-								name: antecedent.name,
-								treatments:
-									antecedent.treatments?.map((treatment) => ({
-										id: treatment.id,
-										startDate: treatment.start_date * 1000,
-										endDate: treatment.end_date ? treatment.end_date * 1000 : undefined,
-										medicines:
-											treatment.medicines?.map((medicine) => ({
-												medicineId: medicine.medicine_id,
-												comment: medicine.comment,
-												periods:
-													medicine.period?.map((period) => ({
-														quantity: period.quantity,
-														frequency: period.frequency,
-														frequencyRatio: period.frequency_ratio,
-														frequencyUnit: period.frequency_unit,
-														periodLength: period.period_length,
-														periodUnit: period.period_unit,
-													})) ?? [],
-											})) ?? [],
-									})) ?? [],
-							})) ?? [],
-					},
-					appointmentIds: patient.rendez_vous_ids ?? [],
-					documentIds: patient.document_ids ?? [],
-				})) || [],
+				response.patients
+					?.filter((patient, index, self) => self.findIndex((p) => p.id === patient.id) === index)
+					.map((patient) => ({
+						id: patient.id,
+						email: patient.email,
+						medicalInfos: {
+							name: patient.medical_folder.name,
+							firstname: patient.medical_folder.firstname,
+							birthdate: patient.medical_folder.birthdate * 1000,
+							sex: patient.medical_folder.sex,
+							height: patient.medical_folder.height / 100,
+							weight: patient.medical_folder.weight / 100,
+							primaryDoctorId: patient.medical_folder.primary_doctor_id,
+							onboardingStatus: patient.medical_folder.onboarding_status,
+							healthIssues:
+								patient.medical_folder.medical_antecedents?.map((antecedent) => ({
+									id: antecedent.id,
+									name: antecedent.name,
+									treatments:
+										antecedent.treatments?.map((treatment) => ({
+											id: treatment.id,
+											startDate: treatment.start_date * 1000,
+											endDate: treatment.end_date ? treatment.end_date * 1000 : undefined,
+											medicines:
+												treatment.medicines?.map((medicine) => ({
+													medicineId: medicine.medicine_id,
+													comment: medicine.comment,
+													periods:
+														medicine.period?.map((period) => ({
+															quantity: period.quantity,
+															frequency: period.frequency,
+															frequencyRatio: period.frequency_ratio,
+															frequencyUnit: period.frequency_unit,
+															periodLength: period.period_length,
+															periodUnit: period.period_unit,
+														})) ?? [],
+												})) ?? [],
+										})) ?? [],
+								})) ?? [],
+						},
+						appointmentIds: patient.rendez_vous_ids ?? [],
+						documentIds: patient.document_ids ?? [],
+					})) || [],
 		}),
 
 		getPatientDocumentById: builder.query<PatientDocumentType, string>({
