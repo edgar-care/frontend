@@ -18,7 +18,9 @@ const StartPageContent = () => {
 	useEffect(() => {
 		if (auth.checkToken().status === 'success') router.push(searchParams.get('redirect') ?? '/dashboard');
 		else {
-			const random = Math.random().toString(36).substring(7);
+			const array = new Uint32Array(1);
+			window.crypto.getRandomValues(array);
+			const random = array[0].toString(36).substring(0, 7);
 
 			auth.signup(`${random}@experience.edgar-sante.fr`, random).then((res) => {
 				toast({
