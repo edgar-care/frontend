@@ -58,7 +58,9 @@ const PatientAddPrescriptionModalContent = ({
 												}}
 											>
 												<Text>
-													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)}
+													{medicine.name} - {displayMedicineUnit(medicine.dosageForm)} (
+													{medicine.dosage}
+													{medicine.dosageUnit})
 												</Text>
 											</SelectHealthIssueMedicineInputCard>
 										),
