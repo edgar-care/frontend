@@ -69,7 +69,7 @@ describe('Navigation tests - Mobile', () => {
 			});
 
 			it('Good content for "Diagnostics" tab', () => {
-				cy.get('#edgar-dashboardNavbar-navbarTab-diagnostics-text').should('contain.text', 'Diagnostics');
+				cy.get('#edgar-dashboardNavbar-navbarTab-diagnostics-text').should('contain.text', 'Pré-diagnostics');
 			});
 
 			it('Good content for "Messagerie" tab', () => {
