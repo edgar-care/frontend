@@ -45,7 +45,7 @@ const Navbar = (): JSX.Element => {
 			id: 'patients',
 		},
 		{
-			name: 'Diagnostics',
+			name: 'Pré-diagnostics',
 			path: '/dashboard/diagnostics',
 			icon: HeartPulseIcon,
 			id: 'diagnostics',

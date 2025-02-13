@@ -14,15 +14,15 @@ const Diagnostics = (): JSX.Element => {
 
 	const availableSubNavigation: { label: string; state: DiagnosticsSubNavigationType }[] = [
 		{
-			label: 'Diagnostics en attente',
+			label: 'Pré-diagnostics en attente',
 			state: 'WAITING',
 		},
 		{
-			label: 'Diagnostics validés',
+			label: 'Pré-diagnostics validés',
 			state: 'VALIDATED',
 		},
 		{
-			label: 'Diagnostics refusés',
+			label: 'Pré-diagnostics refusés',
 			state: 'REFUSED',
 		},
 	];
@@ -30,7 +30,7 @@ const Diagnostics = (): JSX.Element => {
 	const subNavigation: { [key: string]: JSX.Element } = {
 		WAITING: (
 			<DiagnosticsView
-				title="Mes diagnostics en attente"
+				title="Mes pré-diagnostics en attente"
 				diagnostics={
 					appointments?.filter((appointment) => appointment.appointmentStatus === 'WAITING_FOR_REVIEW') || []
 				}
@@ -38,7 +38,7 @@ const Diagnostics = (): JSX.Element => {
 		),
 		VALIDATED: (
 			<DiagnosticsView
-				title="Mes diagnostics validés"
+				title="Mes pré-diagnostics validés"
 				diagnostics={
 					appointments?.filter((appointment) => appointment.appointmentStatus === 'ACCEPTED_DUE_TO_REVIEW') ||
 					[]
@@ -47,7 +47,7 @@ const Diagnostics = (): JSX.Element => {
 		),
 		REFUSED: (
 			<DiagnosticsView
-				title="Mes diagnostics refusés"
+				title="Mes pré-diagnostics refusés"
 				diagnostics={
 					appointments?.filter((appointment) => appointment.appointmentStatus === 'CANCELED_DUE_TO_REVIEW') ||
 					[]

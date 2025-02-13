@@ -27,7 +27,7 @@ const HowItWorks = (): JSX.Element => {
 							<Box as="span" fontWeight="600" color="green.400">
 								informations nécessaires
 							</Box>{' '}
-							pour qu’il puisse proposer un diagnostic{' '}
+							pour qu’il puisse proposer un pré-diagnostic{' '}
 							<Box as="span" fontWeight="600" color="green.400">
 								fiable
 							</Box>{' '}

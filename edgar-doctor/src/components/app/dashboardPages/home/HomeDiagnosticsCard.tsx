@@ -23,7 +23,7 @@ const HomeDiagnosticsCard = (): JSX.Element => {
 			align="start"
 		>
 			<VStack w="100%" align="start">
-				<Text size="boldXl">Mes diagnostics en attente</Text>
+				<Text size="boldXl">Mes pré-diagnostics en attente</Text>
 				<Box as="span" w="100%" h="2px" bg="blue.700" />
 			</VStack>
 			<VStack w="100%">
@@ -35,7 +35,7 @@ const HomeDiagnosticsCard = (): JSX.Element => {
 					))}
 			</VStack>
 			<Link href="/dashboard/diagnostics">
-				<Text textDecoration="underline">Afficher tous les diagnostics</Text>
+				<Text textDecoration="underline">Afficher tous les pré-diagnostics</Text>
 			</Link>
 		</VStack>
 	);

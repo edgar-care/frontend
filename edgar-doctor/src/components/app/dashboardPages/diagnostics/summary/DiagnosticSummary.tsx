@@ -16,7 +16,7 @@ const DiagnosticSummary = ({
 	isLoading: boolean;
 }): JSX.Element => (
 	<VStack w="100%">
-		<DiagnosticTitleCard title="Diagnostic" icon={HeartPulseIcon} />
+		<DiagnosticTitleCard title="Pré-diagnostic" icon={HeartPulseIcon} />
 		<Skeleton isLoaded={!isLoading && summary !== undefined} w="100%" h="100%" borderRadius="8px">
 			{summary && (
 				<VStack w="100%" spacing="16px" align="start">
