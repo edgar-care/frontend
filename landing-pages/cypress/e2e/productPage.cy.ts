@@ -64,7 +64,7 @@ describe('Good content on elements - Desktop', () => {
 	it('Good content for product description 1', () => {
 		cy.get('#edgar-productPage-productDescription1-text').should(
 			'contain.text',
-			'Avant de prendre un rendez-vous chez le médecin, vous allez devoir échanger avec Edgar, notre assistant numérique. Son rôle, faire en sorte de fournir au médecin toutes les informations nécessaires pour qu’il puisse proposer un diagnostic fiable et rapide.',
+			'Avant de prendre un rendez-vous chez le médecin, vous allez devoir échanger avec Edgar, notre assistant numérique. Son rôle, faire en sorte de fournir au médecin toutes les informations nécessaires pour qu’il puisse proposer un pré-diagnostic fiable et rapide.',
 		);
 	});
 
@@ -241,7 +241,7 @@ describe('Good content on elements - Mobile', () => {
 	it('Good content for product description 1', () => {
 		cy.get('#edgar-productPage-productDescription1-text').should(
 			'contain.text',
-			'Avant de prendre un rendez-vous chez le médecin, vous allez devoir échanger avec Edgar, notre assistant numérique. Son rôle, faire en sorte de fournir au médecin toutes les informations nécessaires pour qu’il puisse proposer un diagnostic fiable et rapide.',
+			'Avant de prendre un rendez-vous chez le médecin, vous allez devoir échanger avec Edgar, notre assistant numérique. Son rôle, faire en sorte de fournir au médecin toutes les informations nécessaires pour qu’il puisse proposer un pré-diagnostic fiable et rapide.',
 		);
 	});
 
