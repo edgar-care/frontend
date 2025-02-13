@@ -6,24 +6,41 @@ import { type ChatType } from 'types/dashboard/chat/ChatType';
 import type { ChatResponse, ChatResponses, ReceiveChatMessage } from 'types/dashboard/chat/ChatClassType';
 
 class Chat {
-	private readonly socket: WebSocket | undefined;
+	private socket: WebSocket | undefined;
 
 	private readonly setChats: Dispatch<SetStateAction<ChatType[]>> | undefined;
 
 	constructor(setChats: Dispatch<SetStateAction<ChatType[]>>) {
 		try {
 			this.setChats = setChats;
-			const socket = new WebSocket(WS_URL);
-
-			socket.addEventListener('message', (event) => {
-				this.handleMessage(event.data);
-			});
-
-			this.socket = socket;
+			this.initializeWebSocket();
 		} catch (error) {
 			console.error(error);
 		}
 	}
+
+	private initializeWebSocket = () => {
+		const socket = new WebSocket(WS_URL);
+
+		socket.addEventListener('message', (event) => {
+			this.handleMessage(event.data);
+		});
+
+		socket.addEventListener('close', () => {
+			console.warn('WebSocket closed, attempting to reopen...');
+			this.closeSocket();
+			setTimeout(this.initializeWebSocket, 1000); // Reopen after 1 second
+			setTimeout(this.makeReady, 5000);
+		});
+
+		socket.addEventListener('error', (error) => {
+			console.error('WebSocket error:', error);
+			this.closeSocket();
+			setTimeout(this.initializeWebSocket, 1000); // Reopen after 1 second
+			setTimeout(this.makeReady, 5000);
+		});
+		this.socket = socket;
+	};
 
 	private handleMessage = (data: string) => {
 		const message = JSON.parse(data);
@@ -125,7 +142,10 @@ class Chat {
 	public getSocketState = () => this.socket?.readyState;
 
 	public closeSocket = () => {
-		if (this.socket && this.socket.readyState === WebSocket.OPEN) this.socket.close();
+		if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+			this.socket.removeEventListener('close', this.initializeWebSocket); // Prevent reopening on manual close
+			this.socket.close();
+		}
 	};
 
 	public createChat = (message: string, recipientsIds: string[]) => {
